@@ -27,10 +27,7 @@
   		<td>{{$afiliado->id}}</td>
   		<td>{{$afiliado->afiliado->Nombre}} {{$afiliado->afiliado->Apellido1}} {{$afiliado->afiliado->Apellido2}}</td>
       <td>{{$afiliado->apiario_id}}</td>
-  
-  		
-			
-	
+
    
   		<td>
 			<a href="{{URL::action('AfiliadoApiarioController@edit',$afiliado->id)}}"><button class="btn btn-info">Editar</button></a>

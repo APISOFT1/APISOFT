@@ -46,10 +46,10 @@ class EstadoCivilController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      *///GUARDAR
-    public function store(EstadoCivilFormRequest $request)
+    public function store(Estado_CivilFormRequest $request)
     {
         //
-        $estado_Civil= new EstadoCivil;
+        $estado_Civil= new Estado_Civil;
         $estado_Civil->descripcion=$request->get('descripcion');
         $estado_Civil->save();
         return redirect('EstadoCivil');

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Apiario;
 use App\Ubicacion;
 use Illuminate\Http\Request;
-use Illuminate\Http\ApiarioFormRequest;
+use App\Http\Requests\ApiariosFormRequest;
 
 class ApiarioController extends Controller
 {
@@ -45,7 +45,7 @@ class ApiarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ApiarioFormRequest $request)
+    public function store(ApiariosFormRequest $request)
     {
         $apiario = Apiario::create($request->all());
 
@@ -81,7 +81,7 @@ class ApiarioController extends Controller
      * @param  \App\Apiario  $apiario
      * @return \Illuminate\Http\Response
      */
-    public function update(ApiarioRequestForm $request, $id)
+    public function update(ApiariosRequestForm $request, $id)
     {
         $ubicaciones = new Ubicacion;
         $apiario= new Apiario;
