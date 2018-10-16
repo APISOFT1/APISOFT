@@ -8,10 +8,10 @@ role="dialog" tabindex="-1" id="modal-delete-{{$apiario->id}}">
 				aria-label="Close">
                      <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title">Eliminar  Colmena</h4>
+                <h4 class="modal-title">Eliminar  Apiario</h4>
 			</div>
 			<div class="modal-body">
-				<p>Confirme si desea Eliminar  Colmena</p>
+				<p>Confirme si desea Eliminar  Apiario</p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
