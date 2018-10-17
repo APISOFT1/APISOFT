@@ -14,30 +14,25 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Auth::routes(
-[
-        //'users' => 'UserController',
-        'Rol','RolController',
-        //'Estanon','EstanonController',
-        'Genero','GeneroController',
-       // 'Estado_Civil','EstadoCivilController'
-        //'Ubicacion','UbicacionController',
-        //'Colmena','ColmenaController',
-      //  'Usuario','UsuarioController',
-        //'Afiliado','AfiliadoController'
+Route::group(['middleware' =>[ 'auth', 'verified']], function () {
+  Route::resources([
+'Estanon'=>'EstanonController',
+'Genero'=>'GeneroController',
+'EstadoCivil'=>'EstadoCivilController',
+'Ubicacion'=>'UbicacionController',
+'Apiario'=>'ApiarioController',
+'Afiliado'=>'AfiliadoController',
+'AfiliadoApiario'=>'AfiliadoApiarioController',
+'Usuario'=>'UserController',
+'Rol'=>'RolController'
+	
 	]);
+});
+	
+
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('Estanon','EstanonController');
-Route::resource('Genero','GeneroController');
-Route::resource('EstadoCivil','EstadoCivilController');
-Route::resource('Ubicacion','UbicacionController');
-Route::resource('Ubicacion','UbicacionController');
-Route::resource('Apiario','ApiarioController');
-Route::resource('Afiliado','AfiliadoController');
-Route::resource('AfiliadoApiario','AfiliadoApiarioController');
-Route::resource('Usuario','UserController');
-Route::resource('Rol','RolController');
+
 
 
