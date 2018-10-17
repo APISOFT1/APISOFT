@@ -66,7 +66,7 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right main-nav">
 					<li><a href="Genero">Intro</a></li>
-					<li><a href="#services">Services</a></li>
+					<li><a href="Usuario/create">Registro Usuario</a></li>
 					<li><a href="login">Login</a></li>
 					<li><a href="#pricing"></a></li>
 					<!--<li><a href="#" data-toggle="modal" data-target="#modal1" class="btn btn-blue">Sign Up</a></li> --->
