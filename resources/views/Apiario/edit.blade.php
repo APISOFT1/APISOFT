@@ -10,8 +10,8 @@
             </div>
            
             <div class="form-group">
-            	<label for="Cantidad">Cantidad</label>
-            	<input type="text" name="Cantidad" class="form-control" value="{{$apiario->Cantidad}}" placeholder="Cantidad...">
+            	<label for="cantidad">Cantidad</label>
+            	<input type="text" name="cantidad" class="form-control" value="{{$apiario->cantidad}}" placeholder="Cantidad...">
             </div>
             <div class="form-group">
             	<div class="col-md-6">

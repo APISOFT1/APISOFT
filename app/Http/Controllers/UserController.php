@@ -95,8 +95,8 @@ class UserController extends Controller
       $usuario->Direccion->get('Direccion');
   	  $usuario->Fecha_Ingreso->get('Fecha_Ingreo');
       $usuario->password->get('password');
-	  $usuario->genero_id=$request->get('genero_id');
-	  $usuario->rol_id=$request->get('rol_id');
+	  $usuario->Genero_id=$request->get('Genero_id');
+	  $usuario->Rol_id=$request->get('Rol_id');
       $usuario->update();  
 
       return redirect('Usuario');

@@ -13,12 +13,12 @@
 			</div>
 			@endif
 
-			{!!Form::model($estado_Civil,['method'=>'PATCH','route'=>['Estado_Civil.update',$estado_Civil->id]])!!}
+			{!!Form::model($estado_Civil,['method'=>'PATCH','route'=>['EstadoCivil.update',$estado_Civil->id]])!!}
             {{Form::token()}}
          
             <div class="form-group">
-            	<label for="Descripcion">Descripción</label>
-            	<input type="text" name="Descripcion" class="form-control" value="{{$estado_Civil->Descripcion}}" placeholder="Descripción...">
+            	<label for="descripcion">Descripción</label>
+            	<input type="text" name="descripcion" class="form-control" value="{{$estado_Civil->descripcion}}" placeholder="descripcion...">
             </div>
             <div class="form-group">
             	<button class="btn btn-primary" type="submit">Guardar</button>

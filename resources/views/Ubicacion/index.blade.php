@@ -19,7 +19,7 @@
                @foreach ($ubicacion as $r)
 				<tr>
 					<td>{{ $r->id}}</td>
-					<td>{{ $r->descripcion}}</td>
+					<td>{{ $r->Descripcion}}</td>
 					<td>
 						<a href="{{URL::action('UbicacionController@edit',$r->id)}}"><button class="btn btn-info">Editar</button></a>
                          <a href="" data-target="#modal-delete-{{$r->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Afiliado;
+use App\Apiario;
 use App\AfiliadoApiario;
 use Illuminate\Http\Request;
-use Illuminate\Http\AfiliadoApiarioRequest;
+use App\Http\Requests\AfiliadoApiariosFormRequest;
 
 class AfiliadoApiarioController extends Controller
 {
@@ -48,7 +49,7 @@ class AfiliadoApiarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(filiadoApiarioFormRequest $request)
+    public function store(AfiliadoApiariosFormRequest $request)
     {
         $afiliadoApiario = AfiliadoApiario::create($request->all());
 

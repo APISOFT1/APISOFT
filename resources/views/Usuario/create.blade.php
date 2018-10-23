@@ -56,8 +56,8 @@
             
 			<div class="form-group">
             	<div class="col-md-6">
-				<label for="genero_id">Genero</label>
-					<select class="form-control" id="genero_id" name="Genero_Id">
+				<label for="Genero_Id">Genero</label>
+					<select class="form-control" id="Genero_Id" name="Genero_Id">
 						@foreach ($Generos as $Genero)
 							<option value="{{ $Genero->id }}">{{ $Genero->descripcion }}</option>
 						@endforeach						

@@ -30,8 +30,8 @@ class User extends Authenticatable
         'Telefono',
         'Direccion',
         'Fecha_Ingreso',
-        'genero_id',
-        'rol_id'
+        'Genero_Id',
+        'Rol_Id'
     ];
 
 
@@ -47,11 +47,11 @@ class User extends Authenticatable
 
     public function Genero() 
     {
-        return $this->belongsTo(Genero::class ,'genero_id');
+        return $this->belongsTo(Genero::class ,'Genero_Id');
     }
 
     public function Rol() 
     {
-        return $this->BelongsTo(Rol::class,'rol_id');
+        return $this->BelongsTo(Rol::class,'Rol_Id');
     }
 }

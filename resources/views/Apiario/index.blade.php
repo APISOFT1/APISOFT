@@ -2,7 +2,7 @@
 @section ('contenido')
 <div class="row">
 	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-		<h3>Listado de Apiarios <a href="Colmena/create"><button class="btn btn-success">Nuevo</button></a></h3>
+		<h3>Listado de Apiarios <a href="Apiario/create"><button class="btn btn-success">Nuevo</button></a></h3>
 		@include('Apiario.search')
 	</div>
 </div>
@@ -24,13 +24,13 @@
 				<tr>
 					<td>{{ $apiario->id}}</td>
 					<td>{{ $apiario->Descripcion}}</td>
-					<td>{{ $apiario->Cantidad}}</td>
+					<td>{{ $apiario->cantidad}}</td>
                     <td>{{ $apiario->ubicacion->Descripcion}}</td>
 					<td>{{ $apiario->created_at}}</td>
 
 					<td>
-						<a href="{{URL::action('ColmenaController@edit',$colmena->id)}}"><button class="btn btn-info">Editar</button></a>
-                         <a href="" data-target="#modal-delete-{{$colmena->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
+						<a href="{{URL::action('ApiarioController@edit',$apiario->id)}}"><button class="btn btn-info">Editar</button></a>
+                         <a href="" data-target="#modal-delete-{{$apiario->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
 					</td>
 				</tr>
 				@include('Apiario.modal')
