@@ -13,7 +13,7 @@ class UbicacionFormRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,6 +25,7 @@ class UbicacionFormRequest extends FormRequest
     {
         return [
             //
+            'descripcion'=>'max:255', 
         ];
     }
 }

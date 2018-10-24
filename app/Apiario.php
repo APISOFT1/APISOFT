@@ -12,7 +12,7 @@ class Apiario extends Model
 
     protected $fillable =[
         'Descripcion',
-        'Cantidad',
+        'cantidad',
         'ubicacion_id'
 
     ];
