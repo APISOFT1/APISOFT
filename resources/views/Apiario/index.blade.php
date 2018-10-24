@@ -24,7 +24,7 @@
 				<tr>
 					<td>{{ $apiario->id}}</td>
 					<td>{{ $apiario->Descripcion}}</td>
-					<td>{{ $apiario->Cantidad}}</td>
+					<td>{{ $apiario->cantidad}}</td>
                     <td>{{ $apiario->ubicacion->Descripcion}}</td>
 					<td>{{ $apiario->created_at}}</td>
 

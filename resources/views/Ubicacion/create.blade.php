@@ -16,8 +16,8 @@
 			{!!Form::open(array('url'=>'Ubicacion','method'=>'POST','autocomplete'=>'off'))!!}
             {{Form::token()}}
             <div class="form-group">
-            	<label for="descripcion">Descripción</label>
-            	<input type="text" name="descripcion" class="form-control" placeholder="descripción...">
+            	<label for="Descripcion">Descripción</label>
+            	<input type="text" name="Descripcion" class="form-control" placeholder="Descripcion...">
             </div>
             <div class="form-group">
             	<button class="btn btn-primary" type="submit">Guardar</button>

@@ -44,7 +44,7 @@ class UbicacionController extends Controller
     public function store(UbicacionFormRequest $request)
     {
         $ubicacion= new Ubicacion;
-        $ubicacion->descripcion=$request->get('descripcion');
+        $ubicacion->descripcion=$request->get('Descripcion');
         $ubicacion->save();
         return redirect('Ubicacion');
     }

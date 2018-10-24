@@ -16,7 +16,7 @@
 			{!!Form::open(array('url'=>'AfiliadoApiario','method'=>'POST','autocomplete'=>'off'))!!}
             {{Form::token()}}
            
-        
+           
             
             <div class="form-group">
             	<div class="col-md-6">
@@ -50,4 +50,5 @@
             
 		</div>
 	</div>
+
 @endsection

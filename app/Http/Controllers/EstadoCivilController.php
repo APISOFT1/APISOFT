@@ -65,7 +65,7 @@ class EstadoCivilController extends Controller
     public function show(EstadoCivil $estado_Civil)
     {
         //
-        return view ("EstadoCivil.show",["estado_Civil"=>EstadoCivil::findOrFail($id)]);
+        return view ("EstadoCivil.show",["estado_Civil"=>Estado_Civil::findOrFail($id)]);
     }
 
     /**
@@ -77,7 +77,7 @@ class EstadoCivilController extends Controller
     public function edit($id)
     {
         //
-        return view ("EstadoCivil.edit",["estado_Civil"=>EstadoCivil::findOrFail($id)]);
+        return view ("EstadoCivil.edit",["estado_Civil"=>Estado_Civil::findOrFail($id)]);
       
     }
 
@@ -88,10 +88,10 @@ class EstadoCivilController extends Controller
      * @param  \App\Estado_Civil  $estado_Civil
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Estado_Civil $estado_Civil)
+    public function update(Estado_CivilFormRequest $request, $id)
     {
         //
-        $estado_Civil=EstadoCivil::findOrFail($id);
+        $estado_Civil=Estado_Civil::findOrFail($id);
         $estado_Civil->descripcion=$request->get('descripcion');
         $estado_Civil->update();
         return redirect('EstadoCivil');
@@ -107,7 +107,7 @@ class EstadoCivilController extends Controller
     {
         //
         
-    $estado_Civil=EstadoCivil::findOrFail($id);
+    $estado_Civil=Estado_Civil::findOrFail($id);
     $estado_Civil->delete();
     return redirect('EstadoCivil');
     }

@@ -21,7 +21,7 @@
 					<td>{{ $estado->id}}</td>
 					<td>{{ $estado->descripcion}}</td>
 					<td>
-                  
+					<a href="{{URL::action('EstadoCivilController@edit',$estado->id)}}"><button class="btn btn-info">Editar</button></a>
                          <a href="" data-target="#modal-delete-{{$estado->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
 					</td>
 				</tr>
