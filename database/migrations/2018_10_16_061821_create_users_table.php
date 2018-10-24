@@ -25,9 +25,9 @@ class CreateUsersTable extends Migration
             $table->string('Direccion',100);
             $table->datetime('Fecha_Ingreso');
             $table->integer('Genero_Id')->unsigned();;
-            $table->foreign('Genero_Id')->references('id')->on('Genero');
+            $table->foreign('Genero_Id')->references('id')->on('generos');
             $table->integer('Rol_Id')->nullable()->unsigned();
-            $table->foreign('Rol_Id')->references('id')->on('Rol');
+            $table->foreign('Rol_Id')->references('id')->on('rols');
             $table->rememberToken();
             $table->timestamps();
         });

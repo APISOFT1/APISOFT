@@ -19,7 +19,7 @@ class AfiliadoApiarioController extends Controller
         if($request){
             $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
         $afiliadoapiarios = AfiliadoApiario::with('Afiliado', 'Apiario') 
-           // ->where('Descripcion','LIKE','%'.$query.'%')
+           ->where('id','LIKE','%'.$query.'%')
             ->orderby('id','desc')
             ->paginate(7);
          
@@ -42,7 +42,7 @@ class AfiliadoApiarioController extends Controller
     
         return view("AfiliadoApiario.create",["Afiliados"=> $Afiliados], ["Apiarios"=> $Apiarios]);
     }
-
+               
     /**
      * Store a newly created resource in storage.
      *
@@ -75,8 +75,8 @@ class AfiliadoApiarioController extends Controller
      */
     public function edit($id)
     {
-        $afiliadocolmena= AfiliadoColmena::find($id);
-        return view('Afiliadoolmena.edit',compact('afiliadocolmena'));
+        $afiliadoapiario= AfiliadoColmena::find($id);
+        return view('AfiliadoApiario.edit',compact('afiliadoapiario'));
     }
 
     /**
