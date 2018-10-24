@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class User extends Authenticatable 
 {
     use Notifiable;
 
@@ -25,6 +25,7 @@ class User extends Authenticatable
         'id',
         'name', 
         'email',
+      'email_verified_at',
          'password',
         'Apellido1',
         'Apellido2',
@@ -33,6 +34,7 @@ class User extends Authenticatable
         'Fecha_Ingreso',
         'Genero_Id',
         'Rol_Id'
+
     ];
 
 
@@ -45,7 +47,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = \Hash::make($password);
+    }
     public function Genero() 
     {
         return $this->belongsTo(Genero::class ,'Genero_Id');
