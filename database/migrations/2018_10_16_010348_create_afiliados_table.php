@@ -24,9 +24,9 @@ class CreateAfiliadosTable extends Migration
             $table->string('Direccion',100);
             $table->datetime('Fecha_Ingreso');
             $table->string('Num_Cuenta',20);
-            $table->integer('genero_id')->unsigned();;
+            $table->integer('genero_id')->unsigned();
             $table->foreign('genero_id')->references('id')->on('generos');
-            $table->integer('estado_civil_id')->nullable()->unsigned();
+            $table->integer('estado_civil_id')->unsigned();
             $table->foreign('estado_civil_id')->references('id')->on('estado_civils');
             $table->boolean('Estado');
             $table->rememberToken();
