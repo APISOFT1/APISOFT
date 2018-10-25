@@ -90,26 +90,19 @@ class UserController extends Controller
       $usuario= new User;
   	  $usuario->name->get('name');
       $usuario->Apellido1->get('Apellido1');
-  	  $usuario->Apellido2->get('Apellido1');
+  	  $usuario->Apellido2->get('Apellido2');
       $usuario->Telefono->get('Telefono');
   	  $usuario->email->get('email');
       $usuario->Direccion->get('Direccion');
-  	  $usuario->Fecha_Ingreso->get('Fecha_Ingreo');
+  	  $usuario->Fecha_Ingreso->get('Fecha_Ingreso');
       $usuario->password->get('password');
-	  $usuario->Genero_id=$request->get('Genero_id');
-	  $usuario->Rol_id=$request->get('Rol_id');
+	  $usuario->Genero_id=$request->get('Genero_Id');
+	  $usuario->Rol_id=$request->get('Rol_Id');
       $usuario->update();  
 
       return redirect('Usuario');
         
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Usuario  $usuario
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $usuario=User::findOrFail($id);
