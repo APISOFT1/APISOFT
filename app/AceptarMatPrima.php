@@ -12,12 +12,7 @@ class AceptarMatPrima extends Model
     public $timestamps=true;
 
     protected $fillable =[
-        'descripcion',
-        'users_id'
-
+        'descripcion'
     ];
-    public function recepcionMateriaPrima()
-    {
-       return $this->hasOne('App\RecepcionMateriaPrima');
-    }
+   
 }

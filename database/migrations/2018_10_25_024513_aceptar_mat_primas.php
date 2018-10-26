@@ -12,9 +12,6 @@ class AceptarMatPrimas extends Migration
             Schema::create('aceptar_mat_primas', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('descripcion',50);
-                $table->integer('numero_muestra');
-                $table->integer('recepcionMateriaPrima_id')->unsigned();
-                $table->foreign('recepcionMateriaPrima_id')->references('id')->on('recepcion_materia_primas');
                 $table->timestamps();
             });
         }

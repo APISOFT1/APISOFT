@@ -25,7 +25,8 @@ class RecepcionMateriaPrimaController extends Controller
         $user = User::all();
         $afiliados = Afiliado::all();
         $tipoEntrega = TipoEntrega::all();
-        return view("RecepcionMateriaPrima.create",["users"=> $user], ["afiliados"=> $afiliados], ["tipo_entregas"=> $tipoEntrega] );
+        $aceptarMatPrima = AceptarMatPrima::all();
+        return view("RecepcionMateriaPrima.create",["users"=> $user], ["afiliados"=> $afiliados], ["tipo_entregas"=> $tipoEntrega], ["aceptar_mat_primas"=> $aceptarMatPrima] );
     }
 
     public function store(RecepcionMateriaPrimaFormRequest $request)
@@ -53,6 +54,8 @@ class RecepcionMateriaPrimaController extends Controller
         $recepcionMateriaPrima= new RecepcionMateriaPrima;
         $recepcionMateriaPrima->fecha=$request->get('fecha');
         $recepcionMateriaPrima->pesoBruto=$request->get('pesoBruto');
+        $recepcionMateriaPrima->numero_muestra=$request->get('numero_muestra');
+        $recepcionMateriaPrima->aceptarMatPrima=$request->get('aceptarMatPrima_id');
         $recepcionMateriaPrima->user_id=$request->get('user_id');
         $recepcionMateriaPrima->afiliado_id=$request->get('afiliado_id');
         $recepcionMateriaPrima->tipoEntrega_id=$request->get('tipoEntrega_id');
