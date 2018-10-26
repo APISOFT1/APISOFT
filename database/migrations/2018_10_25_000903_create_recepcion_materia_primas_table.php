@@ -13,8 +13,11 @@ class CreateRecepcionMateriaPrimasTable extends Migration
             $table->increments('id')->unique();
             $table->datetime('fecha');
             $table->float('pesoBruto');
+            $table->increments('numero_muestras');
             $table->string('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('aceptarMatPrima_id');
+            $table->foreign('aceptarMatPrima_id')->references('id')->on('aceptar_mat_primas');
             $table->string('afiliado_id');
             $table->foreign('afiliado_id')->references('id')->on('afiliados');
             $table->integer('tipoEntrega_id')->unsigned();

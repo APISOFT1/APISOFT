@@ -12,8 +12,11 @@ class RecepcionMateriaPrima extends Model
     protected $fillable = 
     [      
         'fecha',
+        'Observacion',
         'pesoBruto',
         'user_id',
+        'aceptarMatPrima_id',
+        'numero_muestra',
         'afiliado_id',
         'tipoEntrega_id'
     ];
@@ -28,5 +31,9 @@ class RecepcionMateriaPrima extends Model
     public function tipoEntrega() 
     {
         return $this->BelongsTo(TipoEntrega::class,'tipoEntrega_id');
+    }
+    public function aceptarMatPrima() 
+    {
+        return $this->BelongsTo(AceptarMatPrima::class,'tipoEntrega_id');
     }
 }
