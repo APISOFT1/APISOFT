@@ -20,6 +20,9 @@ class RecepcionMateriaPrima extends Model
         'afiliado_id',
         'tipoEntrega_id'
     ];
+    protected $casts = [
+        'fecha' => 'Y-m-d H:i:s'
+    ];
     public function user() 
     {
         return $this->belongsTo(User::class ,'user_id');
