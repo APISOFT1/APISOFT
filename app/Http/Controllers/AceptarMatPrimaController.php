@@ -28,6 +28,8 @@ class AceptarMatPrimaController extends Controller
     {
         $aceptarMatPrima= new AceptarMatPrima;
         $aceptarMatPrima->descripcion=$request->get('descripcion');
+        $aceptarMatPrima->numero_muestra=$request->get('numero_muestra');
+        $aceptarMatPrima->recepcionMateriaPrima_id=$request->get('recepcionMateriaPrima_id');
         $aceptarMatPrima->save();
         return redirect('AceptarMatPrima');
     }
@@ -48,6 +50,8 @@ class AceptarMatPrimaController extends Controller
     {
         $aceptarMatPrima=Ubicacion::findOrFail($id);
         $aceptarMatPrima->descripcion=$request->get('descripcion');
+        $aceptarMatPrima->numero_muestra=$request->get('numero_muestra');
+        $aceptarMatPrima->recepcionMateriaPrima_id=$request->get('recepcionMateriaPrima_id');
         $aceptarMatPrima->update();
         return redirect('AceptarMatPrima');    }
 
