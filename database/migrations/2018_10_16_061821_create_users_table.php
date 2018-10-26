@@ -43,3 +43,6 @@ class CreateUsersTable extends Migration
         Schema::dropIfExists('users');
     }
 }
+
+/**
+     * Run the migrations.
