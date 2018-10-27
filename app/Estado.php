@@ -4,14 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Estado_Civil extends Model
+class Estado extends Model
 {
-    protected $table= 'estado_civils';
+    //
+    protected $table= 'estados';
     protected $primaryKey="id";
     
-    public $timestamps=false;
-
+    public $timestamps=true;
     protected $fillable =[
-        'descripcion'
+        
+        'Descripcion'
+
     ];
 }

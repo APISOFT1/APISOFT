@@ -69,9 +69,12 @@ class ApiarioController extends Controller
      * @param  \App\Apiario  $apiario
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit( $id)
     {
-        return view ("Apiario.edit",["apiario"=>Apiario::findOrFail($id)]);
+        $ubicaciones = Ubicacion::all();
+       
+
+        return view ("Apiario.edit",["apiario"=>Apiario::findOrFail($id)],  ["ubicaciones"=> $ubicaciones]);
     }
 
     /**
@@ -81,13 +84,13 @@ class ApiarioController extends Controller
      * @param  \App\Apiario  $apiario
      * @return \Illuminate\Http\Response
      */
-    public function update(ApiariosRequestForm $request, $id)
+    public function update(ApiariosFormRequest $request, $id  )
     {
-        $ubicaciones = new Ubicacion;
-        $apiario= new Apiario;
-        $apiario->Descripcion=$request->get('Descripcion');
-        $apiario->Cantidad=$request->get('Cantidad');
-        $apiario->Ubicacion_Id=$request->get('ubicacion_id');
+        
+        $apiario=Apiario::findOrFail($id);
+        $apiario->Descripcion= $request->get('Descripcion');
+        $apiario->cantidad= $request->get('cantidad');
+        $apiario->ubicacion_id=$request->get('ubicacion_id');
         $apiario->update();
         return redirect('Apiario');
     }
@@ -101,5 +104,8 @@ class ApiarioController extends Controller
     public function destroy($id)
     {
         //
+        $apiario=Apiario::findOrFail($id);
+    $apiario->delete();
+    return redirect('Apiario');
     }
 }

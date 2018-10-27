@@ -34,6 +34,7 @@ class User extends Authenticatable
         'Fecha_Ingreso',
         'Genero_Id',
         'Rol_Id'
+        
 
     ];
 
@@ -59,5 +60,9 @@ class User extends Authenticatable
     public function Rol() 
     {
         return $this->BelongsTo(Rol::class,'Rol_Id');
+    }
+    public function Estado() 
+    {
+        return $this->Belongsto(Estado::class,'estado_id');
     }
 }

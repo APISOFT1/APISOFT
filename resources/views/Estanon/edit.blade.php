@@ -11,7 +11,7 @@
            
             <div class="form-group">
             	<label for="Fecha">Fecha</label>
-            	<input type="date" name="Fecha" class="form-control" value="{{$estanon->fecha}}" placeholder="Fecha...">
+            	<input type="date" name="Fecha" class="form-control" value="{{$estanon->Fecha}}" placeholder="Fecha...">
             </div>
             
             <div class="form-group">
