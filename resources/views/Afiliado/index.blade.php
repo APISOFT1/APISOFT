@@ -23,6 +23,7 @@
   	<th>Numero de Cuenta</th>
     <th>Genero</th>
   	<th>Estado Civil</th>
+	<th>Estado</th>
 		
   	
 
@@ -41,8 +42,8 @@
   		<td>{{$afiliado->Fecha_Ingreso}}</td>
         <td>{{$afiliado->Num_Cuenta}}</td>
 		<td>{{$afiliado->Genero->descripcion}}</td>
-		<td>{{$afiliado->Estado_Civil->descripcion}}</td>
-  		
+		<td>{{@$afiliado->Estado_Civil->descripcion}}</td>
+		<td>{{$afiliado->Estado->Descripcion}}</td>  		
 			
 	
    

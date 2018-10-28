@@ -13,14 +13,10 @@
 			</div>
 			@endif
 
-			{!!Form::open(array('url'=>'AfiliadoApiario','method'=>'POST','autocomplete'=>'off'))!!}
+			{!!Form::model($afiliadoapiarios ,['method'=>'PATCH','route'=>['AfiliadoApiario.update',$afiliadoapiarios->id]])!!}
             {{Form::token()}}
-            <div class="form-group">
-            	<label for="id">Codigo</label>
-            	<input type="text" name="id" class="form-control" placeholder="id...">
-            </div>
+         
            
-            
             <div class="form-group">
             	<div class="col-md-6">
 				<label for="afiliado_id">Afiliado</label>
