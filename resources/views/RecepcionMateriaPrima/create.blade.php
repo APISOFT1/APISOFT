@@ -54,20 +54,20 @@
             </div>
             <div class="form-group">
             	<div class="col-md-6">
-				<label for="genero_id">Genero</label>
-					<select class="form-control" id="genero_id" name="genero_id">
-						@foreach ($Generos as $Genero)
-							<option value="{{ $Genero->id }}">{{ $Genero->descripcion }}</option>
+				<label for="tipo_entrega">Tipo Entrega</label>
+					<select class="form-control" id="tipo_entrega" name="tipo_entrega">
+						@foreach ($tipo_entrega as $entrega)
+							<option value="{{ $entrega->id }}">{{ $entrega->descripcion }}</option>
 						@endforeach						
 					</select>
 				</div>
             </div>
             <div class="form-group">
             	<div class="col-md-6">
-				<label for="genero_id">Genero</label>
-					<select class="form-control" id="genero_id" name="genero_id">
-						@foreach ($Generos as $Genero)
-							<option value="{{ $Genero->id }}">{{ $Genero->descripcion }}</option>
+				<label for="aceptarMatPrima_id">Condicion</label>
+					<select class="form-control" id="aceptarMatPrima_id" name="aceptarMatPrima_id">
+						@foreach ($aceptarMatPrimas as $aceptarMatPrima)
+							<option value="{{ $aceptarMatPrima->id }}">{{ $aceptarMatPrima->descripcion }}</option>
 						@endforeach						
 					</select>
 				</div>
