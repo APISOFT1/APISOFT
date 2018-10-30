@@ -1,6 +1,6 @@
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
-role="dialog" tabindex="-1" id="modal-delete-{{$afiliado->id}}">
-	{{Form::Open(array('action'=>array('AfiliadoApiarioController@destroy',$afiliado->id),'method'=>'delete'))}}
+role="dialog" tabindex="-1" id="modal-delete-{{$est->id}}">
+	{{Form::Open(array('action'=>array('EstadoController@destroy', $est->id),'method'=>'delete'))}}
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -8,10 +8,10 @@ role="dialog" tabindex="-1" id="modal-delete-{{$afiliado->id}}">
 				aria-label="Close">
                      <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title">Eliminar Afiliado Apiario</h4>
+                <h4 class="modal-title">Eliminar Estado</h4>
 			</div>
 			<div class="modal-body">
-				<p>Confirme si desea Eliminar Afiliado Apiario</p>
+				<p>Confirme si desea Eliminar la Genero</p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

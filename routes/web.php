@@ -24,7 +24,8 @@ Route::group(['middleware' =>[ 'auth', 'verified']], function () {
 'Afiliado'=>'AfiliadoController',
 'AfiliadoApiario'=>'AfiliadoApiarioController',
 'Usuario'=>'UserController',
-'Rol'=>'RolController'
+'Rol'=>'RolController',
+'Estado'=>'EstadoController'
 	
 	]);
 });

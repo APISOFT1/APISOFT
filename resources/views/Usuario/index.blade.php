@@ -23,6 +23,7 @@
   	<th>Clave</th>
     <th>Genero</th>
   	<th>Rol</th>
+		<th>Estado</th>
 		
   	
 
@@ -42,6 +43,7 @@
       <td>{{$usuario->password}}</td>
 			<td>{{$usuario->Genero->descripcion}}</td>
 			<td>{{$usuario->Rol->descripcion}}</td>
+			<td>{{$usuario->Estado->Descripcion}}</td>
   		
 			
 	

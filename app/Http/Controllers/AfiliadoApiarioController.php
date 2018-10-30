@@ -40,15 +40,19 @@ class AfiliadoApiarioController extends Controller
 
     public function edit($id)
     {
-        $afiliadoapiario= AfiliadoColmena::find($id);
-        return view('AfiliadoApiario.edit',compact('afiliadoapiario'));
+        $Afiliados = Afiliado::all();
+
+        $Apiarios = Apiario::all();
+        $afiliadoapiario= AfiliadoApiario::find($id);
+        
+        return view('AfiliadoApiario.edit',["afiliadoapiario"=>AfiliadoApiario::findOrFail($id),"Apiarios"=> $Apiarios, "Afiliados"=> $Afiliados]);
     }
 
     public function update(AfiliadoApiario $request,  $id)
     {
-        $afiliadoapiario= new AfiliadoApiario;
+        $afiliadoapiario= AfiliadoApiario::find($id);
         $afiliadoapiario->afiliado_id=$request->get('afiliado_id');
-        $afiliadoapiario->colmena_id=$request->get('colmena_id');
+        $afiliadoapiario->apiario_id=$request->get('apiario_id');
         $afiliadoapiario->update();  
         return redirect('AfiliadoApiario');
     }
