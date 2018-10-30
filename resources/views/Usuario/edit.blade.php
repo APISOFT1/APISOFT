@@ -56,7 +56,7 @@
 
                   <div class="form-group">
 					{!! Form::label('fechaingreso','FechaIngreso') !!}
-					{!! Form::date_add('fechaingreso', $user->fechaingreso,['class' =>'form-control', 'placeholder' =>'Fecha Ingreso','required'])!!}
+					{!! Form::date_add('fechaingreso', $user->fecha_ingreso,['class' =>'form-control', 'placeholder' =>'Fecha Ingreso','required'])!!}
 				</div>
 
                     
@@ -67,12 +67,12 @@
 
                 <div class="form-group">
 					{!! Form::label('genero','Genero') !!}
-					{!! Form:: select('genero',[''=>'Seleccione el genero'  ,'1' => 'Mujer','2'=>'Hombre'], $user->genero_id, ['class'=>'form-control']) !!}
+					{!! Form:: select('genero',[''=>'Seleccione el genero'  ,'1' => 'Mujer','2'=>'Hombre'], $user->Genero_Id, ['class'=>'form-control']) !!}
 				</div>
 
                 <div class="form-group">
 					{!! Form::label('rol','Rol') !!}
-					{!! Form:: select('rol',[''=>'Seleccione tipo de Rol'  ,'1' => 'Administrador','2'=>'Usuario'], $user->rol_id, ['class'=>'form-control']) !!}
+					{!! Form:: select('rol',[''=>'Seleccione tipo de Rol'  ,'1' => 'Administrador','2'=>'Usuario'], $user->Rol_Id, ['class'=>'form-control']) !!}
 				</div>
 
 				

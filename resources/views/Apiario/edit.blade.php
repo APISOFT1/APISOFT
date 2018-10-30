@@ -2,16 +2,16 @@
 @section ('contenido')
 
 	
-			{!!Form::model($apiario,['method'=>'PATCH','route'=>['Apiario.update',$apiario->id]])!!}
+			{!!Form::model($apiarios,['method'=>'PATCH','route'=>['Apiario.update',$apiarios->id]])!!}
             {{Form::token()}}
 			<div class="form-group">
             	<label for="Descripcion">Descripcion</label>
-            	<input type="text" name="Descripcion" class="form-control" value="{{$apiario->Descripcion}}" placeholder="Descripicion...">
+            	<input type="text" name="Descripcion" class="form-control" value="{{$apiarios->Descripcion}}" placeholder="Descripicion...">
             </div>
            
             <div class="form-group">
             	<label for="cantidad">Cantidad</label>
-            	<input type="text" name="cantidad" class="form-control" value="{{$apiario->cantidad}}" placeholder="Cantidad...">
+            	<input type="text" name="cantidad" class="form-control" value="{{$apiarios->cantidad}}" placeholder="Cantidad...">
             </div>
             <div class="form-group">
             	<div class="col-md-6">

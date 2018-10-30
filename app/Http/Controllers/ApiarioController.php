@@ -12,7 +12,7 @@ class ApiarioController extends Controller
     public function index(Request $request)
     {
         $query=trim($request->get('searchText'));  //valida si la peticion trae el campo de busqueda 
-        $apiarios = Apiario::with('ubicacion')
+        $apiarios = Apiario::with('Ubicacion')
             ->where('Descripcion','LIKE','%'.$query.'%')
             ->orderby('id','desc')
             ->paginate(7);
@@ -23,40 +23,41 @@ class ApiarioController extends Controller
     public function create()
     {
         $ubicaciones = Ubicacion::all();
-        return view("Apiario.create",["ubicaciones"=> $ubicaciones]);
+        //dd(ubicaciones);
+        return view("Apiario.create",["ubicacions"=> $ubicaciones]);
     }
 
 
     public function store(ApiariosFormRequest $request)
     {
-        $apiario = Apiario::create($request->all());
+        $apiarios = Apiario::create($request->all());
         return redirect('Apiario');  
     }
 
     public function show($id)
     {
-        return view ("Apiario.show",["apiario"=>Apiario::findOrFail($id)]);
+        return view ("Apiario.show",["Apiario"=>Apiario::findOrFail($id)]);
     }
 
     public function edit($id)
     {
-        return view ("Apiario.edit",["apiario"=>Apiario::findOrFail($id)]);
+        return view ("Apiario.edit",["Apiario"=>Apiario::findOrFail($id)]);
     }
 
     public function update(ApiariosRequestForm $request, $id)
     {
-        $apiario= new Apiario;
-        $apiario->Descripcion=$request->get('Descripcion');
-        $apiario->cantidad=$request->get('cantidad');
-        $apiario->ubicacion_id=$request->get('ubicacion_id');
-        $apiario->update();
+        $apiarios= new Apiario;
+        $apiarios->Descripcion->get('Descripcion');
+        $apiarios->cantidad->get('cantidad');
+        $apiarios->ubicacion_id=$request->get('ubicacion_id');
+        $apiarios->update();
         return redirect('Apiario');
     }
     
     public function destroy($id)
     {
-        $apiario=Apiario::findOrFail($id);
-        $apiario->delete();
+        $apiarios=Apiario::findOrFail($id);
+        $apiarios->delete();
         return redirect('Apiario');
     }
 }
