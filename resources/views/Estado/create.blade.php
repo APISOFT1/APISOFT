@@ -13,7 +13,7 @@
 			</div>
 			@endif
 
-			{!!Form::open(array('url'=>'Estado,'method'=>'POST','autocomplete'=>'off'))!!}
+		{!!Form::open(array('url'=>'Estado','method'=>'POST','autocomplete'=>'off'))!!}
             {{Form::token()}}
             <div class="form-group">
             	<label for="Descripcion">Descripción</label>

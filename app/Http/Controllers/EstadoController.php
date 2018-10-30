@@ -13,14 +13,14 @@ class EstadoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         
         if ($request)
     {
         $query=trim($request->get('searchText'));
-        $estado=DB::table('estado')->where('descripcion','LIKE','%'.$query.'%')
+        $estado=DB::table('estados')->where('descripcion','LIKE','%'.$query.'%')
         ->orderby('id','desc')
         ->paginate(7);
         return view('Estado.index',["estado"=>$estado,"searchText"=>$query]);
@@ -102,7 +102,7 @@ class EstadoController extends Controller
      * @param  \App\Estado  $estado
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Estado $estado)
+    public function destroy($id)
     {
         //
     $estado=Estado::findOrFail($id);
