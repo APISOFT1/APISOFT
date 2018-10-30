@@ -21,7 +21,6 @@ Route::group(['middleware' =>[ 'auth', 'verified']], function () {
 'Genero'=>'GeneroController',
 'EstadoCivil'=>'EstadoCivilController',
 'Ubicacion'=>'UbicacionController',
-'Apiario'=>'ApiarioController',
 'Afiliado'=>'AfiliadoController',
 'AfiliadoApiario'=>'AfiliadoApiarioController',
 'Usuario'=>'UserController',
@@ -30,7 +29,8 @@ Route::group(['middleware' =>[ 'auth', 'verified']], function () {
 	
 	]);
 });
-	
+Route::resource('Apiario','ApiarioController'
+);
 
 Auth::routes(['verify' => true]);
 

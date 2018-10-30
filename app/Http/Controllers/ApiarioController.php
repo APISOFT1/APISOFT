@@ -60,7 +60,7 @@ class ApiarioController extends Controller
      */
     public function show($id)
     {
-        return view ("Apiario.show",["apiario"=>Apiario::findOrFail($id)]);
+        return view ("Apiario.show",["Apiario"=>Apiario::findOrFail($id)]);
     }
 
     /**
@@ -71,10 +71,7 @@ class ApiarioController extends Controller
      */
     public function edit( $id)
     {
-        $ubicaciones = Ubicacion::all();
-       
-
-        return view ("Apiario.edit",["apiario"=>Apiario::findOrFail($id)],  ["ubicaciones"=> $ubicaciones]);
+        return view ("Apiario.edit",["Apiario"=>Apiario::findOrFail($id)]);
     }
 
     /**

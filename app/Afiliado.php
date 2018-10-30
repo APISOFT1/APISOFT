@@ -24,6 +24,7 @@ class Afiliado extends Model
          'estado_civil_id',
          'estado_id'
     ];
+   
 
     public function Genero() 
     {
