@@ -18,13 +18,16 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $Generos = Genero::all();
+       
+        $Rols = Rol::all();
         $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
         $usuarios = User::with('Genero', 'Rol') 
             ->where('name','LIKE','%'.$query.'%')
             ->orderby('id','desc')
             ->paginate(7);
          
-        return view('Usuario.index', ['usuarios'=>$usuarios,"searchText"=>$query]);
+        return view('Usuario.index', ['usuarios'=>$usuarios,"Rols"=> $Rols, "Generos"=> $Generos,"searchText"=>$query]);
     }
 
     /**
@@ -32,7 +35,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(UsuarioFormRequest $request)
     {
         $Generos = Genero::all();
        

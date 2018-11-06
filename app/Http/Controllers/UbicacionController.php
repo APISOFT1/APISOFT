@@ -17,10 +17,10 @@ class UbicacionController extends Controller
     {
     
             $query=trim($request->get('searchText'));
-            $ubicacion=DB::table('ubicacions')->where('descripcion','LIKE','%'.$query.'%')
+            $ubicaciones=DB::table('ubicacions')->where('descripcion','LIKE','%'.$query.'%')
             ->orderby('id','desc')
             ->paginate(7);
-            return view('Ubicacion.index',["ubicacion"=>$ubicacion,"searchText"=>$query]);
+            return view('Ubicacion.index',["ubicacion"=>$ubicaciones,"searchText"=>$query]);
 
     }
 
@@ -42,9 +42,9 @@ class UbicacionController extends Controller
      */
     public function store(UbicacionFormRequest $request)
     {
-        $ubicacion= new Ubicacion;
-        $ubicacion->descripcion=$request->get('Descripcion');
-        $ubicacion->save();
+        $ubicaciones= new Ubicacion;
+        $ubicaciones->descripcion=$request->get('Descripcion');
+        $ubicaciones->save();
         return redirect('Ubicacion');
     }
 
@@ -73,9 +73,9 @@ class UbicacionController extends Controller
      */
     public function update(UbicacionFormRequest $request, $id)
     {
-        $ubicacion=Ubicacion::findOrFail($id);
-        $ubicacion->descripcion=$request->get('descripcion');
-        $ubicacion->update();
+        $ubicaciones=Ubicacion::findOrFail($id);
+        $ubicaciones->descripcion=$request->get('descripcion');
+        $ubicaciones->update();
         return redirect('Ubicacion');
     }
 
@@ -87,8 +87,8 @@ class UbicacionController extends Controller
      */
     public function destroy($id)
     {
-        $ubicacion=Ubicacion::findOrFail($id);
-    $ubicacion->delete();
+        $ubicaciones=Ubicacion::findOrFail($id);
+    $ubicaciones->delete();
     return redirect('Ubicacion');
     }
 }

@@ -2,7 +2,9 @@
 @section ('contenido')
 <div class="row">
 	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-		<h3>Listado de Usuario <a href="Usuario/create"><button class="btn btn-success">Nuevo</button></a></h3>
+	<h3>Listado de Generos <a href="" class="btn btn-success" data-toggle="modal" data-target="#createUsuario">
+	
+    Nuevo</a></h3>
 		@include('Usuario.search')
 		</div>
 </div>
@@ -53,6 +55,7 @@
 
   	</tr>
 		@include('Usuario.modal')
+		@include('Usuario.create')
   	@endforeach
 	
 

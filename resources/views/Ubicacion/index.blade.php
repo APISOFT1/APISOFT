@@ -16,20 +16,20 @@
 					<th>Descripción</th>
 				
 				</thead>
-               @foreach ($ubicacion as $r)
+               @foreach ($ubicaciones as $ubicacion)
 				<tr>
-					<td>{{ $r->id}}</td>
-					<td>{{ $r->Descripcion}}</td>
+					<td>{{ $ubicacion->id}}</td>
+					<td>{{ $ubicacion->Descripcion}}</td>
 					<td>
-						<a href="{{URL::action('UbicacionController@edit',$r->id)}}"><button class="btn btn-info">Editar</button></a>
-                         <a href="" data-target="#modal-delete-{{$r->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
+						<a href="{{URL::action('UbicacionController@edit',$ubicacion->id)}}"><button class="btn btn-info">Editar</button></a>
+                         <a href="" data-target="#modal-delete-{{$ubicacion->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
 					</td>
 				</tr>
 				@include('Ubicacion.modal')
 				@endforeach
 			</table>
 		</div>
-		{{$ubicacion->render()}}
+		{{$ubicaciones->render()}}
 	</div>
 </div>
 
