@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->foreign('Genero_Id')->references('id')->on('generos');
             $table->integer('Rol_Id')->nullable()->unsigned();
             $table->foreign('Rol_Id')->references('id')->on('rols');
+            $table->foreign('estado_id')->references('id')->on('estados');
            
             $table->rememberToken();
             $table->timestamps();

@@ -43,7 +43,7 @@ class AfiliadoController extends Controller
         $estados = Estado::all();
     
         return view("Afiliado.create",["Estados"=> $Estados, "Generos"=> $Generos, 
-        "estados"=> $estados]);
+        "Estados"=> $estados]);
     }
 
     /**
