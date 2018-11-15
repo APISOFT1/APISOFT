@@ -86,6 +86,12 @@
 						@endforeach						
 					</select>
 				</div>
+<<<<<<< HEAD
+
+                  <div class="form-group">
+					{!! Form::label('fechaingreso','FechaIngreso') !!}
+					{!! Form::date_add('fechaingreso', $user->fecha_ingreso,['class' =>'form-control', 'placeholder' =>'Fecha Ingreso','required'])!!}
+=======
             </div>
 			<div class="form-group">
             	<div class="col-md-6">
@@ -95,6 +101,7 @@
 							<option value="{{ $Rol->id}}">{{ $Rol->descripcion}}</option>
 						@endforeach						
 					</select>
+>>>>>>> develop
 				</div>
             </div>
             
@@ -103,6 +110,36 @@
             	<button class="btn btn-primary" type="submit">Guardar</button>
             	<button class="btn btn-danger" type="reset">Cancelar</button>
 				</div>
+<<<<<<< HEAD
+
+                <div class="form-group">
+					{!! Form::label('genero','Genero') !!}
+					{!! Form:: select('genero',[''=>'Seleccione el genero'  ,'1' => 'Mujer','2'=>'Hombre'], $user->Genero_Id, ['class'=>'form-control']) !!}
+				</div>
+
+                <div class="form-group">
+					{!! Form::label('rol','Rol') !!}
+					{!! Form:: select('rol',[''=>'Seleccione tipo de Rol'  ,'1' => 'Administrador','2'=>'Usuario'], $user->Rol_Id, ['class'=>'form-control']) !!}
+				</div>
+
+				
+				<div class="form-group">
+					{!! Form::submit('Actualizar', ['class' =>'btn btn-primary']) !!}
+					
+				</div>
+
+
+			    
+			{!! Form::close() !!}
+
+			
+
+
+			
+@endsection			
+
+			
+=======
             </div>
 			</div>
 			{!!Form::close()!!}		
@@ -110,3 +147,4 @@
 		</div>
 	</div>
 @endsection
+>>>>>>> develop

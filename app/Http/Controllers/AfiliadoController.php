@@ -127,3 +127,4 @@ class AfiliadoController extends Controller
         return redirect('Afiliado');
     }
 }
+

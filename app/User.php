@@ -48,6 +48,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    protected $casts = [
+        'Fecha_Ingreso' => 'Y-m-d H:i:s'
+    ];
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = \Hash::make($password);
