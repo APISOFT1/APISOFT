@@ -1,4 +1,4 @@
-@extends ('layouts.admin')
+@extends ('layouts.principal')
 @section ('contenido')
 	<div class="row">
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -111,7 +111,18 @@
 				</div>
             </div>
             
+			<div class="form-group">
+            	<div class="col-md-6">
+				<label for="estado_id">Estado</label>
+	
+				<div class="register-switch">
+      <input type="radio" name="estado_id" value="{{$estado_id=1}}" id="estado_id" class="register-switch-input" checked>
+      <label for="estado_id" class="register-switch-label">Activo</label>
+      <input type="radio" name="estado_id" value="{{$estado_id=0}}" id="estado_id" class="register-switch-input">
+      <label for="estado_id" class="register-switch-label">Inactivo</label>
+	</div> 
 		
+			
             <div class="form-group">
 			
             	<button class="btn btn-primary" type="submit">Guardar</button>

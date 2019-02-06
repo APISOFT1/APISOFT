@@ -2,7 +2,7 @@
 @section ('contenido')
 
 
-		{!!Form::model($usuario,['method'=>'PATCH','route'=>['Usuario.update',$usuario->id]])!!}
+		{!!Form::model($apiario,['method'=>'PATCH','route'=>['Apiario.update',$apiario->id]])!!}
             {{Form::token()}}
          
 		

@@ -33,7 +33,8 @@ class User extends Authenticatable
         'Direccion',
         'Fecha_Ingreso',
         'Genero_Id',
-        'Rol_Id'
+        'Rol_Id',
+        'estado_id'
         
 
     ];
@@ -64,8 +65,5 @@ class User extends Authenticatable
     {
         return $this->BelongsTo(Rol::class,'Rol_Id');
     }
-    public function Estado() 
-    {
-        return $this->Belongsto(Estado::class,'estado_id');
-    }
+   
 }

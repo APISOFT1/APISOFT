@@ -42,6 +42,7 @@
 				<input type="text" name="email" class="form-control" placeholder="email..." />
             </div>
             <div class="form-group">
+				
             	<label for="Direccion">Direccion</label>
 				<input type="text" name="Direccion" class="form-control" placeholder="Direccion..." />
             </div>
@@ -66,8 +67,8 @@
             </div>
 			<div class="form-group">
             	<div class="col-md-6">
-				<label for="estado_civil_id">Estado Civil</label>
-					<select class="form-control" id="estado_civil_id" name="estado_civil_id">
+				<label for="estado_civil_id"  >Estado Civil </label>
+					<select class="form-control" id="estado_civil_id" name="estado_civil_id" width=300px>
 						@foreach ($Estados as $estado)
 							<option value="{{ $estado->id}}">{{ $estado->descripcion}}</option>
 						@endforeach						
@@ -78,15 +79,22 @@
             <div class="form-group">
             	<div class="col-md-6">
 				<label for="estado_id">Estado</label>
-					<select class="form-control" id="estado_id" name="estado_id">
-						@foreach ($estados as $Estado)
-							<option value="{{ $Estado->id}}">{{ $Estado->Descripcion}}</option>
-						@endforeach						
-					</select>
-				</div>
-            </div>
+	
+				<div class="register-switch">
+      <input type="radio" name="estado_id" value="{{$estado_id=1}}" id="estado_id" class="register-switch-input" checked>
+      <label for="estado_id" class="register-switch-label">Activo</label>
+      <input type="radio" name="estado_id" value="{{$estado_id=0}}" id="estado_id" class="register-switch-input">
+      <label for="estado_id" class="register-switch-label">Inactivo</label>
+	</div> 
+	
+<!-- Material checked 
+<label class="switch" >
+  <input type="checkbox" name="estado_id" value="{{$estado_id=1}}" id="estado_id">
+  <span class="slider round"></span>
+</label> -->
+
             <div class="form-group">
-			
+				
             	<button class="btn btn-primary" type="submit">Guardar</button>
             	<button class="btn btn-danger" type="reset">Cancelar</button>
             </div>
