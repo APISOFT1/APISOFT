@@ -18,7 +18,7 @@ class ApiarioController extends Controller
     {
         if($request){
             $query=trim($request->get('searchText'));  //valida si la peticion trae el campo de busqueda 
-        $apiarios = Apiario::with('ubicacion')
+        $apiarios = Apiario::with('Ubicacion')
             ->where('Descripcion','LIKE','%'.$query.'%')
             ->orderby('id','desc')
             ->paginate(7);
@@ -49,7 +49,7 @@ class ApiarioController extends Controller
     {
         $apiario = Apiario::create($request->all());
 
-        return redirect('Apiario');  
+        return redirect('Apiario')->with('message','store'); 
     }
 
     /**

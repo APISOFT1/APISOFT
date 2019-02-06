@@ -35,8 +35,5 @@ class Afiliado extends Model
         return $this->belongsTo(Estado_Civil::class, 'estado_civil_id');
     }
 
-    public function Estado() 
-    {
-        return $this->Belongsto(Estado::class,'estado_id');
-    }
+   
 }

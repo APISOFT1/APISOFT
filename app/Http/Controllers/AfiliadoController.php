@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Afiliado;
 use App\Genero;
 use App\Estado_Civil;
-use App\Estado;
+
 use Illuminate\Http\Request;
 use App\Http\Requests\AfiliadoFormRequest;
 
@@ -20,7 +20,7 @@ class AfiliadoController extends Controller
     {
         if($request){
             $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-            $afiliados = Afiliado::with('Genero', 'Estado_Civil', 'Estado') 
+            $afiliados = Afiliado::with('Genero', 'Estado_Civil') 
                 ->where('Nombre','LIKE','%'.$query.'%')
                 ->orderby('id','desc')
                 ->paginate(7);
@@ -40,10 +40,10 @@ class AfiliadoController extends Controller
        
         $Estados = Estado_Civil::all();
         
-        $estados = Estado::all();
+        
+       
     
-        return view("Afiliado.create",["Estados"=> $Estados, "Generos"=> $Generos, 
-        "Estados"=> $estados]);
+        return view("Afiliado.create",["Estados"=> $Estados, "Generos"=> $Generos]);
     }
 
     /**
@@ -55,8 +55,9 @@ class AfiliadoController extends Controller
     public function store(Request $request)
     {
         $afiliado = Afiliado::create($request->all());
+    
 
-        return redirect('Afiliado');  
+        return redirect('Afiliado')->with('message','store');  
     }
 
     /**
@@ -81,11 +82,11 @@ class AfiliadoController extends Controller
         $Generos = Genero::all();
        
         $Estados = Estado_Civil::all();
-        $estados = Estado::all();
+       
         
         $afiliado= Afiliado::find($id);
         return view('Afiliado.edit',["afiliado"=>Afiliado::findOrFail($id), "Estados"=> $Estados, 
-        "Generos"=> $Generos, "estados"=> $estados]);
+        "Generos"=> $Generos]);
     }
 
     /**

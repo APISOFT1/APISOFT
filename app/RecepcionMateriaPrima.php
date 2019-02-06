@@ -12,13 +12,13 @@ class RecepcionMateriaPrima extends Model
     protected $fillable = 
     [      
         'fecha',
-        'Observacion',
         'pesoBruto',
+        'numero_muestras',
+        'afiliado_id',
         'user_id',
         'aceptarMatPrima_id',
-        'numero_muestra',
-        'afiliado_id',
-        'tipoEntrega_id'
+        'tipoEntrega_id',
+        'observacion'
     ];
     protected $casts = [
         'fecha' => 'Y-m-d H:i:s'

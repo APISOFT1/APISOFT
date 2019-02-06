@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Genero;
 use App\Rol;
-use App\Estado;
+
 
 
 
@@ -42,13 +42,13 @@ class UserController extends Controller
        
        $Rols = Rol::all();
 
-       $Estados = Estado::all();
+      
 
         
         
     
         return view("Usuario.create",  ["Rols"=> $Rols ,
-        "Generos"=>$Generos , "Estados"=>$Estados]);
+        "Generos"=>$Generos]);
     }
 
     /**
@@ -91,7 +91,7 @@ class UserController extends Controller
 
 
         
-        return view('Usuario.edit',["usuario"=>User::findOrFail($id)], ["Rols"=> $Rols, 
+        return view('Usuario.edit',["usuarios"=>User::findOrFail($id)], ["Rols"=> $Rols, 
         "Generos"=> $Generos]);
     }
 
@@ -116,6 +116,7 @@ class UserController extends Controller
   	  $usuario->Fecha_Ingreso=$request->get('Fecha_Ingreso');
 	  $usuario->Genero_Id=$request->get('Genero_Id');
       $usuario->Rol_Id=$request->get('Rol_Id');
+      $usuario->estado_id=$request->get('estado_id');
       $usuario->update();  
 
       return redirect('Usuario');

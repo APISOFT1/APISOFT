@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+  <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <head>
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+    <!-- Styles -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Apisoft | www.Apisoft.com</title>
     <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <!-- Font Awesome -->
@@ -18,14 +31,23 @@
     <link rel="stylesheet" href="{{asset('css/_all-skins.min.css')}}">
     <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
     <link rel="shortcut icon" href="{{asset('img/favicon.ico')}}">
+      <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
 
   </head>
-  <body class="hold-transition skin-blue sidebar-mini">
+  <body class="hold-transition skin-yellow sidebar-mini">
     <div class="wrapper">
 
       <header class="main-header">
 
+             
+  
+</ul>
         <!-- Logo -->
+        <div class="absolut">
         <a href="index2.html" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>AS</b>T</span>
@@ -33,12 +55,9 @@
           <span class="logo-lg"><b>Apisoft</b></span>
         </a>
 
-        <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top" role="navigation">
+
           <!-- Sidebar toggle button-->
-          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Navegación</span>
-          </a>
+         
           <!-- Navbar Right Menu -->
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
@@ -79,10 +98,10 @@
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-          <!-- Sidebar user panel -->
+       <section class="sidebar">
+          <!-- Sidebar user panel 
                     
-          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <!-- sidebar menu: : style can be found in sidebar.less --> 
           <ul class="sidebar-menu">
             <li class="header"></li>
             
@@ -158,7 +177,7 @@
             </li>
                         
           </ul>
-        </section>
+        </section> -->
         <!-- /.sidebar -->
       </aside>
 
@@ -172,7 +191,7 @@
         
         <!-- Main content -->
         <section class="content">
-          
+          <div class ="absolute6">
           <div class="row">
             <div class="col-md-12">
               <div class="box">
@@ -218,31 +237,17 @@
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <!-- AdminLTE App -->
     <script src="{{asset('js/app.min.js')}}"></script>
+
+      <!-- DATATABLE-->
+    <script src= "https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src= "https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src= "https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+    <style> 
+
+</style>
     <body>
-	<p>Click the button to get your coordinates.</p>
 
-<button onclick="getLocation()">Try It</button>
-
-<p id="demo"></p>
-
-<script>
-var x = document.getElementById("demo");
-
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else { 
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-    function myFunction() {
-    var x = document.getElementById("snackbar");
-    x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-}
-}
-
-
-</script>
 
   </body>
 </html>
