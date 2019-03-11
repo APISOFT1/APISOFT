@@ -34,11 +34,9 @@
 			<div class="form-group">
             	<div class="col-md-6">
 				<label for="user_id">Responsable</label>
-					<select class="form-control" id="user_id" name="user_id">
-						@foreach ($users as $user)
-							<option value="{{ $user->id }}">{{ $user->name}} {{ $user->Apellido1}} {{ $user->Apellido2}}</option>
-						@endforeach						
-					</select>
+						
+				<input  type="text" name="user_id"  value="{{ Auth::user()->id}} "></option>
+					
 				</div>
             </div>			
 		

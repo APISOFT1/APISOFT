@@ -12,11 +12,8 @@
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
-<h1 class="text-center">LISTADO DE USUARIOS<a href="Usuario/create"></h1>
-<div class="absolute">
-<button class="btn btn-primary" >+ Crear Nuevo Usuario</button></a>
+<h1 class="text-center">LISTADO DE USUARIOS</h1>
 
-</div>
 <!-- Saltos de linea-->
 <br>
 <br>
@@ -42,7 +39,11 @@
     <th>Genero</th>
   	<th>Rol</th>
 		<th>Estado</th>
-		<th> <div class="size">Acción</th>
+		<th>  <div class="size">
+		  <a href="Usuario/create" class="create-modal btn btn-success btn-sm">
+			<i class="glyphicon glyphicon-plus"></i>
+			</a>
+			</th>
 
   </thead>
 

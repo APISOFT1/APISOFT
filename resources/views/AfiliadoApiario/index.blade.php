@@ -13,10 +13,7 @@
 
 @section ('contenido')
 
-<h1 class="text-center">LISTADO DE  AFILIADO-APIARIO<a href="AfiliadoApiario/create"></h1>
-<div class="absolute">
-<button class="btn btn-primary" >+ Crear Nuevo Afiliado-Apiario</button></a>
-</div>
+<h1 class="text-center">LISTADO DE  AFILIADO-APIARIO</h1>
 
 <!-- Saltos de linea-->
 <br>
@@ -34,14 +31,16 @@
   	<th>Codigo</th>
   	<th>Afiliado</th>
   	<th>Apiario</th>
-	<th>Accion</th>
+	<th> <a href="AfiliadoApiario/create"
+	class="create-modal btn btn-success btn-sm">
+			<i class="glyphicon glyphicon-plus"></i></th>
   </thead>
 
  
   <tbody>
   		@foreach ($afiliadoapiarios as $afiliado )
   		<td>{{$afiliado->id}}</td>
-  		<td>{{$afiliado->afiliado->Nombre}} {{$afiliado->afiliado->Apellido1}} {{$afiliado->afiliado->Apellido2}}</td>
+  		<td>{{$afiliado->afiliado->Nombre}} {{$afiliado->afiliado->apellido1}} {{$afiliado->afiliado->apellido2}}</td>
       <td>{{$afiliado->apiario->Descripcion}}</td>
   
   		

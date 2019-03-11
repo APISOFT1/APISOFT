@@ -10,13 +10,14 @@ use App\TipoEnTrega;
 use App\AceptarMatPrima;
 use App\Http\Requests\RecepcionMateriaPrimaFormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Auth\Guard;
 
 
 
 class RecepcionMateriaPrimaController extends Controller
 {
    
-    public function index(request $request)
+    public function index(request $request, Guard $auth)
     {
         if($request){
             $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
@@ -25,7 +26,7 @@ class RecepcionMateriaPrimaController extends Controller
                
                 ->orderby('id','desc')
                 ->paginate(7);
-                return view('RecepcionMateriaPrima.index',["recepcionMateriaPrima"=>$recepcionMateriaPrima,"searchText"=>$query]);
+                return view('RecepcionMateriaPrima.index',["recepcionMateriaPrima"=>$recepcionMateriaPrima,"searchText"=>$query ,'user' => $auth->user()]);
         }
         
         
@@ -36,16 +37,23 @@ class RecepcionMateriaPrimaController extends Controller
     
     public function create()
     {
-        $users = User::all();
+        
+       
+        $user= User::find(Auth()->id());
+       
         $afiliados = Afiliado::all();
         $tipoEntregas = TipoEntrega::all();
         $aceptarMatPrimas = AceptarMatPrima::all();
-        return view("RecepcionMateriaPrima.create",["users"=> $users, "afiliados"=> $afiliados, 
+        return view("RecepcionMateriaPrima.create",["user"=> $user, "afiliados"=> $afiliados, 
         "tipoEntregas"=> $tipoEntregas, "aceptarMatPrimas"=> $aceptarMatPrimas] );
     }
 
     public function store(RecepcionMateriaPrimaFormRequest $request)
     {
+      
+
+   
+        
         $recepcionMateriaPrima = RecepcionMateriaPrima::create($request->all());
         return redirect('RecepcionMateriaPrima'); 
     }

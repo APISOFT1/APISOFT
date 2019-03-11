@@ -11,23 +11,20 @@
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
-<h1 class="text-center">LISTADO DE  ROL<a href="Rol/create"></h1>
-<div class="absolute">
-<button class="btn btn-primary" > + Crear Nuevo Rol <span class="glyphicon glyphicon-user"></button></a>
+<h1 >LISTADO DE  ROL<a href="Rol/create"> <button class="btn btn-primary" >  Nuevo <span class="glyphicon glyphicon-user"></button></a></h1>
 
-</div>
+
 <!-- Saltos de linea-->
+<br>
+<br>
 <br>
 <br>
 <!-- Fin de salto de linea. No necesita una etiqueta de cierre-->
 <div class="absolute3">
 		@include('Rol.search')
 		
-	
 </div>	
 
-
-	
 <div class="table-responsive">
 			<table class="table table-striped table-bordered table-condensed table-hover">
 				<thead>

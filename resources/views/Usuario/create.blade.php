@@ -15,6 +15,15 @@
 
 			{!!Form::open(array('url'=>'Usuario','method'=>'POST','autocomplete'=>'off'))!!}
 			{{Form::token()}}
+			<div class="container">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="email">Cedula</label>
+      <div class="col-sm-10">
+        <input type="email" class="form-control" id="Id_Usuario" placeholder="Enter email" name="email">
+      </div>
+    </div>
+    
+   
 			<div class="form-group">
             	<label for="id">Cedula</label>
             	<input type="text" name="id" class="form-control" placeholder="Id_Usuario...">

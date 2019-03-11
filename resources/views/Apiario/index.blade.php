@@ -12,11 +12,8 @@
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
-<h1 class="text-center">LISTADO DE  APIARIOS<a href="Apiario/create"></h1>
-<div class="absolute">
-<button class="btn btn-primary" >+ Crear Nuevo APIARIO</button></a>
+<h1 class="text-center">LISTADO DE  APIARIOS</h1>
 
-</div>
 <!-- Saltos de linea-->
 <br>
 <br>
@@ -34,8 +31,10 @@
 					<th>Descripcion</th>
 					<th>Cantidad</th>
 					<th>Ubicacion</th>
-                    <th>Creacion</th>
-					<th>Accion</th>
+          <th>Creacion</th>
+					<th><a href="Apiario/create"
+					class="create-modal btn btn-success btn-sm">
+            <i class="glyphicon glyphicon-plus"></i></th>
 				</thead>
 
                @foreach ($apiarios as $apiario)
