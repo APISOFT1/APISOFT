@@ -15,14 +15,13 @@ class UbicacionController extends Controller
      */
     public function index(request $request)
     {
-        if ($request) 
-        {
+    
             $query=trim($request->get('searchText'));
             $ubicacion=DB::table('ubicacions')->where('descripcion','LIKE','%'.$query.'%')
             ->orderby('id','desc')
             ->paginate(7);
             return view('Ubicacion.index',["ubicacion"=>$ubicacion,"searchText"=>$query]);
-        }
+
     }
 
     /**
@@ -60,17 +59,9 @@ class UbicacionController extends Controller
         return view ("Ubicacion.show",["ubicacion"=>Ubicacion::findOrFail($id)]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Ubicacion  $ubicacion
-     * @return \Illuminate\Http\Response
-     */
     public function edit( $id)
     {
         return view ("Ubicacion.edit",["ubicacion"=>Ubicacion::findOrFail($id)]);
-    
-        
     }
 
     /**

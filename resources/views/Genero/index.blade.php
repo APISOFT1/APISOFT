@@ -1,4 +1,4 @@
-@extends ('layouts.admin')
+@extends ('layouts.principal')
 @section ('contenido')
 <div class="row">
 	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
@@ -23,6 +23,7 @@
 					<td>
 						<a href="{{URL::action('GeneroController@edit',$generos->id)}}"><button class="btn btn-info">Editar</button></a>
                          <a href="" data-target="#modal-delete-{{$generos->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
+						 
 					</td>
 				</tr>
 				@include('Genero.modal')

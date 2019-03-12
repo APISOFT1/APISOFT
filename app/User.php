@@ -33,7 +33,9 @@ class User extends Authenticatable
         'Direccion',
         'Fecha_Ingreso',
         'Genero_Id',
-        'Rol_Id'
+        'Rol_Id',
+        'estado_id'
+        
 
     ];
 
@@ -46,6 +48,9 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password', 'remember_token',
+    ];
+    protected $casts = [
+        'Fecha_Ingreso' => 'Y-m-d H:i:s'
     ];
     public function setPasswordAttribute($password)
     {
@@ -60,4 +65,5 @@ class User extends Authenticatable
     {
         return $this->BelongsTo(Rol::class,'Rol_Id');
     }
+   
 }

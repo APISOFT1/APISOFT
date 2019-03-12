@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Genero;
 use App\Rol;
+
+
+
+
 use Illuminate\Http\Request;
 use App\Http\Requests\UsuarioFormRequest;
 
@@ -36,10 +40,15 @@ class UserController extends Controller
     {
         $Generos = Genero::all();
        
-        $Rols = Rol::all();
+       $Rols = Rol::all();
+
+      
+
+        
         
     
-        return view("Usuario.create",["Rols"=> $Rols], ["Generos"=> $Generos]);
+        return view("Usuario.create",  ["Rols"=> $Rols ,
+        "Generos"=>$Generos]);
     }
 
     /**
@@ -61,7 +70,7 @@ class UserController extends Controller
      * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function show(Usuario $usuario)
+    public function show( $id)
     {
         return view ("Usuario.show",["usuarios"=>User::findOrFail($id)]);
     }
@@ -72,10 +81,18 @@ class UserController extends Controller
      * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function edit(Usuario $usuario)
+    public function edit($id)
     {
-        $usuario= User::find($id);
-        return view('Usuario.edit',compact('usuario'));
+
+     
+        $Generos = Genero::all();
+       
+       $Rols = Rol::all();
+
+
+        
+        return view('Usuario.edit',["usuarios"=>User::findOrFail($id)], ["Rols"=> $Rols, 
+        "Generos"=> $Generos]);
     }
 
     /**
@@ -87,17 +104,19 @@ class UserController extends Controller
      */
     public function update(UsuarioFormRequest $request, $id)
     {
-      $usuario= new User;
-  	  $usuario->name->get('name');
-      $usuario->Apellido1->get('Apellido1');
-  	  $usuario->Apellido2->get('Apellido1');
-      $usuario->Telefono->get('Telefono');
-  	  $usuario->email->get('email');
-      $usuario->Direccion->get('Direccion');
-  	  $usuario->Fecha_Ingreso->get('Fecha_Ingreo');
-      $usuario->password->get('password');
-	  $usuario->Genero_id=$request->get('Genero_id');
-	  $usuario->Rol_id=$request->get('Rol_id');
+      $usuario =User::findOrFail($id);
+    
+      $usuario->name=$request->get('name');
+      $usuario->email=$request->get('email');
+      $usuario->password=$request->get('password');
+      $usuario->Apellido1=$request->get('Apellido1');
+  	  $usuario->Apellido2=$request->get('Apellido1');
+      $usuario->Telefono=$request->get('Telefono');
+      $usuario->Direccion=$request->get('Direccion');
+  	  $usuario->Fecha_Ingreso=$request->get('Fecha_Ingreso');
+	  $usuario->Genero_Id=$request->get('Genero_Id');
+      $usuario->Rol_Id=$request->get('Rol_Id');
+      $usuario->estado_id=$request->get('estado_id');
       $usuario->update();  
 
       return redirect('Usuario');
@@ -117,3 +136,4 @@ class UserController extends Controller
         return redirect('Usuario');
     }
 }
+

@@ -18,7 +18,7 @@ class ApiarioController extends Controller
     {
         if($request){
             $query=trim($request->get('searchText'));  //valida si la peticion trae el campo de busqueda 
-        $apiarios = Apiario::with('ubicacion')
+        $apiarios = Apiario::with('Ubicacion')
             ->where('Descripcion','LIKE','%'.$query.'%')
             ->orderby('id','desc')
             ->paginate(7);
@@ -49,7 +49,7 @@ class ApiarioController extends Controller
     {
         $apiario = Apiario::create($request->all());
 
-        return redirect('Apiario');  
+        return redirect('Apiario')->with('message','store'); 
     }
 
     /**
@@ -60,7 +60,7 @@ class ApiarioController extends Controller
      */
     public function show($id)
     {
-        return view ("Apiario.show",["apiario"=>Apiario::findOrFail($id)]);
+        return view ("Apiario.show",["Apiario"=>Apiario::findOrFail($id)]);
     }
 
     /**
@@ -69,9 +69,9 @@ class ApiarioController extends Controller
      * @param  \App\Apiario  $apiario
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit( $id)
     {
-        return view ("Apiario.edit",["apiario"=>Apiario::findOrFail($id)]);
+        return view ("Apiario.edit",["Apiario"=>Apiario::findOrFail($id)]);
     }
 
     /**
@@ -81,13 +81,13 @@ class ApiarioController extends Controller
      * @param  \App\Apiario  $apiario
      * @return \Illuminate\Http\Response
      */
-    public function update(ApiariosRequestForm $request, $id)
+    public function update(ApiariosFormRequest $request, $id  )
     {
-        $ubicaciones = new Ubicacion;
-        $apiario= new Apiario;
-        $apiario->Descripcion=$request->get('Descripcion');
-        $apiario->Cantidad=$request->get('Cantidad');
-        $apiario->Ubicacion_Id=$request->get('ubicacion_id');
+        
+        $apiario=Apiario::findOrFail($id);
+        $apiario->Descripcion= $request->get('Descripcion');
+        $apiario->cantidad= $request->get('cantidad');
+        $apiario->ubicacion_id=$request->get('ubicacion_id');
         $apiario->update();
         return redirect('Apiario');
     }
@@ -101,5 +101,8 @@ class ApiarioController extends Controller
     public function destroy($id)
     {
         //
+        $apiario=Apiario::findOrFail($id);
+    $apiario->delete();
+    return redirect('Apiario');
     }
 }
