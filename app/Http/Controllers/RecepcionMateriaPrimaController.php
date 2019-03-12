@@ -22,7 +22,7 @@ class RecepcionMateriaPrimaController extends Controller
         if($request){
             $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
             $recepcionMateriaPrima = RecepcionMateriaPrima::with('Afiliado', 'User',
-             'TipoEntrega','AceptarMatPrima') 
+             'TipoEntrega') 
                
                 ->orderby('id','desc')
                 ->paginate(7);
@@ -43,9 +43,8 @@ class RecepcionMateriaPrimaController extends Controller
        
         $afiliados = Afiliado::all();
         $tipoEntregas = TipoEntrega::all();
-        $aceptarMatPrimas = AceptarMatPrima::all();
         return view("RecepcionMateriaPrima.create",["user"=> $user, "afiliados"=> $afiliados, 
-        "tipoEntregas"=> $tipoEntregas, "aceptarMatPrimas"=> $aceptarMatPrimas] );
+        "tipoEntregas"=> $tipoEntregas] );
     }
 
     public function store(RecepcionMateriaPrimaFormRequest $request)
@@ -70,12 +69,11 @@ class RecepcionMateriaPrimaController extends Controller
         $user = User::all();
         $afiliados = Afiliado::all();
         $tipoEntrega = TipoEntrega::all();
-        $aceptarMatPrima = AceptarMatPrima::all();
         $recepcionMateriaPrima= RecepcionMateriaPrima::find($id);
         return view ("RecepcionMateriaPrima.edit",
         ["recepcion_materia_primas"=>RecepcionMateriaPrima::findOrFail($id),
         "users"=> $users, "afiliados"=> $afiliados, 
-        "tipoEntregas"=> $tipoEntregas, "aceptarMatPrimas"=> $aceptarMatPrimas]);
+        "tipoEntregas"=> $tipoEntregas]);
     }
 
    
@@ -88,7 +86,6 @@ class RecepcionMateriaPrimaController extends Controller
         $recepcionMateriaPrima->afiliado_id=$request->get('afiliado_id');
         $recepcionMateriaPrima->pesoBruto=$request->get('pesoBruto');
         $recepcionMateriaPrima->numero_muestras=$request->get('numero_muestras');
-        $recepcionMateriaPrima->aceptarMatPrima=$request->get('aceptarMatPrima_id');
         $recepcionMateriaPrima->tipoEntrega_id=$request->get('tipoEntrega_id');
         $recepcionMateriaPrima->update();
         return redirect('RecepcionMateriaPrima');

@@ -16,7 +16,6 @@ class RecepcionMateriaPrima extends Model
         'numero_muestras',
         'afiliado_id',
         'user_id',
-        'aceptarMatPrima_id',
         'tipoEntrega_id',
         'observacion'
     ];
@@ -35,8 +34,5 @@ class RecepcionMateriaPrima extends Model
     {
         return $this->BelongsTo(TipoEntrega::class,'tipoEntrega_id');
     }
-    public function aceptarMatPrima() 
-    {
-        return $this->BelongsTo(AceptarMatPrima::class,'tipoEntrega_id');
-    }
+   
 }
