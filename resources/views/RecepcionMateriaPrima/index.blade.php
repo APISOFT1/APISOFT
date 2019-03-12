@@ -15,11 +15,8 @@
 @section ('contenido')
 
 
-<h1 class="text-center">LISTADO DE  RecepcionMateriaPrima<a href="RecepcionMateriaPrima/create"></h1>
-<div class="absolute">
-<button class="btn btn-primary" >+ Crear Nueva Recepcion</button></a>
+<h1 class="text-center">LISTADO DE  RECEPCION </h1>
 
-</div>
 <!-- Saltos de linea-->
 <br>
 <br>
@@ -39,10 +36,13 @@
 					<th>Afiliado</th>
 					<th>Usuario</th>
                     <th>Peso Bruto</th>
-                    <th>Tipo Entrega</th>
 					<th>Numero de muestra</th>
-                    <th>Aceptar Materia Prima</th>
+					<th>Tipo Entrega</th>
 					<th>Observacion </th>
+					<th> <a href="RecepcionMateriaPrima/create" class="create-modal btn btn-success btn-sm">
+			<i class="glyphicon glyphicon-plus"></i>
+			</a>
+					</th>
 				</thead>
 
 
@@ -51,20 +51,35 @@
 					<td>{{ $recepcion->id}}</td>
                     <td>{{ $recepcion->fecha}}</td>
 					<td>{{ $recepcion->user->name}} {{$recepcion->user->Apellido1}} {{$recepcion->user->Apellido2}}</td>
-                    <td>{{ $recepcion->afiliado->Nombre}} {{$recepcion->afiliado->Apellido}} {{$recepcion->afiliado->Apellido2}}</td>
+                    <td>{{ $recepcion->afiliado->Nombre}} {{$recepcion->afiliado->apellido}} {{$recepcion->afiliado->apellido2}}</td>
 					<td>{{ $recepcion->pesoBruto}}</td>
 					<td>{{ $recepcion->numero_muestras}}</td>
                     <td>{{ $recepcion->tipoEntrega->Descripcion}}</td>
-                    <td>{{ $recepcion->aceptarMatPrima->descripcion}}</td>
 					<td>{{ $recepcion->observacion}}</td>
 
                     
 					<td>
-						<a href="{{URL::action('RecepcionMateriaPrimaController@edit',$recepcion->id)}}"><button class="btn btn-info">Editar</button></a>
-                         <a href="" data-target="#modal-delete-{{$recepcion->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
+					<a href=""  > <button class="btn btn-info btn-sm" > <span class="glyphicon glyphicon-eye-open"></button></a>
+						<a href="{{URL::action('RecepcionMateriaPrimaController@edit',$recepcion->id)}}"><Button  class="btn btn-success btn-lg btn-sm">
+      <span class="glyphicon glyphicon-edit "></button></a>
+                         <a href="" data-target="#modal-delete-{{$recepcion->id}}" data-toggle="modal"><button class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove "></button></a>
+						
+						
 					</td>
 					</tbody>
 					@endforeach
 				@include('RecepcionMateriaPrima.modal')
 			</table>
+			<script>
+    $(function ()
+       {
+         $("#wizard").steps({
+            headerTag: "h2",
+            bodyTag: "section",
+            transitionEffect: "slideLeft"
+         });
+     });
+</script>
+
+
 @endsection

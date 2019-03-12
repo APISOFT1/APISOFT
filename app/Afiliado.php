@@ -13,8 +13,8 @@ class Afiliado extends Model
     protected $fillable =[
         'id',
         'Nombre',
-        'Apellido1',
-        'Apellido2',
+        'apellido1',
+        'apellido2',
         'Telefono',
         'email',
         'Direccion',

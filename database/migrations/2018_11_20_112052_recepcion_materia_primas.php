@@ -24,8 +24,6 @@ class RecepcionMateriaPrimas extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('tipoEntrega_id')->unsigned();
             $table->foreign('tipoEntrega_id')->references('id')->on('tipo_entregas');
-            $table->integer('aceptarMatPrima_id')->unsigned();;
-            $table->foreign('aceptarMatPrima_id')->references('id')->on('aceptar_mat_primas');
             $table->longText('observacion');
             $table->timestamps();
         });

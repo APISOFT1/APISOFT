@@ -21,14 +21,28 @@ Route::group(['middleware' =>[ 'auth', 'verified']], function () {
 'Genero'=>'GeneroController',
 'EstadoCivil'=>'EstadoCivilController',
 'Ubicacion'=>'UbicacionController',
-'Afiliado'=>'AfiliadoController',
+'Afiliado' =>'AfiliadoController',
 'AfiliadoApiario'=>'AfiliadoApiarioController',
 'Usuario'=>'UserController',
 'Rol'=>'RolController',
 'Estado'=>'EstadoController',
-'RecepcionMateriaPrima'=> 'RecepcionMateriaPrimaController'
-	
-	]);
+'RecepcionMateriaPrima'=> 'RecepcionMateriaPrimaController',
+'Ingreso' => 'IngresoController',
+
+  ]);
+ 
+Route::POST('addAfiliado','AfiliadoController@addAfiliado');
+Route::POST('editAfiliado','AfiliadoController@editAfiliado');
+Route::POST('deleteAfiliado','AfiliadoController@deleteAfiliado');
+
+Route::POST('addRol','RolController@addRol');
+Route::POST('editRol','RolController@editRol');
+Route::POST('deleteRol','RolController@deleteRol');
+
+Route::POST('addApiario','ApiarioController@addApiario');
+Route::POST('editApiario','ApiarioController@editApiario');
+Route::POST('deleteApiario','ApiarioController@deleteApiario');
+
 });
 Route::resource('Apiario','ApiarioController'
 );
@@ -38,6 +52,5 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-
 
 
