@@ -40,8 +40,8 @@
     	<th>Genero</th>
   		<th>Estado Civil</th>
 			<th>Estado</th>
-        <th ><div class="size">
-          <a href="#" class="create-modalAfiliado btn btn-success btn-sm">
+        <th >
+          <a href="#" class="create-modal btn btn-success btn-sm">
             <i class="glyphicon glyphicon-plus"></i>
           </a>
         </th>
@@ -66,12 +66,12 @@
 		}
 		  ?></td>  		
           <td>
-            <a href="#" class="show-modalAfiliado btn btn-info btn-sm" 
+            <a href="#" class="show-modal btn btn-info btn-sm" 
             data-id="{{$value->id}}"
             data-Nombre="{{$value->Nombre}}">
               <i class="fa fa-eye"></i>
             </a>
-            <a href="#" class="edit-modalAfiliado btn btn-warning btn-sm"
+            <a href="#" class="edit-modal btn btn-warning btn-sm"
             data-id="{{$value->id}}"
             data-Nombre="{{$value->Nombre}}"
             data-apellido1="{{$value->apellido1}}"
@@ -85,7 +85,7 @@
             data-estado_civil_id="{{$value->Estado_Civil->descripcion}}"
             data-estado_id="{{$value->estado_id}}"><i class="glyphicon glyphicon-pencil"></i> </a>
 
-            <a href="#" class="delete-modalAfiliado btn btn-danger btn-sm" data-id="{{$value->id}}" data-title="{{$value->Nombre}}">
+            <a href="#" class="delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" data-title="{{$value->Nombre}}">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
           </td>
@@ -95,19 +95,17 @@
   </div>
   {{$afi->links()}}
 </div>
-{{-- Modal Form Create Post --}}
-
+{{-- Modal Form Create Afiliado --}}
 <div id="create" class="modal fade" role="dialog">
-
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-descripcion"></h4>
+        <h4 class="modal-crear"></h4>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" role="form">
-       
+
           <div class="form-group row add">
             <label class="control-label col-sm-2" for="id">Cedula:</label>
             <div class="col-sm-10">
@@ -205,16 +203,7 @@
             </div>
           </div>
 
-					<div class="form-group row add">
-            <label class="control-label col-sm-2" for="estado_id">Estado</label>
-	
-				<div class="register-switch">
-      <input type="radio" name="estado_id" value="{{$estado_id=1}}" id="estado_id" class="register-switch-input" checked>
-      <label for="estado_id" class="register-switch-label">Activo</label>
-      <input type="radio" name="estado_id" value="{{$estado_id=0}}" id="estado_id" class="register-switch-input">
-      <label for="estado_id" class="register-switch-label">Inactivo</label>
-	</div> 
-					
+        
         </form>
       </div>
           <div class="modal-footer">
@@ -227,31 +216,32 @@
           </div>
     </div>
   </div>
-</div></div>
 {{-- Modal Form Show POST --}}
 <div id="show" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title"></h4>
+          <h4 class="modal-show"></h4>
                   </div>
                     <div class="modal-body">
                     <div class="form-group">
-                      <label for="">ID :</label>
-                      <b id="i"/>
+                      <label for="iii">ID :</label>
+                      <b id="iaa"/>
                     </div>
                     <div class="form-group">
-                      <label for="">Descripcion :</label>
-                      <b id="di"/>
+                      <label for="">Nombre :</label>
+                      <b id="jaja"/>
                     </div>
                     </div>
                     </div>
                   </div>
 </div>
+
+
+
 {{-- Modal Form Edit and Delete Post --}}
 <div id="myModal"class="modal fade" role="dialog">
-
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -270,42 +260,42 @@
           <div class="form-group">
             <label class="control-label col-sm-2"for="Nombre">Nombre</label>
             <div class="col-sm-10">
-              <input type="name" class="form-control" id="n" >
+              <input type="text" class="form-control" id="n" >
             </div>
           </div>
 
           <div class="form-group">
             <label class="control-label col-sm-2"for="apellido1">Primer Apellido</label>
             <div class="col-sm-10">
-              <input type="name" class="form-control" id="a1">
+              <input type="text" class="form-control" id="a1">
             </div>
           </div>
 
           <div class="form-group">
             <label class="control-label col-sm-2"for="apellido2">Segundo Apellido</label>
             <div class="col-sm-10">
-              <input type="name" class="form-control" id="a2">
+              <input type="text" class="form-control" id="a2">
             </div>
           </div>
 
           <div class="form-group">
             <label class="control-label col-sm-2"for="Telefono">Telefono</label>
             <div class="col-sm-10">
-              <input type="name" class="form-control" id="t" >
+              <input type="text" class="form-control" id="t" >
             </div>
           </div>
 
           <div class="form-group">
             <label class="control-label col-sm-2"for="email">Correo</label>
             <div class="col-sm-10">
-              <input type="name" class="form-control" id="em" >
+              <input type="text" class="form-control" id="em" >
             </div>
           </div>
 
           <div class="form-group">
             <label class="control-label col-sm-2"for="Direccion">Direccion</label>
             <div class="col-sm-10">
-              <input type="name" class="form-control" id="d" >
+              <input type="text" class="form-control" id="d" >
             </div>
           </div>
 
@@ -317,36 +307,36 @@
           </div>
 
           <div class="form-group">
-            <label class="control-label col-sm-2"for="Num_Cuenta">Numero de Cuenta</label>
+            <label class="control-label col-sm-2"for="Num_cuenta">Numero de Cuenta</label>
             <div class="col-sm-10">
-              <input type="name" class="form-control" id="nu" >
+              <input type="text" class="form-control" id="nu" >
             </div>
           </div>
 
           <div class="form-group">
             <label class="control-label col-sm-2"for="genero_id">Genero</label>
             <div class="col-sm-10">
-              <input type="name" class="form-control" id="g" >
+              <input type="text" class="form-control" id="g" >
             </div>
           </div>
 
           <div class="form-group">
             <label class="control-label col-sm-2"for="estado_civil_id">Estado Civil</label>
             <div class="col-sm-10">
-              <input type="name" class="form-control" id="e" >
+              <input type="text" class="form-control" id="e" >
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2"for="estado_id">Estado</label>
             <div class="col-sm-10">
-              <input type="name" class="form-control" id="es" >
+              <input type="text" class="form-control" id="es" >
             </div>
           </div>
 
         </form>
                 {{-- Form Delete Post --}}
         <div class="deleteContent">
-          Are You sure want to delete <span class="descripcion"></span>?
+          Desea Eliminar Este Afiliado <span class="descripcion"></span>?
           <span class="hidden id"></span>
         </div>
       </div>
@@ -361,7 +351,5 @@
     </div>
   </div>
 </div>
-
-
   	
 @endsection

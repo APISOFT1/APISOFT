@@ -1,4 +1,4 @@
-@extends ('layouts.principal')
+@extends ('layouts.principalApiario')
 
 <!-- mensaje de exito -->
 <?php $message=Session::get('message') ?>
@@ -33,32 +33,33 @@
 					<th>Ubicacion</th>
           <th>Creacion</th>
 					<th><a href="#"
-					class="create-modalApiario btn btn-success btn-sm">
+					class="create-modal btn btn-success btn-sm">
             <i class="glyphicon glyphicon-plus"></i></th>
 				</thead>
-				<?php  $no=1; ?>
-               @foreach ($apiarios as $value)
-					<tr class="apiarios{{$value->id}}">
+        {{ csrf_field() }}
+           <?php  $no=1; ?>
+               @foreach ($api as $value)
+					<tr class="api{$value->id}}">
           <td>{{ $no++ }}</td>
 					<td>{{ $value->Descripcion}}</td>
 					<td>{{ $value->cantidad}}</td>
             <td>{{ $value->ubicacion->Descripcion}}</td>
 					<td>
-					<a href="#" class="show-modalApiario btn btn-info btn-sm"
+					<a href="#" class="show-modal btn btn-info btn-sm"
 					 data-id="{{$value->id}}" 
 					 data-Descripcion="{{$value->Descripcion}}"
 					 data-cantidad="{{$value->cantidad}}"
 					 data-ubicacion_id="{{$value->ubicacion_id}}">
               <i class="fa fa-eye"></i>
             </a>
-            <a href="#" class="edit-modalApiario btn btn-warning btn-sm" 
+            <a href="#" class="edit-modal btn btn-warning btn-sm" 
 						data-id="{{$value->id}}"
 					 data-Descripcion="{{$value->Descripcion}}"
 					 data-cantidad="{{$value->cantidad}}"
 					 data-ubicacion_id="{{$value->ubicacion_id}}">
               <i class="glyphicon glyphicon-pencil"></i>
             </a>
-            <a href="#" class="delete-modalApiario btn btn-danger btn-sm"
+            <a href="#" class="delete-modal btn btn-danger btn-sm"
 						 data-id="{{$value->id}}"
 						  data-title="{{$value->Descripcion}}">
               <i class="glyphicon glyphicon-trash"></i>
@@ -68,7 +69,7 @@
       @endforeach
     </table>
   </div>
-  {{$apiarios->links()}}
+  {{$api->links()}}
 </div>
 {{-- Modal Form Create Post --}}
 <div id="create" class="modal fade" role="dialog">
@@ -110,7 +111,7 @@
       </div>
           <div class="modal-footer">
             <button class="btn btn-warning" type="submit" id="add">
-              <span class="glyphicon glyphicon-plus"></span>Guardar Rol
+              <span class="glyphicon glyphicon-plus"></span>Guardar Apiario
             </button>
             <button class="btn btn-warning" type="button" data-dismiss="modal">
               <span class="glyphicon glyphicon-remobe"></span>Cerrar
