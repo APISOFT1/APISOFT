@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -161,238 +162,89 @@
     {!!Html::script('/js2/jquery.mCustomScrollbar.concat.min.js')!!}
     <!-- Custom Theme Scripts -->
     {!!Html::script('/js2/custom.min.js')!!}
-     {!!Html::script('/js2/dropdown.js')!!}
+     {!!Html::script('/js2/dropdown.js')!!
 
 
-
-
-
-<!-- MODAL AFILIADO -->
+<!-- MODAL ROL -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 {{-- ajax Form Add Post--}}
-  $(document).on('click','.create-modal', function() {
+
+  $(document).on('click','.create-modalRol', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
-    $('.modal-crear').text('Crear Afiliado');
+    $('.modal-descripcion').text('Crear Rol');
   });
   $("#add").click(function() {
     $.ajax({
       type: 'POST',
-      url: 'addAfiliado',
+      url: 'addRol',
       data: {
         '_token': $('input[name=_token]').val(),
-        'id': $('input[name=id').val(),
-        'Nombre': $('input[name=Nombre]').val(),
-        'apellido1': $('input[name=apellido1]').val(),
-        'apellido2': $('input[name=apellido2]').val(),
-        'Telefono': $('input[name=Telefono]').val(),
-        'email': $('input[name=email]').val(),
-        'Direccion': $('input[name=Direccion]').val(),
-        'Fecha_Ingreso': $('input[name=Fecha_Ingreso]').val(),
-        'Num_Cuenta': $('input[name=Num_Cuenta]').val(),
-        'genero_id': $('input[name=genero_id]').val(),
-        'estado_civil_id': $('input[name=estado_civil_id').val(),
-        'estado_id': $('input[name=estado_id]').val()
+        'descripcion': $('input[name=descripcion]').val()
       },
       success: function(data){
         if ((data.errors)) {
           $('.error').removeClass('hidden');
-          $('.error').text(data.errors.id);
-          $('.error').text(data.errors.Nombre);
-          $('.error').text(data.errors.apellido1);
-          $('.error').text(data.errors.apellido2);
-          $('.error').text(data.errors.Telefono);
-          $('.error').text(data.errors.email);
-          $('.error').text(data.errors.Direccion);
-          $('.error').text(data.errors.Fecha_Ingreso);
-          $('.error').text(data.errors.Num_Cuenta);
-          $('.error').text(data.errors.genero_id);
-          $('.error').text(data.errors.estado_civil_id);
-          $('.error').text(data.errors.estado_id);
-
+          $('.error').text(data.errors.descripcion);
  
         } else {
           $('.error').remove();
-          $('#table').append("<tr class= afi" + data.id + "'>"+
+          $('#table').append("<tr class='rol" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
-          "<td>" + data.Nombre + "</td>"+
-          "<td>" + data.apellido1 + "</td>"+
-          "<td>" + data.apellido2 + "</td>"+
-          "<td>" + data.Telefono + "</td>"+
-          "<td>" + data.email + "</td>"+
-          "<td>" + data.Direccion+ "</td>"+
-          "<td>" + data.Fecha_Ingreso+ "</td>"+
-          "<td>" + data.Num_Cuenta+ "</td>"+
-          "<td>" + data.genero_id + "</td>"+
-          "<td>" + data.estado_civil_id + "</td>"+
-          "<td>" + data.estado_id + "</td>"+
-          "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + 
-          "' data-Nombre='" + data.Nombre + 
-          "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2+
-           "'data-Telefono='" + data.Telefono +
-            "' data-email='" + data.email +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-             "'  data-Num_Cuenta='" + data.Num_Cuenta +
-              "'data-genero_id='" + data.genero_id + 
-              "'data-estado_civil_id='" + data.estado_civil_id +
-               "'data-estado_id='" + data.estado_id +
- "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
- + data.id + 
-          "' data-Nombre='" + data.Nombre + 
-          "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2 +
-           "'data-Telefono='" + data.Telefono +
-            "' data-email='" + data.email +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-             "'  data-Num_Cuenta='" + data.Num_Cuenta +
-              "'data-genero_id='" + data.genero_id + 
-              "'data-estado_civil_id='" + data.estado_civil_id +
-               "'data-estado_id='" + data.estado_id +
- "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
- + data.id + 
-          "' data-Nombre='" + data.Nombre + 
-          "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2 +
-           "'data-Telefono='" + data.Telefono +
-            "' data-email='" + data.email +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-             "'  data-Num_Cuenta='" + data.Num_Cuenta +
-              "'data-genero_id='" + data.genero_id + 
-              "'data-estado_civil_id='" + data.estado_civil_id +
-               "'data-estado_id='" + data.estado_id +
-"'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+          "<td>" + data.descripcion + "</td>"+
+          "<td>" + data.created_at + "</td>"+
+          "<td><button class='show-modalRol btn btn-info btn-sm' data-id='" + 
+          data.id + "' data-descripcion='" + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modalRol btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalRol btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
-         
         }
       },
     });
-    $('#id').val('');
-    $('#Nombre').val('');
-    $('#apellido1').val('');
-    $('#apellido2').val('');
-    $('#Telefono').val('');
-    $('#email').val('');
-    $('#Direccion').val('');
-    $('#Fecha_Ingreso').val('');
-    $('#Num_Cuenta').val('');
-    $('#genero_id').val('');
-    $('#estado_civil_id').val('');
-    $('#estado_id').val('');
+    $('#descripcion').val('');
+
   });
 
-
-$(document).on('click', '.edit-modal', function() {
-$('#footer_action_button').text(" Editar Afiliado");
+// function Edit POST
+$(document).on('click', '.edit-modalRol', function() {
+$('#footer_action_button').text(" Editar Rol");
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-$('.modal-descripcion').text('Editar Afiliado');
+$('.modal-descripcion').text('Editar Rol');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
-$('#i').val($(this).data('id'));
-$('#n').val($(this).data('nombre'));
-$('#a1').val($(this).data('apellido1'));
-$('#a2').val($(this).data('apellido2'));
-$('#t').val($(this).data('telefono'));
-$('#em').val($(this).data('email'));
-$('#d').val($(this).data('direccion'));
-$('#f').val($(this).data('fecha_ingreso'));
-$('#nu').val($(this).data('num_cuenta'));
-$('#g').val($(this).data('genero_id'));
-$('#e').val($(this).data('estado_civil_id'));
-$('#es').val($(this).data('estado_id'));
+$('#fid').val($(this).data('id'));
+$('#ti').val($(this).data('descripcion'));
 $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
-    url: 'editAfiliado',
+    url: 'editRol',
     data: {
-
-'id':$("#i").val(),
-'Nombre':$('#n').val(),
-'apellido1':$('#a1').val(),
-'apellido2':$('#a2').val(),
-'Telefono':$('#t').val(),
-'email':$('#em').val(),
-'Direccion':$('#d').val(),
-'Fecha_Ingreso':$('#f').val(),
-'Num_Cuenta':$('#nu').val(),
-'genero_id':$('#g').val(),
-'estado_civil_id':$('#e').val(),
-'estado_id':$('#es').val(),
+'_token': $('input[name=_token]').val(),
+'id': $("#fid").val(),
+'descripcion': $('#ti').val(),
 
     },
 success: function(data) {
-      $('.afi' + data.id).replaceWith("<tr class='afi" + data.id + "'>"+
-          "<td>" + data.id + "</td>"+
-          "<td>" + data.Nombre + "</td>"+
-          "<td>" + data.apellido1 + "</td>"+
-          "<td>" + data.apellido2 + "</td>"+
-          "<td>" + data.Telefono + "</td>"+
-          "<td>" + data.email + "</td>"+
-          "<td>" + data.Direccion + "</td>"+
-          "<td>" + data.Fecha_Ingreso + "</td>"+
-          "<td>" + data.Num_Cuenta + "</td>"+
-          "<td>" + data.genero_id + "</td>"+
-          "<td>" + data.estado_civil_id + "</td>"+
-          "<td>" + data.estado_id + "</td>"+
-          "<td><button class='show-modal btn btn-info btn-sm' data-id='" 
-          + data.id + 
-          "' data-Nombre='" + data.Nombre + 
-          "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2 +
-           "'data-Telefono='" + data.Telefono +
-            "' data-email='" + data.email +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-             "'  data-Num_Cuenta='" + data.Num_Cuenta +
-              "'data-genero_id='" + data.genero_id + 
-              "'data-estado_civil_id='" + data.estado_civil_id +
-               "'data-estado_id='" + data.estado_id +
- "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
- + data.id + 
-          "' data-Nombre='" + data.Nombre + 
-          "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2+
-           "'data-Telefono='" + data.Telefono +
-            "' data-email='" + data.email +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-             "'  data-Num_Cuenta='" + data.Num_Cuenta +
-              "'data-genero_id='" + data.genero_id + 
-              "'data-estado_civil_id='" + data.estado_civil_id +
-               "'data-estado_id='" + data.estado_id +
- "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
- + data.id + 
-          "' data-Nombre='" + data.Nombre + 
-          "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2 +
-           "'data-Telefono='" + data.Telefono +
-            "' data-email='" + data.email +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-             "'  data-Num_Cuenta='" + data.Num_Cuenta +
-              "'data-genero_id='" + data.genero_id + 
-              "'data-estado_civil_id='" + data.estado_civil_id +
-               "'data-estado_id='" + data.estado_id +
-"'><span class='glyphicon glyphicon-trash'></span></button></td>"+
-          "</tr>");
+      $('.rol' + data.id).replaceWith(" "+
+      "<tr class='rol" + data.id + "'>"+
+      "<td>" + data.id + "</td>"+
+      "<td>" + data.descripcion + "</td>"+
+      "<td>" + data.created_at + "</td>"+
+ "<td><button class='show-modalRol btn btn-info btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modalRol btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalRol btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+      "</tr>");
     }
   });
 });
 
-
-$(document).on('click', '.delete-modal', function() {
+// form Delete function
+$(document).on('click', '.delete-modalRol', function() {
 $('#footer_action_button').text(" Delete");
 $('#footer_action_button').removeClass('glyphicon-check');
 $('#footer_action_button').addClass('glyphicon-trash');
@@ -410,28 +262,24 @@ $('#myModal').modal('show');
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
-    url: 'deleteAfiliado',
+    url: 'deleteRol',
     data: {
       '_token': $('input[name=_token]').val(),
       'id': $('.id').text()
     },
     success: function(data){
-       $('.afiliado' + $('.id').text()).remove();
+       $('.rol' + $('.id').text()).remove();
     }
   });
 });
 
   // Show function
-  $(document).on('click', '.show-modal', function() {
+  $(document).on('click', '.show-modalRol', function() {
   $('#show').modal('show');
-  
-  $('#iaa').val($(this).data('iii'));
-$('#jaja').val($(this).data('nom'));
-;
-  $('.modal-show').text('Datos');
+  $('#ii').text($(this).data('id'));
+  $('#di').text($(this).data('descripcion'));
+  $('.modal-title').text('Show Post');
   });
-
-
-  </body>
-</html>
-  
+</script>
+    </body>
+    </html>

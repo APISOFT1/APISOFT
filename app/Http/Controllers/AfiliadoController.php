@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Afiliado;
 use App\Genero;
 use App\Estado_Civil;
-
+use Validator;
+use Response;
+use Illuminate\Support\Facades\Input;  //MUYR IMPORTANTE , SIN ESTO NO GUARDA.
 use Illuminate\Http\Request;
 use App\Http\Requests\AfiliadoFormRequest;
 
@@ -25,7 +27,7 @@ class AfiliadoController extends Controller
                 ->orderby('id','desc')
                 ->paginate(7);
              
-            return view('Afiliado.index', compact('afi'), ['afiliados'=>$afi,"searchText"=>$query]);
+            return view('Afiliado.index', compact('afi'), ['afi'=>$afi,"searchText"=>$query]);
         }
     }
 
