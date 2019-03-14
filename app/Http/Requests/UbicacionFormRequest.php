@@ -25,7 +25,7 @@ class UbicacionFormRequest extends FormRequest
     {
         return [
             //
-            'descripcion'=>'max:255', 
+            'Descripcion'=>'max:255', 
         ];
     }
 }

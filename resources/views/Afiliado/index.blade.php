@@ -41,12 +41,13 @@
   		<th>Estado Civil</th>
 			<th>Estado</th>
         <th ><div class="size">
-          <a href="addAfiliado" class="create-modal btn btn-success btn-sm">
+          <a href="#" class="create-modalAfiliado btn btn-success btn-sm">
             <i class="glyphicon glyphicon-plus"></i>
           </a>
         </th>
       </tr>
       {{ csrf_field() }}
+      <?php  $no=1; ?>
       @foreach ($afi as $value)
         <td>{{$value->id}}</td>
   	  	<td>{{$value->Nombre}} {{$value->apellido1}} {{$value->apellido2}}</td>
@@ -65,12 +66,12 @@
 		}
 		  ?></td>  		
           <td>
-            <a href="#" class="show-modal btn btn-info btn-sm" 
+            <a href="#" class="show-modalAfiliado btn btn-info btn-sm" 
             data-id="{{$value->id}}"
             data-Nombre="{{$value->Nombre}}">
               <i class="fa fa-eye"></i>
             </a>
-            <a href="#" class="edit-modal btn btn-warning btn-sm"
+            <a href="#" class="edit-modalAfiliado btn btn-warning btn-sm"
             data-id="{{$value->id}}"
             data-Nombre="{{$value->Nombre}}"
             data-apellido1="{{$value->apellido1}}"
@@ -84,7 +85,7 @@
             data-estado_civil_id="{{$value->Estado_Civil->descripcion}}"
             data-estado_id="{{$value->estado_id}}"><i class="glyphicon glyphicon-pencil"></i> </a>
 
-            <a href="#" class="delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" data-title="{{$value->Nombre}}">
+            <a href="#" class="delete-modalAfiliado btn btn-danger btn-sm" data-id="{{$value->id}}" data-title="{{$value->Nombre}}">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
           </td>
@@ -360,6 +361,7 @@
     </div>
   </div>
 </div>
+
 
   	
 @endsection

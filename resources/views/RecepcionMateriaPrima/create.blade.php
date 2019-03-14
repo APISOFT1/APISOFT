@@ -16,6 +16,19 @@
 			{!!Form::open(array('url'=>'RecepcionMateriaPrima','method'=>'POST','autocomplete'=>'off'))!!}
             {{Form::token()}}
            
+
+			
+  <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+   <div class="form-group">
+    <label for="afiliado">Afiliado</label>
+    <select name="afiliado_id" id="afiliado_id" class="form-control selectpicker" data-live-search="true">
+	@foreach ($afiliados as $afiliado)
+     <option value="{{$afiliado->id}}">{{$afiliado->Nombre}} {{$afiliado->apellido1}} {{$afiliado->apellido2}}</option>
+     @endforeach
+    </select>
+   </div>
+  
+
             <div class="form-group">
             	<label for="fecha">Fecha</label>
 				<input type="date" name="fecha" class="form-control"  required="required" placeholder="YYYY-MM-DD" />
@@ -32,29 +45,12 @@
             
             </div>
 			<div class="form-group">
-            	<div class="col-md-6">
-				<label for="user_id">Responsable</label>
-						
-				<input  type="text" name="user_id"  value="{{ Auth::user()->id}} "></option>
-					
-				</div>
+				<label for="user_id">Responsable</label>	
+				<input  type="text" name="user_id"  disabled class="form-control" value="{{ Auth::user()->id}}"></option>
             </div>			
+           
+			<br />
 		
-            <div class="form-group">
-            	<div class="col-md-6">
-				<label for="afiliado_id">afiliado</label>
-					<select class="form-control" id="afiliado_id" name="afiliado_id">
-						@foreach ($afiliados as $afiliado)
-							<option value="{{ $afiliado->id }}">{{ $afiliado->Nombre}} {{ $afiliado->Apellido1}} {{ $afiliado->Apellido2}}</option>
-						@endforeach						
-					</select>
-				</div>
-            </div>
-			<br />
-			<br />
-			<br />
-			<br />
-			
 
             <div class="form-group">
             	<div class="col-md-6">
@@ -66,20 +62,12 @@
 					</select>
 				</div>
             </div>
-            <div class="form-group">
-            	<div class="col-md-6">
-				<label for="aceptarMatPrima_id">Condicion</label>
-					<select class="form-control" id="aceptarMatPrima_id" name="aceptarMatPrima_id">
-						@foreach ($aceptarMatPrimas as $aceptarMatPrima)
-							<option value="{{ $aceptarMatPrima->id }}">{{ $aceptarMatPrima->descripcion }}</option>
-						@endforeach						
-					</select>
-				</div>
-            </div>
+          
 			<br />
 			<br />
 			<br />
-
+			<br />
+			<br />
             <div class="form-group">
 			
             	<div class="col-md-6">

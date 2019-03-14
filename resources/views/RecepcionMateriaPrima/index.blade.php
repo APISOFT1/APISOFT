@@ -38,7 +38,6 @@
                     <th>Peso Bruto</th>
 					<th>Numero de muestra</th>
 					<th>Tipo Entrega</th>
-                    <th>Aceptar Materia Prima</th>
 					<th>Observacion </th>
 					<th> <a href="RecepcionMateriaPrima/create" class="create-modal btn btn-success btn-sm">
 			<i class="glyphicon glyphicon-plus"></i>
@@ -52,11 +51,10 @@
 					<td>{{ $recepcion->id}}</td>
                     <td>{{ $recepcion->fecha}}</td>
 					<td>{{ $recepcion->user->name}} {{$recepcion->user->Apellido1}} {{$recepcion->user->Apellido2}}</td>
-                    <td>{{ $recepcion->afiliado->Nombre}} {{$recepcion->afiliado->Apellido}} {{$recepcion->afiliado->Apellido2}}</td>
+                    <td>{{ $recepcion->afiliado->Nombre}} {{$recepcion->afiliado->apellido}} {{$recepcion->afiliado->apellido2}}</td>
 					<td>{{ $recepcion->pesoBruto}}</td>
 					<td>{{ $recepcion->numero_muestras}}</td>
                     <td>{{ $recepcion->tipoEntrega->Descripcion}}</td>
-                    <td>{{ $recepcion->aceptarMatPrima->descripcion}}</td>
 					<td>{{ $recepcion->observacion}}</td>
 
                     

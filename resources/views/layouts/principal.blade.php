@@ -15,6 +15,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="{{asset('css2/bootstrap-select.min.css')}}">
 
+
+
   
     {!!Html::style ('/css2/bootstrap.min.css')!!} 
 
@@ -138,12 +140,13 @@
         <!-- /footer content -->
       </div>
     </div>
-    <script  src="https://code.jquery.com/jquery-2.2.4.min.js"
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
   crossorigin="anonymous"></script>
   <script src="{{asset('js2/bootstrap-select.min.js')}}"></script>
   
     <!-- jQuery -->
+
     {!!Html::script('/js2/jquery.min.js')!!}  
     @stack('scripts')
     <!-- Bootstrap -->
@@ -162,24 +165,25 @@
 
 
 
-     
-    
 
+
+
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-
+<!-- MODAL AFILIADO -->
 {{-- ajax Form Add Post--}}
-  $(document).on('click','.create-modal', function() {
+  $(document).on('click','.create-modalAfiliado', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
     $('.modal-descripcion').text('Crear Afiliado');
   });
-  $("#addAfiliado").click(function() {
+  $("#add").click(function() {
     $.ajax({
       url: 'addAfiliado',
       type: 'POST',
       data: {
-        "_token": $("meta[name='csrf-token']").attr("content"),
+       
         'id': $('input[name=id]').val(),
         'Nombre': $('input[name=Nombre]').val(),
         'apellido1': $('input[name=apellido1]').val(),
@@ -211,7 +215,6 @@
           $('.error').text(data.errors.genero_id);
           $('.error').text(data.errors.estado_civil_id);
           $('.error').text(data.errors.estado_id);
-
  
         } else {
           $('.error').remove();
@@ -228,7 +231,7 @@
           "<td>" + data.genero_id + "</td>"+
           "<td>" + data.estado_civil_id + "</td>"+
           "<td>" + data.estado_id + "</td>"+
-          "<td><button class='show-modal btn btn-info btn-sm' data-id='" 
+          "<td><button class='show-modalAfiliado btn btn-info btn-sm' data-id='" 
           + data.id + 
           "' data-Nombre='" + data.Nombre + 
           "'data-apellido1='" + data.apellido1 + 
@@ -241,7 +244,7 @@
               "'data-genero_id='" + data.genero_id + 
               "'data-estado_civil_id='" + data.estado_civil_id +
                "'data-estado_id='" + data.estado_id +
- "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
+ "'><span class='fa fa-eye'></span></button> <button class='edit-modalAfiliado btn btn-warning btn-sm' data-id='" 
  + data.id + 
           "' data-Nombre='" + data.Nombre + 
           "'data-apellido1='" + data.apellido1 + 
@@ -254,7 +257,7 @@
               "'data-genero_id='" + data.genero_id + 
               "'data-estado_civil_id='" + data.estado_civil_id +
                "'data-estado_id='" + data.estado_id +
- "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
+ "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalAfiliado btn btn-danger btn-sm' data-id='" 
  + data.id + 
           "' data-Nombre='" + data.Nombre + 
           "'data-apellido1='" + data.apellido1 + 
@@ -285,11 +288,9 @@
     $('#genero_id').val('');
     $('#estado_civil_id').val('');
     $('#estado_id').val('');
-
-
   });
 // function Edit POST
-$(document).on('click', '.edit-modal', function() {
+$(document).on('click', '.edit-modalAfiliado', function() {
 $('#footer_action_button').text(" Editar Afiliado");
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
@@ -313,7 +314,6 @@ $('#e').val($(this).data('estado_civil_id'));
 $('#es').val($(this).data('estado_id'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
@@ -331,7 +331,6 @@ $('.modal-footer').on('click', '.edit', function() {
 'genero_id':$('#g').val(),
 'estado_civil_id':$('#e').val(),
 'estado_id':$('#es').val(),
-
     },
 success: function(data) {
       $('.afiliado' + data.id).replaceWith("<tr class='afiliado" + data.id + "'>"+
@@ -347,7 +346,7 @@ success: function(data) {
           "<td>" + data.genero_id + "</td>"+
           "<td>" + data.estado_civil_id + "</td>"+
           "<td>" + data.estado_id + "</td>"+
-          "<td><button class='show-modal btn btn-info btn-sm' data-id='" 
+          "<td><button class='show-modalAfiliado btn btn-info btn-sm' data-id='" 
           + data.id + 
           "' data-Nombre='" + data.Nombre + 
           "'data-apellido1='" + data.apellido1 + 
@@ -360,7 +359,7 @@ success: function(data) {
               "'data-genero_id='" + data.genero_id + 
               "'data-estado_civil_id='" + data.estado_civil_id +
                "'data-estado_id='" + data.estado_id +
- "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
+ "'><span class='fa fa-eye'></span></button> <button class='edit-modalAfiliado btn btn-warning btn-sm' data-id='" 
  + data.id + 
           "' data-Nombre='" + data.Nombre + 
           "'data-apellido1='" + data.apellido1 + 
@@ -373,7 +372,7 @@ success: function(data) {
               "'data-genero_id='" + data.genero_id + 
               "'data-estado_civil_id='" + data.estado_civil_id +
                "'data-estado_id='" + data.estado_id +
- "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
+ "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalAfiliado btn btn-danger btn-sm' data-id='" 
  + data.id + 
           "' data-Nombre='" + data.Nombre + 
           "'data-apellido1='" + data.apellido1 + 
@@ -391,10 +390,120 @@ success: function(data) {
     }
   });
 });
+// form Delete function
+$(document).on('click', '.delete-modalAfiliado', function() {
+$('#footer_action_button').text(" Delete");
+$('#footer_action_button').removeClass('glyphicon-check');
+$('#footer_action_button').addClass('glyphicon-trash');
+$('.actionBtn').removeClass('btn-success');
+$('.actionBtn').addClass('btn-danger');
+$('.actionBtn').addClass('delete');
+$('.modal-title').text('Delete Post');
+$('.id').text($(this).data('id'));
+$('.deleteContent').show();
+$('.form-horizontal').hide();
+$('.title').html($(this).data('descripcion'));
+$('#myModal').modal('show');
+});
+$('.modal-footer').on('click', '.delete', function(){
+  $.ajax({
+    type: 'POST',
+    url: 'deleteAfiliado',
+    data: {
+      '_token': $('input[name=_token]').val(),
+      'id': $('.id').text()
+    },
+    success: function(data){
+       $('.afiliado' + $('.id').text()).remove();
+    }
+  });
+});
+  // Show function
+  $(document).on('click', '.show-modalAfiliado', function() {
+  $('#show').modal('show');
+  $('#ia').text($(this).data('id'));
+  $('#di').text($(this).data('descripcion'));
+  $('.modal-title').text('Show Post');
+  });
+</script>
 
+<!-- MODAL ROL -->
+<script type="text/javascript">
+{{-- ajax Form Add Post--}}
+  $(document).on('click','.create-modalRol', function() {
+    $('#create').modal('show');
+    $('.form-horizontal').show();
+    $('.modal-descripcion').text('Crear Rol');
+  });
+  $("#add").click(function() {
+    $.ajax({
+      type: 'POST',
+      url: 'addRol',
+      data: {
+        '_token': $('input[name=_token]').val(),
+        'descripcion': $('input[name=descripcion]').val()
+      },
+      success: function(data){
+        if ((data.errors)) {
+          $('.error').removeClass('hidden');
+          $('.error').text(data.errors.descripcion);
+ 
+        } else {
+          $('.error').remove();
+          $('#table').append("<tr class='rol" + data.id + "'>"+
+          "<td>" + data.id + "</td>"+
+          "<td>" + data.descripcion + "</td>"+
+          "<td>" + data.created_at + "</td>"+
+          "<td><button class='show-modalRol btn btn-info btn-sm' data-id='" + 
+          data.id + "' data-descripcion='" + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modalRol btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalRol btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+          "</tr>");
+        }
+      },
+    });
+    $('#descripcion').val('');
+
+  });
+
+// function Edit POST
+$(document).on('click', '.edit-modalRol', function() {
+$('#footer_action_button').text(" Editar Rol");
+$('#footer_action_button').addClass('glyphicon-check');
+$('#footer_action_button').removeClass('glyphicon-trash');
+$('.actionBtn').addClass('btn-success');
+$('.actionBtn').removeClass('btn-danger');
+$('.actionBtn').addClass('edit');
+$('.modal-descripcion').text('Editar Rol');
+$('.deleteContent').hide();
+$('.form-horizontal').show();
+$('#fid').val($(this).data('id'));
+$('#ti').val($(this).data('descripcion'));
+$('#myModal').modal('show');
+});
+
+$('.modal-footer').on('click', '.edit', function() {
+  $.ajax({
+    type: 'POST',
+    url: 'editRol',
+    data: {
+'_token': $('input[name=_token]').val(),
+'id': $("#fid").val(),
+'descripcion': $('#ti').val(),
+
+    },
+success: function(data) {
+      $('.rol' + data.id).replaceWith(" "+
+      "<tr class='rol" + data.id + "'>"+
+      "<td>" + data.id + "</td>"+
+      "<td>" + data.descripcion + "</td>"+
+      "<td>" + data.created_at + "</td>"+
+ "<td><button class='show-modalRol btn btn-info btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modalRol btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalRol btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+      "</tr>");
+    }
+  });
+});
 
 // form Delete function
-$(document).on('click', '.delete-modal', function() {
+$(document).on('click', '.delete-modalRol', function() {
 $('#footer_action_button').text(" Delete");
 $('#footer_action_button').removeClass('glyphicon-check');
 $('#footer_action_button').addClass('glyphicon-trash');
@@ -412,28 +521,177 @@ $('#myModal').modal('show');
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
-    url: 'deleteAfiliado',
+    url: 'deleteRol',
     data: {
       '_token': $('input[name=_token]').val(),
       'id': $('.id').text()
     },
     success: function(data){
-       $('.afiliado' + $('.id').text()).remove();
+       $('.rol' + $('.id').text()).remove();
     }
   });
 });
 
   // Show function
-  $(document).on('click', '.show-modal', function() {
+  $(document).on('click', '.show-modalRol', function() {
   $('#show').modal('show');
-  $('#ia').text($(this).data('id'));
+  $('#ii').text($(this).data('id'));
   $('#di').text($(this).data('descripcion'));
   $('.modal-title').text('Show Post');
   });
 </script>
+    <!--  APIARIO MODAL -->
 
+    <script type="text/javascript">
+{{-- ajax Form Add Post--}}
+  $(document).on('click','.create-modalApiario', function() {
+    $('#create').modal('show');
+    $('.form-horizontal').show();
+    $('.modal-descripcion').text('Crear Apiario');
+  });
+  $("#add").click(function() {
+    $.ajax({
+      type: 'POST',
+      url: 'addApiario',
+      data: {
+        '_token': $('input[name=_token]').val(),
+        'Descripcion': $('input[name=Descripcion]').val(),
+        'cantidad': $('input[name=cantidad]').val(),
+        'ubicacion_id': $('input[name=ubicacion_id]').val()
+      },
+      success: function(data){
+        if ((data.errors)) {
+          $('.error').removeClass('hidden');
+          $('.error').text(data.errors.Descripcion);
+          $('.error').text(data.errors.cantidad);
+          $('.error').text(data.errors.ubicacion_id);
+ 
+        } else {
+          $('.error').remove();
+          $('#table').append("<tr class='apiario" + data.id + "'>"+
+          "<td>" + data.id + "</td>"+
+          "<td>" + data.Descripcion + "</td>"+
+          "<td>" + data.cantidad + "</td>"+
+          "<td>" + data.ubicacion_id + "</td>"+
+          "<td>" + data.created_at + "</td>"+
+          "<td><button class='show-modalApiario btn btn-info btn-sm' data-id='" + 
+          data.id + "' data-Descripcion='"
+          + data.Descripcion +  "' data-cantidad='" 
+          + data.cantidad +  " 'data-ubicacion_id='" 
+          + data.ubicacion_id + "'><span class='fa fa-eye'></span></button> <button class='edit-modalApiario btn btn-warning btn-sm'  data-id='"
+           + data.id + "' data-Descripcion='" 
+           + data.Descripcion + "' data-cantidad='" + data.cantidad + "' data-ubicacion_id='" 
+           + data.ubicacion_id + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalApiario btn btn-danger btn-sm' data-id='" 
+           + data.id + "' data-Descripcion='" + data.Descripcion +  "' data-cantidad='" 
+          + data.cantidad +  " 'data-ubicacion_id='" 
+          + data.ubicacion_id + "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
+          "</tr>");
+        }
+      },
+    });
+    $('#Descripcion').val('');
+    $('#cantidad').val('');
+    $('#ubicacion_id').val('');
 
+  });
+
+// function Edit POST
+$(document).on('click', '.edit-modalApiario', function() {
+$('#footer_action_button').text(" Editar Apiario");
+$('#footer_action_button').addClass('glyphicon-check');
+$('#footer_action_button').removeClass('glyphicon-trash');
+$('.actionBtn').addClass('btn-success');
+$('.actionBtn').removeClass('btn-danger');
+$('.actionBtn').addClass('edit');
+$('.modal-descripcion').text('Editar Apiario');
+$('.deleteContent').hide();
+$('.form-horizontal').show();
+$('#ids').val($(this).data('id'));
+$('#cri').val($(this).data('descripcion'));
+$('#can').val($(this).data('cantidad'));
+$('#ub').val($(this).data('ubicacion_id'));
+$('#myModal').modal('show');
+});
+
+$('.modal-footer').on('click', '.edit', function() {
+  $.ajax({
+    type: 'POST',
+    url: 'editApiario',
+    data: {
+'_token': $('input[name=_token]').val(),
+'id': $("#ids").val(),
+'descripcion': $('#cri').val(),
+'cantidad': $('#can').val(),
+'ubicacion_id': $('#ub').val(),
+
+    },
+success: function(data) {
+      $('.apiarios' + data.id).replaceWith(" "+
+      "<tr class='apiarios" + data.id + "'>"+
+      "<td>" + data.id + "</td>"+
+      "<td>" + data.Descripcion + "</td>"+
+      "<td>" + data.cantidad + "</td>"+
+      "<td>" + data.ubicacion_id + "</td>"+
+      "<td>" + data.created_at + "</td>"+
+ "<td><button class='show-modalApiario btn btn-info btn-sm' data-id='" + data.id + "' data-Descripcion='" 
+ + data.Descripcion + "' data-cantidad='" 
+          + data.cantidad +  " 'data-ubicacion_id='" 
+          + data.ubicacion_id + "'><span class='fa fa-eye'></span></button> <button class='edit-modalApiario btn btn-warning btn-sm' data-id='" 
+          + data.id + "' data-Descripcion='" + data.Descripcion + 
+          "' data-cantidad='" 
+          + data.cantidad +  " 'data-ubicacion_id='" 
+          + data.ubicacion_id + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalApiario btn btn-danger btn-sm' data-id='" 
+          + data.id + "' data-Descripcion='" + data.Descripcion + 
+          "' data-cantidad='" 
+          + data.cantidad +  " 'data-ubicacion_id='" 
+          + data.ubicacion_id + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+      "</tr>");
+    }
+  });
+});
+
+// form Delete function
+$(document).on('click', '.delete-modalRol', function() {
+$('#footer_action_button').text(" Delete");
+$('#footer_action_button').removeClass('glyphicon-check');
+$('#footer_action_button').addClass('glyphicon-trash');
+$('.actionBtn').removeClass('btn-success');
+$('.actionBtn').addClass('btn-danger');
+$('.actionBtn').addClass('delete');
+$('.modal-title').text('Delete Post');
+$('.id').text($(this).data('id'));
+$('.deleteContent').show();
+$('.form-horizontal').hide();
+$('.title').html($(this).data('Descripcion'));
+$('#myModal').modal('show');
+});
+
+$('.modal-footer').on('click', '.delete', function(){
+  $.ajax({
+    type: 'POST',
+    url: 'deleteApiario',
+    data: {
+      '_token': $('input[name=_token]').val(),
+      'id': $('.id').text()
+    },
+    success: function(data){
+       $('.apiarios' + $('.id').text()).remove();
+    }
+  });
+});
+
+  // Show function
+  $(document).on('click', '.show-modalApiario', function() {
+  $('#show').modal('show');
+  $('#i2').text($(this).data('id'));
+  $('#d2').text($(this).data('descripcion'));
+  $('#ca2').text($(this).data('cantidad'));
+  $('#ub2').text($(this).data('ubicacion_id'));
+  $('.modal-title').text('Show Post');
+  });
+</script>
     
+
   </body>
 </html>
   
