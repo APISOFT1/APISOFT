@@ -194,7 +194,7 @@
           "<td>" + data.descripcion + "</td>"+
           "<td>" + data.created_at + "</td>"+
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
-          data.id + "' data-descripcion='" + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+          data.id + "'data-descripcion='" + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         }
       },
@@ -214,8 +214,8 @@ $('.actionBtn').addClass('edit');
 $('.modal-descripcion').text('Editar Ubicacion');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
-$('#fid').val($(this).data('id'));
-$('#ti').val($(this).data('descripcion'));
+$('#ids').val($(this).data('id'));
+$('#des').val($(this).data('title'));
 $('#myModal').modal('show');
 });
 
@@ -225,21 +225,17 @@ $('.modal-footer').on('click', '.edit', function() {
     url: 'editUbicacion',
     data: {
 '_token': $('input[name=_token]').val(),
-'id': $("#fid").val(),
-'descripcion': $('#ti').val(),
-
+'id': $("#ids").val(),
+'descripcion': $('#des').val(),
     },
 success: function(data) {
       $('.ubicacion' + data.id).replaceWith(" "+
       "<tr class='ubicacion" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
+      "<td>" + data.descripcion + "</td>"+
   
       "<td>" + data.created_at + "</td>"+
- "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id +
-  "' data-descripcion='" + data.descripcion +
-   "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
-   + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
-      "</tr>");
+ "<td><button class='show-modal btn btn-info btn-sm' data-id='"+data.id+"' data-descripcion='"+data.descripcion+"'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='"+data.id+"'data-descripcion='"+data.descripcion+"'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='"+data.id+"' data-descripcion='"+data.descripcion+"'><span class='glyphicon glyphicon-trash'></span></button></td>"+"</tr>");
     }
   });
 });
@@ -277,8 +273,8 @@ $('.modal-footer').on('click', '.delete', function(){
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
-  $('#i').text($(this).data('id'));
-  $('#di').text($(this).data('descripcion'));
+  $('#ii').text($(this).data('id'));
+  $('#dii').text($(this).data('title'));
   $('.modal-title').text('Show Post');
   });
 </script>

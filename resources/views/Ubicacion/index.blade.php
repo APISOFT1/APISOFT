@@ -13,7 +13,6 @@ UBICACION CREADO CORRECTAMENTE
 @section ('contenido')
 <h1 >LISTADO DE  UBICACION<a href="Ubicacion/create"> <button class="btn btn-primary" >  Nuevo <span class="glyphicon glyphicon-user"></button></a></h1>
 
-
 <!-- Saltos de linea-->
 <br>
 <br>
@@ -21,7 +20,7 @@ UBICACION CREADO CORRECTAMENTE
 <br>
 <!-- Fin de salto de linea. No necesita una etiqueta de cierre-->
 <div class="absolute3">
-		@include('Ubicacion.search')
+
 		
 </div>	
 
@@ -104,11 +103,11 @@ UBICACION CREADO CORRECTAMENTE
                     <div class="modal-body">
                     <div class="form-group">
                       <label for="">ID :</label>
-                      <b id="i"/>
+                      <b id="ii"/>
                     </div>
                     <div class="form-group">
                       <label for="">Descripcion :</label>
-                      <b id="di"/>
+                      <b id="dii"/>
                     </div>
                     </div>
                     </div>
@@ -128,13 +127,13 @@ UBICACION CREADO CORRECTAMENTE
           <div class="form-group">
             <label class="control-label col-sm-2"for="id">ID</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="fid" disabled>
+              <input type="text" class="form-control" id="ids" disabled>
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2"for="descripcion">Descripcion</label>
             <div class="col-sm-10">
-            <input type="name" class="form-control" id="ti">
+            <input type="name" class="form-control" id="des">
             </div>
           </div>
 
