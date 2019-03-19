@@ -52,8 +52,11 @@ Route::POST('deleteApiario','ApiarioController@deleteApiario');
 
 
 });
-Route::resource('Apiario','ApiarioController'
-);
+Route::resource('Apiario','ApiarioController');
+Route::resource('Ubicacion','UbicacionController');
+
+
+  
 
 
 Auth::routes(['verify' => true]);

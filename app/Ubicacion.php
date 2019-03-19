@@ -12,7 +12,7 @@ class Ubicacion extends Model
     public $timestamps=true;
 
     protected $fillable =[
-        'Descripcion'
+        'descripcion'
 
     ];
 
