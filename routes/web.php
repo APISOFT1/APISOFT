@@ -43,9 +43,7 @@ Route::POST('addApiario','ApiarioController@addApiario');
 Route::POST('editApiario','ApiarioController@editApiario');
 Route::POST('deleteApiario','ApiarioController@deleteApiario');
 
-Route::POST('addUbicacion','UbicacionController@addUbicacion');
-Route::POST('editUbicacion','UbicacionController@editUbicacion');
-Route::POST('deleteUbicacion','UbicacionController@deleteUbicacion');
+
 
 
 });
