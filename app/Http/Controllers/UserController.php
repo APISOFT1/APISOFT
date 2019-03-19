@@ -20,6 +20,8 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+  
     public function index(Request $request)
     {
         $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 

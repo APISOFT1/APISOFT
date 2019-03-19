@@ -7,6 +7,7 @@ use App\Genero;
 use App\Estado_Civil;
 use Validator;
 use Response;
+use Illuminate\Support\Facades\Input;  //MUYR IMPORTANTE , SIN ESTO NO GUARDA.
 use Illuminate\Http\Request;
 use App\Http\Requests\AfiliadoFormRequest;
 
