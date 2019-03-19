@@ -3,7 +3,7 @@
 <!-- mensaje de exito -->
 <?php $message=Session::get('message') ?>
 
-@if($message == 'store')
+@if($message == 'addApiario')
 <div class="alert alert-success alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   APIARIO CREADO CORRECTAMENTE
@@ -19,6 +19,8 @@
 <br>
 <!-- Fin de salto de linea. No necesita una etiqueta de cierre-->
 
+@can('Crear Afiliado')
+
 <!--Esta clase nos permite posicionar el buscador  -->
 <div class="absolute3">
 		@include('Apiario.search') 
@@ -31,7 +33,6 @@
 					<th>Descripcion</th>
 					<th>Cantidad</th>
 					<th>Ubicacion</th>
-          <th>Creacion</th>
 					<th><a href="#"
 					class="create-modal btn btn-success btn-sm">
             <i class="glyphicon glyphicon-plus"></i></th>
@@ -100,13 +101,18 @@
             </div>
           </div>
 					<div class="form-group row add">
-            <label class="control-label col-sm-2" for="ubicacion_id">Ubicacion:</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="ubicacion_id" name="ubicacion_id"
-              placeholder="Ingrese Su ubicacion" required>
-              <p class="error text-center alert alert-danger hidden"></p>
+        
+          <label class="control-label col-sm-2" for="ubicacion_id">Ubicacion</label>
+          <div class="col-sm-10">
+					<select class="form-control" id="ubicacion_id" name="ubicacion_id">
+          <option value="">Seleccione</option>
+						@foreach ($ubicaciones as $ubicacion)
+							<option value="{{ $ubicacion->id }}">{{ $ubicacion->Descripcion }}</option>
+						@endforeach						
+					</select>
             </div>
           </div>
+
         </form>
       </div>
           <div class="modal-footer">
@@ -206,4 +212,7 @@
   </div>
 </div>
 
+@else
+                            Usted no tiene los permisos suficientes 
+                        @endcan
 @endsection

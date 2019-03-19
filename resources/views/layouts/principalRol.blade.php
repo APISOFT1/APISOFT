@@ -64,7 +64,9 @@
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Usuario/') }}">Gestionar Usuario</a></li>
-                      <li><a href="{{ url('/Rol/') }}">Gestionar Rol</a></li>
+                      <li><a href="{{ url('/admin/roles/') }}">Gestionar Rol</a></li>
+                     <li><a href="{{ url('/admin/permissions/') }}">Gestionar Permisos</a></li>
+                     <li><a href="{{ url('/admin/users/') }}">Gestionar Users</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
@@ -162,7 +164,7 @@
     {!!Html::script('/js2/jquery.mCustomScrollbar.concat.min.js')!!}
     <!-- Custom Theme Scripts -->
     {!!Html::script('/js2/custom.min.js')!!}
-     {!!Html::script('/js2/dropdown.js')!!
+     {!!Html::script('/js2/dropdown.js')!!}
 
 
 <!-- MODAL ROL -->
@@ -170,6 +172,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 {{-- ajax Form Add Post--}}
+var div_respuesta="#respuesta";
 
   $(document).on('click','.create-modalRol', function() {
     $('#create').modal('show');
@@ -184,6 +187,7 @@
         '_token': $('input[name=_token]').val(),
         'descripcion': $('input[name=descripcion]').val()
       },
+      
       success: function(data){
         if ((data.errors)) {
           $('.error').removeClass('hidden');

@@ -1,8 +1,9 @@
 @extends ('layouts.principalRol') 
+
 <!-- mensaje de exito -->
 <?php $message=Session::get('message') ?>
 
-@if($message == 'store')
+@if($message == 'AddRol')
 <div class="alert alert-success alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   ROL CREADO CORRECTAMENTE
@@ -63,6 +64,7 @@
   {{$rol->links()}}
 </div>
 {{-- Modal Form Create Post --}}
+
 <div id="create" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -103,11 +105,11 @@
                   </div>
                     <div class="modal-body">
                     <div class="form-group">
-                      <label for="">ID :</label>
+                      <label for="descripcion">ID :</label>
                       <b id="ii"/>
                     </div>
                     <div class="form-group">
-                      <label for="">Descripcion :</label>
+                      <label for="id">Descripcion :</label>
                       <b id="di"/>
                     </div>
                     </div>

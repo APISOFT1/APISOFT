@@ -63,7 +63,9 @@
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Usuario/') }}">Gestionar Usuario</a></li>
-                      <li><a href="{{ url('/Rol/') }}">Gestionar Rol</a></li>
+                      <li><a href="{{ url('/admin/roles/') }}">Gestionar Rol</a></li>
+                     <li><a href="{{ url('/admin/permissions/') }}">Gestionar Permisos</a></li>
+                     <li><a href="{{ url('/admin/users/') }}">Gestionar users</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
@@ -171,6 +173,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+
 {{-- ajax Form Add Post--}}
 
   $(document).on('click','.create-modal', function() {
@@ -187,6 +190,7 @@
         'Descripcion': $('input[name=Descripcion]').val(),
         'cantidad': $('input[name=cantidad]').val(),
         'ubicacion_id': $('input[name=ubicacion_id]').val()
+        
       },
       success: function(data){
         if ((data.errors)) {
@@ -223,7 +227,7 @@
     $('#ubicacion_id').val('');
 
   });
-
+ 
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
 $('#footer_action_button').text(" Editar Apiario");

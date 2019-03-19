@@ -22,6 +22,7 @@
 <!-- Fin de salto de linea. No necesita una etiqueta de cierre-->
 
 <!--Esta clase nos permite posicionar el buscador  -->
+@can('Crear Afiliado')
 <div class="absolute3">
 		@include('Afiliado.search') 
 
@@ -47,7 +48,6 @@
         </th>
       </tr>
       {{ csrf_field() }}
-      <?php  $no=1; ?>
       @foreach ($afi as $value)
         <td>{{$value->id}}</td>
   	  	<td>{{$value->Nombre}} {{$value->apellido1}} {{$value->apellido2}}</td>
@@ -202,7 +202,12 @@
               <p class="error text-center alert alert-danger hidden"></p>
             </div>
           </div>
-
+          <div class="register-switch">
+      <input type="radio" name="estado_id" value="{{$estado_id=1}}" id="estado_id" class="register-switch-input" checked>
+      <label for="estado_id" class="register-switch-label">Activo</label>
+      <input type="radio" name="estado_id" value="{{$estado_id=0}}" id="estado_id" class="register-switch-input">
+      <label for="estado_id" class="register-switch-label">Inactivo</label>
+	</div> 
         
         </form>
       </div>
@@ -351,5 +356,7 @@
     </div>
   </div>
 </div>
-  	
+@else
+                            Usted no tiene los permisos suficientes 
+                        @endcan
 @endsection

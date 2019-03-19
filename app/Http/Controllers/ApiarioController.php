@@ -24,12 +24,17 @@ class ApiarioController extends Controller
             ->where('Descripcion','LIKE','%'.$query.'%')
             ->orderby('id','desc')
             ->paginate(7);
-        
-        return view('Apiario.index', compact('api'), ['api'=>$api,"searchText"=>$query]);
+           $ubicaciones = Ubicacion::all();
+
+           
+        return view('Apiario.index', compact('api', 'ubicaciones'), ['api'=>$api,"searchText"=>$query]);
         }
+
+        
     }
 
     ////////////////////////////////////////////////////////NUEVO
+
 
 public function addApiario(Request $request){
     $rules = array(
@@ -42,15 +47,21 @@ public function addApiario(Request $request){
   return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
 
   else {
-
+    
+   
     $api = new Apiario;
     $api->Descripcion = $request->Descripcion;
     $api->cantidad = $request->cantidad;
     $api->ubicacion_id = $request->ubicacion_id;
+  
     $api->save();
     return response()->json($api);
+   
+  
+  
   }
 }
+
 
 public function editApiario(request $request){
   $rules = array(
@@ -65,12 +76,13 @@ return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
 
 else {
 
+  $ubicaciones = Ubicacion::all();
 $api = Apiario::find($request->id);
 $api->Descripcion = $request->Descripcion;
 $api->cantidad = $request->cantidad;
 $api->ubicacion_id = $request->ubicacion_id;
 $api->save();
-return response()->json($api);
+return response()->json($api , $ubicaciones);
 }
 }
 
