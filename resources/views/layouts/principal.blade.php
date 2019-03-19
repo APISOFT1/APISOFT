@@ -62,8 +62,10 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Usuario/') }}">Gestionar Usuario</a></li>
-                      <li><a href="{{ url('/Rol/') }}">Gestionar Rol</a></li>
+                      <li><a href="{{ url('/Usuario/') }}">Gestionar Usuario</a></li> 
+                     <li><a href="{{ url('/admin/roles/') }}">Gestionar Rol</a></li>
+                     <li><a href="{{ url('/admin/permissions/') }}">Gestionar Permisos</a></li>
+                     <li><a href="{{ url('/admin/users/') }}">Gestionar Users</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
@@ -182,7 +184,7 @@
       type: 'POST',
       url: 'addAfiliado',
       data: {
-        '_token': $('input[name=_token]').val(),
+       
         'id': $('input[name=id').val(),
         'Nombre': $('input[name=Nombre]').val(),
         'apellido1': $('input[name=apellido1]').val(),
@@ -430,7 +432,7 @@ $('#jaja').val($(this).data('nom'));
 ;
   $('.modal-show').text('Datos');
   });
-
+</script>
 
   </body>
 </html>

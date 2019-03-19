@@ -187,7 +187,7 @@
                   <div class="icon">
                     <i class="mdi-maps-map"></i>
                   </div>
-                  <h4>Locaci�n</h4>
+                  <h4>Locación</h4>
                   <p>Nicoya, Guanacaste</p>
                 </div>
               </div>

@@ -47,7 +47,7 @@ public function addRol(Request $request){
     $rol = new Rol;
     $rol->descripcion = $request->descripcion;
     $rol->save();
-    return response()->json($rol);
+    return response()->json($rol)->with('message');
   }
 }
 
