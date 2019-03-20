@@ -25,15 +25,17 @@ class User extends Authenticatable
         'id',
         'name', 
         'email',
-      'email_verified_at',
-         'password',
+        'email_verified_at',
+        'password',
         'Apellido1',
         'Apellido2',
         'Telefono',
         'Direccion',
         'Fecha_Ingreso',
         'Genero_Id',
-        'Rol_Id'
+        'Rol_Id',
+        'Estado_Id'
+        
 
     ];
 
@@ -61,5 +63,9 @@ class User extends Authenticatable
     public function Rol() 
     {
         return $this->BelongsTo(Rol::class,'Rol_Id');
+    }
+    public function Estado() 
+    {
+        return $this->Belongsto(Estado::class,'Estado_id');
     }
 }

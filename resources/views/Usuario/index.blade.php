@@ -1,6 +1,9 @@
 @extends('layouts.Admin')
 @section ('contenido')
 <div class="row">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 	<h3>Listado de Generos <a href="" class="btn btn-success" data-toggle="modal" data-target="#createUsuario">
 	
@@ -25,6 +28,7 @@
   	<th>Clave</th>
     <th>Genero</th>
   	<th>Rol</th>
+		<th>Estado</th>
 		
   	
 
@@ -44,18 +48,20 @@
       <td>{{$usuario->password}}</td>
 			<td>{{$usuario->Genero->descripcion}}</td>
 			<td>{{$usuario->Rol->descripcion}}</td>
+			<td>{{@$usuario->Estados->Descripcion}}</td>
   		
 			
 	
    
   		<td>
-			<a href="{{URL::action('UserController@edit',$usuario->id)}}"><button class="btn btn-info">Editar</button></a>
+			<a href="" class="btn btn-success" data-toggle="modal" data-target="#editarUsuario">Editar</button></a>
                          <a href="" data-target="#modal-delete-{{$usuario->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
   		</td>
 
   	</tr>
 		@include('Usuario.modal')
 		@include('Usuario.create')
+		@include('Usuario.editar')
   	@endforeach
 	
 

@@ -1,57 +1,42 @@
 @extends ('layouts.admin')
 @section ('contenido')
-	<div class="row">
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-			<h3>Nuevo Afiliado</h3>
-			@if (count($errors)>0)
-			<div class="alert alert-danger">
-				<ul>
-				@foreach ($errors->all() as $error)
-					<li>{{$error}}</li>
-				@endforeach
-				</ul>
-			</div>
-			@endif
-
-			{!!Form::open(array('url'=>'Afiliado','method'=>'POST','autocomplete'=>'off'))!!}
+	
+            {!!Form::model($afiliado,['method'=>'PATCH','route'=>['Afiliado.update',$afiliado->id]])!!}
             {{Form::token()}}
-            <div class="form-group">
-            	<label for="id">Cedula</label>
-            	<input type="text" name="id" class="form-control" placeholder="id...">
-            </div>
+         
            
             <div class="form-group">
             	<label for="Nombre">Nombre</label>
-            	<input type="text" name="Nombre" class="form-control" placeholder="Nombre...">
+            	<input type="text" name="Nombre" class="form-control" value="{{$afiliado->Nombre}}" placeholder="Nombre...">
             </div>
             <div class="form-group">
             	<label for="Apellido1">Primer apellido</label>
-				<input type="text" name="Apellido1" class="form-control" placeholder="Apellido1..." />
+				<input type="text" name="Apellido1" class="form-control" value="{{$afiliado->Apellido1}}" placeholder="Apellido1..." />
             </div>
             <div class="form-group">
             	<label for="Apellido2">Segundo apellido</label>
-				<input type="text" name="Apellido2" class="form-control" placeholder="Apellido2..." />
+				<input type="text" name="Apellido2" class="form-control" value="{{$afiliado->Apellido2}}" placeholder="Apellido2..." />
             </div>
             <div class="form-group">
             	<label for="Telefono">Telefono</label>
-				<input type="text" name="Telefono" class="form-control" placeholder="Telefono..." />
+				<input type="text" name="Telefono" class="form-control" value="{{$afiliado->Telefono}}" placeholder="Telefono..." />
             </div>
             
             <div class="form-group">
             	<label for="email">Correo</label>
-				<input type="text" name="email" class="form-control" placeholder="email..." />
+				<input type="text" name="email" class="form-control"value="{{$afiliado->email}}" placeholder="email..." />
             </div>
             <div class="form-group">
             	<label for="Direccion">Direccion</label>
-				<input type="text" name="Direccion" class="form-control" placeholder="Direccion..." />
+				<input type="text" name="Direccion" class="form-control" value="{{$afiliado->Direccion}}" placeholder="Direccion..." />
             </div>
 			<div class="form-group">
             	<label for="Fecha_Ingreso">Fecha Ingreso</label>
-				<input type="date" name="Fecha_Ingreso" class="form-control" placeholder="YYYY-MM-DD" />
+				<input type="date" name="Fecha_Ingreso" class="form-control" value="{{$afiliado->Fecha_Ingreso}}"  placeholder="YYYY-MM-DD" />
             </div>
 			<div class="form-group">
             	<label for="Num_Cuenta">Numero cuenta</label>
-				<input type="text" name="Num_Cuenta" class="form-control" placeholder="Num_Cuenta..." />
+				<input type="text" name="Num_Cuenta" class="form-control" value="{{$afiliado->Num_Cuenta}}" placeholder="Num_Cuenta..." />
             </div>
             
 			<div class="form-group">
@@ -59,25 +44,31 @@
 				<label for="genero_id">Genero</label>
 					<select class="form-control" id="genero_id" name="genero_id">
 						@foreach ($Generos as $Genero)
-							<option value="{{ $Genero->id }}">{{ $Genero->Descripcion }}</option>
+							<option value="{{ $Genero->id }}">{{ $Genero->descripcion }}</option>
 						@endforeach						
 					</select>
 				</div>
             </div>
 			<div class="form-group">
             	<div class="col-md-6">
-				<label for="estado_civil_id">Rol</label>
+				<label for="estado_civil_id">Estado Civil</label>
 					<select class="form-control" id="estado_civil_id" name="estado_civil_id">
 						@foreach ($Estados as $estado)
-							<option value="{{ $estado->id}}">{{ $estado->Descripcion}}</option>
+							<option value="{{ $estado->id}}">{{ $estado->descripcion}}</option>
 						@endforeach						
 					</select>
 				</div>
             </div>
             
             <div class="form-group">
-            	<label for="Estado">Estado</label>
-				<input type="text" name="Estado" class="form-control" placeholder="Estado" />
+            	<div class="col-md-6">
+				<label for="estado_id">Estado</label>
+					<select class="form-control" id="estado_id" name="estado_id">
+						@foreach ($estados as $Estado)
+							<option value="{{ $Estado->id}}">{{ $Estado->Descripcion}}</option>
+						@endforeach						
+					</select>
+				</div>
             </div>
             <div class="form-group">
 			

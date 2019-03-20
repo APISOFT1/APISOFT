@@ -107,6 +107,17 @@
 					</select>
 				</div>
             </div>
+
+				<div class="form-group">
+            	<div class="col-md-6">
+				<label for="Estado_Id">Estado</label>
+					<select class="form-control" id="Estado_Id" name="Estado_Id">
+						@foreach ($Estados as $Estado)
+							<option value="{{ $Estado->id}}">{{ $Estado->Descripcion}}</option>
+						@endforeach						
+					</select>
+				</div>
+            </div>
             
 		
          <div class="modal-footer">

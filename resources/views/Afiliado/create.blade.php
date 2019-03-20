@@ -75,8 +75,14 @@
             </div>
             
             <div class="form-group">
-            	<label for="Estado">Estado</label>
-				<input type="text" name="Estado" class="form-control" placeholder="Estado" />
+            	<div class="col-md-6">
+				<label for="estado_id">Estado</label>
+					<select class="form-control" id="estado_id" name="estado_id">
+						@foreach ($estados as $Estado)
+							<option value="{{ $Estado->id}}">{{ $Estado->Descripcion}}</option>
+						@endforeach						
+					</select>
+				</div>
             </div>
             <div class="form-group">
 			

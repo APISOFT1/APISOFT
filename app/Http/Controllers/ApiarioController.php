@@ -38,16 +38,33 @@ class ApiarioController extends Controller
         return view ("Apiario.show",["apiario"=>Apiario::findOrFail($id)]);
     }
 
-    public function edit($id)
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Apiario  $apiario
+     * @return \Illuminate\Http\Response
+     */
+    public function edit( $id)
     {
-        return view ("Apiario.edit",["apiario"=>Apiario::findOrFail($id)]);
+        $ubicaciones = Ubicacion::all();
+       
+
+        return view ("Apiario.edit",["apiario"=>Apiario::findOrFail($id)],  ["ubicaciones"=> $ubicaciones]);
     }
 
-    public function update(ApiariosRequestForm $request, $id)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Apiario  $apiario
+     * @return \Illuminate\Http\Response
+     */
+    public function update(ApiariosFormRequest $request, $id  )
     {
-        $apiario= new Apiario;
-        $apiario->Descripcion=$request->get('Descripcion');
-        $apiario->cantidad=$request->get('cantidad');
+        
+        $apiario=Apiario::findOrFail($id);
+        $apiario->Descripcion= $request->get('Descripcion');
+        $apiario->cantidad= $request->get('cantidad');
         $apiario->ubicacion_id=$request->get('ubicacion_id');
         $apiario->update();
         return redirect('Apiario');
@@ -55,8 +72,9 @@ class ApiarioController extends Controller
     
     public function destroy($id)
     {
+        //
         $apiario=Apiario::findOrFail($id);
-        $apiario->delete();
-        return redirect('Apiario');
+    $apiario->delete();
+    return redirect('Apiario');
     }
 }

@@ -9,7 +9,7 @@ class Estado_Civil extends Model
     protected $table= 'estado_civils';
     protected $primaryKey="id";
     
-    public $timestamps=true;
+    public $timestamps=false;
 
     protected $fillable =[
         'descripcion'
