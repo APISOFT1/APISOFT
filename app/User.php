@@ -4,12 +4,13 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable 
 {
     use Notifiable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -34,7 +35,11 @@ class User extends Authenticatable
         'Fecha_Ingreso',
         'Genero_Id',
         'Rol_Id',
+<<<<<<< HEAD
         'Estado_Id'
+=======
+        'estado_id'
+>>>>>>> develop
         
 
     ];
@@ -49,8 +54,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+<<<<<<< HEAD
 
   
+=======
+    protected $casts = [
+        'Fecha_Ingreso' => 'Y-m-d H:i:s'
+    ];
+>>>>>>> develop
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = \Hash::make($password);
@@ -64,8 +75,12 @@ class User extends Authenticatable
     {
         return $this->BelongsTo(Rol::class,'Rol_Id');
     }
+<<<<<<< HEAD
     public function Estado() 
     {
         return $this->Belongsto(Estado::class,'Estado_id');
     }
+=======
+   
+>>>>>>> develop
 }

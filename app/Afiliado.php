@@ -13,8 +13,8 @@ class Afiliado extends Model
     protected $fillable =[
         'id',
         'Nombre',
-        'Apellido1',
-        'Apellido2',
+        'apellido1',
+        'apellido2',
         'Telefono',
         'email',
         'Direccion',
@@ -24,6 +24,7 @@ class Afiliado extends Model
          'estado_civil_id',
          'Estado_id'
     ];
+   
 
     public function Genero() 
     {
@@ -34,8 +35,12 @@ class Afiliado extends Model
         return $this->belongsTo(Estado_Civil::class, 'estado_civil_id');
     }
 
+<<<<<<< HEAD
     public function Estado() 
     {
         return $this->Belongsto(Estado::class,'Estado_id');
     }
+=======
+   
+>>>>>>> develop
 }

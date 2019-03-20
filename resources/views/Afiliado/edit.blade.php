@@ -10,12 +10,12 @@
             	<input type="text" name="Nombre" class="form-control" value="{{$afiliado->Nombre}}" placeholder="Nombre...">
             </div>
             <div class="form-group">
-            	<label for="Apellido1">Primer apellido</label>
-				<input type="text" name="Apellido1" class="form-control" value="{{$afiliado->Apellido1}}" placeholder="Apellido1..." />
+            	<label for="apellido1">Primer apellido</label>
+				<input type="text" name="apellido1" class="form-control" value="{{$afiliado->apellido1}}" placeholder="Apellido1..." />
             </div>
             <div class="form-group">
-            	<label for="Apellido2">Segundo apellido</label>
-				<input type="text" name="Apellido2" class="form-control" value="{{$afiliado->Apellido2}}" placeholder="Apellido2..." />
+            	<label for="apellido2">Segundo apellido</label>
+				<input type="text" name="apellido2" class="form-control" value="{{$afiliado->apellido2}}" placeholder="Apellido2..." />
             </div>
             <div class="form-group">
             	<label for="Telefono">Telefono</label>

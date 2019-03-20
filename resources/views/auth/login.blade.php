@@ -15,6 +15,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 <!-- //Custom Theme files -->
 <!-- font-awesome icons -->
+<<<<<<< HEAD
+=======
+<link href="css/boostrap.min.css" rel="stylesheet"> 
+>>>>>>> develop
 <link href="css/font-awesome.css" rel="stylesheet"> 
 <!-- //font-awesome icons -->
 <!-- web font -->
@@ -23,11 +27,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </head>
 <body>
 	<!-- main -->
+<<<<<<< HEAD
 	<div class="main-agile">
 		 <div class="limiter"{{ __('Login') }}>
 		<div class="content">
 			<div class="top-grids">
 				<div class="top-grids-left">
+=======
+   
+	<div class="main-agile">
+		 <div class="limiter"{{ __('Login') }}>
+		<div class="content">
+        <div class="absolute4"> 
+			<div class="top-grids">
+            
+				<div class="top-grids-right">
+>>>>>>> develop
 					<div class="signin-form-grid">
 						<div class="signin-form">
 							<h2>Inicio de Sesion</h2>
@@ -73,7 +88,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						</div>
 					</div>
 				
+<<<<<<< HEAD
 				
+=======
+				</div>
+>>>>>>> develop
 						</form>
 					</div>
 				</div>
@@ -81,7 +100,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</div>
 		</div>
 		<div class="copyright">
+<<<<<<< HEAD
 			<p> © 2017 Different Multiple Form Widget . All rights reserved | Design by <a href="http://w3layouts.com/" target="_blank">W3layouts</a></p>
+=======
+			
+>>>>>>> develop
 		</div>
 	</div>	
 	<!-- //main --> 

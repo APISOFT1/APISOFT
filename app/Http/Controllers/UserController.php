@@ -7,6 +7,9 @@ use App\Genero;
 use App\Rol;
 use App\Estado;
 
+
+
+
 use Illuminate\Http\Request;
 use App\Http\Requests\UsuarioFormRequest;
 
@@ -18,6 +21,8 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+  
     public function index(Request $request)
     {
         $Generos = Genero::all();
@@ -43,10 +48,17 @@ class UserController extends Controller
         $Estados = Estado::all();
        $Rols = Rol::all();
 
+      
+
         
         
     
+<<<<<<< HEAD
         return view("Usuario.create",  ["Rols"=> $Rols,"Generos"=> $Generos,"Estados"=> $Estados]);
+=======
+        return view("Usuario.create",  ["Rols"=> $Rols ,
+        "Generos"=>$Generos]);
+>>>>>>> develop
     }
 
     /**
@@ -89,8 +101,13 @@ class UserController extends Controller
 
 
         
+<<<<<<< HEAD
         return view('Usuario.edit',["usuario"=>User::findOrFail($id)], ["Rols"=> $Rols, 
         "Generos"=> $Generos,"Estados"=> $Estados] );
+=======
+        return view('Usuario.edit',["usuarios"=>User::findOrFail($id)], ["Rols"=> $Rols, 
+        "Generos"=> $Generos]);
+>>>>>>> develop
     }
 
     /**
@@ -114,12 +131,23 @@ class UserController extends Controller
   	  $usuario->Fecha_Ingreso=$request->get('Fecha_Ingreso');
 	  $usuario->Genero_Id=$request->get('Genero_Id');
       $usuario->Rol_Id=$request->get('Rol_Id');
+<<<<<<< HEAD
       $usuario->Estado_Id=$request->get('Estado_Id');
+=======
+      $usuario->estado_id=$request->get('estado_id');
+>>>>>>> develop
       $usuario->update();  
 
       return redirect('Usuario');
         
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Usuario  $usuario
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
         $usuario=User::findOrFail($id);
@@ -127,3 +155,4 @@ class UserController extends Controller
         return redirect('Usuario');
     }
 }
+

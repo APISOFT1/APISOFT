@@ -1,204 +1,337 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
-<head>
-<meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
-        <link rel=”stylesheet” href=”css/sweetalert.css”>
- <script src=”js/sweetalert.js”></script>
- <link rel=”stylesheet” href=" https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
-<script src=”https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+  <head>  	
+  	<meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="description" content="Responsive Bootstrap Landing Page Template">
+    <meta name="keywords" content="Bootstrap, Landing page, Template, Registration, Landing">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Grayrids">
+		<title>Asociacion de Apicultores Region Chorotega</title>
 
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>APISOFT</title>
-	<meta name="description" content="Cardio is a free one page template made exclusively for Codrops by Luka Cvetinovic" />
-	<meta name="keywords" content="html template, css, free, one page, gym, fitness, web design" />
-	<meta name="author" content="Luka Cvetinovic for Codrops" />
-	<!-- Favicons (created with http://realfavicongenerator.net/)-->
-	<link rel="apple-touch-icon" sizes="57x57" href="img/favicons/apple-touch-icon-57x57.png">
-	<link rel="apple-touch-icon" sizes="60x60" href="img/favicons/apple-touch-icon-60x60.png">
-	<link rel="icon" type="image/png" href="img/favicons/favicon-32x32.png" sizes="32x32">
-	<link rel="icon" type="image/png" href="img/favicons/favicon-16x16.png" sizes="16x16">
-	<link rel="manifest" href="img/favicons/manifest.json">
-	<link rel="shortcut icon" href="img/favicons/favicon.ico">
-	<meta name="msapplication-TileColor" content="#00a8ff">
-	<meta name="msapplication-config" content="img/favicons/browserconfig.xml">
-	<meta name="theme-color" content="#ffffff">
-	<!-- Normalize -->
-	<link rel="stylesheet" type="text/css" href="css/normalize.css">
-	<!-- Bootstrap -->
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-	<!-- Owl -->
-	<link rel="stylesheet" type="text/css" href="css/owl.css">
-	<!-- Animate.css -->
-	<link rel="stylesheet" type="text/css" href="css/animate.css">
-	<!-- Font Awesome -->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.1.0/css/font-awesome.min.css">
-	<!-- Elegant Icons -->
-	<link rel="stylesheet" type="text/css" href="fonts/eleganticons/et-icons.css">
-	<!-- Main style -->
-	<link rel="stylesheet" type="text/css" href="css/cardio.css">
-</head>
+    <link href="welcome/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="welcome/fonts/font-awesome.min.css" type="text/css" media="screen">
+    <!-- Include roboto.css to use the Roboto web font, material.css to include the theme and ripples.css to style the ripple effect -->
+    <link href="welcome/css/material.min.css" rel="stylesheet">
+    <link href="welcome/css/ripples.min.css" rel="stylesheet">
+    <link href="welcome/css/main.css" rel="stylesheet">
+    <link href="welcome/css/responsive.css" rel="stylesheet">
+    <link href="welcome/css/animate.min.css" rel="stylesheet">
+  </head>
 
-<body>
+  <body>
 
-	<div class="preloader">
-		<img src="img/loader.gif" alt="Preloader image">
+    <div class="navbar navbar-invers menu-wrap">
+      <div class="navbar-header text-center">
+        <a class="navbar-brand logo-right" href="welcome/javascript:void(0)"><i class="mdi-image-timelapse"></i>APISOFT</a>
+      </div>
+        <ul class="nav navbar-nav main-navigation">
+          <li class="active"><a href="#home">Inicio</a></li>
+          <li><a href="#features">Historia</a></li>
+          <li><a href="#why">Mision</a></li>
+          <li><a href="#screenshot">Vision</a></li>
+          <li><a href="#testimonial">Acerca de Nosotros</a></li>
+          <li><a href="#contact">Ubicacion</a></li>
+        </ul>
+        <button class="close-button" id="close-button">Cerrar</button>
+    </div>
+  	
+  	<div class="content-wrap">
+     <header class="hero-area" id="home">
+      
+      <div class="container">
+          <div class="col-md-12">
+
+            <div class="navbar navbar-inverse sticky-navigation navbar-fixed-top" role="navigation" data-spy="affix" data-offset-top="200">
+              <div class="container">
+                <div class="navbar-header">
+                  <a class="logo-left " href="index.html"><i class="mdi-image-timelapse"></i>APISOFT</a>
+                </div>
+                <div class="navbar-right">
+                  <button class="menu-icon"  id="open-button">
+                    <i class="mdi-navigation-menu"></i>
+                  </button>             
+                </div>
+              </div>
+            </div>
+        </div>        
+        <div class="contents text-right">
+          <h1 class="wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="300ms">APISOFT - Asociacion de Apicultores Region Chorotega</h1>
+          <p class="wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="400ms">La mejor miel del país producida en Nicoya</p>
+  
+        <a href="{{ url('/login/') }}" class="btn btn-lg btn-border wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">Iniciar Sesion</a>
+        </div>   
+    </header>
+
+    <section id="features" class="section">
+			<div class="container">
+					<div class="section-header">
+					  <h1 class="section-title wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="300ms">Historia</h1>
+					</div>
+					<h3 class="section-subtitle wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="400ms">
+
+             La Asociación de Apicultores Región Chorotega se constituyó legalmente el 26 de febrero de 2013, con el propósito de mejorar las  condiciones de vida de los asociados y sus familias impulsar<br>
+             la actividad apícola y asistencia técnica para el desarrollo de las capacidades de los apicultores.<br>
+             <br>
+             
+             La actividad hasta el momento, se ha venido realizando en una forma particular y desorganizada.<br>
+             A nivel técnico, la zona de producción, tiene la suficiente capacidad y disponibilidad para el abastecimiento de esta materia prima<br>
+             Principales problemáticas de la actividad son el cambio climático, plagas, competencia desleal.<br></h3>
+
+					
+				  </div>
+				</div>
+    </section>
+
+    <section id="why" class="section">
+      <div class="container">
+        
+        <div class="row">     
+
+          <div class="col-md-6 col-sm-6 wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="300ms">
+           {{-- <img src="img/features/img1.jpg" alt=""> --}}
+          </div>
+
+          <div class="col-md-6 col-sm-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="300ms">
+            <div class="pull-left content">
+              <h2>Misión <br>Asociacion de Apicultores Region Chorotega</h2>
+			  <h4 class="section-subtitle wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="400ms">
+					Material UI Bootstrap APP and Business Template orem ipsum dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore <br>
+					eumetur adipIusto quisquam idodit dolore inventore eum' dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore <br>
+					Material UI Bootstrap APP and Business Template orem ipsum dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore
+					eumetur adipIusto quisquam idodit dolore inventore eum' dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore <br>
+					Material UI Bootstrap APP and Business Template orem ipsum dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore
+					eumetur adipIusto quisquam idodit dolore inventore eum' dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore <br></h4>
+              
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="screenshot" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h1 class="section-title wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="300ms">Visión</h1>
+		</div>
+		<h3 class="section-subtitle wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="400ms">
+				Material UI Bootstrap APP and Business Template orem ipsum dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore <br>
+				eumetur adipIusto quisquam idodit dolore inventore eum' dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore <br>
+				Material UI Bootstrap APP and Business Template orem ipsum dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore
+				eumetur adipIusto quisquam idodit dolore inventore eum' dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore <br>
+				Material UI Bootstrap APP and Business Template orem ipsum dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore
+				eumetur adipIusto quisquam idodit dolore inventore eum' dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore <br></h3>
+      </div>
 	</div>
-	<nav class="navbar">
-		<div class="container">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#"><img src="img/logo.png" data-active-url="img/logo-active.png" alt=""></a>
-			</div>
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav navbar-right main-nav">
-					<li><a href="Genero">Intro</a></li>
-					<li><a href="Usuario/create">Registro Usuario</a></li>
-					<li><a href="login">Login</a></li>
-					<li><a href="#pricing"></a></li>
-					<!--<li><a href="#" data-toggle="modal" data-target="#modal1" class="btn btn-blue">Sign Up</a></li> --->
-				</ul>
-			</div>
-			<!-- /.navbar-collapse -->
-		</div>
-		<!-- /.container-fluid -->
-	</nav>
-	<header id="intro">
-		<div class="container">
-			<div class="table">
-				<div class="header-text">
-					<div class="row">
-						<div class="col-md-12 text-center">
-							
-							<h1 class="white typed">Asociación de Apicultores Región Chorotega.</h1>
-							<span class="typed-cursor">|</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-	
-	
-	
-	<section class="section section-padded blue-bg">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-md-offset-2">
-					<div class="owl-twitter owl-carousel">
-						<div class="item text-center">
-							<i class="icon fa fa-twitter"></i>
-							<h4 class="white light">To enjoy the glow of good health, you must exercise.</h4>
-							<h4 class="light-white light">#health #training #exercise</h4>
-						</div>
-						<div class="item text-center">
-							<i class="icon fa fa-twitter"></i>
-							<h4 class="white light">To enjoy the glow of good health, you must exercise.</h4>
-							<h4 class="light-white light">#health #training #exercise</h4>
-						</div>
-						<div class="item text-center">
-							<i class="icon fa fa-twitter"></i>
-							<h4 class="white light">To enjoy the glow of good health, you must exercise.</h4>
-							<h4 class="light-white light">#health #training #exercise</h4>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content modal-popup">
-				<a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
-				<h3 class="white">Sign Up</h3>
-				<form action="" class="popup-form">
-					<input type="text" class="form-control form-white" placeholder="Full Name">
-					<input type="text" class="form-control form-white" placeholder="Email Address">
-					<div class="dropdown">
-						<button id="dLabel" class="form-control form-white dropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Pricing Plan
-						</button>
-						<ul class="dropdown-menu animated fadeIn" role="menu" aria-labelledby="dLabel">
-							<li class="animated lightSpeedIn"><a href="#">1 month membership ($150)</a></li>
-							<li class="animated lightSpeedIn"><a href="#">3 month membership ($350)</a></li>
-							<li class="animated lightSpeedIn"><a href="#">1 year membership ($1000)</a></li>
-							<li class="animated lightSpeedIn"><a href="#">Free trial class</a></li>
-						</ul>
-					</div>
-					<div class="checkbox-holder text-left">
-						<div class="checkbox">
-							<input type="checkbox" value="None" id="squaredOne" name="check" />
-							<label for="squaredOne"><span>I Agree to the <strong>Terms &amp; Conditions</strong></span></label>
-						</div>
-					</div>
-					<button type="submit" class="btn btn-submit">Submit</button>
-				</form>
-			</div>
-		</div>
-	</div>
-	<footer>
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-6 text-center-mobile">
-					<h3 class="white">Reserve a Free Trial Class!</h3>
-					<h5 class="light regular light-white">Shape your body and improve your health.</h5>
-					<a href="#" class="btn btn-blue ripple trial-button">Start Free Trial</a>
-				</div>
-				<div class="col-sm-6 text-center-mobile">
-					<h3 class="white">Opening Hours <span class="open-blink"></span></h3>
-					<div class="row opening-hours">
-						<div class="col-sm-6 text-center-mobile">
-							<h5 class="light-white light">Mon - Fri</h5>
-							<h3 class="regular white">9:00 - 22:00</h3>
-						</div>
-						<div class="col-sm-6 text-center-mobile">
-							<h5 class="light-white light">Sat - Sun</h5>
-							<h3 class="regular white">10:00 - 18:00</h3>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row bottom-footer text-center-mobile">
-				<div class="col-sm-8">
-					<p>&copy; 2015 All Rights Reserved. Powered by <a href="http://www.phir.co/">PHIr</a> exclusively for <a href="http://tympanus.net/codrops/">Codrops</a></p>
-				</div>
-				<div class="col-sm-4 text-right text-center-mobile">
-					<ul class="social-footer">
-						<li><a href="http://www.facebook.com/pages/Codrops/159107397912"><i class="fa fa-facebook"></i></a></li>
-						<li><a href="http://www.twitter.com/codrops"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="https://plus.google.com/101095823814290637419"><i class="fa fa-google-plus"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<!-- Holder for mobile navigation -->
-	<div class="mobile-nav">
-		<ul>
-		</ul>
-		<a href="#" class="close-link"><i class="arrow_up"></i></a>
-	</div>
-	<!-- Scripts -->
-	<script src="js/jquery-1.11.1.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/wow.min.js"></script>
-	<script src="js/typewriter.js"></script>
-	<script src="js/jquery.onepagenav.js"></script>
-	<script src="js/main.js"></script>
-</body>
+    </section>
 
-</html>
+
+    <section id="testimonial" class="section">
+      <div class="container">
+        <div class="section-header text-center wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="400ms">
+          <h1 class="section-title">Acerca de Nosotros</h1>
+        </div>
+        <div class="row">
+          <div class="col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="400ms">
+            <div id="testimonial-carousel" class="carousel slide" data-ride="carousel">
+              <!-- Indicators -->
+              <ol class="carousel-indicators">
+                <li data-target="#testimonial-carousel" data-slide-to="0" class="active"></li>
+                <li data-target="#testimonial-carousel" data-slide-to="1"></li>
+                <li data-target="#testimonial-carousel" data-slide-to="2"></li>
+              </ol>
+              <div class="carousel-inner">
+                <div class="item active text-center">               
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
+                  <div class="meta">
+                    <p>Web excutive <span><a href="http://wingthemes.com/">WingThemes</a></span></p>
+                  </div>
+                </div>
+                <div class="item text-center">                
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
+                  <div class="meta">
+                    <p>Web excutive <span><a href="http://graygrids.com/">GrayGrids</a></span></p>
+                  </div>
+                </div>
+                <div class="item text-center">                
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
+                  <div class="meta">
+                    <p>Web excutive <span><a href="http://landingbow.com/">LandinBow</a></span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+   
+
+
+   
+    <section id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="300ms">
+            <h2 class="section-title">Aquí estamos!</h2>
+            <div class="row">
+              <div class="col-md-6 col-sm-6">
+                <div class="info">
+                  <div class="icon">
+                    <i class="mdi-maps-map"></i>
+                  </div>
+                  <h4>Locación</h4>
+                  <p>Nicoya, Guanacaste</p>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-6">
+                <div class="info">
+                  <div class="icon">
+                    <i class="mdi-content-mail"></i>
+                  </div>
+                  <h4>Correo</h4>
+                  <p>apicultoresNicoya@gmail.com</p>
+                </div>
+              </div>
+              <div class="clear"></div>
+              <div class="col-md-6 col-sm-6">
+                <div class="info">
+                  <div class="icon">
+                    <i class="mdi-action-settings-phone"></i>
+                  </div>
+                  <h4>Numero Telefonico</h4>
+                  <p>2685-02-02</p>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-6">
+                <div class="info">
+                  <div class="icon">
+                    <i class="mdi-action-thumb-up"></i>
+                  </div>
+                  <h4>Redes sociales</h4>
+                  <p>Apicultores Nicoya</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>    
+
+    <div class="map-area">      
+      <div class="map">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6853.31334931688!2d149.5710983929677!3d-33.43399308961885!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0x63680231a1016da2!2sWestern+Region+Academy+of+Sport!5e0!3m2!1sen!2sbd!4v1436826340086" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+       </div>
+    </div>
+
+    <section id="footer">
+      <div class="container">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <h3>Products</h3>
+              <ul>
+                <li><a href="http://wingthemes.com/">WingThemes</a>
+                </li>
+                <li><a href="http://graygrids.com/">Graygrids</a>
+                </li>
+                <li><a href="http://wpbean.com/">WPBean</a>
+                </li>
+                <li><a href="http://landingbow.com/">Landingbow</a>
+                </li>
+                <li><a href="http://freebiescircle.com/">FreebiesCicle</a>
+                </li>               
+              </ul>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <h3>FAQs</h3>
+              <ul>
+                <li><a href="#">Why choose us?</a>
+                </li>
+                <li><a href="#">Where we are?</a>
+                </li>
+                <li><a href="#">Fees</a>
+                </li>
+                <li><a href="#">Guarantee</a>
+                </li>
+                <li><a href="#">Discount</a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <h3>About</h3>
+              <ul>
+                <li><a href="#">Career</a>
+                </li>
+                <li><a href="#">Partners</a>
+                </li>
+                <li><a href="#">Team</a>
+                </li>
+                <li><a href="#">Clients</a>
+                </li>
+                <li><a href="#">Contact</a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <h3>Find us on</h3>
+              <a class="social" href="#" target="_blank"><i class="fa fa-facebook"></i></a>
+              <a class="social" href="#" target="_blank"><i class="fa fa-twitter"></i></a>
+              <a class="social" href="#" target="_blank"><i class="fa fa-google-plus"></i></a>
+            </div>
+          </div>
+        </div>  
+      </div>      
+      <!-- Go to Top Link -->
+      <a href="#home" class="btn btn-primary back-to-top">
+      <i class=" mdi-hardware-keyboard-arrow-up"></i>
+      </a>
+    </section> 
+
+    <section id="copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <p class="copyright-text">
+             � Pluto 2015 All right reserved. Designed and Developed by 
+              <a href="http://graygrids.com/">
+                GrayGrids
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>     
+    </div>  
+
+
+		<script src="welcome/js/jquery-2.1.4.min.js"></script>
+    <script src="welcome/js/bootstrap.min.js"></script>
+    <script src="welcome/js/ripples.min.js"></script>
+    <script src="welcome/js/material.min.js"></script>
+    <script src="welcome/js/wow.js"></script>
+    <script src="welcome/js/jquery.mmenu.min.all.js"></script> 
+    <script src="welcome/js/count-to.js"></script>   
+    <script src="welcome/js/jquery.inview.min.js"></script>     
+    <script src="welcome/js/main.js"></script>
+    <script src="welcome/js/classie.js"></script>
+    <script src="welcome/js/jquery.nav.js"></script>      
+    <script src="welcome/js/smooth-on-scroll.js"></script>
+    <script src="welcome/js/smooth-scroll.js"></script>
+    
+
+    <script>
+        $(document).ready(function() {
+            // This command is used to initialize some elements and make them work properly
+            $.material.init();
+        });
+    </script>
+
+  </body>

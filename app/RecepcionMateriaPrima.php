@@ -13,9 +13,14 @@ class RecepcionMateriaPrima extends Model
     [      
         'fecha',
         'pesoBruto',
-        'user_id',
+        'numero_muestras',
         'afiliado_id',
-        'tipoEntrega_id'
+        'user_id',
+        'tipoEntrega_id',
+        'observacion'
+    ];
+    protected $casts = [
+        'fecha' => 'Y-m-d H:i:s'
     ];
     public function user() 
     {
@@ -29,4 +34,5 @@ class RecepcionMateriaPrima extends Model
     {
         return $this->BelongsTo(TipoEntrega::class,'tipoEntrega_id');
     }
+   
 }

@@ -1,13 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Ubicacion;
-use App\Http\Requests\UbicacionFormRequest;
+use Validator;
+use Response;
+use Illuminate\Support\Facades\Input;
+use App\http\Requests;
 use Illuminate\Http\Request;
+use App\Ubicacion;
+use Illuminate\Http\Redirect;
+use App\Http\Requests\UbicacionFormRequest;
 use DB;
+
+
+
 class UbicacionController extends Controller
 {
+<<<<<<< HEAD
     /**
      * Display a listing of the resource.
      *
@@ -21,19 +29,14 @@ class UbicacionController extends Controller
             ->orderby('id','desc')
             ->paginate(7);
             return view('Ubicacion.index',["ubicacion"=>$ubicaciones,"searchText"=>$query]);
+=======
+>>>>>>> develop
 
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view("Ubicacion.create");
-    }
+public function __construct()
+{
 
+<<<<<<< HEAD
     /**
      * Store a newly created resource in storage.
      *
@@ -47,23 +50,22 @@ class UbicacionController extends Controller
         $ubicaciones->save();
         return redirect('Ubicacion');
     }
+=======
+}
+>>>>>>> develop
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Ubicacion  $ubicacion
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        return view ("Ubicacion.show",["ubicacion"=>Ubicacion::findOrFail($id)]);
-    }
 
-    public function edit( $id)
-    {
-        return view ("Ubicacion.edit",["ubicacion"=>Ubicacion::findOrFail($id)]);
-    }
+//INDEEEEEEEEEEEEX/
+public function index(Request $request)
+{
+  $ubicacion = Ubicacion::paginate(10);
+  return view('Ubicacion.index',compact('ubicacion'));        
+    
+}
 
+////////////////////////////////////////////////////////NUEVO
+
+<<<<<<< HEAD
     /**
      * Update the specified resource in storage.
      *
@@ -91,4 +93,44 @@ class UbicacionController extends Controller
     $ubicaciones->delete();
     return redirect('Ubicacion');
     }
+=======
+public function addUbicacion(Request $request){
+    $rules = array(
+      'descripcion' => 'required'
+    );
+  $validator = Validator::make ( Input::all(), $rules);
+  if ($validator->fails())
+  return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
+
+  else {
+    $ubicacion = new Ubicacion;
+    $ubicacion->descripcion = $request->descripcion;
+    $ubicacion->save();
+    return response()->json($ubicacion);
+  }
 }
+
+public function editUbicacion(request $request){
+  $rules = array(
+    'descripcion' => 'required'
+  );
+$validator = Validator::make ( Input::all(), $rules);
+if ($validator->fails())
+return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
+
+else {
+$ubicacion =Ubicacion::find ($request->id);
+$ubicacion->descripcion = $request->descripcion;
+$ubicacion->save();
+return response()->json($ubicacion);
+}
+}
+
+public function deleteUbicacion(request $request){
+  
+  $ubicacion = Ubicacion::find ($request->id);
+  $ubicacion->delete();
+  return response()->json();
+>>>>>>> develop
+}
+}   //

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @extends ('layouts.admin')
 @section('contenido')
 <div class="row">
@@ -5,6 +6,35 @@
     <h1>Simple Laravel CRUD Ajax</h1>
   </div>
 </div>
+=======
+@extends ('layouts.principalRol') 
+
+<!-- mensaje de exito -->
+<?php $message=Session::get('message') ?>
+
+@if($message == 'AddRol')
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  ROL CREADO CORRECTAMENTE
+</div>
+@endif
+<!-- fin de mensaje de exito -->
+
+@section ('contenido')
+<h1 >LISTADO DE  ROL<a href="Rol/create"> <button class="btn btn-primary" >  Nuevo <span class="glyphicon glyphicon-user"></button></a></h1>
+
+
+<!-- Saltos de linea-->
+<br>
+<br>
+<br>
+<br>
+<!-- Fin de salto de linea. No necesita una etiqueta de cierre-->
+<div class="absolute3">
+		@include('Rol.search')
+		
+</div>	
+>>>>>>> develop
 
 <div id="estudiante" style="display: none;">
     <h2>Si eres estudiante...</h2>
@@ -35,7 +65,11 @@
         <th>Descripcion</th>
         <th>Create At</th>
         <th class="text-center" width="150px">
+<<<<<<< HEAD
           <a href="#" class="create-modal btn btn-success btn-sm">
+=======
+          <a href="#" class="create-modalRol btn btn-success btn-sm">
+>>>>>>> develop
             <i class="glyphicon glyphicon-plus"></i>
           </a>
         </th>
@@ -48,6 +82,7 @@
           <td>{{ $value->descripcion }}</td>
           <td>{{ $value->created_at }}</td>
           <td>
+<<<<<<< HEAD
             <a href="#" class="show-modal btn btn-info btn-sm" data-id="{{$value->id}}" data-title="{{$value->descripcion}}">
               <i class="fa fa-eye"></i>
             </a>
@@ -55,6 +90,15 @@
               <i class="glyphicon glyphicon-pencil"></i>
             </a>
             <a href="#" class="delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" data-title="{{$value->descripcion}}">
+=======
+            <a href="#" class="show-modalRol btn btn-info btn-sm" data-id="{{$value->id}}" data-title="{{$value->descripcion}}">
+              <i class="fa fa-eye"></i>
+            </a>
+            <a href="#" class="edit-modalRol btn btn-warning btn-sm" data-id="{{$value->id}}" data-title="{{$value->descripcion}}">
+              <i class="glyphicon glyphicon-pencil"></i>
+            </a>
+            <a href="#" class="delete-modalRol btn btn-danger btn-sm" data-id="{{$value->id}}" data-title="{{$value->descripcion}}">
+>>>>>>> develop
               <i class="glyphicon glyphicon-trash"></i>
             </a>
           </td>
@@ -65,6 +109,10 @@
   {{$rol->links()}}
 </div>
 {{-- Modal Form Create Post --}}
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
 <div id="create" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -84,7 +132,10 @@
           </div>
         </form>
       </div>
+<<<<<<< HEAD
      
+=======
+>>>>>>> develop
           <div class="modal-footer">
             <button class="btn btn-warning" type="submit" id="add">
               <span class="glyphicon glyphicon-plus"></span>Guardar Rol
@@ -106,11 +157,19 @@
                   </div>
                     <div class="modal-body">
                     <div class="form-group">
+<<<<<<< HEAD
                       <label for="">ID :</label>
                       <b id="i"/>
                     </div>
                     <div class="form-group">
                       <label for="">Descripcion :</label>
+=======
+                      <label for="descripcion">ID :</label>
+                      <b id="ii"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="id">Descripcion :</label>
+>>>>>>> develop
                       <b id="di"/>
                     </div>
                     </div>

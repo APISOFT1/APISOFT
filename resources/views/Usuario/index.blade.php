@@ -1,5 +1,18 @@
-@extends('layouts.Admin')
+@extends('layouts.principal')
+
+<!-- mensaje de exito -->
+<?php $message=Session::get('message') ?>
+
+@if($message == 'store')
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  ASUARIO CREADO CORRECTAMENTE
+</div>
+@endif
+<!-- fin de mensaje de exito -->
+
 @section ('contenido')
+<<<<<<< HEAD
 <div class="row">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -8,13 +21,22 @@
 	<h3>Listado de Generos <a href="" class="btn btn-success" data-toggle="modal" data-target="#createUsuario">
 	
     Nuevo</a></h3>
+=======
+<h1 class="text-center">LISTADO DE USUARIOS</h1>
+
+<!-- Saltos de linea-->
+<br>
+<br>
+<!-- Fin de salto de linea. No necesita una etiqueta de cierre-->
+
+<!--Esta clase nos permite posicionar el buscador  -->
+<div class="absolute3">
+>>>>>>> develop
 		@include('Usuario.search')
-		</div>
+
 </div>
 
-<div class="row">
-	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		<div class="table-responsive">
+<div class="table-responsive">
 			<table class="table table-striped table-bordered table-condensed table-hover">
 				<thead>
   	<th>Cedula</th>
@@ -25,18 +47,21 @@
   	<th>Correo</th>
     <th>Direccion</th>
   	<th>FechaIngreso</th>
-  	<th>Clave</th>
     <th>Genero</th>
   	<th>Rol</th>
 		<th>Estado</th>
-		
-  	
+		<th>  <div class="size">
+		  <a href="Usuario/create" class="create-modal btn btn-success btn-sm">
+			<i class="glyphicon glyphicon-plus"></i>
+			</a>
+			</th>
 
   </thead>
 
  
-  	<tr>
+  
   		@foreach ($usuarios as $usuario )
+			<tbody>
   		<td>{{$usuario->id}}</td>
   		<td>{{$usuario->name}}</td>
       <td>{{$usuario->Apellido1}}</td>
@@ -45,36 +70,46 @@
   		<td>{{$usuario->email}}</td>
       <td>{{$usuario->Direccion}}</td>
   		<td>{{$usuario->Fecha_Ingreso}}</td>
-      <td>{{$usuario->password}}</td>
 			<td>{{$usuario->Genero->descripcion}}</td>
 			<td>{{$usuario->Rol->descripcion}}</td>
+<<<<<<< HEAD
 			<td>{{@$usuario->Estados->Descripcion}}</td>
+=======
+			<td> <?php  if ($usuario->estado_id=='1') {
+			# code...
+			print("Activo");
+		} else {
+			print("Inactivo");
+		}
+		  ?></td> 
+>>>>>>> develop
   		
 			
 	
    
   		<td>
+<<<<<<< HEAD
 			<a href="" class="btn btn-success" data-toggle="modal" data-target="#editarUsuario">Editar</button></a>
                          <a href="" data-target="#modal-delete-{{$usuario->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
+=======
+			<a href=""  > <button class="btn btn-info btn-sm" > <span class="glyphicon glyphicon-eye-open"></button></a>
+			<a href="{{URL::action('UserController@edit',$usuario->id)}}"><Button  class="btn btn-success btn-lg btn-sm">
+      <span class="glyphicon glyphicon-edit "></button></a>
+                         <a href="" data-target="#modal-delete-{{$usuario->id}}" data-toggle="modal"><button class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove "></button></a>
+>>>>>>> develop
   		</td>
 
-  	</tr>
+			</tbody>
+			@endforeach
 		@include('Usuario.modal')
+<<<<<<< HEAD
 		@include('Usuario.create')
 		@include('Usuario.editar')
   	@endforeach
 	
 
 
+=======
+>>>>>>> develop
 </table>
-
-	</div>
-	</div>
-</div>
-
-
-
-
-
-
 @endsection

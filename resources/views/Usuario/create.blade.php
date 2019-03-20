@@ -1,6 +1,23 @@
+<<<<<<< HEAD
 <div class="modal fade modal-slide-in-right" id="createUsuario">
     <div class="modal-dialog">
         <div class="modal-content">
+=======
+@extends ('layouts.principal')
+@section ('contenido')
+	<div class="row">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+			<h3>Nuevo Usuario</h3>
+			@if (count($errors)>0)
+			<div class="alert alert-danger">
+				<ul>
+				@foreach ($errors->all() as $error)
+					<li>{{$error}}</li>
+				@endforeach
+				</ul>
+			</div>
+			@endif
+>>>>>>> develop
 
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
@@ -12,6 +29,15 @@
             <div class="modal-body">
 			{!!Form::open(array('url'=>'Usuario','method'=>'POST','autocomplete'=>'off'))!!}
 			{{Form::token()}}
+			<div class="container">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="email">Cedula</label>
+      <div class="col-sm-10">
+        <input type="email" class="form-control" id="Id_Usuario" placeholder="Enter email" name="email">
+      </div>
+    </div>
+    
+   
 			<div class="form-group">
             	<label for="id">Cedula</label>
             	<input type="text" name="id" class="form-control" placeholder="Id_Usuario...">
@@ -119,8 +145,23 @@
 				</div>
             </div>
             
+			<div class="form-group">
+            	<div class="col-md-6">
+				<label for="estado_id">Estado</label>
+	
+				<div class="register-switch">
+      <input type="radio" name="estado_id" value="{{$estado_id=1}}" id="estado_id" class="register-switch-input" checked>
+      <label for="estado_id" class="register-switch-label">Activo</label>
+      <input type="radio" name="estado_id" value="{{$estado_id=0}}" id="estado_id" class="register-switch-input">
+      <label for="estado_id" class="register-switch-label">Inactivo</label>
+	</div> 
 		
+<<<<<<< HEAD
          <div class="modal-footer">
+=======
+			
+            <div class="form-group">
+>>>>>>> develop
 			
             	<button class="btn btn-primary" type="submit">Guardar</button>
             	<button class="btn btn-danger" type="reset">Cancelar</button>

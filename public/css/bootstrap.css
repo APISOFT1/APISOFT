@@ -11,7 +11,7 @@ html {
 }
 body {
   margin: 0;
-  color: #333333;
+  color: #1f6b67;
 }
 article,
 aside,
@@ -124,6 +124,7 @@ button {
 button,
 select {
   text-transform: none;
+  
 }
 button,
 html input[type="button"],
@@ -6780,3 +6781,393 @@ button.close {
   padding-left:30px !important;
   position: relative;
 }
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+
+/* Style the header */
+.header {
+  background-color:agua;
+  padding: 10px;
+  text-align: center;
+  text-decoration-color: blanchedalmond;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+
+
+
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  background-color: rgb(255, 255, 255);
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: right;
+  display: block;
+  color: #050505;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: blue;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: whitesmoke;
+}
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {   
+  float: relative;
+  width: 100%;
+  height: 100px;
+
+ 
+}
+
+/* Right column */
+.rightcolumn {
+  float: left;
+  width:  15%;
+  background-color: #f1f1f1;
+  padding-left: 20px;
+}
+
+/* Fake image */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+  background-color: white;
+  padding: 220px;
+  margin-top: 50px;
+ 
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+  margin-top: 20px;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn {   
+    width: 100%;
+    padding: 0;
+  }
+}
+
+  @media screen and (max-width: 400px) {
+    .topnav a {
+      float: none;
+      width: 100%;
+    }
+  }
+  /*Para el buscar */
+  input[type=text] {
+  width: 130px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('searchicon.png');
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+  width: 100%;
+}
+
+/* imagenes devolver y siguient */
+#next {
+  width: 43px;
+  height: 44px;
+  background: url(img_navsprites.gif) -91px 0;
+}
+
+#prev {
+  left: 63px;
+  width: 43px;
+  background: url('img_navsprites.gif') -47px 0;
+}
+/* boton con imagen */
+.botonimagen{
+  background-image:url('../img/anterior.png');
+  background-repeat:no-repeat;
+  height:55px;
+  width:75px;
+  border:none;
+  
+  background-position:center;
+}
+
+/* Posiciones */
+div.relative {
+  position: relative;
+  width: 500px;
+  height: 200px;
+ 
+} 
+
+div.absolute {
+  position: absolute;
+  top: 130px;
+  right: 3;
+  width: 400px;
+  height: 100px;
+  
+}
+
+.center {
+  position: absolute;
+  left: 0;
+  top: 1%;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+}
+
+.center2 {
+  position: absolute;
+  left: 0;
+  top: 170%;
+  width: 100%;
+  text-align: center;
+  font-size: 15px;
+}
+
+/* para el boton de nuevo */
+div.absolute2 {
+  position: absolute;
+  top: 100px;
+  right: 0;
+  width: 500px;
+  height: 100px;
+
+  
+}
+
+/* para el listado */
+div.absolute3 {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  width: 830px;
+  height: 100px;
+  
+}
+
+
+/*posicion boton retroceder */
+div.absolute4 {
+  position: absolute;
+  top: 20px;
+  right: 5;
+  width: 300px;
+  height: 100px;
+
+  
+}
+
+/* agregar */
+
+/* boton con imagen */
+.botonimagen1{
+  background-image:url('../img/afiliado.png');
+  background-repeat:no-repeat;
+  height:55px;
+  width:75px;
+  border:none;
+  
+  background-position:center;
+}
+
+/*navegacion bar */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgb(100, 91, 91);
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: rgba(240, 242, 248, 0.932);
+}
+
+.active {
+  background-color: rgb(31, 180, 26);
+}
+
+
+/*posicion boton retroceder */
+div.absolutetable {
+  position: absolute;
+  top: 130px;
+  right: 0;
+  width: 1370px;
+  height: 90px;
+
+  
+}
+
+div.absolute5 {
+  position: absolute;
+  top: 130px;
+  right: 0;
+  width: 800px;
+  height: 100px;
+
+  
+}
+
+
+/*botones */
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 2px 1px;
+  cursor: pointer;
+}
+.button1 {border-radius: 2px;}
+.button2 {border-radius: 8px;}
+.button3 {border-radius: 8px;}
+.button4 {border-radius: 12px;}
+.button5 {border-radius: 50%;}
+
+.button2 {background-color: rgb(11, 113, 121);} /* Blue */
+.button3 {background-color: #f44336;} /* Red */ 
+.button4 {background-color: #e7e7e7; color: black;} /* Gray */ 
+.button5 {background-color: #555555;} /* Black */
+
+.button2:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+
+div.absolute6 {
+  position: absolute;
+  top: 20px;
+  right: 2;
+  width: 1050px;
+  height: 120px;
+
+  
+}
+
+div.absolut {
+  position: absolute;
+  top: 50px;
+  right: 2;
+  width: 2000px;
+  height: 120px;
+
+  
+}
+
+h1 { color: #FF0000; }

@@ -1,31 +1,46 @@
-@extends('layouts.Admin')
+@extends('layouts.principal')
+
+<!-- mensaje de exito -->
+<?php $message=Session::get('message') ?>
+
+@if($message == 'store')
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  AFILIADO-APIARIO CREADO CORRECTAMENTE
+</div>
+@endif
+<!-- fin de mensaje de exito -->
+
 @section ('contenido')
-<div class="row">
-	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-		<h3>Listado de Afiliado Apiario <a href="AfiliadoApiario/create"><button class="btn btn-success">Nuevo</button></a></h3>
+
+<h1 class="text-center">LISTADO DE  AFILIADO-APIARIO</h1>
+
+<!-- Saltos de linea-->
+<br>
+<br>
+<!-- Fin de salto de linea. No necesita una etiqueta de cierre-->
+<!--Esta clase nos permite posicionar el buscador  -->
+<div class="absolute3">
 		@include('AfiliadoApiario.search')
 		</div>
-</div>
 
-<div class="row">
-	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
 		<div class="table-responsive">
-			<table class="table table-striped table-bordered table-condensed table-hover">
-				<thead>
+		<table class="table table-striped table-bordered table-condensed table-hover">
+	<thead>
   	<th>Codigo</th>
-  	<th>Cedula Afiliado</th>
+  	<th>Afiliado</th>
   	<th>Apiario</th>
-    
-		
-  	
-
+	<th> <a href="AfiliadoApiario/create"
+	class="create-modal btn btn-success btn-sm">
+			<i class="glyphicon glyphicon-plus"></i></th>
   </thead>
 
  
-  	<tr>
+  <tbody>
   		@foreach ($afiliadoapiarios as $afiliado )
   		<td>{{$afiliado->id}}</td>
-  		<td>{{$afiliado->afiliado->Nombre}} {{$afiliado->afiliado->Apellido1}} {{$afiliado->afiliado->Apellido2}}</td>
+  		<td>{{$afiliado->afiliado->Nombre}} {{$afiliado->afiliado->apellido1}} {{$afiliado->afiliado->apellido2}}</td>
       <td>{{$afiliado->apiario->Descripcion}}</td>
   
   		
@@ -33,25 +48,13 @@
 	
    
   		<td>
-			<a href="{{URL::action('AfiliadoApiarioController@edit',$afiliado->id)}}"><button class="btn btn-info">Editar</button></a>
-                         <a href="" data-target="#modal-delete-{{$afiliado->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
+		  <a href=""  > <button class="btn btn-info btn-sm" > <span class="glyphicon glyphicon-eye-open"></button></a>
+			<a href="{{URL::action('AfiliadoApiarioController@edit',$afiliado->id)}}"><Button  class="btn btn-success btn-lg btn-sm"><span class="glyphicon glyphicon-edit "></button></a>
+                         <a href="" data-target="#modal-delete-{{$afiliado->id}}" data-toggle="modal"><button class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove "></button></a>
   		</td>
 
-  	</tr>
+		  </tbody>
+		  @endforeach
 		@include('AfiliadoApiario.modal')
-  	@endforeach
-	
-
-
 </table>
-
-	</div>
-	</div>
-</div>
-
-
-
-
-
-
 @endsection
