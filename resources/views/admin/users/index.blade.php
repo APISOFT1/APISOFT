@@ -210,7 +210,7 @@
 	
 				<div class="register-switch">
       <input type="radio" name="estado_id" value="{{$estado_id=1}}" id="estado_id" class="register-switch-input" checked>
-      <label for="estado_id" class="register-switch-label">Activo</label>
+      <label for="estado_id" class="register-switch-label">LOL</label>
       <input type="radio" name="estado_id" value="{{$estado_id=0}}" id="estado_id" class="register-switch-input">
       <label for="estado_id" class="register-switch-label">Inactivo</label>
 	</div> 

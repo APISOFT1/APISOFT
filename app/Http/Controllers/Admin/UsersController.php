@@ -114,8 +114,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //if (! Gate::allows('users_manage')) {
-           // return abort(401);
+        
 //  }
         $roles = Role::get()->pluck('name', 'name');
         $user = User::findOrFail($id);
