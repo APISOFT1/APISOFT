@@ -23,9 +23,21 @@ class AfiliadoController extends Controller
      */
     public function index(Request $request)
     {
-      
-             
-            return view('Afiliado.index', compact('afi'));
+      if($request){
+        $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
+        $afi= Afiliado::with('Genero', 'Estado_Civil') 
+            ->where('Nombre','LIKE','%'.$query.'%')
+            ->orderby('id','desc')
+            ->paginate(7);
+            $genero = Genero::all();
+            $estadoC = Estado_Civil::all();
+        return view('Afiliado.index', compact('afi','genero','estadoC'), ['afi'=>$afi,"searchText"=>$query]);
+    }
+   
+    
+  
+  
+    return view('Afiliado.index',compact('afi','genero','estadoC','esta'));   
         
     }
 

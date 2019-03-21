@@ -105,13 +105,13 @@
       </div>
       <div class="modal-body">
         <form class="form-horizontal" role="form">
-
-          <div class="form-group row add">
+          
+        <div class="form-group row add">
             <label class="control-label col-sm-2" for="id">Cedula:</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="id" name="id"
-              placeholder="Ingrese Su Cedula" required>
-              <p class="error text-center alert alert-danger hidden"></p>
+              placeholder="Cedula" required>
+              <p class="No Ingreso la Cedula"></p>
             </div>
           </div>
 
@@ -185,30 +185,38 @@
             </div>
           </div>
 
-					<div class="form-group row add">
-            <label class="control-label col-sm-2" for="genero_id">Genero:</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="genero_id" name="genero_id"
-              placeholder="Genero" required>
-              <p class="error text-center alert alert-danger hidden"></p>
+          <div class="form-group row add">
+          <label class="control-label col-sm-2" for="genero_id">Genero</label>
+          <div class="col-sm-10">
+					<select class="form-control" id="genero_id" name="genero_id">
+          <option value="">Seleccione</option>
+						@foreach ($genero as $gene)
+							<option value="{{$gene->id}}">{{ $gene->descripcion }}</option>
+						@endforeach						
+					</select>
             </div>
           </div>
 
 					<div class="form-group row add">
             <label class="control-label col-sm-2" for="estado_civil_id">Estado Civil:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="estado_civil_id" name="estado_civil_id"
-              placeholder="estado civil" required>
-              <p class="error text-center alert alert-danger hidden"></p>
+            <select class="form-control" id="estado_civil_id" name="estado_civil_id">
+          <option value="">Seleccione</option>
+						@foreach ($estadoC as $ess)
+							<option value="{{$ess->id}}">{{ $ess->descripcion }}</option>
+						@endforeach						
+					</select>
             </div>
           </div>
-          <div class="register-switch">
+
+      <div class="register-switch">
+      <label class="control-label col-sm-2" for="estado_civil_id">Estado:</label>
       <input type="radio" name="estado_id" value="{{$estado_id=1}}" id="estado_id" class="register-switch-input" checked>
       <label for="estado_id" class="register-switch-label">Activo</label>
       <input type="radio" name="estado_id" value="{{$estado_id=0}}" id="estado_id" class="register-switch-input">
       <label for="estado_id" class="register-switch-label">Inactivo</label>
 	</div> 
-        
+					
         </form>
       </div>
           <div class="modal-footer">
@@ -221,6 +229,10 @@
           </div>
     </div>
   </div>
+</div></div>
+   
+        
+  
 {{-- Modal Form Show POST --}}
 <div id="show" class="modal fade" role="dialog">
   <div class="modal-dialog">

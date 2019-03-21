@@ -194,8 +194,9 @@
         'Direccion': $('input[name=Direccion]').val(),
         'Fecha_Ingreso': $('input[name=Fecha_Ingreso]').val(),
         'Num_Cuenta': $('input[name=Num_Cuenta]').val(),
-        'genero_id': $('input[name=genero_id]').val(),
-        'estado_civil_id': $('input[name=estado_civil_id').val(),
+        'genero_id': $('select[name=genero_id]').val(),
+
+        'estado_civil_id': $('select[name=estado_civil_id').val(),
         'estado_id': $('input[name=estado_id]').val()
       },
       success: function(data){
@@ -219,9 +220,7 @@
           $('.error').remove();
           $('#table').append("<tr class= afi" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
-          "<td>" + data.Nombre + "</td>"+
-          "<td>" + data.apellido1 + "</td>"+
-          "<td>" + data.apellido2 + "</td>"+
+          "<td>" + data.Nombre + data.apellido1 +  data.apellido2 +"</td>"+
           "<td>" + data.Telefono + "</td>"+
           "<td>" + data.email + "</td>"+
           "<td>" + data.Direccion+ "</td>"+
