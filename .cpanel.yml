@@ -3,3 +3,4 @@ deployment:
  tasks:
  - export DEPLOYPATH=/home/apisoftcr/apisoft/
  - /bin/cp -r * $DEPLOYPATH
+- /bin/cp -r ./public/* $DEPLOYPATH/public_html/
