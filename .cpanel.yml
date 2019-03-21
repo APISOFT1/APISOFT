@@ -1,6 +1,6 @@
 ---
 deployment:
  tasks:
- - export DEPLOYPATH=/home/apisoftcr/repositories/APISOFT/public_html/
+ - export DEPLOYPATH=/home/apisoftcr/APISOFT/
  - /bin/cp index.php $DEPLOYPATH
  - /bin/cp style.css $DEPLOYPATH
