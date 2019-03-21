@@ -26,7 +26,7 @@
 
     <div class="navbar navbar-invers menu-wrap">
       <div class="navbar-header text-center">
-        <a class="navbar-brand logo-right" href="welcome/javascript:void(0)"><i class="mdi-image-timelapse"></i>APISOFT</a>
+        <a class="navbar-brand logo-right" href=""><i class="mdi-image-timelapse"></i>APISOFT</a>
       </div>
         <ul class="nav navbar-nav main-navigation">
           <li class="active"><a href="#home">Inicio</a></li>
