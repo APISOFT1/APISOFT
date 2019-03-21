@@ -1,93 +1,97 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Different Multiple Form Widget template Responsive, Login form web template,Flat Pricing tables,Flat Drop downs  Sign up Web Templates, Flat Web Templates, Login sign up Responsive web template, SmartPhone Compatible web template, free web designs for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- Custom Theme files -->
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-<!-- //Custom Theme files -->
-<!-- font-awesome icons -->
-<link href="css/boostrap.min.css" rel="stylesheet"> 
-<link href="css/font-awesome.css" rel="stylesheet"> 
-<!-- //font-awesome icons -->
-<!-- web font -->
-<link href="//fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
-<!-- //web font -->
+	<title>Login V16</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css4/util.css">
+	<link rel="stylesheet" type="text/css" href="css4/main.css">
+<!--===============================================================================================-->
 </head>
 <body>
-	<!-- main -->
-   
-	<div class="main-agile">
-		 <div class="limiter"{{ __('Login') }}>
-		<div class="content">
-        <div class="absolute4"> 
-			<div class="top-grids">
-            
-				<div class="top-grids-right">
-					<div class="signin-form-grid">
-						<div class="signin-form">
-							<h2>Inicio de Sesion</h2>
-							<form id="signin"  method="POST"  action="{{ route('login') }}">
-								 @csrf
+	
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+			<div class="wrap-login100 p-t-30 p-b-50">
+				<span class="login100-form-title p-b-41">
+					Iniciar Sesion
+				</span>
+				<form class="login100-form validate-form p-b-33 p-t-5"  id="signin"  method="POST"  action="{{ route('login') }}">
 
-								<div data-validate="Type user name">
-								<input id="email" class="input100{{ $errors->has('email') ? ' is-invalid' : '' }}" type="email" name="email" placeholder="Correo" required="" value="{{ old('email') }}" required autofocus>
-									<span class="focus-input100"></span>
-										 @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                       					 @endif
-								</div>
-								<div data-validate="Type password"{{ __('Password') }}>
-								<input  id="password" class="input100{{ $errors->has('password') ? ' is-invalid' : '' }}" type="password" name="password" placeholder="Contraseña"  required="Este campo es obligatorio">	
-								<span class="focus-input100"></span>
-						
-								@if ($errors->has('password'))
-									<span class="invalid-feedback" role="alert">
-									<strong>{{ $errors->first('password') }}</strong>
-									</span>
-								@endif
-								</div>
-
-
-
-								<input type="checkbox" id="brand" value="">
-								<label for="brand"><span></span> Recuerdame</label> 
-
-								<input type="submit" value="Ingresar" {{ __('Ingresar') }}>
-							
-
-								<div class="signin-agileits-bottom"> 
-									<p>
-										<a class="txt2" href="{{ route('password.request') }}">
-                                    		{{ __('Olvidó su contraseña?') }}
-                          				</a>
-									</p>    
-								</div> 
-							</form>
-						</div>
+					<div class="wrap-input100 validate-input" data-validate = "Enter username">
+						<input id="email"  type="text"  class="input100{{ $errors->has('email') ? ' is-invalid' : '' }}" type="email" name="email" placeholder="Correo" required="" value="{{ old('email') }}" required autofocus>
+						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
+						  @if ($errors->has('email'))
+                		<span class="invalid-feedback" role="alert">
+                   		 <strong>{{ $errors->first('email') }}</strong>
+               			</span>
+           			 	@endif
 					</div>
-				
-				</div>
-						</form>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input   id="password" class="input100{{ $errors->has('password') ? ' is-invalid' : '' }}" type="password" name="password" placeholder="Contraseña"  required="Este campo es obligatorio">
+						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
+						   @if ($errors->has('password'))
+                 			 <span class="invalid-feedback" role="alert">
+                 				 <strong>{{ $errors->first('password') }}</strong>
+                 			 </span>
+            				@endif
 					</div>
-				</div>
-				<div class="clear"> </div>
+
+					<div class="container-login100-form-btn m-t-32">
+						<button  type="submit" value="Ingresar" {{ __('Ingresar') }} class="login100-form-btn">  Ingresar </button>			
+					</div>
+							<div class="container-login100-form-btn m-t-32"> 
+							<p>
+							<a class="text" href="{{ route('password.request') }}">
+                  {{ __('Olvidó su contraseña?') }}
+              </a>
+						</p>    
+					</div> 
+
+				</form>
 			</div>
 		</div>
-		<div class="copyright">
-			
-		</div>
-	</div>	
-	<!-- //main --> 
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main3.js"></script>
+
 </body>
 </html>
