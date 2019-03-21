@@ -12,16 +12,6 @@
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
-<<<<<<< HEAD
-<div class="row">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-	<h3>Listado de Generos <a href="" class="btn btn-success" data-toggle="modal" data-target="#createUsuario">
-	
-    Nuevo</a></h3>
-=======
 <h1 class="text-center">LISTADO DE USUARIOS</h1>
 
 <!-- Saltos de linea-->
@@ -31,7 +21,6 @@
 
 <!--Esta clase nos permite posicionar el buscador  -->
 <div class="absolute3">
->>>>>>> develop
 		@include('Usuario.search')
 
 </div>
@@ -72,9 +61,6 @@
   		<td>{{$usuario->Fecha_Ingreso}}</td>
 			<td>{{$usuario->Genero->descripcion}}</td>
 			<td>{{$usuario->Rol->descripcion}}</td>
-<<<<<<< HEAD
-			<td>{{@$usuario->Estados->Descripcion}}</td>
-=======
 			<td> <?php  if ($usuario->estado_id=='1') {
 			# code...
 			print("Activo");
@@ -82,34 +68,19 @@
 			print("Inactivo");
 		}
 		  ?></td> 
->>>>>>> develop
   		
 			
 	
    
   		<td>
-<<<<<<< HEAD
-			<a href="" class="btn btn-success" data-toggle="modal" data-target="#editarUsuario">Editar</button></a>
-                         <a href="" data-target="#modal-delete-{{$usuario->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
-=======
 			<a href=""  > <button class="btn btn-info btn-sm" > <span class="glyphicon glyphicon-eye-open"></button></a>
 			<a href="{{URL::action('UserController@edit',$usuario->id)}}"><Button  class="btn btn-success btn-lg btn-sm">
       <span class="glyphicon glyphicon-edit "></button></a>
                          <a href="" data-target="#modal-delete-{{$usuario->id}}" data-toggle="modal"><button class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove "></button></a>
->>>>>>> develop
   		</td>
 
 			</tbody>
 			@endforeach
 		@include('Usuario.modal')
-<<<<<<< HEAD
-		@include('Usuario.create')
-		@include('Usuario.editar')
-  	@endforeach
-	
-
-
-=======
->>>>>>> develop
 </table>
 @endsection
