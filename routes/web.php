@@ -47,11 +47,15 @@ Route::POST('addUbicacion','UbicacionController@addUbicacion');
 Route::POST('editUbicacion','UbicacionController@editUbicacion');
 Route::POST('deleteUbicacion','UbicacionController@deleteUbicacion');
 
+Route::POST('addAfiliadoApiario','AfiliadoApiarioController@addAfiliadoApiario');
+Route::POST('editAfiliadoApiario','AfiliadoApiarioController@editAfiliadoApiario');
+Route::POST('deleteAfiliadoApiario','AfiliadoApiarioController@deleteAfiliadoApiario');
+
 
 });
 Route::resource('Apiario','ApiarioController');
 Route::resource('Ubicacion','UbicacionController');
-
+Route::resource('AfiliadoApiario','AfiliadoApiarioController');
 
   
 

@@ -21,8 +21,8 @@
             <div class="form-group">
             	<div class="col-md-6">
 				<label for="afiliado_id">Afiliado</label>
-					<select class="form-control" id="afilado_id" name="afiliado_id">
-						@foreach ($Afiliados as $afiliado)
+					<select class="form-control" id="afiliado_id" name="afiliado_id">
+						@foreach ($Afiliados as $afiliado =>value)
 							<option value="{{ $afiliado->id }}">{{ $afiliado->Nombre}} {{$afiliado->Apellido1}} {{$afiliado->Apellido2}}</option>
 						@endforeach						
 					</select>

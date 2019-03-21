@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 use App\Afiliado;
 use App\Apiario;
+use Validator;
+use Response;
 use App\AfiliadoApiario;
 use Illuminate\Http\Request;
 use App\Http\Requests\AfiliadoApiariosFormRequest;
+use Illuminate\Support\Facades\Input;  //MUYR IMPORTANTE , SIN ESTO NO GUARDA.
 
 class AfiliadoApiarioController extends Controller
 {
@@ -15,58 +18,64 @@ class AfiliadoApiarioController extends Controller
     
     }
     
-    
-    //INDEEEEEEEEEEEEX/
-    public function index(Request $request)
-    {
-        if($request){
-            $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-            $afi= Afiliado::with('Afiliado', 'Apirario') 
-                ->where('Nombre','LIKE','%'.$query.'%')
-                ->orderby('id','desc')
-                ->paginate(7);
-             
-            return view('Afiliado.index', compact('afi'), ['afi'=>$afi,"searchText"=>$query]);
+        /**
+         * Display a listing of the resource.
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function index(Request $request)
+        { 
+         
+          $afiliadoapiario = AfiliadoApiario::paginate(10);
+          $afiliados=Afiliado::all();
+          $apiarios=Apiario::all();
+          return view('AfiliadoApiario.index',compact('afiliadoapiario','afiliados','apiarios'));      
+         
         }
-    }
-    ////////////////////////////////////////////////////////NUEVO
     
-    public function addUbicacion(Request $request){
-        $rules = array(
-          'descripcion' => 'required'
-        );
-      $validator = Validator::make ( Input::all(), $rules);
-      if ($validator->fails())
-      return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
+        ////////////////////////////////////////////////////////NUEVO
+    
+    public function addAfiliadoApiario(Request $request){
+      $rules = array(
+        'afiliado_id' => 'required',
+        'apiario_id' => 'required'
+      );
+        $validator = Validator::make (Input::all(),$rules);
+        if ($validator->fails())
+        return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
     
       else {
-        $ubicacion = new Ubicacion;
-        $ubicacion->descripcion = $request->descripcion;
-        $ubicacion->save();
-        return response()->json($ubicacion);
+        $afiliadoapiario = new AfiliadoApiario;
+        $afiliadoapiario->afiliado_id = $request->afiliado_id;
+        $afiliadoapiario->apiario_id = $request->apiario_id;
+        $afiliadoapiario->save();
+        return response()->json($afiliadoapiario);
       }
     }
     
-    public function editUbicacion(request $request){
-      $rules = array(
-        'descripcion' => 'required'
-      );
-    $validator = Validator::make ( Input::all(), $rules);
-    if ($validator->fails())
-    return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
     
-    else {
-    $ubicacion =Ubicacion::find ($request->id);
-    $ubicacion->descripcion = $request->descripcion;
-    $ubicacion->save();
-    return response()->json($ubicacion);
-    }
-    }
+ public function editAfiliadoApiario(request $request){
+    $rules = array(
+      'afiliado_id' => 'required',
+      'apiario_id' => 'required'
+    );
+  $validator = Validator::make ( Input::all(), $rules);
+  if ($validator->fails())
+  return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
+  
+  else {
+  $afiliadoapiario = AfiliadoApiario::find ($request->id);
+  $afiliadoapiario->afiliado_id = $request->afiliado_id;
+  $afiliadoapiario->apiario_id = $request->apiario_id;
+  $afiliadoapiario->save();
+  return response()->json($afiliadoapiario);
+  }
+  }
+  
+  public function deleteAfiliadoApiario(request $request){
     
-    public function deleteUbicacion(request $request){
-      
-      $ubicacion = Ubicacion::find ($request->id);
-      $ubicacion->delete();
-      return response()->json();
-    }
-    }   //
+    $afiliadoapiario = AfiliadoApiario::find ($request->id);
+    $afiliadoapiario->delete();
+    return response()->json();
+  }
+  }   //
