@@ -155,6 +155,25 @@
     {!!Html::script('/js2/bootstrap.min.js')!!}
 
     
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
+<script src="//cdn.datatables.net/buttons/1.2.4/js/buttons.flash.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+<script src="{{ url('adminlte/js') }}/bootstrap.min.js"></script>
+<script src="{{ url('adminlte/js') }}/select2.full.min.js"></script>
+<script src="{{ url('adminlte/js') }}/main.js"></script>
+
+<script src="{{ url('adminlte/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ url('adminlte/plugins/fastclick/fastclick.js') }}"></script>
+<script src="{{ url('adminlte/js/app.min.js') }}"></script>
     <!-- FastClick -->
     {!!Html::script('/js2/fastclick.js')!!}
     <!-- NProgress -->
@@ -177,96 +196,90 @@
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
-    $('.modal-crear').text('Crear Afiliado');
+    $('.modal-crear').text('Crear User');
   });
   $("#add").click(function() {
     $.ajax({
       type: 'POST',
-      url: 'addAfiliado',
+      url: 'addUser',
       data: {
        
         'id': $('input[name=id').val(),
-        'Nombre': $('input[name=Nombre]').val(),
-        'apellido1': $('input[name=apellido1]').val(),
-        'apellido2': $('input[name=apellido2]').val(),
-        'Telefono': $('input[name=Telefono]').val(),
+        'name': $('input[name=name]').val(),
         'email': $('input[name=email]').val(),
+        'password': $('input[name=password]').val(),
+        'Apellido1': $('input[name=Apellido1]').val(),
+        'Apellido2': $('input[name=Apellido2]').val(),
+        'Telefono': $('input[name=Telefono]').val(),
         'Direccion': $('input[name=Direccion]').val(),
         'Fecha_Ingreso': $('input[name=Fecha_Ingreso]').val(),
-        'Num_Cuenta': $('input[name=Num_Cuenta]').val(),
-        'genero_id': $('input[name=genero_id]').val(),
-        'estado_civil_id': $('input[name=estado_civil_id').val(),
+        'genero_Id': $('input[name=genero_Id]').val(),
         'estado_id': $('input[name=estado_id]').val()
       },
       success: function(data){
         if ((data.errors)) {
           $('.error').removeClass('hidden');
           $('.error').text(data.errors.id);
-          $('.error').text(data.errors.Nombre);
-          $('.error').text(data.errors.apellido1);
-          $('.error').text(data.errors.apellido2);
-          $('.error').text(data.errors.Telefono);
+          $('.error').text(data.errors.name);
           $('.error').text(data.errors.email);
+          $('.error').text(data.errors.password);
+          $('.error').text(data.errors.Apellido1);
+          $('.error').text(data.errors.Apellido2);
+          $('.error').text(data.errors.Telefono);
           $('.error').text(data.errors.Direccion);
           $('.error').text(data.errors.Fecha_Ingreso);
-          $('.error').text(data.errors.Num_Cuenta);
-          $('.error').text(data.errors.genero_id);
-          $('.error').text(data.errors.estado_civil_id);
+          $('.error').text(data.errors.genero_Id);
           $('.error').text(data.errors.estado_id);
 
  
         } else {
           $('.error').remove();
-          $('#table').append("<tr class= afi" + data.id + "'>"+
+          $('#table').append("<tr class= users" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
-          "<td>" + data.Nombre + "</td>"+
-          "<td>" + data.apellido1 + "</td>"+
-          "<td>" + data.apellido2 + "</td>"+
-          "<td>" + data.Telefono + "</td>"+
+          "<td>" + data.name + "</td>"+
           "<td>" + data.email + "</td>"+
+          "<td>" + data.password + "</td>"+
+          "<td>" + data.Apellido1 + "</td>"+
+          "<td>" + data.Apellido2 + "</td>"+
+          "<td>" + data.Telefono + "</td>"+
           "<td>" + data.Direccion+ "</td>"+
           "<td>" + data.Fecha_Ingreso+ "</td>"+
-          "<td>" + data.Num_Cuenta+ "</td>"+
-          "<td>" + data.genero_id + "</td>"+
-          "<td>" + data.estado_civil_id + "</td>"+
+          "<td>" + data.genero_Id + "</td>"+
           "<td>" + data.estado_id + "</td>"+
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + 
-          "' data-Nombre='" + data.Nombre + 
-          "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2+
+          "' data-name='" + data.name + 
+          "' data-email='" + data.email +
+          "' data-password='" + data.password +
+          "'data-Apellido1='" + data.Apellido1 + 
+          "'data-Apellido2='" + data.Apellido2+
            "'data-Telefono='" + data.Telefono +
-            "' data-email='" + data.email +
              "'data-Direccion='" + data.Direccion + 
              "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-             "'  data-Num_Cuenta='" + data.Num_Cuenta +
-              "'data-genero_id='" + data.genero_id + 
-              "'data-estado_civil_id='" + data.estado_civil_id +
+              "'data-genero_Id='" + data.genero_Id + 
                "'data-estado_id='" + data.estado_id +
  "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
  + data.id + 
-          "' data-Nombre='" + data.Nombre + 
-          "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2 +
+           "' data-name='" + data.name + 
+          "' data-email='" + data.email +
+          "' data-password='" + data.password +
+          "'data-Apellido1='" + data.Apellido1 + 
+          "'data-Apellido2='" + data.Apellido2+
            "'data-Telefono='" + data.Telefono +
-            "' data-email='" + data.email +
              "'data-Direccion='" + data.Direccion + 
              "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-             "'  data-Num_Cuenta='" + data.Num_Cuenta +
-              "'data-genero_id='" + data.genero_id + 
-              "'data-estado_civil_id='" + data.estado_civil_id +
+              "'data-genero_Id='" + data.genero_Id + 
                "'data-estado_id='" + data.estado_id +
  "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
  + data.id + 
-          "' data-Nombre='" + data.Nombre + 
-          "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2 +
+              "' data-name='" + data.name + 
+          "' data-email='" + data.email +
+          "' data-password='" + data.password +
+          "'data-Apellido1='" + data.Apellido1 + 
+          "'data-Apellido2='" + data.Apellido2+
            "'data-Telefono='" + data.Telefono +
-            "' data-email='" + data.email +
              "'data-Direccion='" + data.Direccion + 
              "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-             "'  data-Num_Cuenta='" + data.Num_Cuenta +
-              "'data-genero_id='" + data.genero_id + 
-              "'data-estado_civil_id='" + data.estado_civil_id +
+              "'data-genero_Id='" + data.genero_Id + 
                "'data-estado_id='" + data.estado_id +
 "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
@@ -275,20 +288,19 @@
       },
     });
     $('#id').val('');
-    $('#Nombre').val('');
-    $('#apellido1').val('');
-    $('#apellido2').val('');
-    $('#Telefono').val('');
+    $('#name').val('');
     $('#email').val('');
+    $('#password').val('');
+    $('#Apellido1').val('');
+    $('#Apellido2').val('');
+    $('#Telefono').val('');
     $('#Direccion').val('');
     $('#Fecha_Ingreso').val('');
-    $('#Num_Cuenta').val('');
-    $('#genero_id').val('');
-    $('#estado_civil_id').val('');
+    $('#genero_Id').val('');
     $('#estado_id').val('');
   });
 
-
+/*
 $(document).on('click', '.edit-modal', function() {
 $('#footer_action_button').text(" Editar Afiliado");
 $('#footer_action_button').addClass('glyphicon-check');
@@ -422,7 +434,7 @@ $('.modal-footer').on('click', '.delete', function(){
     }
   });
 });
-
+*/
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');

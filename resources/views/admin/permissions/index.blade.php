@@ -45,7 +45,9 @@
                                 <td>{{ $permission->id }}</td>
                                 <td>{{ $permission->name }}</td>
                                 <td>
-                                    <a href="{{ route('permissions.edit',[$permission->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
+                                <a href=""  > <button class="btn btn-info btn-sm" > <span class="glyphicon glyphicon-eye-open"></button></a>
+                                    <a href="{{ route('permissions.edit',[$permission->id]) }}"> <Button  class="btn btn-success btn-lg btn-sm">
+      <span class="glyphicon glyphicon-edit "></button></a>
                                     {!! Form::open(array(
                                         'style' => 'display: inline-block;',
                                         'method' => 'DELETE',

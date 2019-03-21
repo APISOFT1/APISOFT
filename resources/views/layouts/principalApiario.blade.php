@@ -38,7 +38,7 @@
         <div class="col-md-3 left_col menu_fixed">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="{{ url('/admin') }}" class="site_title">
+              <a href="{{ url('/Afiliado') }}" class="site_title">
                 <i class="glyphicon glyphicon-home"></i> <span>AAPIS Chorotega</span>
               </a>
             </div>
@@ -185,6 +185,7 @@
     $.ajax({
       type: 'POST',
       url: 'addApiario',
+      
       data: {
         '_token': $('input[name=_token]').val(),
         'Descripcion': $('input[name=Descripcion]').val(),
