@@ -20,9 +20,7 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-       // if (! Gate::allows('users_manage')) {
-           // return abort(401);
-       // }
+       
        if($request){
         $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
         $users= User::with('Genero') 
@@ -88,9 +86,7 @@ class UsersController extends Controller
      */
    public function create()
    {
-      //  if (! Gate::allows('users_manage')) {
-        //    return abort(401);
-        //}
+   
        $roles = Role::get()->pluck('name', 'name');
        return view('admin.users.create', compact('roles'));
    }
