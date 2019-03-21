@@ -2,4 +2,4 @@
 deployment:
  tasks:
  - export DEPLOYPATH=/home/apisoftcr/apisoft/
- - /bin/cp * $DEPLOYPATH
+ - /bin/cp -r $DEPLOYPATH
