@@ -71,6 +71,7 @@
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
                       <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
                       <li><a href="{{ url('/Apiario/') }}">Gestionar Apiaro</a></li>
+                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicacion</a></li>
                     
                     </ul>
                   </li>
