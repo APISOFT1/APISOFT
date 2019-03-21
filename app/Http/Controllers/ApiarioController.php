@@ -24,6 +24,7 @@ class ApiarioController extends Controller
             ->where('Descripcion','LIKE','%'.$query.'%')
             ->orderby('id','desc')
             ->paginate(7);
+
            $ubicaciones = Ubicacion::all();
 
            
@@ -48,8 +49,10 @@ public function addApiario(Request $request){
 
   else {
     
-   
+    $ubicacion_id = input::get('ubicacion_id');
+
     $api = new Apiario;
+    $api =  Apiario::where('ubicacion_id' , '=' , $ubicacion_id)->get();
     $api->Descripcion = $request->Descripcion;
     $api->cantidad = $request->cantidad;
     $api->ubicacion_id = $request->ubicacion_id;
@@ -62,6 +65,24 @@ public function addApiario(Request $request){
   }
 }
 
+public function find(Request $request)
+    {
+        $term = trim($request->q);
+
+        if (empty($term)) {
+            return \Response::json([]);
+        }
+
+        $tags = Ubicacion::search($term)->limit(5)->get();
+
+        $formatted_tags = [];
+
+        foreach ($tags as $tag) {
+            $formatted_tags[] = ['id' => $tag->id, 'text' => $tag->name];
+        }
+
+        return \Response::json($formatted_tags);
+    }
 
 public function editApiario(request $request){
   $rules = array(
