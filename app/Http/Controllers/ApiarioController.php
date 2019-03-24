@@ -52,7 +52,6 @@ public function addApiario(Request $request){
     $ubicacion_id = input::get('ubicacion_id');
 
     $api = new Apiario;
-    $api =  Apiario::where('ubicacion_id' , '=' , $ubicacion_id)->get();
     $api->Descripcion = $request->Descripcion;
     $api->cantidad = $request->cantidad;
     $api->ubicacion_id = $request->ubicacion_id;

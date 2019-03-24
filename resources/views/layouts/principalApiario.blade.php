@@ -190,7 +190,7 @@
         '_token': $('input[name=_token]').val(),
         'Descripcion': $('input[name=Descripcion]').val(),
         'cantidad': $('input[name=cantidad]').val(),
-        'ubicacion_id': $('input[name=ubicacion_id]').val()
+        'ubicacion_id': $('select[name=ubicacion_id]').val()
         
       },
       success: function(data){

@@ -173,70 +173,94 @@
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
-    $('.modal-descripcion').text('Crear Ubicacion');
+    $('.modal-descripcion').text('Crear AfiliadoApiario');
+    
   });
   $("#add").click(function() {
     $.ajax({
       type: 'POST',
-      url: 'addUbicacion',
+      url: 'addAfiliadoApiario',
       data: {
         '_token': $('input[name=_token]').val(),
-        'descripcion': $('input[name=descripcion]').val()
+        'afiliado_id': $('select[name=afiliado_id]').val(),
+        'apiario_id': $('select[name=apiario_id]').val()
       },
       success: function(data){
         if ((data.errors)) {
           $('.error').removeClass('hidden');
-          $('.error').text(data.errors.descripcion);
+          $('.error').text(data.errors.afiliado_id);
+          $('.error').text(data.errors.apiario_id);
  
         } else {
           $('.error').remove();
-          $('#table').append("<tr class='ubicacion" + data.id + "'>"+
+          $('#table').append("<tr class='afiliadoapiario" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
-          "<td>" + data.descripcion + "</td>"+
+          "<td>" + data.afiliado_id + "</td>"+
+          "<td>" + data.apiario_id + "</td>"+
           "<td>" + data.created_at + "</td>"+
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
-          data.id + "'data-descripcion='" + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+          data.id + "'data-afiliado_id='" 
+          +data.afiliado_id+ "'data-apiario_id='" 
+          +data.apiario_id+ "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
+          +data.id + "' data-afiliado_id='" 
+           + data.afiliado_id + "' data-apiario_id='" 
+           + data.apiario_id + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
+           + data.id + "' data-afiliado_id='" 
+           + data.afilido_id + "'data-apiario_id='" 
+           + data.apiario_id + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         }
       },
     });
-    $('#descripcion').val('');
+    $('#afiliado_id').val('');
+    $('#apiario_id').val('');
 
   });
 
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
-$('#footer_action_button').text(" Editar Ubicacion");
+$('#footer_action_button').text(" Editar AfiliadoApiario");
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-$('.modal-descripcion').text('Editar Ubicacion');
+$('.modal-descripcion').text('Editar AfiliadoApiario');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
-$('#ids').val($(this).data('id'));
-$('#des').val($(this).data('title'));
+$('#idAA').val($(this).data('id'));
+$('#afi').val($(this).data('afiliado_id'));
+$('#api').val($(this).data('apiario_id'));
 $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
-    url: 'editUbicacion',
+    url: 'editAfiliadoApiario',
     data: {
 '_token': $('input[name=_token]').val(),
-'id': $("#ids").val(),
-'descripcion': $('#des').val(),
+'id': $("#idAA").val(),
+'afiliado_id': $('#afi').val(),
+'apiario_id': $('#api').val()
     },
 success: function(data) {
-      $('.ubicacion' + data.id).replaceWith(" "+
-      "<tr class='ubicacion" + data.id + "'>"+
+      $('.afiliadoapiario' + data.id).replaceWith(" "+
+      "<tr class='afiliadoapiario" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
-      "<td>" + data.descripcion + "</td>"+
-  
+      "<td>" + data.afiliado_id + "</td>"+
+      "<td>" + data.apiario_id + "</td>"+
       "<td>" + data.created_at + "</td>"+
- "<td><button class='show-modal btn btn-info btn-sm' data-id='"+data.id+"' data-descripcion='"+data.descripcion+"'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='"+data.id+"'data-descripcion='"+data.descripcion+"'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='"+data.id+"' data-descripcion='"+data.descripcion+"'><span class='glyphicon glyphicon-trash'></span></button></td>"+"</tr>");
+ "<td><button class='show-modal btn btn-info btn-sm' data-id='"+
+ data.id+"' data-afiliado_id='"
+ +data.afiliado_id+"'data-apiario_id='"
+ +data.apiario_id+"'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='"+
+ data.id+"'data-afiliado_id='"
+ +data.afiliado_id+ "' data-apiario_id='"
+ +data.apiario_id+"'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='"+
+ data.id+"' data-afiliado_id='"+
+ data.afiliado_id+"'data-apiario_id='"+
+ data.apiario_id+"'><span class='glyphicon glyphicon-trash'></span></button></td>"+"</tr>");
     }
   });
 });
@@ -253,20 +277,21 @@ $('.modal-title').text('Delete Post');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
-$('.title').html($(this).data('descripcion'));
+$('.afiliado_id').html($(this).data('afiliado_id'));
+$('.apiario_id').html($(this).data('apiario_id'));
 $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
-    url: 'deleteUbicacion',
+    url: 'deleteAfiliadoApiario',
     data: {
       '_token': $('input[name=_token]').val(),
       'id': $('.id').text()
     },
     success: function(data){
-       $('.ubicacion' + $('.id').text()).remove();
+       $('.afiliadoapiario' + $('.id').text()).remove();
     }
   });
 });
@@ -274,8 +299,9 @@ $('.modal-footer').on('click', '.delete', function(){
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
-  $('#ii').text($(this).data('id'));
-  $('#dii').text($(this).data('title'));
+  $('#idA').text($(this).data('id'));
+  $('#af').text($(this).data('afiliado_id'));
+  $('#ap').text($(this).data('apiario_id'));
   $('.modal-title').text('Show Post');
   });
 </script>

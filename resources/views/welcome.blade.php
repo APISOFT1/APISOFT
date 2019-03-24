@@ -97,16 +97,13 @@
 
           <div class="col-md-6 col-sm-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="300ms">
             <div class="pull-left content">
-              <h2>Misión <br>Asociacion de Apicultores Region Chorotega</h2>
-			  <h4 class="section-subtitle wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="400ms">
-					Material UI Bootstrap APP and Business Template orem ipsum dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore <br>
-					eumetur adipIusto quisquam idodit dolore inventore eum' dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore <br>
-					Material UI Bootstrap APP and Business Template orem ipsum dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore
-					eumetur adipIusto quisquam idodit dolore inventore eum' dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore <br>
-					Material UI Bootstrap APP and Business Template orem ipsum dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore
-					eumetur adipIusto quisquam idodit dolore inventore eum' dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore <br></h4>
-              
-             
+              <h2>Misión </h2>
+			  <h1 class="section-subtitle wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="400ms" >
+
+           Somos una asociación productora y comercializadora de productos en base a la miel ,que brinda sus 
+           alcances de calidad a nivel de producción; basados siempre en la mejora continua para garantizar 
+           una excelente satisfacción al cliente y al consumidor final.<br></h1>
+
             </div>
           </div>
         </div>
@@ -119,13 +116,13 @@
         <div class="section-header">
           <h1 class="section-title wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="300ms">Visión</h1>
 		</div>
-		<h3 class="section-subtitle wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="400ms">
-				Material UI Bootstrap APP and Business Template orem ipsum dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore <br>
-				eumetur adipIusto quisquam idodit dolore inventore eum' dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore <br>
-				Material UI Bootstrap APP and Business Template orem ipsum dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore
-				eumetur adipIusto quisquam idodit dolore inventore eum' dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore <br>
-				Material UI Bootstrap APP and Business Template orem ipsum dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore
-				eumetur adipIusto quisquam idodit dolore inventore eum' dolor sit amet, consectetur adipIusto quisquam idodit dolore inventore <br></h3>
+		<h1 class="section-subtitle wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="400ms">
+
+        Ser una asociación líder en posicionamiento y en calidad de productos de miel en el mercado nacional e internacional, cruzando
+        las fronteras a base de nuevas tendencias tecnológicas e innovadoras que provean calidades nutritivas para el ser humano,
+        su región y su calidad de vida<br></h1>
+      
+		
       </div>
 	</div>
     </section>
@@ -145,27 +142,26 @@
                 <li data-target="#testimonial-carousel" data-slide-to="1"></li>
                 <li data-target="#testimonial-carousel" data-slide-to="2"></li>
               </ol>
+              <font size=5> 
               <div class="carousel-inner">
+              
                 <div class="item active text-center">               
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
-                  <div class="meta">
-                    <p>Web excutive <span><a href="http://wingthemes.com/">WingThemes</a></span></p>
-                  </div>
+                  <p>Somos una asociación que garantiza al consumidor productos de la colmena libres de residuos químicos, que cumpla con las normas de calidad</p>
+                  
+                </div>
+                <div class="item text-center"> 
+                                
+                  <p>Además, procuramos que los productos que se comercializan alcancen su destino de mercado y generen los ingresos económicos esperados</p>
+                  
                 </div>
                 <div class="item text-center">                
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
-                  <div class="meta">
-                    <p>Web excutive <span><a href="http://graygrids.com/">GrayGrids</a></span></p>
-                  </div>
-                </div>
-                <div class="item text-center">                
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
-                  <div class="meta">
-                    <p>Web excutive <span><a href="http://landingbow.com/">LandinBow</a></span></p>
-                  </div>
+                  <p>Productos apícolas que cumplan con los estándares de calidad recomendados, son garantía de salud y bienestar para apicultores y consumidores.
+</p>
+
                 </div>
               </div>
             </div>
+            </font>
           </div>
         </div>
       </div>
@@ -180,15 +176,17 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="300ms">
-            <h2 class="section-title">Aquí estamos!</h2>
+            <h2 class="section-title">¡Aquí estamos!</h2>
             <div class="row">
               <div class="col-md-6 col-sm-6">
                 <div class="info">
                   <div class="icon">
                     <i class="mdi-maps-map"></i>
                   </div>
-                  <h4>Locación</h4>
-                  <p>Nicoya, Guanacaste</p>
+                  <h4>Localización</h4>
+                 <p> Nicoya, cantón segundo de Guanacaste,<p>
+                  <p>uno de los más poblados de la provincia.<p>
+
                 </div>
               </div>
               <div class="col-md-6 col-sm-6">
@@ -227,61 +225,33 @@
 
     <div class="map-area">      
       <div class="map">
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6853.31334931688!2d149.5710983929677!3d-33.43399308961885!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0x63680231a1016da2!2sWestern+Region+Academy+of+Sport!5e0!3m2!1sen!2sbd!4v1436826340086" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5093.262585022687!2d-85.45634677172262!3d10.144652384278258!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f9fb6d26f825361%3A0xcbdc1416a01be4f3!2sProvincia+de+Guanacaste%2C+Nicoya!5e0!3m2!1ses-419!2scr!4v1553388582710" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
        </div>
     </div>
-
-    <section id="footer">
+    
+    <section id="footer" >
       <div class="container">
         <div class="container">
           <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <h3>Products</h3>
+               <h3>   APPIS Chorotega</h3>
               <ul>
-                <li><a href="http://wingthemes.com/">WingThemes</a>
-                </li>
-                <li><a href="http://graygrids.com/">Graygrids</a>
-                </li>
-                <li><a href="http://wpbean.com/">WPBean</a>
-                </li>
-                <li><a href="http://landingbow.com/">Landingbow</a>
-                </li>
-                <li><a href="http://freebiescircle.com/">FreebiesCicle</a>
-                </li>               
+               <!-- <img src="/welcome/img/APPIS.jpeg"> -->
               </ul>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <h3>FAQs</h3>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+            </div>
+            </div>
+           
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <h3>Asociacion de Apicultores Región Chorotega</h3>
+                Todos los derechos reservados<br>
               <ul>
-                <li><a href="#">Why choose us?</a>
-                </li>
-                <li><a href="#">Where we are?</a>
-                </li>
-                <li><a href="#">Fees</a>
-                </li>
-                <li><a href="#">Guarantee</a>
-                </li>
-                <li><a href="#">Discount</a>
-                </li>
+              
               </ul>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <h3>About</h3>
-              <ul>
-                <li><a href="#">Career</a>
-                </li>
-                <li><a href="#">Partners</a>
-                </li>
-                <li><a href="#">Team</a>
-                </li>
-                <li><a href="#">Clients</a>
-                </li>
-                <li><a href="#">Contact</a>
-                </li>
-              </ul>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <h3>Find us on</h3>
               <a class="social" href="#" target="_blank"><i class="fa fa-facebook"></i></a>
               <a class="social" href="#" target="_blank"><i class="fa fa-twitter"></i></a>
               <a class="social" href="#" target="_blank"><i class="fa fa-google-plus"></i></a>
@@ -300,9 +270,7 @@
         <div class="row">
           <div class="col-md-12">
             <p class="copyright-text">
-             � Pluto 2015 All right reserved. Designed and Developed by 
-              <a href="http://graygrids.com/">
-                GrayGrids
+               APISOFT©Copyright ©2019 All rights reserved.
               </a>
             </p>
           </div>

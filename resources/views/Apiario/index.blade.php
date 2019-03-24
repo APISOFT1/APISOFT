@@ -22,9 +22,9 @@
 @can('Crear Afiliado')
 
 <!--Esta clase nos permite posicionar el buscador  -->
-<div class="absolute3">
+
 		@include('Apiario.search') 
-</div>
+
 
 <div class="table-responsive">
 			<table class="table table-striped table-bordered table-condensed table-hover">
@@ -101,10 +101,10 @@
             </div>
           </div>
           <label for="roll">ubicacion <span class="required">*</span></label>
-        <select name="city" class="form-control" id="city">
+        <select name="ubicacion_id" class="form-control" id="ubicacion_id">
          <option value="">-- Select ubicacion --</option>
-         @foreach ($ubicaciones as $state)
-          <option value="{{ $state->id }}">{{ ucfirst($state->Descripcion) }}</option>
+         @foreach ($ubicaciones as $ubicacion)
+          <option value="{{ $ubicacion->id }}">{{$ubicacion->Descripcion}}</option>
          @endforeach
         </select>
         </form>
@@ -135,6 +135,7 @@
                     </div>
                     <div class="form-group">
                       <label for="">Descripcion :</label>
+                      
                       <b id="d2"/>
                     </div>
 										<div class="form-group">
@@ -142,6 +143,7 @@
                       <b id="ca2"/>
                     </div>
 										<div class="form-group">
+                   
                       <label for="">Ubicacion :</label>
                       <b id="ub2"/>
                     </div>
@@ -180,12 +182,14 @@
             </div>
           </div>
 
-					<div class="form-group">
-            <label class="control-label col-sm-2"for="ubicacion_id">Ubicacion</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="ub">
-            </div>
-          </div>
+          <label for="roll">ubicacion <span class="required">*</span></label>
+        <select name="name" class="form-control" id="ub">
+         <option value="">-- Select ubicacion --</option>
+         @foreach ($ubicaciones as $ubicacion)
+          <option value="{{ $ubicacion->id }}">{{$ubicacion->Descripcion}}</option>
+         @endforeach
+        </select>
+					
 
         </form>
                 {{-- Form Delete Post --}}

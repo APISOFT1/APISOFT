@@ -29,12 +29,12 @@ class UsersController extends Controller
             ->paginate(7);
 
             $generos = Genero::all();
-          
-            $roles = Role::get()->pluck('name', 'name');
+            $roles = Role::all();
+           // $roles = Role::get()->pluck('name', 'name');
             return view('admin.users.index', compact('users', 'roles', 'generos'), ['users'=>$users,"searchText"=>$query]);
     }
-        //$users = User::all();
-       // return view('admin.users.index', compact('users'));
+        
+        return view('admin.users.index', compact('users', 'roles','generos'));
     }
 
 
@@ -52,7 +52,7 @@ class UsersController extends Controller
           'email' => 'required',
           'Direccion' => 'required',
           'Fecha_Ingreso' => 'required',
-          'genero_Id' => 'required',
+          'Genero_Id' => 'required',
           'estado_id' => 'required'
         
         );
@@ -71,12 +71,13 @@ class UsersController extends Controller
         $users->Telefono = $request->Telefono;
         $users->Direccion = $request->Direccion;
         $users->Fecha_Ingreso = $request->Fecha_Ingreso;
-        $users->genero_Id = $request->genero_Id;
+        $users->Genero_Id = $request->Genero_Id;
         $users->estado_id = $request->estado_id;
         $roles = $request->input('roles') ? $request->input('roles') : [];
         $users->assignRole($roles);
         $users->save();
-        return response()->json($users);
+        return response()->json($users)->with([
+            'roleList' => $roles]);
       }
     }
     /**
@@ -84,8 +85,8 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-   public function create()
-   {
+  public function create()
+  {
    
        $roles = Role::get()->pluck('name', 'name');
        return view('admin.users.create', compact('roles'));
@@ -117,8 +118,9 @@ class UsersController extends Controller
         
 //  }
         $roles = Role::get()->pluck('name', 'name');
+        $generos = Genero::all();
         $user = User::findOrFail($id);
-        return view('admin.users.edit', compact('user', 'roles'));
+        return view('admin.users.edit', compact('user', 'roles', 'generos'));
     }
     /**
      * Update User in storage.

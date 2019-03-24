@@ -29,11 +29,9 @@
             <table class="table table-bordered" id="table">
       <tr>
 			<th width="150px" >Cedula</th>
-  		<th> <div class="size2">Nombre</th>
+  		<th> <div class="size2">Usuario</th>
   		<th>email</th>
-  		<th>Correo</th>
-    	<th>Direccion</th>
-  		<th>FechaIngreso</th>
+    	<th>Roles</th>
           <th >
           <a href="#" class="create-modal btn btn-success btn-sm">
             <i class="glyphicon glyphicon-plus"></i>
@@ -44,9 +42,9 @@
           {{ csrf_field() }}
                 @foreach ($users as $value)
                      <tr data-entry-id="{{ $value->id }}">
-                                <td></td>
-
-                                <td>{{ $value->name }}</td>
+                               
+                                <td>{{ $value->id }}</td>
+                                <td>{{ $value->name }} {{ $value->Apellido1 }} {{ $value->Apellido2 }}</td>
                                 <td>{{ $value->email }}</td>
                                 <td>
                                     @foreach ($value->roles()->pluck('name') as $role)
@@ -94,31 +92,14 @@
       <div class="modal-body">
         <form class="form-horizontal" role="form">
 
-          <div class="form-group row add">
-          <div class="form-group">
-      <label class="control-label col-sm-2" for="email">Cedula</label>
-      <div class="col-sm-10">
-        <input type="email" class="form-control" id="Id_Usuario" placeholder="Enter email" name="email">
-      </div>
-    </div>
-    
    
 			<div class="form-group row add">
             	<label for="id">Cedula</label>
             	<input type="text" name="id" class="form-control" placeholder="Id_Usuario...">
             </div>
 			<div class="form-group row">
-				<label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-				<div class="col-md-6">
-					<input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-
-					@if ($errors->has('name'))
-						<span class="invalid-feedback" role="alert">
-							<strong>{{ $errors->first('name') }}</strong>
-						</span>
-					@endif
-				</div>
+      <label for="name">Nombre</label>
+					<input type="text" name = "name"   class="form-control"  placeholder="Nombre...">
 			</div>
            
           
@@ -136,17 +117,15 @@
             </div>
             
             <div class="form-group row add">
-				<label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-				<div class="col-md-6">
-					<input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+				<label for="email">{{ __('E-Mail Address') }}</label>
+					<input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required  placeholder="Correo...">
 
 					@if ($errors->has('email'))
 						<span class="invalid-feedback" role="alert">
 							<strong>{{ $errors->first('email') }}</strong>
 						</span>
 					@endif
-				</div>
+			
 			</div>
             <div class="form-group row add">
             	<label for="Direccion">Direccion</label>
@@ -157,64 +136,74 @@
 				<input type="date" name="Fecha_Ingreso" class="form-control" placeholder="YYYY-MM-DD" />
             </div>
 			<div class="form-group row">
-				<label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+				<label for="password">{{ __('Password') }}</label>
 
-				<div class="col-md-6">
-					<input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+					<input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required placeholder="contraseña...">
 
 					@if ($errors->has('password'))
 						<span class="invalid-feedback" role="alert">
 							<strong>{{ $errors->first('password') }}</strong>
 						</span>
 					@endif
-				</div>
+
 			</div>
 
 			<div class="form-group row">
-				<label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+				<label for="password-confirm">{{ __('Confirm Password') }}</label>
 
-				<div class="col-md-6">
-					<input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+					<input id="password-confirm" type="password" class="form-control" name="password_confirmation" required placeholder="Confirme Contraseña...">
 				</div>
-			</div>
+		
             
-            <div class="form-group row add">
-            	<div class="col-md-6">
-				<label for="Genero_Id">Genero</label>
+        <div class="form-group row add">
+        <div class="col-sm-6">
+          <label for="Genero_Id">Genero</label>
 					<select class="form-control" id="Genero_Id" name="Genero_Id">
-						@foreach ($generos as $Genero)
-							<option value="{{ $Genero->id }}">{{ $Genero->descripcion }}</option>
+          <option value="Genero_Id">Seleccione</option>
+						@foreach ($generos as $gene)
+							<option value="{{$gene->id}}">{{ $gene->descripcion }}</option>
 						@endforeach						
 					</select>
-				</div>
-
-
-               
-
-                <div class="row">
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('roles', 'Roles*', ['class' => 'control-label']) !!}
-                    {!! Form::select('roles[]', $roles, old('roles'), ['class' => 'form-control select2', 'multiple' => 'multiple', 'required' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('roles'))
-                        <p class="help-block">
-                            {{ $errors->first('roles') }}
-                        </p>
-                    @endif
-                </div>
             </div>
-            
+          </div>
+
+
 			<div class="form-group row add">
             	<div class="col-md-6">
 				<label for="estado_id">Estado</label>
-	
 				<div class="register-switch">
       <input type="radio" name="estado_id" value="{{$estado_id=1}}" id="estado_id" class="register-switch-input" checked>
-      <label for="estado_id" class="register-switch-label">LOL</label>
+      <label for="estado_id" class="register-switch-label">Activo</label>
       <input type="radio" name="estado_id" value="{{$estado_id=0}}" id="estado_id" class="register-switch-input">
       <label for="estado_id" class="register-switch-label">Inactivo</label>
 	</div> 
-		
+    </div>
+    <div class="form-group row add">
+            	<div class="col-md-6">
+    <div class="form-group {{ $errors->has('roles') ? ' has-error' : '' }}">
+                                <label for="method" class="col-sm-3 control-label">Rol：</label>
+
+                                <div class="col-sm-8">
+                                    <select class="form-control select2" style="width: 100%;" name="roles[]" multiple>
+                                        @foreach ($roles as $role)
+                                            <option value="{{ $role->id }}">
+                                                {{ $role->identifier.' ['.$role->name.']' }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                @if ($errors->has('roles'))
+                                    <div class="col-sm-offset-3 col-sm-8">
+                                            <span class="invalid-feedback">
+                                                <strong class="text-danger">{{ $errors->first('permissions') }}</strong>
+                                            </span>
+                                    </div>
+                                @endif
+                            </div>
+</div>
+</div>
+</div>
         </form>
       </div>
           <div class="modal-footer">
@@ -363,5 +352,7 @@
   </div>
 </div>
 
-
+<script>
+        $('.select2').select2()
+    </script
 @endsection

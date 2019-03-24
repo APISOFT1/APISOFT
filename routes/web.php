@@ -55,7 +55,7 @@ Route::POST('deleteApiario','ApiarioController@deleteApiario');
 });
 Route::resource('Apiario','ApiarioController');
 Route::resource('Ubicacion','UbicacionController');
-
+Route::resource('AfiliadoApiario','AfiliadoApiarioController');
 
   
 

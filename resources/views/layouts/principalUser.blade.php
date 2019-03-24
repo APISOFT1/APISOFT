@@ -14,14 +14,40 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="{{asset('css2/bootstrap-select.min.css')}}">
+ 
 
-
-
+  <link href="{{ url('adminlte/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+<link rel="stylesheet"
+      href="{{ url('adminlte/css') }}/select2.min.css"/>
+<link href="{{ url('adminlte/css/AdminLTE.min.css') }}" rel="stylesheet">
+<link href="{{ url('adminlte/css/skins/skin-blue.min.css') }}" rel="stylesheet">
+<link rel="stylesheet"
+      href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet"
+      href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css"/>
+<link rel="stylesheet"
+      href="https://cdn.datatables.net/select/1.2.0/css/select.dataTables.min.css"/>
+<link rel="stylesheet"
+      href="//cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css"/>
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.min.css"/>
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.standalone.min.css"/>
   
+      <!-- Include Twitter Bootstrap and jQuery: -->
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+ 
+<!-- Include the plugin's CSS and JS: -->
+<link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
     {!!Html::style ('/css2/bootstrap.min.css')!!} 
 
-    {!!Html::style ('/css2/bootstrap-select.min.css')!!}  
+    {!!Html::style ('/css2/bootstrap-select.min.css')!!}   
     
+    {!!Html::style ('/css2/select2.min.css')!!}
+
+    {!!Html::style ('/css2/select2.css')!!}
     
     <!-- Font Awesome -->
     {!!Html::style ('/css2/font-awesome.min.css')!!}
@@ -154,26 +180,14 @@
     <!-- Bootstrap -->
     {!!Html::script('/js2/bootstrap.min.js')!!}
 
-    
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
-<script src="//cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
-<script src="//cdn.datatables.net/buttons/1.2.4/js/buttons.flash.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.print.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.colVis.min.js"></script>
-<script src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
-<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
-<script src="{{ url('adminlte/js') }}/bootstrap.min.js"></script>
-<script src="{{ url('adminlte/js') }}/select2.full.min.js"></script>
-<script src="{{ url('adminlte/js') }}/main.js"></script>
+   <!-- SELECT2 -->
+    {!!Html::script('/js2/select2.full.js')!!}
 
-<script src="{{ url('adminlte/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
-<script src="{{ url('adminlte/plugins/fastclick/fastclick.js') }}"></script>
-<script src="{{ url('adminlte/js/app.min.js') }}"></script>
+    {!!Html::script('/js2/select2.js')!!}
+    
+    {!!Html::script('/js2/select2.min.js')!!}
+
+    {!!Html::script('/js2/select2.full.min.js')!!}
     <!-- FastClick -->
     {!!Html::script('/js2/fastclick.js')!!}
     <!-- NProgress -->
@@ -183,7 +197,11 @@
     <!-- Custom Theme Scripts -->
     {!!Html::script('/js2/custom.min.js')!!}
      {!!Html::script('/js2/dropdown.js')!!}
-
+     <script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+ 
+<!-- Include the plugin's CSS and JS: -->
+<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
 
 
 
@@ -213,7 +231,7 @@
         'Telefono': $('input[name=Telefono]').val(),
         'Direccion': $('input[name=Direccion]').val(),
         'Fecha_Ingreso': $('input[name=Fecha_Ingreso]').val(),
-        'genero_Id': $('input[name=genero_Id]').val(),
+        'Genero_Id': $('select[name=Genero_Id]').val(),
         'estado_id': $('input[name=estado_id]').val()
       },
       success: function(data){
@@ -228,7 +246,7 @@
           $('.error').text(data.errors.Telefono);
           $('.error').text(data.errors.Direccion);
           $('.error').text(data.errors.Fecha_Ingreso);
-          $('.error').text(data.errors.genero_Id);
+          $('.error').text(data.errors.Genero_Id);
           $('.error').text(data.errors.estado_id);
 
  
@@ -244,7 +262,7 @@
           "<td>" + data.Telefono + "</td>"+
           "<td>" + data.Direccion+ "</td>"+
           "<td>" + data.Fecha_Ingreso+ "</td>"+
-          "<td>" + data.genero_Id + "</td>"+
+          "<td>" + data.Genero_Id + "</td>"+
           "<td>" + data.estado_id + "</td>"+
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + 
           "' data-name='" + data.name + 
@@ -255,7 +273,7 @@
            "'data-Telefono='" + data.Telefono +
              "'data-Direccion='" + data.Direccion + 
              "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-              "'data-genero_Id='" + data.genero_Id + 
+              "'data-Genero_Id='" + data.Genero_Id + 
                "'data-estado_id='" + data.estado_id +
  "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
  + data.id + 
@@ -267,7 +285,7 @@
            "'data-Telefono='" + data.Telefono +
              "'data-Direccion='" + data.Direccion + 
              "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-              "'data-genero_Id='" + data.genero_Id + 
+              "'data-Genero_Id='" + data.Genero_Id + 
                "'data-estado_id='" + data.estado_id +
  "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
  + data.id + 
@@ -279,7 +297,7 @@
            "'data-Telefono='" + data.Telefono +
              "'data-Direccion='" + data.Direccion + 
              "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-              "'data-genero_Id='" + data.genero_Id + 
+              "'data-Genero_Id='" + data.Genero_Id + 
                "'data-estado_id='" + data.estado_id +
 "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
@@ -445,7 +463,7 @@ $('#jaja').val($(this).data('nom'));
   $('.modal-show').text('Datos');
   });
 </script>
-
+@include('partials.javascripts')
   </body>
 </html>
   
