@@ -26,8 +26,6 @@ class CreateUsersTable extends Migration
             $table->datetime('Fecha_Ingreso');
             $table->integer('Genero_Id')->unsigned();;
             $table->foreign('Genero_Id')->references('id')->on('generos');
-            $table->integer('Rol_Id')->unsigned();
-            $table->foreign('Rol_Id')->references('id')->on('rols');
             $table->integer('estado_id')->unsigned();
            
             $table->rememberToken();

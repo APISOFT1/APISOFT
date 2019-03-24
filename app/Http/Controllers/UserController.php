@@ -24,6 +24,7 @@ class UserController extends Controller
   
     public function index(Request $request)
     {
+        if($request){
         $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
         $usuarios = User::with('Genero', 'Rol') 
             ->where('name','LIKE','%'.$query.'%')
@@ -31,6 +32,7 @@ class UserController extends Controller
             ->paginate(7);
          
         return view('Usuario.index', ['usuarios'=>$usuarios,"searchText"=>$query]);
+        }
     }
 
     /**

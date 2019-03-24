@@ -1,4 +1,5 @@
 @extends ('layouts.principal')
+
 <!-- mensaje de exito -->
 <?php $message=Session::get('message') ?>
 
@@ -11,7 +12,8 @@
 <!-- fin de mensaje de exito -->
 @section ('contenido')
 
-<h1 >LISTADO DE  AFILIADOS <a href="Ingreso/create"> <button class="btn btn-primary" > Nuevo </button></a></h1>
+<h3>Listado de Boletas <a href="Ingreso/create"><button class="btn btn-success">Nuevo</button></a></h3>
+
 
 
 <!-- Saltos de linea-->

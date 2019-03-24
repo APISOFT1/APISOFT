@@ -46,6 +46,7 @@ Route::POST('addRol','RolController@addRol');
 Route::POST('editRol','RolController@editRol');
 Route::POST('deleteRol','RolController@deleteRol');
 
+Route::get('find', 'ApiarioController@find');
 Route::POST('addApiario','ApiarioController@addApiario');
 Route::POST('editApiario','ApiarioController@editApiario');
 Route::POST('deleteApiario','ApiarioController@deleteApiario');
@@ -54,7 +55,7 @@ Route::POST('deleteApiario','ApiarioController@deleteApiario');
 });
 Route::resource('Apiario','ApiarioController');
 Route::resource('Ubicacion','UbicacionController');
-
+Route::resource('AfiliadoApiario','AfiliadoApiarioController');
 
   
 

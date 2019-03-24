@@ -14,14 +14,40 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="{{asset('css2/bootstrap-select.min.css')}}">
+ 
 
-
-
+  <link href="{{ url('adminlte/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+<link rel="stylesheet"
+      href="{{ url('adminlte/css') }}/select2.min.css"/>
+<link href="{{ url('adminlte/css/AdminLTE.min.css') }}" rel="stylesheet">
+<link href="{{ url('adminlte/css/skins/skin-blue.min.css') }}" rel="stylesheet">
+<link rel="stylesheet"
+      href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet"
+      href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css"/>
+<link rel="stylesheet"
+      href="https://cdn.datatables.net/select/1.2.0/css/select.dataTables.min.css"/>
+<link rel="stylesheet"
+      href="//cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css"/>
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.min.css"/>
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.standalone.min.css"/>
   
+      <!-- Include Twitter Bootstrap and jQuery: -->
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+ 
+<!-- Include the plugin's CSS and JS: -->
+<link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
     {!!Html::style ('/css2/bootstrap.min.css')!!} 
 
-    {!!Html::style ('/css2/bootstrap-select.min.css')!!}  
+    {!!Html::style ('/css2/bootstrap-select.min.css')!!}   
     
+    {!!Html::style ('/css2/select2.min.css')!!}
+
+    {!!Html::style ('/css2/select2.css')!!}
     
     <!-- Font Awesome -->
     {!!Html::style ('/css2/font-awesome.min.css')!!}
@@ -73,7 +99,6 @@
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
                       <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
                       <li><a href="{{ url('/Apiario/') }}">Gestionar Apiaro</a></li>
-                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicacion</a></li>
                     
                     </ul>
                   </li>
@@ -155,7 +180,14 @@
     <!-- Bootstrap -->
     {!!Html::script('/js2/bootstrap.min.js')!!}
 
+   <!-- SELECT2 -->
+    {!!Html::script('/js2/select2.full.js')!!}
+
+    {!!Html::script('/js2/select2.js')!!}
     
+    {!!Html::script('/js2/select2.min.js')!!}
+
+    {!!Html::script('/js2/select2.full.min.js')!!}
     <!-- FastClick -->
     {!!Html::script('/js2/fastclick.js')!!}
     <!-- NProgress -->
@@ -165,7 +197,11 @@
     <!-- Custom Theme Scripts -->
     {!!Html::script('/js2/custom.min.js')!!}
      {!!Html::script('/js2/dropdown.js')!!}
-
+     <script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+ 
+<!-- Include the plugin's CSS and JS: -->
+<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
 
 
 
@@ -178,96 +214,90 @@
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
-    $('.modal-crear').text('Crear Afiliado');
+    $('.modal-crear').text('Crear User');
   });
   $("#add").click(function() {
     $.ajax({
       type: 'POST',
-      url: 'addAfiliado',
+      url: 'addUser',
       data: {
        
         'id': $('input[name=id').val(),
-        'Nombre': $('input[name=Nombre]').val(),
-        'apellido1': $('input[name=apellido1]').val(),
-        'apellido2': $('input[name=apellido2]').val(),
-        'Telefono': $('input[name=Telefono]').val(),
+        'name': $('input[name=name]').val(),
         'email': $('input[name=email]').val(),
+        'password': $('input[name=password]').val(),
+        'Apellido1': $('input[name=Apellido1]').val(),
+        'Apellido2': $('input[name=Apellido2]').val(),
+        'Telefono': $('input[name=Telefono]').val(),
         'Direccion': $('input[name=Direccion]').val(),
         'Fecha_Ingreso': $('input[name=Fecha_Ingreso]').val(),
-        'Num_Cuenta': $('input[name=Num_Cuenta]').val(),
-        'genero_id': $('input[name=genero_id]').val(),
-        'estado_civil_id': $('input[name=estado_civil_id').val(),
+        'Genero_Id': $('select[name=Genero_Id]').val(),
         'estado_id': $('input[name=estado_id]').val()
       },
       success: function(data){
         if ((data.errors)) {
           $('.error').removeClass('hidden');
           $('.error').text(data.errors.id);
-          $('.error').text(data.errors.Nombre);
-          $('.error').text(data.errors.apellido1);
-          $('.error').text(data.errors.apellido2);
-          $('.error').text(data.errors.Telefono);
+          $('.error').text(data.errors.name);
           $('.error').text(data.errors.email);
+          $('.error').text(data.errors.password);
+          $('.error').text(data.errors.Apellido1);
+          $('.error').text(data.errors.Apellido2);
+          $('.error').text(data.errors.Telefono);
           $('.error').text(data.errors.Direccion);
           $('.error').text(data.errors.Fecha_Ingreso);
-          $('.error').text(data.errors.Num_Cuenta);
-          $('.error').text(data.errors.genero_id);
-          $('.error').text(data.errors.estado_civil_id);
+          $('.error').text(data.errors.Genero_Id);
           $('.error').text(data.errors.estado_id);
 
  
         } else {
           $('.error').remove();
-          $('#table').append("<tr class= afi" + data.id + "'>"+
+          $('#table').append("<tr class= users" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
-          "<td>" + data.Nombre + "</td>"+
-          "<td>" + data.apellido1 + "</td>"+
-          "<td>" + data.apellido2 + "</td>"+
-          "<td>" + data.Telefono + "</td>"+
+          "<td>" + data.name + "</td>"+
           "<td>" + data.email + "</td>"+
+          "<td>" + data.password + "</td>"+
+          "<td>" + data.Apellido1 + "</td>"+
+          "<td>" + data.Apellido2 + "</td>"+
+          "<td>" + data.Telefono + "</td>"+
           "<td>" + data.Direccion+ "</td>"+
           "<td>" + data.Fecha_Ingreso+ "</td>"+
-          "<td>" + data.Num_Cuenta+ "</td>"+
-          "<td>" + data.genero_id + "</td>"+
-          "<td>" + data.estado_civil_id + "</td>"+
+          "<td>" + data.Genero_Id + "</td>"+
           "<td>" + data.estado_id + "</td>"+
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + 
-          "' data-Nombre='" + data.Nombre + 
-          "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2+
+          "' data-name='" + data.name + 
+          "' data-email='" + data.email +
+          "' data-password='" + data.password +
+          "'data-Apellido1='" + data.Apellido1 + 
+          "'data-Apellido2='" + data.Apellido2+
            "'data-Telefono='" + data.Telefono +
-            "' data-email='" + data.email +
              "'data-Direccion='" + data.Direccion + 
              "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-             "'  data-Num_Cuenta='" + data.Num_Cuenta +
-              "'data-genero_id='" + data.genero_id + 
-              "'data-estado_civil_id='" + data.estado_civil_id +
+              "'data-Genero_Id='" + data.Genero_Id + 
                "'data-estado_id='" + data.estado_id +
  "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
  + data.id + 
-          "' data-Nombre='" + data.Nombre + 
-          "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2 +
+           "' data-name='" + data.name + 
+          "' data-email='" + data.email +
+          "' data-password='" + data.password +
+          "'data-Apellido1='" + data.Apellido1 + 
+          "'data-Apellido2='" + data.Apellido2+
            "'data-Telefono='" + data.Telefono +
-            "' data-email='" + data.email +
              "'data-Direccion='" + data.Direccion + 
              "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-             "'  data-Num_Cuenta='" + data.Num_Cuenta +
-              "'data-genero_id='" + data.genero_id + 
-              "'data-estado_civil_id='" + data.estado_civil_id +
+              "'data-Genero_Id='" + data.Genero_Id + 
                "'data-estado_id='" + data.estado_id +
  "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
  + data.id + 
-          "' data-Nombre='" + data.Nombre + 
-          "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2 +
+              "' data-name='" + data.name + 
+          "' data-email='" + data.email +
+          "' data-password='" + data.password +
+          "'data-Apellido1='" + data.Apellido1 + 
+          "'data-Apellido2='" + data.Apellido2+
            "'data-Telefono='" + data.Telefono +
-            "' data-email='" + data.email +
              "'data-Direccion='" + data.Direccion + 
              "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-             "'  data-Num_Cuenta='" + data.Num_Cuenta +
-              "'data-genero_id='" + data.genero_id + 
-              "'data-estado_civil_id='" + data.estado_civil_id +
+              "'data-Genero_Id='" + data.Genero_Id + 
                "'data-estado_id='" + data.estado_id +
 "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
@@ -276,20 +306,19 @@
       },
     });
     $('#id').val('');
-    $('#Nombre').val('');
-    $('#apellido1').val('');
-    $('#apellido2').val('');
-    $('#Telefono').val('');
+    $('#name').val('');
     $('#email').val('');
+    $('#password').val('');
+    $('#Apellido1').val('');
+    $('#Apellido2').val('');
+    $('#Telefono').val('');
     $('#Direccion').val('');
     $('#Fecha_Ingreso').val('');
-    $('#Num_Cuenta').val('');
-    $('#genero_id').val('');
-    $('#estado_civil_id').val('');
+    $('#genero_Id').val('');
     $('#estado_id').val('');
   });
 
-
+/*
 $(document).on('click', '.edit-modal', function() {
 $('#footer_action_button').text(" Editar Afiliado");
 $('#footer_action_button').addClass('glyphicon-check');
@@ -423,7 +452,7 @@ $('.modal-footer').on('click', '.delete', function(){
     }
   });
 });
-
+*/
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
@@ -434,7 +463,7 @@ $('#jaja').val($(this).data('nom'));
   $('.modal-show').text('Datos');
   });
 </script>
-
+@include('partials.javascripts')
   </body>
 </html>
   

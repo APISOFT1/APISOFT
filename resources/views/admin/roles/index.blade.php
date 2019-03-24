@@ -1,4 +1,4 @@
-@extends ('layouts.principalApiario')
+@extends ('layouts.principal')
 
 <!-- mensaje de exito -->
 <?php $message=Session::get('message') ?>
