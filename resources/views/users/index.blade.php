@@ -3,7 +3,7 @@
 <!-- mensaje de exito -->
 <?php $message=Session::get('message') ?>
 
-@if($message == 'addApiario')
+@if($message == 'addUser')
 <div class="alert alert-success alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   ROL CREADO CORRECTAMENTE
@@ -178,32 +178,22 @@
       <label for="estado_id" class="register-switch-label">Inactivo</label>
 	</div> 
     </div>
+  
     <div class="form-group row add">
             	<div class="col-md-6">
-    <div class="form-group {{ $errors->has('roles') ? ' has-error' : '' }}">
-                                <label for="method" class="col-sm-3 control-label">Rol：</label>
+                    {!! Form::label('roles', 'Roles*', ['class' => 'control-label']) !!}
+                    {!! Form::select('roles[]', $roles, old('roles'), ['class' => 'form-control select2', 'multiple' => 'multiple', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('roles'))
+                        <p class="help-block">
+                            {{ $errors->first('roles') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+   
 
-                                <div class="col-sm-8">
-                                    <select class="form-control select2" style="width: 100%;" name="roles[]" multiple>
-                                        @foreach ($roles as $role)
-                                            <option value="{{ $role->id }}">
-                                                {{ $role->identifier.' ['.$role->name.']' }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
 
-                                @if ($errors->has('roles'))
-                                    <div class="col-sm-offset-3 col-sm-8">
-                                            <span class="invalid-feedback">
-                                                <strong class="text-danger">{{ $errors->first('permissions') }}</strong>
-                                            </span>
-                                    </div>
-                                @endif
-                            </div>
-</div>
-</div>
-</div>
         </form>
       </div>
           <div class="modal-footer">
@@ -258,21 +248,21 @@
           </div>
 
           <div class="form-group">
-            <label class="control-label col-sm-2"for="Nombre">Nombre</label>
+            <label class="control-label col-sm-2"for="name">Nombre</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="n" >
             </div>
           </div>
 
           <div class="form-group">
-            <label class="control-label col-sm-2"for="apellido1">Primer Apellido</label>
+            <label class="control-label col-sm-2"for="Apellido1">Primer Apellido</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="a1">
             </div>
           </div>
 
           <div class="form-group">
-            <label class="control-label col-sm-2"for="apellido2">Segundo Apellido</label>
+            <label class="control-label col-sm-2"for="Apellido2">Segundo Apellido</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="a2">
             </div>
@@ -288,7 +278,7 @@
           <div class="form-group">
             <label class="control-label col-sm-2"for="email">Correo</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="em" >
+              <input type="text" class="form-control" id="num" >
             </div>
           </div>
 
@@ -307,21 +297,14 @@
           </div>
 
           <div class="form-group">
-            <label class="control-label col-sm-2"for="Num_cuenta">Numero de Cuenta</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="nu" >
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="genero_id">Genero</label>
+            <label class="control-label col-sm-2"for="Genero_Id">Genero</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="g" >
             </div>
           </div>
 
           <div class="form-group">
-            <label class="control-label col-sm-2"for="estado_civil_id">Estado Civil</label>
+            <label class="control-label col-sm-2"for="password">Password</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="e" >
             </div>
@@ -352,7 +335,7 @@
   </div>
 </div>
 
-<script>
+<!--<script>
         $('.select2').select2()
-    </script
+    </script>-->
 @endsection
