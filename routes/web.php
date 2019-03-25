@@ -31,13 +31,14 @@ Route::group(['middleware' =>['auth',  'verified']], function () {
 'Ingreso' => 'IngresoController',
 'admin/permissions' => 'Admin\PermissionsController',
 'admin/roles'=> 'Admin\RolesController',
-'admin/users'=> 'Admin\UsersController',
+'users'=> 'Admin\UsersController',
 
   ]);
   Route::post('permissions_mass_destroy', ['uses' => 'Admin\PermissionsController@massDestroy', 'as' => 'permissions.mass_destroy']);
   Route::post('roles_mass_destroy', ['uses' => 'Admin\RolesController@massDestroy', 'as' => 'roles.mass_destroy']);
   Route::post('users_mass_destroy', ['uses' => 'Admin\UsersController@massDestroy', 'as' => 'users.mass_destroy']);
 Route::get('generos/{id}/destroy', 'GeneroController@destroy')->name('generos.destroy');
+
 Route::POST('addAfiliado','AfiliadoController@addAfiliado');
 Route::POST('editAfiliado','AfiliadoController@editAfiliado');
 Route::POST('deleteAfiliado','AfiliadoController@deleteAfiliado');
@@ -50,6 +51,10 @@ Route::get('find', 'ApiarioController@find');
 Route::POST('addApiario','ApiarioController@addApiario');
 Route::POST('editApiario','ApiarioController@editApiario');
 Route::POST('deleteApiario','ApiarioController@deleteApiario');
+
+Route::POST('addUser','Admin\UsersController@addUser');
+Route::POST('editUser','Admin/UsersController@editUser');
+Route::POST('deleteUser','Admin/UsersController@deleteUser');
 
 
 });

@@ -29,12 +29,12 @@ class UsersController extends Controller
             ->paginate(7);
 
             $generos = Genero::all();
-            $roles = Role::all();
-           // $roles = Role::get()->pluck('name', 'name');
-            return view('admin.users.index', compact('users', 'roles', 'generos'), ['users'=>$users,"searchText"=>$query]);
+          
+            $roles = Role::get()->pluck('name', 'name');
+            return view('users.index', compact('users', 'roles', 'generos'), ['users'=>$users,"searchText"=>$query]);
     }
         
-        return view('admin.users.index', compact('users', 'roles','generos'));
+        return view('users.index', compact('users', 'roles','generos'));
     }
 
 
@@ -76,8 +76,7 @@ class UsersController extends Controller
         $roles = $request->input('roles') ? $request->input('roles') : [];
         $users->assignRole($roles);
         $users->save();
-        return response()->json($users)->with([
-            'roleList' => $roles]);
+        return response()->json($users);
       }
     }
     /**
@@ -85,12 +84,44 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-  public function create()
-  {
-   
-       $roles = Role::get()->pluck('name', 'name');
-       return view('admin.users.create', compact('roles'));
-   }
+
+
+     
+    public function editUser(request $request){
+        $rules = array(
+        );
+      $validator = Validator::make ( Input::all(), $rules);
+      if ($validator->fails())
+      return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
+      
+      else {
+        $users = User::find ($request->id);
+      
+        $users->id= $request->id;
+        $users->name = $request->name;
+        $users->email = $request->email;
+        $users->password = $request->password;
+        $users->Apellido1 = $request->Apellido1;
+        $users->Apellido2 = $request->Apellido2;
+        $users->Telefono = $request->Telefono;
+        $users->Direccion = $request->Direccion;
+        $users->Fecha_Ingreso = $request->Fecha_Ingreso;
+        $users->Genero_Id = $request->Genero_Id;
+        $users->estado_id = $request->estado_id;
+        $roles = $request->input('roles') ? $request->input('roles') : [];
+        $users->assignRole($roles);
+        $users->save();
+      return response()->json($users);
+      }
+      }
+
+
+ // public function create()
+ // {
+   //
+      // $roles = Role::get()->pluck('name', 'name');
+      // return view('admin.users.create', compact('roles'));
+  // }
     /**
      * Store a newly created User in storage.
      *
@@ -116,12 +147,12 @@ class UsersController extends Controller
     public function edit($id)
     {
         
-//  }
+
         $roles = Role::get()->pluck('name', 'name');
         $generos = Genero::all();
         $user = User::findOrFail($id);
-        return view('admin.users.edit', compact('user', 'roles', 'generos'));
-    }
+        return view('users.edit', compact('user', 'roles', 'generos'));
+   }
     /**
      * Update User in storage.
      *
@@ -138,7 +169,7 @@ class UsersController extends Controller
         $user->update($request->all());
         $roles = $request->input('roles') ? $request->input('roles') : [];
         $user->syncRoles($roles);
-        return redirect()->route('admin.users.index');
+        return redirect()->route('users.index');
     }
     /**
      * Remove User from storage.
