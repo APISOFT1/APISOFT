@@ -22,7 +22,7 @@ class Afiliado extends Model
         'Num_Cuenta',
          'genero_id',
          'estado_civil_id',
-         'Estado_id'
+         'estado_id'
     ];
    
 

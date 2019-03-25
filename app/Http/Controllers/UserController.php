@@ -54,7 +54,7 @@ class UserController extends Controller
         
     
         return view("Usuario.create",  ["Rols"=> $Rols ,
-        "Generos"=>$Generos]);
+        "Generos"=>$Generos, 'Estados'=> $Estados]);
     }
 
     /**

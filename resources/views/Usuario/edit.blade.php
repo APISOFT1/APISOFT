@@ -2,7 +2,6 @@
     <div class="modal-dialog">
         <div class="modal-content">
 
-<<<<<<< HEAD
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                     <span>×</span>
@@ -12,9 +11,7 @@
             
             <div class="modal-body">
 		{!!Form::model($usuario,['method'=>'PATCH','route'=>['Usuario.update',$usuario->id]])!!}
-=======
 		{!!Form::model($usuarios,['method'=>'PATCH','route'=>['Usuario.update',$usuarios->id]])!!}
->>>>>>> develop
             {{Form::token()}}
          
 		
@@ -108,24 +105,11 @@
 					</select>
 				</div>
             </div>
-<<<<<<< HEAD
-			<div class="form-group">
-            	<div class="col-md-6">
-				<label for="Estado_id">Estado</label>
-					<select class="form-control" id="Estado_id" name="Estado_id">
-						@foreach ($Estados as $es)
-							<option value="{{ $es->id}}">{{ $es->Descripcion}}</option>
-						@endforeach						
-					</select>
-=======
-            
-		
             
             <div class="form-group">
 			<div class="col-md-6">
             	<button class="btn btn-primary" type="submit">Guardar</button>
             	<button class="btn btn-danger" type="reset">Cancelar</button>
->>>>>>> develop
 				</div>
 
             </div>
@@ -140,8 +124,4 @@
             
 		</div>
 	</div>
-<<<<<<< HEAD
-	</div>
-=======
 @endsection
->>>>>>> develop
