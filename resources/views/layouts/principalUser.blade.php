@@ -80,6 +80,7 @@
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
+                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicacion</a></li>
                       <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
                       <li><a href="{{ url('/Apiario/') }}">Gestionar Apiaro</a></li>
                     
@@ -216,7 +217,31 @@
     $('#create').modal('show');
     $('.form-horizontal').show();
     $('.modal-crear').text('Crear User');
+    
   });
+  $(document).ready(function () {
+        // inicializamos el plugin
+        $('#roles').select2({
+            // Activamos la opcion "Tags" del plugin
+            tags: true,
+            tokenSeparators: [','],
+            ajax: {
+                dataType: 'json',
+                url: '{{ url("roles") }}',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        term: params.term
+                    }
+                },
+                processResults: function (data, page) {
+                  return {
+                    results: data
+                  };
+                },
+            }
+        });
+    });
   $("#add").click(function() {
     $.ajax({
       type: 'POST',
@@ -234,7 +259,7 @@
         'Fecha_Ingreso': $('input[name=Fecha_Ingreso]').val(),
         'Genero_Id': $('select[name=Genero_Id]').val(),
         'estado_id': $('input[name=estado_id]').val(),
-        'roles[]'    : $('select[name= roles]').realize()
+       // 'roles[]'    : $('select[name= roles]').realize()
       },
       success: function(data){
         if ((data.errors)) {

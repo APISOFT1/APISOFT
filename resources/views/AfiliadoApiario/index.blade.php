@@ -139,6 +139,7 @@ AFILIADO CON SUS APIARIO CREADO CORRECTAMENTE
                       <b id="idA"/>
                     </div>
                     <div class="form-group">
+                    
                       <label for="">afiliado:</label>
                       <b id="af"/>
                     </div>

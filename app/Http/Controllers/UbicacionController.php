@@ -34,7 +34,7 @@ public function index(Request $request)
 
 public function addUbicacion(Request $request){
     $rules = array(
-      'descripcion' => 'required'
+      'Descripcion' => 'required'
     );
   $validator = Validator::make ( Input::all(), $rules);
   if ($validator->fails())
@@ -42,7 +42,7 @@ public function addUbicacion(Request $request){
 
   else {
     $ubicacion = new Ubicacion;
-    $ubicacion->descripcion = $request->descripcion;
+    $ubicacion->Descripcion = $request->Descripcion;
     $ubicacion->save();
     return response()->json($ubicacion);
   }
@@ -57,7 +57,7 @@ return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
 
 else {
 $ubicacion =Ubicacion::find ($request->id);
-$ubicacion->descripcion = $request->descripcion;
+$ubicacion->Descripcion = $request->Descripcion;
 $ubicacion->save();
 return response()->json($ubicacion);
 }
