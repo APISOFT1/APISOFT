@@ -71,6 +71,7 @@
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
+                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicacion</a></li>
                       <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
                       <li><a href="{{ url('/Apiario/') }}">Gestionar Apiaro</a></li>
                       <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicacion</a></li>
@@ -171,6 +172,8 @@
 
 
 <!-- MODAL AFILIADO -->
+  
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
@@ -185,8 +188,7 @@
       type: 'POST',
       url: 'addAfiliado',
       data: {
-       
-        'id': $('input[name=id').val(),
+        'id': $('input[name=id]').val(),
         'Nombre': $('input[name=Nombre]').val(),
         'apellido1': $('input[name=apellido1]').val(),
         'apellido2': $('input[name=apellido2]').val(),
@@ -195,8 +197,8 @@
         'Direccion': $('input[name=Direccion]').val(),
         'Fecha_Ingreso': $('input[name=Fecha_Ingreso]').val(),
         'Num_Cuenta': $('input[name=Num_Cuenta]').val(),
-        'genero_id': $('input[name=genero_id]').val(),
-        'estado_civil_id': $('input[name=estado_civil_id').val(),
+        'genero_id': $("select[name=genero_id]").val(),
+        'estado_civil_id': $('select[name=estado_civil_id').val(),
         'estado_id': $('input[name=estado_id]').val()
       },
       success: function(data){
@@ -218,7 +220,7 @@
  
         } else {
           $('.error').remove();
-          $('#table').append("<tr class= afi" + data.id + "'>"+
+          $('#table').append("<tr class='afi" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.Nombre + "</td>"+
           "<td>" + data.apellido1 + "</td>"+
@@ -247,7 +249,7 @@
  + data.id + 
           "' data-Nombre='" + data.Nombre + 
           "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2 +
+          "'data-apellido2='" + data.apellido2+
            "'data-Telefono='" + data.Telefono +
             "' data-email='" + data.email +
              "'data-Direccion='" + data.Direccion + 
@@ -260,7 +262,7 @@
  + data.id + 
           "' data-Nombre='" + data.Nombre + 
           "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2 +
+          "'data-apellido2='" + data.apellido2+
            "'data-Telefono='" + data.Telefono +
             "' data-email='" + data.email +
              "'data-Direccion='" + data.Direccion + 
@@ -299,12 +301,13 @@ $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
 $('.modal-descripcion').text('Editar Afiliado');
 $('.deleteContent').hide();
-$('.form-horizontal').show();
+$('.form-horizontal1').show();
 $('#i').val($(this).data('id'));
 $('#n').val($(this).data('nombre'));
 $('#a1').val($(this).data('apellido1'));
 $('#a2').val($(this).data('apellido2'));
 $('#t').val($(this).data('telefono'));
+
 $('#em').val($(this).data('email'));
 $('#d').val($(this).data('direccion'));
 $('#f').val($(this).data('fecha_ingreso'));
@@ -320,7 +323,7 @@ $('.modal-footer').on('click', '.edit', function() {
     type: 'POST',
     url: 'editAfiliado',
     data: {
-
+    
 'id':$("#i").val(),
 'Nombre':$('#n').val(),
 'apellido1':$('#a1').val(),
@@ -336,24 +339,24 @@ $('.modal-footer').on('click', '.edit', function() {
 
     },
 success: function(data) {
-      $('.afi' + data.id).replaceWith("<tr class='afi" + data.id + "'>"+
+      $('.afi' + data.id).replaceWith(" "+
+      "<tr class='afi'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.Nombre + "</td>"+
           "<td>" + data.apellido1 + "</td>"+
           "<td>" + data.apellido2 + "</td>"+
           "<td>" + data.Telefono + "</td>"+
           "<td>" + data.email + "</td>"+
-          "<td>" + data.Direccion + "</td>"+
-          "<td>" + data.Fecha_Ingreso + "</td>"+
-          "<td>" + data.Num_Cuenta + "</td>"+
+          "<td>" + data.Direccion+ "</td>"+
+          "<td>" + data.Fecha_Ingreso+ "</td>"+
+          "<td>" + data.Num_Cuenta+ "</td>"+
           "<td>" + data.genero_id + "</td>"+
           "<td>" + data.estado_civil_id + "</td>"+
           "<td>" + data.estado_id + "</td>"+
-          "<td><button class='show-modal btn btn-info btn-sm' data-id='" 
-          + data.id + 
+          "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + 
           "' data-Nombre='" + data.Nombre + 
           "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2 +
+          "'data-apellido2='" + data.apellido2+
            "'data-Telefono='" + data.Telefono +
             "' data-email='" + data.email +
              "'data-Direccion='" + data.Direccion + 
@@ -361,7 +364,7 @@ success: function(data) {
              "'  data-Num_Cuenta='" + data.Num_Cuenta +
               "'data-genero_id='" + data.genero_id + 
               "'data-estado_civil_id='" + data.estado_civil_id +
-               "'data-estado_id='" + data.estado_id +
+               "'data-Estado_id='" + data.estado_id +
  "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
  + data.id + 
           "' data-Nombre='" + data.Nombre + 
@@ -374,12 +377,12 @@ success: function(data) {
              "'  data-Num_Cuenta='" + data.Num_Cuenta +
               "'data-genero_id='" + data.genero_id + 
               "'data-estado_civil_id='" + data.estado_civil_id +
-               "'data-estado_id='" + data.estado_id +
+               "'data-Estado_id='" + data.estado_id +
  "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
  + data.id + 
           "' data-Nombre='" + data.Nombre + 
           "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2 +
+          "'data-apellido2='" + data.apellido2+
            "'data-Telefono='" + data.Telefono +
             "' data-email='" + data.email +
              "'data-Direccion='" + data.Direccion + 
@@ -387,14 +390,16 @@ success: function(data) {
              "'  data-Num_Cuenta='" + data.Num_Cuenta +
               "'data-genero_id='" + data.genero_id + 
               "'data-estado_civil_id='" + data.estado_civil_id +
-               "'data-estado_id='" + data.estado_id +
+               "'data-Estado_id='" + data.estado_id +
 "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
     }
   });
 });
 
+/*
 
+// form Delete function
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Delete");
 $('#footer_action_button').removeClass('glyphicon-check');
@@ -404,6 +409,18 @@ $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
 $('.modal-title').text('Delete Post');
 $('.id').text($(this).data('id'));
+$('.nombre').text($(this).data('Nombre'));
+$('.apellido1').text($(this).data('apellido1'));
+$('.apellido2').text($(this).data('apellido2'));
+$('.telefono').text($(this).data('Telefono'));
+
+$('.email').text($(this).data('email'));
+$('.direccion').text($(this).data('Direccion'));
+$('.fecha_ingreso').text($(this).data('Fecha_Ingreso'));
+$('.num_cuenta').text($(this).data('Num_Cuenta'));
+$('.genero_id').text($(this).data('genero_id'));
+$('.estado_civil_id').text($(this).data('estado_civil_id'));
+$('.estado_id').text($(this).data('estado_id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
 $('.title').html($(this).data('descripcion'));
@@ -415,25 +432,32 @@ $('.modal-footer').on('click', '.delete', function(){
     type: 'POST',
     url: 'deleteAfiliado',
     data: {
-      '_token': $('input[name=_token]').val(),
-      'id': $('.id').text()
+  
+      
     },
     success: function(data){
-       $('.afiliado' + $('.id').text()).remove();
+       $('.afiliado' + $('.id').text()+ $('.nombre').text()+
+       $('.apellido1').text()+ $('.apellido2').text()+ $('.telefono').text()+ $('.email').text()+ $('.direccion').text()+
+       $('.fecha_ingreso').text() $('.num_cuenta').text()+ $('.genero_id').text()+ $('.estado_civil_id').text()+ $('.genero_id').text()).remove();
     }
   });
 });
+*/
 
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
   
-  $('#iaa').val($(this).data('iii'));
-$('#jaja').val($(this).data('nom'));
+
+$('#iaa').val($(this).data('id'));
+$('#jaja').val($(this).data('nombre'));
 ;
   $('.modal-show').text('Datos');
   });
+
+ 
 </script>
+
 
   </body>
 </html>

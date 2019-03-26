@@ -31,7 +31,7 @@
         <ul class="nav navbar-nav main-navigation">
           <li class="active"><a href="">Inicio</a></li>
           @can('permisos')
-          <li><a href="{{ url('/admin/users/') }}">Administrador</a></li>
+          <li><a href="{{ url('users/') }}">Administrador</a></li>
           @else
                             Usted no tiene los permisos suficientes 
                         @endcan

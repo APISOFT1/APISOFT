@@ -1,6 +1,6 @@
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
-role="dialog" tabindex="-1" id="modal-delete-{{$r->id}}">
-	{{Form::Open(array('action'=>array('UbicacionController@destroy',$r->id),'method'=>'delete'))}}
+role="dialog" tabindex="-1" id="modal-delete-{{$generos->id}}">
+	{{Form::Open(array('action'=>array('GeneroController@destroy',$generos->id),'method'=>'delete'))}}
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -8,10 +8,10 @@ role="dialog" tabindex="-1" id="modal-delete-{{$r->id}}">
 				aria-label="Close">
                      <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title">Eliminar Ubicacion</h4>
+                <h4 class="modal-title">Eliminar Genero</h4>
 			</div>
 			<div class="modal-body">
-				<p>Confirme si desea eliminar la ubicacion</p>
+				<p>Confirme si desea Eliminar la Genero</p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

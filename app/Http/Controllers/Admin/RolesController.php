@@ -2,6 +2,9 @@
 namespace App\Http\Controllers\Admin;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Validator;
+use Response;
+use Illuminate\Support\Facades\Input;  //MUYR IMPORTANTE , SIN ESTO NO GUARDA.
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
@@ -14,27 +17,81 @@ class RolesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(request $request)
     {
        // if (! Gate::allows('users_manage')) {
           //  return abort(401);
       //  }
-        $roles = Role::all();
-        return view('admin.roles.index', compact('roles'));
+
+      if($request){
+        $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
+        $permissions = Permission::get()->pluck('name', 'name');
+  $roles = Role::paginate(10);
+  return view('roles.index',compact('roles','permissions'));        
+}
+      //  $roles = Role::all();
+        //return view('admin.roles.index', compact('roles'));
     }
     /**
      * Show the form for creating new Role.
      *
      * @return \Illuminate\Http\Response
      */
+
+     
+public function addRole(Request $request){
+    $rules = array(
+      'name' => 'required'
+    );
+  $validator = Validator::make ( Input::all(), $rules);
+  if ($validator->fails())
+  return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
+
+  else {
+    $roles = Role::create($request->except('permission'));
+    $permissions = $request->input('permission') ? $request->input('permission') : [];
+    $roles->givePermissionTo($permissions);
+    $roles->save();
+    return response()->json($roles);
+  }
+}
+
     public function create()
     {
        // if (! Gate::allows('users_manage')) {
            // return abort(401);
        // }
         $permissions = Permission::get()->pluck('name', 'name');
-        return view('admin.roles.create', compact('permissions'));
+        return view('roles.create', compact('permissions'));
     }
+
+    
+public function editRole(request $request){
+    $rules = array(
+      'descripcion' => 'required'
+    );
+  $validator = Validator::make ( Input::all(), $rules);
+  if ($validator->fails())
+  return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
+  
+  else {
+
+    $roles = Role::findOrFail($id);
+    $roles->update($request->except('permission'));
+    $permissions = $request->input('permission') ? $request->input('permission') : [];
+    $roles->syncPermissions($permissions);
+     $roles->save();
+  return response()->json($roles);
+  }
+  }
+  
+  public function deleteRole(request $request){
+    
+    
+    $roles = Role::findOrFail($id);
+    $roles->delete();
+    return response()->json($roles);
+  }
     /**
      * Store a newly created Role in storage.
      *
@@ -49,8 +106,10 @@ class RolesController extends Controller
         $role = Role::create($request->except('permission'));
         $permissions = $request->input('permission') ? $request->input('permission') : [];
         $role->givePermissionTo($permissions);
-        return redirect()->route('admin.roles.index');
+        return redirect()->route('roles.index');
     }
+
+    
     /**
      * Show the form for editing Role.
      *
@@ -64,7 +123,7 @@ class RolesController extends Controller
        // }
         $permissions = Permission::get()->pluck('name', 'name');
         $role = Role::findOrFail($id);
-        return view('admin.roles.edit', compact('role', 'permissions'));
+        return view('roles.edit', compact('role', 'permissions'));
     }
     /**
      * Update Role in storage.
@@ -82,7 +141,7 @@ class RolesController extends Controller
         $role->update($request->except('permission'));
         $permissions = $request->input('permission') ? $request->input('permission') : [];
         $role->syncPermissions($permissions);
-        return redirect()->route('admin.roles.index');
+        return redirect()->route('roles.index');
     }
     /**
      * Remove Role from storage.
@@ -97,7 +156,7 @@ class RolesController extends Controller
         }
         $role = Role::findOrFail($id);
         $role->delete();
-        return redirect()->route('admin.roles.index');
+        return redirect()->route('roles.index');
     }
     /**
      * Delete all selected Role at once.

@@ -120,7 +120,7 @@
 
         Ser una asociación líder en posicionamiento y en calidad de productos de miel en el mercado nacional e internacional, cruzando
         las fronteras a base de nuevas tendencias tecnológicas e innovadoras que provean calidades nutritivas para el ser humano,
-        su región y su calidad de vida<br></h1>
+        su región y su calidad de vida.<br></h1>
       
 		
       </div>
