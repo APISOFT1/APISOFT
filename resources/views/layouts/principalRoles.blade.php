@@ -251,7 +251,7 @@
       data: {
         '_token': $('input[name=_token]').val(),
         'name': $('input[name=name]').val(),
-      'permissions[]': $('select2[name=permissions').val(),
+      'permissions': $('select[name=permissions').val(),
        
         
       },

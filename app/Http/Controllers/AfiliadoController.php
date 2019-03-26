@@ -1,15 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Validator;
+use Response;
+use Illuminate\Support\Facades\Input;
+use App\http\Requests;
+use Illuminate\Http\Request;
 use App\Afiliado;
 use App\Genero;
 use App\Estado_Civil;
-use Validator;
-use Response;
-use Illuminate\Support\Facades\Input;  //MUYR IMPORTANTE , SIN ESTO NO GUARDA.
-use Illuminate\Http\Request;
 use App\Http\Requests\AfiliadoFormRequest;
+use DB;
+
+
 
 class AfiliadoController extends Controller
 {
@@ -20,15 +23,22 @@ class AfiliadoController extends Controller
      */
     public function index(Request $request)
     {
-        if($request){
-            $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-            $afi= Afiliado::with('Genero', 'Estado_Civil') 
-                ->where('Nombre','LIKE','%'.$query.'%')
-                ->orderby('id','desc')
-                ->paginate(7);
-             
-            return view('Afiliado.index', compact('afi'), ['afi'=>$afi,"searchText"=>$query]);
-        }
+      if($request){
+        $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
+        $afi= Afiliado::with('Genero', 'Estado_Civil') 
+            ->where('Nombre','LIKE','%'.$query.'%')
+            ->orderby('id','desc')
+            ->paginate(7);
+            $genero = Genero::all();
+            $estadoC = Estado_Civil::all();
+        return view('Afiliado.index', compact('afi','genero','estadoC'), ['afi'=>$afi,"searchText"=>$query]);
+    }
+   
+    
+  
+  
+    return view('Afiliado.index',compact('afi','genero','estadoC','esta'));   
+        
     }
 
     /**
@@ -144,12 +154,21 @@ class AfiliadoController extends Controller
     public function deleteAfiliado(request $request){
   
         $afi = Afiliado::find ($request->id);
+        $afi->Nombre = $request->Nombre;
+      $afi->apellido1 = $request->apellido1;
+      $afi->apellido2 = $request->apellido2;
+      $afi->Telefono = $request->Telefono;
+      $afi->email = $request->email;
+      $afi->Direccion = $request->Direccion;
+      $afi->Fecha_Ingreso = $request->Fecha_Ingreso;
+      $afi->Num_Cuenta = $request->Num_Cuenta;
+      $afi->genero_id = $request->genero_id;
+      $afi->estado_civil_id = $request->estado_civil_id;
+      $afi->estado_id = $request->estado_id;
         $afi->delete();
         return response()->json();
       }
       }   //
-      
-      
-      
+    
 
-
+    

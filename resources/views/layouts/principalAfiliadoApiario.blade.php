@@ -265,6 +265,18 @@ success: function(data) {
     }
   });
 });
+$(".selectpicker")
+  .selectpicker()
+  .filter(".with-ajax")
+  .ajaxSelectPicker(options);
+$("select").trigger("change");
+
+function chooseSelectpicker(index, selectpicker) {
+  $(selectpicker).val(index);
+  $(selectpicker).selectpicker('refresh');
+}
+
+
 
 // form Delete function
 $(document).on('click', '.delete-modal', function() {

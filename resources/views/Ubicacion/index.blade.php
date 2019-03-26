@@ -124,6 +124,32 @@ UBICACION CREADO CORRECTAMENTE
       <div class="modal-body">
         <form class="form-horizontal" role="modal">
 
+<<<<<<< HEAD
+<div class="row">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered table-condensed table-hover">
+				<thead>
+					<th>Id</th>
+					<th>Descripción</th>
+				
+				</thead>
+               @foreach ($ubicaciones as $ubicacion)
+				<tr>
+					<td>{{ $ubicacion->id}}</td>
+					<td>{{ $ubicacion->Descripcion}}</td>
+					<td>
+						<a href="{{URL::action('UbicacionController@edit',$ubicacion->id)}}"><button class="btn btn-info">Editar</button></a>
+                         <a href="" data-target="#modal-delete-{{$ubicacion->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
+					</td>
+				</tr>
+				@include('Ubicacion.modal')
+				@endforeach
+			</table>
+		</div>
+		{{$ubicaciones->render()}}
+	</div>
+=======
           <div class="form-group">
             <label class="control-label col-sm-2"for="id">ID</label>
             <div class="col-sm-10">
@@ -154,6 +180,7 @@ UBICACION CREADO CORRECTAMENTE
       </div>
     </div>
   </div>
+>>>>>>> develop
 </div>
 
 @endsection

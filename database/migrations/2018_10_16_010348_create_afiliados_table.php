@@ -28,7 +28,12 @@ class CreateAfiliadosTable extends Migration
             $table->foreign('genero_id')->references('id')->on('generos');
             $table->integer('estado_civil_id')->unsigned();
             $table->foreign('estado_civil_id')->references('id')->on('estado_civils');
+<<<<<<< HEAD
+            $table->integer('Estado_id')->unsigned();
+            $table->foreign('Estado_id')->references('id')->on('estados');
+=======
             $table->integer('estado_id')->unsigned();
+>>>>>>> develop
             $table->rememberToken();
             $table->timestamps();
         });

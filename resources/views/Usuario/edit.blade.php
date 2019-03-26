@@ -1,7 +1,22 @@
+<<<<<<< HEAD
 @extends ('layouts.principal')
 @section ('contenido')
 
+=======
+<div class="modal fade modal-slide-in-right" id="editarUsuario">
+    <div class="modal-dialog">
+        <div class="modal-content">
+>>>>>>> jeremy
 
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>×</span>
+                </button>
+                <h4>Crear</h4>
+            </div>
+            
+            <div class="modal-body">
+		{!!Form::model($usuario,['method'=>'PATCH','route'=>['Usuario.update',$usuario->id]])!!}
 		{!!Form::model($usuarios,['method'=>'PATCH','route'=>['Usuario.update',$usuarios->id]])!!}
             {{Form::token()}}
          
@@ -97,8 +112,6 @@
 				</div>
             </div>
             
-		
-            
             <div class="form-group">
 			<div class="col-md-6">
             	<button class="btn btn-primary" type="submit">Guardar</button>
@@ -106,6 +119,12 @@
 				</div>
 
             </div>
+            
+			<div class="modal-footer">
+			
+			<button class="btn btn-primary" type="submit">Guardar</button>
+			<button class="btn btn-danger" type="reset">Cancelar</button>
+		</div>
 			</div>
 			{!!Form::close()!!}		
             

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Genero;
 use App\Rol;
+use App\Estado;
 
 
 
@@ -40,10 +41,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(UsuarioFormRequest $request)
     {
         $Generos = Genero::all();
-       
+        $Estados = Estado::all();
        $Rols = Rol::all();
 
       
@@ -52,7 +53,7 @@ class UserController extends Controller
         
     
         return view("Usuario.create",  ["Rols"=> $Rols ,
-        "Generos"=>$Generos]);
+        "Generos"=>$Generos, 'Estados'=> $Estados]);
     }
 
     /**
@@ -90,7 +91,7 @@ class UserController extends Controller
 
      
         $Generos = Genero::all();
-       
+        $Estados = Estado::all();
        $Rols = Rol::all();
 
 

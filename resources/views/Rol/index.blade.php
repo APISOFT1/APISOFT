@@ -26,6 +26,27 @@
 		
 </div>	
 
+<div id="estudiante" style="display: none;">
+    <h2>Si eres estudiante...</h2>
+    <form action="index.php" method="post">
+        <p>Nombre:<br/>
+        <input type="text" name="nombre" /></p>
+        <p>Centro:<br/>
+        <input type="text" name="centro" /></p>
+        <input type="submit" name="send" value="Enviar" />
+    </form>
+</div>
+
+<form action="index.php" method="post">
+    Estado actual: 
+    <select id="status" name="status" onChange="mostrar(this.value);">
+        <option value="estudiante">Estudiante</option>
+        <option value="trabajador">Trabajador</option>
+        <option value="autonomo">Autónomo</option>
+        <option value="paro">En el paro</option>
+     </select>
+</form>
+
 <div class="row">
   <div class="table table-responsive">
     <table class="table table-bordered" id="table">
@@ -64,7 +85,6 @@
   {{$rol->links()}}
 </div>
 {{-- Modal Form Create Post --}}
-
 <div id="create" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">

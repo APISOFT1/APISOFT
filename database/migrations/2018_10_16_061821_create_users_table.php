@@ -26,7 +26,17 @@ class CreateUsersTable extends Migration
             $table->datetime('Fecha_Ingreso');
             $table->integer('Genero_Id')->unsigned();;
             $table->foreign('Genero_Id')->references('id')->on('generos');
+<<<<<<< HEAD
+=======
+            $table->integer('Rol_Id')->unsigned();
+            $table->foreign('Rol_Id')->references('id')->on('rols');
+<<<<<<< HEAD
+            $table->integer('Estado_Id')->unsigned();
+            $table->foreign('Estado_Id')->references('id')->on('estados');
+=======
+>>>>>>> jeremy
             $table->integer('estado_id')->unsigned();
+>>>>>>> develop
            
             $table->rememberToken();
             $table->timestamps();

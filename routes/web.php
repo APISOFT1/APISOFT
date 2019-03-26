@@ -11,9 +11,9 @@
 jjajaajaj
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
+  
 });
 Route::group(['middleware' =>['auth',  'verified']], function () {
   
@@ -22,7 +22,7 @@ Route::group(['middleware' =>['auth',  'verified']], function () {
 'Genero'=>'GeneroController',
 'EstadoCivil'=>'EstadoCivilController',
 'Ubicacion'=>'UbicacionController',
-'Afiliado' =>'AfiliadoController',
+
 'AfiliadoApiario'=>'AfiliadoApiarioController',
 'Apiario' => 'ApiarioController',
 'Usuario'=>'UserController',
@@ -82,4 +82,19 @@ Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
+Route::group(['middleware' => ['web']], function() {
+  Route::resource('Rol','RolController');
+  Route::POST('addRol','RolController@addRol');
+  Route::POST('editRol','RolController@editRol');
+  Route::POST('deleteRol','RolController@deleteRol');
 
+
+  
+  Auth::routes(['verify' => true]);
+  Route::get('/home','HomeController@index')->name('home');
+});
+  
+Route::resource('Afiliado','AfiliadoController');
+Route::POST('addAfiliado','AfiliadoController@addAfiliado');
+Route::POST('editAfiliado','AfiliadoController@editAfiliado');
+Route::POST('deleteAfiliado','AfiliadoController@deleteAfiliado');
