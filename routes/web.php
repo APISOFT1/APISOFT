@@ -15,9 +15,15 @@ jjajaajaj
 Route::get('/', function () {
     return view('welcome');
 });
-Route::group(['middleware' =>['auth',  'verified']], function () {
-  
-  Route::resources([
+
+Auth::routes(['verify' => true]);
+Route::group(['middleware'=> 'verified'], function(){
+
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+Route::resources([
 'Estanon'=>'EstanonController',
 'Genero'=>'GeneroController',
 'EstadoCivil'=>'EstadoCivilController',
@@ -32,8 +38,11 @@ Route::group(['middleware' =>['auth',  'verified']], function () {
 'admin/permissions' => 'Admin\PermissionsController',
 'admin/roles'=> 'Admin\RolesController',
 'admin/users'=> 'Admin\UsersController',
+'Apiario'=>'ApiarioController',
+'Ubicacion'=>'UbicacionController',
 
-  ]);
+]);
+
   Route::post('permissions_mass_destroy', ['uses' => 'Admin\PermissionsController@massDestroy', 'as' => 'permissions.mass_destroy']);
   Route::post('roles_mass_destroy', ['uses' => 'Admin\RolesController@massDestroy', 'as' => 'roles.mass_destroy']);
   Route::post('users_mass_destroy', ['uses' => 'Admin\UsersController@massDestroy', 'as' => 'users.mass_destroy']);
@@ -53,16 +62,12 @@ Route::POST('deleteApiario','ApiarioController@deleteApiario');
 
 
 });
-Route::resource('Apiario','ApiarioController');
-Route::resource('Ubicacion','UbicacionController');
 
 
   
 
 
-Auth::routes(['verify' => true]);
+
+Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-
-
