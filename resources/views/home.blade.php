@@ -2,7 +2,7 @@
 <html lang="en">
 
   <head>  	
-  	<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="Responsive Bootstrap Landing Page Template">
@@ -31,6 +31,7 @@
         <ul class="nav navbar-nav main-navigation">
           <li class="active"><a href="#home">Inicio</a></li>
           <li><a href="{{ url('/Usuario/') }}">Administrador</a></li>
+          <li><a href=" {{url('/register/') }}">User prueba</a></li>
           <li><a href="{{ url('/RecepcionMateriaPrima/') }}">Planta</a></li>
           <li><a href="#testimonial">Acerca de Nosotros</a></li>
           <li><a href="#contact">Ubicacion</a></li>

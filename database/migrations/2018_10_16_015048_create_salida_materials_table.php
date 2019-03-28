@@ -19,7 +19,7 @@ class CreateSalidaMaterialsTable extends Migration
             $table->string('afiliado_id',12);
             $table->foreign('afiliado_id')->references('id')->on('afiliados');
             $table->string('user_id',12);
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('user');
             $table->float('Peso_Cera');
             $table->float('Peso_Miel');
             $table->float('Peso_Deduccion_Merma');

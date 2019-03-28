@@ -1,15 +1,13 @@
 <?php
 
 namespace App;
-
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Notifications\MailResetPasswordToken;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable implements MustVerifyEmail
+class Users extends Authenticatable 
 {
     use Notifiable;
     use HasRoles;
@@ -19,33 +17,42 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array
      */
+
     protected $table= 'users';
     protected $primaryKey="id";
     
     public $timestamps=true;
     protected $fillable = [
-        'name', 'email', 'password',
+        'id',
+        'name', 
+        'Apellido1',
+        'Apellido2',
+        'Telefono',
+        'Direccion',
+        'Fecha_Ingreso',
+        'Genero_Id',
+        'Rol_Id',
+        'estado_id'
+        
+
     ];
+
+
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-    public function sendPasswordResetNotification($token)
+    
+    public function Genero() 
     {
-        $this->notify(new MailResetPasswordToken($token));
+        return $this->belongsTo(Genero::class ,'Genero_Id');
     }
+
+    public function Rol() 
+    {
+        return $this->BelongsTo(Rol::class,'Rol_Id');
+    }
+   
 }

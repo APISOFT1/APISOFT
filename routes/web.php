@@ -15,8 +15,17 @@ jjajaajaj
 Route::get('/', function () {
     return view('welcome');
 });
+Auth::routes();
+Auth::routes(['verify' => true]);
+
 Route::group(['middleware' =>['auth',  'verified']], function () {
   
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+ if ($options['register'] ?? true) {
+        $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+        $this->post('register', 'Auth\RegisterController@register');
+    }
   Route::resources([
 'Estanon'=>'EstanonController',
 'Genero'=>'GeneroController',
@@ -59,9 +68,5 @@ Route::resource('Ubicacion','UbicacionController');
   
 
 
-Auth::routes(['verify' => true]);
-
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 
