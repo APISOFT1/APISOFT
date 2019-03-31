@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V16</title>
+	<title>Inicio Sesion</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -36,7 +36,7 @@
 					Iniciar Sesion
 				</span>
 				<form class="login100-form validate-form p-b-33 p-t-5"  id="signin"  method="POST"  action="{{ route('login') }}">
-
+ 					@csrf
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
 						<input id="email"  type="text"  class="input100{{ $errors->has('email') ? ' is-invalid' : '' }}" type="email" name="email" placeholder="Correo" required="" value="{{ old('email') }}" required autofocus>
 						<span class="focus-input100" data-placeholder="&#xe82a;"></span>

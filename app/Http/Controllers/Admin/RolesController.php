@@ -45,25 +45,21 @@ public function addRole(Request $request){
     );
   $validator = Validator::make ( Input::all(), $rules);
   if ($validator->fails())
+  
   return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
 
   else {
-    $roles = Role::create($request->except('permission'));
-    $permissions = $request->input('permission') ? $request->input('permission') : [];
-    $roles->givePermissionTo($permissions);
+  
+   $roles = Role::create($request->except('permission'));
+  
+   $permissions = $request->input('permission') ? $request->input('permission') : [];
+   $roles->givePermissionTo($permissions);
     $roles->save();
     return response()->json($roles);
+ 
   }
 }
 
-    public function create()
-    {
-       // if (! Gate::allows('users_manage')) {
-           // return abort(401);
-       // }
-        $permissions = Permission::get()->pluck('name', 'name');
-        return view('roles.create', compact('permissions'));
-    }
 
     
 public function editRole(request $request){
@@ -79,85 +75,19 @@ public function editRole(request $request){
     $roles = Role::findOrFail($id);
     $roles->update($request->except('permission'));
     $permissions = $request->input('permission') ? $request->input('permission') : [];
-    $roles->syncPermissions($permissions);
+    $role->givePermissionTo($permissions);
      $roles->save();
   return response()->json($roles);
   }
   }
   
-  public function deleteRole(request $request){
-    
-    
-    $roles = Role::findOrFail($id);
-    $roles->delete();
-    return response()->json($roles);
-  }
     /**
      * Store a newly created Role in storage.
      *
      * @param  \App\Http\Requests\StoreRolesRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRolesRequest $request)
-    {
-       // if (! Gate::allows('users_manage')) {
-          //  return abort(401);
-       // }
-        $role = Role::create($request->except('permission'));
-        $permissions = $request->input('permission') ? $request->input('permission') : [];
-        $role->givePermissionTo($permissions);
-        return redirect()->route('roles.index');
-    }
-
     
-    /**
-     * Show the form for editing Role.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-       /// if (! Gate::allows('users_manage')) {
-           // return abort(401);
-       // }
-        $permissions = Permission::get()->pluck('name', 'name');
-        $role = Role::findOrFail($id);
-        return view('roles.edit', compact('role', 'permissions'));
-    }
-    /**
-     * Update Role in storage.
-     *
-     * @param  \App\Http\Requests\UpdateRolesRequest  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateRolesRequest $request, $id)
-    {
-       // if (! Gate::allows('users_manage')) {
-           // return abort(401);
-      //  }
-        $role = Role::findOrFail($id);
-        $role->update($request->except('permission'));
-        $permissions = $request->input('permission') ? $request->input('permission') : [];
-        $role->syncPermissions($permissions);
-        return redirect()->route('roles.index');
-    }
-    /**
-     * Remove Role from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        if (! Gate::allows('users_manage')) {
-            return abort(401);
-        }
-        $role = Role::findOrFail($id);
-        $role->delete();
-        return redirect()->route('roles.index');
-    }
     /**
      * Delete all selected Role at once.
      *

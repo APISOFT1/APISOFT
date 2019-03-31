@@ -23,15 +23,10 @@ class UsersController extends Controller
        
        if($request){
         $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-        $users= User::with('Genero') 
-            ->where('name','LIKE','%'.$query.'%')
-            ->orderby('id','desc')
-            ->paginate(7);
-
-            $generos = Genero::all();
-          
+        $users= User::paginate(10);
+           
             $roles = Role::get()->pluck('name', 'name');
-            return view('users.index', compact('users', 'roles', 'generos'), ['users'=>$users,"searchText"=>$query]);
+            return view('users.index', compact('users', 'roles'), ['users'=>$users,"searchText"=>$query]);
     }
         
         return view('users.index', compact('users', 'roles','generos'));
@@ -42,18 +37,11 @@ class UsersController extends Controller
     public function addUser(Request $request){
         $rules = array(
     
-          'id' => 'required',
+          
           'name' => 'required',
           'email' => 'required',
           'password' => 'required',
-          'Apellido1' => 'required',
-          'Apellido2' => 'required',
-          'Telefono' => 'required',
-          'email' => 'required',
-          'Direccion' => 'required',
-          'Fecha_Ingreso' => 'required',
-          'Genero_Id' => 'required',
-          'estado_id' => 'required'
+          
         
         );
       $validator = Validator::make ( Input::all(), $rules);
@@ -66,13 +54,6 @@ class UsersController extends Controller
         $users->name = $request->name;
         $users->email = $request->email;
         $users->password = $request->password;
-        $users->Apellido1 = $request->Apellido1;
-        $users->Apellido2 = $request->Apellido2;
-        $users->Telefono = $request->Telefono;
-        $users->Direccion = $request->Direccion;
-        $users->Fecha_Ingreso = $request->Fecha_Ingreso;
-        $users->Genero_Id = $request->Genero_Id;
-        $users->estado_id = $request->estado_id;
         $roles = $request->input('roles') ? $request->input('roles') : [];
         $users->assignRole($roles);
         $users->save();
@@ -116,81 +97,6 @@ class UsersController extends Controller
       }
 
 
- // public function create()
- // {
-   //
-      // $roles = Role::get()->pluck('name', 'name');
-      // return view('admin.users.create', compact('roles'));
-  // }
-    /**
-     * Store a newly created User in storage.
-     *
-     * @param  \App\Http\Requests\StoreUsersRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-  //  public function store(StoreUsersRequest $request)
-   // {
-       // if (! Gate::allows('users_manage')) {
-           // return abort(401);
-       // }
-      //  $user = User::create($request->all());
-      //  $roles = $request->input('roles') ? $request->input('roles') : [];
-       // $user->assignRole($roles);
-      //  return redirect()->route('admin.users.index');
-   // }
-    /**
-     * Show the form for editing User.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        
-
-        $roles = Role::get()->pluck('name', 'name');
-        $generos = Genero::all();
-        $user = User::findOrFail($id);
-        return view('users.edit', compact('user', 'roles', 'generos'));
-   }
-    /**
-     * Update User in storage.
-     *
-     * @param  \App\Http\Requests\UpdateUsersRequest  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateUsersRequest $request, $id)
-    {
-       // if (! Gate::allows('users_manage')) {
-         //   return abort(401);
-     //   }
-        $user = User::findOrFail($id);
-        $user->update($request->all());
-        $roles = $request->input('roles') ? $request->input('roles') : [];
-        $user->syncRoles($roles);
-        return redirect()->route('users.index');
-    }
-    /**
-     * Remove User from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        if (! Gate::allows('users_manage')) {
-            return abort(401);
-        }
-        $user = User::findOrFail($id);
-        $user->delete();
-        return redirect()->route('admin.users.index');
-    }
-    /**
-     * Delete all selected User at once.
-     *
-     * @param Request $request
-     */
     public function massDestroy(Request $request)
     {
         if (! Gate::allows('users_manage')) {

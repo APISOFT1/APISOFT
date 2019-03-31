@@ -24,6 +24,8 @@
 <!--<link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>-->
 
  <!--   {!!Html::style ('/css/bootstrap-multiselect.css')!!} -->
+
+ <link href="toastr.css" rel="stylesheet"/>
     {!!Html::style ('/css2/bootstrap.min.css')!!} 
 
     {!!Html::style ('/css2/bootstrap-select.min.css')!!}   
@@ -31,6 +33,8 @@
     {!!Html::style ('/css2/select2.min.css')!!}
 
     {!!Html::style ('/css2/select2.css')!!}
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     
     <!-- Font Awesome -->
     {!!Html::style ('/css2/font-awesome.min.css')!!}
@@ -186,6 +190,8 @@
     {!!Html::script('/js2/custom.min.js')!!}
 
      {!!Html::script('/js2/dropdown.js')!!}
+     <script src="toastr.js"></script>
+     
 
     <!-- {!!Html::script('/js/jquery.min.js')!!}
 
@@ -208,80 +214,116 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script>-->
 
 
-
-
-
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<!-- MODAL ROLES -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script type="text/javascript">
+
 {{-- ajax Form Add Post--}}
+
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
-    $('.modal-descripcion').text('Crear Ubicacion');
+    $('.modal-descripcion').text('Crear Permissions');
   });
+ 
   $("#add").click(function() {
     $.ajax({
       type: 'POST',
-      url: 'addUbicacion',
+      url: 'addPermissions',
+      
       data: {
         '_token': $('input[name=_token]').val(),
-        'Descripcion': $('input[name=Descripcion]').val()
+        'name': $('input[name=name]').val(),
+      
+
+    
+      
+       
+        
       },
       success: function(data){
         if ((data.errors)) {
           $('.error').removeClass('hidden');
-          $('.error').text(data.errors.descripcion);
+          $('.error').text(data.errors.name);
+       
  
         } else {
           $('.error').remove();
-          $('#table').append("<tr class='ubicacion" + data.id + "'>"+
+         
+      toastr.success('Successfully added Post!', 'Success Alert', {timeOut: 5000});
+                   
+          $('#table').append("<tr class='permissions" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
-          "<td>" + data.Descripcion + "</td>"+
-          "<td>" + data.created_at + "</td>"+
+          "<td>" + data.name + "</td>"+
+       
+  
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
-          data.id + "'data-Descripcion='" + data.Descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-Descripcion='" + data.Descripcion + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.Descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+          data.id + "' data-name='"
+          + data.name+ "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='"
+           + data.id + "' data-name='" 
+           + data.name +  "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
+           + data.id + "' data-name='" + data.name + "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         }
+        alert("Se ha Creado el rol correcatamente "+data);
       },
     });
-    $('#Descripcion').val('');
+    $('#name').val('');
+  
 
   });
-
+  
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
-$('#footer_action_button').text(" Editar Ubicacion");
+$('#footer_action_button').text(" Editar Apiario");
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-$('.modal-descripcion').text('Editar Ubicacion');
+$('.modal-descripcion').text('Editar Apiario');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
 $('#ids').val($(this).data('id'));
-$('#des').val($(this).data('Descripcion'));
+$('#cri').val($(this).data('name'));
 $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
-    url: 'editUbicacion',
+    url: 'editRole',
     data: {
 '_token': $('input[name=_token]').val(),
 'id': $("#ids").val(),
-'Descripcion': $('#des').val(),
+'Descripcion': $('#cri').val(),
+'cantidad': $('#can').val(),
+'ubicacion_id': $('#ub').val(),
+
     },
 success: function(data) {
-      $('.ubicacion' + data.id).replaceWith(" "+
-      "<tr class='ubicacion" + data.id + "'>"+
+      $('.api' + data.id).replaceWith(" "+
+      "<tr class='api" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
       "<td>" + data.Descripcion + "</td>"+
-  
-      "<td>" + data.created_at + "</td>"+
- "<td><button class='show-modal btn btn-info btn-sm' data-id='"+data.id+"' data-Descripcion='"+data.Descripcion+"'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='"+data.id+"'data-Descripcion='"+data.Descripcion+"'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='"+data.id+"' data-Descripcion='"+data.Descripcion+"'><span class='glyphicon glyphicon-trash'></span></button></td>"+"</tr>");
+      "<td>" + data.cantidad + "</td>"+
+      "<td>" + data.ubicacion_id + "</td>"+
+      
+ "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + "' data-Descripcion='" 
+ + data.Descripcion + "' data-cantidad='" 
+          + data.cantidad +  " 'data-ubicacion_id='" 
+          + data.ubicacion_id + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
+          + data.id + "' data-Descripcion='" + data.Descripcion + 
+          "' data-cantidad='" 
+          + data.cantidad +  " 'data-ubicacion_id='" 
+          + data.ubicacion_id + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
+          + data.id + "' data-Descripcion='" + data.Descripcion + 
+          "' data-cantidad='" 
+          + data.cantidad +  " 'data-ubicacion_id='" 
+          + data.ubicacion_id + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+      "</tr>");
     }
   });
 });
@@ -298,20 +340,20 @@ $('.modal-title').text('Delete Post');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
-$('.Descripcion').html($(this).data('Descripcion'));
+$('.title').html($(this).data('Descripcion'));
 $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
-    url: 'deleteUbicacion',
+    url: 'deleteApiario',
     data: {
       '_token': $('input[name=_token]').val(),
       'id': $('.id').text()
     },
     success: function(data){
-       $('.ubicacion' + $('.id').text()).remove();
+       $('.apiario' + $('.id').text()).remove();
     }
   });
 });
@@ -319,8 +361,14 @@ $('.modal-footer').on('click', '.delete', function(){
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
-  $('#ii').text($(this).data('id'));
-  $('#dii').text($(this).data('Descripcion'));
+  $('#i2').text($(this).data('id'));
+  $('#d2').text($(this).data('descripcion'));
+  $('#ca2').text($(this).data('cantidad'));
+  $('#ub2').text($(this).data('ubicacion_id'));
   $('.modal-title').text('Show Post');
   });
 </script>
+@include('partials.javascripts')
+  </body>
+</html>
+  

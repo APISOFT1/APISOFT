@@ -29,8 +29,8 @@
             <table class="table table-bordered" id="table">
       <tr>
 			<th width="150px" >Codigo</th>
-  		<th> <div class="size2">Permiso</th>
-  		<th>Rol</th>
+  		<th> <div class="size2">Rol</th>
+  		<th>Permiso</th>
           <th >
           <a href="#" class="create-modal btn btn-success btn-sm">
             <i class="glyphicon glyphicon-plus"></i>
@@ -65,6 +65,7 @@
              data-title="{{$value->name}}">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
+        
           </td>
         </tr>
        
@@ -96,10 +97,9 @@
           </div>
           </div>
 
-        
-    <div class="form-group ">
-            	<div class="col-md-6">
-          {!! Form::label('permission', 'Permissions', ['class' => 'control-label']) !!}
+          <div class="row">
+                <div class="col-xs-12 form-group">
+                {!! Form::label('permission', 'Permissions', ['class' => 'control-label']) !!}
                     {!! Form::select('permission[]', $permissions, old('permission'), ['class' => 'form-control select2', 'multiple' => 'multiple']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('permission'))
@@ -107,9 +107,9 @@
                             {{ $errors->first('permission') }}
                         </p>
                     @endif
-                    </div>
-                    </div>
-                    
+                </div>
+            </div>
+    
         </form>
       </div>
           <div class="modal-footer">
@@ -134,11 +134,11 @@
                     <div class="modal-body">
                     <div class="form-group">
                       <label for="id">ID :</label>
-                      <b id="i2"/>
+                      <b id="i22"/>
                     </div>
                     <div class="form-group">
                       <label for="name">Descripcion :</label>
-                      <b id="d2"/>
+                      <b id="d22"/>
                     </div>
                     </div>
                     </div>

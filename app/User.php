@@ -3,6 +3,7 @@
 namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Notifications\MailResetPasswordToken;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
@@ -11,37 +12,19 @@ class User extends Authenticatable
 {
     use Notifiable;
     use HasRoles;
-
+  
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-
     protected $table= 'users';
     protected $primaryKey="id";
     
     public $timestamps=true;
     protected $fillable = [
-        'id',
-        'name', 
-        'email',
-        'email_verified_at',
-        'password',
-        'Apellido1',
-        'Apellido2',
-        'Telefono',
-        'Direccion',
-        'Fecha_Ingreso',
-        'Genero_Id',
-        'Rol_Id',
-        'estado_id'
-        
-
+        'name', 'email', 'password',
     ];
-
-
-
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -50,16 +33,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
     protected $casts = [
-        'Fecha_Ingreso' => 'Y-m-d H:i:s'
+        
+        'email_verified_at' => 'datetime',
+       
     ];
-    public function setPasswordAttribute($password)
+    public function sendPasswordResetNotification($token)
     {
-        $this->attributes['password'] = \Hash::make($password);
-    }
-    public function Genero() 
-    {
-        return $this->belongsTo(Genero::class ,'Genero_Id');
+        $this->notify(new MailResetPasswordToken($token));
     }
 
     public function role()

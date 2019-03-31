@@ -63,17 +63,13 @@
             data-Nombre="{{$value->name}}"
             data-email="{{$value->email}}"
             data-email="{{$value->password}}"
-            data-apellido1="{{$value->Apellido1}}"
-            data-apellido2="{{$value->Apellido2}}"
-            data-Telefono="{{$value->Telefono}}"
-            data-Direccion="{{$value->Direccion}}"
-            data-Fecha_Ingreso="{{$value->Fecha_Ingreso}}"
-            data-genero_id="{{$value->Genero->descripcion}}"
-            data-estado_id="{{$value->estado_id}}"><i class="glyphicon glyphicon-pencil"></i> </a>
+   ><i class="glyphicon glyphicon-pencil"></i> </a>
 
             <a href="#" class="delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" data-title="{{$value->name}}">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
+            </a>
+          
           </td>
         </tr>
       @endforeach
@@ -92,30 +88,13 @@
       <div class="modal-body">
         <form class="form-horizontal" role="form">
 
-   
-			<div class="form-group row add">
-            	<label for="id">Cedula</label>
-            	<input type="text" name="id" class="form-control" placeholder="Id_Usuario...">
-            </div>
+  
 			<div class="form-group row">
       <label for="name">Nombre</label>
 					<input type="text" name = "name"   class="form-control"  placeholder="Nombre...">
 			</div>
            
           
-            <div class="form-group row add">
-            	<label for="Apellido1">Primer apellido</label>
-				<input type="text" name="Apellido1" class="form-control" placeholder="Apellido1..." />
-            </div>
-            <div class="form-group row add">
-            	<label for="Apellido2">Segundo apellido</label>
-				<input type="text" name="Apellido2" class="form-control" placeholder="Apellido2..." />
-            </div>
-            <div class="form-group row add">
-            	<label for="Telefono">Telefono</label>
-				<input type="text" name="Telefono" class="form-control" placeholder="Telefono..." />
-            </div>
-            
             <div class="form-group row add">
 				<label for="email">{{ __('E-Mail Address') }}</label>
 					<input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required  placeholder="Correo...">
@@ -126,15 +105,7 @@
 						</span>
 					@endif
 			
-			</div>
-            <div class="form-group row add">
-            	<label for="Direccion">Direccion</label>
-				<input type="text" name="Direccion" class="form-control" placeholder="Direccion..." />
-            </div>
-            <div class="form-group row add">
-            	<label for="Fecha_Ingreso">Fecha Ingreso</label>
-				<input type="date" name="Fecha_Ingreso" class="form-control" placeholder="YYYY-MM-DD" />
-            </div>
+		
 			<div class="form-group row">
 				<label for="password">{{ __('Password') }}</label>
 
@@ -154,30 +125,6 @@
 					<input id="password-confirm" type="password" class="form-control" name="password_confirmation" required placeholder="Confirme Contraseña...">
 				</div>
 		
-            
-        <div class="form-group row add">
-        <div class="col-sm-6">
-          <label for="Genero_Id">Genero</label>
-					<select class="form-control" id="Genero_Id" name="Genero_Id">
-          <option value="Genero_Id">Seleccione</option>
-						@foreach ($generos as $gene)
-							<option value="{{$gene->id}}">{{ $gene->descripcion }}</option>
-						@endforeach						
-					</select>
-            </div>
-          </div>
-
-
-			<div class="form-group row add">
-            	<div class="col-md-6">
-				<label for="estado_id">Estado</label>
-				<div class="register-switch">
-      <input type="radio" name="estado_id" value="{{$estado_id=1}}" id="estado_id" class="register-switch-input" checked>
-      <label for="estado_id" class="register-switch-label">Activo</label>
-      <input type="radio" name="estado_id" value="{{$estado_id=0}}" id="estado_id" class="register-switch-input">
-      <label for="estado_id" class="register-switch-label">Inactivo</label>
-	</div> 
-    </div>
   
     <div class="form-group row add">
             	<div class="col-md-6">

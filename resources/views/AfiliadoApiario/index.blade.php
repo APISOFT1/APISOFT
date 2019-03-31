@@ -172,10 +172,10 @@ AFILIADO CON SUS APIARIO CREADO CORRECTAMENTE
   
            <label class="control-label col-sm-2" for="afiliado_id">Afiliado</label>
            <div class="col-sm-10">
-            <select name="name" id="afi" class="selectpicker with-ajax" data-live-search="true" multiple>
-            <option value="afi"></option>
+            <select name="name" id="afi"  class="form-control selectpicker" data-live-search="true">
+            <option  value="afi"></option>
                 @foreach($afiliados as $persona => $value  )
-                 <option value="{{$value->id}}">{{$value->id}} - {{$value->Nombre}} {{$value->apellido1}} {{$value->apellido2}}</option>
+                 <option  value="{{$value->id}}">{{$value->id}} - {{$value->Nombre}} {{$value->apellido1}} {{$value->apellido2}}</option>
                  @endforeach
                 
             </select>
