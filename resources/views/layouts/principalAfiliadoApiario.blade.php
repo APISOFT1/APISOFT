@@ -63,7 +63,9 @@
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Usuario/') }}">Gestionar Usuario</a></li>
-                      <li><a href="{{ url('/Rol/') }}">Gestionar Rol</a></li>
+                      <li><a href="{{ url('/roles/') }}">Gestionar Rol</a></li>
+                     <li><a href="{{ url('/permissions/') }}">Gestionar Permisos</a></li>
+                     <li><a href="{{ url('/users/') }}">Gestionar Users</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
@@ -265,16 +267,7 @@ success: function(data) {
     }
   });
 });
-$(".selectpicker")
-  .selectpicker()
-  .filter(".with-ajax")
-  .ajaxSelectPicker(options);
-$("select").trigger("change");
 
-function chooseSelectpicker(index, selectpicker) {
-  $(selectpicker).val(index);
-  $(selectpicker).selectpicker('refresh');
-}
 
 
 

@@ -59,7 +59,7 @@
               </div>
               <div class="profile_info">
                 <span>Bienvenido</span>
-                <h2>{{ Auth::user()->name }}</h2>
+            
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -72,9 +72,9 @@
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Usuario/') }}">Gestionar Usuario</a></li> 
-                     <li><a href="{{ url('/admin/roles/') }}">Gestionar Rol</a></li>
-                     <li><a href="{{ url('/admin/permissions/') }}">Gestionar Permisos</a></li>
-                     <li><a href="{{ url('/admin/users/') }}">Gestionar Users</a></li>
+                     <li><a href="{{ url('/roles/') }}">Gestionar Rol</a></li>
+                     <li><a href="{{ url('/permissions/') }}">Gestionar Permisos</a></li>
+                     <li><a href="{{ url('/users/') }}">Gestionar Users</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
@@ -219,62 +219,26 @@
     $('.modal-crear').text('Crear User');
     
   });
-  $(document).ready(function () {
-        // inicializamos el plugin
-        $('#roles').select2({
-            // Activamos la opcion "Tags" del plugin
-            tags: true,
-            tokenSeparators: [','],
-            ajax: {
-                dataType: 'json',
-                url: '{{ url("roles") }}',
-                delay: 250,
-                data: function(params) {
-                    return {
-                        term: params.term
-                    }
-                },
-                processResults: function (data, page) {
-                  return {
-                    results: data
-                  };
-                },
-            }
-        });
-    });
+
   $("#add").click(function() {
     $.ajax({
       type: 'POST',
       url: 'addUser',
       data: {
        
-        'id': $('input[name=id').val(),
+        '_token': $('input[name=_token]').val(),
         'name': $('input[name=name]').val(),
         'email': $('input[name=email]').val(),
         'password': $('input[name=password]').val(),
-        'Apellido1': $('input[name=Apellido1]').val(),
-        'Apellido2': $('input[name=Apellido2]').val(),
-        'Telefono': $('input[name=Telefono]').val(),
-        'Direccion': $('input[name=Direccion]').val(),
-        'Fecha_Ingreso': $('input[name=Fecha_Ingreso]').val(),
-        'Genero_Id': $('select[name=Genero_Id]').val(),
-        'estado_id': $('input[name=estado_id]').val(),
-       // 'roles[]'    : $('select[name= roles]').realize()
+        'roles'    : $('select[name= "roles[]"]').val()
       },
       success: function(data){
         if ((data.errors)) {
           $('.error').removeClass('hidden');
-          $('.error').text(data.errors.id);
           $('.error').text(data.errors.name);
           $('.error').text(data.errors.email);
           $('.error').text(data.errors.password);
-          $('.error').text(data.errors.Apellido1);
-          $('.error').text(data.errors.Apellido2);
-          $('.error').text(data.errors.Telefono);
-          $('.error').text(data.errors.Direccion);
-          $('.error').text(data.errors.Fecha_Ingreso);
-          $('.error').text(data.errors.Genero_Id);
-          $('.error').text(data.errors.estado_id);
+         
 
  
         } else {
@@ -283,66 +247,34 @@
           "<td>" + data.id + "</td>"+
           "<td>" + data.name + "</td>"+
           "<td>" + data.email + "</td>"+
-          "<td>" + data.password + "</td>"+
-          "<td>" + data.Apellido1 + "</td>"+
-          "<td>" + data.Apellido2 + "</td>"+
-          "<td>" + data.Telefono + "</td>"+
-          "<td>" + data.Direccion+ "</td>"+
-          "<td>" + data.Fecha_Ingreso+ "</td>"+
-          "<td>" + data.Genero_Id + "</td>"+
-          "<td>" + data.estado_id + "</td>"+
+          
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + 
           "' data-name='" + data.name + 
           "' data-email='" + data.email +
           "' data-password='" + data.password +
-          "'data-Apellido1='" + data.Apellido1 + 
-          "'data-Apellido2='" + data.Apellido2+
-           "'data-Telefono='" + data.Telefono +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-              "'data-Genero_Id='" + data.Genero_Id + 
-               "'data-estado_id='" + data.estado_id +
+          
  "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
  + data.id + 
            "' data-name='" + data.name + 
           "' data-email='" + data.email +
           "' data-password='" + data.password +
-          "'data-Apellido1='" + data.Apellido1 + 
-          "'data-Apellido2='" + data.Apellido2+
-           "'data-Telefono='" + data.Telefono +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-              "'data-Genero_Id='" + data.Genero_Id + 
-               "'data-estado_id='" + data.estado_id +
+          
  "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
  + data.id + 
               "' data-name='" + data.name + 
           "' data-email='" + data.email +
           "' data-password='" + data.password +
-          "'data-Apellido1='" + data.Apellido1 + 
-          "'data-Apellido2='" + data.Apellido2+
-           "'data-Telefono='" + data.Telefono +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-              "'data-Genero_Id='" + data.Genero_Id + 
-               "'data-estado_id='" + data.estado_id +
+      
 "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
          
         }
       },
     });
-    $('#id').val('');
     $('#name').val('');
     $('#email').val('');
     $('#password').val('');
-    $('#Apellido1').val('');
-    $('#Apellido2').val('');
-    $('#Telefono').val('');
-    $('#Direccion').val('');
-    $('#Fecha_Ingreso').val('');
-    $('#Genero_Id').val('');
-    $('#estado_id').val('');
+  
   });
 
 /*

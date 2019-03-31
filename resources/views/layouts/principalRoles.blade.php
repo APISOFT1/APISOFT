@@ -24,6 +24,8 @@
 <!--<link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>-->
 
  <!--   {!!Html::style ('/css/bootstrap-multiselect.css')!!} -->
+
+ <link href="toastr.css" rel="stylesheet"/>
     {!!Html::style ('/css2/bootstrap.min.css')!!} 
 
     {!!Html::style ('/css2/bootstrap-select.min.css')!!}   
@@ -31,6 +33,8 @@
     {!!Html::style ('/css2/select2.min.css')!!}
 
     {!!Html::style ('/css2/select2.css')!!}
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     
     <!-- Font Awesome -->
     {!!Html::style ('/css2/font-awesome.min.css')!!}
@@ -72,9 +76,9 @@
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Usuario/') }}">Gestionar Usuario</a></li> 
-                     <li><a href="{{ url('/admin/roles/') }}">Gestionar Rol</a></li>
-                     <li><a href="{{ url('/admin/permissions/') }}">Gestionar Permisos</a></li>
-                     <li><a href="{{ url('/admin/users/') }}">Gestionar Users</a></li>
+                     <li><a href="{{ url('/roles/') }}">Gestionar Rol</a></li>
+                     <li><a href="{{ url('/permissions/') }}">Gestionar Permisos</a></li>
+                     <li><a href="{{ url('/users/') }}">Gestionar Users</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
@@ -186,6 +190,8 @@
     {!!Html::script('/js2/custom.min.js')!!}
 
      {!!Html::script('/js2/dropdown.js')!!}
+     <script src="toastr.js"></script>
+     
 
     <!-- {!!Html::script('/js/jquery.min.js')!!}
 
@@ -211,6 +217,7 @@
 <!-- MODAL ROLES -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script type="text/javascript">
 
 {{-- ajax Form Add Post--}}
@@ -220,29 +227,7 @@
     $('.form-horizontal').show();
     $('.modal-descripcion').text('Crear Rol');
   });
-  $(document).ready(function () {
-        // inicializamos el plugin
-        $('#permissions').select2({
-            // Activamos la opcion "Tags" del plugin
-            tags: true,
-            tokenSeparators: [','],
-            ajax: {
-                dataType: 'json',
-                url: '{{ url("permissions") }}',
-                delay: 250,
-                data: function(params) {
-                    return {
-                        term: params.term
-                    }
-                },
-                processResults: function (data, page) {
-                  return {
-                    results: data
-                  };
-                },
-            }
-        });
-    });
+ 
   $("#add").click(function() {
     $.ajax({
       type: 'POST',
@@ -251,7 +236,10 @@
       data: {
         '_token': $('input[name=_token]').val(),
         'name': $('input[name=name]').val(),
-      'permissions': $('select[name=permissions').val(),
+        'permission'    : $('select[name= "permission[]"]').val(),
+
+    
+      
        
         
       },
@@ -263,6 +251,9 @@
  
         } else {
           $('.error').remove();
+         
+      toastr.success('Successfully added Post!', 'Success Alert', {timeOut: 5000});
+                   
           $('#table').append("<tr class='roles" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.name + "</td>"+
@@ -276,6 +267,7 @@
            + data.id + "' data-name='" + data.name + "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         }
+        alert("Se ha Creado el rol correcatamente "+data);
       },
     });
     $('#name').val('');
@@ -285,7 +277,7 @@
  
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
-$('#footer_action_button').text(" Editar Apiario");
+$('#footer_action_button').text(" Editar ");
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');

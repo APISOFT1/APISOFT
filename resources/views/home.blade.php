@@ -35,9 +35,11 @@
           @else
                             Usted no tiene los permisos suficientes 
                         @endcan
+          <li><a href=" {{url('/register/') }}">User prueba</a></li>
           <li><a href="{{ url('/RecepcionMateriaPrima/') }}">Planta</a></li>
           <li><a href="#testimonial">Acerca de Nosotros</a></li>
           <li><a href="#contact">Ubicacion</a></li>
+          <li><a href=" {{url('/register/') }}">User prueba</a></li>
         </ul>
         <button class="close-button" id="close-button">Cerrar</button>
     </div>
