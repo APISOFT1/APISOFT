@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UsuarioFormRequest;
 
 
-class UserController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.

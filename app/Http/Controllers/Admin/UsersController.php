@@ -82,15 +82,8 @@ class UsersController extends Controller
         $users->name = $request->name;
         $users->email = $request->email;
         $users->password = $request->password;
-        $users->Apellido1 = $request->Apellido1;
-        $users->Apellido2 = $request->Apellido2;
-        $users->Telefono = $request->Telefono;
-        $users->Direccion = $request->Direccion;
-        $users->Fecha_Ingreso = $request->Fecha_Ingreso;
-        $users->Genero_Id = $request->Genero_Id;
-        $users->estado_id = $request->estado_id;
         $roles = $request->input('roles') ? $request->input('roles') : [];
-        $users->assignRole($roles);
+        $users->syncRoles($roles);
         $users->save();
       return response()->json($users);
       }

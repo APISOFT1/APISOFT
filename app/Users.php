@@ -18,8 +18,8 @@ class Users extends Model
      *
      * @var array
      */
-    public  $incrementing=false;  // para quitar que le de 0
-    protected $table= 'user';
+
+    protected $table= 'users';
     protected $primaryKey="id";
     
     public $timestamps=true;
@@ -34,7 +34,11 @@ class Users extends Model
         'Genero_Id',
         'estado_id'
         
+
     ];
+
+
+
     /**
      * The attributes that should be hidden for arrays.
      *

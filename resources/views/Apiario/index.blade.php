@@ -210,21 +210,6 @@
   </div>
 </div>
 
-<script type="text/javascript">
-  $('#city').change(function(){
-      var id_country = $(this).val();
-      var token = $("input[name='_token']").val();
-      $.ajax({
-          url:'addApiario',
-          method: 'POST',
-          data: {id_country:id_country, _token:token},
-          success: function(data) {
-            $("select[name='ubicacion_id'").html('');
-            $("select[name='ubicacion_id'").html(data.options);
-          }
-      });
-  });
-</script>
 
 @else
                             Usted no tiene los permisos suficientes 
