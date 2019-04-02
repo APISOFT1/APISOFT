@@ -20,7 +20,7 @@ class Users extends Authenticatable
 
     protected $table= 'users';
     protected $primaryKey="id";
-    
+    public $incrementing =false;
     public $timestamps=true;
     protected $fillable = [
         'id',
@@ -54,5 +54,15 @@ class Users extends Authenticatable
     {
         return $this->BelongsTo(Rol::class,'Rol_Id');
     }
-   
+       protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new MailResetPasswordToken($token));
+    }
+      protected $hidden = [
+        'password', 'remember_token',
+    ];
+
 }
