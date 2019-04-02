@@ -77,8 +77,4 @@
 	<script src="/js/main3.js"></script>
 
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> develop

@@ -71,7 +71,7 @@
                     </div>
                     
                     <div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input   id="password-confirm" class="input100"  name="password_confirmation" required>
+						<input  type="password"  id="password-confirm" class="input100"  name="password_confirmation" required>
 						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
 					</div>
 					<div class="container-login100-form-btn m-t-32">
