@@ -11,7 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
-    use HasRoles;
+   // use HasRoles;
   
     /**
      * The attributes that are mass assignable.
