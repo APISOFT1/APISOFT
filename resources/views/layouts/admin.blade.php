@@ -19,6 +19,26 @@
     <!-- Styles -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Apisoft | www.Apisoft.com</title>
+
+
+
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
     <!-- Tell the browser to be responsive to screen width -->
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
@@ -69,7 +89,7 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <small class="bg-red"></small>
-                  <span class="hidden-xs">{{ Auth::user()->name }} </span>
+                
                 </a>
                 <ul class="dropdown-menu">
               
@@ -232,12 +252,180 @@
         <strong>Apisoft &copy; 2019-2020 <a href="www.Apisoft.com">Ingenieria</a>.</strong> All rights reserved.
       </footer>
 
-      
+       <!-- AdminLTE App -->
+    <script src="{{asset('js/app.min.js')}}"></script>
     <!-- jQuery 2.1.4 -->
     <script src="{{asset('js/jQuery-2.1.4.min.js')}}"></script>
     @stack('scripts')
     <!-- Bootstrap 3.3.5 -->
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
+<<<<<<< HEAD
+   
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+{{-- ajax Form Add Post--}}
+  $(document).on('click','.create-modal', function() {
+    $('#create').modal('show');
+    $('.form-horizontal').show();
+    $('.modal-descripcion').text('Crear Rol');
+  });
+  $("#add").click(function() {
+    $.ajax({
+      type: 'POST',
+      url: 'addRol',
+      data: {
+        '_token': $('input[name=_token]').val(),
+        'descripcion': $('input[name=descripcion]').val()
+      },
+      success: function(data){
+        if ((data.errors)) {
+          $('.error').removeClass('hidden');
+          $('.error').text(data.errors.descripcion);
+ 
+        } else {
+          $('.error').remove();
+          $('#table').append("<tr class='rol" + data.id + "'>"+
+          "<td>" + data.id + "</td>"+
+          "<td>" + data.descripcion + "</td>"+
+          "<td>" + data.created_at + "</td>"+
+          "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
+          data.id + "' data-descripcion='" + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+          "</tr>");
+        }
+      },
+    });
+    $('#descripcion').val('');
+
+  });
+
+// function Edit POST
+$(document).on('click', '.edit-modal', function() {
+$('#footer_action_button').text(" Editar Rol");
+$('#footer_action_button').addClass('glyphicon-check');
+$('#footer_action_button').removeClass('glyphicon-trash');
+$('.actionBtn').addClass('btn-success');
+$('.actionBtn').removeClass('btn-danger');
+$('.actionBtn').addClass('edit');
+$('.modal-descripcion').text('Editar Rol');
+$('.deleteContent').hide();
+$('.form-horizontal').show();
+$('#fid').val($(this).data('id'));
+$('#ti').val($(this).data('descripcion'));
+$('#myModal').modal('show');
+});
+
+$('.modal-footer').on('click', '.edit', function() {
+  $.ajax({
+    type: 'POST',
+    url: 'editRol',
+    data: {
+'_token': $('input[name=_token]').val(),
+'id': $("#fid").val(),
+'descripcion': $('#ti').val(),
+
+    },
+success: function(data) {
+      $('.rol' + data.id).replaceWith(" "+
+      "<tr class='rol" + data.id + "'>"+
+      "<td>" + data.id + "</td>"+
+  
+      "<td>" + data.created_at + "</td>"+
+ "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id +
+  "' data-descripcion='" + data.descripcion +
+   "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
+   + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+      "</tr>");
+    }
+  });
+});
+
+// form Delete function
+$(document).on('click', '.delete-modal', function() {
+$('#footer_action_button').text(" Delete");
+$('#footer_action_button').removeClass('glyphicon-check');
+$('#footer_action_button').addClass('glyphicon-trash');
+$('.actionBtn').removeClass('btn-success');
+$('.actionBtn').addClass('btn-danger');
+$('.actionBtn').addClass('delete');
+$('.modal-title').text('Delete Post');
+$('.id').text($(this).data('id'));
+$('.deleteContent').show();
+$('.form-horizontal').hide();
+$('.title').html($(this).data('descripcion'));
+$('#myModal').modal('show');
+});
+
+$('.modal-footer').on('click', '.delete', function(){
+  $.ajax({
+    type: 'POST',
+    url: 'deleteRol',
+    data: {
+      '_token': $('input[name=_token]').val(),
+      'id': $('.id').text()
+    },
+    success: function(data){
+       $('.rol' + $('.id').text()).remove();
+    }
+  });
+});
+
+  // Show function
+  $(document).on('click', '.show-modal', function() {
+  $('#show').modal('show');
+  $('#i').text($(this).data('id'));
+  $('#di').text($(this).data('descripcion'));
+  $('.modal-title').text('Show Post');
+  });
+
+
+
+  function mostrar(id) {
+    if (id == "estudiante") {
+        $("#estudiante").show();
+        $("#trabajador").hide();
+        $("#autonomo").hide();
+        $("#paro").hide();
+    }
+
+    if (id == "trabajador") {
+        $("#estudiante").hide();
+        $("#trabajador").show();
+        $("#autonomo").hide();
+        $("#paro").hide();
+    }
+
+    if (id == "autonomo") {
+        $("#estudiante").hide();
+        $("#trabajador").hide();
+        $("#autonomo").show();
+        $("#paro").hide();
+    }
+
+    if (id == "paro") {
+        $("#estudiante").hide();
+        $("#trabajador").hide();
+        $("#autonomo").hide();
+        $("#paro").show();
+    }
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+    
+=======
 
     <script src="{{asset('js/bootstrap-select.min.js')}}"></script>
     <!-- AdminLTE App -->
@@ -254,5 +442,6 @@
     <body>
 
 
+>>>>>>> develop
   </body>
 </html>

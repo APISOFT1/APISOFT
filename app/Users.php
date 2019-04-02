@@ -1,26 +1,27 @@
 <?php
 
 namespace App;
+
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\MailResetPasswordToken;
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Users extends Authenticatable 
+class Users extends Model
 {
     use Notifiable;
-    use HasRoles;
-
+  
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-
-    protected $table= 'users';
+    public  $incrementing=false;  // para quitar que le de 0
+    protected $table= 'user';
     protected $primaryKey="id";
-    public $incrementing =false;
+    
     public $timestamps=true;
     protected $fillable = [
         'id',
@@ -31,14 +32,9 @@ class Users extends Authenticatable
         'Direccion',
         'Fecha_Ingreso',
         'Genero_Id',
-        'Rol_Id',
         'estado_id'
         
-
     ];
-
-
-
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -49,20 +45,5 @@ class Users extends Authenticatable
     {
         return $this->belongsTo(Genero::class ,'Genero_Id');
     }
-
-    public function Rol() 
-    {
-        return $this->BelongsTo(Rol::class,'Rol_Id');
-    }
-       protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new MailResetPasswordToken($token));
-    }
-      protected $hidden = [
-        'password', 'remember_token',
-    ];
-
+    
 }

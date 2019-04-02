@@ -29,12 +29,17 @@
         <a class="navbar-brand logo-right" href="welcome/javascript:void(0)"><i class="mdi-image-timelapse"></i>APISOFT</a>
       </div>
         <ul class="nav navbar-nav main-navigation">
-          <li class="active"><a href="#home">Inicio</a></li>
-          <li><a href="{{ url('/Usuario/') }}">Administrador</a></li>
+          <li class="active"><a href="">Inicio</a></li>
+          @can('permisos')
+          <li><a href="{{ url('users/') }}">Administrador</a></li>
+          @else
+                            Usted no tiene los permisos suficientes 
+                        @endcan
           <li><a href=" {{url('/register/') }}">User prueba</a></li>
           <li><a href="{{ url('/RecepcionMateriaPrima/') }}">Planta</a></li>
           <li><a href="#testimonial">Acerca de Nosotros</a></li>
           <li><a href="#contact">Ubicacion</a></li>
+          <li><a href=" {{url('/register/') }}">User prueba</a></li>
         </ul>
         <button class="close-button" id="close-button">Cerrar</button>
     </div>
@@ -48,7 +53,7 @@
             <div class="navbar navbar-inverse sticky-navigation navbar-fixed-top" role="navigation" data-spy="affix" data-offset-top="200">
               <div class="container">
                 <div class="navbar-header">
-                  <a class="logo-left " href="index.html"><i class="mdi-image-timelapse"></i>APISOFT</a>
+                  <a class="logo-left " href=""><i class="mdi-image-timelapse"></i>APISOFT</a>
                 </div>
                 <div class="navbar-right">
                   <button class="menu-icon"  id="open-button">
@@ -60,7 +65,7 @@
         </div>        
         <div class="contents text-right">
             <h1 class="wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="300ms">Hola , {{ auth()->user()->name }}</h1>
-           @role('Admin') <h2> Soy admin  </h2>@endrole 
+         
   
         <a href="{{ url('/logout/') }}" class="btn btn-lg btn-border wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">Logout</a>
         </div>   
@@ -68,116 +73,29 @@
 
 
 
-   
-
-
-   
-    <section id="contact">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="300ms">
-            <h2 class="section-title">Aquí estamos!</h2>
-            <div class="row">
-              <div class="col-md-6 col-sm-6">
-                <div class="info">
-                  <div class="icon">
-                    <i class="mdi-maps-map"></i>
-                  </div>
-                  <h4>Locaci�n</h4>
-                  <p>Nicoya, Guanacaste</p>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-6">
-                <div class="info">
-                  <div class="icon">
-                    <i class="mdi-content-mail"></i>
-                  </div>
-                  <h4>Correo</h4>
-                  <p>apicultoresNicoya@gmail.com</p>
-                </div>
-              </div>
-              <div class="clear"></div>
-              <div class="col-md-6 col-sm-6">
-                <div class="info">
-                  <div class="icon">
-                    <i class="mdi-action-settings-phone"></i>
-                  </div>
-                  <h4>Numero Telefonico</h4>
-                  <p>2685-02-02</p>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-6">
-                <div class="info">
-                  <div class="icon">
-                    <i class="mdi-action-thumb-up"></i>
-                  </div>
-                  <h4>Redes sociales</h4>
-                  <p>Apicultores Nicoya</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>    
-
-    <div class="map-area">      
-      <div class="map">
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6853.31334931688!2d149.5710983929677!3d-33.43399308961885!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0x63680231a1016da2!2sWestern+Region+Academy+of+Sport!5e0!3m2!1sen!2sbd!4v1436826340086" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
-       </div>
-    </div>
-
-    <section id="footer">
+    <section id="footer" >
       <div class="container">
         <div class="container">
           <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <h3>Products</h3>
+               <h3>   APPIS Chorotega</h3>
               <ul>
-                <li><a href="http://wingthemes.com/">WingThemes</a>
-                </li>
-                <li><a href="http://graygrids.com/">Graygrids</a>
-                </li>
-                <li><a href="http://wpbean.com/">WPBean</a>
-                </li>
-                <li><a href="http://landingbow.com/">Landingbow</a>
-                </li>
-                <li><a href="http://freebiescircle.com/">FreebiesCicle</a>
-                </li>               
+               <!-- <img src="/welcome/img/APPIS.jpeg"> -->
               </ul>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <h3>FAQs</h3>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+            </div>
+            </div>
+           
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <h3>Asociacion de Apicultores Región Chorotega</h3>
+                Todos los derechos reservados<br>
               <ul>
-                <li><a href="#">Why choose us?</a>
-                </li>
-                <li><a href="#">Where we are?</a>
-                </li>
-                <li><a href="#">Fees</a>
-                </li>
-                <li><a href="#">Guarantee</a>
-                </li>
-                <li><a href="#">Discount</a>
-                </li>
+              
               </ul>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <h3>About</h3>
-              <ul>
-                <li><a href="#">Career</a>
-                </li>
-                <li><a href="#">Partners</a>
-                </li>
-                <li><a href="#">Team</a>
-                </li>
-                <li><a href="#">Clients</a>
-                </li>
-                <li><a href="#">Contact</a>
-                </li>
-              </ul>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <h3>Find us on</h3>
               <a class="social" href="#" target="_blank"><i class="fa fa-facebook"></i></a>
               <a class="social" href="#" target="_blank"><i class="fa fa-twitter"></i></a>
               <a class="social" href="#" target="_blank"><i class="fa fa-google-plus"></i></a>
@@ -196,9 +114,7 @@
         <div class="row">
           <div class="col-md-12">
             <p class="copyright-text">
-             � Pluto 2015 All right reserved. Designed and Developed by 
-              <a href="http://graygrids.com/">
-                GrayGrids
+               APISOFT©Copyright ©2019 All rights reserved.
               </a>
             </p>
           </div>

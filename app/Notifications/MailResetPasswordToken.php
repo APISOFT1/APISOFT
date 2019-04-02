@@ -22,7 +22,6 @@ class MailResetPasswordToken extends Notification
     {
         $this->token = $token;
     }
-
     /**
      * Get the notification's delivery channels.
      *
@@ -33,7 +32,6 @@ class MailResetPasswordToken extends Notification
     {
         return ['mail'];
     }
-
     /**
      * Get the mail representation of the notification.
      *
@@ -48,5 +46,4 @@ class MailResetPasswordToken extends Notification
                     ->action('Reestablecer contraseña', url('password/reset', $this->token))
                     ->line('Este link exipira en 60 minutos');
     }
-
 }

@@ -22,9 +22,9 @@
 @can('Crear Afiliado')
 
 <!--Esta clase nos permite posicionar el buscador  -->
-<div class="absolute3">
+
 		@include('Apiario.search') 
-</div>
+
 
 <div class="table-responsive">
 			<table class="table table-striped table-bordered table-condensed table-hover">
@@ -100,19 +100,13 @@
               <p class="error text-center alert alert-danger hidden"></p>
             </div>
           </div>
-					<div class="form-group row add">
-        
-          <label class="control-label col-sm-2" for="ubicacion_id">Ubicacion</label>
-          <div class="col-sm-10">
-					<select class="form-control" id="ubicacion_id" name="ubicacion_id">
-          <option value="">Seleccione</option>
-						@foreach ($ubicaciones as $ubicacion)
-							<option value="{{ $ubicacion->id }}">{{ $ubicacion->Descripcion }}</option>
-						@endforeach						
-					</select>
-            </div>
-          </div>
-
+          <label for="roll">ubicacion <span class="required">*</span></label>
+        <select name="ubicacion_id" class="form-control" id="ubicacion_id">
+         <option value="">-- Select ubicacion --</option>
+         @foreach ($ubicaciones as $ubicacion)
+          <option value="{{ $ubicacion->id }}">{{$ubicacion->Descripcion}}</option>
+         @endforeach
+        </select>
         </form>
       </div>
           <div class="modal-footer">
@@ -141,6 +135,7 @@
                     </div>
                     <div class="form-group">
                       <label for="">Descripcion :</label>
+                      
                       <b id="d2"/>
                     </div>
 										<div class="form-group">
@@ -148,6 +143,7 @@
                       <b id="ca2"/>
                     </div>
 										<div class="form-group">
+                   
                       <label for="">Ubicacion :</label>
                       <b id="ub2"/>
                     </div>
@@ -186,12 +182,14 @@
             </div>
           </div>
 
-					<div class="form-group">
-            <label class="control-label col-sm-2"for="ubicacion_id">Ubicacion</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="ub">
-            </div>
-          </div>
+          <label for="roll">ubicacion <span class="required">*</span></label>
+        <select name="name" class="form-control" id="ub">
+         <option value="">-- Select ubicacion --</option>
+         @foreach ($ubicaciones as $ubicacion)
+          <option value="{{ $ubicacion->id }}">{{$ubicacion->Descripcion}}</option>
+         @endforeach
+        </select>
+					
 
         </form>
                 {{-- Form Delete Post --}}
@@ -211,6 +209,22 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $('#city').change(function(){
+      var id_country = $(this).val();
+      var token = $("input[name='_token']").val();
+      $.ajax({
+          url:'addApiario',
+          method: 'POST',
+          data: {id_country:id_country, _token:token},
+          success: function(data) {
+            $("select[name='ubicacion_id'").html('');
+            $("select[name='ubicacion_id'").html(data.options);
+          }
+      });
+  });
+</script>
 
 @else
                             Usted no tiene los permisos suficientes 

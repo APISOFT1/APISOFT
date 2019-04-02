@@ -38,7 +38,7 @@
         <div class="col-md-3 left_col menu_fixed">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="{{ url('/admin') }}" class="site_title">
+              <a href="{{ url('/Afiliado') }}" class="site_title">
                 <i class="glyphicon glyphicon-home"></i> <span>AAPIS Chorotega</span>
               </a>
             </div>
@@ -63,14 +63,15 @@
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Usuario/') }}">Gestionar Usuario</a></li>
-                      <li><a href="{{ url('/admin/roles/') }}">Gestionar Rol</a></li>
-                     <li><a href="{{ url('/admin/permissions/') }}">Gestionar Permisos</a></li>
-                     <li><a href="{{ url('/admin/users/') }}">Gestionar users</a></li>
+                      <li><a href="{{ url('roles/') }}">Gestionar Rol</a></li>
+                     <li><a href="{{ url('permissions/') }}">Gestionar Permisos</a></li>
+                     <li><a href="{{ url('users/') }}">Gestionar users</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
+                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicacion</a></li>
                       <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
                       <li><a href="{{ url('/Apiario/') }}">Gestionar Apiaro</a></li>
                     
@@ -185,11 +186,12 @@
     $.ajax({
       type: 'POST',
       url: 'addApiario',
+      
       data: {
         '_token': $('input[name=_token]').val(),
         'Descripcion': $('input[name=Descripcion]').val(),
         'cantidad': $('input[name=cantidad]').val(),
-        'ubicacion_id': $('input[name=ubicacion_id]').val()
+        'ubicacion_id': $('select[name=ubicacion_id]').val()
         
       },
       success: function(data){

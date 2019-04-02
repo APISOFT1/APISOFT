@@ -77,7 +77,7 @@
 					<div class="container-login100-form-btn m-t-32">
 						<button  type="submit"  {{ __('Register') }} class="login100-form-btn"> Registrarse </button>			
 					</div>
-					
+				
 				
 				</form>
 			</div>

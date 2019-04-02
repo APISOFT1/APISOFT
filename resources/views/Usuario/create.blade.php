@@ -13,16 +13,13 @@
 			</div>
 			@endif
 
-			{!!Form::open(array('url'=>'Usuario','method'=>'POST','autocomplete'=>'off'))!!}
-			{{Form::token()}}
-			<div class="container">
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="email">Cedula</label>
-      <div class="col-sm-10">
-        <input type="email" class="form-control" id="Id_Usuario" placeholder="Enter email" name="email">
-      </div>
-    </div>
-    
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>×</span>
+                </button>
+                <h4>Crear</h4>
+            </div>
+            
    
 			<div class="form-group">
             	<label for="id">Cedula</label>
@@ -119,6 +116,17 @@
 					</select>
 				</div>
             </div>
+
+				<div class="form-group">
+            	<div class="col-md-6">
+				<label for="Estado_Id">Estado</label>
+					<select class="form-control" id="Estado_Id" name="Estado_Id">
+						@foreach ($Estados as $Estado)
+							<option value="{{ $Estado->id}}">{{ $Estado->Descripcion}}</option>
+						@endforeach						
+					</select>
+				</div>
+            </div>
             
 			<div class="form-group">
             	<div class="col-md-6">
@@ -138,8 +146,8 @@
             	<button class="btn btn-danger" type="reset">Cancelar</button>
             </div>
 
-			{!!Form::close()!!}		
-            
-		</div>
-	</div>
-@endsection
+			{!!Form::close()!!}	
+           
+        </div>
+    </div>
+</div>

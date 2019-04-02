@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Genero;
 use App\Rol;
+use App\Estado;
 
 
 
@@ -21,121 +22,100 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-  
     public function index(Request $request)
     {
+       
+       if($request){
         $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-        $usuarios = User::with('Genero', 'Rol') 
+        $users= User::with('Genero') 
             ->where('name','LIKE','%'.$query.'%')
             ->orderby('id','desc')
             ->paginate(7);
-         
-        return view('Usuario.index', ['usuarios'=>$usuarios,"searchText"=>$query]);
+
+            $generos = Genero::all();
+          
+            $roles = Role::get()->pluck('name', 'name');
+            return view('users.index', compact('users', 'roles', 'generos'), ['users'=>$users,"searchText"=>$query]);
+    }
+        
+        return view('users.index', compact('users', 'roles','generos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $Generos = Genero::all();
-       
-       $Rols = Rol::all();
 
-      
-
-        
-        
     
-        return view("Usuario.create",  ["Rols"=> $Rols ,
-        "Generos"=>$Generos]);
+    public function addUser(Request $request){
+        $rules = array(
+    
+          'id' => 'required',
+          'name' => 'required',
+          'email' => 'required',
+          'password' => 'required',
+          
+        
+        );
+      $validator = Validator::make ( Input::all(), $rules);
+      if ($validator->fails())
+      return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
+    
+      else {   
+        $users = new User;
+        $users->id= $request->id;
+        $users->name = $request->name;
+        $users->Apellido1 = $request->Apellido1;
+        $users->Apellido2 = $request->Apellido2;
+        $users->Telefono = $request->Telefono;
+        $users->Direccion = $request->Direccion;
+        $users->Fecha_Ingreso = $request->Fecha_Ingreso;
+        $users->Genero_Id = $request->Genero_Id;
+        $users->estado_id = $request->estado_id;
+      
+        $users->save();
+        return response()->json($users);
+      }
     }
-
     /**
-     * Store a newly created resource in storage.
+     * Show the form for creating new User.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UsuarioFormRequest $request)
-    {
-        $usuario = User::create($request->all());
 
-        return redirect('Usuario');  
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Usuario  $usuario
-     * @return \Illuminate\Http\Response
-     */
-    public function show( $id)
-    {
-        return view ("Usuario.show",["usuarios"=>User::findOrFail($id)]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Usuario  $usuario
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
 
      
-        $Generos = Genero::all();
-       
-       $Rols = Rol::all();
+    public function editUser(request $request){
+        $rules = array(
+        );
+      $validator = Validator::make ( Input::all(), $rules);
+      if ($validator->fails())
+      return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
+      
+      else {
+        $users = User::find ($request->id);
+      
+        $users->id= $request->id;
+        $users->name = $request->name;
+        $users->Apellido1 = $request->Apellido1;
+        $users->Apellido2 = $request->Apellido2;
+        $users->Telefono = $request->Telefono;
+        $users->Direccion = $request->Direccion;
+        $users->Fecha_Ingreso = $request->Fecha_Ingreso;
+        $users->Genero_Id = $request->Genero_Id;
+        $users->estado_id = $request->estado_id;
+        $users->save();
+      return response()->json($users);
+      }
+      }
 
 
-        
-        return view('Usuario.edit',["usuarios"=>User::findOrFail($id)], ["Rols"=> $Rols, 
-        "Generos"=> $Generos]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Usuario  $usuario
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UsuarioFormRequest $request, $id)
+    public function massDestroy(Request $request)
     {
-      $usuario =User::findOrFail($id);
-    
-      $usuario->name=$request->get('name');
-      $usuario->email=$request->get('email');
-      $usuario->password=$request->get('password');
-      $usuario->Apellido1=$request->get('Apellido1');
-  	  $usuario->Apellido2=$request->get('Apellido1');
-      $usuario->Telefono=$request->get('Telefono');
-      $usuario->Direccion=$request->get('Direccion');
-  	  $usuario->Fecha_Ingreso=$request->get('Fecha_Ingreso');
-	  $usuario->Genero_Id=$request->get('Genero_Id');
-      $usuario->Rol_Id=$request->get('Rol_Id');
-      $usuario->estado_id=$request->get('estado_id');
-      $usuario->update();  
-
-      return redirect('Usuario');
-        
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Usuario  $usuario
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $usuario=User::findOrFail($id);
-        $usuario->delete();
-        return redirect('Usuario');
+        if (! Gate::allows('users_manage')) {
+            return abort(401);
+        }
+        if ($request->input('ids')) {
+            $entries = User::whereIn('id', $request->input('ids'))->get();
+            foreach ($entries as $entry) {
+                $entry->delete();
+            }
+        }
     }
 }
-
