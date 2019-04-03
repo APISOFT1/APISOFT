@@ -15,17 +15,19 @@ Route::get('/', function () {
     return view('welcome');
   
 });
- Auth::routes();
+Auth::routes();
 Auth::routes(['verify' => true]);
 
-Route::group(['middleware' =>['auth',  'verified']], function () {
- 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
- if ($options['register'] ?? true) {
-        $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-        $this->post('register', 'Auth\RegisterController@register');
-    }
+
+//Route::group(['middleware' =>['auth',  'verified']], function () {
+  
+  Route::get('/home', 'HomeController@index')->name('home');
+  Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+   if ($options['register'] ?? true) {
+          $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+          $this->post('register', 'Auth\RegisterController@register');
+      }
+
   Route::resources([
 'Estanon'=>'EstanonController',
 'Genero'=>'GeneroController',
@@ -58,8 +60,8 @@ Route::POST('editAfiliado','AfiliadoController@editAfiliado');
 Route::POST('deleteAfiliado','AfiliadoController@deleteAfiliado');
 
 Route::POST('addPermissions','Admin\PermissionsController@addPermissions');
-Route::POST('editUser','Admin\UsersController@editUser');
-Route::POST('deleteUser','Admin\UsersController@deleteUser');
+Route::POST('ediPermissions','Admin\PermissionsController@ediPermissions');
+Route::POST('deletePermissions','Admin\PermissionsController@deletePermissions');
 
 Route::POST('addRole','Admin\RolesController@addRole');
 Route::POST('editRol','Admin\RolesController@editRole');
@@ -83,6 +85,5 @@ Route::POST('addUbicacion','UbicacionController@addUbicacion');
 Route::POST('editUbicacion','UbicacionController@editUbicacion');
 Route::POST('deleteUbicacion','UbicacionController@deleteUbicacion');
 
-});
-
-
+//});
+ 

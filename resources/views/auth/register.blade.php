@@ -74,10 +74,22 @@
 						<input   id="password-confirm" class="input100"  name="password_confirmation" required>
 						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
 					</div>
+
+					<div class="col-md-6">
+                    {!! Form::label('roles', 'Roles*', ['class' => 'control-label']) !!}
+                    {!! Form::select('roles[]', $roles, old('roles'), ['class' => 'form-control select2', 'multiple' => 'multiple', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('roles'))
+                        <p class="help-block">
+                            {{ $errors->first('roles') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
 					<div class="container-login100-form-btn m-t-32">
 						<button  type="submit"  {{ __('Register') }} class="login100-form-btn"> Registrarse </button>			
 					</div>
-				
+					
 				
 				</form>
 			</div>

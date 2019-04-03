@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+
+
 use Illuminate\Support\Facades\Auth;
 
 use Spatie\Permission\Models\Role;
 
-use Spatie\Permission\Models\Permission;
-class HomeController extends Controller
+use Spatie\Permission\Models\Permission;class HomeController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -24,12 +24,13 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-     
-        
+//  Permission::create(['name'=>'Crear Afiliado']);
+     // auth()->user()->givePermissionTo('Crear Afiliado');
+    // auth()->user()->assignRole('Admin');
         return view('home');
     }
 }

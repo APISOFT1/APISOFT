@@ -49,51 +49,38 @@ public function addPermissions(Request $request){
  
   }
 }
+
     
-    public function edit($id)
-    {
-       // if (! Gate::allows('users_manage')) {
-            //return abort(401);
-        //}
-        $permission = Permission::findOrFail($id);
-        return view('permissions.edit', compact('permission'));
-    }
-    /**
-     * Update Permission in storage.
-     *
-     * @param  \App\Http\Requests\UpdatePermissionsRequest  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdatePermissionsRequest $request, $id)
-    {
-       // if (! Gate::allows('users_manage')) {
-         //   return abort(401);
-       // }
-        $permission = Permission::findOrFail($id);
-        $permission->update($request->all());
-        return redirect()->route('permissions.index');
-    }
-    /**
-     * Remove Permission from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //if (! Gate::allows('users_manage')) {
-          //  return abort(401);
-      //  }
-        $permission = Permission::findOrFail($id);
-        $permission->delete();
-        return redirect()->route('permissions.index');
-    }
-    /**
-     * Delete all selected Permission at once.
-     *
-     * @param Request $request
-     */
+public function editPermissions(request $request){
+  $rules = array(
+    'name' => 'required'
+  );
+$validator = Validator::make ( Input::all(), $rules);
+if ($validator->fails())
+return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
+
+else {
+
+  $permission = Permission::findOrFail($id);
+  $permission->update($request->all());
+   $permission->save();
+return response()->json($permission);
+}
+}
+
+  /**
+   * Store a newly created Role in storage.
+   *
+   * @param  \App\Http\Requests\StoreRolesRequest  $request
+   * @return \Illuminate\Http\Response
+   */
+  
+  /**
+   * Delete all selected Role at once.
+   *
+   * @param Request $request
+   */
+  
     public function massDestroy(Request $request)
     {
        // if (! Gate::allows('users_manage')) {
