@@ -33,7 +33,7 @@ Route::group(['middleware' =>['auth',  'verified']], function () {
 'Genero'=>'GeneroController',
 'EstadoCivil'=>'EstadoCivilController',
 'Ubicacion'=>'UbicacionController',
-
+'Afiliado' => 'AfiliadoController',
 'AfiliadoApiario'=>'AfiliadoApiarioController',
 'Apiario' => 'ApiarioController',
 'Usuario'=>'UserController',
@@ -76,10 +76,13 @@ Route::POST('addAfiliadoApiario','AfiliadoApiarioController@addAfiliadoApiario')
 Route::POST('editApiario','ApiarioController@editApiario');
 Route::POST('deleteApiario','ApiarioController@deleteApiario');
 
-Route::POST('addUser','Admin\UsersController@addUser');
+
 Route::POST('editUser','Admin\UsersController@editUser');
 Route::POST('deleteUser','Admin\UsersController@deleteUser');
 
+Route::POST('addUser','Auth\RegisterController@addUser');
+Route::POST('editUser','Admin\UsersController@editUser');
+Route::POST('deleteUser','Admin\UsersController@deleteUser');
 
 Route::POST('addUbicacion','UbicacionController@addUbicacion');
 Route::POST('editUbicacion','UbicacionController@editUbicacion');
