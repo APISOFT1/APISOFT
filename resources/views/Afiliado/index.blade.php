@@ -22,7 +22,7 @@
 <!-- Fin de salto de linea. No necesita una etiqueta de cierre-->
 
 <!--Esta clase nos permite posicionar el buscador  -->
-@can('Crear Afiliado')
+
 <div class="absolute3">
 		@include('Afiliado.search') 
 
@@ -385,7 +385,5 @@
     </div>
   </div>
 </div>
-@else
-                            Usted no tiene los permisos suficientes 
-                        @endcan
+
 @endsection
