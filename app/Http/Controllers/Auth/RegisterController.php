@@ -38,13 +38,7 @@ class RegisterController extends Controller
         
     }
 
-    public function register()
-    {
-        $roles = Role::get()->pluck('name', 'name');
-
-        return view('register', compact('roles'));
-    }
-
+  
     /**
      * Get a validator for an incoming registration request.
      *
@@ -65,21 +59,16 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(StoreUsersRequest $request)
+    protected function create(array $data)
     {
-        $user = User::create([
+        return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
 
             'password' => Hash::make($data['password']),
         ]);
 
-        $roles = Role::get()->pluck('name', 'name');
-        $roles = $request->input('roles') ? $request->input('roles') : [];
-        $user->assignRole($roles);
-       $user->roles()->save($roles);
-     return $user ;
-     return $roles;
+      
     }
 
 }

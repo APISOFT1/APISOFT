@@ -19,7 +19,7 @@ Auth::routes();
 Auth::routes(['verify' => true]);
 
 
-//Route::group(['middleware' =>['auth',  'verified']], function () {
+Route::group(['middleware' =>['auth',  'verified']], function () {
   
   Route::get('/home', 'HomeController@index')->name('home');
   Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
@@ -85,5 +85,5 @@ Route::POST('addUbicacion','UbicacionController@addUbicacion');
 Route::POST('editUbicacion','UbicacionController@editUbicacion');
 Route::POST('deleteUbicacion','UbicacionController@deleteUbicacion');
 
-//});
+});
  
