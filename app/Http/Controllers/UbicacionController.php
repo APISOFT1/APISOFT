@@ -25,8 +25,17 @@ public function __construct()
 //INDEEEEEEEEEEEEX/
 public function index(Request $request)
 {
-  $ubicacion = Ubicacion::paginate(10);
-  return view('Ubicacion.index',compact('ubicacion'));        
+  if ($request)
+  {
+      $query=trim($request->get('searchText'));
+      $ubicacion=DB::table('ubicacions')->where('id','LIKE','%'.$query.'%')
+      ->orwhere('descripcion','LIKE','%'.$query.'%')
+      ->orderby('id','desc')
+      ->paginate(10);
+      return view('Ubicacion.index',["ubicacion"=>$ubicacion,"searchText"=>$query]);
+  }
+ // $ubicacion = Ubicacion::paginate(10);
+ // return view('Ubicacion.index',compact('ubicacion'));        
     
 }
 

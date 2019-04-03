@@ -8,7 +8,6 @@ use App\Rol;
 
 
 
-
 use Illuminate\Http\Request;
 use App\Http\Requests\UsuarioFormRequest;
 
