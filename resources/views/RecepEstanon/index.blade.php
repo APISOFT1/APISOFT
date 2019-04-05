@@ -1,18 +1,18 @@
-@extends ('layouts.principalApiario')
+@extends ('layouts.principalRecepEstanon')
 
 <!-- mensaje de exito -->
 <?php $message=Session::get('message') ?>
 
-@if($message == 'addApiario')
+@if($message == 'addRecep')
 <div class="alert alert-success alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  APIARIO CREADO CORRECTAMENTE
+  CERA CREADO CORRECTAMENTE
 </div>
 @endif
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
-<h1 class="text-center">LISTADO DE  APIARIOS</h1>
+<h1 class="text-center">LISTADO DE  Recepcion con su Estañón</h1>
 
 <!-- Saltos de linea-->
 <br>
@@ -30,48 +30,48 @@
 			<table class="table table-striped table-bordered table-condensed table-hover">
 				<thead>
 					<th>Código</th>
-					<th>Descripción</th>
-					<th>Cantidad</th>
-					<th>Ubicación</th>
+					<th>Recepcion</th>
+					<th>Estanon</th>
+                    <th>Fecha</th>
 					<th><a href="#"
 					class="create-modal btn btn-success btn-sm">
             <i class="glyphicon glyphicon-plus"></i></th>
 				</thead>
         {{ csrf_field() }}
            <?php  $no=1; ?>
-               @foreach ($api as $value)
+               @foreach ($recepcionEst as $value)
 					<tr class="api{$value->id}}">
           <td>{{ $no++ }}</td>
-					<td>{{ $value->Descripcion}}</td>
-					<td>{{ $value->cantidad}}</td>
-            <td>{{ $value->ubicacion->Descripcion}}</td>
+					<td>{{ $value->RecepcionMateriaPrima->afiliado->Nombre}}</td>
+            <td>{{ $value->Estanon->Descripcion}}</td>
+            <td>{{ $value->Fecha}}</td>
 					<td>
 					<a href="#" class="show-modal btn btn-info btn-sm"
 					 data-id="{{$value->id}}" 
-					 data-Descripcion="{{$value->Descripcion}}"
-					 data-cantidad="{{$value->cantidad}}"
-					 data-ubicacion_id="{{$value->ubicacion_id}}">
+					 data-Recepcion_id="{{$value->Recepcion_id}}"
+					 data-Estanon_id="{{$value->Estanon_id}}"
+                     data-Fecha="{{$value->Fecha}}">
               <i class="fa fa-eye"></i>
             </a>
             <a href="#" class="edit-modal btn btn-warning btn-sm" 
 						data-id="{{$value->id}}"
-					 data-Descripcion="{{$value->Descripcion}}"
-					 data-cantidad="{{$value->cantidad}}"
-					 data-ubicacion_id="{{$value->ubicacion_id}}">
+                     data-Recepcion_id="{{$value->Recepcion_id}}"
+					 data-Estanon_id="{{$value->Estanon_id}}"
+                     data-Fecha="{{$value->Fecha}}">
               <i class="glyphicon glyphicon-pencil"></i>
             </a>
             <a href="#" class="delete-modal btn btn-danger btn-sm"
 						 data-id="{{$value->id}}"
-						  data-title="{{$value->Descripcion}}">
+						  data-title="{{$value->Recepcion_id}}">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
-            {!! Form::button('Eliminar', array('type' => 'submit', 'class' => 'btn btn-danger')) !!} 
+           
           </td>
         </tr>
       @endforeach
     </table>
   </div>
-  {{$api->links()}}
+  {{$recepcionEst->links()}}
 </div>
 {{-- Modal Form Create Post --}}
 <div id="create" class="modal fade" role="dialog">
@@ -84,35 +84,36 @@
       <div class="modal-body">
         <form class="form-horizontal" role="form">
 
+        
+
+          <label for="roll">Recepcion <span class="required">*</span></label>
+        <select name="Recepcion_id" class="form-control" id="Recepcion_id">
+         <option value="">-- Select Recepcion --</option>
+         @foreach ($recepciones as $recep)
+          <option value="{{ $recep->id }}">{{$recep->id}} - {{$recep->afiliado->Nombre}} {{$recep->afiliado->apellido1}} {{$recep->afiliado->apellido2}}</option>
+         @endforeach
+        </select>
+
+        <label for="roll">Estanon <span class="required">*</span></label>
+        <select name="Estanon_id" class="form-control" id="Estanon_id">
+         <option value="">-- Select Estanon --</option>
+         @foreach ($estanon as $est)
+          <option value="{{ $est->id }}">{{$est->id}}-{{$est->Descripcion}}</option>
+         @endforeach
+        </select>
           <div class="form-group row add">
-            <label class="control-label col-sm-2" for="Descripcion">Descripcion :</label>
+            <label class="control-label col-sm-2" for="Fecha">Fecha :</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="Descripcion" name="Descripcion"
+              <input type="date" class="form-control" id="Fecha" name="Fecha"
               placeholder="Your Title Here" required>
               <p class="error text-center alert alert-danger hidden"></p>
             </div>
           </div>
-
-					<div class="form-group row add">
-            <label class="control-label col-sm-2" for="cantidad">Cantidad:</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="cantidad" name="cantidad"
-              placeholder="Ingrese cantidad" required>
-              <p class="error text-center alert alert-danger hidden"></p>
-            </div>
-          </div>
-          <label for="roll">ubicacion <span class="required">*</span></label>
-        <select name="ubicacion_id" class="form-control" id="ubicacion_id">
-         <option value="">-- Select ubicacion --</option>
-         @foreach ($ubicaciones as $ubicacion)
-          <option value="{{ $ubicacion->id }}">{{$ubicacion->Descripcion}}</option>
-         @endforeach
-        </select>
         </form>
       </div>
           <div class="modal-footer">
             <button class="btn btn-warning" type="submit" id="add">
-              <span class="glyphicon glyphicon-plus"></span>Guardar Apiario
+              <span class="glyphicon glyphicon-plus"></span>Guardar Extracción
             </button>
             <button class="btn btn-warning" type="button" data-dismiss="modal">
               <span class="glyphicon glyphicon-remobe"></span>Cerrar
@@ -183,14 +184,7 @@
             </div>
           </div>
 
-          <label for="roll">ubicacion <span class="required">*</span></label>
-        <select name="name" class="form-control" id="ub">
-         <option value="">-- Select ubicacion --</option>
-         @foreach ($ubicaciones as $ubicacion)
-          <option value="{{ $ubicacion->id }}">{{$ubicacion->Descripcion}}</option>
-         @endforeach
-        </select>
-					
+        
 
         </form>
                 {{-- Form Delete Post --}}
@@ -215,15 +209,3 @@
 
 @endsection
 
-<script type="text/javascript">
- 
-  function ConfirmDelete()
-  {
-    var x = confirm("Estas seguro de Eliminar?");
-    if (x)
-      return true;
-    else
-      return false;
-  }
- 
-</script>

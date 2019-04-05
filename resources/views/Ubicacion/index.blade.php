@@ -11,7 +11,7 @@ UBICACION CREADO CORRECTAMENTE
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
-<h1 >LISTADO DE  UBICACION</h1>
+<h1 >LISTADO DE  UBICACIÓN</h1>
 
 <!-- Saltos de linea-->
 <br>
@@ -20,7 +20,7 @@ UBICACION CREADO CORRECTAMENTE
 <br>
 <!-- Fin de salto de linea. No necesita una etiqueta de cierre-->
 <div class="absolute3">
-
+@include('Ubicacion.search') 
 		
 </div>	
 
@@ -29,7 +29,7 @@ UBICACION CREADO CORRECTAMENTE
     <table class="table table-bordered" id="table">
       <tr>
         <th width="150px">No</th>
-        <th>Descripcion</th>
+        <th>Descripción</th>
         <th>Create At</th>
         <th class="text-center" width="150px">
           <a href="#" class="create-modal btn btn-success btn-sm">
@@ -157,3 +157,26 @@ UBICACION CREADO CORRECTAMENTE
 </div>
 
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+    @if(Session::has('message'))
+        var type = "{{ Session::get('alert-type', 'info') }}";
+        switch(type){
+            case 'info':
+                toastr.info("{{ Session::get('message') }}");
+                break;
+            
+            case 'warning':
+                toastr.warning("{{ Session::get('message') }}");
+                break;
+            case 'success':
+                toastr.success("{{ Session::get('message') }}");
+                break;
+            case 'error':
+                toastr.error("{{ Session::get('message') }}");
+                break;
+        }
+    @endif
+    </script>

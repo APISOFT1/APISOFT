@@ -14,23 +14,14 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="{{asset('css2/bootstrap-select.min.css')}}">
- 
+
+
+
   
-      <!-- Include Twitter Bootstrap and jQuery: -->
-<!--<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>->
-
- 
-<!-- Include the plugin's CSS and JS: -->
-<!--<link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>-->
-
- <!--   {!!Html::style ('/css/bootstrap-multiselect.css')!!} -->
     {!!Html::style ('/css2/bootstrap.min.css')!!} 
 
-    {!!Html::style ('/css2/bootstrap-select.min.css')!!}   
+    {!!Html::style ('/css2/bootstrap-select.min.css')!!}  
     
-    {!!Html::style ('/css2/select2.min.css')!!}
-
-    {!!Html::style ('/css2/select2.css')!!}
     
     <!-- Font Awesome -->
     {!!Html::style ('/css2/font-awesome.min.css')!!}
@@ -71,10 +62,10 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Usuario/') }}">Gestionar Usuario</a></li> 
-                     <li><a href="{{ url('/roles/') }}">Gestionar Rol</a></li>
-                     <li><a href="{{ url('/permissions/') }}">Gestionar Permisos</a></li>
-                     <li><a href="{{ url('/users/') }}">Gestionar Users</a></li>
+                      <li><a href="{{ url('/Usuario/') }}">Gestionar Usuario</a></li>
+                      <li><a href="{{ url('roles/') }}">Gestionar Rol</a></li>
+                     <li><a href="{{ url('permissions/') }}">Gestionar Permisos</a></li>
+                     <li><a href="{{ url('users/') }}">Gestionar users</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
@@ -152,33 +143,19 @@
         <!-- /footer content -->
       </div>
     </div>
-   
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
   crossorigin="anonymous"></script>
-
-  
-  <!--<script src="{{asset('js2/bootstrap-select.min.js')}}"></script>-->
+  <script src="{{asset('js2/bootstrap-select.min.js')}}"></script>
   
     <!-- jQuery -->
-     
 
     {!!Html::script('/js2/jquery.min.js')!!}  
-
     @stack('scripts')
     <!-- Bootstrap -->
     {!!Html::script('/js2/bootstrap.min.js')!!}
 
-   <!-- SELECT2 -->
-   {!!Html::script('/js2/bootstrap-select.min.js')!!} 
-
-    {!!Html::script('/js2/select2.full.js')!!}
-
-    {!!Html::script('/js2/select2.js')!!}
     
-    {!!Html::script('/js2/select2.min.js')!!}
-
-    {!!Html::script('/js2/select2.full.min.js')!!}
     <!-- FastClick -->
     {!!Html::script('/js2/fastclick.js')!!}
     <!-- NProgress -->
@@ -187,104 +164,124 @@
     {!!Html::script('/js2/jquery.mCustomScrollbar.concat.min.js')!!}
     <!-- Custom Theme Scripts -->
     {!!Html::script('/js2/custom.min.js')!!}
-
      {!!Html::script('/js2/dropdown.js')!!}
 
-    <!-- {!!Html::script('/js/jquery.min.js')!!}
-
-     {!!Html::script('/js/bootstrap.min.js')!!}-->
-
-
-   <!--  <script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>-->
- 
-<!-- Include the plugin's CSS and JS: -->
-{!!Html::script('/js/bootstrap-select.min.js')!!}
-
-{!!Html::script('/js/jquery-1.11.1.min.js')!!}
-
-<!--{!!Html::script('/js/bootstrap.min.js')!!} -->
-
-<!--<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
-
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>-->
 
 
 
 
-
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<!-- MODAL Cera -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+
 {{-- ajax Form Add Post--}}
+
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
-    $('.modal-descripcion').text('Crear Ubicacion');
+    $('.modal-descripcion').text('Crear Recepción Estañón');
   });
   $("#add").click(function() {
     $.ajax({
       type: 'POST',
-      url: 'addUbicacion',
+      url: 'addRecepcion',
+      
       data: {
         '_token': $('input[name=_token]').val(),
-        'Descripcion': $('input[name=Descripcion]').val()
+        'Recepcion_id': $('select[name=Recepcion_id]').val(),
+        'Estanon_id': $('select[name=Estanon_id]').val(),
+        'Fecha': $('input[name=Fecha]').val()
+        
       },
       success: function(data){
         if ((data.errors)) {
           $('.error').removeClass('hidden');
-          $('.error').text(data.errors.descripcion);
+          $('.error').text(data.errors.Recepcion_id);
+          $('.error').text(data.errors.Estanon_id);
+          $('.error').text(data.errors.Fecha);
  
         } else {
           $('.error').remove();
-          $('#table').append("<tr class='ubicacion" + data.id + "'>"+
+          $('#table').append("<tr class='cera" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
-          "<td>" + data.Descripcion + "</td>"+
-          "<td>" + data.created_at + "</td>"+
+          "<td>" + data.Recepcion_id + "</td>"+
+          "<td>" + data.Estanon_id + "</td>"+
+          "<td>" + data.Fecha + "</td>"+
+  
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
-          data.id + "'data-Descripcion='" + data.Descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-Descripcion='" + data.Descripcion + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.Descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+          data.id +  "' data-Recepcion_id='" 
+          + data.Recepcion_id +  " 'data-Estanon_id='" 
+          + data.Estanon_id + " 'data-Fecha='"
+          + data.Fecha + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='"
+           + data.id + "' data-Recepcion_id='" + data.Recepcion_id + " 'data-Estanon_id='"
+           + data.Estanon_id +  " 'data-Fecha='"
+          + data.Fecha + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
+           + data.id +  "' data-Recepcion_id='" 
+          + data.Recepcion_id +  " 'data-Estanon_id='"  
+          + data.Estanon_id +  " 'data-Fecha='"
+          + data.Fecha + "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         }
       },
     });
-    $('#Descripcion').val('');
+    $('#Recepcion_id').val('');
+    $('#Estanon_id').val('');
+    $('#Fecha').val('');
 
   });
-
+ 
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
-$('#footer_action_button').text(" Editar Ubicacion");
+$('#footer_action_button').text(" Editar Apiario");
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-$('.modal-descripcion').text('Editar Ubicacion');
+$('.modal-descripcion').text('Editar Apiario');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
 $('#ids').val($(this).data('id'));
-$('#des').val($(this).data('Descripcion'));
+$('#cri').val($(this).data('Descripcion'));
+$('#can').val($(this).data('cantidad'));
+$('#ub').val($(this).data('ubicacion_id'));
 $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
-    url: 'editUbicacion',
+    url: 'editApiario',
     data: {
 '_token': $('input[name=_token]').val(),
 'id': $("#ids").val(),
-'Descripcion': $('#des').val(),
+'Descripcion': $('#cri').val(),
+'cantidad': $('#can').val(),
+'ubicacion_id': $('#ub').val(),
+
     },
 success: function(data) {
-      $('.ubicacion' + data.id).replaceWith(" "+
-      "<tr class='ubicacion" + data.id + "'>"+
+      $('.api' + data.id).replaceWith(" "+
+      "<tr class='api" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
       "<td>" + data.Descripcion + "</td>"+
-  
-      "<td>" + data.created_at + "</td>"+
- "<td><button class='show-modal btn btn-info btn-sm' data-id='"+data.id+"' data-Descripcion='"+data.Descripcion+"'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='"+data.id+"'data-Descripcion='"+data.Descripcion+"'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='"+data.id+"' data-Descripcion='"+data.Descripcion+"'><span class='glyphicon glyphicon-trash'></span></button></td>"+"</tr>");
+      "<td>" + data.cantidad + "</td>"+
+      "<td>" + data.ubicacion_id + "</td>"+
+      
+ "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + "' data-Descripcion='" 
+ + data.Descripcion + "' data-cantidad='" 
+          + data.cantidad +  " 'data-ubicacion_id='" 
+          + data.ubicacion_id + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
+          + data.id + "' data-Descripcion='" + data.Descripcion + 
+          "' data-cantidad='" 
+          + data.cantidad +  " 'data-ubicacion_id='" 
+          + data.ubicacion_id + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
+          + data.id + "' data-Descripcion='" + data.Descripcion + 
+          "' data-cantidad='" 
+          + data.cantidad +  " 'data-ubicacion_id='" 
+          + data.ubicacion_id + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+      "</tr>");
     }
   });
 });
@@ -302,32 +299,35 @@ $('.modal-title').text('Delete Post');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
-$('.Descripcion').html($(this).data('Descripcion'));
+$('.title').html($(this).data('Descripcion'));
 $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
-    url: 'deleteUbicacion',
+    url: 'deleteApiario',
     data: {
       '_token': $('input[name=_token]').val(),
       'id': $('.id').text()
     },
     success: function(data){
-       $('.ubicacion' + $('.id').text()).remove();
+       $('.apiario' + $('.id').text()).remove();
     }
   });
 });
 */
-
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
-  $('#ii').text($(this).data('id'));
-  $('#dii').text($(this).data('Descripcion'));
+  $('#i2').text($(this).data('id'));
+  $('#d2').text($(this).data('descripcion'));
+  $('#ca2').text($(this).data('cantidad'));
+  $('#ub2').text($(this).data('ubicacion_id'));
   $('.modal-title').text('Show Post');
   });
 </script>
-  </body>
-</html>
+    
+
+    </body>
+    </html>

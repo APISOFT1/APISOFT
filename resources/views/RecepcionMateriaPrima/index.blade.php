@@ -63,7 +63,9 @@
 						<a href="{{URL::action('RecepcionMateriaPrimaController@edit',$recepcion->id)}}"><Button  class="btn btn-success btn-lg btn-sm">
       <span class="glyphicon glyphicon-edit "></button></a>
                          <a href="" data-target="#modal-delete-{{$recepcion->id}}" data-toggle="modal"><button class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove "></button></a>
-						
+						  <a href="Cera/index" class="create-modal btn btn-success btn-sm">
+			<i class="glyphicon glyphicon-plus"></i>
+			</a>
 						
 					</td>
 					</tbody>
