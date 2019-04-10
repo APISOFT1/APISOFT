@@ -31,6 +31,8 @@
     {!!Html::style ('/css2/jquery.mCustomScrollbar.min.css')!!}
     <!-- Custom Theme Style -->
     {!!Html::style ('/css2/custom.min.css')!!}
+
+    {!!Html::style ('/css/daterangepicker.css')!!}
   </head>
   <body class="nav-md">
     <div class="container body">
@@ -60,12 +62,11 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Usuario/') }}">Gestionar Usuario</a></li>
-                      <li><a href="{{ url('roles/') }}">Gestionar Rol</a></li>
-                     <li><a href="{{ url('permissions/') }}">Gestionar Permisos</a></li>
-                     <li><a href="{{ url('users/') }}">Gestionar users</a></li>
+                     <li><a href="{{ url('/roles/') }}">Gestionar Rol</a></li>
+                     <li><a href="{{ url('/permissions/') }}">Gestionar Permisos</a></li>
+                     <li><a href="{{ url('/users/') }}">Gestionar Users</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
@@ -80,13 +81,13 @@
                   <li><a><i class="glyphicon glyphicon-list-alt"></i> Recepción<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/RecepcionMateriaPrima') }}">Gestionar Recepción</a></li>
-                      <li><a href="{{ url('/SalidaMaterial/') }}">Gestionar Salida Material</a></li>
+                      <li><a href="{{ url('/Cera/') }}">Gestionar Extración de cera</a></li>
                     </ul>
                   </li>
                   <li><a><i class="glyphicon glyphicon-oil"></i> Planta <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
-                      <li><a href="{{ url('/AfiliadoEstanon/') }}">Gestionar Afiliado-Estañon</a></li>
+                      <li><a href="{{ url('/RecepEstanon/') }}">Gestionar Recepción-Estañón</a></li>
                       <li><a href="{{ url('/Homogeneizacion/') }}">Gestionar Homogeneización</a></li>
                     
                     </ul>
@@ -166,7 +167,7 @@
     {!!Html::script('/js2/custom.min.js')!!}
      {!!Html::script('/js2/dropdown.js')!!}
 
-
+     {!!Html::script('/js/daterangepicker.js')!!}
 
 
 
@@ -180,7 +181,7 @@
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
-    $('.modal-descripcion').text('Crear Extracion Cera');
+    $('.modal-descripcion').text('Crear Extración Cera');
   });
   $("#add").click(function() {
     $.ajax({
@@ -339,6 +340,8 @@ $('.modal-footer').on('click', '.delete', function(){
   $('#ub2').text($(this).data('ubicacion_id'));
   $('.modal-title').text('Show Post');
   });
+
+
 </script>
     
 

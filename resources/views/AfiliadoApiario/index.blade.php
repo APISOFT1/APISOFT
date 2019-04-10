@@ -31,7 +31,8 @@ AFILIADO CON SUS APIARIO CREADO CORRECTAMENTE
         <th width="150px">No</th>
         <th>Afiliado</th>
         <th>Apiario</th>
-		<th>Create At</th>
+		<th>Creado</th>
+    <th> Actualizado</th>
         <th class="text-center" width="150px">
           <a href="#" class="create-modal btn btn-success btn-sm">
             <i class="glyphicon glyphicon-plus"></i>
@@ -45,7 +46,8 @@ AFILIADO CON SUS APIARIO CREADO CORRECTAMENTE
           <td>{{ $no++ }}</td>
 		  <td>{{$value-> afiliado->id}} - {{$value-> afiliado-> Nombre}} {{$value->afiliado->apellido1}} {{$value->afiliado->apellido2}}</td>
           <td>{{$value-> apiario->id}} - {{$value-> apiario-> Descripcion }}</td>
-          <td>{{$value->created_at }}</td>
+          <td>{{$value->created_at}} ({{$value->created_at->diffForHumans()}})</td>
+          <td>{{$value->updated_at}} ({{$value->updated_at->diffForHumans()}})</td>
           <td>
             <a href="#" class="show-modal btn btn-info btn-sm" data-id="{{$value->id}}" data-afiliado_id="{{$value->afiliado_id}}"data-apiario_id="{{$value->apiario_id}}">
               <i class="fa fa-eye"></i>
@@ -75,43 +77,27 @@ AFILIADO CON SUS APIARIO CREADO CORRECTAMENTE
         <form class="form-horizontal" role="form">
         <div class="form-group row add">
         
-    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-   <div class="form-group">
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
     <label for="afiliados">Afiliado</label>
-    <select name="afiliado_id" id="afiliado_id" class="form-control selectpicker" data-live-search="true">
+    <select name="afiliado_id" id="afiliado_id" class="form-control  selectpicker " data-live-search="true">
      @foreach($afiliados as $persona  )
      <option value="{{$persona->id}}">{{$persona->id}} - {{$persona->Nombre}} {{$persona->apellido1}} {{$persona->apellido2}}</option>
      @endforeach
     </select>
+    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
    </div>
   </div>
-  </div>
   
-<script>
- 
-
- </script>
-         <!-- <div class="form-group row add">
-            <label class="control-label col-sm-2" for="afiliado_id">afiliado:</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="afiliado_id" name="afiliado_id"placeholder="afiliado" required>
-              <p class="error text-center alert alert-danger hidden"></p>
-            </div>
-          </div> -->
-
-		  <div class="form-group row add">
-
-      <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-   <div class="form-group">
+  <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
     <label for="apiarios">Apiario</label>
     <select name="apiario_id" id="apiario_id" class="form-control selectpicker" data-live-search="true">
      @foreach($apiarios as $api)
-     <option value="{{$api->id}}">{{$api->Descripcion}}</option>
+     <option value="{{$api->id}}">  {{  $api->Descripcion}}</option>
      @endforeach
     </select>
+    <span class="fa fa-archive form-control-feedback right" aria-hidden="true"></span>
    </div>
-  </div>
-  </div>
+ 
         </form>
       </div>
           <div class="modal-footer">

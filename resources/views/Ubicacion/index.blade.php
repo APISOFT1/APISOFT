@@ -30,7 +30,8 @@ UBICACION CREADO CORRECTAMENTE
       <tr>
         <th width="150px">No</th>
         <th>Descripción</th>
-        <th>Create At</th>
+        <th>Creado</th>
+        <th>Modificado</th>
         <th class="text-center" width="150px">
           <a href="#" class="create-modal btn btn-success btn-sm">
             <i class="glyphicon glyphicon-plus"></i>
@@ -43,7 +44,8 @@ UBICACION CREADO CORRECTAMENTE
         <tr class="ubicacion{{$value->id}}">
           <td>{{ $no++ }}</td>
           <td>{{ $value->Descripcion }}</td>
-          <td>{{ $value->created_at }}</td>
+          <td>{{ $value->created_at }} ({{ $value->created_at->diffForHumans() }})</td>
+          <td>{{ $value->updated_at }} ({{ $value->created_at->diffForHumans() }})</td>
           <td>
             <a href="#" class="show-modal btn btn-info btn-sm" data-id="{{$value->id}}" data-title="{{$value->Descripcion}}">
               <i class="fa fa-eye"></i>

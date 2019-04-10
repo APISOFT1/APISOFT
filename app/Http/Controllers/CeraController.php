@@ -26,6 +26,19 @@ class CeraController extends Controller
         
     }
     ////////////////////////////////////////////////////////NUEVO
+
+
+    public function agregar($id)
+    {
+         //valida si la peticion trae el campo de busqueda 
+        $recepciones = RecepcionMateriaPrima::where('Fecha','LIKE','%'.$query.'%')
+            ->orderby('id','desc')
+            ->paginate(7);
+        
+           return response()->json($recepciones);
+     
+        
+    }
 public function addCera(Request $request){
     $rules = array(
       'Descripcion' => 'required',

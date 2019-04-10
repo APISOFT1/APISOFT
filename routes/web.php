@@ -45,7 +45,7 @@ Route::group(['middleware' =>['auth',  'verified']], function () {
 'roles'=> 'Admin\RolesController',
 'users'=> 'Admin\UsersController',
 'Cera'=>'CeraController',
-'RecepcionEstanon' => 'RecepcionEstanonController',
+'RecepEstanon' => 'RecepcionEstanonController',
 
 
 
@@ -76,6 +76,7 @@ Route::POST('deleteApiario','ApiarioController@deleteApiario');
 Route::POST('addCera','CeraController@addCera');
 Route::POST('editCera','CeraController@editCera');
 Route::POST('deleteCera','CeraController@deleteCera');
+Route::POST('agregar','CeraController@agregar');
 
 Route::POST('addRecepcion','RecepcionEstanonController@addRecepcion');
 Route::POST('editRecepcion','RecepcionEstanonController@editRecepcion');
@@ -93,4 +94,5 @@ Route::POST('editUbicacion','UbicacionController@editUbicacion');
 Route::POST('deleteUbicacion','UbicacionController@deleteUbicacion');
 
 });
- 
+  // Dashboard
+ // Route::get('/', 'DashboardController@index')->name('dashboard');

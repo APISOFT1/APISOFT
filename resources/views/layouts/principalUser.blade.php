@@ -31,6 +31,8 @@
     {!!Html::style ('/css2/select2.min.css')!!}
 
     {!!Html::style ('/css2/select2.css')!!}
+
+    {!!Html::style ('/css/dashboard.css')!!}
     
     <!-- Font Awesome -->
     {!!Html::style ('/css2/font-awesome.min.css')!!}
@@ -71,7 +73,6 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Usuario/') }}">Gestionar Usuario</a></li> 
                      <li><a href="{{ url('/roles/') }}">Gestionar Rol</a></li>
                      <li><a href="{{ url('/permissions/') }}">Gestionar Permisos</a></li>
                      <li><a href="{{ url('/users/') }}">Gestionar Users</a></li>
@@ -89,13 +90,13 @@
                   <li><a><i class="glyphicon glyphicon-list-alt"></i> Recepción<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/RecepcionMateriaPrima') }}">Gestionar Recepción</a></li>
-                      <li><a href="{{ url('/SalidaMaterial/') }}">Gestionar Salida Material</a></li>
+                      <li><a href="{{ url('/Cera/') }}">Gestionar Extración de cera</a></li>
                     </ul>
                   </li>
                   <li><a><i class="glyphicon glyphicon-oil"></i> Planta <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
-                      <li><a href="{{ url('/AfiliadoEstanon/') }}">Gestionar Afiliado-Estañon</a></li>
+                      <li><a href="{{ url('/RecepEstanon/') }}">Gestionar Recepción-Estañón</a></li>
                       <li><a href="{{ url('/Homogeneizacion/') }}">Gestionar Homogeneización</a></li>
                     
                     </ul>
@@ -187,25 +188,16 @@
 
      {!!Html::script('/js2/dropdown.js')!!}
 
-    <!-- {!!Html::script('/js/jquery.min.js')!!}
-
-     {!!Html::script('/js/bootstrap.min.js')!!}-->
+     {!!Html::script('/js/dashboard.js')!!}
 
 
-   <!--  <script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>-->
  
 <!-- Include the plugin's CSS and JS: -->
 {!!Html::script('/js/bootstrap-select.min.js')!!}
 
 {!!Html::script('/js/jquery-1.11.1.min.js')!!}
 
-<!--{!!Html::script('/js/bootstrap.min.js')!!} -->
 
-<!--<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
-
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>-->
 
 
 <!-- MODAL USER -->

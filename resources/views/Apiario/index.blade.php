@@ -33,6 +33,8 @@
 					<th>Descripción</th>
 					<th>Cantidad</th>
 					<th>Ubicación</th>
+          <th> Creado</th>
+          <th> Actualizado</th>
 					<th><a href="#"
 					class="create-modal btn btn-success btn-sm">
             <i class="glyphicon glyphicon-plus"></i></th>
@@ -44,7 +46,9 @@
           <td>{{ $no++ }}</td>
 					<td>{{ $value->Descripcion}}</td>
 					<td>{{ $value->cantidad}}</td>
-            <td>{{ $value->ubicacion->Descripcion}}</td>
+            <td><span class="label label-success">{{ $value->ubicacion->Descripcion}}</span></td>
+            <td >{{$value->created_at}} ({{$value->created_at->diffForHumans()}})</td>
+            <td >{{$value->updated_at}} ({{$value->updated_at->diffForHumans()}})</td>
 					<td>
 					<a href="#" class="show-modal btn btn-info btn-sm"
 					 data-id="{{$value->id}}" 
@@ -65,7 +69,7 @@
 						  data-title="{{$value->Descripcion}}">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
-            {!! Form::button('Eliminar', array('type' => 'submit', 'class' => 'btn btn-danger')) !!} 
+            
           </td>
         </tr>
       @endforeach
@@ -84,38 +88,41 @@
       <div class="modal-body">
         <form class="form-horizontal" role="form">
 
-          <div class="form-group row add">
-            <label class="control-label col-sm-2" for="Descripcion">Descripcion :</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="Descripcion" name="Descripcion"
-              placeholder="Your Title Here" required>
-              <p class="error text-center alert alert-danger hidden"></p>
-            </div>
-          </div>
+        <div class="form-group row add">
+        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+           <input type="text" class="form-control has-feedback-left" id="Descripcion" name="Descripcion" placeholder="Descripción" required>
+            <p class="No Ingreso la Descripcion"></p>
+              <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                </div>
+                </div>
 
-					<div class="form-group row add">
-            <label class="control-label col-sm-2" for="cantidad">Cantidad:</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="cantidad" name="cantidad"
-              placeholder="Ingrese cantidad" required>
-              <p class="error text-center alert alert-danger hidden"></p>
-            </div>
-          </div>
-          <label for="roll">ubicacion <span class="required">*</span></label>
-        <select name="ubicacion_id" class="form-control" id="ubicacion_id">
-         <option value="">-- Select ubicacion --</option>
+                <div class="form-group row add">
+                <div class="col-md-9" >
+           <input type="text" class="form-control has-feedback-left" id="cantidad" name="cantidad" placeholder="cantidad" required>
+            <p class="No Ingreso la Cantidad"></p>
+              <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                </div>
+               </div>
+
+                <div class="form-group row add">
+                <div class="col-md-9  form-group has-feedback">
+        <select name="ubicacion_id" class="form-control has-feedback-left" id="ubicacion_id">
+         <option value="">-- Seleccione ubicación --</option>
          @foreach ($ubicaciones as $ubicacion)
           <option value="{{ $ubicacion->id }}">{{$ubicacion->Descripcion}}</option>
          @endforeach
         </select>
+        <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+        </div>
+        </div>
         </form>
       </div>
           <div class="modal-footer">
             <button class="btn btn-warning" type="submit" id="add">
-              <span class="glyphicon glyphicon-plus"></span>Guardar Apiario
+              <span class="fa fa-save"></span> Guardar 
             </button>
             <button class="btn btn-warning" type="button" data-dismiss="modal">
-              <span class="glyphicon glyphicon-remobe"></span>Cerrar
+              <span class="fa fa-times"></span> Cerrar
             </button>
           </div>
     </div>
@@ -163,35 +170,38 @@
       <div class="modal-body">
         <form class="form-horizontal" role="modal">
 
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="id">ID</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="ids" disabled>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="Descripcion">Descripcion</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="cri">
-            </div>
-          </div>
+        <div class="form-group row add">
+        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+           <input type="text" class="form-control has-feedback-left" id="ids" disabled>
+              <span class="fa fa-key form-control-feedback left" aria-hidden="true"></span>
+                </div>
+                </div>
+          
+                <div class="form-group row add">
+        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+           <input type="text" class="form-control has-feedback-left" id="cri" >
+              <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
+                </div>
+                </div>
+          
+                <div class="form-group row add">
+        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+           <input type="text" class="form-control has-feedback-left" id="can" >
+              <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
+                </div>
+                </div>
 
-					<div class="form-group">
-            <label class="control-label col-sm-2"for="cantidad">Cantidad</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="can">
-            </div>
-          </div>
-
-          <label for="roll">ubicacion <span class="required">*</span></label>
-        <select name="name" class="form-control" id="ub">
+                <div class="form-group row add">
+        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+        <select name="name" class="form-control has-feedback-left" id="ub">
          <option value="">-- Select ubicacion --</option>
          @foreach ($ubicaciones as $ubicacion)
           <option value="{{ $ubicacion->id }}">{{$ubicacion->Descripcion}}</option>
          @endforeach
         </select>
-					
-
+					  <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+</div>
+</div>
         </form>
                 {{-- Form Delete Post --}}
         <div class="deleteContent">
@@ -200,12 +210,12 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn actionBtn" data-dismiss="modal">
-          <span id="footer_action_button" class="glyphicon"></span>
-        </button>
-        <button type="button" class="btn btn-warning" data-dismiss="modal">
-          <span class="glyphicon glyphicon"></span>close
-        </button>
+      <button class="btn btn-warning" type="submit" id="add">
+              <span class="fa fa-pencil"></span> Editar 
+            </button>
+            <button class="btn btn-warning" type="button" data-dismiss="modal">
+              <span class="fa fa-times"></span> Cerrar
+            </button>
       </div>
     </div>
   </div>
@@ -215,15 +225,3 @@
 
 @endsection
 
-<script type="text/javascript">
- 
-  function ConfirmDelete()
-  {
-    var x = confirm("Estas seguro de Eliminar?");
-    if (x)
-      return true;
-    else
-      return false;
-  }
- 
-</script>

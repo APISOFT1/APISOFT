@@ -12,7 +12,7 @@
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
-<h1 class="text-center">LISTADO DE  Recepcion con su Estañón</h1>
+<h1 class="text-center">LISTADO DE RECEPCIÓN CON SU ESTAÑÓN</h1>
 
 <!-- Saltos de linea-->
 <br>
@@ -30,8 +30,8 @@
 			<table class="table table-striped table-bordered table-condensed table-hover">
 				<thead>
 					<th>Código</th>
-					<th>Recepcion</th>
-					<th>Estanon</th>
+					<th width="150px" >Recepción</th>
+					<th>Estañón</th>
                     <th>Fecha</th>
 					<th><a href="#"
 					class="create-modal btn btn-success btn-sm">
@@ -40,10 +40,10 @@
         {{ csrf_field() }}
            <?php  $no=1; ?>
                @foreach ($recepcionEst as $value)
-					<tr class="api{$value->id}}">
+					<tr class="recepcionEst{$value->id}}">
           <td>{{ $no++ }}</td>
-					<td>{{ $value->RecepcionMateriaPrima->afiliado->Nombre}}</td>
-            <td>{{ $value->Estanon->Descripcion}}</td>
+					<td>{{ $value->RecepcionMateriaPrima->id}} - {{ $value->RecepcionMateriaPrima->afiliado->Nombre}} {{ $value->RecepcionMateriaPrima->afiliado->apellido1}} {{ $value->RecepcionMateriaPrima->afiliado->apellido2}}</td>
+            <td>{{ $value->Estanon->id}} - {{ $value->Estanon->Descripcion}}</td>
             <td>{{ $value->Fecha}}</td>
 					<td>
 					<a href="#" class="show-modal btn btn-info btn-sm"
@@ -85,38 +85,45 @@
         <form class="form-horizontal" role="form">
 
         
-
-          <label for="roll">Recepcion <span class="required">*</span></label>
+        <div class="form-group row add">
+                <div class="col-md-9" >
         <select name="Recepcion_id" class="form-control" id="Recepcion_id">
-         <option value="">-- Select Recepcion --</option>
+         <option value="">-- Seleccione Recepción --</option>
          @foreach ($recepciones as $recep)
           <option value="{{ $recep->id }}">{{$recep->id}} - {{$recep->afiliado->Nombre}} {{$recep->afiliado->apellido1}} {{$recep->afiliado->apellido2}}</option>
          @endforeach
         </select>
-
-        <label for="roll">Estanon <span class="required">*</span></label>
+        <span class="fa fa-file-text form-control-feedback right" aria-hidden="true"></span>
+            </div>
+</div>
+            <div class="form-group row add">
+                <div class="col-md-9" >
         <select name="Estanon_id" class="form-control" id="Estanon_id">
-         <option value="">-- Select Estanon --</option>
+         <option value="">-- Seleccione Estañón --</option>
          @foreach ($estanon as $est)
           <option value="{{ $est->id }}">{{$est->id}}-{{$est->Descripcion}}</option>
          @endforeach
         </select>
-          <div class="form-group row add">
-            <label class="control-label col-sm-2" for="Fecha">Fecha :</label>
-            <div class="col-sm-10">
-              <input type="date" class="form-control" id="Fecha" name="Fecha"
-              placeholder="Your Title Here" required>
-              <p class="error text-center alert alert-danger hidden"></p>
+        <span class="fa fa-database form-control-feedback right" aria-hidden="true"></span>
             </div>
-          </div>
+            </div>
+       
+            <div class="form-group row add">
+                <div class="col-md-9" >
+              <input type="date" class="form-control has-feedback-right" id="Fecha" name="Fecha" required>
+              <p class="No Ingreso la Fecha"></p>
+              <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
+            </div>
+            </div>
+
         </form>
       </div>
           <div class="modal-footer">
-            <button class="btn btn-warning" type="submit" id="add">
-              <span class="glyphicon glyphicon-plus"></span>Guardar Extracción
+          <button class="btn btn-warning" type="submit" id="add">
+              <span class="fa fa-save"></span> Guardar 
             </button>
             <button class="btn btn-warning" type="button" data-dismiss="modal">
-              <span class="glyphicon glyphicon-remobe"></span>Cerrar
+              <span class="fa fa-times"></span> Cerrar
             </button>
           </div>
     </div>
