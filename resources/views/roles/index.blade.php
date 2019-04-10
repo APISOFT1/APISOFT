@@ -28,7 +28,7 @@
 			<table class="table table-striped table-bordered table-condensed table-hover">
             <table class="table table-bordered" id="table">
       <tr>
-			<th width="150px" >Codigo</th>
+			<th width="150px" >Código</th>
   		<th> <div class="size2">Rol</th>
   		<th>Permiso</th>
           <th >

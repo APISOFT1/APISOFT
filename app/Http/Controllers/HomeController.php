@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use DB;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -16,6 +17,8 @@ use Spatie\Permission\Models\Permission;class HomeController extends Controller
      *
      * @return void
      */
+
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -28,9 +31,9 @@ use Spatie\Permission\Models\Permission;class HomeController extends Controller
      */
     public function index()
     {
-//  Permission::create(['name'=>'Crear Afiliado']);
-     // auth()->user()->givePermissionTo('Crear Afiliado');
-    // auth()->user()->assignRole('Admin');
+        //$afiliados = DB::select("SELECT count('id_Afiliado') as total, genero_id as Genero
+       // FROM afiliados INNER JOIN generos 
+       // ON afiliados.genero_id=generos.id GROUP BY genero_id");
         return view('home');
     }
 }

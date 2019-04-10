@@ -46,7 +46,7 @@ class EstanonController extends Controller
     public function store(EstanonFormRequest $request)
     {
         $estanon= new Estanon;
-        $estanon->Peso=$request->get('Peso');
+        $estanon->Descripcion=$request->get('Descripcion');
         $estanon->Fecha=$request->get('Fecha');
         $estanon->save();
         return redirect('Estanon');  
@@ -84,7 +84,7 @@ class EstanonController extends Controller
     public function update(EstanonFormRequest $request, $id)
     {
     $estanon=Estanon::findOrFail($id);
-    $estanon->Peso=$request->get('Peso');
+    $estanon->Descripcion=$request->get('Descripcion');
     $estanon->Fecha=$request->get('Fecha');
     $estanon->update();
     return redirect('Estanon');

@@ -59,13 +59,11 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <h3>General</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Usuario/') }}">Gestionar Usuario</a></li>
-                      <li><a href="{{ url('roles/') }}">Gestionar Rol</a></li>
-                     <li><a href="{{ url('permissions/') }}">Gestionar Permisos</a></li>
-                     <li><a href="{{ url('users/') }}">Gestionar users</a></li>
+                     <li><a href="{{ url('/roles/') }}">Gestionar Rol</a></li>
+                     <li><a href="{{ url('/permissions/') }}">Gestionar Permisos</a></li>
+                     <li><a href="{{ url('/users/') }}">Gestionar Users</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
@@ -80,18 +78,17 @@
                   <li><a><i class="glyphicon glyphicon-list-alt"></i> Recepción<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/RecepcionMateriaPrima') }}">Gestionar Recepción</a></li>
-                      <li><a href="{{ url('/SalidaMaterial/') }}">Gestionar Salida Material</a></li>
+                      <li><a href="{{ url('/Cera/') }}">Gestionar Extración de cera</a></li>
                     </ul>
                   </li>
                   <li><a><i class="glyphicon glyphicon-oil"></i> Planta <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
-                      <li><a href="{{ url('/AfiliadoEstanon/') }}">Gestionar Afiliado-Estañon</a></li>
+                      <li><a href="{{ url('/RecepEstanon/') }}">Gestionar Recepción-Estañón</a></li>
                       <li><a href="{{ url('/Homogeneizacion/') }}">Gestionar Homogeneización</a></li>
                     
                     </ul>
                   </li>
-
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Producto Terminado <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
@@ -271,7 +268,7 @@ success: function(data) {
  "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + "' data-Descripcion='" 
  + data.Descripcion + "' data-cantidad='" 
           + data.cantidad +  " 'data-ubicacion_id='" 
-          + data.ubicacion_id + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
+          + data.ubicacion_id +  "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
           + data.id + "' data-Descripcion='" + data.Descripcion + 
           "' data-cantidad='" 
           + data.cantidad +  " 'data-ubicacion_id='" 
@@ -323,6 +320,8 @@ $('.modal-footer').on('click', '.delete', function(){
   $('#d2').text($(this).data('descripcion'));
   $('#ca2').text($(this).data('cantidad'));
   $('#ub2').text($(this).data('ubicacion_id'));
+  $('#crt').text($(this).data('created_at'));
+  $('#upd').text($(this).data('updated_at'));
   $('.modal-title').text('Show Post');
   });
 </script>

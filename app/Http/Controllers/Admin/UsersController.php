@@ -23,7 +23,9 @@ class UsersController extends Controller
        
        if($request){
         $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-        $users= User::paginate(10);
+        $users= User::where('name','LIKE','%'.$query.'%')
+        ->orderby('id','desc')
+        ->paginate(10);
            
             $roles = Role::get()->pluck('name', 'name');
             return view('users.index', compact('users', 'roles'), ['users'=>$users,"searchText"=>$query]);
@@ -57,7 +59,11 @@ class UsersController extends Controller
         $roles = $request->input('roles') ? $request->input('roles') : [];
         $users->assignRole($roles);
         $users->save();
-        return response()->json($users);
+        $notificacion = array(
+          'message' => 'Gracias! Su mensaje se a enviado con exito.', 
+          'alert-type' => 'success'
+      );
+        return response()->json($users)->with($notificacion);
       }
     }
     /**

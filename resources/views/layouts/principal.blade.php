@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>APISOFT</title>
     <!-- Bootstrap -->
+  
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -17,11 +18,15 @@
 
 
 
-  
+
+    {!!Html::style ('/vendor/switch/switchery.min.css')!!} 
+
     {!!Html::style ('/css2/bootstrap.min.css')!!} 
 
+    {!!Html::style ('/css/green.css')!!} 
+
+
     {!!Html::style ('/css2/bootstrap-select.min.css')!!}  
-    
     
     <!-- Font Awesome -->
     {!!Html::style ('/css2/font-awesome.min.css')!!}
@@ -60,9 +65,8 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Usuario/') }}">Gestionar Usuario</a></li> 
                      <li><a href="{{ url('/roles/') }}">Gestionar Rol</a></li>
                      <li><a href="{{ url('/permissions/') }}">Gestionar Permisos</a></li>
                      <li><a href="{{ url('/users/') }}">Gestionar Users</a></li>
@@ -74,20 +78,19 @@
                       <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicacion</a></li>
                       <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
                       <li><a href="{{ url('/Apiario/') }}">Gestionar Apiaro</a></li>
-                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicacion</a></li>
                     
                     </ul>
                   </li>
                   <li><a><i class="glyphicon glyphicon-list-alt"></i> Recepción<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/RecepcionMateriaPrima') }}">Gestionar Recepción</a></li>
-                      <li><a href="{{ url('/SalidaMaterial/') }}">Gestionar Salida Material</a></li>
+                      <li><a href="{{ url('/Cera/') }}">Gestionar Extración de cera</a></li>
                     </ul>
                   </li>
                   <li><a><i class="glyphicon glyphicon-oil"></i> Planta <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
-                      <li><a href="{{ url('/AfiliadoEstanon/') }}">Gestionar Afiliado-Estañon</a></li>
+                      <li><a href="{{ url('/RecepEstanon/') }}">Gestionar Recepción-Estañón</a></li>
                       <li><a href="{{ url('/Homogeneizacion/') }}">Gestionar Homogeneización</a></li>
                     
                     </ul>
@@ -156,6 +159,9 @@
     <!-- Bootstrap -->
     {!!Html::script('/js2/bootstrap.min.js')!!}
 
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     
     <!-- FastClick -->
     {!!Html::script('/js2/fastclick.js')!!}
@@ -167,21 +173,25 @@
     {!!Html::script('/js2/custom.min.js')!!}
      {!!Html::script('/js2/dropdown.js')!!}
 
+     {!!Html::script('/js/switchery.min.js')!!}
+
+     {!!Html::script('/js/icheck.min.js')!!}
+
+     {!!Html::script('/js/icheck.js')!!}
+
 
 
 
 
 <!-- MODAL AFILIADO -->
   
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 {{-- ajax Form Add Post--}}
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
     $('.modal-crear').text('Crear Afiliado');
+    
   });
   $("#add").click(function() {
     $.ajax({
@@ -293,13 +303,13 @@
 
 
 $(document).on('click', '.edit-modal', function() {
-$('#footer_action_button').text(" Editar Afiliado");
-$('#footer_action_button').addClass('glyphicon-check');
+$('#footer_action_button').text(" Editar ");
+$('#footer_action_button').addClass('fa fa-pencil');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-$('.modal-descripcion').text('Editar Afiliado');
+$('.modal-descripcion').text('Editar ');
 $('.deleteContent').hide();
 $('.form-horizontal1').show();
 $('#i').val($(this).data('id'));
@@ -378,7 +388,7 @@ success: function(data) {
               "'data-genero_id='" + data.genero_id + 
               "'data-estado_civil_id='" + data.estado_civil_id +
                "'data-Estado_id='" + data.estado_id +
- "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
+ "' ><span class='fa fa-pencil-esquare-o'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
  + data.id + 
           "' data-Nombre='" + data.Nombre + 
           "'data-apellido1='" + data.apellido1 + 
@@ -391,7 +401,7 @@ success: function(data) {
               "'data-genero_id='" + data.genero_id + 
               "'data-estado_civil_id='" + data.estado_civil_id +
                "'data-Estado_id='" + data.estado_id +
-"'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+"'><span class='fa fa-trash'></span></button></td>"+
           "</tr>");
     }
   });
@@ -458,7 +468,107 @@ $('#jaja').val($(this).data('nombre'));
  
 </script>
 
+<script type="text/javascript">
+$(document).ready(function () {
+    var navListItems = $('div.setup-panel div a'), // tab nav items
+            allWells = $('.setup-content'), // content div
+            allNextBtn = $('.nextBtn'); // next button
+
+    allWells.hide(); // hide all contents by defauld
+
+    navListItems.click(function (e) {
+        e.preventDefault();
+        var $target = $($(this).attr('href')),
+                $item = $(this);
+
+        if (!$item.hasClass('disabled')) {
+            navListItems.removeClass('btn-primary').addClass('btn-default');
+            $item.addClass('btn-primary');
+            allWells.hide();
+            $target.show();
+            $target.find('input:eq(0)').focus();
+        }
+    });
+    // next button
+    allNextBtn.click(function(){
+        var curStep = $(this).closest(".setup-content"),
+            curStepBtn = curStep.attr("id"),
+            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+            curInputs = curStep.find("input[type='text'],input[type='email'],input[type='password'],input[type='url']"),
+            isValid = true;
+           // Validation
+        $(".form-group").removeClass("has-error");
+        for(var i=0; i<curInputs.length; i++){
+            if (!curInputs[i].validity.valid){
+                isValid = false;
+                $(curInputs[i]).closest(".form-group").addClass("has-error");
+            }
+        }
+        // move to next step if valid
+        if (isValid)
+            nextStepWizard.removeAttr('disabled').trigger('click');
+    });
+
+
+ 
+    $('div.setup-panel div a.btn-primary').trigger('click');
+});
+
+
+</script>
 
   </body>
 </html>
-  
+  <style type="text/css">
+.form-control {
+    height: 37px;
+}
+.stepwizard-step p {
+    margin-top: 10px;
+}
+
+.stepwizard-row {
+    display: table-row;
+}
+
+.stepwizard {
+    display: table;
+    width: 100%;
+    position: relative;
+}
+
+.stepwizard-step button[disabled] {
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+}
+
+
+ 
+.stepwizard-row:before {
+    top: 14px;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    z-order: 0;
+
+}
+
+.stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+</style>
