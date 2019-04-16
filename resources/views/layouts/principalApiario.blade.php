@@ -242,7 +242,7 @@ $('.modal-descripcion').text('Editar Apiario');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
 $('#ids').val($(this).data('id'));
-$('#cri').val($(this).data('descripcion'));
+$('#cri').val($(this).data('Descripcion'));
 $('#can').val($(this).data('cantidad'));
 $('#ub').val($(this).data('ubicacion_id'));
 $('#myModal').modal('show');
@@ -285,6 +285,7 @@ success: function(data) {
   });
 });
 
+/*
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Delete");
@@ -314,7 +315,7 @@ $('.modal-footer').on('click', '.delete', function(){
     }
   });
 });
-
+*/
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');

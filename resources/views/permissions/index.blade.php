@@ -13,7 +13,7 @@
 
 @section ('contenido')
 <h1 class="text-center">LISTADO DE  PERMISOS</h1>
-@can('permisos')
+
 
 
 <!-- Saltos de linea-->
@@ -92,7 +92,8 @@
                     @endif
           </div>
           </div>
-
+</div>
+</div>
     
         </form>
       </div>
@@ -170,7 +171,5 @@
     </div>
   </div>
 </div>
-    @else
-                            Usted no tiene los permisos suficientes 
-                        @endcan
+   
 @endsection

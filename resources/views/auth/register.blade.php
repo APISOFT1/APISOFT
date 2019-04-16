@@ -37,7 +37,7 @@
 				<span class="login100-form-title p-b-41">
 					Registro
 				</span>
-				<form class="login100-form validate-form p-b-33 p-t-5"   method="POST"  action="{{ route('register') }}">
+				<form class="login100-form validate-form p-b-33 p-t-5"    >
   					@csrf
 
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
@@ -71,13 +71,15 @@
                     </div>
                     
                     <div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input  type="password"  id="password-confirm" class="input100"  name="password_confirmation" required>
+						<input   id="password-confirm" class="input100"  name="password_confirmation" type="password" required>
 						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
 					</div>
+
+					
 					<div class="container-login100-form-btn m-t-32">
 						<button  type="submit"  {{ __('Register') }} class="login100-form-btn"> Registrarse </button>			
 					</div>
-				
+					
 				
 				</form>
 			</div>

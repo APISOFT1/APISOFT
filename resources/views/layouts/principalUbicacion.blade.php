@@ -286,6 +286,7 @@ success: function(data) {
   });
 });
 
+/*
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Delete");
@@ -315,6 +316,7 @@ $('.modal-footer').on('click', '.delete', function(){
     }
   });
 });
+*/
 
   // Show function
   $(document).on('click', '.show-modal', function() {
@@ -324,3 +326,5 @@ $('.modal-footer').on('click', '.delete', function(){
   $('.modal-title').text('Show Post');
   });
 </script>
+  </body>
+</html>

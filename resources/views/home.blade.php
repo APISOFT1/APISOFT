@@ -29,15 +29,10 @@
         <a class="navbar-brand logo-right" href="welcome/javascript:void(0)"><i class="mdi-image-timelapse"></i>APISOFT</a>
       </div>
         <ul class="nav navbar-nav main-navigation">
-          <li class="active"><a href="">Inicio</a></li>
-          @can('permisos')
-          <li><a href="{{ url('users/') }}">Administrador</a></li>
-          @else
-                            Usted no tiene los permisos suficientes 
-                        @endcan
+          <li class="active"><a href="#home">Inicio</a></li>
+          <li><a href="{{ url('/users/') }}">Administrador</a></li>
           <li><a href=" {{url('/register/') }}">User prueba</a></li>
           <li><a href="{{ url('/RecepcionMateriaPrima/') }}">Planta</a></li>
-          <li><a href="#testimonial">Acerca de Nosotros</a></li>
           <li><a href="#contact">Ubicacion</a></li>
         </ul>
         <button class="close-button" id="close-button">Cerrar</button>

@@ -86,7 +86,7 @@
         <h4 class="modal-crear"></h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form" method="POST"  action="{{ route('register') }}" >
 
   
 			<div class="form-group row">
@@ -105,7 +105,7 @@
 						</span>
 					@endif
 			
-		
+		</div>
 			<div class="form-group row">
 				<label for="password">{{ __('Password') }}</label>
 
@@ -138,8 +138,8 @@
                     @endif
                 </div>
             </div>
-   
-
+           
+  
 
         </form>
       </div>
@@ -159,23 +159,31 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-show"></h4>
+          <h4 class="modal-title"></h4>
                   </div>
                     <div class="modal-body">
                     <div class="form-group">
-                      <label for="iii">ID :</label>
-                      <b id="iaa"/>
+                      <label for="">ID :</label>
+                      <b id="i2"/>
                     </div>
                     <div class="form-group">
-                      <label for="">Nombre :</label>
-                      <b id="jaja"/>
+                      <label for="">Descripcion :</label>
+                      
+                      <b id="d2"/>
+                    </div>
+										<div class="form-group">
+                      <label for="">Cantidad :</label>
+                      <b id="ca2"/>
+                    </div>
+										<div class="form-group">
+                   
+                      <label for="">Ubicacion :</label>
+                      <b id="ub2"/>
                     </div>
                     </div>
                     </div>
                   </div>
 </div>
-
-
 
 {{-- Modal Form Edit and Delete Post --}}
 <div id="myModal"class="modal fade" role="dialog">
@@ -190,79 +198,44 @@
           <div class="form-group">
             <label class="control-label col-sm-2"for="id">ID</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="i" disabled>
+              <input type="text" class="form-control" id="ids" disabled>
             </div>
           </div>
 
           <div class="form-group">
             <label class="control-label col-sm-2"for="name">Nombre</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="n" >
+              <input type="text" class="form-control" id="nam" >
             </div>
           </div>
 
           <div class="form-group">
-            <label class="control-label col-sm-2"for="Apellido1">Primer Apellido</label>
+            <label class="control-label col-sm-2"for="email">Email</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="a1">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="Apellido2">Segundo Apellido</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="a2">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="Telefono">Telefono</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="t" >
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="email">Correo</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="num" >
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="Direccion">Direccion</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="d" >
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="Fecha_Ingreso">Fecha Ingreso</label>
-            <div class="col-sm-10">
-              <input type="date" class="form-control" id="f">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="Genero_Id">Genero</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="g" >
+              <input type="text" class="form-control" id="em4" >
             </div>
           </div>
 
           <div class="form-group">
             <label class="control-label col-sm-2"for="password">Password</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="e" >
+              <input type="text" class="form-control" id="pass" >
             </div>
           </div>
+         
           <div class="form-group">
-            <label class="control-label col-sm-2"for="estado_id">Estado</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="es" >
+         
+                    {!! Form::label('roles', 'Roles*', ['class' => 'control-label col-sm-2']) !!}
+                    <div class="col-sm-10">
+                    {!! Form::select('roles[]', $roles, old('roles'), ['class' => 'form-control select2', 'multiple' => 'multiple', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('roles'))
+                        <p class="help-block">
+                            {{ $errors->first('roles') }}
+                        </p>
+                    @endif
+                </div>
             </div>
-          </div>
-
         </form>
                 {{-- Form Delete Post --}}
         <div class="deleteContent">
@@ -282,7 +255,4 @@
   </div>
 </div>
 
-<!--<script>
-        $('.select2').select2()
-    </script>-->
 @endsection

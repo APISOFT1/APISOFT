@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+
+
 use Illuminate\Support\Facades\Auth;
 
 use Spatie\Permission\Models\Role;
@@ -17,7 +18,9 @@ use Spatie\Permission\Models\Permission;class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+     
+        $this->middleware('auth', ['except' => ['index']]);
+
     }
 
     /**
@@ -27,8 +30,9 @@ use Spatie\Permission\Models\Permission;class HomeController extends Controller
      */
     public function index()
     {
-     
-        
+//  Permission::create(['name'=>'Crear Afiliado']);
+     // auth()->user()->givePermissionTo('Crear Afiliado');
+    // auth()->user()->assignRole('Admin');
         return view('home');
     }
 }

@@ -15,20 +15,26 @@ Route::get('/', function () {
     return view('welcome');
   
 });
- Auth::routes();
+Auth::routes();
 Auth::routes(['verify' => true]);
 
+
 Route::group(['middleware' =>['auth',  'verified']], function () {
- 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+  
+  Route::get('/home', 'HomeController@index')->name('home');
+  Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+     if ($options['register'] ?? true) {
+          $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+          $this->post('register', 'Auth\RegisterController@register');
+      }
+
 
   Route::resources([
 'Estanon'=>'EstanonController',
 'Genero'=>'GeneroController',
 'EstadoCivil'=>'EstadoCivilController',
 'Ubicacion'=>'UbicacionController',
-
+'Afiliado' => 'AfiliadoController',
 'AfiliadoApiario'=>'AfiliadoApiarioController',
 'Apiario' => 'ApiarioController',
 'Usuario'=>'UserController',
@@ -55,8 +61,8 @@ Route::POST('editAfiliado','AfiliadoController@editAfiliado');
 Route::POST('deleteAfiliado','AfiliadoController@deleteAfiliado');
 
 Route::POST('addPermissions','Admin\PermissionsController@addPermissions');
-Route::POST('editUser','Admin\UsersController@editUser');
-Route::POST('deleteUser','Admin\UsersController@deleteUser');
+Route::POST('ediPermissions','Admin\PermissionsController@ediPermissions');
+Route::POST('deletePermissions','Admin\PermissionsController@deletePermissions');
 
 Route::POST('addRole','Admin\RolesController@addRole');
 Route::POST('editRol','Admin\RolesController@editRole');
@@ -71,15 +77,17 @@ Route::POST('addAfiliadoApiario','AfiliadoApiarioController@addAfiliadoApiario')
 Route::POST('editApiario','ApiarioController@editApiario');
 Route::POST('deleteApiario','ApiarioController@deleteApiario');
 
-Route::POST('addUser','Admin\UsersController@addUser');
+
 Route::POST('editUser','Admin\UsersController@editUser');
 Route::POST('deleteUser','Admin\UsersController@deleteUser');
 
+Route::POST('addUser','Auth\RegisterController@addUser');
+Route::POST('editUser','Admin\UsersController@editUser');
+Route::POST('deleteUser','Admin\UsersController@deleteUser');
 
 Route::POST('addUbicacion','UbicacionController@addUbicacion');
 Route::POST('editUbicacion','UbicacionController@editUbicacion');
 Route::POST('deleteUbicacion','UbicacionController@deleteUbicacion');
 
 });
-
-
+ 

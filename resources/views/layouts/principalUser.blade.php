@@ -277,28 +277,22 @@
   
   });
 
-/*
+// function Edit POST
 $(document).on('click', '.edit-modal', function() {
-$('#footer_action_button').text(" Editar User");
+$('#footer_action_button').text(" Editar Apiario");
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-$('.modal-descripcion').text('Editar User');
+$('.modal-descripcion').text('Editar Apiario');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
-$('#i').val($(this).data('id'));
-$('#n').val($(this).data('name'));
-$('#nu').val($(this).data('email'));
-$('#e').val($(this).data('password'));
-$('#a1').val($(this).data('apellido1'));
-$('#a2').val($(this).data('apellido2'));
-$('#t').val($(this).data('telefono'));
-$('#d').val($(this).data('direccion'));
-$('#f').val($(this).data('fecha_ingreso'));
-$('#g').val($(this).data('genero_id'));
-$('#es').val($(this).data('estado_id'));
+$('#ids').val($(this).data('id'));
+$('#nam').val($(this).data('name'));
+$('#em4').val($(this).data('email'));
+$('#pass').val($(this).data('password'));
+$("#roles").val($(this).data('roles[]'));
 $('#myModal').modal('show');
 });
 
@@ -307,66 +301,48 @@ $('.modal-footer').on('click', '.edit', function() {
     type: 'POST',
     url: 'editUser',
     data: {
-
-'id':$("#i").val(),
-'name':$('#n').val(),
-'Apellido1':$('#a1').val(),
-'Apellido2':$('#a2').val(),
-'email':$('#num').val(),
-'password':$('#e').val(),
-'Telefono':$('#t').val(),
-'Direccion':$('#d').val(),
-'Fecha_Ingreso':$('#f').val(),
-'Genero_Id':$('#g').val(),
-'estado_id':$('#es').val(),
+'_token': $('input[name=_token]').val(),
+'id': $("#ids").val(),
+'name': $('#nam').val(),
+'email': $('#em4').val(),
+'password': $('#pass').val(),
+'roles'    : $('#roles').val(),
+      
 
     },
 success: function(data) {
-      $('.users' + data.id).replaceWith("<tr class='users" + data.id + "'>"+
-      "<td>" + data.id + "</td>"+
+      $('.users' + data.id).replaceWith(" "+
+      "<tr class='users" + data.id + "'>"+
+          "<td>" + data.id + "</td>"+
           "<td>" + data.name + "</td>"+
           "<td>" + data.email + "</td>"+
-          "<td>" + data.password + "</td>"+
-          "<td>" + data.Apellido1 + "</td>"+
-          "<td>" + data.Apellido2 + "</td>"+
-          "<td>" + data.Telefono + "</td>"+
-          "<td>" + data.Direccion+ "</td>"+
-          "<td>" + data.Fecha_Ingreso+ "</td>"+
-          "<td>" + data.Genero_Id + "</td>"+
-          "<td>" + data.estado_id + "</td>"+
-          "<td><button class='show-modal btn btn-info btn-sm' data-id='" 
-        
+          
+          "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + 
+          "' data-name='" + data.name + 
+          "' data-email='" + data.email +
+          "' data-password='" + data.password +
+          
  "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
  + data.id + 
- "' data-name='" + data.name + 
+           "' data-name='" + data.name + 
           "' data-email='" + data.email +
           "' data-password='" + data.password +
-          "'data-Apellido1='" + data.Apellido1 + 
-          "'data-Apellido2='" + data.Apellido2+
-           "'data-Telefono='" + data.Telefono +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-              "'data-Genero_Id='" + data.Genero_Id + 
-               "'data-estado_id='" + data.estado_id +
+          
  "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
  + data.id + 
- "' data-name='" + data.name + 
+              "' data-name='" + data.name + 
           "' data-email='" + data.email +
           "' data-password='" + data.password +
-          "'data-Apellido1='" + data.Apellido1 + 
-          "'data-Apellido2='" + data.Apellido2+
-           "'data-Telefono='" + data.Telefono +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-              "'data-Genero_Id='" + data.Genero_Id + 
-               "'data-estado_id='" + data.estado_id +
+      
 "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
+         
     }
   });
 });
 
 /*
+// form Delete function
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Delete");
 $('#footer_action_button').removeClass('glyphicon-check');
@@ -378,20 +354,20 @@ $('.modal-title').text('Delete Post');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
-$('.title').html($(this).data('descripcion'));
+$('.title').html($(this).data('Descripcion'));
 $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
-    url: 'deleteAfiliado',
+    url: 'deleteUser',
     data: {
       '_token': $('input[name=_token]').val(),
       'id': $('.id').text()
     },
     success: function(data){
-       $('.afiliado' + $('.id').text()).remove();
+       $('.apiario' + $('.id').text()).remove();
     }
   });
 });
@@ -399,11 +375,11 @@ $('.modal-footer').on('click', '.delete', function(){
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
-  
-  $('#iaa').val($(this).data('iii'));
-$('#jaja').val($(this).data('nom'));
-;
-  $('.modal-show').text('Datos');
+  $('#i2').text($(this).data('id'));
+  $('#d2').text($(this).data('name'));
+  $('#ca2').text($(this).data('email'));
+  $('#ub2').text($(this).data('password'));
+  $('.modal-title').text('Show Post');
   });
 </script>
 @include('partials.javascripts')

@@ -17,7 +17,7 @@
  
   
       <!-- Include Twitter Bootstrap and jQuery: -->
-<!--<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>->
+<!--<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/> -->
 
  
 <!-- Include the plugin's CSS and JS: -->
@@ -274,7 +274,7 @@
   
 
   });
-  
+ 
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
 $('#footer_action_button').text(" Editar Apiario");
@@ -294,22 +294,20 @@ $('#myModal').modal('show');
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
-    url: 'editRole',
+    url: 'editPermission',
     data: {
 '_token': $('input[name=_token]').val(),
 'id': $("#ids").val(),
-'Descripcion': $('#cri').val(),
-'cantidad': $('#can').val(),
-'ubicacion_id': $('#ub').val(),
+'name': $('#cri').val(),
+
 
     },
 success: function(data) {
-      $('.api' + data.id).replaceWith(" "+
+      $('.permission' + data.id).replaceWith(" "+
       "<tr class='api" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
-      "<td>" + data.Descripcion + "</td>"+
-      "<td>" + data.cantidad + "</td>"+
-      "<td>" + data.ubicacion_id + "</td>"+
+      "<td>" + data.name + "</td>"+
+  
       
  "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + "' data-Descripcion='" 
  + data.Descripcion + "' data-cantidad='" 
@@ -328,6 +326,7 @@ success: function(data) {
   });
 });
 
+/*
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Delete");
@@ -357,14 +356,12 @@ $('.modal-footer').on('click', '.delete', function(){
     }
   });
 });
-
+*/
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
   $('#i2').text($(this).data('id'));
-  $('#d2').text($(this).data('descripcion'));
-  $('#ca2').text($(this).data('cantidad'));
-  $('#ub2').text($(this).data('ubicacion_id'));
+  $('#d2').text($(this).data('name'));
   $('.modal-title').text('Show Post');
   });
 </script>
