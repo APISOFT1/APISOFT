@@ -55,14 +55,16 @@
                                 <td>
             <a href="#" class="show-modal btn btn-info btn-sm" 
             data-id="{{$value->id}}"
-            data-Nombre="{{$value->name}}">
+            data-name="{{$value->name}}"
+            data-email="{{$value->email}}"
+            data-password="{{$value->password}}">
               <i class="fa fa-eye"></i>
             </a>
             <a href="#" class="edit-modal btn btn-warning btn-sm"
             data-id="{{$value->id}}"
-            data-Nombre="{{$value->name}}"
+            data-name="{{$value->name}}"
             data-email="{{$value->email}}"
-            data-email="{{$value->password}}"
+            data-password="{{$value->password}}"
    ><i class="glyphicon glyphicon-pencil"></i> </a>
 
             <a href="#" class="delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" data-title="{{$value->name}}">
@@ -77,53 +79,61 @@
   </div>
   {{$users->links()}}
 </div>
-{{-- Modal Form Create Afiliado --}}
-  <div class="modal fade"  id="create" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-  <div class="modal-dialog modal-primary modal-lg" role="document">
+{{-- Modal Form Create User --}}
+<div id="create" class="modal fade" role="dialog" >
+<div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-crear"></h4>
+        <h4 class="modal-descripcion"></h4>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" role="form">
 
-			<div class="form-group row">
-      <label for="name">Nombre</label>
-					<input type="text" name = "name"   class="form-control"  placeholder="Nombre...">
-			</div>
+        <div class="form-group row add">
+        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+           <input type="text" class="form-control has-feedback-left" id="name" name="name" placeholder="Nombre..." required>
+            <p class="No Ingreso el Nombre"></p>
+              <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                </div>
+                </div>
            
           
             <div class="form-group row add">
-				<label for="email">{{ __('E-Mail Address') }}</label>
-					<input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required  placeholder="Correo...">
+            <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+					<input id="email" type="email" class="form-control has-feedback-left{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required  placeholder="Correo...">
 
 					@if ($errors->has('email'))
 						<span class="invalid-feedback" role="alert">
 							<strong>{{ $errors->first('email') }}</strong>
 						</span>
 					@endif
-			
+          <p class="No Ingreso la el correo"></p>
+              <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
 		</div>
-			<div class="form-group row">
-				<label for="password">{{ __('Password') }}</label>
+    </div>
 
-					<input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required placeholder="contraseña...">
+			<div class="form-group row">
+		  <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+			<input id="password" type="password" class="form-control  has-feedback-left{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required placeholder="Contraseña...">
 
 					@if ($errors->has('password'))
 						<span class="invalid-feedback" role="alert">
 							<strong>{{ $errors->first('password') }}</strong>
 						</span>
 					@endif
-
+          <p class="No Ingreso la Contraseña"></p>
+              <span class="fa fa-key form-control-feedback left" aria-hidden="true"></span>
 			</div>
+</div>
 
 			<div class="form-group row">
-				<label for="password-confirm">{{ __('Confirm Password') }}</label>
-
-					<input id="password-confirm" type="password" class="form-control" name="password_confirmation" required placeholder="Confirme Contraseña...">
+      <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+					<input id="password-confirm" type="password" class="form-control has-feedback-left" name="password_confirmation" required placeholder="Confirme Contraseña...">
+          <p class="No Ingreso la Contraseña"></p>
+              <span class="fa fa-key form-control-feedback left" aria-hidden="true"></span>
 				</div>
-		
+		</div>
   
     <div class="form-group row add">
             	<div class="col-md-6">
@@ -144,11 +154,11 @@
       </div>
     
           <div class="modal-footer">
-            <button class="btn btn-warning" type="submit" id="add">
-              <span class="glyphicon glyphicon-plus"></span>Guardar Afiliado
+          <button class="btn btn-warning" type="submit" id="add">
+              <span class="fa fa-save"></span> Guardar 
             </button>
             <button class="btn btn-warning" type="button" data-dismiss="modal">
-              <span class="glyphicon glyphicon-remobe"></span>Cerrar
+              <span class="fa fa-times"></span> Cerrar
             </button>
           </div>
     </div>
@@ -167,18 +177,18 @@
                       <b id="i2"/>
                     </div>
                     <div class="form-group">
-                      <label for="">Descripcion :</label>
+                      <label for="">Nombre :</label>
                       
-                      <b id="d2"/>
+                      <b id="n2"/>
                     </div>
 										<div class="form-group">
-                      <label for="">Cantidad :</label>
-                      <b id="ca2"/>
+                      <label for="">Correo :</label>
+                      <b id="em"/>
                     </div>
 										<div class="form-group">
                    
-                      <label for="">Ubicacion :</label>
-                      <b id="ub2"/>
+                      <label for="">Contraseña :</label>
+                      <b id="pw"/>
                     </div>
                     </div>
                     </div>
@@ -198,21 +208,21 @@
           <div class="form-group">
             <label class="control-label col-sm-2"for="id">ID</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="ids" disabled>
+              <input type="text" class="form-control" id="i" disabled>
             </div>
           </div>
 
           <div class="form-group">
             <label class="control-label col-sm-2"for="name">Nombre</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="nam" >
+              <input type="text" class="form-control" id="n" >
             </div>
           </div>
 
           <div class="form-group">
             <label class="control-label col-sm-2"for="email">Email</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="em4" >
+              <input type="text" class="form-control" id="em" >
             </div>
           </div>
 
@@ -223,19 +233,7 @@
             </div>
           </div>
          
-          <div class="form-group">
-         
-                    {!! Form::label('roles', 'Roles*', ['class' => 'control-label col-sm-2']) !!}
-                    <div class="col-sm-10">
-                    {!! Form::select('roles[]', $roles, old('roles'), ['class' => 'form-control select2', 'multiple' => 'multiple', 'required' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('roles'))
-                        <p class="help-block">
-                            {{ $errors->first('roles') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
+       
         </form>
                 {{-- Form Delete Post --}}
         <div class="deleteContent">

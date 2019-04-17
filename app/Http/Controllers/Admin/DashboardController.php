@@ -6,9 +6,12 @@ use App\Models\Auth\User\User;
 //use Arcanedev\LogViewer\Entities\Log;
 //use Arcanedev\LogViewer\Entities\LogEntry;
 use Carbon\Carbon;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Routing\Route;
+use DB;
+
 
 class DashboardController extends Controller
 {
@@ -31,9 +34,9 @@ class DashboardController extends Controller
     {
         $counts = [
             'users' => \DB::table('users')->count(),
-            'users_unconfirmed' => \DB::table('users')->where('confirmed', false)->count(),
-            'users_inactive' => \DB::table('users')->where('active', false)->count(),
-            'protected_pages' => 0,
+            //'users_unconfirmed' => \DB::table('users')->where('confirmed', false)->count(),
+           // 'users_inactive' => \DB::table('users')->where('active', false)->count(),
+           // 'protected_pages' => 0,
         ];
 
         foreach (\Route::getRoutes() as $route) {
@@ -42,7 +45,7 @@ class DashboardController extends Controller
             }
         }
 
-        return view('admin.dashboard', ['counts' => $counts]);
+        return view('dashboard', ['counts' => $counts]);
     }
 
 
@@ -106,4 +109,13 @@ class DashboardController extends Controller
 
         return response($data);
     }
+
+    public function chart()
+      {
+        $result = \DB::table('users')
+                    ->where('name','=','carolina')
+                    ->orderBy('created_at', 'ASC')
+                    ->get();
+        return response()->json($result);
+      }
 }

@@ -107,29 +107,32 @@
               <span class="fa fa-pencil form-control-feedback left" aria-hidden="true"></span>
                 </div>
               
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-           <input type="text" class="form-control has-feedback-right" id="PesoBruto" name="PesoBruto" placeholder="Peso Bruto" required>
-            <p class="No Ingreso el Peso bruto"></p>
-              <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                </div>
+                <div class="form-group row add">
+              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
+              <input type="number" class="form-control" id="discount" name="pesoBruto"
+              placeholder="Peso Bruto" required>
+              <p class="No ingreso el Peso Bruto"></p>
+              <span class="fa fa-plus form-control-feedback right" aria-hidden="true"></span>
+              </div>
+              </div>
              
-                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-           <input type="text" class="form-control has-feedback-left" id="PesoNeto" name="PesoNeto" placeholder="Peso Neto" required>
-            <p class="No Ingreso el Peso Neto"></p>
-              <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                </div>
-          
+
+              <div class="form-group row add">
+              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
+              <input type="text" class="form-control" id="pesoNeto" name="pesoNeto"
+             placeholder="Peso Neto" required>
+              <p class="No ingreso el Peso Neto"></p>
+              <span class="fa fa-minus-circle form-control-feedback right" aria-hidden="true"></span>
+              </div>
+              </div>
+
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
               <input type="date" class="form-control has-feedback-right" id="Fecha" name="Fecha" required>
               <p class="No Ingreso la Fecha"></p>
               <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
             </div>
 
-            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-              <input type="text" class="form-control has-feedback-left" id="resultado1" name="resultado" placeholder="Recepción" required>
-              <p class="No Ingreso la Recepción"></p>
-              <span class="fa fa-file-text form-control-feedback left" aria-hidden="true"></span>
-            </div> 
+          
             <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#miModal">   <i class="fa fa-search"></i>
          
         </form>
@@ -201,6 +204,7 @@
                                         </tr>
                                             </tbody>
                                         </table>
+                                        </div>
                                         </div>
                                         </div>
               <div class="modal-footer">
@@ -306,6 +310,9 @@
 
 @endsection
 
-<script>
-  
-</script>
+
+@section('scripts')
+    @parent
+    {{ Html::script('/js/dashboard.js') }}
+@endsection
+

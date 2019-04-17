@@ -189,7 +189,7 @@
                             <!-- content go here -->
                                      
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <input type="text" class="form-control" id="Telefono" name="Telefono" placeholder="Teléfono">
+                        <input type="text" class="form-control  has-feedback-right" id="Telefono" name="Telefono" placeholder="Teléfono">
                         <p class="No Ingreso el Telefono"></p>
                         <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
                       </div>

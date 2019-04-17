@@ -174,7 +174,7 @@
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
-    $('.modal-descripcion').text('Crear AfiliadoApiario');
+    $('.modal-descripcion').text('Crear Afiliado Apiario');
     
   });
   $("#add").click(function() {
@@ -220,13 +220,13 @@
 
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
-$('#footer_action_button').text(" Editar AfiliadoApiario");
-$('#footer_action_button').addClass('glyphicon-check');
+$('#footer_action_button').text(" Editar ");
+$('#footer_action_button').addClass('fa fa-pencil');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-$('.modal-descripcion').text('Editar AfiliadoApiario');
+$('.modal-descripcion').text('Editar Afiliado Apiario');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
 $('#idAA').val($(this).data('id'));
@@ -306,6 +306,6 @@ $('.modal-footer').on('click', '.delete', function(){
   $('#idA').text($(this).data('id'));
   $('#af').text($(this).data('afiliado_id'));
   $('#ap').text($(this).data('apiario_id'));
-  $('.modal-title').text('Show Post');
+  $('.modal-title').text('Detalle');
   });
 </script>
