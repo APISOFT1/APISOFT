@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateExtraccionCeraTable extends Migration
+class CreateCerasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateExtraccionCeraTable extends Migration
      */
     public function up()
     {
-        Schema::create('extraccion_cera', function (Blueprint $table) {
+        Schema::create('ceras', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('descripcion');
             $table->integer('recepcion_materia_prima_id')->unsigned();
             $table->foreign('recepcion_materia_prima_id')->references('id')->on('recepcion_materia_primas');
             $table->float('PesoBruto');
             $table->float('PesoNeto');
+            $table->datetime('fecha');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateExtraccionCeraTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('extraccion_cera');
+        Schema::dropIfExists('ceras');
     }
 }

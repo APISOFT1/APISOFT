@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDetalleIngresoCeraTable extends Migrationphp 
+class CreateDetalleIngresoCeraTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,13 +15,11 @@ class CreateDetalleIngresoCeraTable extends Migrationphp
     {
         Schema::create('detalle_ingreso_cera', function (Blueprint $table) {
             $table->increments('iddetalle_ingreso_cera');
-            $table->integer('idingresocera')->unsigned();
-            $table->foreign('idingresocera')->references('idingresocera')->on('ingreso_cera');
-            $table->integer('idproducto')->unsigned();
-            $table->foreign('idproducto')->references('id')->on('producto');
-            $table->double('Peso');
-            $table->double('deduccionMerma');
-            $table->timestamps();
+            $table->integer('idingreso_cera')->unsigned();
+            $table->foreign('idingreso_cera')->references('idingreso_cera')->on('ingreso_cera');
+            $table->integer('cera_id')->unsigned();
+            $table->foreign('cera_id')->references('id')->on('ceras');
+            $table->double('Precio');
             $table->timestamps();
         });
     }

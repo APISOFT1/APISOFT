@@ -126,8 +126,29 @@
         <!-- /top navigation -->
         <!-- page content -->
         <div class="right_col" role="main">
+        
           <div class="container">
+          
             <div class="row x_panel">
+
+
+
+
+   <ul class="nav nav-tabs " id="myTab" role="tablist" >
+  <li class="nav-item">
+    <a class="nav-link active" role="tab"  href="{{ url('/IngresoCera/') }}">Boletas de la Cera procesada</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" role="tab"  href="{{ url('/IngresoLamina/') }}">Boletas de la Cera en lamina</a>
+  </li>
+
+</ul>
+
+
+
+
+
+
               @yield('contenido')
             </div>
           </div>

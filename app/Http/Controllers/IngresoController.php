@@ -52,7 +52,7 @@ class IngresoController extends Controller
         ->get();
         $usuarios=DB::table('users')
         ->get();
-        $productos = DB::table('producto as art')
+        $productos = DB::table('recepcion_materia_primas as art')
           ->select(DB::raw('CONCAT(art.nombre) AS producto'),'art.id','art.Precio')
           ->where('art.estado','=','Activo')
           ->groupBy('producto','art.id','art.Precio')
@@ -73,7 +73,7 @@ class IngresoController extends Controller
 
             $mtyime= Carbon::now('America/Costa_Rica');
             $ingreso->fecha_hora=$mtyime->toDateTimeString();
-            $ingreso->estado='A';
+            $ingreso->estado='Activo';
             $ingreso->save();
 
             $idproducto = $request->get('idproducto');
@@ -110,7 +110,7 @@ class IngresoController extends Controller
         ->first();
 
         $detalles=DB::table('detalle_ingreso as d')
-            ->join ('producto as a','d.idproducto','=','a.id')
+            ->join ('recepcion_materia_primas as a','d.idproducto','=','a.id')
             ->select('a.nombre as producto','d.Peso','d.deduccionMerma','a.Precio')
             ->where('d.idingreso','=',$id)
             ->get(); 
@@ -129,7 +129,7 @@ class IngresoController extends Controller
     ->first();
 
     $detalles=DB::table('detalle_ingreso as d')
-    ->join ('producto as a','d.idproducto','=','a.id')
+    ->join ('recepcion_materia_primas as a','d.idproducto','=','a.id')
     ->select('a.nombre as producto','d.Peso','d.deduccionMerma','a.Precio')
     ->where('d.idingreso','=',$id)
     ->get(); 
@@ -140,7 +140,7 @@ return $ingresos->download('Ingreso.edit');
     public function destroy ($id)
     {
         $ingreso=Ingreso::findOrFail($id);
-        $ingreso->Estado='C';
+        $ingreso->Estado='Cancelado';
         $ingreso->update();
         return Redirect::to('Ingreso');
     }

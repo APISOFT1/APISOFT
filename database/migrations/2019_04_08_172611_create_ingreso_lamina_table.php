@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIngresoCeraTable extends Migration
+class CreateIngresoLaminaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateIngresoCeraTable extends Migration
      */
     public function up()
     {
-        Schema::create('ingreso_cera', function (Blueprint $table) {
-            $table->increments('idingreso_cera');
+        Schema::create('ingreso_lamina', function (Blueprint $table) {
+            $table->increments('idingreso_lamina');
             $table->string('idproveedor',12);
             $table->foreign('idproveedor')->references('id')->on('afiliados');
             $table->string('idusuario',12);
@@ -26,6 +26,7 @@ class CreateIngresoCeraTable extends Migration
             $table->dateTime('fecha_hora');
             $table->string('estado');
             $table->timestamps();
+         
         });
     }
 
@@ -36,6 +37,6 @@ class CreateIngresoCeraTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ingreso_cera');
+        Schema::dropIfExists('ingreso_lamina');
     }
 }
