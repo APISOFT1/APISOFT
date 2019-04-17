@@ -341,6 +341,21 @@ $('.modal-footer').on('click', '.delete', function(){
   $('.modal-title').text('Show Post');
   });
 
+  
+  var timeoutId = 0;
+$('#discount').keyup(function(e){
+   clearTimeout(timeoutId);
+   timeoutId = setTimeout(discount,1000);
+});
+
+function discount(){
+  let amount = $('#discount').val();
+  if(!isNaN(amount)){
+    let discount = amount * 0.05;
+    let total =  amount - discount;
+    $("#pesoNeto").val(total);
+  } 
+}
 
 </script>
     

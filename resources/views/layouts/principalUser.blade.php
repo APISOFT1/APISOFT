@@ -21,9 +21,7 @@
 
  
 <!-- Include the plugin's CSS and JS: -->
-<!--<link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>-->
 
- <!--   {!!Html::style ('/css/bootstrap-multiselect.css')!!} -->
     {!!Html::style ('/css2/bootstrap.min.css')!!} 
 
     {!!Html::style ('/css2/bootstrap-select.min.css')!!}   
@@ -71,6 +69,12 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
+                <li><a><i class="fa fa-home"></i> Home<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                     <li><a href="{{ url('/roles/') }}">Dashboard</a></li>
+                     
+                    </ul>
+                  </li>
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                      <li><a href="{{ url('/roles/') }}">Gestionar Rol</a></li>
@@ -190,6 +194,8 @@
 
      {!!Html::script('/js/dashboard.js')!!}
 
+     {!!Html::script('/js/Chart.min.js')!!}
+
 
  
 <!-- Include the plugin's CSS and JS: -->
@@ -271,20 +277,19 @@
 
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
-$('#footer_action_button').text(" Editar Apiario");
+$('#footer_action_button').text(" Editar");
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-$('.modal-descripcion').text('Editar Apiario');
+$('.modal-descripcion').text('Editar Usuario');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
-$('#ids').val($(this).data('id'));
-$('#nam').val($(this).data('name'));
-$('#em4').val($(this).data('email'));
+$('#i').val($(this).data('id'));
+$('#n').val($(this).data('name'));
+$('#em').val($(this).data('email'));
 $('#pass').val($(this).data('password'));
-$("#roles").val($(this).data('roles[]'));
 $('#myModal').modal('show');
 });
 
@@ -294,11 +299,11 @@ $('.modal-footer').on('click', '.edit', function() {
     url: 'editUser',
     data: {
 '_token': $('input[name=_token]').val(),
-'id': $("#ids").val(),
-'name': $('#nam').val(),
-'email': $('#em4').val(),
+'id': $("#i").val(),
+'name': $('#n').val(),
+'email': $('#em').val(),
 'password': $('#pass').val(),
-'roles'    : $('#roles').val(),
+
       
 
     },
@@ -309,6 +314,7 @@ success: function(data) {
           "<td>" + data.name + "</td>"+
           "<td>" + data.email + "</td>"+
           
+         
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + 
           "' data-name='" + data.name + 
           "' data-email='" + data.email +
@@ -364,13 +370,14 @@ $('.modal-footer').on('click', '.delete', function(){
   });
 });
 */
+
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
   $('#i2').text($(this).data('id'));
-  $('#d2').text($(this).data('name'));
-  $('#ca2').text($(this).data('email'));
-  $('#ub2').text($(this).data('password'));
+  $('#n2').text($(this).data('name'));
+  $('#em').text($(this).data('email'));
+  $('#pw').text($(this).data('password'));
   $('.modal-title').text('Show Post');
   });
 </script>

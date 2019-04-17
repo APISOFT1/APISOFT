@@ -220,7 +220,7 @@
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
-    $('.modal-descripcion').text('Crear Ubicacion');
+    $('.modal-descripcion').text('Crear Ubicación');
   });
   $("#add").click(function() {
     $.ajax({
@@ -233,7 +233,10 @@
       success: function(data){
         if ((data.errors)) {
           $('.error').removeClass('hidden');
-          $('.error').text(data.errors.descripcion);
+          $('.error').text(data.errors.Descripcion);
+          if(data.errors.Descripcion){
+                        $( '#Descripcion-error' ).html( data.errors.Descripcion[0] );
+                    }
  
         } else {
           $('.error').remove();
@@ -253,17 +256,17 @@
 
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
-$('#footer_action_button').text(" Editar Ubicacion");
+$('#footer_action_button').text(" Editar ");
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-$('.modal-descripcion').text('Editar Ubicacion');
+$('.modal-descripcion').text('Editar Ubicación');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
 $('#ids').val($(this).data('id'));
-$('#des').val($(this).data('Descripcion'));
+$('#des').val($(this).data('descripcion'));
 $('#myModal').modal('show');
 });
 
@@ -324,8 +327,8 @@ $('.modal-footer').on('click', '.delete', function(){
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
   $('#ii').text($(this).data('id'));
-  $('#dii').text($(this).data('Descripcion'));
-  $('.modal-title').text('Show Post');
+  $('#dii').text($(this).data('descripcion'));
+  $('.modal-title').text('Detalle');
   });
 </script>
   </body>

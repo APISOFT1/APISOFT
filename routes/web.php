@@ -28,6 +28,9 @@ Route::group(['middleware' =>['auth',  'verified']], function () {
           $this->post('register', 'Auth\RegisterController@register');
       }
 
+       // Dashboard
+  //Route::get('users', ' Admin\DashboardController')->name('dashboard'); 
+
   Route::resources([
 'Estanon'=>'EstanonController',
 'Genero'=>'GeneroController',
@@ -46,6 +49,7 @@ Route::group(['middleware' =>['auth',  'verified']], function () {
 'users'=> 'Admin\UsersController',
 'Cera'=>'CeraController',
 'RecepEstanon' => 'RecepcionEstanonController',
+'chart' => 'Admin\DashboardController',
 
 
 
@@ -94,5 +98,4 @@ Route::POST('editUbicacion','UbicacionController@editUbicacion');
 Route::POST('deleteUbicacion','UbicacionController@deleteUbicacion');
 
 });
-  // Dashboard
- // Route::get('/', 'DashboardController@index')->name('dashboard');
+ 

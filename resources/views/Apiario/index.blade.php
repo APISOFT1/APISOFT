@@ -33,8 +33,6 @@
 					<th>Descripción</th>
 					<th>Cantidad</th>
 					<th>Ubicación</th>
-          <th> Creado</th>
-          <th> Actualizado</th>
 					<th><a href="#"
 					class="create-modal btn btn-success btn-sm">
             <i class="glyphicon glyphicon-plus"></i></th>
@@ -47,14 +45,13 @@
 					<td>{{ $value->Descripcion}}</td>
 					<td>{{ $value->cantidad}}</td>
             <td><span class="label label-success">{{ $value->ubicacion->Descripcion}}</span></td>
-            <td >{{$value->created_at}} ({{$value->created_at->diffForHumans()}})</td>
-            <td >{{$value->updated_at}} ({{$value->updated_at->diffForHumans()}})</td>
+           
 					<td>
 					<a href="#" class="show-modal btn btn-info btn-sm"
 					 data-id="{{$value->id}}" 
 					 data-Descripcion="{{$value->Descripcion}}"
 					 data-cantidad="{{$value->cantidad}}"
-					 data-ubicacion_id="{{$value->ubicacion_id}}">
+					 data-ubicacion_id="{{$value->ubicacion_id}} - {{$value->ubicacion->Descripcion}}">
               <i class="fa fa-eye"></i>
             </a>
             <a href="#" class="edit-modal btn btn-warning btn-sm" 
@@ -83,7 +80,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-descripcion"></h4>
+        <h4 class="modal-descripcion text-center"></h4>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" role="form">
@@ -91,7 +88,7 @@
         <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
            <input type="text" class="form-control has-feedback-left" id="Descripcion" name="Descripcion" placeholder="Descripción" required>
-            <p class="No Ingreso la Descripcion"></p>
+           <p class="error text-center alert alert-danger hidden"></p>
               <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                 </div>
                 </div>
@@ -99,7 +96,7 @@
                 <div class="form-group row add">
                 <div class="col-md-9" >
            <input type="text" class="form-control has-feedback-left" id="cantidad" name="cantidad" placeholder="cantidad" required>
-            <p class="No Ingreso la Cantidad"></p>
+           <p class="error text-center alert alert-danger hidden"></p>
               <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                 </div>
                </div>
@@ -134,15 +131,17 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title"></h4>
+          <h4 class="modal-title text-center">
+          <i class="glyphicon glyphicon-info-sign"></i></h4>
                   </div>
                     <div class="modal-body">
+                  
                     <div class="form-group">
-                      <label for="">ID :</label>
+                      <label for="">Código :</label>
                       <b id="i2"/>
                     </div>
                     <div class="form-group">
-                      <label for="">Descripcion :</label>
+                      <label for="">Descripción :</label>
                       
                       <b id="d2"/>
                     </div>
@@ -152,8 +151,8 @@
                     </div>
 										<div class="form-group">
                    
-                      <label for="">Ubicacion :</label>
-                      <b id="ub2"/>
+                      <label for="">Ubicación :</label>
+                      <span class="label label-success"><b id="ub2"/>
                     </div>
                     </div>
                     </div>
@@ -165,7 +164,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-descripcion"></h4>
+        <h4 class="modal-descripcion text-center"></h4>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" role="modal">
@@ -216,12 +215,23 @@
             <button class="btn btn-warning" type="button" data-dismiss="modal">
               <span class="fa fa-times"></span> Cerrar
             </button>
+            myApp.showPleaseWait();
       </div>
     </div>
   </div>
 </div>
 
-
-
+<div class="modal hide" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-header">
+            <h1>Processing...</h1>
+        </div>
+        <div class="modal-body">
+            <div class="progress progress-striped active">
+                <div class="bar" style="width: 100%;"></div>
+            </div>
+        </div>
+    </div>
 @endsection
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 

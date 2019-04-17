@@ -14,14 +14,23 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="{{asset('css2/bootstrap-select.min.css')}}">
-
-
-
+ 
   
+      <!-- Include Twitter Bootstrap and jQuery: -->
+<!--<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>->
+
+ 
+<!-- Include the plugin's CSS and JS: -->
+
     {!!Html::style ('/css2/bootstrap.min.css')!!} 
 
-    {!!Html::style ('/css2/bootstrap-select.min.css')!!}  
+    {!!Html::style ('/css2/bootstrap-select.min.css')!!}   
     
+    {!!Html::style ('/css2/select2.min.css')!!}
+
+    {!!Html::style ('/css2/select2.css')!!}
+
+    {!!Html::style ('/css/dashboard.css')!!}
     
     <!-- Font Awesome -->
     {!!Html::style ('/css2/font-awesome.min.css')!!}
@@ -50,7 +59,7 @@
               </div>
               <div class="profile_info">
                 <span>Bienvenido</span>
-                <h2>{{ Auth::user()->name }}</h2>
+            
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -59,7 +68,8 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <h3>General</h3>
-                <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                      <li><a href="{{ url('/roles/') }}">Gestionar Rol</a></li>
                      <li><a href="{{ url('/permissions/') }}">Gestionar Permisos</a></li>
@@ -89,6 +99,7 @@
                     
                     </ul>
                   </li>
+
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Producto Terminado <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
@@ -143,16 +154,27 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
   crossorigin="anonymous"></script>
-  <script src="{{asset('js2/bootstrap-select.min.js')}}"></script>
+  <!--<script src="{{asset('js2/bootstrap-select.min.js')}}"></script>-->
   
     <!-- jQuery -->
+     
 
     {!!Html::script('/js2/jquery.min.js')!!}  
+
     @stack('scripts')
     <!-- Bootstrap -->
     {!!Html::script('/js2/bootstrap.min.js')!!}
 
+   <!-- SELECT2 -->
+   {!!Html::script('/js2/bootstrap-select.min.js')!!} 
+
+    {!!Html::script('/js2/select2.full.js')!!}
+
+    {!!Html::script('/js2/select2.js')!!}
     
+    {!!Html::script('/js2/select2.min.js')!!}
+
+    {!!Html::script('/js2/select2.full.min.js')!!}
     <!-- FastClick -->
     {!!Html::script('/js2/fastclick.js')!!}
     <!-- NProgress -->
@@ -161,13 +183,23 @@
     {!!Html::script('/js2/jquery.mCustomScrollbar.concat.min.js')!!}
     <!-- Custom Theme Scripts -->
     {!!Html::script('/js2/custom.min.js')!!}
+
      {!!Html::script('/js2/dropdown.js')!!}
 
+     {!!Html::script('/js/dashboard.js')!!}
+
+     {!!Html::script('/js/Chart.min.js')!!}
 
 
+ 
+<!-- Include the plugin's CSS and JS: -->
+{!!Html::script('/js/bootstrap-select.min.js')!!}
+
+{!!Html::script('/js/jquery-1.11.1.min.js')!!}
 
 
 <!-- MODAL AFILIADO -->
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
@@ -239,7 +271,7 @@ $('.modal-descripcion').text('Editar Apiario');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
 $('#ids').val($(this).data('id'));
-$('#cri').val($(this).data('Descripcion'));
+$('#cri').val($(this).data('descripcion'));
 $('#can').val($(this).data('cantidad'));
 $('#ub').val($(this).data('ubicacion_id'));
 $('#myModal').modal('show');
@@ -322,10 +354,46 @@ $('.modal-footer').on('click', '.delete', function(){
   $('#ub2').text($(this).data('ubicacion_id'));
   $('#crt').text($(this).data('created_at'));
   $('#upd').text($(this).data('updated_at'));
-  $('.modal-title').text('Show Post');
+  $('.modal-title').text('Detalle');
   });
+
+  /* processing bar 
+  */
+  var myApp;
+myApp = myApp || (function () {
+    var pleaseWaitDiv = $('<div class="modal hide" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false"><div class="modal-header"><h1>Processing...</h1></div><div class="modal-body"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div></div>');
+    return {
+        showPleaseWait: function() {
+            pleaseWaitDiv.modal();
+        },
+        hidePleaseWait: function () {
+            pleaseWaitDiv.modal('hide');
+        },
+
+    };
+})();
 </script>
-    
+  
+  <!--  <style>
+   
+
+.modal-header {
+
+background-color: #1ABB9C;
+
+padding:16px 16px;
+
+color:#FFF;
+
+border-bottom:2px dashed #1ABB9C;
+
+}
+
+.btn-success {
+    background: #26B99A;
+    border: 1px solid #169F85;
+}
+    </style> -->
 
     </body>
     </html>
