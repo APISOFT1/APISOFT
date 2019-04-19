@@ -34,9 +34,9 @@ class DashboardController extends Controller
     {
         $counts = [
             'users' => \DB::table('users')->count(),
-            //'users_unconfirmed' => \DB::table('users')->where('confirmed', false)->count(),
-           // 'users_inactive' => \DB::table('users')->where('active', false)->count(),
-           // 'protected_pages' => 0,
+            'users_unconfirmed' => \DB::table('users')->where('confirmed', false)->count(),
+            'users_inactive' => \DB::table('users')->where('active', false)->count(),
+           'protected_pages' => 0,
         ];
 
         foreach (\Route::getRoutes() as $route) {

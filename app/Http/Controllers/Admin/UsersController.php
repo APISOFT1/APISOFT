@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\Controllers\Admin;
-use App\User;
+use App\Models\Auth\Role\Role;
+use App\Models\Auth\User\User;
 use App\Genero;
 use Validator;
 use Response;
-use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
@@ -27,11 +27,11 @@ class UsersController extends Controller
         ->orderby('id','desc')
         ->paginate(10);
            
-            $roles = Role::get()->pluck('name', 'name');
-            return view('users.index', compact('users', 'roles'), ['users'=>$users,"searchText"=>$query]);
+            $roles = Role::all();
+            return view('users.index',  compact('users', 'roles','generos'), ['users'=>$users,"searchText"=>$query]);
     }
         
-        return view('users.index', compact('users', 'roles','generos'));
+        return view('admin.users.index', compact('users', 'roles','generos'));
     }
 
 
@@ -71,29 +71,98 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function edit(User $user)
+    {
+        return view('admin.users.edit', ['user' => $user, 'roles' => Role::get()]);
+    }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param User $user
+     * @return mixed
+     */
+    public function update(Request $request, User $user)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255',
+            'active' => 'sometimes|boolean',
+            'confirmed' => 'sometimes|boolean',
+        ]);
+
+        $validator->sometimes('email', 'unique:users', function ($input) use ($user) {
+            return strtolower($input->email) != strtolower($user->email);
+        });
+
+        $validator->sometimes('password', 'min:9|confirmed', function ($input) {
+            return $input->password;
+        });
+
+        if ($validator->fails()) return redirect()->back()->withErrors($validator->errors());
+
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+
+        if ($request->has('password')) {
+            $user->password = bcrypt($request->get('password'));
+        }
+
+        $user->active = $request->get('active', 0);
+        $user->confirmed = $request->get('confirmed', 0);
+
+        $user->save();
+
+        //roles
+        if ($request->has('roles')) {
+            $user->roles()->detach();
+
+            if ($request->get('roles')) {
+                $user->roles()->attach($request->get('roles'));
+            }
+        }
+
+        return redirect()->intended(route('users'));
+    }
 
      
     public function editUser(request $request){
+
         $rules = array(
-        );
-      $validator = Validator::make ( Input::all(), $rules);
-      if ($validator->fails())
-      return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
+            'name' => 'required|max:255',
+          'email' => 'required|email|max:255',
+          'active' => 'sometimes|boolean',
+          'confirmed' => 'sometimes|boolean',
+          );
+        $validator = Validator::make ( Input::all(), $rules);
+        if ($validator->fails())
+        return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
+        
+        else {
       
-      else {
-        $users = User::find ($request->id);
+            $users = User::find ($request->id);
+          $users->name = $request->name;
+          $users->email = $request->email;
+          $user->password =$request->password;
+          $users->active = $request->active;
+          $users->confirmed = $request->confirmed;
+          $users->save();
       
-        $users->id= $request->id;
-        $users->name = $request->name;
-        $users->email = $request->email;
-        $users->password = $request->password;
-        $roles = $request->input('roles') ? $request->input('roles') : [];
-        $users->syncRoles($roles);
-        $users->save();
+      //roles
+      
+      if ($request->has('roles')) {
+          $users->roles()->detach();
+
+          if ($request->get('roles')) {
+              $users->roles()->attach($request->get('roles'));
+          }
+      }
+
+       
       return response()->json($users);
       }
-      }
+    }
 
 
     public function massDestroy(Request $request)
