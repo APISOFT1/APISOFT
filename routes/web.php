@@ -19,14 +19,16 @@ Auth::routes();
 Auth::routes(['verify' => true]);
 
 
-Route::group(['middleware' =>['auth',  'verified']], function () {
-  
+//Route::group(['middleware' =>['auth',  'verified']], function () {
+// Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
   Route::get('/home', 'HomeController@index')->name('home');
   Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-   if ($options['register'] ?? true) {
+     if ($options['register'] ?? true) {
           $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
           $this->post('register', 'Auth\RegisterController@register');
       }
+
+   //   Route::get('/', 'DashboardController@index')->name('dashboard');
 
        // Dashboard
   //Route::get('users', ' Admin\DashboardController')->name('dashboard'); 
@@ -49,13 +51,13 @@ Route::group(['middleware' =>['auth',  'verified']], function () {
 'users'=> 'Admin\UsersController',
 'Cera'=>'CeraController',
 'RecepEstanon' => 'RecepcionEstanonController',
-'chart' => 'Admin\DashboardController',
+'/' => 'Admin\DashboardController',
 
 
 
   ]);
-
-  
+  Route::get('users/{users}/edit', 'UsersController@edit')->name('users.edit');
+  Route::put('users/{users}', 'UsersController@update')->name('users.update');
 Route::POST('addAfiliado','AfiliadoController@addAfiliado');
 Route::POST('editAfiliado','AfiliadoController@editAfiliado');
 Route::POST('deleteAfiliado','AfiliadoController@deleteAfiliado');
@@ -97,5 +99,5 @@ Route::POST('addUbicacion','UbicacionController@addUbicacion');
 Route::POST('editUbicacion','UbicacionController@editUbicacion');
 Route::POST('deleteUbicacion','UbicacionController@deleteUbicacion');
 
-});
+//});
  

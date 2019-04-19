@@ -71,14 +71,13 @@
                 <ul class="nav side-menu">
                 <li><a><i class="fa fa-home"></i> Home<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                     <li><a href="{{ url('/roles/') }}">Dashboard</a></li>
+                     <li><a href="{{ url('/dashboard/') }}">Dashboard</a></li>
                      
                     </ul>
                   </li>
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                      <li><a href="{{ url('/roles/') }}">Gestionar Rol</a></li>
-                     <li><a href="{{ url('/permissions/') }}">Gestionar Permisos</a></li>
                      <li><a href="{{ url('/users/') }}">Gestionar Users</a></li>
                     </ul>
                   </li>
@@ -227,8 +226,8 @@
         '_token': $('input[name=_token]').val(),
         'name': $('input[name=name]').val(),
         'email': $('input[name=email]').val(),
-        'password': $('input[name=password]').val(),
-        'roles'    : $('select[name= "roles[]"]').val()
+        'password': $('input[name=password]').val()
+      
       },
       success: function(data){
         if ((data.errors)) {
@@ -286,10 +285,13 @@ $('.actionBtn').addClass('edit');
 $('.modal-descripcion').text('Editar Usuario');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
-$('#i').val($(this).data('id'));
-$('#n').val($(this).data('name'));
-$('#em').val($(this).data('email'));
-$('#pass').val($(this).data('password'));
+$('#iii').val($(this).data('id'));
+$('#nnn').val($(this).data('name'));
+$('#emm').val($(this).data('email'));
+$('#passs').val($(this).data('password'));
+$('#rlss').val($(this).data('roles'));
+
+
 $('#myModal').modal('show');
 });
 
@@ -299,10 +301,11 @@ $('.modal-footer').on('click', '.edit', function() {
     url: 'editUser',
     data: {
 '_token': $('input[name=_token]').val(),
-'id': $("#i").val(),
-'name': $('#n').val(),
-'email': $('#em').val(),
-'password': $('#pass').val(),
+'id': $("#iii").val(),
+'name': $('#nnn').val(),
+'email': $('#emm').val(),
+'password': $('#passs').val(),
+'roles': $('#rlss').val(),
 
       
 

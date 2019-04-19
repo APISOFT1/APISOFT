@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 use Spatie\Permission\Models\Role;
-use App\User;
+use App\Models\Auth\User\User;
 use Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -38,80 +38,11 @@ class RegisterController extends Controller
      * @return void
      */
 
-    public function index(Request $request)
-    {
-       
-       if($request){
-        $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-        $users= User::paginate(10);
-           
-            $roles = Role::get()->pluck('name', 'name');
-            return view('users.index', compact('users', 'roles'), ['users'=>$users,"searchText"=>$query]);
-    }
-        
-        return view('users.index', compact('users', 'roles','generos'));
-    }
-
-
-    
-    public function addUser(Request $request){
-        $rules = array(
-    
-          
-          'name' => 'required',
-          'email' => 'required',
-          'password' => 'required',
-          
-        
-        );
-      $validator = Validator::make ( Input::all(), $rules);
-      if ($validator->fails())
-      return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
-    
-      else {   
-        $users = new User;
-        $users->id= $request->id;
-        $users->name = $request->name;
-        $users->email = $request->email;
-        $users->password = $request->password;
-        $roles = $request->input('roles') ? $request->input('roles') : [];
-        $users->assignRole($roles);
-        $users->save();
-        return response()->json($users);
-      }
-    }
-    /**
-     * Show the form for creating new User.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-
-     
-    public function editUser(request $request){
-        $rules = array(
-        );
-      $validator = Validator::make ( Input::all(), $rules);
-      if ($validator->fails())
-      return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
-      
-      else {
-        $users = User::find ($request->id);
-      
-        $users->id= $request->id;
-        $users->name = $request->name;
-        $users->email = $request->email;
-        $users->password = $request->password;
-        $roles = $request->input('roles') ? $request->input('roles') : [];
-        $users->syncRoles($roles);
-        $users->save();
-      return response()->json($users);
-      }
-      }
+   
 
     public function __construct()
     {
-        
+      $this->middleware('guest');
     }
 
   
@@ -121,30 +52,80 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+  protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
+        $rules = [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6|confirmed',
+        ];
+
+        if (config('auth.captcha.registration')) {
+            $rules['g-recaptcha-response'] = 'required|captcha';
+        }
+
+        return Validator::make($data, $rules);
     }
+
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
-     * @return \App\User
+     * @param  array $data
+     * @return User|\Illuminate\Database\Eloquent\Model
      */
     protected function create(array $data)
     {
-        return User::create([
+        /** @var  $user User */
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-
-            'password' => Hash::make($data['password']),
+            'password' => bcrypt($data['password']),
+            'confirmation_code' => Uuid::uuid4(),
+            'confirmed' => false
         ]);
 
-      
+        if (config('auth.users.default_role')) {
+            $user->roles()->attach(Role::firstOrCreate(['name' => config('auth.users.default_role')]));
+        }
+
+        return $user;
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
+    }
+
+    /**
+     * The user has been registered.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  mixed $user
+     * @return mixed
+     */
+    protected function registered(Request $request, $user)
+    {
+        if (config('auth.users.confirm_email') && !$user->confirmed) {
+
+            $this->guard()->logout();
+
+            $user->notify(new ConfirmEmail());
+
+            return redirect(route('login'));
+        }
     }
 
 }
