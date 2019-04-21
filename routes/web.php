@@ -89,5 +89,12 @@ Route::POST('addUbicacion','UbicacionController@addUbicacion');
 Route::POST('editUbicacion','UbicacionController@editUbicacion');
 Route::POST('deleteUbicacion','UbicacionController@deleteUbicacion');
 
+Route::POST('addProduct','ProductController@addProduct');
+Route::POST('editProduct','ProductController@editProduct');
+Route::POST('deleteProduct','ProductController@deleteProduct');
+
+Route::POST('addEstanon','EstanonController@addEstanon');
+Route::POST('editEstanon','EstanonController@editEstanon');
+Route::POST('deleteEstanon','EstanonController@deleteEstanon');
 });
  
