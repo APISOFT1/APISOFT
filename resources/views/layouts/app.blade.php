@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
+<html lang="en">
+  <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -37,30 +38,88 @@
                 </a>
                
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+<<<<<<< HEAD
+// function Edit POST
+$(document).on('click', '.edit-modal', function() {
+$('#footer_action_button').text(" Editar Rol");
+$('#footer_action_button').addClass('glyphicon-check');
+$('#footer_action_button').removeClass('glyphicon-trash');
+$('.actionBtn').addClass('btn-success');
+$('.actionBtn').removeClass('btn-danger');
+$('.actionBtn').addClass('edit');
+$('.modal-descripcion').text('Editar Rol');
+$('.deleteContent').hide();
+$('.form-horizontal').show();
+$('#fid').val($(this).data('id'));
+$('#ti').val($(this).data('descripcion'));
+$('#myModal').modal('show');
+});
 
-                    </ul>
+$('.modal-footer').on('click', '.edit', function() {
+  $.ajax({
+    type: 'POST',
+    url: 'editRol',
+    data: {
+'_token': $('input[name=_token]').val(),
+'id': $("#fid").val(),
+'descripcion': $('#ti').val(),
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                @if (Route::has('register'))
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                @endif
-                            </li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+    },
+success: function(data) {
+      $('.post' + data.id).replaceWith(" "+
+      "<tr class='post" + data.id + "'>"+
+      "<td>" + data.id + "</td>"+
+      "<td>" + data.descripcion + "</td>"+
+      "<td>" + data.created_at + "</td>"+
+ "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+      "</tr>");
+    }
+  });
+});
 
+<<<<<<< HEAD
+// form Delete function
+$(document).on('click', '.delete-modal', function() {
+$('#footer_action_button').text(" Delete");
+$('#footer_action_button').removeClass('glyphicon-check');
+$('#footer_action_button').addClass('glyphicon-trash');
+$('.actionBtn').removeClass('btn-success');
+$('.actionBtn').addClass('btn-danger');
+$('.actionBtn').addClass('delete');
+$('.modal-title').text('Delete Post');
+$('.id').text($(this).data('id'));
+$('.deleteContent').show();
+$('.form-horizontal').hide();
+$('.title').html($(this).data('descripcion'));
+$('#myModal').modal('show');
+});
+
+$('.modal-footer').on('click', '.delete', function(){
+  $.ajax({
+    type: 'POST',
+    url: 'deleteRol',
+    data: {
+      '_token': $('input[name=_token]').val(),
+      'id': $('.id').text()
+    },
+    success: function(data){
+       $('.post' + $('.id').text()).remove();
+    }
+  });
+});
+
+  // Show function
+  $(document).on('click', '.show-modal', function() {
+  $('#show').modal('show');
+  $('#i').text($(this).data('id'));
+  $('#di').text($(this).data('descripcion'));
+  $('.modal-title').text('Show Post');
+  });
+</script>
+  </body>
+=======
+=======
+>>>>>>> develop
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -89,4 +148,5 @@
         </main>
     </div>
 </body>
+>>>>>>> develop
 </html>

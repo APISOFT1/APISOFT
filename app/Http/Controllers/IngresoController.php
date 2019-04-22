@@ -38,10 +38,10 @@ class IngresoController extends Controller
                 ->join('afiliados as p','i.idproveedor','=','p.id')
                 ->join('users as u','i.idusuario','=','u.id')
                 ->join('detalle_ingreso as di','i.idingreso','=','di.idingreso')
-                ->select('i.idingreso','i.fecha_hora','p.Nombre','p.apellido1','p.apellido2','u.name','u.Apellido1','u.Apellido2','i.tipo_comprobante', 'i.serie_comprobante','i.total_venta','i.estado')
+                ->select('i.idingreso','i.fecha_hora','p.Nombre','p.apellido1','p.apellido2','u.name','i.tipo_comprobante', 'i.serie_comprobante','i.total_venta','i.estado')
                 ->where('i.idingreso','LIKE','%'.$query.  '%')
                 ->orderBy ('i.idingreso','desc')
-                ->groupBy('i.idingreso','i.fecha_hora','p.nombre','p.apellido1','p.apellido2','u.name','u.Apellido1','u.Apellido2','i.tipo_comprobante', 'i.serie_comprobante','i.total_venta','i.estado')
+                ->groupBy('i.idingreso','i.fecha_hora','p.nombre','p.apellido1','p.apellido2','u.name','i.tipo_comprobante', 'i.serie_comprobante','i.total_venta','i.estado')
                 ->paginate(7);
                 return view ('Ingreso.index',["ingresos"=>$ingresos,"searchText"=>$query]);
         }
@@ -123,9 +123,9 @@ class IngresoController extends Controller
     ->join('afiliados as p','i.idproveedor','=','p.id')
     ->join('users as u','i.idusuario','=','u.id')
     ->join('detalle_ingreso as di','i.idingreso','=','di.idingreso')
-    ->select('i.idingreso','i.fecha_hora','p.Nombre','p.apellido1','p.apellido2','u.name','u.Apellido1','u.Apellido2','i.tipo_comprobante', 'i.serie_comprobante','i.total_venta','i.estado')
+    ->select('i.idingreso','i.fecha_hora','p.Nombre','p.apellido1','p.apellido2','u.name','i.tipo_comprobante', 'i.serie_comprobante','i.total_venta','i.estado')
     ->where('i.idingreso','=',$id)
-    ->groupBy('i.idingreso','i.fecha_hora','p.nombre','p.apellido1','p.apellido2','u.name','u.Apellido1','u.Apellido2','i.tipo_comprobante', 'i.serie_comprobante','i.total_venta','i.estado')
+    ->groupBy('i.idingreso','i.fecha_hora','p.nombre','p.apellido1','p.apellido2','u.name','i.tipo_comprobante', 'i.serie_comprobante','i.total_venta','i.estado')
     ->first();
 
     $detalles=DB::table('detalle_ingreso as d')

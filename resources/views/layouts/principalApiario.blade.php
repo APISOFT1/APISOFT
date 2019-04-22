@@ -63,14 +63,15 @@
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Usuario/') }}">Gestionar Usuario</a></li>
-                      <li><a href="{{ url('/admin/roles/') }}">Gestionar Rol</a></li>
-                     <li><a href="{{ url('/admin/permissions/') }}">Gestionar Permisos</a></li>
-                     <li><a href="{{ url('/admin/users/') }}">Gestionar users</a></li>
+                      <li><a href="{{ url('roles/') }}">Gestionar Rol</a></li>
+                     <li><a href="{{ url('permissions/') }}">Gestionar Permisos</a></li>
+                     <li><a href="{{ url('users/') }}">Gestionar users</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
+                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicacion</a></li>
                       <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
                       <li><a href="{{ url('/Apiario/') }}">Gestionar Apiaro</a></li>
                     
@@ -241,7 +242,7 @@ $('.modal-descripcion').text('Editar Apiario');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
 $('#ids').val($(this).data('id'));
-$('#cri').val($(this).data('descripcion'));
+$('#cri').val($(this).data('Descripcion'));
 $('#can').val($(this).data('cantidad'));
 $('#ub').val($(this).data('ubicacion_id'));
 $('#myModal').modal('show');
@@ -284,6 +285,7 @@ success: function(data) {
   });
 });
 
+/*
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Delete");
@@ -313,7 +315,7 @@ $('.modal-footer').on('click', '.delete', function(){
     }
   });
 });
-
+*/
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');

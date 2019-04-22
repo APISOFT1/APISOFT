@@ -14,14 +14,10 @@ use DB;
 
 class UbicacionController extends Controller
 {
-
-
+   
 public function __construct()
 {
-
 }
-
-
 //INDEEEEEEEEEEEEX/
 public function index(Request $request)
 {
@@ -38,20 +34,17 @@ public function index(Request $request)
  // return view('Ubicacion.index',compact('ubicacion'));        
     
 }
-
 ////////////////////////////////////////////////////////NUEVO
-
 public function addUbicacion(Request $request){
     $rules = array(
-      'descripcion' => 'required'
+      'Descripcion' => 'required'
     );
   $validator = Validator::make ( Input::all(), $rules);
   if ($validator->fails())
   return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
-
   else {
     $ubicacion = new Ubicacion;
-    $ubicacion->descripcion = $request->descripcion;
+    $ubicacion->Descripcion = $request->Descripcion;
     $ubicacion->save();
     return response()->json($ubicacion);
   }
@@ -63,15 +56,13 @@ public function addUbicacion(Request $request){
 $validator = Validator::make ( Input::all(), $rules);
 if ($validator->fails())
 return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
-
 else {
 $ubicacion =Ubicacion::find ($request->id);
-$ubicacion->descripcion = $request->descripcion;
+$ubicacion->Descripcion = $request->Descripcion;
 $ubicacion->save();
 return response()->json($ubicacion);
 }
 }
-
 public function deleteUbicacion(request $request){
   
   $ubicacion = Ubicacion::find ($request->id);

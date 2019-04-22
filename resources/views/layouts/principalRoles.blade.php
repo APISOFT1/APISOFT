@@ -1,4 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+    
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +24,8 @@
 <!--<link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>-->
 
  <!--   {!!Html::style ('/css/bootstrap-multiselect.css')!!} -->
+
+ <link href="toastr.css" rel="stylesheet"/>
     {!!Html::style ('/css2/bootstrap.min.css')!!} 
 
     {!!Html::style ('/css2/bootstrap-select.min.css')!!}   
@@ -26,6 +33,8 @@
     {!!Html::style ('/css2/select2.min.css')!!}
 
     {!!Html::style ('/css2/select2.css')!!}
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     
     <!-- Font Awesome -->
     {!!Html::style ('/css2/font-awesome.min.css')!!}
@@ -67,14 +76,15 @@
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Usuario/') }}">Gestionar Usuario</a></li> 
-                     <li><a href="{{ url('/admin/roles/') }}">Gestionar Rol</a></li>
-                     <li><a href="{{ url('/admin/permissions/') }}">Gestionar Permisos</a></li>
-                     <li><a href="{{ url('/admin/users/') }}">Gestionar Users</a></li>
+                     <li><a href="{{ url('/roles/') }}">Gestionar Rol</a></li>
+                     <li><a href="{{ url('/permissions/') }}">Gestionar Permisos</a></li>
+                     <li><a href="{{ url('/users/') }}">Gestionar Users</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
+                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicacion</a></li>
                       <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
                       <li><a href="{{ url('/Apiario/') }}">Gestionar Apiaro</a></li>
                     
@@ -180,6 +190,8 @@
     {!!Html::script('/js2/custom.min.js')!!}
 
      {!!Html::script('/js2/dropdown.js')!!}
+     <script src="toastr.js"></script>
+     
 
     <!-- {!!Html::script('/js/jquery.min.js')!!}
 
@@ -202,209 +214,121 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script>-->
 
 
-<!-- MODAL USER -->
+<!-- MODAL ROLES -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script type="text/javascript">
+
 {{-- ajax Form Add Post--}}
+
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
-    $('.modal-crear').text('Crear User');
+    $('.modal-descripcion').text('Crear Rol');
   });
+ 
   $("#add").click(function() {
     $.ajax({
       type: 'POST',
-      url: 'addUser',
+      url: 'addRole',
+      
       data: {
-       
-        'id': $('input[name=id').val(),
+        '_token': $('input[name=_token]').val(),
         'name': $('input[name=name]').val(),
-        'email': $('input[name=email]').val(),
-        'password': $('input[name=password]').val(),
-        'Apellido1': $('input[name=Apellido1]').val(),
-        'Apellido2': $('input[name=Apellido2]').val(),
-        'Telefono': $('input[name=Telefono]').val(),
-        'Direccion': $('input[name=Direccion]').val(),
-        'Fecha_Ingreso': $('input[name=Fecha_Ingreso]').val(),
-        'Genero_Id': $('select[name=Genero_Id]').val(),
-        'estado_id': $('input[name=estado_id]').val(),
-        'roles[]'    : $('select[name= roles]').realize()
+        'permission'    : $('select[name= "permission[]"]').val(),
+
+    
+      
+       
+        
       },
       success: function(data){
         if ((data.errors)) {
           $('.error').removeClass('hidden');
-          $('.error').text(data.errors.id);
           $('.error').text(data.errors.name);
-          $('.error').text(data.errors.email);
-          $('.error').text(data.errors.password);
-          $('.error').text(data.errors.Apellido1);
-          $('.error').text(data.errors.Apellido2);
-          $('.error').text(data.errors.Telefono);
-          $('.error').text(data.errors.Direccion);
-          $('.error').text(data.errors.Fecha_Ingreso);
-          $('.error').text(data.errors.Genero_Id);
-          $('.error').text(data.errors.estado_id);
-
+       
  
         } else {
           $('.error').remove();
-          $('#table').append("<tr class= users" + data.id + "'>"+
+         
+      toastr.success('Successfully added Post!', 'Success Alert', {timeOut: 5000});
+                   
+          $('#table').append("<tr class='roles" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.name + "</td>"+
-          "<td>" + data.email + "</td>"+
-          "<td>" + data.password + "</td>"+
-          "<td>" + data.Apellido1 + "</td>"+
-          "<td>" + data.Apellido2 + "</td>"+
-          "<td>" + data.Telefono + "</td>"+
-          "<td>" + data.Direccion+ "</td>"+
-          "<td>" + data.Fecha_Ingreso+ "</td>"+
-          "<td>" + data.Genero_Id + "</td>"+
-          "<td>" + data.estado_id + "</td>"+
-          "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + 
-          "' data-name='" + data.name + 
-          "' data-email='" + data.email +
-          "' data-password='" + data.password +
-          "'data-Apellido1='" + data.Apellido1 + 
-          "'data-Apellido2='" + data.Apellido2+
-           "'data-Telefono='" + data.Telefono +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-              "'data-Genero_Id='" + data.Genero_Id + 
-               "'data-estado_id='" + data.estado_id +
- "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
- + data.id + 
-           "' data-name='" + data.name + 
-          "' data-email='" + data.email +
-          "' data-password='" + data.password +
-          "'data-Apellido1='" + data.Apellido1 + 
-          "'data-Apellido2='" + data.Apellido2+
-           "'data-Telefono='" + data.Telefono +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-              "'data-Genero_Id='" + data.Genero_Id + 
-               "'data-estado_id='" + data.estado_id +
- "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
- + data.id + 
-              "' data-name='" + data.name + 
-          "' data-email='" + data.email +
-          "' data-password='" + data.password +
-          "'data-Apellido1='" + data.Apellido1 + 
-          "'data-Apellido2='" + data.Apellido2+
-           "'data-Telefono='" + data.Telefono +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-              "'data-Genero_Id='" + data.Genero_Id + 
-               "'data-estado_id='" + data.estado_id +
-"'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+       
+  
+          "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
+          data.id + "' data-name='"
+          + data.name+ "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='"
+           + data.id + "' data-name='" 
+           + data.name +  "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
+           + data.id + "' data-name='" + data.name + "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
-         
         }
+        alert("Se ha Creado el rol correcatamente "+data);
       },
     });
-    $('#id').val('');
     $('#name').val('');
-    $('#email').val('');
-    $('#password').val('');
-    $('#Apellido1').val('');
-    $('#Apellido2').val('');
-    $('#Telefono').val('');
-    $('#Direccion').val('');
-    $('#Fecha_Ingreso').val('');
-    $('#Genero_Id').val('');
-    $('#estado_id').val('');
-  });
+  
 
-/*
+  });
+ 
+// function Edit POST
 $(document).on('click', '.edit-modal', function() {
-$('#footer_action_button').text(" Editar User");
+$('#footer_action_button').text(" Editar ");
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-$('.modal-descripcion').text('Editar User');
+$('.modal-descripcion').text('Editar Apiario');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
-$('#i').val($(this).data('id'));
-$('#n').val($(this).data('name'));
-$('#nu').val($(this).data('email'));
-$('#e').val($(this).data('password'));
-$('#a1').val($(this).data('apellido1'));
-$('#a2').val($(this).data('apellido2'));
-$('#t').val($(this).data('telefono'));
-$('#d').val($(this).data('direccion'));
-$('#f').val($(this).data('fecha_ingreso'));
-$('#g').val($(this).data('genero_id'));
-$('#es').val($(this).data('estado_id'));
+$('#ids').val($(this).data('id'));
+$('#cri').val($(this).data('name'));
 $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
-    url: 'editUser',
+    url: 'editRole',
     data: {
-
-'id':$("#i").val(),
-'name':$('#n').val(),
-'Apellido1':$('#a1').val(),
-'Apellido2':$('#a2').val(),
-'email':$('#num').val(),
-'password':$('#e').val(),
-'Telefono':$('#t').val(),
-'Direccion':$('#d').val(),
-'Fecha_Ingreso':$('#f').val(),
-'Genero_Id':$('#g').val(),
-'estado_id':$('#es').val(),
+'_token': $('input[name=_token]').val(),
+'id': $("#ids").val(),
+'Descripcion': $('#cri').val(),
+'cantidad': $('#can').val(),
+'ubicacion_id': $('#ub').val(),
 
     },
 success: function(data) {
-      $('.users' + data.id).replaceWith("<tr class='users" + data.id + "'>"+
+      $('.api' + data.id).replaceWith(" "+
+      "<tr class='api" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
-          "<td>" + data.name + "</td>"+
-          "<td>" + data.email + "</td>"+
-          "<td>" + data.password + "</td>"+
-          "<td>" + data.Apellido1 + "</td>"+
-          "<td>" + data.Apellido2 + "</td>"+
-          "<td>" + data.Telefono + "</td>"+
-          "<td>" + data.Direccion+ "</td>"+
-          "<td>" + data.Fecha_Ingreso+ "</td>"+
-          "<td>" + data.Genero_Id + "</td>"+
-          "<td>" + data.estado_id + "</td>"+
-          "<td><button class='show-modal btn btn-info btn-sm' data-id='" 
-        
- "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
- + data.id + 
- "' data-name='" + data.name + 
-          "' data-email='" + data.email +
-          "' data-password='" + data.password +
-          "'data-Apellido1='" + data.Apellido1 + 
-          "'data-Apellido2='" + data.Apellido2+
-           "'data-Telefono='" + data.Telefono +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-              "'data-Genero_Id='" + data.Genero_Id + 
-               "'data-estado_id='" + data.estado_id +
- "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
- + data.id + 
- "' data-name='" + data.name + 
-          "' data-email='" + data.email +
-          "' data-password='" + data.password +
-          "'data-Apellido1='" + data.Apellido1 + 
-          "'data-Apellido2='" + data.Apellido2+
-           "'data-Telefono='" + data.Telefono +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-              "'data-Genero_Id='" + data.Genero_Id + 
-               "'data-estado_id='" + data.estado_id +
-"'><span class='glyphicon glyphicon-trash'></span></button></td>"+
-          "</tr>");
+      "<td>" + data.Descripcion + "</td>"+
+      "<td>" + data.cantidad + "</td>"+
+      "<td>" + data.ubicacion_id + "</td>"+
+      
+ "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + "' data-Descripcion='" 
+ + data.Descripcion + "' data-cantidad='" 
+          + data.cantidad +  " 'data-ubicacion_id='" 
+          + data.ubicacion_id + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
+          + data.id + "' data-Descripcion='" + data.Descripcion + 
+          "' data-cantidad='" 
+          + data.cantidad +  " 'data-ubicacion_id='" 
+          + data.ubicacion_id + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
+          + data.id + "' data-Descripcion='" + data.Descripcion + 
+          "' data-cantidad='" 
+          + data.cantidad +  " 'data-ubicacion_id='" 
+          + data.ubicacion_id + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+      "</tr>");
     }
   });
 });
 
-/*
+// form Delete function
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Delete");
 $('#footer_action_button').removeClass('glyphicon-check');
@@ -416,32 +340,32 @@ $('.modal-title').text('Delete Post');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
-$('.title').html($(this).data('descripcion'));
+$('.title').html($(this).data('Descripcion'));
 $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
-    url: 'deleteAfiliado',
+    url: 'deleteApiario',
     data: {
       '_token': $('input[name=_token]').val(),
       'id': $('.id').text()
     },
     success: function(data){
-       $('.afiliado' + $('.id').text()).remove();
+       $('.apiario' + $('.id').text()).remove();
     }
   });
 });
-*/
+
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
-  
-  $('#iaa').val($(this).data('iii'));
-$('#jaja').val($(this).data('nom'));
-;
-  $('.modal-show').text('Datos');
+  $('#i2').text($(this).data('id'));
+  $('#d2').text($(this).data('descripcion'));
+  $('#ca2').text($(this).data('cantidad'));
+  $('#ub2').text($(this).data('ubicacion_id'));
+  $('.modal-title').text('Show Post');
   });
 </script>
 @include('partials.javascripts')

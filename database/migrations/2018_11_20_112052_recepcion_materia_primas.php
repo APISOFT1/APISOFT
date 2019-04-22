@@ -20,7 +20,7 @@ class RecepcionMateriaPrimas extends Migration
             $table->integer('numero_muestras')->unsigned();
             $table->string('afiliado_id',12);
             $table->foreign('afiliado_id')->references('id')->on('afiliados');
-            $table->string('user_id',12);
+            $table->integer('user_id')->unsigned();;
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('tipoEntrega_id')->unsigned();
             $table->foreign('tipoEntrega_id')->references('id')->on('tipo_entregas');

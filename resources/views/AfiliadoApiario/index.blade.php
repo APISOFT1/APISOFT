@@ -139,6 +139,7 @@ AFILIADO CON SUS APIARIO CREADO CORRECTAMENTE
                       <b id="idA"/>
                     </div>
                     <div class="form-group">
+                    
                       <label for="">afiliado:</label>
                       <b id="af"/>
                     </div>
@@ -171,10 +172,18 @@ AFILIADO CON SUS APIARIO CREADO CORRECTAMENTE
   
            <label class="control-label col-sm-2" for="afiliado_id">Afiliado</label>
            <div class="col-sm-10">
+<<<<<<< HEAD
             <select name="name" id="afi" class="form-control selectpicker" data-live-search="true">
                 @foreach($afiliados as $persona)
                  <option value="{{$value->id}}">{{$value->id}} - {{$value->Nombre}} {{$value->apellido1}} {{$value->apellido2}}</option>
+=======
+            <select name="name" id="afi"  class="form-control selectpicker" data-live-search="true">
+            <option  value="afi"></option>
+                @foreach($afiliados as $persona => $value  )
+                 <option  value="{{$value->id}}">{{$value->id}} - {{$value->Nombre}} {{$value->apellido1}} {{$value->apellido2}}</option>
+>>>>>>> raychel
                  @endforeach
+                
             </select>
            </div>
           </div>

@@ -1,4 +1,4 @@
-@extends ('layouts.principal')
+@extends ('layouts.principalEstanon')
 
 <!-- mensaje de exito -->
 <?php $message=Session::get('message') ?>
@@ -29,10 +29,10 @@
 <div class="table-responsive">
 			<table class="table table-striped table-bordered table-condensed table-hover">
 				<thead>
-					<th>Id</th>
+					<th>Identificación</th>
 					<th>Peso</th>
 					<th>Fecha</th>
-					<th>Creacion</th>
+					<th>Creación</th>
 					<th> <a href="Estanon/create"
 					class="create-modal btn btn-success btn-sm">
             <i class="glyphicon glyphicon-plus"></i>
@@ -43,7 +43,7 @@
 				<tr>
 					<td>{{ $est->id}}</td>
 					<td>{{ $est->Peso}}</td>
-                    <td>{{ $est->Fecha}}</td>
+          <td>{{ $est->Fecha}}</td>
 					<td>{{ $est->created_at}}</td>
 
 					<td>

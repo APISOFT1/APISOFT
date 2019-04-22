@@ -33,10 +33,10 @@ class IngresoCeraController extends Controller
                 ->join('afiliados as p','i.idproveedor','=','p.id')
                 ->join('users as u','i.idusuario','=','u.id')
                 ->join('detalle_ingreso_cera as di','i.idingreso_cera','=','di.idingreso_cera')
-                ->select('i.idingreso_cera','i.fecha_hora','p.Nombre','p.apellido1','p.apellido2','u.name','u.Apellido1','u.Apellido2','i.tipo_comprobante', 'i.serie_comprobante','i.tipo_pago','i.total_venta','i.estado')
+                ->select('i.idingreso_cera','i.fecha_hora','p.Nombre','p.apellido1','p.apellido2','u.name','i.tipo_comprobante', 'i.serie_comprobante','i.tipo_pago','i.total_venta','i.estado')
                 ->where('i.idingreso_cera','LIKE','%'.$query.  '%')
                 ->orderBy ('i.idingreso_cera','desc')
-                ->groupBy('i.idingreso_cera','i.fecha_hora','p.Nombre','p.apellido1','p.apellido2','u.name','u.Apellido1','u.Apellido2','i.tipo_comprobante', 'i.serie_comprobante','i.tipo_pago','i.total_venta','i.estado')
+                ->groupBy('i.idingreso_cera','i.fecha_hora','p.Nombre','p.apellido1','p.apellido2','u.name','i.tipo_comprobante', 'i.serie_comprobante','i.tipo_pago','i.total_venta','i.estado')
                 ->paginate(7);
                 return view ('IngresoCera.index',["ingresos"=>$ingresos,"searchText"=>$query]);
         }
@@ -98,9 +98,9 @@ class IngresoCeraController extends Controller
         ->join('afiliados as p','i.idproveedor','=','p.id')
         ->join('users as u','i.idusuario','=','u.id')
         ->join('detalle_ingreso_cera as di','i.idingreso_cera','=','di.idingreso_cera')
-        ->select('i.idingreso_cera','i.fecha_hora','p.Nombre','p.apellido1','p.apellido2','u.name','u.Apellido1','u.Apellido2','i.tipo_comprobante', 'i.serie_comprobante','i.tipo_pago','i.total_venta','i.estado')
+        ->select('i.idingreso_cera','i.fecha_hora','p.Nombre','p.apellido1','p.apellido2','u.name','i.tipo_comprobante', 'i.serie_comprobante','i.tipo_pago','i.total_venta','i.estado')
         ->where('i.idingreso_cera','=',$id)
-        ->groupBy('i.idingreso_cera','i.fecha_hora','p.nombre','p.apellido1','p.apellido2','u.name','u.Apellido1','u.Apellido2','i.tipo_comprobante', 'i.serie_comprobante','i.tipo_pago','i.total_venta','i.estado')
+        ->groupBy('i.idingreso_cera','i.fecha_hora','p.nombre','p.apellido1','p.apellido2','u.name','i.tipo_comprobante', 'i.serie_comprobante','i.tipo_pago','i.total_venta','i.estado')
         ->first();
 
         $detalles=DB::table('detalle_ingreso_cera as d')
@@ -117,9 +117,9 @@ class IngresoCeraController extends Controller
     ->join('afiliados as p','i.idproveedor','=','p.id')
     ->join('users as u','i.idusuario','=','u.id')
     ->join('detalle_ingreso_cera as di','i.idingreso_cera','=','di.idingreso_cera')
-    ->select('i.idingreso_cera','i.fecha_hora','p.Nombre','p.apellido1','p.apellido2','u.name','u.Apellido1','u.Apellido2','i.tipo_comprobante', 'i.serie_comprobante','i.tipo_pago','i.total_venta','i.estado')
+    ->select('i.idingreso_cera','i.fecha_hora','p.Nombre','p.apellido1','p.apellido2','u.name','i.tipo_comprobante', 'i.serie_comprobante','i.tipo_pago','i.total_venta','i.estado')
     ->where('i.idingreso_cera','=',$id)
-    ->groupBy('i.idingreso_cera','i.fecha_hora','p.nombre','p.apellido1','p.apellido2','u.name','u.Apellido1','u.Apellido2','i.tipo_comprobante', 'i.serie_comprobante','i.tipo_pago','i.total_venta','i.estado')
+    ->groupBy('i.idingreso_cera','i.fecha_hora','p.nombre','p.apellido1','p.apellido2','u.name','i.tipo_comprobante', 'i.serie_comprobante','i.tipo_pago','i.total_venta','i.estado')
     ->first();
 
     $detalles=DB::table('detalle_ingreso_cera as d')
