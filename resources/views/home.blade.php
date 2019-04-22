@@ -139,5 +139,9 @@
             $.material.init();
         });
     </script>
+<script type="text/javascript" src="graficas/googlechart.js"></script>
 
+
+
+ 
   </body>

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DetalleIngresoLamina extends Model
+class DetalleIngresoInventario extends Model
 {
     protected $table='detalle_ingreso_inventario';
 

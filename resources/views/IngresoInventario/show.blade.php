@@ -1,4 +1,4 @@
-@extends ('layouts.principal')
+@extends ('layouts.principal1')
 @section ('contenido')
 <div class="row">
   <div class="panel panel-primary">
@@ -6,7 +6,7 @@
    <div class="col-lg-10 col-sm-10 col-md-10 col-xs-20">
      <div class="form-group">
     <label>Numero de ingreso</label>
-    <p>{{$ingresos->idingreso_lamina}}</p>
+    <p>{{$ingresos->idingreso_inventario}}</p>
     </select>
    </div>
   </div>
@@ -21,7 +21,7 @@
   <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
    <div class="form-group">
     <label for="proveedor">Usuario</label>
-     <p>{{$ingresos->name}} {{$ingresos->Apellido1}} {{$ingresos->Apellido2}}</p>
+     <p>{{$ingresos->name}} </p>
     </select>
    </div>
   </div>
@@ -51,9 +51,9 @@
     <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
      <table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
       <thead style="background-color: #A9D0F5">
-       <th>Cera en laminas</th>
+       <th>Producto</th>
        <th>Precio</th>
-       <th>cantidad de laminas</th>
+       <th>cantidad utilizada</th>
        <th>Descuento</th>
        <th>Subtotal</th>
       </thead>
@@ -69,11 +69,11 @@
 
        @foreach($detalles as $det)
       <tr>
-       <td>{{$det->laminas}} </td>
+       <td>{{$det->stocks}} </td>
        <td>{{$det->Precio}} </td>
        <td>{{$det->cantidad}} </td>
        <td>{{$det->descuento}} </td>
-       <td>{{$det->Precio*$det->cantidad}} </td> 
+       <td>{{(($det->Precio*$det->cantidad)-$det->descuento)}} </td> 
      </td>
       @endforeach
       </tbody>

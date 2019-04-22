@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Auth\User\Traits\Relations;
+namespace App\Models\Auth\User\Relations;
 
 use App\Models\Auth\Role\Role;
 use App\Protection\ProtectionShopToken;

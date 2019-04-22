@@ -5,7 +5,7 @@ use App\Http\Requests\Request;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class IngresoLaminaFormRequest extends Request
+class IngresoInventarioFormRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.

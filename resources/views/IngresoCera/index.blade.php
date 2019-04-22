@@ -1,4 +1,4 @@
-@extends ('layouts.principal')
+@extends ('layouts.principal1')
 
 
 <!-- mensaje de exito -->
@@ -48,7 +48,7 @@
 					<td>{{ $ing->idingreso_cera}}</td>
 					<td>{{ $ing->fecha_hora}}</td>
 					<td>{{ $ing->Nombre.' '. $ing->apellido1.' '.$ing->apellido2}}</td>
-					<td>{{ $ing->name.' '. $ing->Apellido1.' '.$ing->Apellido2}}</td>
+					<td>{{ $ing->name}}</td>
 					<td>{{ $ing->tipo_comprobante.':'.$ing->serie_comprobante.'-'.$ing->idingreso_cera}}</td>
 					<td>{{ $ing->tipo_pago}}</td>
                     <td>{{ $ing->total_venta}}</td>

@@ -21,6 +21,7 @@ public function __construct()
 //INDEEEEEEEEEEEEX/
 public function index(Request $request)
 {
+<<<<<<< HEAD
   if ($request)
   {
       $query=trim($request->get('searchText'));
@@ -33,6 +34,13 @@ public function index(Request $request)
  // $ubicacion = Ubicacion::paginate(10);
  // return view('Ubicacion.index',compact('ubicacion'));        
     
+=======
+  if($request){
+    $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
+  $ubicacion = Ubicacion::paginate(10);
+  return view('Ubicacion.index',compact('ubicacion'), ['ubicacion'=>$ubicacion,"searchText"=>$query]);       
+}
+>>>>>>> Caro
 }
 ////////////////////////////////////////////////////////NUEVO
 public function addUbicacion(Request $request){

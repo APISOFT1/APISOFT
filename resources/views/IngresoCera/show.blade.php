@@ -1,4 +1,4 @@
-@extends ('layouts.admin')
+@extends ('layouts.principal1')
 @section ('contenido')
 <div class="row">
   <div class="panel panel-primary">
@@ -21,7 +21,7 @@
   <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
    <div class="form-group">
     <label for="proveedor">Usuario</label>
-     <p>{{$ingresos->name}} {{$ingresos->Apellido1}} {{$ingresos->Apellido2}}</p>
+     <p>{{$ingresos->name}} </p>
     </select>
    </div>
   </div>

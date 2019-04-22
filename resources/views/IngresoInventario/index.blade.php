@@ -1,4 +1,4 @@
-@extends ('layouts.principal')
+@extends ('layouts.principal1')
 
 
 <!-- mensaje de exito -->
@@ -16,7 +16,7 @@
 @endif
 <!-- fin de mensaje de exito -->
 @section ('contenido')
-<h3>Listado Boletas de Cera en laminas  <a href="IngresoLamina/create"><button class="btn btn-success btn-sm"> <i class="glyphicon glyphicon-plus"></i></h3>
+<h3>Listado Boletas de Inventario <a href="IngresoInventario/create"><button class="btn btn-success btn-sm"> <i class="glyphicon glyphicon-plus"></i></h3>
 
 <!-- Saltos de linea-->
 <br>
@@ -27,7 +27,7 @@
 
 <!--Esta clase nos permite posicionar el buscador  -->
 <div class="absolute3">
-		@include('IngresoCera\IngresoLamina.search') 
+		@include('IngresoInventario.search') 
 
 </div>
 		<div class="table-responsive">

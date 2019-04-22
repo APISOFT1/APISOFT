@@ -2,14 +2,13 @@
 
 namespace App\Models\Auth\User;
 
-use App\Models\Auth\User\Traits\Ables\Protectable;
-use App\Models\Auth\User\Traits\Attributes\UserAttributes;
+use App\Models\Auth\User\Ables\Protectable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Auth\User\Ables\Rolable;
 use App\Models\Auth\User\Scopes\UserScopes;
-use App\Models\Auth\User\elations\UserRelations;
+use App\Models\Auth\User\Relations\UserRelations;
 use Kyslik\ColumnSortable\Sortable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Notifications\MailResetPasswordToken;
@@ -59,12 +58,11 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable,
          Rolable,
-        UserAttributes,
         UserScopes,
         UserRelations,
         Notifiable,
         SoftDeletes,
-        Sortable,
+      
         Protectable;
 
     public $sortable = ['name', 'email', 'created_at', 'updated_at'];

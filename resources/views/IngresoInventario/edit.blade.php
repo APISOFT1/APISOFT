@@ -31,7 +31,7 @@
                 Serie Comprobante: {{$ingresos->serie_comprobante}}
             </small>
             <small>
-                Numero Comprobante: {{$ingresos->idingreso_lamina}}
+                Numero Comprobante: {{$ingresos->idingreso_inventario}}
             </small>
             <small>
                 tipo de pago: {{$ingresos->tipo_pago}}
@@ -56,7 +56,7 @@
             <th style="width:100px;">
                Usuario:
             </th>
-            <td>{{$ingresos->name}} {{$ingresos->Apellido1}} {{$ingresos->Apellido2}}</td>
+            <td>{{$ingresos->name}}</td>
         </tr>
     </table>
 
@@ -65,9 +65,9 @@
     <table class="items">
         <thead>
             <tr>
-                <th>Cera en laminas</th>
+                <th>Producto</th>
                 <th>Precio</th>
-                <th>cantidad</th>
+                <th>cantidad utilizada</th>
                 <th>descuento</th>
                
                 <th>Subtotal</th>
@@ -76,12 +76,12 @@
         <tbody>
        @foreach($detalles as $det)
             <tr>
-                <td>{{$det->laminas}}</td>
+                <td>{{$det->stocks}}</td>
                 <td>{{$det->Precio}}</td>
                 <td>{{$det->cantidad}}</td>
                 <td>{{$det->descuento}}</td>
               
-                 <td>{{$det->cantidad*$det->Precio}}</td>
+                 <td>{{(($det->cantidad*$det->Precio)-(($det->cantidad*$det->Precio)-$det->descuento))}}</td>
             </tr>
         @endforeach
         </tbody>

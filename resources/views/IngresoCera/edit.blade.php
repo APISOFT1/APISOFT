@@ -53,7 +53,7 @@
             <th style="width:100px;">
                Usuario
             </th>
-            <td>{{$ingresos->name}} {{$ingresos->Apellido1}} {{$ingresos->Apellido2}}</td>
+            <td>{{$ingresos->name}}</td>
         </tr>
     </table>
 

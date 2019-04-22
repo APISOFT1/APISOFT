@@ -21,9 +21,7 @@
 
  
 <!-- Include the plugin's CSS and JS: -->
-<!--<link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>-->
 
- <!--   {!!Html::style ('/css/bootstrap-multiselect.css')!!} -->
     {!!Html::style ('/css2/bootstrap.min.css')!!} 
 
     {!!Html::style ('/css2/bootstrap-select.min.css')!!}   
@@ -31,6 +29,8 @@
     {!!Html::style ('/css2/select2.min.css')!!}
 
     {!!Html::style ('/css2/select2.css')!!}
+
+    {!!Html::style ('/css/dashboard.css')!!}
     
     <!-- Font Awesome -->
     {!!Html::style ('/css2/font-awesome.min.css')!!}
@@ -69,11 +69,15 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
+                <li><a><i class="fa fa-home"></i> Home<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                     <li><a href="{{ url('/dashboard/') }}">Dashboard</a></li>
+                     
+                    </ul>
+                  </li>
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Usuario/') }}">Gestionar Usuario</a></li> 
                      <li><a href="{{ url('/roles/') }}">Gestionar Rol</a></li>
-                     <li><a href="{{ url('/permissions/') }}">Gestionar Permisos</a></li>
                      <li><a href="{{ url('/users/') }}">Gestionar Users</a></li>
                     </ul>
                   </li>
@@ -89,13 +93,13 @@
                   <li><a><i class="glyphicon glyphicon-list-alt"></i> Recepción<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/RecepcionMateriaPrima') }}">Gestionar Recepción</a></li>
-                      <li><a href="{{ url('/SalidaMaterial/') }}">Gestionar Salida Material</a></li>
+                      <li><a href="{{ url('/Cera/') }}">Gestionar Extración de cera</a></li>
                     </ul>
                   </li>
                   <li><a><i class="glyphicon glyphicon-oil"></i> Planta <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
-                      <li><a href="{{ url('/AfiliadoEstanon/') }}">Gestionar Afiliado-Estañon</a></li>
+                      <li><a href="{{ url('/RecepEstanon/') }}">Gestionar Recepción-Estañón</a></li>
                       <li><a href="{{ url('/Homogeneizacion/') }}">Gestionar Homogeneización</a></li>
                     
                     </ul>
@@ -187,25 +191,18 @@
 
      {!!Html::script('/js2/dropdown.js')!!}
 
-    <!-- {!!Html::script('/js/jquery.min.js')!!}
+     {!!Html::script('/js/dashboard.js')!!}
 
-     {!!Html::script('/js/bootstrap.min.js')!!}-->
+     {!!Html::script('/js/Chart.min.js')!!}
 
 
-   <!--  <script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>-->
  
 <!-- Include the plugin's CSS and JS: -->
 {!!Html::script('/js/bootstrap-select.min.js')!!}
 
 {!!Html::script('/js/jquery-1.11.1.min.js')!!}
 
-<!--{!!Html::script('/js/bootstrap.min.js')!!} -->
 
-<!--<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
-
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>-->
 
 
 <!-- MODAL USER -->
@@ -229,8 +226,8 @@
         '_token': $('input[name=_token]').val(),
         'name': $('input[name=name]').val(),
         'email': $('input[name=email]').val(),
-        'password': $('input[name=password]').val(),
-        'roles'    : $('select[name= "roles[]"]').val()
+        'password': $('input[name=password]').val()
+      
       },
       success: function(data){
         if ((data.errors)) {
@@ -279,20 +276,22 @@
 
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
-$('#footer_action_button').text(" Editar Apiario");
+$('#footer_action_button').text(" Editar");
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-$('.modal-descripcion').text('Editar Apiario');
+$('.modal-descripcion').text('Editar Usuario');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
-$('#ids').val($(this).data('id'));
-$('#nam').val($(this).data('name'));
-$('#em4').val($(this).data('email'));
-$('#pass').val($(this).data('password'));
-$("#roles").val($(this).data('roles[]'));
+$('#iii').val($(this).data('id'));
+$('#nnn').val($(this).data('name'));
+$('#emm').val($(this).data('email'));
+$('#passs').val($(this).data('password'));
+$('#rlss').val($(this).data('roles'));
+
+
 $('#myModal').modal('show');
 });
 
@@ -302,11 +301,12 @@ $('.modal-footer').on('click', '.edit', function() {
     url: 'editUser',
     data: {
 '_token': $('input[name=_token]').val(),
-'id': $("#ids").val(),
-'name': $('#nam').val(),
-'email': $('#em4').val(),
-'password': $('#pass').val(),
-'roles'    : $('#roles').val(),
+'id': $("#iii").val(),
+'name': $('#nnn').val(),
+'email': $('#emm').val(),
+'password': $('#passs').val(),
+'roles': $('#rlss').val(),
+
       
 
     },
@@ -317,6 +317,7 @@ success: function(data) {
           "<td>" + data.name + "</td>"+
           "<td>" + data.email + "</td>"+
           
+         
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + 
           "' data-name='" + data.name + 
           "' data-email='" + data.email +
@@ -372,13 +373,14 @@ $('.modal-footer').on('click', '.delete', function(){
   });
 });
 */
+
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
   $('#i2').text($(this).data('id'));
-  $('#d2').text($(this).data('name'));
-  $('#ca2').text($(this).data('email'));
-  $('#ub2').text($(this).data('password'));
+  $('#n2').text($(this).data('name'));
+  $('#em').text($(this).data('email'));
+  $('#pw').text($(this).data('password'));
   $('.modal-title').text('Show Post');
   });
 </script>

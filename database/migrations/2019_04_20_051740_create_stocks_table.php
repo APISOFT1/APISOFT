@@ -18,9 +18,9 @@ class CreateStocksTable extends Migration
             $table->integer('cantidadDisponible')->default(0);
             $table->double('precioTotal')->default(0);;
             $table->integer('producto_id')->unsigned();
-            $table->foreign('producto_id')->references('id')->on('producto');
+            $table->foreign('producto_id')->references('id')->on('products');
             $table->integer('estanon_recepcions_id')->unsigned();
-            $table->foreign('estanon_recepcions_id')->references('id')->on('estanon_recepcions');
+            $table->foreign('estanon_recepcions_id')->references('id')->on('recepcion_estanons');
             $table->timestamps();           
         
         });

@@ -24,7 +24,7 @@
    @endif
   </div>
  </div>
-{!!Form::open(array('url'=>'IngresoLamina','method'=>'POST','autocomplete'=>'off'))!!}
+{!!Form::open(array('url'=>'IngresoInventario','method'=>'POST','autocomplete'=>'off'))!!}
 {{Form::token()}}
  <div class="row">
   <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
@@ -67,8 +67,8 @@
    <div class="form-group">
     <label>Tipo de pago</label>
     <select name="tipo_pago" class="form-control">
-     <option value="laminas">Laminas</option>
- 
+     <option value="en efectivo">En efectivo</option>
+     <option value="Con tarjeta">Con tarjeta</option>
     </select>
    </div>
   </div>
@@ -200,7 +200,7 @@ $(document).ready(function(){
        subtotal[cont]=(Precio*cantidad)-((Precio*cantidad)-descuento);
        total=total+subtotal[cont];
 
-       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="lamina_id[]" value="'+lamina_id+'">'+laminas+'</td><td><input type="number" name="stock[]" value="'+stock+'"></td><td><input type="number" name="Precio[]" value="'+Precio+'"></td><td><input type="number" name="cantidad[]" value="'+cantidad+'"></td><td><input type="number" name="descuento[]" value="'+descuento+'"></td><td>'+subtotal[cont]+'</td></tr>';
+       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="stock_id[]" value="'+stock_id+'">'+stocks+'</td><td><input type="number" name="cantidadDisponible[]" value="'+cantidadDisponible+'"></td><td><input type="number" name="Precio[]" value="'+Precio+'"></td><td><input type="number" name="cantidad[]" value="'+cantidad+'"></td><td><input type="number" name="descuento[]" value="'+descuento+'"></td><td>'+subtotal[cont]+'</td></tr>';
        cont++;
        limpiar();
        $('#total').html("$/ " + total);
