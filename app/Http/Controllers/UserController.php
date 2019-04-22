@@ -25,7 +25,7 @@ class UserController extends Controller
     {
         if($request){
         $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-        $usuarios = User::with('Genero', 'Rol') 
+        $usuarios = Users::with('Genero', 'Rol') 
             ->where('name','LIKE','%'.$query.'%')
             ->orderby('id','desc')
             ->paginate(7);
@@ -107,7 +107,7 @@ class UserController extends Controller
      */
     public function update(UsuarioFormRequest $request, $id)
     {
-      $usuario =User::findOrFail($id);
+      $usuario =Users::findOrFail($id);
     
       $usuario->name=$request->get('name');
       $usuario->email=$request->get('email');
@@ -134,7 +134,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $usuario=User::findOrFail($id);
+        $usuario=Users::findOrFail($id);
         $usuario->delete();
         return redirect('Usuario');
     }
