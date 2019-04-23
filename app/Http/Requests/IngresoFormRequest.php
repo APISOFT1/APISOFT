@@ -29,12 +29,13 @@ class IngresoFormRequest extends Request
             'idproveedor'=>'required',
             'idusuario'=>'required',
             'tipo_comprobante'=>'required|max:20',
-            'serie_comprobante'=>'max:30',
+            'serie_comprobante'=>'required',
             'total_venta'=>'max:30',
+            'estado'=>'max:30',
             
-            'idproducto'=>'required',
-            'Peso'=>'required',
-            'deduccionMerma'=>'required'
+            'recepcion_id'=>'required',
+            'Precio'=>'required',
+            
             
         ];
     }

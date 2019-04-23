@@ -1,4 +1,4 @@
-@extends ('layouts.admin')
+@extends ('layouts.principal1')
 @section ('contenido')
  <div class="row">
  <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
@@ -19,7 +19,7 @@
   <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
    <div class="form-group">
     <label for="proveedor">Usuario</label>
-     <p>{{$ingresos->name}} {{$ingresos->Apellido1}} {{$ingresos->Apellido2}}</p>
+     <p>{{$ingresos->name}}</p>
     </select>
    </div>
   </div>
@@ -46,9 +46,9 @@
      <table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
       <thead style="background-color: #A9D0F5">
        <th>Producto</th>
-       <th>Peso</th>
+       <th>Peso Bruto de la miel</th>
        <th>Precio</th>
-       <th>Peso deduccion Merma</th>
+       <th></th>
        <th>Subtotal</th>
       </thead>
       <tfoot>
@@ -64,10 +64,10 @@
        @foreach($detalles as $det)
       <tr>
        <td>{{$det->producto}} </td>
-       <td>{{$det->Peso}} </td>
+       <td>{{$det->PesoBruto}} </td>
        <td>{{$det->Precio}} </td>
-       <td>{{$det->deduccionMerma}} </td> 
-       <td>{{$det->Peso*$det->Precio}} </td> 
+       <td> </td> 
+       <td>{{$det->Precio}} </td> 
      </td>
       @endforeach
       </tbody>

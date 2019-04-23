@@ -53,10 +53,9 @@ class IngresoController extends Controller
         $usuarios=DB::table('users')
         ->get();
         $productos = DB::table('recepcion_materia_primas as art')
-          ->select(DB::raw('CONCAT(art.nombre) AS producto'),'art.id','art.Precio')
-          ->where('art.estado','=','Activo')
-          ->groupBy('producto','art.id','art.Precio')
-          ->where('art.Precio','>','0')
+          ->select(DB::raw('CONCAT(art.id) AS producto'),'art.id','art.PesoBruto')
+          ->groupBy('producto','art.id','art.PesoBruto')
+          ->where('art.PesoBruto','>','0')
           ->get();
         return view ("Ingreso.create",["personas"=>$personas,"usuarios"=>$usuarios,"productos"=>$productos]);
     }
@@ -76,17 +75,17 @@ class IngresoController extends Controller
             $ingreso->estado='Activo';
             $ingreso->save();
 
-            $idproducto = $request->get('idproducto');
-            $Peso = $request->get('Peso');
-            $deduccionMerma = $request->get('deduccionMerma');
+            $recepcion_id= $request->get('recepcion_id');
+            $Precio = $request->get('Precio');
+         
 
             $cont= 0;
-            while ($cont < count($idproducto)){
+            while ($cont < count($recepcion_id)){
                 $detalle = new DetalleIngreso(); 
                 $detalle->idingreso=$ingreso->idingreso;
-                $detalle->idproducto=$idproducto[$cont];
-                $detalle->Peso=$Peso[$cont];
-                $detalle->deduccionMerma=$deduccionMerma[$cont];
+                $detalle->recepcion_id=$recepcion_id[$cont];
+                $detalle->Precio=$Precio[$cont];
+              
                 $detalle->save();
                 $cont=$cont+1;
                 
@@ -104,14 +103,14 @@ class IngresoController extends Controller
         ->join('afiliados as p','i.idproveedor','=','p.id')
         ->join('users as u','i.idusuario','=','u.id')
         ->join('detalle_ingreso as di','i.idingreso','=','di.idingreso')
-        ->select('i.idingreso','i.fecha_hora','p.Nombre','p.apellido1','p.apellido2','u.name','u.Apellido1','u.Apellido2','i.tipo_comprobante', 'i.serie_comprobante','i.total_venta','i.estado')
+        ->select('i.idingreso','i.fecha_hora','p.Nombre','p.apellido1','p.apellido2','u.name','i.tipo_comprobante', 'i.serie_comprobante','i.total_venta','i.estado')
         ->where('i.idingreso','=',$id)
-        ->groupBy('i.idingreso','i.fecha_hora','p.nombre','p.apellido1','p.apellido2','u.name','u.Apellido1','u.Apellido2','i.tipo_comprobante', 'i.serie_comprobante','i.total_venta','i.estado')
+        ->groupBy('i.idingreso','i.fecha_hora','p.Nombre','p.apellido1','p.apellido2','u.name','i.tipo_comprobante', 'i.serie_comprobante','i.total_venta','i.estado')
         ->first();
 
         $detalles=DB::table('detalle_ingreso as d')
-            ->join ('recepcion_materia_primas as a','d.idproducto','=','a.id')
-            ->select('a.nombre as producto','d.Peso','d.deduccionMerma','a.Precio')
+            ->join ('recepcion_materia_primas as a','d.recepcion_id','=','a.id')
+            ->select('a.id as producto','d.Precio','a.PesoBruto')
             ->where('d.idingreso','=',$id)
             ->get(); 
         return view("Ingreso.show",["ingresos"=>$ingresos,"detalles"=>$detalles]);
@@ -125,14 +124,15 @@ class IngresoController extends Controller
     ->join('detalle_ingreso as di','i.idingreso','=','di.idingreso')
     ->select('i.idingreso','i.fecha_hora','p.Nombre','p.apellido1','p.apellido2','u.name','i.tipo_comprobante', 'i.serie_comprobante','i.total_venta','i.estado')
     ->where('i.idingreso','=',$id)
-    ->groupBy('i.idingreso','i.fecha_hora','p.nombre','p.apellido1','p.apellido2','u.name','i.tipo_comprobante', 'i.serie_comprobante','i.total_venta','i.estado')
+    ->groupBy('i.idingreso','i.fecha_hora','p.Nombre','p.apellido1','p.apellido2','u.name','i.tipo_comprobante', 'i.serie_comprobante','i.total_venta','i.estado')
     ->first();
 
     $detalles=DB::table('detalle_ingreso as d')
-    ->join ('recepcion_materia_primas as a','d.idproducto','=','a.id')
-    ->select('a.nombre as producto','d.Peso','d.deduccionMerma','a.Precio')
+    ->join ('recepcion_materia_primas as a','d.recepcion_id','=','a.id')
+    ->select('a.id as producto','d.Precio','a.PesoBruto')
     ->where('d.idingreso','=',$id)
     ->get(); 
+        
 $ingresos = PDF::loadView("Ingreso.edit",["ingresos"=>$ingresos,"detalles"=>$detalles]);
 return $ingresos->download('Ingreso.edit');
   

@@ -12,8 +12,8 @@ class DetalleIngreso extends Model
     public $timestamps=false;
 
     protected $fillable =[
-     'idingreso_cera',
-     'extraccion_cera_id',
+     'idingreso',
+     'recepcion_id',
      'Precio'
     ];
     protected $guarded =[
