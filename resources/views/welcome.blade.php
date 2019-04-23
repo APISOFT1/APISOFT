@@ -59,7 +59,7 @@
             </div>
         </div>        
         <div class="contents text-right">
-          <h1 class="wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="300ms">APISOFT - Asociacion de Apicultores Region Chorotega</h1>
+          <h1 class="wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="300ms">APISOFT - Asociación de Apicultores Región Chorotega</h1>
           <p class="wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="400ms">La mejor miel del país producida en Nicoya</p>
   
         <a href="{{ url('/login/') }}" class="btn btn-lg btn-border wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">Iniciar Sesion</a>
@@ -120,7 +120,7 @@
 
         Ser una asociación líder en posicionamiento y en calidad de productos de miel en el mercado nacional e internacional, cruzando
         las fronteras a base de nuevas tendencias tecnológicas e innovadoras que provean calidades nutritivas para el ser humano,
-        su región y su calidad de vida<br></h1>
+        su región y su calidad de vida.<br></h1>
       
 		
       </div>
@@ -204,7 +204,7 @@
                   <div class="icon">
                     <i class="mdi-action-settings-phone"></i>
                   </div>
-                  <h4>Numero Telefonico</h4>
+                  <h4>Número Telefónico</h4>
                   <p>2685-02-02</p>
                 </div>
               </div>

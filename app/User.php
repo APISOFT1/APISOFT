@@ -1,23 +1,19 @@
 <?php
-
 namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
-
-class User extends Authenticatable 
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
     use HasRoles;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-
     protected $table= 'users';
     protected $primaryKey="id";
     
@@ -26,8 +22,8 @@ class User extends Authenticatable
         'id',
         'name', 
         'email',
-        'email_verified_at',
-        'password',
+      'email_verified_at',
+         'password',
         'Apellido1',
         'Apellido2',
         'Telefono',
@@ -37,11 +33,7 @@ class User extends Authenticatable
         'Rol_Id',
         'estado_id'
         
-
     ];
-
-
-
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -61,11 +53,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Genero::class ,'Genero_Id');
     }
-
     public function role()
     {
-        return $this->belongsTo(Role::class, 'role_user');
+        return $this->belongsToMany(Role::class, 'role');
     }
-    
    
 }

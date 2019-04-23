@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Genero;
 use App\Rol;
-use App\Estado;
-
 
 
 
@@ -26,24 +24,33 @@ class UserController extends Controller
     public function index(Request $request)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         $Generos = Genero::all();
         $Estados = Estado::all();
         $Rols = Rol::all();
 =======
         if($request){
 >>>>>>> develop
+=======
+        if($request){
+>>>>>>> Caro
         $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-        $usuarios = User::with('Genero', 'Rol') 
+        $usuarios = Users::with('Genero', 'Rol') 
             ->where('name','LIKE','%'.$query.'%')
             ->orderby('id','desc')
             ->paginate(7);
          
+<<<<<<< HEAD
 <<<<<<< HEAD
         return view('Usuario.index', ['usuarios'=>$usuarios,"Rols"=> $Rols, "Generos"=> $Generos, "Estados"=> $Estados,"searchText"=>$query]);
 =======
         return view('Usuario.index', ['usuarios'=>$usuarios,"searchText"=>$query]);
         }
 >>>>>>> develop
+=======
+        return view('Usuario.index', ['usuarios'=>$usuarios,"searchText"=>$query]);
+        }
+>>>>>>> Caro
     }
 
     /**
@@ -51,10 +58,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(UsuarioFormRequest $request)
+    public function create()
     {
         $Generos = Genero::all();
-        $Estados = Estado::all();
+       
        $Rols = Rol::all();
 
       
@@ -63,7 +70,7 @@ class UserController extends Controller
         
     
         return view("Usuario.create",  ["Rols"=> $Rols ,
-        "Generos"=>$Generos, 'Estados'=> $Estados]);
+        "Generos"=>$Generos]);
     }
 
     /**
@@ -101,7 +108,7 @@ class UserController extends Controller
 
      
         $Generos = Genero::all();
-        $Estados = Estado::all();
+       
        $Rols = Rol::all();
 
 
@@ -119,7 +126,7 @@ class UserController extends Controller
      */
     public function update(UsuarioFormRequest $request, $id)
     {
-      $usuario =User::findOrFail($id);
+      $usuario =Users::findOrFail($id);
     
       $usuario->name=$request->get('name');
       $usuario->email=$request->get('email');
@@ -146,7 +153,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $usuario=User::findOrFail($id);
+        $usuario=Users::findOrFail($id);
         $usuario->delete();
         return redirect('Usuario');
     }

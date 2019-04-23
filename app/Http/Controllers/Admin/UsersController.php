@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\Controllers\Admin;
-use App\User;
+use App\Models\Auth\Role\Role;
+use App\Models\Auth\User\User;
 use App\Genero;
 use Validator;
 use Response;
-use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
@@ -23,18 +23,15 @@ class UsersController extends Controller
        
        if($request){
         $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-        $users= User::with('Genero') 
-            ->where('name','LIKE','%'.$query.'%')
-            ->orderby('id','desc')
-            ->paginate(7);
-
-            $generos = Genero::all();
-          
-            $roles = Role::get()->pluck('name', 'name');
-            return view('users.index', compact('users', 'roles', 'generos'), ['users'=>$users,"searchText"=>$query]);
+        $users= User::where('name','LIKE','%'.$query.'%')
+        ->orderby('id','desc')
+        ->paginate(10);
+           
+            $roles = Role::all();
+            return view('users.index',  compact('users', 'roles','generos'), ['users'=>$users,"searchText"=>$query]);
     }
         
-        return view('users.index', compact('users', 'roles','generos'));
+        return view('admin.users.index', compact('users', 'roles','generos'));
     }
 
 
@@ -42,18 +39,11 @@ class UsersController extends Controller
     public function addUser(Request $request){
         $rules = array(
     
-          'id' => 'required',
+          
           'name' => 'required',
           'email' => 'required',
           'password' => 'required',
-          'Apellido1' => 'required',
-          'Apellido2' => 'required',
-          'Telefono' => 'required',
-          'email' => 'required',
-          'Direccion' => 'required',
-          'Fecha_Ingreso' => 'required',
-          'Genero_Id' => 'required',
-          'estado_id' => 'required'
+          
         
         );
       $validator = Validator::make ( Input::all(), $rules);
@@ -66,17 +56,14 @@ class UsersController extends Controller
         $users->name = $request->name;
         $users->email = $request->email;
         $users->password = $request->password;
-        $users->Apellido1 = $request->Apellido1;
-        $users->Apellido2 = $request->Apellido2;
-        $users->Telefono = $request->Telefono;
-        $users->Direccion = $request->Direccion;
-        $users->Fecha_Ingreso = $request->Fecha_Ingreso;
-        $users->Genero_Id = $request->Genero_Id;
-        $users->estado_id = $request->estado_id;
         $roles = $request->input('roles') ? $request->input('roles') : [];
         $users->assignRole($roles);
         $users->save();
-        return response()->json($users);
+        $notificacion = array(
+          'message' => 'Gracias! Su mensaje se a enviado con exito.', 
+          'alert-type' => 'success'
+      );
+        return response()->json($users)->with($notificacion);
       }
     }
     /**
@@ -84,113 +71,108 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function edit(User $user)
+    {
+        return view('admin.users.edit', ['user' => $user, 'roles' => Role::get()]);
+    }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param User $user
+     * @return mixed
+     */
+    public function update(Request $request, User $user)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255',
+            'active' => 'sometimes|boolean',
+            'confirmed' => 'sometimes|boolean',
+        ]);
+
+        $validator->sometimes('email', 'unique:users', function ($input) use ($user) {
+            return strtolower($input->email) != strtolower($user->email);
+        });
+
+        $validator->sometimes('password', 'min:9|confirmed', function ($input) {
+            return $input->password;
+        });
+
+        if ($validator->fails()) return redirect()->back()->withErrors($validator->errors());
+
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+
+        if ($request->has('password')) {
+            $user->password = bcrypt($request->get('password'));
+        }
+
+        $user->active = $request->get('active', 0);
+        $user->confirmed = $request->get('confirmed', 0);
+
+        $user->save();
+
+        //roles
+        if ($request->has('roles')) {
+            $user->roles()->detach();
+
+            if ($request->get('roles')) {
+                $user->roles()->attach($request->get('roles'));
+            }
+        }
+
+        return redirect()->intended(route('users'));
+    }
 
      
     public function editUser(request $request){
-        $rules = array(
-        );
-      $validator = Validator::make ( Input::all(), $rules);
-      if ($validator->fails())
-      return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
-      
-      else {
-        $users = User::find ($request->id);
-      
-        $users->id= $request->id;
-        $users->name = $request->name;
-        $users->email = $request->email;
-        $users->password = $request->password;
-        $users->Apellido1 = $request->Apellido1;
-        $users->Apellido2 = $request->Apellido2;
-        $users->Telefono = $request->Telefono;
-        $users->Direccion = $request->Direccion;
-        $users->Fecha_Ingreso = $request->Fecha_Ingreso;
-        $users->Genero_Id = $request->Genero_Id;
-        $users->estado_id = $request->estado_id;
-        $roles = $request->input('roles') ? $request->input('roles') : [];
-        $users->assignRole($roles);
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255',
+            'active' => 'sometimes|boolean',
+            'confirmed' => 'sometimes|boolean',
+        ]);
+
+        $validator->sometimes('email', 'unique:users', function ($input) use ($users) {
+            return strtolower($input->email) != strtolower($users->email);
+        });
+
+        $validator->sometimes('password', 'min:6|confirmed', function ($input) {
+            return $input->password;
+        });
+
+        if ($validator->fails()) return redirect()->back()->withErrors($validator->errors());
+
+        $users->name = $request->get('name');
+        $users->email = $request->get('email');
+
+        if ($request->has('password')) {
+            $users->password = bcrypt($request->get('password'));
+        }
+
+        $users->active = $request->get('active', 0);
+        $users->confirmed = $request->get('confirmed', 0);
+
         $users->save();
+
+        //roles
+        if ($request->has('roles')) {
+            $users->roles()->detach();
+
+            if ($request->get('roles')) {
+                $users->roles()->attach($request->get('roles'));
+            }
+        }
+
+    
       return response()->json($users);
       }
-      }
+    
 
 
- // public function create()
- // {
-   //
-      // $roles = Role::get()->pluck('name', 'name');
-      // return view('admin.users.create', compact('roles'));
-  // }
-    /**
-     * Store a newly created User in storage.
-     *
-     * @param  \App\Http\Requests\StoreUsersRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-  //  public function store(StoreUsersRequest $request)
-   // {
-       // if (! Gate::allows('users_manage')) {
-           // return abort(401);
-       // }
-      //  $user = User::create($request->all());
-      //  $roles = $request->input('roles') ? $request->input('roles') : [];
-       // $user->assignRole($roles);
-      //  return redirect()->route('admin.users.index');
-   // }
-    /**
-     * Show the form for editing User.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        
-
-        $roles = Role::get()->pluck('name', 'name');
-        $generos = Genero::all();
-        $user = User::findOrFail($id);
-        return view('users.edit', compact('user', 'roles', 'generos'));
-   }
-    /**
-     * Update User in storage.
-     *
-     * @param  \App\Http\Requests\UpdateUsersRequest  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateUsersRequest $request, $id)
-    {
-       // if (! Gate::allows('users_manage')) {
-         //   return abort(401);
-     //   }
-        $user = User::findOrFail($id);
-        $user->update($request->all());
-        $roles = $request->input('roles') ? $request->input('roles') : [];
-        $user->syncRoles($roles);
-        return redirect()->route('users.index');
-    }
-    /**
-     * Remove User from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        if (! Gate::allows('users_manage')) {
-            return abort(401);
-        }
-        $user = User::findOrFail($id);
-        $user->delete();
-        return redirect()->route('admin.users.index');
-    }
-    /**
-     * Delete all selected User at once.
-     *
-     * @param Request $request
-     */
     public function massDestroy(Request $request)
     {
         if (! Gate::allows('users_manage')) {

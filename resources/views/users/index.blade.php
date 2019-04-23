@@ -21,22 +21,20 @@
 
 <!--Esta clase nos permite posicionar el buscador  -->
 <div class="absolute3">
-
+@include('users.search') 
 </div>
 
 <div class="table-responsive">
 			<table class="table table-striped table-bordered table-condensed table-hover">
             <table class="table table-bordered" id="table">
       <tr>
-			<th width="150px" >Cedula</th>
+			<th width="150px" >Cédula</th>
   		<th> <div class="size2">Usuario</th>
-  		<th>email</th>
+  		<th>Correo</th>
     	<th>Roles</th>
-          <th >
-          <a href="#" class="create-modal btn btn-success btn-sm">
-            <i class="glyphicon glyphicon-plus"></i>
-          </a>
-        </th>
+      <th>Estado</th>
+      <th>Confirmado</th>
+      <th>Acciones</th>
          <tr>
        
           {{ csrf_field() }}
@@ -46,34 +44,61 @@
                                 <td>{{ $value->id }}</td>
                                 <td>{{ $value->name }} {{ $value->Apellido1 }} {{ $value->Apellido2 }}</td>
                                 <td>{{ $value->email }}</td>
-                                <td>
-                                    @foreach ($value->roles()->pluck('name') as $role)
-                                        <span class="label label-info label-many">{{ $role }}</span>
-                                    @endforeach
+                                <td> <span class="label label-info label-many label label-success">
+                                {{$value->roles->pluck('name')->implode(' , ')}}</span>
                                  
                                 </td>
                                 <td>
+                                @if($value->active)
+                            <span class="label label-primary"><?php  if ($value->active=='1') {
+	                     		# code...
+	                 		print("Activo");
+	                         	} 
+	                     	  ?> </span>
+                        @else
+                            <span class="label label-danger"><?php  if ($value->active=='0') {
+		                      	# code...
+	                       		print("Inactivo");
+	                         	} 
+	                     	  ?> </span>
+                        @endif</td>
+
+                        <td>
+                        @if($value->confirmed)
+                            <span class="label label-success"><?php  if ($value->confirmed=='1') {
+		                      	# code...
+		                      	print("Confirmado");
+	                             	} 
+		                           ?></span>
+                        @else
+                            <span class="label label-warning"><?php  if ($value->confirmed=='0') {
+		                      	# code...
+		                     	print("Sin confirmar");
+	                             	} 
+		                           ?></span>
+                        @endif
+                        </td>
+                                <td>
             <a href="#" class="show-modal btn btn-info btn-sm" 
             data-id="{{$value->id}}"
-            data-Nombre="{{$value->name}}">
+            data-name="{{$value->name}}"
+            data-email="{{$value->email}}"
+            data-password="{{$value->password}}">
               <i class="fa fa-eye"></i>
             </a>
             <a href="#" class="edit-modal btn btn-warning btn-sm"
             data-id="{{$value->id}}"
-            data-Nombre="{{$value->name}}"
+            data-name="{{$value->name}}"
             data-email="{{$value->email}}"
-            data-email="{{$value->password}}"
-            data-apellido1="{{$value->Apellido1}}"
-            data-apellido2="{{$value->Apellido2}}"
-            data-Telefono="{{$value->Telefono}}"
-            data-Direccion="{{$value->Direccion}}"
-            data-Fecha_Ingreso="{{$value->Fecha_Ingreso}}"
-            data-genero_id="{{$value->Genero->descripcion}}"
-            data-estado_id="{{$value->estado_id}}"><i class="glyphicon glyphicon-pencil"></i> </a>
+            data-password="{{$value->password}}"
+   ><i class="glyphicon glyphicon-pencil"></i> </a>
 
+   {{--@if(!$value->hasRole('administrator'))--}}
             <a href="#" class="delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" data-title="{{$value->name}}">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
+            </a>
+            {{--@endif--}}
           </td>
         </tr>
       @endforeach
@@ -81,154 +106,39 @@
   </div>
   {{$users->links()}}
 </div>
-{{-- Modal Form Create Afiliado --}}
-<div id="create" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-crear"></h4>
-      </div>
-      <div class="modal-body">
-        <form class="form-horizontal" role="form">
 
-   
-			<div class="form-group row add">
-            	<label for="id">Cedula</label>
-            	<input type="text" name="id" class="form-control" placeholder="Id_Usuario...">
-            </div>
-			<div class="form-group row">
-      <label for="name">Nombre</label>
-					<input type="text" name = "name"   class="form-control"  placeholder="Nombre...">
-			</div>
-           
-          
-            <div class="form-group row add">
-            	<label for="Apellido1">Primer apellido</label>
-				<input type="text" name="Apellido1" class="form-control" placeholder="Apellido1..." />
-            </div>
-            <div class="form-group row add">
-            	<label for="Apellido2">Segundo apellido</label>
-				<input type="text" name="Apellido2" class="form-control" placeholder="Apellido2..." />
-            </div>
-            <div class="form-group row add">
-            	<label for="Telefono">Telefono</label>
-				<input type="text" name="Telefono" class="form-control" placeholder="Telefono..." />
-            </div>
-            
-            <div class="form-group row add">
-				<label for="email">{{ __('E-Mail Address') }}</label>
-					<input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required  placeholder="Correo...">
-
-					@if ($errors->has('email'))
-						<span class="invalid-feedback" role="alert">
-							<strong>{{ $errors->first('email') }}</strong>
-						</span>
-					@endif
-			
-			</div>
-            <div class="form-group row add">
-            	<label for="Direccion">Direccion</label>
-				<input type="text" name="Direccion" class="form-control" placeholder="Direccion..." />
-            </div>
-            <div class="form-group row add">
-            	<label for="Fecha_Ingreso">Fecha Ingreso</label>
-				<input type="date" name="Fecha_Ingreso" class="form-control" placeholder="YYYY-MM-DD" />
-            </div>
-			<div class="form-group row">
-				<label for="password">{{ __('Password') }}</label>
-
-					<input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required placeholder="contraseña...">
-
-					@if ($errors->has('password'))
-						<span class="invalid-feedback" role="alert">
-							<strong>{{ $errors->first('password') }}</strong>
-						</span>
-					@endif
-
-			</div>
-
-			<div class="form-group row">
-				<label for="password-confirm">{{ __('Confirm Password') }}</label>
-
-					<input id="password-confirm" type="password" class="form-control" name="password_confirmation" required placeholder="Confirme Contraseña...">
-				</div>
-		
-            
-        <div class="form-group row add">
-        <div class="col-sm-6">
-          <label for="Genero_Id">Genero</label>
-					<select class="form-control" id="Genero_Id" name="Genero_Id">
-          <option value="Genero_Id">Seleccione</option>
-						@foreach ($generos as $gene)
-							<option value="{{$gene->id}}">{{ $gene->descripcion }}</option>
-						@endforeach						
-					</select>
-            </div>
-          </div>
-
-
-			<div class="form-group row add">
-            	<div class="col-md-6">
-				<label for="estado_id">Estado</label>
-				<div class="register-switch">
-      <input type="radio" name="estado_id" value="{{$estado_id=1}}" id="estado_id" class="register-switch-input" checked>
-      <label for="estado_id" class="register-switch-label">Activo</label>
-      <input type="radio" name="estado_id" value="{{$estado_id=0}}" id="estado_id" class="register-switch-input">
-      <label for="estado_id" class="register-switch-label">Inactivo</label>
-	</div> 
-    </div>
-  
-    <div class="form-group row add">
-            	<div class="col-md-6">
-                    {!! Form::label('roles', 'Roles*', ['class' => 'control-label']) !!}
-                    {!! Form::select('roles[]', $roles, old('roles'), ['class' => 'form-control select2', 'multiple' => 'multiple', 'required' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('roles'))
-                        <p class="help-block">
-                            {{ $errors->first('roles') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-   
-
-
-        </form>
-      </div>
-          <div class="modal-footer">
-            <button class="btn btn-warning" type="submit" id="add">
-              <span class="glyphicon glyphicon-plus"></span>Guardar Afiliado
-            </button>
-            <button class="btn btn-warning" type="button" data-dismiss="modal">
-              <span class="glyphicon glyphicon-remobe"></span>Cerrar
-            </button>
-          </div>
-    </div>
-  </div>
+        
 {{-- Modal Form Show POST --}}
 <div id="show" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-show"></h4>
+          <h4 class="modal-title"></h4>
                   </div>
                     <div class="modal-body">
                     <div class="form-group">
-                      <label for="iii">ID :</label>
-                      <b id="iaa"/>
+                      <label for="">ID :</label>
+                      <b id="i2"/>
                     </div>
                     <div class="form-group">
                       <label for="">Nombre :</label>
-                      <b id="jaja"/>
+                      
+                      <b id="n2"/>
+                    </div>
+										<div class="form-group">
+                      <label for="">Correo :</label>
+                      <b id="em"/>
+                    </div>
+										<div class="form-group">
+                   
+                      <label for="">Contraseña :</label>
+                      <b id="pw"/>
                     </div>
                     </div>
                     </div>
                   </div>
 </div>
-
-
 
 {{-- Modal Form Edit and Delete Post --}}
 <div id="myModal"class="modal fade" role="dialog">
@@ -243,79 +153,45 @@
           <div class="form-group">
             <label class="control-label col-sm-2"for="id">ID</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="i" disabled>
+              <input type="text" class="form-control" id="iii" disabled>
             </div>
           </div>
 
           <div class="form-group">
             <label class="control-label col-sm-2"for="name">Nombre</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="n" >
+              <input type="text" class="form-control" id="nnn" >
             </div>
           </div>
 
           <div class="form-group">
-            <label class="control-label col-sm-2"for="Apellido1">Primer Apellido</label>
+            <label class="control-label col-sm-2"for="email">Email</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="a1">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="Apellido2">Segundo Apellido</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="a2">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="Telefono">Telefono</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="t" >
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="email">Correo</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="num" >
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="Direccion">Direccion</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="d" >
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="Fecha_Ingreso">Fecha Ingreso</label>
-            <div class="col-sm-10">
-              <input type="date" class="form-control" id="f">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="Genero_Id">Genero</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="g" >
+              <input type="text" class="form-control" id="emm" >
             </div>
           </div>
 
           <div class="form-group">
             <label class="control-label col-sm-2"for="password">Password</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="e" >
+              <input type="text" class="form-control" id="passs" >
             </div>
           </div>
+         
           <div class="form-group">
-            <label class="control-label col-sm-2"for="estado_id">Estado</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="es" >
-            </div>
-          </div>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="roles">
+                      
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select id="rlss" name="roles[]" class="select2" multiple="multiple" style="width: 100%" autocomplete="off">
+                            @foreach($roles as $role)
+                            <option value="{{ $role->id }}">{{$role->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
 
+       
         </form>
                 {{-- Form Delete Post --}}
         <div class="deleteContent">
@@ -335,7 +211,26 @@
   </div>
 </div>
 
-<!--<script>
-        $('.select2').select2()
-    </script>-->
 @endsection
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+    @if(Session::has('message'))
+        var type = "{{ Session::get('alert-type', 'info') }}";
+        switch(type){
+            case 'info':
+                toastr.info("{{ Session::get('message') }}");
+                break;
+            
+            case 'warning':
+                toastr.warning("{{ Session::get('message') }}");
+                break;
+            case 'success':
+                toastr.success("{{ Session::get('message') }}");
+                break;
+            case 'error':
+                toastr.error("{{ Session::get('message') }}");
+                break;
+        }
+    @endif
+    </script>

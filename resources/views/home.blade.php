@@ -2,7 +2,7 @@
 <html lang="en">
 
   <head>  	
-  	<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="Responsive Bootstrap Landing Page Template">
@@ -29,14 +29,10 @@
         <a class="navbar-brand logo-right" href="welcome/javascript:void(0)"><i class="mdi-image-timelapse"></i>APISOFT</a>
       </div>
         <ul class="nav navbar-nav main-navigation">
-          <li class="active"><a href="">Inicio</a></li>
-          @can('permisos')
-          <li><a href="{{ url('/admin/users/') }}">Administrador</a></li>
-          @else
-                            Usted no tiene los permisos suficientes 
-                        @endcan
+          <li class="active"><a href="#home">Inicio</a></li>
+          <li><a href="{{ url('/users/') }}">Administrador</a></li>
+          <li><a href=" {{url('/register/') }}">User prueba</a></li>
           <li><a href="{{ url('/RecepcionMateriaPrima/') }}">Planta</a></li>
-          <li><a href="#testimonial">Acerca de Nosotros</a></li>
           <li><a href="#contact">Ubicacion</a></li>
         </ul>
         <button class="close-button" id="close-button">Cerrar</button>
@@ -143,5 +139,9 @@
             $.material.init();
         });
     </script>
+<script type="text/javascript" src="graficas/googlechart.js"></script>
 
+
+
+ 
   </body>

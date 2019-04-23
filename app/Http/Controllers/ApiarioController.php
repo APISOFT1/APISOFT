@@ -24,19 +24,13 @@ class ApiarioController extends Controller
             ->where('Descripcion','LIKE','%'.$query.'%')
             ->orderby('id','desc')
             ->paginate(7);
-
            $ubicaciones = Ubicacion::all();
-
            
         return view('Apiario.index', compact('api', 'ubicaciones'), ['api'=>$api,"searchText"=>$query]);
         }
-
         
     }
-
     ////////////////////////////////////////////////////////NUEVO
-
-
 public function addApiario(Request $request){
     $rules = array(
       'Descripcion' => 'required',
@@ -46,11 +40,9 @@ public function addApiario(Request $request){
   $validator = Validator::make ( Input::all(), $rules);
   if ($validator->fails())
   return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
-
   else {
     
     $ubicacion_id = input::get('ubicacion_id');
-
     $api = new Apiario;
     $api->Descripcion = $request->Descripcion;
     $api->cantidad = $request->cantidad;
@@ -63,29 +55,21 @@ public function addApiario(Request $request){
   
   }
 }
-
 public function find(Request $request)
     {
         $term = trim($request->q);
-
         if (empty($term)) {
             return \Response::json([]);
         }
-
         $tags = Ubicacion::search($term)->limit(5)->get();
-
         $formatted_tags = [];
-
         foreach ($tags as $tag) {
             $formatted_tags[] = ['id' => $tag->id, 'text' => $tag->name];
         }
-
         return \Response::json($formatted_tags);
     }
-
 public function editApiario(request $request){
   $rules = array(
-
     'Descripcion' => 'required',
     'cantidad' => 'required',
       'ubicacion_id' => 'required'
@@ -93,22 +77,7 @@ public function editApiario(request $request){
 $validator = Validator::make ( Input::all(), $rules);
 if ($validator->fails())
 return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
-
-<<<<<<< HEAD
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Apiario  $apiario
-     * @return \Illuminate\Http\Response
-     */
-    public function edit( $id)
-    {
-        $ubicaciones = Ubicacion::all();
-       
-=======
 else {
->>>>>>> develop
-
   $ubicaciones = Ubicacion::all();
 $api = Apiario::find($request->id);
 $api->Descripcion = $request->Descripcion;
@@ -118,7 +87,6 @@ $api->save();
 return response()->json($api , $ubicaciones);
 }
 }
-
 public function deleteApiario(request $request){
   
   $api = Apiario::find ($request->id);
@@ -126,33 +94,3 @@ public function deleteApiario(request $request){
   return response()->json();
 }
 }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-<<<<<<< HEAD
-    public function update(ApiariosFormRequest $request, $id  )
-    {
-        
-        $apiario=Apiario::findOrFail($id);
-        $apiario->Descripcion= $request->get('Descripcion');
-        $apiario->cantidad= $request->get('cantidad');
-        $apiario->ubicacion_id=$request->get('ubicacion_id');
-        $apiario->update();
-        return redirect('Apiario');
-    }
-    
-    public function destroy($id)
-    {
-        //
-        $apiario=Apiario::findOrFail($id);
-    $apiario->delete();
-    return redirect('Apiario');
-    }
-}
-=======
-   
-
->>>>>>> develop

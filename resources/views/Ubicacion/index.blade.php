@@ -1,4 +1,5 @@
 @extends ('layouts.principalUbicacion') 
+
 <!-- mensaje de exito -->
 <?php $message=Session::get('message') ?>
 
@@ -11,7 +12,7 @@ UBICACION CREADO CORRECTAMENTE
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
-<h1 >LISTADO DE  UBICACION</h1>
+<h1 >LISTADO DE  UBICACIÓN</h1>
 
 <!-- Saltos de linea-->
 <br>
@@ -20,18 +21,18 @@ UBICACION CREADO CORRECTAMENTE
 <br>
 <!-- Fin de salto de linea. No necesita una etiqueta de cierre-->
 <div class="absolute3">
-
+@include('Ubicacion.search') 
 		
 </div>	
 
 <div class="row">
   <div class="table table-responsive">
+  @include('Ubicacion.search')
     <table class="table table-bordered" id="table">
       <tr>
         <th width="150px">No</th>
-        <th>Descripcion</th>
-        <th>Create At</th>
-        <th class="text-center" width="150px">
+        <th  width="150px">Descripción</th>
+        <th width="200px">
           <a href="#" class="create-modal btn btn-success btn-sm">
             <i class="glyphicon glyphicon-plus"></i>
           </a>
@@ -42,16 +43,15 @@ UBICACION CREADO CORRECTAMENTE
       @foreach ($ubicacion as $value)
         <tr class="ubicacion{{$value->id}}">
           <td>{{ $no++ }}</td>
-          <td>{{ $value->descripcion }}</td>
-          <td>{{ $value->created_at }}</td>
+          <td>{{ $value->Descripcion }}</td>
           <td>
-            <a href="#" class="show-modal btn btn-info btn-sm" data-id="{{$value->id}}" data-title="{{$value->descripcion}}">
+            <a href="#" class="show-modal btn btn-info btn-sm" data-id="{{$value->id}}" data-Descripcion="{{$value->Descripcion}}">
               <i class="fa fa-eye"></i>
             </a>
-            <a href="#" class="edit-modal btn btn-warning btn-sm" data-id="{{$value->id}}" data-title="{{$value->descripcion}}">
+            <a href="#" class="edit-modal btn btn-warning btn-sm" data-id="{{$value->id}}" data-Descripcion="{{$value->Descripcion}}">
               <i class="glyphicon glyphicon-pencil"></i>
             </a>
-            <a href="#" class="delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" data-title="{{$value->descripcion}}">
+            <a href="#" class="delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" data-Descripcion="{{$value->Descripcion}}">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
           </td>
@@ -67,26 +67,28 @@ UBICACION CREADO CORRECTAMENTE
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-descripcion"></h4>
+        <h3 class="modal-descripcion  text-center"></h3>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" role="form">
+
           <div class="form-group row add">
-            <label class="control-label col-sm-2" for="descripcion">Descripcion :</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="descripcion" name="descripcion"
-              placeholder="Your Title Here" required>
+        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+              <input type="text" class="form-control has-feedback-left" id="Descripcion" name="Descripcion"
+              placeholder="Ubicación" required>
+              
               <p class="error text-center alert alert-danger hidden"></p>
+              <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
             </div>
           </div>
         </form>
       </div>
           <div class="modal-footer">
-            <button class="btn btn-warning" type="submit" id="add">
-              <span class="glyphicon glyphicon-plus"></span>Guardar
+            <button class="btn btn-success" type="submit" id="add">
+              <span class="fa fa-save"></span>Guardar
             </button>
             <button class="btn btn-warning" type="button" data-dismiss="modal">
-              <span class="glyphicon glyphicon-remobe"></span>Cerrar
+              <span class="fa fa-times"></span>Cerrar
             </button>
           </div>
     </div>
@@ -96,17 +98,17 @@ UBICACION CREADO CORRECTAMENTE
 <div id="show" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header ">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title"></h4>
+          <h4 class="modal-title text-center"></h4>
                   </div>
                     <div class="modal-body">
                     <div class="form-group">
-                      <label for="">ID :</label>
+                      <label for="">Código :</label>
                       <b id="ii"/>
                     </div>
                     <div class="form-group">
-                      <label for="">Descripcion :</label>
+                      <label for="">Ubicación :</label>
                       <b id="dii"/>
                     </div>
                     </div>
@@ -117,49 +119,23 @@ UBICACION CREADO CORRECTAMENTE
 <div id="myModal"class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="background-color:	#fff">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-descripcion"></h4>
+        <h1 class="modal-descripcion text-center" ></h1>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" role="modal">
 
-<<<<<<< HEAD
-<div class="row">
-	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		<div class="table-responsive">
-			<table class="table table-striped table-bordered table-condensed table-hover">
-				<thead>
-					<th>Id</th>
-					<th>Descripción</th>
-				
-				</thead>
-               @foreach ($ubicaciones as $ubicacion)
-				<tr>
-					<td>{{ $ubicacion->id}}</td>
-					<td>{{ $ubicacion->Descripcion}}</td>
-					<td>
-						<a href="{{URL::action('UbicacionController@edit',$ubicacion->id)}}"><button class="btn btn-info">Editar</button></a>
-                         <a href="" data-target="#modal-delete-{{$ubicacion->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
-					</td>
-				</tr>
-				@include('Ubicacion.modal')
-				@endforeach
-			</table>
-		</div>
-		{{$ubicaciones->render()}}
-	</div>
-=======
           <div class="form-group">
-            <label class="control-label col-sm-2"for="id">ID</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="ids" disabled>
+          <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+              <input type="text" class="form-control has-feedback-left" id="ids" disabled>
+              <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
             </div>
           </div>
           <div class="form-group">
-            <label class="control-label col-sm-2"for="descripcion">Descripcion</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="des">
+          <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+            <input type="name" class="form-control  has-feedback-left" id="des">
+            <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
             </div>
           </div>
 
@@ -175,12 +151,34 @@ UBICACION CREADO CORRECTAMENTE
           <span id="footer_action_button" class="glyphicon"></span>
         </button>
         <button type="button" class="btn btn-warning" data-dismiss="modal">
-          <span class="glyphicon glyphicon"></span>close
+          <span class="fa fa-times"></span>close
         </button>
       </div>
     </div>
   </div>
->>>>>>> develop
 </div>
 
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+    @if(Session::has('message'))
+        var type = "{{ Session::get('alert-type', 'info') }}";
+        switch(type){
+            case 'info':
+                toastr.info("{{ Session::get('message') }}");
+                break;
+            
+            case 'warning':
+                toastr.warning("{{ Session::get('message') }}");
+                break;
+            case 'success':
+                toastr.success("{{ Session::get('message') }}");
+                break;
+            case 'error':
+                toastr.error("{{ Session::get('message') }}");
+                break;
+        }
+    @endif
+    </script>

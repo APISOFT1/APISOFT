@@ -15,7 +15,7 @@ class CreateEstanonsTable extends Migration
     {
         Schema::create('estanons', function (Blueprint $table) {
             $table->increments('id');
-            $table->datetime('Fecha');
+            $table->string('Descripcion',30);
             $table->float('Peso');
             $table->timestamps();
         });

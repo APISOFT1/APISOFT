@@ -1,16 +1,21 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
-use App\User;
+use Spatie\Permission\Models\Role;
+use App\Models\Auth\User\User;
+use Response;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Input;  //MUYR IMPORTANTE , SIN ESTO NO GUARDA.
+use App\Http\Requests\Admin\StoreUsersRequest;
+use App\Http\Requests\Admin\UpdateUsersRequest;
 
 class RegisterController extends Controller
 {
-    /*
+     /*
     |--------------------------------------------------------------------------
     | Register Controller
     |--------------------------------------------------------------------------
@@ -20,53 +25,107 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-
     use RegistersUsers;
-
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
     protected $redirectTo = '/home';
-
     /**
      * Create a new controller instance.
      *
      * @return void
      */
+
+   
+
     public function __construct()
     {
-        $this->middleware('guest');
+      $this->middleware('guest');
     }
 
+  
     /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+  protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
+        $rules = [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6|confirmed',
+        ];
+
+        if (config('auth.captcha.registration')) {
+            $rules['g-recaptcha-response'] = 'required|captcha';
+        }
+
+        return Validator::make($data, $rules);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
-     * @return \App\User
+     * @param  array $data
+     * @return User|\Illuminate\Database\Eloquent\Model
      */
     protected function create(array $data)
     {
-        return User::create([
+        /** @var  $user User */
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => bcrypt($data['password']),
+            'confirmation_code' => Uuid::uuid4(),
+            'confirmed' => false
         ]);
+
+        if (config('auth.users.default_role')) {
+            $user->roles()->attach(Role::firstOrCreate(['name' => config('auth.users.default_role')]));
+        }
+
+        return $user;
     }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
+    }
+
+    /**
+     * The user has been registered.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  mixed $user
+     * @return mixed
+     */
+    protected function registered(Request $request, $user)
+    {
+        if (config('auth.users.confirm_email') && !$user->confirmed) {
+
+            $this->guard()->logout();
+
+            $user->notify(new ConfirmEmail());
+
+            return redirect(route('login'));
+        }
+    }
+
 }

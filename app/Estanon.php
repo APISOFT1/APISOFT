@@ -10,12 +10,11 @@ class Estanon extends Model
     protected $primaryKey="id";
     
     public $timestamps=true;
-    protected $casts = [
-        'Fecha' => 'Y-m-d H:i:s'
-    ];
+   
     protected $fillable =[
+        'Descripcion',
         'Peso',
-        'Fecha'
+        
 
     ];
 }
