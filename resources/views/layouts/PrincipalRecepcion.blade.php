@@ -500,14 +500,12 @@ $("#numero_muestras").val(aleatorio);
 });
 </script>
 
+
+
 <script type="text/javascript">
 {{-- ajax Form Add Post--}}
 
-$(document).ready(iniciar);
 
-function iniciar() {
-    $("#busqueda_parroquia tr td").click(clickTabla);
-}
 
 $(document).ready(function () {
     var table = $('#busqueda_parroquia').DataTable();
