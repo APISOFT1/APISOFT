@@ -258,40 +258,51 @@
                         <div class="col-md-12">
                             
                             <!-- content go here -->
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#popupBusquedaParroquia">   <i class="fa fa-search"></i>   
-                            </div>
-                      <div class="form-group row add">
-                <div class="col-md-9" >
-        <select name="Recepcion_id" class="form-control" id="Recepcion_id">
+         <div class="modal-footer">
+           <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#popupBusquedaParroquia">   <i class="fa fa-search"></i>   
+          </div>
+
+
+        
+
+              <div class="form-group row add">
+              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
+              <select  class="form-control" name="Recepcion_id" class="form-control" id="Recepcion_id">
          <option value="">-- Seleccione Recepción --</option>
          @foreach ($recepciones as $recep)
           <option value="{{ $recep->id }}">{{$recep->id}} - {{$recep->afiliado->Nombre}} {{$recep->afiliado->apellido1}} {{$recep->afiliado->apellido2}}</option>
          @endforeach
         </select>
-        <span class="fa fa-file-text form-control-feedback right" aria-hidden="true"></span>
-            </div>
-</div>
+              <p class="No ingreso la fecha"></p>
+              <span class="fa fa-child form-control-feedback right" aria-hidden="true"></span>
+              </div>
+              </div>
+
+
+     
+
             <div class="form-group row add">
-                <div class="col-md-9" >
-        <select name="Estanon_id" class="form-control" id="busqueda_parroquia">
+              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
+              <select  class="form-control" name="Estanon_id" class="form-control" id="Estanon_id">
          <option value="">-- Seleccione Estañon --</option>
          @foreach ($recepcion as $value)
           <option value="{{ $value->id }}">{{$value->id}}-{{$value->Fecha}}-{{$value->afiliado_id}}</option>
-         @endforeach
-        </select>
-        <span class="fa fa-database form-control-feedback right" aria-hidden="true"></span>
-            </div>
-            </div>
-           
-           
+         @endforeach         
+                </select>
+              <p class="No ingreso el tipo de Entrega"></p>
+              <span class="fa fa-sign-in form-control-feedback right" aria-hidden="true"></span>
+              </div>
+              </div>
+
+
             <div class="form-group row add">
-                <div class="col-md-9" >
-              <input type="text" class="form-control has-feedback-right"  id="busqueda_parroquia1" name="busqueda_parroquia" required>
-              <p class="No Ingreso la Fecha"></p>
-              <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
-            </div>
-            </div>
+              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
+              <input type="datetime" class="form-control" id="Fecha" name="Fecha" 
+              placeholder="YYYY-MM-DD" required>
+              <p class="No ingreso la fecha"></p>
+              <span class="fa fa-clock-o form-control-feedback right" aria-hidden="true"></span>
+              </div>
+              </div>
           
             <div class="modal-footer">
           <button class="btn btn-warning" class="text-center" type="submit" id="add">

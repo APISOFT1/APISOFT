@@ -229,11 +229,10 @@ var div_respuesta="#respuesta";
           
 
 
-          $('#busqueda_parroquia1').append("<tr class='recepcion" + data.id + "'>"+
+          $('#busqueda_parroquia').append("<tr class='recepcion" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.fecha + "</td>"+
           "<td>" + data.afiliado_id + "</td>");
-        }
         }
       },
     });
@@ -470,7 +469,7 @@ $( document ).on('click','.create-modal',function() {
     m=now.getMinutes();
   s=now.getSeconds();
     var today = now.getFullYear()+"-"+(month)+"-"+(day)+"-"+(h)+"-"+(m)+"-"+(s) ;
-    $("#fecha").val(today);
+    $("#fecha,#Fecha").val(today);
 });
 </script>
 
@@ -483,7 +482,7 @@ $( document ).on('click','.create-modal',function() {
     m=now.getMinutes();
   s=now.getSeconds();
     var today = now.getFullYear()+"-"+(month)+"-"+(day)+"-"+(h)+"-"+(m)+"-"+(s) ;
-    $("#fecha").val(today);
+    $("#fecha,#Fecha").val(today);
 });
 </script>
 
