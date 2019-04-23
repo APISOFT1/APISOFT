@@ -49,9 +49,12 @@
           </a>
         </th>
       </tr>
+      {{ csrf_field() }}
+      
       @foreach ($afi as $value)
-      <tr class="afi{{$value->id}}">
-      <td>{{$value->id}}</td>
+      <?php  $no=$value->id; ?>
+      <tr class="item{{$value->id}}" >
+      <td>{{$no}}</td>
   	  	<td>{{$value->Nombre}}</td>
         <td>{{$value->apellido1}}</td>
   		  <td>{{$value->apellido2}}</td>
@@ -135,8 +138,8 @@
         <div class="form-group row add">
             <label class="control-label col-sm-2" for="id">Cedula:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="id" name="id"
-              placeholder="Cedula" required>
+              <input type="text" class="form-control" id="id" name="idd"
+              placeholder="Cedula" >
               <p class="No Ingreso la Cedula"></p>
             </div>
           </div>
@@ -145,8 +148,8 @@
             <label class="control-label col-sm-2" for="Nombre">Nombre:</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="Nombre" name="Nombre"
-              placeholder="Nombre" required>
-              <p class="error text-center alert alert-danger hidden"></p>
+              placeholder="Nombre" >
+              <p class="No ingreso el Nombre"></p>
             </div>
           </div>
 
@@ -154,16 +157,17 @@
             <label class="control-label col-sm-2" for="apellido1">Apellido1 :</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="apellido1" name="apellido1"
-              placeholder="Primer Apellido" required>
+              placeholder="Primer Apellido">
               <p class="error text-center alert alert-danger hidden"></p>
             </div>
           </div>
+
 
 					<div class="form-group row add">
             <label class="control-label col-sm-2" for="apellido2">Apellido2:</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="apellido2" name="apellido2"
-              placeholder="Segundo Apellido" required>
+              placeholder="Segundo Apellido" >
               <p class="error text-center alert alert-danger hidden"></p>
             </div>
           </div>
@@ -172,7 +176,7 @@
             <label class="control-label col-sm-2" for="Telefono">Telefono:</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="Telefono" name="Telefono"
-              placeholder="Telefono" required>
+              placeholder="Telefono" >
               <p class="error text-center alert alert-danger hidden"></p>
             </div>
           </div>
@@ -180,7 +184,7 @@
             <label class="control-label col-sm-2" for="email">Emai:</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="email" name="email"
-              placeholder="Ingrese su Correo" required>
+              placeholder="Ingrese su Correo" >
               <p class="error text-center alert alert-danger hidden"></p>
             </div>
           </div>
@@ -188,7 +192,7 @@
             <label class="control-label col-sm-2" for="Direccion">Direccion:</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="Direccion" name="Direccion"
-              placeholder="Ingrese Su Direccion" required>
+              placeholder="Ingrese Su Direccion">
               <p class="error text-center alert alert-danger hidden"></p>
             </div>
           </div>
@@ -197,7 +201,7 @@
             <label class="control-label col-sm-2" for="Fecha_Ingreso">Fecha de Ingreso:</label>
             <div class="col-sm-10">
               <input type="date" class="form-control" id="Fecha_Ingreso" name="Fecha_Ingreso"
-              placeholder="YYYY-MM-DD" required>
+              placeholder="YYYY-MM-DD" >
               <p class="error text-center alert alert-danger hidden"></p>
             </div>
           </div>
@@ -206,7 +210,7 @@
             <label class="control-label col-sm-2" for="Num_Cuenta">Numero Cuenta:</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="Num_Cuenta" name="Num_Cuenta"
-              placeholder="Ingrese su Numero de Cuenta" required>
+              placeholder="Ingrese su Numero de Cuenta">
               <p class="error text-center alert alert-danger hidden"></p>
             </div>
           </div>
@@ -258,7 +262,27 @@
   </div>
 </div></div>
 
-
+{{-- Modal Form Show POST --}}
+<div id="show" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-show"></h4>
+                  </div>
+                    <div class="modal-body">
+                    <div class="form-group">
+                      <label for="">ID :</label>
+                      <b id="iaa"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="">Nombre :</label>
+                      <b id="jaja"/>
+                    </div>
+                    </div>
+                    </div>
+                  </div>
+</div>
 
 
 

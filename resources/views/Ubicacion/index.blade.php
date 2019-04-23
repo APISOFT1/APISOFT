@@ -11,7 +11,7 @@ UBICACION CREADO CORRECTAMENTE
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
-<h1 >LISTADO DE  UBICACION<a href="Ubicacion/create"> <button class="btn btn-primary" >  Nuevo <span class="glyphicon glyphicon-user"></button></a></h1>
+<h1 >LISTADO DE  UBICACION</h1>
 
 <!-- Saltos de linea-->
 <br>

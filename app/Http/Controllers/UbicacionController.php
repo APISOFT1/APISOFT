@@ -12,7 +12,6 @@ use App\Http\Requests\UbicacionFormRequest;
 use DB;
 
 
-
 class UbicacionController extends Controller
 {
 <<<<<<< HEAD
@@ -109,8 +108,7 @@ public function addUbicacion(Request $request){
     return response()->json($ubicacion);
   }
 }
-
-public function editUbicacion(request $request){
+ public function editUbicacion(request $request){
   $rules = array(
     'descripcion' => 'required'
   );

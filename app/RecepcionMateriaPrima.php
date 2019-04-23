@@ -13,6 +13,7 @@ class RecepcionMateriaPrima extends Model
     [      
         'fecha',
         'pesoBruto',
+        'pesoNeto',
         'numero_muestras',
         'afiliado_id',
         'user_id',

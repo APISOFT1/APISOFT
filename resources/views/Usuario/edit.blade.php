@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 <div class="modal fade modal-slide-in-right" id="editarUsuario">
     <div class="modal-dialog">
         <div class="modal-content">
+=======
+@extends ('layouts.principal')
+@section ('contenido')
+
+>>>>>>> develop
 
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">

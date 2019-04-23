@@ -1,7 +1,7 @@
 @extends('layouts.app2')
 
 @section('content')
-    <h3 class="page-title">@lang('global.permissions.title')</h3>
+    <h3 class="page-title">@lang('Nuevo Permiso')</h3>
     {!! Form::open(['method' => 'POST', 'route' => ['permissions.store']]) !!}
 
     <div class="panel panel-default">

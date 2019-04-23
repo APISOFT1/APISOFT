@@ -25,16 +25,25 @@ class UserController extends Controller
   
     public function index(Request $request)
     {
+<<<<<<< HEAD
         $Generos = Genero::all();
         $Estados = Estado::all();
         $Rols = Rol::all();
+=======
+        if($request){
+>>>>>>> develop
         $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
         $usuarios = User::with('Genero', 'Rol') 
             ->where('name','LIKE','%'.$query.'%')
             ->orderby('id','desc')
             ->paginate(7);
          
+<<<<<<< HEAD
         return view('Usuario.index', ['usuarios'=>$usuarios,"Rols"=> $Rols, "Generos"=> $Generos, "Estados"=> $Estados,"searchText"=>$query]);
+=======
+        return view('Usuario.index', ['usuarios'=>$usuarios,"searchText"=>$query]);
+        }
+>>>>>>> develop
     }
 
     /**

@@ -142,10 +142,7 @@
         <!-- /footer content -->
       </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-  crossorigin="anonymous"></script>
-  <script src="{{asset('js2/bootstrap-select.min.js')}}"></script>
+  
   
     <!-- jQuery -->
 
@@ -173,6 +170,7 @@
   
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 {{-- ajax Form Add Post--}}
@@ -186,7 +184,8 @@
       type: 'POST',
       url: 'addAfiliado',
       data: {
-        'id': $('input[name=id]').val(),
+       
+        'id': $('input[name=idd]').val(),
         'Nombre': $('input[name=Nombre]').val(),
         'apellido1': $('input[name=apellido1]').val(),
         'apellido2': $('input[name=apellido2]').val(),
@@ -218,7 +217,7 @@
  
         } else {
           $('.error').remove();
-          $('#table').append("<tr class='afi" + data.id + "'>"+
+          $('#table').append("<tr class='item" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.Nombre + "</td>"+
           "<td>" + data.apellido1 + "</td>"+
@@ -275,7 +274,7 @@
         }
       },
     });
-    $('#id').val('');
+    $('#idd').val('');
     $('#Nombre').val('');
     $('#apellido1').val('');
     $('#apellido2').val('');
@@ -305,7 +304,6 @@ $('#n').val($(this).data('nombre'));
 $('#a1').val($(this).data('apellido1'));
 $('#a2').val($(this).data('apellido2'));
 $('#t').val($(this).data('telefono'));
-
 $('#em').val($(this).data('email'));
 $('#d').val($(this).data('direccion'));
 $('#f').val($(this).data('fecha_ingreso'));
@@ -406,21 +404,31 @@ $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
 $('.modal-title').text('Delete Post');
 $('.id').text($(this).data('id'));
-$('.nombre').text($(this).data('Nombre'));
+$('.Nombre').text($(this).data('Nombre'));
 $('.apellido1').text($(this).data('apellido1'));
 $('.apellido2').text($(this).data('apellido2'));
-$('.telefono').text($(this).data('Telefono'));
-
+$('.Telefono').text($(this).data('Telefono'));
 $('.email').text($(this).data('email'));
-$('.direccion').text($(this).data('Direccion'));
-$('.fecha_ingreso').text($(this).data('Fecha_Ingreso'));
-$('.num_cuenta').text($(this).data('Num_Cuenta'));
+$('.Direccion').text($(this).data('Direccion'));
+$('.Fecha_Ingreso').text($(this).data('Fecha_Ingreso'));
+$('.Num_Cuenta').text($(this).data('Num_Cuenta'));
 $('.genero_id').text($(this).data('genero_id'));
 $('.estado_civil_id').text($(this).data('estado_civil_id'));
 $('.estado_id').text($(this).data('estado_id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
-$('.title').html($(this).data('descripcion'));
+$('.id').html($(this).data('id'));
+$('.Nombre').html($(this).data('Nombre'));
+$('.apellido1').html($(this).data('apellido1'));
+$('.apellido2').html($(this).data('apellido2'));
+$('.Telefono').html($(this).data('Telefono'));
+$('.email').html($(this).data('email'));
+$('.Direccion').html($(this).data('Direccion'));
+$('.Fecha_Ingreso').html($(this).data('Fecha_Ingreso'));
+$('.Num_Cuenta').html($(this).data('Num_Cuenta'));
+$('.genero_id').html($(this).data('genero_id'));
+$('.estado_civil_id').html($(this).data('estado_civil_id'));
+$('.estado_id').html($(this).data('estado_id'));
 $('#myModal').modal('show');
 });
 
@@ -429,16 +437,28 @@ $('.modal-footer').on('click', '.delete', function(){
     type: 'POST',
     url: 'deleteAfiliado',
     data: {
-  
+      'id': $('.id').text(),
+      'Nombre': $('.Nombre').text(),
+      'apellido1': $('.apellido1').text(),
+      'apellido2': $('.apellido2').text(),
+      'Telefono': $('.Telefono').text(),
+      'email': $('.email').text(),
+      'Direccion': $('.Direccion').text(),
+      'Fecha_Ingreso': $('.Fecha_Ingreso').text(),
+      'Num_Cuenta': $('.Num_Cuenta').text(),
+      'genero_id': $('.genero_id').text(),
+      'estado_civil_id': $('.estado_civil_id').text(),
+      'estado_id': $('.estado_id').text()
       
     },
     success: function(data){
-       $('.afiliado' + $('.id').text()+ $('.nombre').text()+
-       $('.apellido1').text()+ $('.apellido2').text()+ $('.telefono').text()+ $('.email').text()+ $('.direccion').text()+
-       $('.fecha_ingreso').text() $('.num_cuenta').text()+ $('.genero_id').text()+ $('.estado_civil_id').text()+ $('.genero_id').text()).remove();
+       $('.afi' + $('.id').text()+ $('.Nombre').text()+
+       $('.apellido1').text()+ $('.apellido2').text()+ $('.Telefono').text()+ $('.email').text()+ $('.Direccion').text()+
+       $('.Fecha_Ingreso').text()+ $('.Num_Cuenta').text()+ $('.genero_id').text()+ $('.estado_civil_id').text()+ $('.genero_id').text()).remove();
     }
   });
 });
+
 
   // Show function
   $(document).on('click', '.show-modal', function() {
@@ -451,10 +471,27 @@ $('#jaja').val($(this).data('nombre'));
   $('.modal-show').text('Datos');
   });
 
- 
-</script>
 
 
+  </script>
   </body>
 </html>
-  
+<script>
+
+
+var timeoutId = 0;
+$('#discount').keyup(function(e){
+   clearTimeout(timeoutId);
+   timeoutId = setTimeout(discount,1000);
+});
+
+function discount(){
+  let amount = $('#discount').val();
+  if(!isNaN(amount)){
+    let discount = amount * 0.05;
+    let total =  amount - discount;
+    $("#total").val(total);
+  } 
+}
+
+</script>
