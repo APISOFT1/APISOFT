@@ -16,19 +16,21 @@ Route::get('/', function () {
   
 });
 Auth::routes();
-Auth::routes(['verify' => true]);
+//Auth::routes(['verify' => true]);
 
 
-//Route::group(['middleware' =>['auth',  'verified']], function () {
+Route::group(['middleware' =>['auth' /*'verified'*/]], function () {
 // Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
   Route::get('/home', 'HomeController@index')->name('home');
   Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
      if ($options['register'] ?? true) {
-          $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-          $this->post('register', 'Auth\RegisterController@register');
+         $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+         $this->post('register', 'Auth\RegisterController@register');
       }
 
-   //   Route::get('/', 'DashboardController@index')->name('dashboard');
+      Route::get('chart', 'ChartController@index'); 
+
+     Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
 
        // Dashboard
   //Route::get('users', ' Admin\DashboardController')->name('dashboard'); 
@@ -61,6 +63,10 @@ Auth::routes(['verify' => true]);
 Route::POST('addAfiliado','AfiliadoController@addAfiliado');
 Route::POST('editAfiliado','AfiliadoController@editAfiliado');
 Route::POST('deleteAfiliado','AfiliadoController@deleteAfiliado');
+
+
+Route::get('dashboard/log-chart', 'Admin\DashboardController@getLogChartData')->name('dashboard.log.chart');
+    Route::get('dashboard/registration-chart', 'Admin\DashboardController@getRegistrationChartData')->name('dashboard.registration.chart');
 
 Route::POST('addPermissions','Admin\PermissionsController@addPermissions');
 Route::POST('ediPermissions','Admin\PermissionsController@ediPermissions');
@@ -98,6 +104,5 @@ Route::POST('deleteUser','Admin\UsersController@deleteUser');
 Route::POST('addUbicacion','UbicacionController@addUbicacion');
 Route::POST('editUbicacion','UbicacionController@editUbicacion');
 Route::POST('deleteUbicacion','UbicacionController@deleteUbicacion');
-
-//});
+});
  

@@ -3,9 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Auth\User\User;
+use LaravelDaily\LaravelCharts\Classes\LaravelChart;
+
+use Charts;
 //use Arcanedev\LogViewer\Entities\Log;
 //use Arcanedev\LogViewer\Entities\LogEntry;
 use Carbon\Carbon;
+use App\Afiliado;
+use App\RecepcionMateriaPrima;
+use App\Apiario;
+use App\Cera;
+use App\Estanon;
+
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -37,15 +46,47 @@ class DashboardController extends Controller
             'users_unconfirmed' => \DB::table('users')->where('confirmed', false)->count(),
             'users_inactive' => \DB::table('users')->where('active', false)->count(),
            'protected_pages' => 0,
+           'afi' => \DB::table('afiliados')->count(),
+           'recep' =>\DB::table('recepcion_materia_primas')->count(),
+           'api'=>\DB::table('apiarios')->count(),
+           'cera'=>\DB::table('ceras')->count(),
+           
+        ];
+        $api =\DB::select("
+SELECT 
+   u.Descripcion
+FROM apiarios as a , ubicacions as u
+where a.ubicacion_id = u.id
+");
+        $chart_options = [
+            'chart_title' => 'Apiarios Por Ubicación',
+            'report_type' => 'group_by_string',
+            'model' => 'App\Apiario',
+            'group_by_field' =>'ubicacion_id',
+            'chart_type' => 'pie',
+            'filter_field' => 'created_at',
+            //'filter_period' => 'month', // show users only registered this month
         ];
 
+        $chart2 = new LaravelChart($chart_options);
+
+        $users = User::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))
+        ->get();
+$chart = Charts::database($users, 'bar', 'highcharts')
+      ->title("Monthly new Register Users")
+      ->elementLabel("Total Users")
+      ->dimensions(1000, 500)
+      ->responsive(false)
+      ->groupByMonth(date('Y'), true);
+
+        $chart1 = new LaravelChart($chart_options);
         foreach (\Route::getRoutes() as $route) {
             foreach ($route->middleware() as $middleware) {
                 if (preg_match("/protection/", $middleware, $matches)) $counts['protected_pages']++;
             }
         }
 
-        return view('dashboard', ['counts' => $counts]);
+        return view('dashboard', ['counts' => $counts] , compact('chart', 'chart2'));
     }
 
 

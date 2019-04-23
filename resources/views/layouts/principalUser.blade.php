@@ -40,6 +40,8 @@
     {!!Html::style ('/css2/jquery.mCustomScrollbar.min.css')!!}
     <!-- Custom Theme Style -->
     {!!Html::style ('/css2/custom.min.css')!!}
+
+ 
   </head>
   <body class="nav-md">
     <div class="container body">
@@ -194,6 +196,10 @@
      {!!Html::script('/js/dashboard.js')!!}
 
      {!!Html::script('/js/Chart.min.js')!!}
+
+
+     {!!Html::script('/js/app.js')!!}
+     
 
 
  
@@ -387,4 +393,10 @@ $('.modal-footer').on('click', '.delete', function(){
 @include('partials.javascripts')
   </body>
 </html>
-  
+@section('styles')
+    {{ Html::style('css/admin.css') }}
+@endsection
+
+@section('scripts')
+    {{ Html::script('js/admin.js') }}
+@endsection

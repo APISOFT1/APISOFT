@@ -1,4 +1,8 @@
-<div class="pull-right">
-    &copy; {{ date('Y') }} {{ config('app.name') }}. {{ __('views.backend.section.footer.copyright') }}
-</div>
-<div class="clearfix"></div>
+ <!-- footer content -->
+ <footer>
+          <div class="pull-right">
+            APPIS - Asociacion de Apicultores Region Chorotega
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
