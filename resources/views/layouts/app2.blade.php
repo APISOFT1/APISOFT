@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    @include('partials.head')
+   
 </head>
 
 
@@ -31,6 +31,5 @@
 
 {!! Form::close() !!}
 
-@include('partials.javascripts')
 </body>
 </html>

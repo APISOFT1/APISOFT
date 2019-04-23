@@ -38,88 +38,7 @@
                 </a>
                
 
-<<<<<<< HEAD
-// function Edit POST
-$(document).on('click', '.edit-modal', function() {
-$('#footer_action_button').text(" Editar Rol");
-$('#footer_action_button').addClass('glyphicon-check');
-$('#footer_action_button').removeClass('glyphicon-trash');
-$('.actionBtn').addClass('btn-success');
-$('.actionBtn').removeClass('btn-danger');
-$('.actionBtn').addClass('edit');
-$('.modal-descripcion').text('Editar Rol');
-$('.deleteContent').hide();
-$('.form-horizontal').show();
-$('#fid').val($(this).data('id'));
-$('#ti').val($(this).data('descripcion'));
-$('#myModal').modal('show');
-});
 
-$('.modal-footer').on('click', '.edit', function() {
-  $.ajax({
-    type: 'POST',
-    url: 'editRol',
-    data: {
-'_token': $('input[name=_token]').val(),
-'id': $("#fid").val(),
-'descripcion': $('#ti').val(),
-
-    },
-success: function(data) {
-      $('.post' + data.id).replaceWith(" "+
-      "<tr class='post" + data.id + "'>"+
-      "<td>" + data.id + "</td>"+
-      "<td>" + data.descripcion + "</td>"+
-      "<td>" + data.created_at + "</td>"+
- "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
-      "</tr>");
-    }
-  });
-});
-
-<<<<<<< HEAD
-// form Delete function
-$(document).on('click', '.delete-modal', function() {
-$('#footer_action_button').text(" Delete");
-$('#footer_action_button').removeClass('glyphicon-check');
-$('#footer_action_button').addClass('glyphicon-trash');
-$('.actionBtn').removeClass('btn-success');
-$('.actionBtn').addClass('btn-danger');
-$('.actionBtn').addClass('delete');
-$('.modal-title').text('Delete Post');
-$('.id').text($(this).data('id'));
-$('.deleteContent').show();
-$('.form-horizontal').hide();
-$('.title').html($(this).data('descripcion'));
-$('#myModal').modal('show');
-});
-
-$('.modal-footer').on('click', '.delete', function(){
-  $.ajax({
-    type: 'POST',
-    url: 'deleteRol',
-    data: {
-      '_token': $('input[name=_token]').val(),
-      'id': $('.id').text()
-    },
-    success: function(data){
-       $('.post' + $('.id').text()).remove();
-    }
-  });
-});
-
-  // Show function
-  $(document).on('click', '.show-modal', function() {
-  $('#show').modal('show');
-  $('#i').text($(this).data('id'));
-  $('#di').text($(this).data('descripcion'));
-  $('.modal-title').text('Show Post');
-  });
-</script>
-  </body>
-=======
-=======
->>>>>>> develop
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -135,7 +54,7 @@ $('.modal-footer').on('click', '.delete', function(){
                                     </form>
                                 </div>
                             </li>
-                        @endguest
+                      
                     </ul>
                 </div>
             </div>
@@ -148,5 +67,5 @@ $('.modal-footer').on('click', '.delete', function(){
         </main>
     </div>
 </body>
->>>>>>> develop
+
 </html>
