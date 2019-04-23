@@ -39,7 +39,7 @@
                 <div class="panel-heading">Chart Demo</div>
 
                 <div class="panel-body">
-                    {!! $chart->html() !!}
+                    {!! $chart3->html() !!}
                     <hr />
 
 <h1>{{ $chart2->options['chart_title'] }}</h1>
@@ -52,6 +52,6 @@
     </div>
 </div>
 {!! Charts::scripts() !!}
-{!! $chart->script() !!}
+{!! $chart3->script() !!}
 {!! $chart2->renderJs() !!}
 @endsection

@@ -16,10 +16,10 @@ Route::get('/', function () {
   
 });
 Auth::routes();
-//Auth::routes(['verify' => true]);
+Auth::routes(['verify' => true]);
 
 
-Route::group(['middleware' =>['auth' /*'verified'*/]], function () {
+Route::group(['middleware' =>['auth' ,'verified']], function () {
 // Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
   Route::get('/home', 'HomeController@index')->name('home');
   Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
@@ -54,6 +54,7 @@ Route::group(['middleware' =>['auth' /*'verified'*/]], function () {
 'admin/roles'=> 'Admin\RolesController',
 'users'=> 'Admin\UsersController',
 'Cera'=>'CeraController',
+'Producto' => 'ProductController',
 'RecepEstanon' => 'RecepcionEstanonController',
 '/' => 'Admin\DashboardController',
 
@@ -102,6 +103,10 @@ Route::POST('deleteUser','Admin\UsersController@deleteUser');
 Route::POST('addUser','Auth\RegisterController@addUser');
 Route::POST('editUser','Admin\UsersController@editUser');
 Route::POST('deleteUser','Admin\UsersController@deleteUser');
+
+Route::POST('addProduct','ProductController@addProduct');
+Route::POST('editProduct','ProductController@editProduct');
+Route::POST('deleteProduct','ProductController@deleteProduct');
 
 Route::POST('addUbicacion','UbicacionController@addUbicacion');
 Route::POST('editUbicacion','UbicacionController@editUbicacion');

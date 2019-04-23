@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         if($request)
         {

@@ -78,7 +78,17 @@ $chart = Charts::database($users, 'bar', 'highcharts')
       ->dimensions(1000, 500)
       ->responsive(false)
       ->groupByMonth(date('Y'), true);
+//Afiliados CHART 
 
+$afi = Afiliado::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))
+    				->get();
+        $chart3 = Charts::database($afi, 'bar', 'highcharts')
+			      ->title("Registro Mensual de Afiliados nuevos ")
+			      ->elementLabel("Total Afiliados")
+			      ->dimensions(1000, 500)
+			      ->responsive(false)
+                  ->groupByMonth(date('Y'), true);
+                  ////////////////////////////////////
         $chart1 = new LaravelChart($chart_options);
         foreach (\Route::getRoutes() as $route) {
             foreach ($route->middleware() as $middleware) {
@@ -86,7 +96,7 @@ $chart = Charts::database($users, 'bar', 'highcharts')
             }
         }
 
-        return view('dashboard', ['counts' => $counts] , compact('chart', 'chart2'));
+        return view('dashboard', ['counts' => $counts] , compact('chart', 'chart2', 'chart3'));
     }
 
 

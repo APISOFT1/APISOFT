@@ -25,10 +25,7 @@
 
     @include('Apiario.search') 
   
-    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-                      <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                      <span>April 9, 2019 - April 9, 2019</span> <b class="caret"></b>
-                    </div>
+    
 
 
 <div class="table-responsive">
@@ -101,15 +98,10 @@
         <form class="form-horizontal" role="form">
 
        
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-           <input type="text" class="form-control has-feedback-left" id="Descripcion" name="Descripcion" placeholder="Descripción" required>
-            <p class="No Ingreso la Descripcion"></p>
-              <span class="fa fa-pencil form-control-feedback left" aria-hidden="true"></span>
-                </div>
               
                 <div class="form-group row add">
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
-              <input type="number" class="form-control" id="discount" name="pesoBruto"
+              <input type="number" class="form-control" id="discount" name="PesoBruto"
               placeholder="Peso Bruto" required>
               <p class="No ingreso el Peso Bruto"></p>
               <span class="fa fa-plus form-control-feedback right" aria-hidden="true"></span>
@@ -119,7 +111,7 @@
 
               <div class="form-group row add">
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
-              <input type="text" class="form-control" id="pesoNeto" name="pesoNeto"
+              <input type="text" class="form-control" id="PesoNeto" name="PesoNeto"
              placeholder="Peso Neto" required>
               <p class="No ingreso el Peso Neto"></p>
               <span class="fa fa-minus-circle form-control-feedback right" aria-hidden="true"></span>
@@ -132,9 +124,21 @@
               <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
             </div>
 
-          
-            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#miModal">   <i class="fa fa-search"></i>
-         
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+    <select name="Recepcion_id" id="Recepcion_id" class="form-control  selectpicker " data-live-search="true">
+     @foreach($recepciones as $recep  )
+     <option value="{{$recep->id}}">{{$recep->id}} - {{$recep->afiliado->Nombre}} {{$recep->afiliado->apellido1}} {{$recep->afiliado->apellido2}}</option>
+     @endforeach
+    </select>
+    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+   </div>
+ 
+  
+   <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+           <input type="text" class="form-control has-feedback-left" id="Descripcion" name="Descripcion" placeholder="Obersevación" required>
+            <p class="No Ingresó la Observación"></p>
+              <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                </div> 
         </form>
       </div>
           <div class="modal-footer">
