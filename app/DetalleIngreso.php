@@ -13,9 +13,8 @@ class DetalleIngreso extends Model
 
     protected $fillable =[
      'idingreso',
-     'idproducto',
-     'Peso',
-     'deduccionMerma'
+     'recepcion_id',
+     'Precio'
     ];
     protected $guarded =[
     ];

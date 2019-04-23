@@ -156,9 +156,20 @@ AFILIADO CON SUS APIARIO CREADO CORRECTAMENTE
   
            <label class="control-label col-sm-2" for="afiliado_id">Afiliado</label>
            <div class="col-sm-10">
+<<<<<<< HEAD
+<<<<<<< HEAD
+            <select name="name" id="afi" class="form-control selectpicker" data-live-search="true">
+                @foreach($afiliados as $persona)
+                 <option value="{{$value->id}}">{{$value->id}} - {{$value->Nombre}} {{$value->apellido1}} {{$value->apellido2}}</option>
+=======
+            <select name="name" id="afi"  class="form-control selectpicker" data-live-search="true">
+            <option  value="afi"></option>
+=======
             <select name="name" class="form-control selectpicker"  id="afi"  data-live-search="true">
+>>>>>>> Caro
                 @foreach($afiliados as $persona => $value  )
                  <option  value="{{$value->id}}">{{$value->id}} - {{$value->Nombre}} {{$value->apellido1}} {{$value->apellido2}}</option>
+>>>>>>> raychel
                  @endforeach
                 
             </select>
@@ -168,14 +179,12 @@ AFILIADO CON SUS APIARIO CREADO CORRECTAMENTE
             <label class="control-label col-sm-2"for="apiario_id">Apiario</label>
             <div class="col-sm-10">
             <select type="name" class="form-control selectpicker" id="api" data-live-search="true">
-
             @foreach($apiarios as $api)
              <option value="{{$api->id}}">{{$api->Descripcion}}</option>
-          @endforeach
+           @endforeach
             </select>
             </div>
           </div>
-
         </form>
                 {{-- Form Delete Post --}}
         <div class="deleteContent">

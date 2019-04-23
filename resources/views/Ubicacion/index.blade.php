@@ -1,4 +1,5 @@
 @extends ('layouts.principalUbicacion') 
+
 <!-- mensaje de exito -->
 <?php $message=Session::get('message') ?>
 
@@ -26,6 +27,7 @@ UBICACION CREADO CORRECTAMENTE
 
 <div class="row">
   <div class="table table-responsive">
+  @include('Ubicacion.search')
     <table class="table table-bordered" id="table">
       <tr>
         <th width="150px">No</th>

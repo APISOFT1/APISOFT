@@ -17,10 +17,9 @@ class CreateDetalleIngresoTable extends Migration
             $table->increments('iddetalle_ingreso');
             $table->integer('idingreso')->unsigned();
             $table->foreign('idingreso')->references('idingreso')->on('ingreso');
-            $table->integer('idproducto')->unsigned();
-            $table->foreign('idproducto')->references('id')->on('producto');
-            $table->double('Peso');
-            $table->double('deduccionMerma');
+            $table->integer('recepcion_id')->unsigned();
+            $table->foreign('recepcion_id')->references('id')->on('recepcion_materia_primas');
+            $table->double('Precio');
             $table->timestamps();
         });
     }

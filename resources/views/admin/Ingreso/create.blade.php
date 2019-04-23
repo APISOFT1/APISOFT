@@ -32,7 +32,7 @@
     <label for="usuario">Usuario</label>
     <select name="idusuario" id="idusuario" class="form-control selectpicker" data-live-search="true">
      @foreach($usuarios as $usuario)
-     <option value="{{$usuario->id}}">{{$usuario->name}} {{$usuario->Apellido1}} {{$usuario->Apellido2}}</option>
+     <option value="{{$usuario->id}}">{{$usuario->name}} </option>
      @endforeach
     </select>
    </div>

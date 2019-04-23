@@ -130,8 +130,19 @@
         <!-- /top navigation -->
         <!-- page content -->
         <div class="right_col" role="main">
+        
           <div class="container">
+          
             <div class="row x_panel">
+
+
+
+
+
+
+
+
+
               @yield('contenido')
             </div>
           </div>

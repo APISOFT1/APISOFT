@@ -16,6 +16,9 @@ class CreateIngresoTable extends Migration
         Schema::create('ingreso', function (Blueprint $table) {
             $table->increments('idingreso');
             $table->string('idproveedor',12);
+            $table->foreign('idproveedor')->references('id')->on('afiliados');
+            $table->integer('idusuario')->unsigned();
+            $table->foreign('idusuario')->references('id')->on('users');
             $table->string('tipo_comprobante');
             $table->string('serie_comprobante');
             $table->double('total_venta');
