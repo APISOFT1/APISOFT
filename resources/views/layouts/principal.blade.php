@@ -237,7 +237,6 @@
           $('.error').text(data.errors.genero_id);
           $('.error').text(data.errors.estado_civil_id);
           $('.error').text(data.errors.estado_id);
-
  
         } else {
           $('.error').remove();
@@ -311,8 +310,6 @@
     $('#estado_civil_id').val('');
     $('#estado_id').val('');
   });
-
-
 $(document).on('click', '.edit-modal', function() {
 $('#footer_action_button').text(" Editar ");
 $('#footer_action_button').addClass('fa fa-pencil');
@@ -328,7 +325,6 @@ $('#n').val($(this).data('nombre'));
 $('#a1').val($(this).data('apellido1'));
 $('#a2').val($(this).data('apellido2'));
 $('#t').val($(this).data('telefono'));
-
 $('#em').val($(this).data('email'));
 $('#d').val($(this).data('direccion'));
 $('#f').val($(this).data('fecha_ingreso'));
@@ -338,7 +334,6 @@ $('#e').val($(this).data('estado_civil_id'));
 $('#es').val($(this).data('estado_id'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
@@ -357,7 +352,6 @@ $('.modal-footer').on('click', '.edit', function() {
 'genero_id':$('#g').val(),
 'estado_civil_id':$('#e').val(),
 'estado_id':$('#es').val(),
-
     },
 success: function(data) {
       $('.afi' + data.id).replaceWith(" "+
@@ -417,9 +411,7 @@ success: function(data) {
     }
   });
 });
-
 /*
-
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Delete");
@@ -434,7 +426,6 @@ $('.nombre').text($(this).data('Nombre'));
 $('.apellido1').text($(this).data('apellido1'));
 $('.apellido2').text($(this).data('apellido2'));
 $('.telefono').text($(this).data('Telefono'));
-
 $('.email').text($(this).data('email'));
 $('.direccion').text($(this).data('Direccion'));
 $('.fecha_ingreso').text($(this).data('Fecha_Ingreso'));
@@ -447,7 +438,6 @@ $('.form-horizontal').hide();
 $('.title').html($(this).data('descripcion'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
@@ -464,18 +454,15 @@ $('.modal-footer').on('click', '.delete', function(){
   });
 });
 */
-
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
   
-
 $('#iaa').val($(this).data('id'));
 $('#jaja').val($(this).data('nombre'));
 ;
   $('.modal-show').text('Datos');
   });
-
  
 </script>
 
@@ -484,14 +471,11 @@ $(document).ready(function () {
     var navListItems = $('div.setup-panel div a'), // tab nav items
             allWells = $('.setup-content'), // content div
             allNextBtn = $('.nextBtn'); // next button
-
     allWells.hide(); // hide all contents by defauld
-
     navListItems.click(function (e) {
         e.preventDefault();
         var $target = $($(this).attr('href')),
                 $item = $(this);
-
         if (!$item.hasClass('disabled')) {
             navListItems.removeClass('btn-primary').addClass('btn-default');
             $item.addClass('btn-primary');
@@ -519,13 +503,9 @@ $(document).ready(function () {
         if (isValid)
             nextStepWizard.removeAttr('disabled').trigger('click');
     });
-
-
  
     $('div.setup-panel div a.btn-primary').trigger('click');
 });
-
-
 </script>
 
 
@@ -538,23 +518,18 @@ $(document).ready(function () {
 .stepwizard-step p {
     margin-top: 10px;
 }
-
 .stepwizard-row {
     display: table-row;
 }
-
 .stepwizard {
     display: table;
     width: 100%;
     position: relative;
 }
-
 .stepwizard-step button[disabled] {
     opacity: 1 !important;
     filter: alpha(opacity=100) !important;
 }
-
-
  
 .stepwizard-row:before {
     top: 14px;
@@ -565,15 +540,12 @@ $(document).ready(function () {
     height: 1px;
     background-color: #ccc;
     z-order: 0;
-
 }
-
 .stepwizard-step {
     display: table-cell;
     text-align: center;
     position: relative;
 }
-
 .btn-circle {
   width: 30px;
   height: 30px;

@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 use App\Models\Auth\Role\Role;
-use App\Models\Auth\User\User;
+use App\User;
 use App\Genero;
 use Validator;
 use Response;

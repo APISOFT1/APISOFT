@@ -4,9 +4,9 @@
 <div class="row tile_count">
       <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
-                  <div class="icon"><i class="fa fa-user"></i></div>
-            <div class="count">{{ $counts['users'] }}</div>
-            <h3>Total Usuarios</h3>
+                  <div class="icon"><i class="fa fa-truck"></i></div>
+            <div class="count">{{ $counts['product'] }}</div>
+            <h3>Total Productos</h3>
         </div>
         </div>
         <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -36,7 +36,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Chart Demo</div>
+                <div class="panel-heading">Estadística de Afiliados</div>
 
                 <div class="panel-body">
                     {!! $chart3->html() !!}
@@ -46,6 +46,7 @@
 {!! $chart2->renderHtml() !!}
 
 <hr />
+
                 </div>
             </div>
         </div>
@@ -54,4 +55,5 @@
 {!! Charts::scripts() !!}
 {!! $chart3->script() !!}
 {!! $chart2->renderJs() !!}
+
 @endsection

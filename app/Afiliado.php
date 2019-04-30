@@ -9,6 +9,7 @@ class Afiliado extends Model
     protected $table= 'afiliados';
     protected $primaryKey="id";
     public $timestamps=false;
+    public $incrementing=false;
 
     protected $fillable =[
         'id',

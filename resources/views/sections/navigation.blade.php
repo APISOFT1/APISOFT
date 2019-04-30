@@ -34,14 +34,20 @@
                 <li><a><i class="fa fa-bar-chart-o"></i> Estadísticas <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li>
-                        <a href="{{ route('dashboard') }}">Usuarios   
+                        <a href="{{ route('dashboard') }}">Afiliado   
                             <i class="fa fa-user" aria-hidden="true"></i>
                             
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('/chart/') }}">Afiliado 
-                            <i class="fa fa-user" aria-hidden="true"></i>
+                        <a href="{{ url('/chartRecepcion/') }}">Recepción
+                            <i class="fa fa-file-text" aria-hidden="true"></i>
+                            
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/chartIngreso/') }}">Ingreso
+                            <i class="fa fa-money" aria-hidden="true"></i>
                             
                         </a>
                     </li>

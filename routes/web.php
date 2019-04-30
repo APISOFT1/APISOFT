@@ -16,21 +16,30 @@ Route::get('/', function () {
   
 });
 Auth::routes();
-Auth::routes(['verify' => true]);
+//Auth::routes(['verify' => true]);
 
 
-Route::group(['middleware' =>['auth' ,'verified']], function () {
-// Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
-  Route::get('/home', 'HomeController@index')->name('home');
-  Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-     if ($options['register'] ?? true) {
-         $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-         $this->post('register', 'Auth\RegisterController@register');
-      }
+Route::group(['middleware' =>['auth']], function () {
 
+  // Authentication Routes...
+
+    
+    // Registration Routes...
+    if (config('auth.registration')) {
+      Route::get('register', 'RegisterController@showRegistrationForm')->name('register');
+      Route::post('register', 'RegisterController@register');
+  }
+
+  if (config('auth.confirm_email')) {
+    Route::get('confirm/{user_by_code}', 'ConfirmController@confirm')->name('confirm');
+    Route::get('confirm/resend/{user_by_email}', 'ConfirmController@sendEmail')->name('confirm.send');
+}
       Route::get('chart', 'ChartController@index'); 
 
      Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
+     Route::get('chartRecepcion', 'Admin\DashboardController@indexRecepcion')->name('chartRecepcion');
+     Route::get('chartIngreso', 'Admin\DashboardController@indexIngreso')->name('chartIngreso');
+
 
        // Dashboard
   //Route::get('users', ' Admin\DashboardController')->name('dashboard'); 
@@ -61,6 +70,9 @@ Route::group(['middleware' =>['auth' ,'verified']], function () {
 
 
   ]);
+
+  Route::get('/home', 'HomeController@index')->name('home');
+  Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
   Route::get('users/{users}/edit', 'UsersController@edit')->name('users.edit');
   Route::put('users/{users}', 'UsersController@update')->name('users.update');
 Route::POST('addAfiliado','AfiliadoController@addAfiliado');
@@ -78,6 +90,10 @@ Route::POST('deletePermissions','Admin\PermissionsController@deletePermissions')
 Route::POST('addRole','Admin\RolesController@addRole');
 Route::POST('editRol','Admin\RolesController@editRole');
 Route::POST('deleteRol','Admin\RolesController@deleteRole');
+
+Route::POST('addRecepcionMateriaPrima','RecepcionMateriaPrimaController@addRecepcionMateriaPrima');
+Route::POST('editRecepcionMateriaPrima','RecepcionMateriaPrimaController@editRecepcionMateriaPrima');
+Route::POST('deleteRecepcionMateriaPrima','RecepcionMateriaPrimaController@deleteRecepcionMateriaPrima');
 
 Route::get('find', 'ApiarioController@find');
 Route::POST('addApiario','ApiarioController@addApiario');
