@@ -2,7 +2,7 @@
 @section ('contenido')
  <div class="row">
   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-   <h3>Nuevo Boleta</h3>
+   <h3>Nuevo Boleta de Miel</h3>
    @if (count($errors)>0)
    <div class="alert alert-danger">
     <ul>
@@ -32,7 +32,7 @@
     <label for="usuario">Usuario</label>
     <select name="idusuario" id="idusuario" class="form-control selectpicker" data-live-search="true">
      @foreach($usuarios as $usuario)
-     <option value="{{$usuario->id}}">{{$usuario->name}} {{$usuario->Apellido1}} {{$usuario->Apellido2}}</option>
+     <option value="{{$usuario->id}}">{{$usuario->name}}</option>
      @endforeach
     </select>
    </div>
@@ -61,9 +61,9 @@
     <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
      <div class="form-group">
       <label>Producto</label>
-      <select name="pidproducto" class="form-control selectpicker" id="pidproducto" data-live-search="true">
+      <select name="precepcion_id" class="form-control selectpicker" id="precepcion_id" data-live-search="true">
        @foreach($productos as $producto)
-        <option value="{{$producto->id}}_{{$producto->Precio}}">{{$producto->producto}}</option>
+        <option value="{{$producto->id}}_{{$producto->PesoBruto}}">{{$producto->producto}}</option>
        @endforeach
       </select>
      </div>
@@ -71,25 +71,18 @@
      
     <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
      <div class="form-group">
-      <label for="Peso">Peso</label>
-      <input type="number" name="pPeso" id="pPeso" class="form-control" placeholder="Peso">
+      <label for="PesoBruto">Peso Bruto Miel</label>
+      <input type="number" disabled name="pPesoBruto" id="pPesoBruto" class="form-control" placeholder="Peso Bruto Miel">
      </div>
     </div>
 
     <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
      <div class="form-group">
       <label for="Precio">Precio</label>
-      <input type="number" disabled name="pPrecio" id="pPrecio" class="form-control" placeholder="Precio">
+      <input type="number" name="pPrecio" id="pPrecio" class="form-control" placeholder="Precio">
      </div>
     </div>
 
-    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
-     <div class="form-group">
-      <label for="deduccionMerma">Peso deduccionMerma</label>
-      <input type="number" name="pdeduccionMerma" id="pdeduccionMerma" class="form-control" 
-      placeholder="deduccionMerma">
-     </div>
-    </div>
 
     <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
      <div class="form-group">
@@ -102,18 +95,20 @@
      <table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
       <thead style="background-color:	#9ddcf2">
        <th>Opciones</th>
-       <th>Producto</th>
-       <th>Peso</th>
+       <th>Recepcion</th>
+       <th>Peso Bruto Miel</th>
        <th>Precio</th>
-       <th>Peso deduccion Merma</th>
+       <th></th>
        <th>Subtotal</th>
+
       </thead>
       <tfoot>
        <th>Total</th>
        <th></th>
        <th></th>
        <th></th>
-       <th></th>
+    
+     
        <th><h4 id="total">$/ . 0.00</h4> <input type="hidden" name="total_venta" 
        id="total_venta"></th>
       </tfoot>
@@ -147,31 +142,30 @@
  total=0;
  subtotal=[];
  $("#guardar").hide();
- $("#pidproducto").change(mostrarValores);
+ $("#precepcion_id").change(mostrarValores);
 
  function mostrarValores()
  {
-   datosProducto= document.getElementById('pidproducto').value.split('_');
-   $("#pPrecio").val(datosProducto[1]);
+   datosProducto= document.getElementById('precepcion_id').value.split('_');
+   $("#pPesoBruto").val(datosProducto[1]);
  }
 
  function agregar(){
 
-    datosProducto= document.getElementById('pidproducto').value.split('_');
+    datosProducto= document.getElementById('precepcion_id').value.split('_');
 
-    idproducto=datosProducto[0];
-    producto=$("#pidproducto option:selected").text();
-    Peso=$("#pPeso").val();
+    recepcion_id=datosProducto[0];
+    producto=$("#precepcion_id option:selected").text();
+    PesoBruto=$("#pPesoBruto").val();
     Precio=$("#pPrecio").val();
-    deduccionMerma=$("#pdeduccionMerma").val();
+    
 
-
-    if (idproducto!="" && Peso!="" && Peso>0 && Precio!="" && deduccionMerma!="")
+    if (recepcion_id!="" && PesoBruto!=""  && Precio!="" )
     {
-       subtotal[cont]=(Peso*Precio);
+       subtotal[cont]=(Precio);
        total=total+subtotal[cont];
 
-       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="idproducto[]" value="'+idproducto+'">'+producto+'</td><td><input type="number" name="Peso[]" value="'+Peso+'"></td><td><input type="number" name="Precio[]" value="'+Precio+'"></td><td><input type="number" name="deduccionMerma[]" value="'+deduccionMerma+'"></td><td>'+subtotal[cont]+'</td></tr>';
+       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="recepcion_id[]" value="'+recepcion_id+'">'+producto+'</td><td><input type="number" name="PesoBruto[]" value="'+PesoBruto+'"></td><td><input type="number" name="Precio[]" value="'+Precio+'"></td><td>'+subtotal[cont]+'</td></tr>';
        cont++;
        limpiar();
        $('#total').html("$/ " + total);
@@ -187,9 +181,9 @@
   }
 
  function limpiar(){
-    $("#pPeso").val("");
+ 
     $("#pPrecio").val("");
-    $("#pdeduccionMerma").val("");
+  
   }
 
   function evaluar()

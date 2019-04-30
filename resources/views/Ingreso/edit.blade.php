@@ -47,7 +47,7 @@
             <th style="width:100px;">
                Usuario
             </th>
-            <td>{{$ingresos->name}} {{$ingresos->Apellido1}} {{$ingresos->Apellido2}}</td>
+            <td>{{$ingresos->name}} </td>
         </tr>
     </table>
 
@@ -56,10 +56,10 @@
     <table class="items">
         <thead>
             <tr>
-                <th>Producto</th>
-                <th>Peso</th>
+                <th>Recepcion</th>
+                <th>Peso Bruto de la miel</th>
                 <th>Precio</th>
-                 <th>Peso deduccion Merma</th>
+                 <th></th>
                 <th>Subtotal</th>
             </tr>
         </thead>
@@ -67,10 +67,10 @@
        @foreach($detalles as $det)
             <tr>
                 <td>{{$det->producto}}</td>
-                <td>{{$det->Peso}}</td>
+                <td>{{$det->PesoBruto}}</td>
                 <td>{{$det->Precio}}</td>
-                 <td >{{$det->deduccionMerma}}</td>
-                 <td>{{$det->Peso*$det->Precio}}</td>
+                 
+                 <td>{{$det->Precio}}</td>
             </tr>
         @endforeach
         </tbody>

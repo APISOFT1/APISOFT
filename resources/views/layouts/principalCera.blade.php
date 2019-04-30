@@ -353,7 +353,7 @@ function discount(){
   if(!isNaN(amount)){
     let discount = amount * 0.05;
     let total =  amount - discount;
-    $("#pesoNeto").val(total);
+    $("#PesoNeto").val(total);
   } 
 }
 

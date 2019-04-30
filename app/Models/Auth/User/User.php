@@ -1,18 +1,16 @@
 <?php
 
-namespace App\Models\Auth\User;
+/*namespace App\Models\Auth\User;
 
-use App\Models\Auth\User\Ables\Protectable;
+use App\Models\Auth\User\Traits\Ables\Protectable;
+use App\Models\Auth\User\Traits\Attributes\UserAttributes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Models\Auth\User\Ables\Rolable;
-use App\Models\Auth\User\Scopes\UserScopes;
-use App\Models\Auth\User\Relations\UserRelations;
+use App\Models\Auth\User\Traits\Ables\Rolable;
+use App\Models\Auth\User\Traits\Scopes\UserScopes;
+use App\Models\Auth\User\Traits\Relations\UserRelations;
 use Kyslik\ColumnSortable\Sortable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Notifications\MailResetPasswordToken;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * App\Models\Auth\User\User
@@ -51,59 +49,53 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Auth\User\User whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-
-
-
-class User extends Authenticatable implements MustVerifyEmail
+/*
+class User extends Authenticatable
 {
-    use Notifiable,
-         Rolable,
+    use Rolable,
+        UserAttributes,
         UserScopes,
         UserRelations,
         Notifiable,
         SoftDeletes,
-      
+        Sortable,
         Protectable;
 
     public $sortable = ['name', 'email', 'created_at', 'updated_at'];
-   // use HasRoles;
-  
+
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    /*
+    protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $table= 'users';
-    protected $primaryKey="id";
-    
-    public $timestamps=true;
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    /*
+    protected $fillable = ['name', 'email', 'password', 'active', 'confirmation_code', 'confirmed'];
+
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    /*
+    protected $hidden = ['password', 'remember_token'];
+
     /**
-     * The attributes that should be cast to native types.
+     * The attributes that should be mutated to dates.
      *
      * @var array
      */
-    protected $casts = [
-        
-        'email_verified_at' => 'datetime',
-       
-    ];
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new MailResetPasswordToken($token));
-    }
-
+    /*
+    protected $dates = ['deleted_at'];
+}
    
     
    
-}
+

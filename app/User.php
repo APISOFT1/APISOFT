@@ -3,12 +3,12 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\Permission\Traits\HasRoles;
+use App\Role;
 use Illuminate\Database\Eloquent\Model;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
-    use HasRoles;
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -19,19 +19,8 @@ class User extends Authenticatable implements MustVerifyEmail
     
     public $timestamps=true;
     protected $fillable = [
-        'id',
-        'name', 
-        'email',
-      'email_verified_at',
-         'password',
-        'Apellido1',
-        'Apellido2',
-        'Telefono',
-        'Direccion',
-        'Fecha_Ingreso',
-        'Genero_Id',
-        'Rol_Id',
-        'estado_id'
+        'name', 'email', 'password', 'active', 'confirmation_code', 'confirmed'
+     
         
     ];
     /**
@@ -42,20 +31,16 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password', 'remember_token',
     ];
-    protected $casts = [
-        'Fecha_Ingreso' => 'Y-m-d H:i:s'
-    ];
+   
+    protected $dates = ['deleted_at'];
+
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = \Hash::make($password);
     }
-    public function Genero() 
+    
+    public function roles()
     {
-        return $this->belongsTo(Genero::class ,'Genero_Id');
+        return $this->belongsToMany(Role::class, 'users_roles', 'user_id', 'role_id');
     }
-    public function role()
-    {
-        return $this->belongsToMany(Role::class, 'role');
-    }
-   
 }

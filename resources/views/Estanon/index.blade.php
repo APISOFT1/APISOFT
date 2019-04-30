@@ -1,4 +1,4 @@
-@extends ('layouts.principal')
+@extends ('layouts.principalEstanon')
 
 <!-- mensaje de exito -->
 <?php $message=Session::get('message') ?>

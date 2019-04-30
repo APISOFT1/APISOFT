@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Auth\User\User;
+use App\User;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 
 use Charts;
@@ -14,8 +14,9 @@ use App\RecepcionMateriaPrima;
 use App\Apiario;
 use App\Cera;
 use App\Estanon;
-
-
+use App\Ubicacion;
+use App\Product;
+use App\DetalleIngreso;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Routing\Route;
@@ -50,6 +51,7 @@ class DashboardController extends Controller
            'recep' =>\DB::table('recepcion_materia_primas')->count(),
            'api'=>\DB::table('apiarios')->count(),
            'cera'=>\DB::table('ceras')->count(),
+           'product'=>\DB::table('products')->count(),
            
         ];
         $api =\DB::select("
@@ -61,8 +63,8 @@ where a.ubicacion_id = u.id
         $chart_options = [
             'chart_title' => 'Apiarios Por Ubicación',
             'report_type' => 'group_by_string',
-            'model' => 'App\Apiario',
-            'group_by_field' =>'ubicacion_id',
+            'model' => 'App\Ubicacion',
+            'group_by_field' =>'Descripcion',
             'chart_type' => 'pie',
             'filter_field' => 'created_at',
             //'filter_period' => 'month', // show users only registered this month
@@ -79,59 +81,106 @@ $chart = Charts::database($users, 'bar', 'highcharts')
       ->responsive(false)
       ->groupByMonth(date('Y'), true);
 
+//Afiliados CHART 
+
+$afi = Afiliado::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))
+    				->get();
+        $chart3 = Charts::database($afi, 'bar', 'highcharts')
+			      ->title("Registro Mensual de Afiliados nuevos ")
+			      ->elementLabel("Total Afiliados")
+			      ->dimensions(1000, 500)
+			      ->responsive(false)
+                  ->groupByMonth(date('Y'), true);
+                  ////////////////////////////////////
         $chart1 = new LaravelChart($chart_options);
         foreach (\Route::getRoutes() as $route) {
             foreach ($route->middleware() as $middleware) {
                 if (preg_match("/protection/", $middleware, $matches)) $counts['protected_pages']++;
             }
         }
+        
 
-        return view('dashboard', ['counts' => $counts] , compact('chart', 'chart2'));
+
+        return view('dashboard', ['counts' => $counts] , compact('chart', 'chart2', 'chart3', 'chart4'));
+       
+        
     }
 
 
-    public function getLogChartData(Request $request)
-    {
-        \Validator::make($request->all(), [
-            'start' => 'required|date|before_or_equal:now',
-            'end' => 'required|date|after_or_equal:start',
-        ])->validate();
+    public function indexRecepcion(){
 
-        $start = new Carbon($request->get('start'));
-        $end = new Carbon($request->get('end'));
+        $counts = [
+            
+           'afi' => \DB::table('afiliados')->count(),
+           'recep' =>\DB::table('recepcion_materia_primas')->count(),
+           'api'=>\DB::table('apiarios')->count(),
+           'cera'=>\DB::table('ceras')->count(),
+           'product'=>\DB::table('products')->count(),
+           'ingreso'=>\DB::table('detalle_ingreso')->sum('precio'),
+           
+           
+        ]; 
 
-        $dates = collect(\LogViewer::dates())->filter(function ($value, $key) use ($start, $end) {
-            $value = new Carbon($value);
-            return $value->timestamp >= $start->timestamp && $value->timestamp <= $end->timestamp;
-        });
+//Recepcion chart
+$chart_options = [
+    'chart_title' => 'Recepción por día',
+    'report_type' => 'group_by_date',
+    'model' => 'App\RecepcionMateriaPrima',
+    'group_by_field' => 'created_at',
+    'group_by_period' => 'day',
+    'chart_type' => 'bar',
+];
+$chart = new LaravelChart($chart_options);
 
-
-        $levels = \LogViewer::levels();
-
-        $data = [];
-
-        while ($start->diffInDays($end, false) >= 0) {
-
-            foreach ($levels as $level) {
-                $data[$level][$start->format('Y-m-d')] = 0;
-            }
-
-            if ($dates->contains($start->format('Y-m-d'))) {
-                /** @var  $log Log */
-                $logs = \LogViewer::get($start->format('Y-m-d'));
-
-                /** @var  $log LogEntry */
-                foreach ($logs->entries() as $log) {
-                    $data[$log->level][$log->datetime->format($start->format('Y-m-d'))] += 1;
-                }
-            }
-
-            $start->addDay();
-        }
-
-        return response($data);
+$recep = RecepcionMateriaPrima::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))
+    				->get();
+        $chart2 = Charts::database($recep, 'line', 'highcharts')
+			      ->title("Registro Mensual de Recepciones ")
+			      ->elementLabel("Total Recepciones")
+			      ->dimensions(1000, 500)
+			      ->responsive(false)
+                  ->groupByMonth(date('Y'), true);
+        return view('chartRecepcion' ,['counts' => $counts], compact('chart', 'chart2'));
     }
 
+    //Chart Ingreso 
+
+    public function indexIngreso(){
+
+        $counts = [
+            
+           'afi' => \DB::table('afiliados')->count(),
+           'recep' =>\DB::table('recepcion_materia_primas')->count(),
+           'product'=>\DB::table('products')->count(),
+          'ingreso'=>\DB::table('detalle_ingreso')->sum('precio'),
+           
+           
+           
+        ]; 
+
+//Recepcion chart
+$chart_options = [
+    'chart_title' => 'Ingreso por día',
+    'report_type' => 'group_by_date',
+    'model' => 'App\DetalleIngreso',
+    'group_by_field' => 'created_at',
+    'group_by_period' => 'day',
+    'aggregate_function' => 'sum',
+    'aggregate_field' => 'precio',
+    'chart_type' => 'line',
+];
+$chart3 = new LaravelChart($chart_options);
+
+$recep = DetalleIngreso::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))
+    				->get();
+        $chart2 = Charts::database($recep, 'line', 'highcharts')
+			      ->title("Registro Mensual de Recepciones ")
+			      ->elementLabel("Total Recepciones")
+			      ->dimensions(1000, 500)
+			      ->responsive(false)
+                  ->groupByMonth(date('Y'), true);
+        return view('chartIngreso' ,['counts' => $counts], compact('chart3'));
+    }
     public function getRegistrationChartData()
     {
 

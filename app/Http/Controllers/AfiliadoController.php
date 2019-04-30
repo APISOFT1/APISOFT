@@ -50,15 +50,15 @@ class AfiliadoController extends Controller
     public function addAfiliado(Request $request){
         $rules = array(
     
-          'id' => 'required',
-          'Nombre' => 'required',
+          'id' => 'min:6|max:9|required',
+          'Nombre' => 'min:1|max:120|required',
           'apellido1' => 'required',
           'apellido2' => 'required',
-          'Telefono' => 'required',
+          'Telefono' => 'numeric|required',
           'email' => 'required',
           'Direccion' => 'required',
           'Fecha_Ingreso' => 'required',
-          'Num_Cuenta' => 'required',
+          'Num_Cuenta' => 'numeric|required',
           'genero_id' => 'required',
           'estado_civil_id' => 'required',
           'estado_id' => 'required'
