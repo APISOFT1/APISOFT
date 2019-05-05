@@ -28,7 +28,7 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
+
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100 p-t-30 p-b-50">
@@ -66,6 +66,7 @@
 							<button type="submit" value="Ingresar" {{ __('Ingresar') }} class="login100-form-btn">
 								Ingresar
 							</button>
+							
 						</div>
 
 					
@@ -81,6 +82,7 @@
 					</div> 
 
 				</form>
+				
 			</div>
 		</div>
 	</div>
@@ -104,6 +106,7 @@
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 	<script src="js/main3.js"></script>
-
+	
 </body>
 </html>
+
