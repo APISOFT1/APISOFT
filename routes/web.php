@@ -16,24 +16,23 @@ Route::get('/', function () {
   
 });
 Auth::routes();
-//Auth::routes(['verify' => true]);
+Auth::routes(['verify' => true]);
 
 
-Route::group(['middleware' =>['auth']], function () {
+Route::group(['middleware' =>['auth'  ,'verified' ]], function () {
+  
 
-  // Authentication Routes...
-
-    
-    // Registration Routes...
-    if (config('auth.registration')) {
-      Route::get('register', 'RegisterController@showRegistrationForm')->name('register');
-      Route::post('register', 'RegisterController@register');
-  }
-
-  if (config('auth.confirm_email')) {
-    Route::get('confirm/{user_by_code}', 'ConfirmController@confirm')->name('confirm');
-    Route::get('confirm/resend/{user_by_email}', 'ConfirmController@sendEmail')->name('confirm.send');
+  Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+  
+  if (config('auth.registration')) {
+    Route::get('register', 'RegisterController@showRegistrationForm')->name('register');
+    Route::post('register', 'RegisterController@register');
 }
+if (config('auth.confirm_email')) {
+  Route::get('confirm/{user_by_code}', 'ConfirmController@confirm')->name('confirm');
+  Route::get('confirm/resend/{user_by_email}', 'ConfirmController@sendEmail')->name('confirm.send');
+}
+
       Route::get('chart', 'ChartController@index'); 
 
      Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
@@ -41,8 +40,7 @@ Route::group(['middleware' =>['auth']], function () {
      Route::get('chartIngreso', 'Admin\DashboardController@indexIngreso')->name('chartIngreso');
 
 
-       // Dashboard
-  //Route::get('users', ' Admin\DashboardController')->name('dashboard'); 
+   
 
   Route::resources([
 'Estanon'=>'EstanonController',
@@ -65,14 +63,13 @@ Route::group(['middleware' =>['auth']], function () {
 'Cera'=>'CeraController',
 'Producto' => 'ProductController',
 'RecepEstanon' => 'RecepcionEstanonController',
-'/' => 'Admin\DashboardController',
+
 
 
 
   ]);
 
-  Route::get('/home', 'HomeController@index')->name('home');
-  Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+  
   Route::get('users/{users}/edit', 'UsersController@edit')->name('users.edit');
   Route::put('users/{users}', 'UsersController@update')->name('users.update');
 Route::POST('addAfiliado','AfiliadoController@addAfiliado');
@@ -80,8 +77,6 @@ Route::POST('editAfiliado','AfiliadoController@editAfiliado');
 Route::POST('deleteAfiliado','AfiliadoController@deleteAfiliado');
 
 
-Route::get('dashboard/log-chart', 'Admin\DashboardController@getLogChartData')->name('dashboard.log.chart');
-    Route::get('dashboard/registration-chart', 'Admin\DashboardController@getRegistrationChartData')->name('dashboard.registration.chart');
 
 Route::POST('addPermissions','Admin\PermissionsController@addPermissions');
 Route::POST('ediPermissions','Admin\PermissionsController@ediPermissions');

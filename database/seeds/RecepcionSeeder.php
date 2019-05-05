@@ -18,7 +18,7 @@ class RecepcionSeeder extends Seeder
 
         DB::table('recepcion_materia_primas')->insert([ 
             
-            'fecha' => Carbon::now(),
+            'fecha' => Carbon::yesterday(),
             'pesoBruto' => 500,
             'pesoNeto' => 250,
             'numero_muestras' => 4,
@@ -26,8 +26,8 @@ class RecepcionSeeder extends Seeder
             'user_id' => 2,
             'tipoEntrega_id' => 1,
             'observacion'  => 'Buen estado',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
+            'created_at' => Carbon::yesterday(),
+            'updated_at' => Carbon::yesterday(),
         
     ]);
 

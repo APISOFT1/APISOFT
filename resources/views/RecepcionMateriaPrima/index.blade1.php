@@ -24,7 +24,7 @@
 
 <!--Esta clase nos permite posicionar el buscador  -->
 <div class="absolute3">
-		@include('RecepcionMateriaPrima.search')
+	
 	</div>
 
 
