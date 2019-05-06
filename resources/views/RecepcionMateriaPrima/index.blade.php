@@ -151,7 +151,7 @@
               <div class="form-group">
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
               <input type="datetime" class="form-control" id="fecha" name="fecha" 
-              placeholder="YYYY-MM-DD" required>
+              placeholder="YYYY-MM-DD" required  disabled>
               <p class="No ingreso la fecha"></p>
               <span class="fa fa-clock-o form-control-feedback right" aria-hidden="true"></span>
               </div>
@@ -184,7 +184,7 @@
               <div class="form-group row add">
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
               <input type="text" class="form-control" id="pesoNeto" name="pesoNeto"
-             placeholder="Peso Neto" required>
+             placeholder="Peso Neto" required  disabled>
               <p class="No ingreso el Peso Neto"></p>
               <span class="fa fa-minus-circle form-control-feedback right" aria-hidden="true"></span>
               </div>
@@ -194,7 +194,7 @@
               <div class="form-group row add">
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
               <input type="text" class="form-control"  id="numero_muestras" name="numero_muestras"
-          placeholder="Numero Muestra" required>
+          placeholder="Numero Muestra" required  disabled>
               <p class="No ingreso el Codigo"></p>
               <span class="fa fa-address-card form-control-feedback right" aria-hidden="true"></span>
               </div>
@@ -217,7 +217,7 @@
               <div class="form-group row add">
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
               <input type="text" class="form-control"  value="{{ auth()->user()->id }}" id="user_id" name="user_id"
-          placeholder="Encargado" required>
+          placeholder="Encargado" required  disabled>
               <p class="No ingreso el usuario"></p>
               <span class="fa fa-user-circle-o form-control-feedback right" aria-hidden="true"></span>
               </div>
@@ -279,26 +279,27 @@
               </div>
 
 
-     
+    
 
             <div class="form-group row add">
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
-              <select  class="form-control" name="Estanon_id" class="form-control" id="Estanon_id">
+              <select  class="form-control" name="Estanon_id" class="form-control" id="busqueda_parroquia1">
          <option value="">-- Seleccione Estañon --</option>
-         @foreach ($estanon as $value)
-          <option value="{{ $value->id }}">{{$value->id}}-{{$value->Descripcion}}</option>
+         @foreach ($recepcion as $value)
+          <option class="recepcion{{$value->id}}">{{ $value->id }}--{{ $value->fecha }}--{{ $value->afiliado_id }}</option>
          @endforeach         
                 </select>
               <p class="No ingreso el tipo de Entrega"></p>
               <span class="fa fa-sign-in form-control-feedback right" aria-hidden="true"></span>
               </div>
               </div>
-
+      
+       
 
             <div class="form-group row add">
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
               <input type="datetime" class="form-control" id="Fecha" name="Fecha" 
-              placeholder="YYYY-MM-DD" required>
+              placeholder="YYYY-MM-DD" required  disabled>
               <p class="No ingreso la fecha"></p>
               <span class="fa fa-clock-o form-control-feedback right" aria-hidden="true"></span>
               </div>

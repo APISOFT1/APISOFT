@@ -18,12 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->tinyInteger('active')->default(1)->unsigned();
-            $table->uuid('confirmation_code')->nullable();
-            $table->boolean('confirmed')->default(config('access.users.confirm_email') ? false : true);
-            $table->rememberToken();
-            $table->timestamps();
-            $table->softDeletes();
+
         });
     }
     /**

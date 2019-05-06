@@ -196,6 +196,16 @@
 
 <!-- MODAL AFILIADO -->
   
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+=======
+>>>>>>> Caro
+>>>>>>> 241b96a66e7c2609e56d42119f95f8d3ae4b79f3
 <script type="text/javascript">
 {{-- ajax Form Add Post--}}
   $(document).on('click','.create-modal', function() {
@@ -511,6 +521,25 @@ $(document).ready(function () {
 
   </body>
 </html>
+<script>
+
+
+var timeoutId = 0;
+$('#discount').keyup(function(e){
+   clearTimeout(timeoutId);
+   timeoutId = setTimeout(discount,1000);
+});
+
+function discount(){
+  let amount = $('#discount').val();
+  if(!isNaN(amount)){
+    let discount = amount * 0.05;
+    let total =  amount - discount;
+    $("#total").val(total);
+  } 
+}
+
+</script>
   <style type="text/css">
 .form-control {
     height: 37px;
@@ -556,3 +585,4 @@ $(document).ready(function () {
   border-radius: 15px;
 }
 </style>
+

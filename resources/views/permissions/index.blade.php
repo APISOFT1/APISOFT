@@ -26,6 +26,36 @@
 
 </div>
 
+<div id="trabajador" style="display: none;">
+    <h2>Si eres estudiante...</h2>
+    <form action="index.php" method="post">
+        <p>Prueba:<br/>
+        <input type="text" name="nombre" /></p>
+        <p>Centro:<br/>
+        <input type="text" name="centro" /></p>
+        <input type="submit" name="send" value="Enviar" />
+    </form>
+</div>
+
+<form action="index.php" method="post">
+    Estado actual: 
+    <select id="status" name="status" onChange="mostrar(this.value);">
+        <option value="estudiante">Estudiante</option>
+        <option value="trabajador">Trabajador</option>
+        <option value="autonomo">Autónomo</option>
+        <option value="paro">En el paro</option>
+     </select>
+</form>
+
+<div class="row">
+  <div class="table table-responsive">
+    <table class="table table-bordered" id="table">
+      <tr>
+        <th width="150px">No</th>
+        <th>Descripcion</th>
+        <th>Create At</th>
+        <th class="text-center" width="150px">
+          <a href="#" class="create-modalRol btn btn-success btn-sm">
 <div class="table-responsive">
 			<table class="table table-striped table-bordered table-condensed table-hover">
 				<thead>

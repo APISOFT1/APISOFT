@@ -23,7 +23,6 @@ class CreateRecepcionEstanonsTable extends Migration
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *

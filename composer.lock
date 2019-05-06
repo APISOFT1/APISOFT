@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9e33eb45359df00efd3c9ed4c2add7d9",
+    "content-hash": "a5e5dcfc380374ee4710fbbfe850b1e0",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -3619,7 +3619,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "backendtea@gmail.com"
+                    "email": "BackEndTea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",

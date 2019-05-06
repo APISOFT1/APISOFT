@@ -52,6 +52,8 @@
       <tr class="afi{{$value->id}}">
       <td>{{$value->id}}</td>
   	  	<td>{{$value->Nombre}} {{$value->apellido1}}  {{$value->apellido2}}</td>
+   
+        
         <td>{{$value->Telefono}}</td>
   		  <td>{{$value->email}}</td>
         <td>{{$value->Direccion}}</td>
@@ -128,6 +130,7 @@
       </div>
       <div class="modal-body">
         <form class="form-horizontal" role="form">
+=======
        
         <div class="stepwizard">
                 <div class="stepwizard-row setup-panel">
