@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 use App\Models\Auth\Role\Role;
-use App\Models\Auth\User\User;
+use App\User;
 use App\Genero;
 use Validator;
 use Response;
@@ -129,40 +129,48 @@ class UsersController extends Controller
      
     public function editUser(request $request){
 
-        $rules = array(
+        $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
-          'email' => 'required|email|max:255',
-          'active' => 'sometimes|boolean',
-          'confirmed' => 'sometimes|boolean',
-          );
-        $validator = Validator::make ( Input::all(), $rules);
-        if ($validator->fails())
-        return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
-        
-        else {
-      
-            $users = User::find ($request->id);
-          $users->name = $request->name;
-          $users->email = $request->email;
-          $user->password =$request->password;
-          $users->active = $request->active;
-          $users->confirmed = $request->confirmed;
-          $users->save();
-      
-      //roles
-      
-      if ($request->has('roles')) {
-          $users->roles()->detach();
+            'email' => 'required|email|max:255',
+            'active' => 'sometimes|boolean',
+            'confirmed' => 'sometimes|boolean',
+        ]);
 
-          if ($request->get('roles')) {
-              $users->roles()->attach($request->get('roles'));
-          }
-      }
+        $validator->sometimes('email', 'unique:users', function ($input) use ($users) {
+            return strtolower($input->email) != strtolower($users->email);
+        });
 
-       
+        $validator->sometimes('password', 'min:6|confirmed', function ($input) {
+            return $input->password;
+        });
+
+        if ($validator->fails()) return redirect()->back()->withErrors($validator->errors());
+
+        $users->name = $request->get('name');
+        $users->email = $request->get('email');
+
+        if ($request->has('password')) {
+            $users->password = bcrypt($request->get('password'));
+        }
+
+        $users->active = $request->get('active', 0);
+        $users->confirmed = $request->get('confirmed', 0);
+
+        $users->save();
+
+        //roles
+        if ($request->has('roles')) {
+            $users->roles()->detach();
+
+            if ($request->get('roles')) {
+                $users->roles()->attach($request->get('roles'));
+            }
+        }
+
+    
       return response()->json($users);
       }
-    }
+    
 
 
     public function massDestroy(Request $request)

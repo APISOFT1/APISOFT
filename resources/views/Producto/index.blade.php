@@ -22,7 +22,7 @@
 
 <!--Esta clase nos permite posicionar el buscador  -->
 <div class="absolute3">
-		@include('Produco.search') 
+		@include('Producto.search') 
 </div>
 
 
@@ -33,7 +33,7 @@
 					<th>Nombre</th>
 					<th>Precio Unitario</th>
 					<th>Creación</th>
-					<th> <a href="Producto/create"
+					<th> <a href="#"
 					class="create-modal btn btn-success btn-sm">
             <i class="glyphicon glyphicon-plus"></i>
 			</th>

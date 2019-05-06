@@ -2,6 +2,7 @@
 deployment:
  tasks:
 <<<<<<< HEAD
+<<<<<<< HEAD
  - export DEPLOYPATH=/home/apisoftcr/apisoft/
  - /bin/cp -r * $DEPLOYPATH
 - /bin/cp -r ./public/* $DEPLOYPATH/public_html/
@@ -12,3 +13,8 @@ deployment:
  - /bin/cp index.php $DEPLOYPATH
  - /bin/cp style.css $DEPLOYPATH
 >>>>>>> origin
+=======
+ - export DEPLOYPATH=/home/apisoftcr/public_html/
+ - /bin/cp index.php $DEPLOYPATH
+ - /bin/cp style.css $DEPLOYPATH
+>>>>>>> Caro

@@ -17,6 +17,7 @@ class RecepcionMateriaPrimas extends Migration
             $table->increments('id');
             $table->datetime('fecha')->index();
             $table->float('pesoBruto');
+            $table->float('pesoNeto');
             $table->integer('numero_muestras')->unsigned();
             $table->string('afiliado_id',12);
             $table->foreign('afiliado_id')->references('id')->on('afiliados');

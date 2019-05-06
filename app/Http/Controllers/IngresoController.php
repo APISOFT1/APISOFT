@@ -69,16 +69,13 @@ class IngresoController extends Controller
             $ingreso->tipo_comprobante=$request->get('tipo_comprobante');
             $ingreso->serie_comprobante=$request->get('serie_comprobante');
             $ingreso->total_venta=$request->get('total_venta');
-
             $mtyime= Carbon::now('America/Costa_Rica');
             $ingreso->fecha_hora=$mtyime->toDateTimeString();
             $ingreso->estado='Activo';
             $ingreso->save();
-
             $recepcion_id= $request->get('recepcion_id');
             $Precio = $request->get('Precio');
          
-
             $cont= 0;
             while ($cont < count($recepcion_id)){
                 $detalle = new DetalleIngreso(); 
@@ -107,7 +104,6 @@ class IngresoController extends Controller
         ->where('i.idingreso','=',$id)
         ->groupBy('i.idingreso','i.fecha_hora','p.Nombre','p.apellido1','p.apellido2','u.name','i.tipo_comprobante', 'i.serie_comprobante','i.total_venta','i.estado')
         ->first();
-
         $detalles=DB::table('detalle_ingreso as d')
             ->join ('recepcion_materia_primas as a','d.recepcion_id','=','a.id')
             ->select('a.id as producto','d.Precio','a.PesoBruto')
@@ -115,7 +111,6 @@ class IngresoController extends Controller
             ->get(); 
         return view("Ingreso.show",["ingresos"=>$ingresos,"detalles"=>$detalles]);
     }
-
     public function edit($id)
 {
     $ingresos=DB::table('ingreso as i')
@@ -126,7 +121,6 @@ class IngresoController extends Controller
     ->where('i.idingreso','=',$id)
     ->groupBy('i.idingreso','i.fecha_hora','p.Nombre','p.apellido1','p.apellido2','u.name','i.tipo_comprobante', 'i.serie_comprobante','i.total_venta','i.estado')
     ->first();
-
     $detalles=DB::table('detalle_ingreso as d')
     ->join ('recepcion_materia_primas as a','d.recepcion_id','=','a.id')
     ->select('a.id as producto','d.Precio','a.PesoBruto')

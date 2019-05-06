@@ -1,4 +1,4 @@
-@extends('layouts.app1')
+@extends('layouts.apps')
 
 @section('body_class','nav-md')
 
@@ -25,6 +25,7 @@
                         </div>
                     @endif
                 </div>
+                
                 @yield('content')
             </div>
 
@@ -36,9 +37,10 @@
 @stop
 
 @section('styles')
-    {{ Html::style('assets/admin/css/admin.css') }}
+    {{ Html::style('css/admin.css') }}
+    {!! Charts::styles() !!}
 @endsection
 
 @section('scripts')
-    {{ Html::script('assets/admin/js/admin.js') }}
+    {{ Html::script('js/admin.js') }}
 @endsection

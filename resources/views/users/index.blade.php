@@ -32,6 +32,9 @@
   		<th> <div class="size2">Usuario</th>
   		<th>Correo</th>
     	<th>Roles</th>
+      <th>Estado</th>
+      <th>Confirmado</th>
+      <th>Acciones</th>
          <tr>
        
           {{ csrf_field() }}
@@ -45,6 +48,36 @@
                                 {{$value->roles->pluck('name')->implode(' , ')}}</span>
                                  
                                 </td>
+                                <td>
+                                @if($value->active)
+                            <span class="label label-primary"><?php  if ($value->active=='1') {
+	                     		# code...
+	                 		print("Activo");
+	                         	} 
+	                     	  ?> </span>
+                        @else
+                            <span class="label label-danger"><?php  if ($value->active=='0') {
+		                      	# code...
+	                       		print("Inactivo");
+	                         	} 
+	                     	  ?> </span>
+                        @endif</td>
+
+                        <td>
+                        @if($value->confirmed)
+                            <span class="label label-success"><?php  if ($value->confirmed=='1') {
+		                      	# code...
+		                      	print("Confirmado");
+	                             	} 
+		                           ?></span>
+                        @else
+                            <span class="label label-warning"><?php  if ($value->confirmed=='0') {
+		                      	# code...
+		                     	print("Sin confirmar");
+	                             	} 
+		                           ?></span>
+                        @endif
+                        </td>
                                 <td>
             <a href="#" class="show-modal btn btn-info btn-sm" 
             data-id="{{$value->id}}"
@@ -60,11 +93,12 @@
             data-password="{{$value->password}}"
    ><i class="glyphicon glyphicon-pencil"></i> </a>
 
+   {{--@if(!$value->hasRole('administrator'))--}}
             <a href="#" class="delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" data-title="{{$value->name}}">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
             </a>
-          
+            {{--@endif--}}
           </td>
         </tr>
       @endforeach

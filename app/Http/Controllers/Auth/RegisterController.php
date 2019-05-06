@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-use Spatie\Permission\Models\Role;
-use App\Models\Auth\User\User;
+
+use App\User;
 use Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -31,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/dashboard';
     /**
      * Create a new controller instance.
      *
@@ -80,7 +80,6 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'confirmation_code' => Uuid::uuid4(),
             'confirmed' => false
         ]);
 
@@ -97,18 +96,7 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function register(Request $request)
-    {
-        $this->validator($request->all())->validate();
-
-        event(new Registered($user = $this->create($request->all())));
-
-        $this->guard()->login($user);
-
-        return $this->registered($request, $user)
-            ?: redirect($this->redirectPath());
-    }
-
+    
     /**
      * The user has been registered.
      *
@@ -116,16 +104,6 @@ class RegisterController extends Controller
      * @param  mixed $user
      * @return mixed
      */
-    protected function registered(Request $request, $user)
-    {
-        if (config('auth.users.confirm_email') && !$user->confirmed) {
-
-            $this->guard()->logout();
-
-            $user->notify(new ConfirmEmail());
-
-            return redirect(route('login'));
-        }
-    }
+   
 
 }

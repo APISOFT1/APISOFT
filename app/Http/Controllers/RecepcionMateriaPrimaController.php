@@ -1,101 +1,92 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\RecepcionMateriaPrima;
+use Validator;
+use Response;
+use Illuminate\Support\Facades\Input;
+use App\http\Requests;
 use Illuminate\Http\Request;
+use App\RecepcionMateriaPrima;
+use Illuminate\Http\Redirect;
+use App\Http\Requests\RecepcionMateriaPrimaFormRequest;
+use DB;
 use App\Afiliado;
 use App\User;
-use App\TipoEnTrega;
-use App\AceptarMatPrima;
-use App\Http\Requests\RecepcionMateriaPrimaFormRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Contracts\Auth\Guard;
+use App\TipoEntrega;
+use App\Estanon;
+
 
 
 
 class RecepcionMateriaPrimaController extends Controller
 {
-   
-    public function index(request $request, Guard $auth)
-    {
-        if($request){
-            $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-            $recepcionMateriaPrima = RecepcionMateriaPrima::with('Afiliado', 'User',
-             'TipoEntrega') 
-               
-                ->orderby('id','desc')
-                ->paginate(7);
-                return view('RecepcionMateriaPrima.index',["recepcionMateriaPrima"=>$recepcionMateriaPrima,"searchText"=>$query ,'user' => $auth->user()]);
-        }
-        
-        
-           
-       
-    }
 
-    
-    public function create()
-    {
-        
-       
-        $user= User::find(Auth()->id());
-       
-        $afiliados = Afiliado::all();
-        $tipoEntregas = TipoEntrega::all();
-        return view("RecepcionMateriaPrima.create",["user"=> $user, "afiliados"=> $afiliados, 
-        "tipoEntregas"=> $tipoEntregas] );
-    }
 
-    public function store(RecepcionMateriaPrimaFormRequest $request)
-    {
-      
+public function __construct()
+{
 
-   
-        
-        $recepcionMateriaPrima = RecepcionMateriaPrima::create($request->all());
-        return redirect('RecepcionMateriaPrima'); 
-    }
-
-   
-    public function show($id)
-    {
-        return view ("RecepcionMateriaPrima.show",["recepcion_materia_primas"=>RecepcionMateriaPrima::findOrFail($id)]);  
-    }
-
-    
-    public function edit(RecepcionMateriaPrima $recepcionMateriaPrima, $id)
-    {
-        $user = User::all();
-        $afiliados = Afiliado::all();
-        $tipoEntrega = TipoEntrega::all();
-        $recepcionMateriaPrima= RecepcionMateriaPrima::find($id);
-        return view ("RecepcionMateriaPrima.edit",
-        ["recepcion_materia_primas"=>RecepcionMateriaPrima::findOrFail($id),
-        "users"=> $users, "afiliados"=> $afiliados, 
-        "tipoEntregas"=> $tipoEntregas]);
-    }
-
-   
-    public function update(Request $request, $id)
-    {
-    
-        $recepcionMateriaPrima= RecepcionMateriaPrima::find($id);
-        $recepcionMateriaPrima->fecha=$request->get('fecha');
-        $recepcionMateriaPrima->user_id=$request->get('user_id');
-        $recepcionMateriaPrima->afiliado_id=$request->get('afiliado_id');
-        $recepcionMateriaPrima->pesoBruto=$request->get('pesoBruto');
-        $recepcionMateriaPrima->numero_muestras=$request->get('numero_muestras');
-        $recepcionMateriaPrima->tipoEntrega_id=$request->get('tipoEntrega_id');
-        $recepcionMateriaPrima->update();
-        return redirect('RecepcionMateriaPrima');
-      
-    }
-
-    public function destroy($id)
-    {
-        $recepcionMateriaPrima=RecepcionMateriaPrima::findOrFail($id);
-        $recepcionMateriaPrima->delete();
-        return redirect('RecepcionMateriaPrima');
-    }
 }
+
+
+//INDEEEEEEEEEEEEX/
+public function index(Request $request){
+if($request){
+  $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
+  $recepcion = RecepcionMateriaPrima::paginate(10);
+      $afiliado = Afiliado::all();
+      $estanon = Estanon::all();
+      $recepciones = RecepcionMateriaPrima::all()->sortBy("fecha");
+      $user = User::all();
+      $tipoEntrega = TipoEntrega::all();
+  return view('RecepcionMateriaPrima.index', compact('afiliado','recepciones','estanon','user','tipoEntrega','recepcion'), ['recepcion'=>$recepcion,"searchText"=>$query]);
+}}
+
+////////////////////////////////////////////////////////NUEVO
+
+public function addRecepcionMateriaPrima(Request $request){
+    $rules = array(
+    
+    );
+  $validator = Validator::make ( Input::all(), $rules);
+  if ($validator->fails())
+  return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
+
+  else {
+    $recepcion = new RecepcionMateriaPrima;
+ 
+        $recepcion->fecha= $request->fecha;
+        $recepcion->pesoBruto = $request->pesoBruto;
+        $recepcion->pesoNeto = $request->discount;
+        $recepcion->numero_muestras = $request->numero_muestras;
+        $recepcion->afiliado_id = $request->afiliado_id;
+        $recepcion->user_id = $request->user_id;
+        $recepcion->tipoEntrega_id = $request->tipoEntrega_id;
+        $recepcion->observacion = $request->observacion;
+    $recepcion->save();
+    return response()->json($recepcion);
+  }
+}
+
+public function editRol(request $request){
+  $rules = array(
+    'descripcion' => 'required'
+  );
+$validator = Validator::make ( Input::all(), $rules);
+if ($validator->fails())
+return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
+
+else {
+$rol = Rol::find ($request->id);
+$rol->descripcion = $request->descripcion;
+$rol->save();
+return response()->json($rol);
+}
+}
+
+public function deleteRol(request $request){
+  
+  $rol = Rol::find ($request->id);
+  $rol->delete();
+  return response()->json();
+}
+}   //

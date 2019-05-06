@@ -109,6 +109,7 @@
 
 </body>
 </html>
+<<<<<<< HEAD
 =======
 @extends('layouts.app')
 
@@ -188,3 +189,5 @@
 </div>
 @endsection
 >>>>>>> origin
+=======
+>>>>>>> Caro
