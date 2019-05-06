@@ -13,6 +13,7 @@ jjajaajaj
 */
 Route::get('/', function () {
     return view('welcome');
+<<<<<<< HEAD
   
 });
 Auth::routes();
@@ -34,6 +35,18 @@ Auth::routes(['verify' => true]);
   //Route::get('users', ' Admin\DashboardController')->name('dashboard'); 
 
   Route::resources([
+=======
+});
+
+Auth::routes(['verify' => true]);
+Route::group(['middleware'=> 'verified'], function(){
+
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+Route::resources([
+>>>>>>> origin
 'Estanon'=>'EstanonController',
 'Genero'=>'GeneroController',
 'EstadoCivil'=>'EstadoCivilController',
@@ -50,6 +63,7 @@ Auth::routes(['verify' => true]);
 'IngresoInventario' => 'IngresoInventarioController',
 'admin/permissions' => 'Admin\PermissionsController',
 'admin/roles'=> 'Admin\RolesController',
+<<<<<<< HEAD
 'users'=> 'Admin\UsersController',
 'Cera'=>'CeraController',
 'RecepEstanon' => 'RecepcionEstanonController',
@@ -60,6 +74,18 @@ Auth::routes(['verify' => true]);
   ]);
   Route::get('users/{users}/edit', 'UsersController@edit')->name('users.edit');
   Route::put('users/{users}', 'UsersController@update')->name('users.update');
+=======
+'admin/users'=> 'Admin\UsersController',
+'Apiario'=>'ApiarioController',
+'Ubicacion'=>'UbicacionController',
+
+]);
+
+  Route::post('permissions_mass_destroy', ['uses' => 'Admin\PermissionsController@massDestroy', 'as' => 'permissions.mass_destroy']);
+  Route::post('roles_mass_destroy', ['uses' => 'Admin\RolesController@massDestroy', 'as' => 'roles.mass_destroy']);
+  Route::post('users_mass_destroy', ['uses' => 'Admin\UsersController@massDestroy', 'as' => 'users.mass_destroy']);
+Route::get('generos/{id}/destroy', 'GeneroController@destroy')->name('generos.destroy');
+>>>>>>> origin
 Route::POST('addAfiliado','AfiliadoController@addAfiliado');
 Route::POST('editAfiliado','AfiliadoController@editAfiliado');
 Route::POST('deleteAfiliado','AfiliadoController@deleteAfiliado');
@@ -81,15 +107,23 @@ Route::POST('addAfiliadoApiario','AfiliadoApiarioController@addAfiliadoApiario')
 Route::POST('editApiario','ApiarioController@editApiario');
 Route::POST('deleteApiario','ApiarioController@deleteApiario');
 
+<<<<<<< HEAD
 Route::POST('addCera','CeraController@addCera');
 Route::POST('editCera','CeraController@editCera');
 Route::POST('deleteCera','CeraController@deleteCera');
 Route::POST('agregar','CeraController@agregar');
+=======
+});
+
+
+  
+>>>>>>> origin
 
 Route::POST('addRecepcion','RecepcionEstanonController@addRecepcion');
 Route::POST('editRecepcion','RecepcionEstanonController@editRecepcion');
 Route::POST('deleRecepcion','RecepcionEstanonController@deleteRecepcion');
 
+<<<<<<< HEAD
 Route::POST('editUser','Admin\UsersController@editUser');
 Route::POST('deleteUser','Admin\UsersController@deleteUser');
 
@@ -103,3 +137,9 @@ Route::POST('deleteUbicacion','UbicacionController@deleteUbicacion');
 
 //});
  
+=======
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+>>>>>>> origin

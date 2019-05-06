@@ -24,7 +24,13 @@ return [
     | the Mailgun mail service which will provide reliable deliveries.
     |
     */
+<<<<<<< HEAD
     'host' => env('MAIL_HOST', 'smtp.gmail.org'),
+=======
+
+    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+
+>>>>>>> origin
     /*
     |--------------------------------------------------------------------------
     | SMTP Host Port

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+<<<<<<< HEAD
 use DB;
 
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,9 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
 use Spatie\Permission\Models\Permission;class HomeController extends Controller
+=======
+class HomeController extends Controller
+>>>>>>> origin
 {
     /**
      * Create a new controller instance.
@@ -33,9 +37,12 @@ use Spatie\Permission\Models\Permission;class HomeController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
         //$afiliados = DB::select("SELECT count('id_Afiliado') as total, genero_id as Genero
        // FROM afiliados INNER JOIN generos 
        // ON afiliados.genero_id=generos.id GROUP BY genero_id");
+=======
+>>>>>>> origin
         return view('home');
     }
 }
