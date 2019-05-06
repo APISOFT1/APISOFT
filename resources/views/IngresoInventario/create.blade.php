@@ -1,4 +1,4 @@
-@extends ('layouts.principal')
+@extends ('layouts.principal1')
 @section ('contenido')
  <div class="row">
   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -80,8 +80,61 @@
    <div class="panel-body">
     <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
      <div class="form-group">
-      <label>Producto</label>
-      <select name="pstock_id" class="form-control selectpicker" id="pstock_id" data-live-search="true">
+
+                   <!--  <div class="col-xs-2 col-sm-2 col-md-12">
+                        <div class="form-group">
+                            <label for="stocks">Agregar recepcion:</label>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="glyphicon glyphicon-plus"></i></button>
+                        </div> 
+                    </div> 
+                    Modal 
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Componentes</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table" width="250" border="2">
+                                        <thead> 
+                                            <tr>
+                                                <td><h4>PrecioTotal</h4></td>
+                                                <td><h4>Producto</h4></td>
+                                               
+                                                <td></td>
+                                            </tr>
+                                        <thead>   
+                                        <tbody>
+                                        @foreach($stocks as $stock)
+                                        <option value="{{$stock->id}}_{{$stock->cantidadDisponible}}">{{$stock->stocks}}
+                                        </option>
+    
+                                         <td>   <input type="checkbox" aria-label="Checkbox for following text input" href="" />Agregar </td>
+                                            </tr>
+                                            @endforeach
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary">Guardar</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+      
+</div> 
+</div>
+</footer>
+</body>
+</html> -->
+
+  <label>Producto</label>
+     <select name="pstock_id" class="form-control selectpicker" id="pstock_id" data-live-search="true">
        @foreach($stocks as $stock)
         <option value="{{$stock->id}}_{{$stock->cantidadDisponible}}">{{$stock->stocks}}</option>
        @endforeach

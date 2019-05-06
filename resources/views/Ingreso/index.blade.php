@@ -12,7 +12,7 @@
 <!-- fin de mensaje de exito -->
 @section ('contenido')
 
-<h3>Listado de Boletas  <a href="Ingreso/create"><button class="btn btn-success btn-sm"> <i class="glyphicon glyphicon-plus"></i></h3>
+<h3>Listado de boletas servicios de miel procesada<a href="Ingreso/create"><button class="btn btn-success btn-sm"> <i class="glyphicon glyphicon-plus"></i></h3>
 
 
 
