@@ -44,8 +44,8 @@ class DashboardController extends Controller
     {
         $counts = [
             'users' => \DB::table('users')->count(),
-            'users_unconfirmed' => \DB::table('users')->where('confirmed', false)->count(),
-            'users_inactive' => \DB::table('users')->where('active', false)->count(),
+           // 'users_unconfirmed' => \DB::table('users')->where('confirmed', false)->count(),
+           // 'users_inactive' => \DB::table('users')->where('active', false)->count(),
            'protected_pages' => 0,
            'afi' => \DB::table('afiliados')->count(),
            'recep' =>\DB::table('recepcion_materia_primas')->count(),

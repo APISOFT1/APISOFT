@@ -16,22 +16,24 @@ Route::get('/', function () {
   
 });
 Auth::routes();
-Auth::routes(['verify' => true]);
 
 
-Route::group(['middleware' =>['auth'  ,'verified' ]], function () {
+
+Route::group(['middleware' =>['auth']], function () {
   
 
-  Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-  
   if (config('auth.registration')) {
     Route::get('register', 'RegisterController@showRegistrationForm')->name('register');
     Route::post('register', 'RegisterController@register');
 }
-if (config('auth.confirm_email')) {
-  Route::get('confirm/{user_by_code}', 'ConfirmController@confirm')->name('confirm');
-  Route::get('confirm/resend/{user_by_email}', 'ConfirmController@sendEmail')->name('confirm.send');
-}
+
+  Route::get('activate/{token}', 'Auth\RegisterController@activate')
+      ->name('activate');
+      
+  Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+  
+  
+
 
       Route::get('chart', 'ChartController@index'); 
 
@@ -59,7 +61,7 @@ if (config('auth.confirm_email')) {
 'IngresoInventario' => 'IngresoInventarioController',
 'admin/permissions' => 'Admin\PermissionsController',
 'admin/roles'=> 'Admin\RolesController',
-'users'=> 'Admin\UsersController',
+'users'=> 'Admin\UserController',
 'Cera'=>'CeraController',
 'Producto' => 'ProductController',
 'RecepEstanon' => 'RecepcionEstanonController',
@@ -70,8 +72,8 @@ if (config('auth.confirm_email')) {
   ]);
 
   
-  Route::get('users/{users}/edit', 'UsersController@edit')->name('users.edit');
-  Route::put('users/{users}', 'UsersController@update')->name('users.update');
+  Route::get('users/{users}/edit', 'Admin\UserController@edit')->name('users.edit');
+  Route::put('users/{users}', 'Admin\UserController@update')->name('users.update');
 Route::POST('addAfiliado','AfiliadoController@addAfiliado');
 Route::POST('editAfiliado','AfiliadoController@editAfiliado');
 Route::POST('deleteAfiliado','AfiliadoController@deleteAfiliado');
@@ -124,3 +126,6 @@ Route::POST('editUbicacion','UbicacionController@editUbicacion');
 Route::POST('deleteUbicacion','UbicacionController@deleteUbicacion');
 });
  
+$this->get('/verify-user/{code}', 'Auth\RegisterController@activateUser')->name('activate.user');
+
+  

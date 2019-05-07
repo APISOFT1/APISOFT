@@ -21,12 +21,18 @@
     <link href="welcome/css/main.css" rel="stylesheet">
     <link href="welcome/css/responsive.css" rel="stylesheet">
     <link href="welcome/css/animate.min.css" rel="stylesheet">
+    <link href="css5/normalize.css" rel="stylesheet">
+    <link href="css/cardio.css" rel="stylesheet">
 
   </head>
 
   
   <body >
 
+  <div class="preloader">
+		<img src="images/loaderr.gif" alt="Preloader image">
+  </div>
+  
     <div class="navbar navbar-invers menu-wrap">
       <div class="navbar-header text-center">
         <a class="navbar-brand logo-right" href=""><i class="mdi-image-timelapse"></i>APISOFT</a>
@@ -295,6 +301,7 @@
     <script src="welcome/js/jquery.nav.js"></script>      
     <script src="welcome/js/smooth-on-scroll.js"></script>
     <script src="welcome/js/smooth-scroll.js"></script>
+    <script src="js/loarder.js"></script>
     
 
     <script>
@@ -305,10 +312,5 @@
     </script>
 
   </body>
+\
 
-  <script>
-  function preloadFinished(e) { ... }
-  function preloadError(e)  { ... }
-</script>
-<!-- listen for load and error events -->
-<link rel="preload" href="app.js" as="script" onload="preloadFinished()" onerror="preloadError()">

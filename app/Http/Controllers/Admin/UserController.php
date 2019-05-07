@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Auth\Role\Role;
-use App\Models\Auth\User\User;
+use App\Role;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
@@ -17,7 +17,15 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        return view('admin.users.index', ['users' => User::with('roles')->sortable(['email' => 'asc'])->paginate()]);
+        if($request){
+            $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
+            $users= User::with('roles')->where('name','LIKE','%'.$query.'%')
+            ->orderby('id','desc')
+            ->paginate(10);
+
+            $roles = Role::all();
+        return view('users.index', compact('users', 'roles'), ['users'=>$users,"searchText"=>$query]);
+    }
     }
 
     /**
@@ -60,7 +68,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.users.edit', ['user' => $user, 'roles' => Role::get()]);
+        return view('users.edit', ['user' => $user, 'roles' => Role::get()]);
     }
 
     /**
@@ -75,30 +83,20 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255',
-            'active' => 'sometimes|boolean',
-            'confirmed' => 'sometimes|boolean',
+            'status' => 'sometimes|boolean',
+           
         ]);
-
-        $validator->sometimes('email', 'unique:users', function ($input) use ($user) {
-            return strtolower($input->email) != strtolower($user->email);
-        });
-
-        $validator->sometimes('password', 'min:9|confirmed', function ($input) {
-            return $input->password;
-        });
-
-        if ($validator->fails()) return redirect()->back()->withErrors($validator->errors());
 
         $user->name = $request->get('name');
         $user->email = $request->get('email');
+       
 
         if ($request->has('password')) {
             $user->password = bcrypt($request->get('password'));
         }
 
-        $user->active = $request->get('active', 0);
-        $user->confirmed = $request->get('confirmed', 0);
-
+        $user->status = $request->get('status', 0);
+       
         $user->save();
 
         //roles
@@ -110,7 +108,7 @@ class UserController extends Controller
             }
         }
 
-        return redirect()->intended(route('admin.users'));
+        return redirect()->intended(route('users.index'));
     }
 
     /**

@@ -1,26 +1,26 @@
 <?php
 
 namespace App\Notifications;
-
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-
-class NotificacionPago extends Notification
+class UserActivate  extends Notification
 {
     use Queueable;
-
+    /**
+     * @var User
+     */
+    protected $user;
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param User $user
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        //
+        $this->user = $user;
     }
-
     /**
      * Get the notification's delivery channels.
      *
@@ -31,7 +31,6 @@ class NotificacionPago extends Notification
     {
         return ['mail'];
     }
-
     /**
      * Get the mail representation of the notification.
      *
@@ -40,12 +39,16 @@ class NotificacionPago extends Notification
      */
     public function toMail($notifiable)
     {
+        /** @var User $user */
+        $user = $this->user;
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+           
+            ->subject('Se ha creado exitosamente una nueva cuenta')
+            ->greeting(sprintf('Hola %s', $user->name))
+            ->line(' Se ha registrado exitosamnete a nuestro sistema. Por favor, active su cuenta.')
+            ->action('Presione aquí', route('activate.user', $user->activation_code))
+            ->line('Gracias por usuar nuestra apliación!');
     }
-
     /**
      * Get the array representation of the notification.
      *
