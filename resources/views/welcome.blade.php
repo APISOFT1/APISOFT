@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 
@@ -20,9 +21,11 @@
     <link href="welcome/css/main.css" rel="stylesheet">
     <link href="welcome/css/responsive.css" rel="stylesheet">
     <link href="welcome/css/animate.min.css" rel="stylesheet">
+
   </head>
 
-  <body>
+  
+  <body >
 
     <div class="navbar navbar-invers menu-wrap">
       <div class="navbar-header text-center">
@@ -278,8 +281,7 @@
       </div>
     </section>     
     </div>  
-
-
+    
 		<script src="welcome/js/jquery-2.1.4.min.js"></script>
     <script src="welcome/js/bootstrap.min.js"></script>
     <script src="welcome/js/ripples.min.js"></script>
@@ -303,3 +305,10 @@
     </script>
 
   </body>
+
+  <script>
+  function preloadFinished(e) { ... }
+  function preloadError(e)  { ... }
+</script>
+<!-- listen for load and error events -->
+<link rel="preload" href="app.js" as="script" onload="preloadFinished()" onerror="preloadError()">
