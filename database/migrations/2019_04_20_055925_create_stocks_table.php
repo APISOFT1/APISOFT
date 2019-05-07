@@ -15,8 +15,8 @@ class CreateStocksTable extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cantidadDisponible')->default(0);
             $table->string('nombre');
+            $table->integer('cantidadDisponible')->default(0);
             $table->double('precioUnitario')->default(0);;
             $table->integer('estanon_recepcions_id')->unsigned();
             $table->foreign('estanon_recepcions_id')->references('id')->on('recepcion_estanons');

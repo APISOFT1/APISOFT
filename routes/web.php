@@ -19,8 +19,6 @@ Auth::routes();
 //Auth::routes(['verify' => true]);
 
 
-Route::group(['middleware' =>['auth']], function () {
-
   // Authentication Routes...
 
     
@@ -127,5 +125,5 @@ Route::POST('deleteProduct','ProductController@deleteProduct');
 Route::POST('addUbicacion','UbicacionController@addUbicacion');
 Route::POST('editUbicacion','UbicacionController@editUbicacion');
 Route::POST('deleteUbicacion','UbicacionController@deleteUbicacion');
-});
+
  
