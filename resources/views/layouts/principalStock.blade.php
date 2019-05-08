@@ -10,23 +10,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>APISOFT</title>
     <!-- Bootstrap -->
-  
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="{{asset('css2/bootstrap-select.min.css')}}">
+ 
 
-
-
-
-    {!!Html::style ('/vendor/switch/switchery.min.css')!!} 
 
     {!!Html::style ('/css2/bootstrap.min.css')!!} 
 
-    {!!Html::style ('/css/green.css')!!} 
+    {!!Html::style ('/css2/bootstrap-select.min.css')!!}   
+    
+    {!!Html::style ('/css2/select2.min.css')!!}
 
+    {!!Html::style ('/css2/select2.css')!!}
 
-    {!!Html::style ('/css2/bootstrap-select.min.css')!!}  
+    {!!Html::style ('/css/dashboard.css')!!}
     
     <!-- Font Awesome -->
     {!!Html::style ('/css2/font-awesome.min.css')!!}
@@ -55,7 +54,7 @@
               </div>
               <div class="profile_info">
                 <span>Bienvenido</span>
-                <h2>{{ Auth::user()->name }}</h2>
+            
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -65,7 +64,7 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                      <li><a href="{{ url('/roles/') }}">Gestionar Rol</a></li>
                      <li><a href="{{ url('/permissions/') }}">Gestionar Permisos</a></li>
@@ -130,19 +129,8 @@
         <!-- /top navigation -->
         <!-- page content -->
         <div class="right_col" role="main">
-        
           <div class="container">
-          
             <div class="row x_panel">
-
-
-
-
-
-
-
-
-
               @yield('contenido')
             </div>
           </div>
@@ -161,19 +149,27 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
   crossorigin="anonymous"></script>
-  <script src="{{asset('js2/bootstrap-select.min.js')}}"></script>
+  <!--<script src="{{asset('js2/bootstrap-select.min.js')}}"></script>-->
   
     <!-- jQuery -->
+     
 
     {!!Html::script('/js2/jquery.min.js')!!}  
+
     @stack('scripts')
     <!-- Bootstrap -->
     {!!Html::script('/js2/bootstrap.min.js')!!}
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+   <!-- SELECT2 -->
+   {!!Html::script('/js2/bootstrap-select.min.js')!!} 
+
+    {!!Html::script('/js2/select2.full.js')!!}
+
+    {!!Html::script('/js2/select2.js')!!}
     
+    {!!Html::script('/js2/select2.min.js')!!}
+
+    {!!Html::script('/js2/select2.full.min.js')!!}
     <!-- FastClick -->
     {!!Html::script('/js2/fastclick.js')!!}
     <!-- NProgress -->
@@ -182,397 +178,198 @@
     {!!Html::script('/js2/jquery.mCustomScrollbar.concat.min.js')!!}
     <!-- Custom Theme Scripts -->
     {!!Html::script('/js2/custom.min.js')!!}
+
      {!!Html::script('/js2/dropdown.js')!!}
 
-     {!!Html::script('/js/switchery.min.js')!!}
+     {!!Html::script('/js/dashboard.js')!!}
 
-     {!!Html::script('/js/icheck.min.js')!!}
-
-     {!!Html::script('/js/icheck.js')!!}
+     {!!Html::script('/js/Chart.min.js')!!}
 
 
+ 
+<!-- Include the plugin's CSS and JS: -->
+{!!Html::script('/js/bootstrap-select.min.js')!!}
+
+{!!Html::script('/js/jquery-1.11.1.min.js')!!}
 
 
+<!-- MODAL INVENTARIO -->
 
-<!-- MODAL AFILIADO -->
-  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+
 {{-- ajax Form Add Post--}}
+
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
-    $('.modal-crear').text('Crear Afiliado');
-    
+    $('.modal-descripcion').text('Nuevo lote');
   });
   $("#add").click(function() {
     $.ajax({
       type: 'POST',
-      url: 'addAfiliado',
+      url: 'addStock',
+      
       data: {
-        'id': $('input[name=id]').val(),
-        'Nombre': $('input[name=Nombre]').val(),
-        'apellido1': $('input[name=apellido1]').val(),
-        'apellido2': $('input[name=apellido2]').val(),
-        'Telefono': $('input[name=Telefono]').val(),
-        'email': $('input[name=email]').val(),
-        'Direccion': $('input[name=Direccion]').val(),
-        'Fecha_Ingreso': $('input[name=Fecha_Ingreso]').val(),
-        'Num_Cuenta': $('input[name=Num_Cuenta]').val(),
-        'genero_id': $("select[name=genero_id]").val(),
-        'estado_civil_id': $('select[name=estado_civil_id').val(),
-        'estado_id': $('input[name=estado_id]').val()
+        '_token': $('input[name=_token]').val(),
+        'nombre': $('input[name=nombre]').val(),
+        'cantidadDisponible': $('input[name=cantidadDisponible]').val(),
+        'precioUnitario': $('input[name=precioUnitario]').val(),
+        'estanon_recepcions_id': $('select[name=estanon_recepcions_id]').val()
+        
       },
       success: function(data){
         if ((data.errors)) {
           $('.error').removeClass('hidden');
-          $('.error').text(data.errors.id);
-          $('.error').text(data.errors.Nombre);
-          $('.error').text(data.errors.apellido1);
-          $('.error').text(data.errors.apellido2);
-          $('.error').text(data.errors.Telefono);
-          $('.error').text(data.errors.email);
-          $('.error').text(data.errors.Direccion);
-          $('.error').text(data.errors.Fecha_Ingreso);
-          $('.error').text(data.errors.Num_Cuenta);
-          $('.error').text(data.errors.genero_id);
-          $('.error').text(data.errors.estado_civil_id);
-          $('.error').text(data.errors.estado_id);
+          $('.error').text(data.errors.Descripcion);
+          $('.error').text(data.errors.cantidad);
+          $('.error').text(data.errors.ubicacion_id);
  
         } else {
           $('.error').remove();
-          $('#table').append("<tr class='afi" + data.id + "'>"+
+          $('#table').append("<tr class='api" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
-          "<td>" + data.Nombre + "</td>"+
-          "<td>" + data.apellido1 + "</td>"+
-          "<td>" + data.apellido2 + "</td>"+
-          "<td>" + data.Telefono + "</td>"+
-          "<td>" + data.email + "</td>"+
-          "<td>" + data.Direccion+ "</td>"+
-          "<td>" + data.Fecha_Ingreso+ "</td>"+
-          "<td>" + data.Num_Cuenta+ "</td>"+
-          "<td>" + data.genero_id + "</td>"+
-          "<td>" + data.estado_civil_id + "</td>"+
-          "<td>" + data.estado_id + "</td>"+
-          "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + 
-          "' data-Nombre='" + data.Nombre + 
-          "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2+
-           "'data-Telefono='" + data.Telefono +
-            "' data-email='" + data.email +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-             "'  data-Num_Cuenta='" + data.Num_Cuenta +
-              "'data-genero_id='" + data.genero_id + 
-              "'data-estado_civil_id='" + data.estado_civil_id +
-               "'data-estado_id='" + data.estado_id +
- "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
- + data.id + 
-          "' data-Nombre='" + data.Nombre + 
-          "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2+
-           "'data-Telefono='" + data.Telefono +
-            "' data-email='" + data.email +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-             "'  data-Num_Cuenta='" + data.Num_Cuenta +
-              "'data-genero_id='" + data.genero_id + 
-              "'data-estado_civil_id='" + data.estado_civil_id +
-               "'data-estado_id='" + data.estado_id +
- "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
- + data.id + 
-          "' data-Nombre='" + data.Nombre + 
-          "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2+
-           "'data-Telefono='" + data.Telefono +
-            "' data-email='" + data.email +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-             "'  data-Num_Cuenta='" + data.Num_Cuenta +
-              "'data-genero_id='" + data.genero_id + 
-              "'data-estado_civil_id='" + data.estado_civil_id +
-               "'data-estado_id='" + data.estado_id +
-"'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+          "<td>" + data.nombre + "</td>"+
+          "<td>" + data.cantidadDisponible + "</td>"+
+          "<td>" + data.precioUnitario + "</td>"+
+          "<td>" + data.estanon_recepcions_id + "</td>"+
+  
+          "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
+          data.id + 
+          "' data-nombre='"
+          + data.nombre +  
+          "' data-cantidadDisponible='" 
+          + data.cantidadDisponible + 
+            "' data-precioUnitario='" 
+          + data.precioUnitario +  
+          " 'data-estanon_recepcions_id='" 
+          + data.estanon_recepcions_id + 
+          "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='"
+           + data.id + 
+            "' data-nombre='"
+          + data.nombre +  
+          "' data-cantidadDisponible='" 
+          + data.cantidadDisponible + 
+            "' data-precioUnitario='" 
+          + data.precioUnitario +  
+          " 'data-estanon_recepcions_id='" 
+          + data.estanon_recepcions_id + 
+           "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
+           + data.id + 
+             "' data-nombre='"
+          + data.nombre +  
+          "' data-cantidadDisponible='" 
+          + data.cantidadDisponible + 
+            "' data-precioUnitario='" 
+          + data.precioUnitario +  
+          " 'data-estanon_recepcions_id='" 
+          + data.estanon_recepcions_id +  "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
-         
         }
       },
     });
-    $('#id').val('');
-    $('#Nombre').val('');
-    $('#apellido1').val('');
-    $('#apellido2').val('');
-    $('#Telefono').val('');
-    $('#email').val('');
-    $('#Direccion').val('');
-    $('#Fecha_Ingreso').val('');
-    $('#Num_Cuenta').val('');
-    $('#genero_id').val('');
-    $('#estado_civil_id').val('');
-    $('#estado_id').val('');
+    $('#nombre').val('');
+    $('#cantidadDisponible').val('');
+    $('#precioUnitario').val('');
+    $('#estanon_recepcions_id').val('');
+
   });
+ 
+// function Edit POST
 $(document).on('click', '.edit-modal', function() {
-$('#footer_action_button').text(" Editar ");
-$('#footer_action_button').addClass('fa fa-pencil');
+$('#footer_action_button').text(" Editar Apiario");
+$('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-$('.modal-descripcion').text('Editar ');
+$('.modal-descripcion').text('Editar Apiario');
 $('.deleteContent').hide();
-$('.form-horizontal1').show();
-$('#i').val($(this).data('id'));
-$('#n').val($(this).data('nombre'));
-$('#a1').val($(this).data('apellido1'));
-$('#a2').val($(this).data('apellido2'));
-$('#t').val($(this).data('telefono'));
-$('#em').val($(this).data('email'));
-$('#d').val($(this).data('direccion'));
-$('#f').val($(this).data('fecha_ingreso'));
-$('#nu').val($(this).data('num_cuenta'));
-$('#g').val($(this).data('genero_id'));
-$('#e').val($(this).data('estado_civil_id'));
-$('#es').val($(this).data('estado_id'));
+$('.form-horizontal').show();
+$('#lol1').val($(this).data('id'));
+$('#lol2').val($(this).data('nombre'));
+$('#lol3').val($(this).data('cantidadDisponible'));
+$('#lol4').val($(this).data('precioUnitario'));
+$('#lol5').val($(this).data('estanon_recepcions_id'));
 $('#myModal').modal('show');
 });
+
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
-    url: 'editAfiliado',
+    url: 'editStock',
     data: {
-    
-'id':$("#i").val(),
-'Nombre':$('#n').val(),
-'apellido1':$('#a1').val(),
-'apellido2':$('#a2').val(),
-'Telefono':$('#t').val(),
-'email':$('#em').val(),
-'Direccion':$('#d').val(),
-'Fecha_Ingreso':$('#f').val(),
-'Num_Cuenta':$('#nu').val(),
-'genero_id':$('#g').val(),
-'estado_civil_id':$('#e').val(),
-'estado_id':$('#es').val(),
+'_token': $('input[name=_token]').val(),
+'id': $("#lol1").val(),
+'nombre': $('#lol2').val(),
+'cantidadDisponible': $('#lol3').val(),
+'precioUnitario': $('#lol4').val(),
+'estanon_recepcions_id': $('#lol5').val(),
+
     },
 success: function(data) {
-      $('.afi' + data.id).replaceWith(" "+
-      "<tr class='afi'>"+
-          "<td>" + data.id + "</td>"+
-          "<td>" + data.Nombre + "</td>"+
-          "<td>" + data.apellido1 + "</td>"+
-          "<td>" + data.apellido2 + "</td>"+
-          "<td>" + data.Telefono + "</td>"+
-          "<td>" + data.email + "</td>"+
-          "<td>" + data.Direccion+ "</td>"+
-          "<td>" + data.Fecha_Ingreso+ "</td>"+
-          "<td>" + data.Num_Cuenta+ "</td>"+
-          "<td>" + data.genero_id + "</td>"+
-          "<td>" + data.estado_civil_id + "</td>"+
-          "<td>" + data.estado_id + "</td>"+
-          "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + 
-          "' data-Nombre='" + data.Nombre + 
-          "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2+
-           "'data-Telefono='" + data.Telefono +
-            "' data-email='" + data.email +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-             "'  data-Num_Cuenta='" + data.Num_Cuenta +
-              "'data-genero_id='" + data.genero_id + 
-              "'data-estado_civil_id='" + data.estado_civil_id +
-               "'data-Estado_id='" + data.estado_id +
- "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
- + data.id + 
-          "' data-Nombre='" + data.Nombre + 
-          "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2+
-           "'data-Telefono='" + data.Telefono +
-            "' data-email='" + data.email +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-             "'  data-Num_Cuenta='" + data.Num_Cuenta +
-              "'data-genero_id='" + data.genero_id + 
-              "'data-estado_civil_id='" + data.estado_civil_id +
-               "'data-Estado_id='" + data.estado_id +
- "' ><span class='fa fa-pencil-esquare-o'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
- + data.id + 
-          "' data-Nombre='" + data.Nombre + 
-          "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2+
-           "'data-Telefono='" + data.Telefono +
-            "' data-email='" + data.email +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-             "'  data-Num_Cuenta='" + data.Num_Cuenta +
-              "'data-genero_id='" + data.genero_id + 
-              "'data-estado_civil_id='" + data.estado_civil_id +
-               "'data-Estado_id='" + data.estado_id +
-"'><span class='fa fa-trash'></span></button></td>"+
-          "</tr>");
-    }
-  });
-});
-/*
-// form Delete function
-$(document).on('click', '.delete-modal', function() {
-$('#footer_action_button').text(" Delete");
-$('#footer_action_button').removeClass('glyphicon-check');
-$('#footer_action_button').addClass('glyphicon-trash');
-$('.actionBtn').removeClass('btn-success');
-$('.actionBtn').addClass('btn-danger');
-$('.actionBtn').addClass('delete');
-$('.modal-title').text('Delete Post');
-$('.id').text($(this).data('id'));
-$('.nombre').text($(this).data('Nombre'));
-$('.apellido1').text($(this).data('apellido1'));
-$('.apellido2').text($(this).data('apellido2'));
-$('.telefono').text($(this).data('Telefono'));
-$('.email').text($(this).data('email'));
-$('.direccion').text($(this).data('Direccion'));
-$('.fecha_ingreso').text($(this).data('Fecha_Ingreso'));
-$('.num_cuenta').text($(this).data('Num_Cuenta'));
-$('.genero_id').text($(this).data('genero_id'));
-$('.estado_civil_id').text($(this).data('estado_civil_id'));
-$('.estado_id').text($(this).data('estado_id'));
-$('.deleteContent').show();
-$('.form-horizontal').hide();
-$('.title').html($(this).data('descripcion'));
-$('#myModal').modal('show');
-});
-$('.modal-footer').on('click', '.delete', function(){
-  $.ajax({
-    type: 'POST',
-    url: 'deleteAfiliado',
-    data: {
-  
+      $('.api' + data.id).replaceWith(" "+
+      "<tr class='api" + data.id + "'>"+
+      "<td>" + data.id + "</td>"+
+      "<td>" + data.nombre + "</td>"+
+      "<td>" + data.cantidadDisponible + "</td>"+
+      "<td>" + data.precioUnitario + "</td>"+
+      "<td>" + data.estanon_recepcions_id + "</td>"+
       
-    },
-    success: function(data){
-       $('.afiliado' + $('.id').text()+ $('.nombre').text()+
-       $('.apellido1').text()+ $('.apellido2').text()+ $('.telefono').text()+ $('.email').text()+ $('.direccion').text()+
-       $('.fecha_ingreso').text() $('.num_cuenta').text()+ $('.genero_id').text()+ $('.estado_civil_id').text()+ $('.genero_id').text()).remove();
+ "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + 
+      "<td>" + data.nombre + "</td>"+
+      "<td>" + data.cantidadDisponible + "</td>"+
+      "<td>" + data.precioUnitario + "</td>"+
+      "<td>" + data.estanon_recepcions_id + "</td>"+
+           "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
+          + data.id + 
+      "<td>" + data.nombre + "</td>"+
+      "<td>" + data.cantidadDisponible + "</td>"+
+      "<td>" + data.precioUnitario + "</td>"+
+      "<td>" + data.estanon_recepcions_id + "</td>"+
+           "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
+          + data.id +
+      "<td>" + data.nombre + "</td>"+
+      "<td>" + data.cantidadDisponible + "</td>"+
+      "<td>" + data.precioUnitario + "</td>"+
+      "<td>" + data.estanon_recepcions_id + "</td>"+
+           "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+      "</tr>");
     }
   });
 });
-*/
+
+
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
-  
-$('#iaa').val($(this).data('id'));
-$('#jaja').val($(this).data('nombre'));
-;
-  $('.modal-show').text('Datos');
+  $('#i').text($(this).data('id'));
+  $('#nom').text($(this).data('nombre'));
+  $('#can').text($(this).data('cantidadDisponible'));
+  $('#pu').text($(this).data('precioUnitario'));
+  $('#esre').text($(this).data('estanon_recepcions_id'));
+  $('.modal-title').text('Detalle');
   });
- 
+
+  /* processing bar 
+  */
+  var myApp;
+myApp = myApp || (function () {
+    var pleaseWaitDiv = $('<div class="modal hide" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false"><div class="modal-header"><h1>Processing...</h1></div><div class="modal-body"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div></div>');
+    return {
+        showPleaseWait: function() {
+            pleaseWaitDiv.modal();
+        },
+        hidePleaseWait: function () {
+            pleaseWaitDiv.modal('hide');
+        },
+
+    };
+})();
 </script>
-
-<script type="text/javascript">
-$(document).ready(function () {
-    var navListItems = $('div.setup-panel div a'), // tab nav items
-            allWells = $('.setup-content'), // content div
-            allNextBtn = $('.nextBtn'); // next button
-    allWells.hide(); // hide all contents by defauld
-    navListItems.click(function (e) {
-        e.preventDefault();
-        var $target = $($(this).attr('href')),
-                $item = $(this);
-        if (!$item.hasClass('disabled')) {
-            navListItems.removeClass('btn-primary').addClass('btn-default');
-            $item.addClass('btn-primary');
-            allWells.hide();
-            $target.show();
-            $target.find('input:eq(0)').focus();
-        }
-    });
-    // next button
-    allNextBtn.click(function(){
-        var curStep = $(this).closest(".setup-content"),
-            curStepBtn = curStep.attr("id"),
-            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-            curInputs = curStep.find("input[type='text'],input[type='email'],input[type='password'],input[type='url']"),
-            isValid = true;
-           // Validation
-        $(".form-group").removeClass("has-error");
-        for(var i=0; i<curInputs.length; i++){
-            if (!curInputs[i].validity.valid){
-                isValid = false;
-                $(curInputs[i]).closest(".form-group").addClass("has-error");
-            }
-        }
-        // move to next step if valid
-        if (isValid)
-            nextStepWizard.removeAttr('disabled').trigger('click');
-    });
- 
-    $('div.setup-panel div a.btn-primary').trigger('click');
-});
-</script>
+  
 
 
-  </body>
-</html>
-<script>
-
-
-var timeoutId = 0;
-$('#discount').keyup(function(e){
-   clearTimeout(timeoutId);
-   timeoutId = setTimeout(discount,1000);
-});
-
-function discount(){
-  let amount = $('#discount').val();
-  if(!isNaN(amount)){
-    let discount = amount * 0.05;
-    let total =  amount - discount;
-    $("#total").val(total);
-  } 
-}
-
-</script>
-  <style type="text/css">
-.form-control {
-    height: 37px;
-}
-.stepwizard-step p {
-    margin-top: 10px;
-}
-.stepwizard-row {
-    display: table-row;
-}
-.stepwizard {
-    display: table;
-    width: 100%;
-    position: relative;
-}
-.stepwizard-step button[disabled] {
-    opacity: 1 !important;
-    filter: alpha(opacity=100) !important;
-}
- 
-.stepwizard-row:before {
-    top: 14px;
-    bottom: 0;
-    position: absolute;
-    content: " ";
-    width: 100%;
-    height: 1px;
-    background-color: #ccc;
-    z-order: 0;
-}
-.stepwizard-step {
-    display: table-cell;
-    text-align: center;
-    position: relative;
-}
-.btn-circle {
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  padding: 6px 0;
-  font-size: 12px;
-  line-height: 1.428571429;
-  border-radius: 15px;
-}
-</style>
-
+    </body>
+    </html>

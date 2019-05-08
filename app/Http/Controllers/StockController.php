@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Stock;
+use Validator;
+use Response;
+use App\RecepcionEstanon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;  //MUYR IMPORTANTE , SIN ESTO NO GUARDA.
+use App\Http\Requests\StockFormRequest;
 
 class StockController extends Controller
 {/**
@@ -15,8 +20,8 @@ class StockController extends Controller
     {
       if($request){
         $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-        $sto= Stock::with('RecepcionEstanon') 
-            ->where('Nombre','LIKE','%'.$query.'%')
+        $sto= Stock::with('recepcionEstanon') 
+            ->where('id','LIKE','%'.$query.'%')
             ->orderby('id','desc')
             ->paginate(7);
             $recepcionEstanon = RecepcionEstanon::all();

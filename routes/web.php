@@ -63,6 +63,7 @@ Auth::routes();
 'Cera'=>'CeraController',
 'Producto' => 'ProductController',
 'RecepEstanon' => 'RecepcionEstanonController',
+'Stock' => 'StockController',
 '/' => 'Admin\DashboardController',
 
 
@@ -77,6 +78,9 @@ Route::POST('addAfiliado','AfiliadoController@addAfiliado');
 Route::POST('editAfiliado','AfiliadoController@editAfiliado');
 Route::POST('deleteAfiliado','AfiliadoController@deleteAfiliado');
 
+Route::POST('addStock','StockController@addStock');
+Route::POST('editStock','StockController@editStock');
+Route::POST('deleteStock','StockController@deleteStock');
 
 Route::get('dashboard/log-chart', 'Admin\DashboardController@getLogChartData')->name('dashboard.log.chart');
     Route::get('dashboard/registration-chart', 'Admin\DashboardController@getRegistrationChartData')->name('dashboard.registration.chart');

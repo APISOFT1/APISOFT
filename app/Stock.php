@@ -1,8 +1,8 @@
 <?php
 
 namespace App;
-
 use Illuminate\Database\Eloquent\Model;
+use App\RecepcionEstanon;
 
 class Stock extends Model
 {
@@ -14,9 +14,9 @@ class Stock extends Model
     ];
 
    
-    public function estanon_recepcion()
+    public function recepcionEstanon()
     {
-         return $this->belongsTo(EstanonRecepcion::class ,'estanon_recepcions_id');
+         return $this->belongsTo(RecepcionEstanon::class ,'estanon_recepcions_id');
     }
 
     
