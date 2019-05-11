@@ -4,15 +4,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Role;
 use Illuminate\Database\Eloquent\Model;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> origin
-class User extends Authenticatable implements MustVerifyEmail
-=======
+
+//class User extends Authenticatable implements MustVerifyEmail
+
 class User extends Authenticatable 
->>>>>>> Caro
+
 {
     use Notifiable;
     

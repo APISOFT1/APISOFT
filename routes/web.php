@@ -13,38 +13,6 @@ jjajaajaj
 */
 Route::get('/', function () {
     return view('welcome');
-<<<<<<< HEAD
-  
-});
-Auth::routes();
-Auth::routes(['verify' => true]);
-
-
-Route::group(['middleware' =>['auth'  ,'verified' ]], function () {
-  
-
-  Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-  
-  if (config('auth.registration')) {
-    Route::get('register', 'RegisterController@showRegistrationForm')->name('register');
-    Route::post('register', 'RegisterController@register');
-}
-if (config('auth.confirm_email')) {
-  Route::get('confirm/{user_by_code}', 'ConfirmController@confirm')->name('confirm');
-  Route::get('confirm/resend/{user_by_email}', 'ConfirmController@sendEmail')->name('confirm.send');
-}
-
-      Route::get('chart', 'ChartController@index'); 
-
-     Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
-     Route::get('chartRecepcion', 'Admin\DashboardController@indexRecepcion')->name('chartRecepcion');
-     Route::get('chartIngreso', 'Admin\DashboardController@indexIngreso')->name('chartIngreso');
-
-
-   
-
-  Route::resources([
-=======
 });
 
 Auth::routes(['verify' => true]);
@@ -55,7 +23,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::resources([
->>>>>>> origin
 'Estanon'=>'EstanonController',
 'Genero'=>'GeneroController',
 'EstadoCivil'=>'EstadoCivilController',
@@ -72,21 +39,6 @@ Route::resources([
 'IngresoInventario' => 'IngresoInventarioController',
 'admin/permissions' => 'Admin\PermissionsController',
 'admin/roles'=> 'Admin\RolesController',
-<<<<<<< HEAD
-'users'=> 'Admin\UsersController',
-'Cera'=>'CeraController',
-'Producto' => 'ProductController',
-'RecepEstanon' => 'RecepcionEstanonController',
-
-
-
-
-  ]);
-
-  
-  Route::get('users/{users}/edit', 'UsersController@edit')->name('users.edit');
-  Route::put('users/{users}', 'UsersController@update')->name('users.update');
-=======
 'admin/users'=> 'Admin\UsersController',
 'Apiario'=>'ApiarioController',
 'Ubicacion'=>'UbicacionController',
@@ -97,7 +49,6 @@ Route::resources([
   Route::post('roles_mass_destroy', ['uses' => 'Admin\RolesController@massDestroy', 'as' => 'roles.mass_destroy']);
   Route::post('users_mass_destroy', ['uses' => 'Admin\UsersController@massDestroy', 'as' => 'users.mass_destroy']);
 Route::get('generos/{id}/destroy', 'GeneroController@destroy')->name('generos.destroy');
->>>>>>> origin
 Route::POST('addAfiliado','AfiliadoController@addAfiliado');
 Route::POST('editAfiliado','AfiliadoController@editAfiliado');
 Route::POST('deleteAfiliado','AfiliadoController@deleteAfiliado');
@@ -125,42 +76,16 @@ Route::POST('addAfiliadoApiario','AfiliadoApiarioController@addAfiliadoApiario')
 Route::POST('editApiario','ApiarioController@editApiario');
 Route::POST('deleteApiario','ApiarioController@deleteApiario');
 
-<<<<<<< HEAD
-Route::POST('addCera','CeraController@addCera');
-Route::POST('editCera','CeraController@editCera');
-Route::POST('deleteCera','CeraController@deleteCera');
-Route::POST('agregar','CeraController@agregar');
-=======
 });
 
 
   
->>>>>>> origin
 
 Route::POST('addRecepcion','RecepcionEstanonController@addRecepcion');
 Route::POST('editRecepcion','RecepcionEstanonController@editRecepcion');
 Route::POST('deleRecepcion','RecepcionEstanonController@deleteRecepcion');
 
-<<<<<<< HEAD
-Route::POST('editUser','Admin\UsersController@editUser');
-Route::POST('deleteUser','Admin\UsersController@deleteUser');
-
-Route::POST('addUser','Auth\RegisterController@addUser');
-Route::POST('editUser','Admin\UsersController@editUser');
-Route::POST('deleteUser','Admin\UsersController@deleteUser');
-
-Route::POST('addProduct','ProductController@addProduct');
-Route::POST('editProduct','ProductController@editProduct');
-Route::POST('deleteProduct','ProductController@deleteProduct');
-
-Route::POST('addUbicacion','UbicacionController@addUbicacion');
-Route::POST('editUbicacion','UbicacionController@editUbicacion');
-Route::POST('deleteUbicacion','UbicacionController@deleteUbicacion');
-});
- 
-=======
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
->>>>>>> origin
