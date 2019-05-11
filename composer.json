@@ -17,7 +17,9 @@
         "laravelcollective/html": "^5.5",
         "laraveldaily/laravel-charts": "^0.1.4",
         "spatie/laravel-permission": "^2.36",
+        "styde/html": "~1.0",
         "techlab/smartwizard": "^4.3",
+        "uxweb/sweet-alert": "^2.0",
         "yoeunes/toastr": "^1.1"
     },
     "require-dev": {

@@ -115,7 +115,7 @@
         </form>
       </div>
           <div class="modal-footer">
-            <button class="btn btn-warning" type="submit" id="add">
+            <button class="btn btn-warning"   onclick="ConfirmDemo()" type="submit" id="add">
               <span class="fa fa-save"></span> Guardar 
             </button>
             <button class="btn btn-warning" type="button" data-dismiss="modal">
@@ -235,3 +235,8 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
+    <script type="text/javascript">
+function ConfirmDemo() {
+ Alert::success('Se ha creado con exito ')->persistent("Close");
+}
+</script>

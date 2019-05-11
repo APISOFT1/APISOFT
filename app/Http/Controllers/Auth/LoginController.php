@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
+use Alert;
 class LoginController extends Controller
 {
     /*
@@ -27,6 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
+    
     protected $redirectTo = '/dashboard';
 
     /**
@@ -56,6 +58,8 @@ class LoginController extends Controller
     public function field(Request $request)
     {
         $email = $this->username();
+        
+      
 
         return filter_var($request->get($email), FILTER_VALIDATE_EMAIL) ? $email : 'username';
     }
@@ -77,17 +81,23 @@ class LoginController extends Controller
             'password' => 'required',
         ], $messages);
 
-      
 
 }
 protected function sendFailedLoginResponse(Request $request)
-    {
+   {
         $request->session()->put('login_error', trans('auth.failed'));
-        throw ValidationException::withMessages(
-            [
+       throw ValidationException::withMessages(
+           [
                 'error' => [trans('auth.failed')],
-            ]
+          ]
         );
     }
+
+   // public function logOut()
+   // {
+     //   Auth::logout();
+      //  alert()->success('You have been logged out.', 'Good bye!');
+       // return Redirect::to('login');
+  //  }
 }
 

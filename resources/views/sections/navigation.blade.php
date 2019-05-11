@@ -45,14 +45,20 @@
                             
                         </a>
                     </li>
+                    @if(Auth::check())
+                    @if (Auth::user()->isAdmin())
+    
                     <li>
                         <a href="{{ url('/chartIngreso/') }}">Ingreso
                             <i class="fa fa-money" aria-hidden="true"></i>
                             
                         </a>
                     </li>
+                    @endif
+@endif
                 </ul>
-    
+                @if(Auth::check())
+                    @if (Auth::user()->isAdmin())
                     <li><a><i class="fa fa-user"></i> Usuarios <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li>
@@ -68,6 +74,20 @@
                             
                         </a>
                     </li>
+                    @else
+                    <li><a><i class="fa fa-home"></i> Planta <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                    <li>
+                        <a href="{{ url('/RecepcionMateriaPrima/') }}"> Gestionar Recepción
+                            <i class="fa fa-file-text" aria-hidden="true"></i>
+                            
+                        </a>
+                    </li>
+
+                   
+                    @endif
+                    @endif
+                    
                 </ul>
            
            

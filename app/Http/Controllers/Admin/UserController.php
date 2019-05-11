@@ -7,7 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
-
+use Alert;
 class UserController extends Controller
 {
     /**
@@ -107,7 +107,7 @@ class UserController extends Controller
                 $user->roles()->attach($request->get('roles'));
             }
         }
-
+      
         return redirect()->intended(route('users.index'));
     }
 

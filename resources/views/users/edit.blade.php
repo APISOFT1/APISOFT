@@ -37,7 +37,7 @@
             
                 <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-           <input type="text" class="form-control has-feedback-left" id="status" name="status"  value="{{ $user->status }}" placeholder="Correo" required>
+           <input type="text" class="form-control has-feedback-left" id="status" name="status"  value="{{ $user->status }}" placeholder="Estado" required>
            <p class="error text-center alert alert-danger hidden"></p>
               <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                 </div>

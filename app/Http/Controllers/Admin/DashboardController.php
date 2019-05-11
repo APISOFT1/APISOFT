@@ -21,7 +21,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Routing\Route;
 use DB;
-
+use Alert;
 \Carbon\Carbon::setLocale('es'); 
 class DashboardController extends Controller
 {
@@ -100,7 +100,8 @@ $afi = Afiliado::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))
         }
         
 
-
+       
+        Alert::message('Welcome back!');
         return view('dashboard', ['counts' => $counts] , compact('chart', 'chart2', 'chart3', 'chart4'));
        
         

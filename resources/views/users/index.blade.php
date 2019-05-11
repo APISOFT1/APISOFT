@@ -121,6 +121,7 @@
                   </div>
 </div>
 
+
 {{-- Modal Form Edit and Delete Post --}}
 <div id="myModal"class="modal fade" role="dialog">
   <div class="modal-dialog">
