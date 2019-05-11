@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -17,6 +18,9 @@ use Spatie\Permission\Models\Permission;class HomeController extends Controller
 class HomeController extends Controller
 >>>>>>> origin
 =======
+=======
+use Alert;
+>>>>>>> Caro
 class HomeController extends Controller
 >>>>>>> Caro
 {
@@ -43,6 +47,7 @@ class HomeController extends Controller
     {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         //$afiliados = DB::select("SELECT count('id_Afiliado') as total, genero_id as Genero
        // FROM afiliados INNER JOIN generos 
        // ON afiliados.genero_id=generos.id GROUP BY genero_id");
@@ -51,6 +56,9 @@ class HomeController extends Controller
         return view('home');
 =======
         return view('dashboard');
+>>>>>>> Caro
+=======
+        return redirect('dashboard')->with('success', 'Profile updated!');
 >>>>>>> Caro
     }
 }

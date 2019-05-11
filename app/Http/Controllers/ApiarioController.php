@@ -8,7 +8,7 @@ use App\Ubicacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;  //MUYR IMPORTANTE , SIN ESTO NO GUARDA.
 use App\Http\Requests\ApiariosFormRequest;
-
+use Alert;
 class ApiarioController extends Controller
 {
     /**
@@ -25,6 +25,7 @@ class ApiarioController extends Controller
             ->orderby('id','desc')
             ->paginate(7);
            $ubicaciones = Ubicacion::all();
+
            
         return view('Apiario.index', compact('api', 'ubicaciones'), ['api'=>$api,"searchText"=>$query]);
         }
@@ -49,6 +50,8 @@ public function addApiario(Request $request){
     $api->ubicacion_id = $request->ubicacion_id;
   
     $api->save();
+    
+   
     return response()->json($api);
    
   

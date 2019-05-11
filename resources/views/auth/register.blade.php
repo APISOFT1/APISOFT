@@ -38,15 +38,29 @@
 				<span class="login100-form-title p-b-41">
 					Registro
 				</span>
-				<form class="login100-form validate-form p-b-33 p-t-5"    >
+				<form class="login100-form validate-form p-b-33 p-t-5"    method="POST" action="{{ route('register') }}" >
   					@csrf
-
+					  @if(session()->has('message'))
+            <div class="alert alert-success">
+              {{ session()->get('message') }}
+            </div>
+          @endif
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
 						<input id="name"  type="text"  class="input100{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
 						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
 						@if ($errors->has('name'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('name') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Enter username">
+						<input id="username"  type="text"  class="input100{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
+						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
+						@if ($errors->has('name'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('username') }}</strong>
                             </span>
                         @endif
                     </div>

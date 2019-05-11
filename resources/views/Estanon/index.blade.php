@@ -1,4 +1,4 @@
-@extends ('layouts.principalEstanon')
+@extends ('layouts.pricipalEstanon')
 
 <!-- mensaje de exito -->
 <?php $message=Session::get('message') ?>
@@ -31,7 +31,6 @@
 				<thead>
 					<th>Identificación</th>
 					<th>Peso</th>
-					<th>Fecha</th>
 					<th>Creación</th>
 					<th> <a href="Estanon/create"
 					class="create-modal btn btn-success btn-sm">
@@ -43,7 +42,6 @@
 				<tr>
 					<td>{{ $est->id}}</td>
 					<td>{{ $est->Peso}}</td>
-          <td>{{ $est->Fecha}}</td>
 					<td>{{ $est->created_at}}</td>
 
 					<td>

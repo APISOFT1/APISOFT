@@ -31,9 +31,8 @@
 			<th width="150px" >Cédula</th>
   		<th> <div class="size2">Usuario</th>
   		<th>Correo</th>
-    	<th>Roles</th>
+      <th>Roles</th>
       <th>Estado</th>
-      <th>Confirmado</th>
       <th>Acciones</th>
          <tr>
        
@@ -42,42 +41,28 @@
                      <tr data-entry-id="{{ $value->id }}">
                                
                                 <td>{{ $value->id }}</td>
-                                <td>{{ $value->name }} {{ $value->Apellido1 }} {{ $value->Apellido2 }}</td>
+                                <td>{{ $value->name }}</td>
                                 <td>{{ $value->email }}</td>
                                 <td> <span class="label label-info label-many label label-success">
                                 {{$value->roles->pluck('name')->implode(' , ')}}</span>
                                  
                                 </td>
                                 <td>
-                                @if($value->active)
-                            <span class="label label-primary"><?php  if ($value->active=='1') {
+                                @if($value->status)
+                            <span class="label label-primary"><?php  if ($value->status=='1') {
 	                     		# code...
 	                 		print("Activo");
 	                         	} 
 	                     	  ?> </span>
                         @else
-                            <span class="label label-danger"><?php  if ($value->active=='0') {
+                            <span class="label label-danger"><?php  if ($value->status=='0') {
 		                      	# code...
 	                       		print("Inactivo");
 	                         	} 
 	                     	  ?> </span>
                         @endif</td>
 
-                        <td>
-                        @if($value->confirmed)
-                            <span class="label label-success"><?php  if ($value->confirmed=='1') {
-		                      	# code...
-		                      	print("Confirmado");
-	                             	} 
-		                           ?></span>
-                        @else
-                            <span class="label label-warning"><?php  if ($value->confirmed=='0') {
-		                      	# code...
-		                     	print("Sin confirmar");
-	                             	} 
-		                           ?></span>
-                        @endif
-                        </td>
+                       
                                 <td>
             <a href="#" class="show-modal btn btn-info btn-sm" 
             data-id="{{$value->id}}"
@@ -86,11 +71,7 @@
             data-password="{{$value->password}}">
               <i class="fa fa-eye"></i>
             </a>
-            <a href="#" class="edit-modal btn btn-warning btn-sm"
-            data-id="{{$value->id}}"
-            data-name="{{$value->name}}"
-            data-email="{{$value->email}}"
-            data-password="{{$value->password}}"
+            <a class= "btn btn-warning btn-sm" href="{{ route('users.edit', [$value->id]) }}" data-toggle="tooltip" data-placement="top" data-title="{{ __('views.users.index.edit') }}"
    ><i class="glyphicon glyphicon-pencil"></i> </a>
 
    {{--@if(!$value->hasRole('administrator'))--}}
@@ -139,6 +120,7 @@
                     </div>
                   </div>
 </div>
+
 
 {{-- Modal Form Edit and Delete Post --}}
 <div id="myModal"class="modal fade" role="dialog">

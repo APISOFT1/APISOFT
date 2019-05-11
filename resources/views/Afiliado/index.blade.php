@@ -41,12 +41,18 @@
   		<th>Numero de Cuenta</th>
     	<th>Género</th>
   		<th>Estado Civil</th>
+     
 			<th>Estado</th>
+      <th>Accion</th>
+      @if(Auth::check())
+      @if (Auth::user()->isAdmin())
         <th class="text-center" width="150px">
           <a href="#" class="create-modal btn btn-success btn-sm">
             <i class="fa fa-plus"></i>
           </a>
         </th>
+        @endif
+        @endif
       </tr>
       @foreach ($afi as $value)
       <tr class="afi{{$value->id}}">
@@ -82,6 +88,8 @@
             data-estado_id="{{$value->estado_id}}"
               ><i class="fa fa-eye"></i>
             </a>
+            @if(Auth::check())
+      @if (Auth::user()->isAdmin())
             <a href="#" class="edit-modal btn btn-warning btn-sm"
             data-id="{{$value->id}}"
             data-Nombre="{{$value->Nombre}}"
@@ -111,6 +119,8 @@
             data-estado_id="{{$value->estado_id}}">
               <i class="fa fa-trash"></i>
             </a>
+            @endif
+            @endif
           </td>
         </tr>
       @endforeach
