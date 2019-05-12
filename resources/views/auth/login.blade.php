@@ -28,7 +28,7 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
+
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100 p-t-30 p-b-50">
@@ -37,6 +37,11 @@
 				</span>
 				<form class="login100-form validate-form p-b-33 p-t-5"  id="signin"  method="POST"  action="{{ route('login') }}">
  					@csrf
+					 @if(session()->has('message'))
+            <div class="alert alert-success">
+              {{ session()->get('message') }}
+            </div>
+          @endif
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
 						<input id="email"  type="text"  class="input100{{ $errors->has('email') ? ' is-invalid' : '' }}" type="email" name="email" placeholder="Correo Electrónico" required="" value="{{ old('email') }}" required autofocus>
 						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
@@ -66,6 +71,7 @@
 							<button type="submit" value="Ingresar" {{ __('Ingresar') }} class="login100-form-btn">
 								Ingresar
 							</button>
+							
 						</div>
 
 					
@@ -81,6 +87,7 @@
 					</div> 
 
 				</form>
+				
 			</div>
 		</div>
 	</div>
@@ -104,6 +111,7 @@
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 	<script src="js/main3.js"></script>
-
+	
 </body>
 </html>
+

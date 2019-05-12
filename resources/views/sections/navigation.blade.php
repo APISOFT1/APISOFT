@@ -61,6 +61,13 @@
                             
                         </a>
                     </li>
+
+                    <li>
+                        <a href="{{ url('/register/') }}">Registrar
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            
+                        </a>
+                    </li>
                 </ul>
            
            

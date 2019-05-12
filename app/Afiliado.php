@@ -1,11 +1,15 @@
 <?php
 
 namespace App;
-
+use App\Notifications\NotificacionPago;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
 class Afiliado extends Model
 {
+    use Notifiable; 
+
+
     protected $table= 'afiliados';
     protected $primaryKey="id";
     public $timestamps=false;

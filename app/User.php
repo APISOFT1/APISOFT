@@ -1,27 +1,23 @@
 <?php
 namespace App;
+
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Role;
-use Illuminate\Database\Eloquent\Model;
-class User extends Authenticatable implements MustVerifyEmail
+
+class User extends Authenticatable
 {
     use Notifiable;
-    
+
+    const STATUS = 1;
+    const INACTIVE = 0;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $table= 'users';
-    protected $primaryKey="id";
-    
-    public $timestamps=true;
     protected $fillable = [
-        'name', 'email', 'password', 'active', 'confirmation_code', 'confirmed'
-     
-        
+        'name', 'email', 'username', 'password' , 'status', 'activation_code',
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -31,16 +27,14 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password', 'remember_token',
     ];
-   
-    protected $dates = ['deleted_at'];
-
-    public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = \Hash::make($password);
-    }
     
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'users_roles', 'user_id', 'role_id');
     }
+
+    public function assignRole(Role $role)
+{
+    return $this->roles()->save($role);
+}
 }

@@ -10,7 +10,7 @@ class Stock extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'precioUnitario','nombre','estanon_recepcions_id','cantidadDisponible'
+       'nombre','cantidadDisponible', 'precioUnitario','estanon_recepcions_id'
     ];
 
    

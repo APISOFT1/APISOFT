@@ -1,6 +1,6 @@
 <?php
 
-/*namespace App\Models\Auth\User;
+namespace App\Models\Auth\User;
 
 use App\Models\Auth\User\Traits\Ables\Protectable;
 use App\Models\Auth\User\Traits\Attributes\UserAttributes;
@@ -49,7 +49,7 @@ use Kyslik\ColumnSortable\Sortable;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Auth\User\User whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-/*
+
 class User extends Authenticatable
 {
     use Rolable,
@@ -68,7 +68,7 @@ class User extends Authenticatable
      *
      * @var string
      */
-    /*
+    
     protected $table = 'users';
 
     /**
@@ -76,7 +76,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    /*
+    
     protected $fillable = ['name', 'email', 'password', 'active', 'confirmation_code', 'confirmed'];
 
     /**
@@ -84,7 +84,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    /*
+    
     protected $hidden = ['password', 'remember_token'];
 
     /**
@@ -92,7 +92,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    /*
+    
     protected $dates = ['deleted_at'];
 }
    

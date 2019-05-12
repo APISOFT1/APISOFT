@@ -42,7 +42,7 @@ class StockController extends Controller
           'id' => 'required',
           'nombre' => 'required',
           'cantidadDisponible' => 'required',
-          'precioUnitario' => 'numeric|required',
+          'precioUnitario' => 'required',
           'estanon_recepcions_id' => 'required'
         );
       $validator = Validator::make ( Input::all(), $rules);

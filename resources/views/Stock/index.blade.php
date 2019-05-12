@@ -99,7 +99,7 @@
 
                 <div class="form-group row add">
                 <div class="col-md-9" >
-           <input type="text" class="form-control has-feedback-left" id="cantidad" name="cantidad" placeholder="cantidad" required>
+           <input type="text" class="form-control has-feedback-left" id="cantidadDisponible" name="cantidadDisponible" placeholder="cantidad" required>
            <p class="error text-center alert alert-danger hidden"></p>
               <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                 </div>
@@ -114,10 +114,10 @@
 
                 <div class="form-group row add">
                 <div class="col-md-9  form-group has-feedback">
-        <select name="ubicacion_id" class="form-control has-feedback-left" id="ubicacion_id">
+        <select name="estanon_recepcions_id" class="form-control has-feedback-left" id="estanon_recepcions_id">
          <option value="">-- Seleccione recepción-estañon --</option>
-         @foreach ($ubicaciones as $ubicacion)
-          <option value="{{ $ubicacion->id }}">{{$ubicacion->id}}</option>
+         @foreach ($recepcionEstanon as $recepcionEstanones)
+          <option value="{{ $recepcionEstanones->id }}">{{$recepcionEstanones->id}}</option>
          @endforeach
         </select>
         <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
@@ -149,21 +149,25 @@
                   
                     <div class="form-group">
                       <label for="">Código :</label>
-                      <b id="i2"/>
+                      <b id="i"/>
                     </div>
                     <div class="form-group">
                       <label for="">Descripción :</label>
                       
-                      <b id="d2"/>
+                      <b id="nom"/>
                     </div>
 										<div class="form-group">
                       <label for="">Cantidad :</label>
-                      <b id="ca2"/>
+                      <b id="can"/>
+                    </div>
+                    	<div class="form-group">
+                      <label for="">Precio :</label>
+                      <b id="pu"/>
                     </div>
 										<div class="form-group">
                    
-                      <label for="">Ubicación :</label>
-                      <span class="label label-success"><b id="ub2"/>
+                      <label for="">Recepcion-Estañon :</label>
+                      <span class="label label-success"><b id="esre"/>
                     </div>
                     </div>
                     </div>
@@ -182,31 +186,38 @@
 
         <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-           <input type="text" class="form-control has-feedback-left" id="ids" disabled>
+           <input type="text" class="form-control has-feedback-left" id="lol1" disabled>
               <span class="fa fa-key form-control-feedback left" aria-hidden="true"></span>
                 </div>
                 </div>
           
                 <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-           <input type="text" class="form-control has-feedback-left" id="cri" >
+           <input type="text" class="form-control has-feedback-left" id="lol2" >
               <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
                 </div>
                 </div>
           
                 <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-           <input type="text" class="form-control has-feedback-left" id="can" >
+           <input type="text" class="form-control has-feedback-left" id="lol3" >
+              <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
+                </div>
+                </div>
+                
+                <div class="form-group row add">
+        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+           <input type="text" class="form-control has-feedback-left" id="lol4" >
               <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
                 </div>
                 </div>
 
                 <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-        <select name="name" class="form-control has-feedback-left" id="ub">
-         <option value="">-- Select ubicacion --</option>
-         @foreach ($ubicaciones as $ubicacion)
-          <option value="{{ $ubicacion->id }}">{{$ubicacion->Descripcion}}</option>
+        <select name="name" class="form-control has-feedback-left" id="lol5">
+        <option value="">-- Seleccione recepción-estañon --</option>
+         @foreach ($recepcionEstanon as $recepcionEstanones)
+          <option value="{{ $recepcionEstanones->id }}">{{$recepcionEstanones->id}}</option>
          @endforeach
         </select>
 					  <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>

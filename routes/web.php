@@ -16,22 +16,21 @@ Route::get('/', function () {
   
 });
 Auth::routes();
-//Auth::routes(['verify' => true]);
 
 
-  // Authentication Routes...
-
-    
-    // Registration Routes...
-    if (config('auth.registration')) {
-      Route::get('register', 'RegisterController@showRegistrationForm')->name('register');
-      Route::post('register', 'RegisterController@register');
-  }
-
-  if (config('auth.confirm_email')) {
-    Route::get('confirm/{user_by_code}', 'ConfirmController@confirm')->name('confirm');
-    Route::get('confirm/resend/{user_by_email}', 'ConfirmController@sendEmail')->name('confirm.send');
+  if (config('auth.registration')) {
+    Route::get('register', 'RegisterController@showRegistrationForm')->name('register');
+    Route::post('register', 'RegisterController@register');
 }
+
+  Route::get('activate/{token}', 'Auth\RegisterController@activate')
+      ->name('activate');
+      
+  Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+  
+  
+
+
       Route::get('chart', 'ChartController@index'); 
 
      Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
@@ -39,8 +38,7 @@ Auth::routes();
      Route::get('chartIngreso', 'Admin\DashboardController@indexIngreso')->name('chartIngreso');
 
 
-       // Dashboard
-  //Route::get('users', ' Admin\DashboardController')->name('dashboard'); 
+   
 
   Route::resources([
 'Estanon'=>'EstanonController',
@@ -59,21 +57,18 @@ Auth::routes();
 'IngresoInventario' => 'IngresoInventarioController',
 'admin/permissions' => 'Admin\PermissionsController',
 'admin/roles'=> 'Admin\RolesController',
-'users'=> 'Admin\UsersController',
+'users'=> 'Admin\UserController',
 'Cera'=>'CeraController',
 'Producto' => 'ProductController',
 'RecepEstanon' => 'RecepcionEstanonController',
 'Stock' => 'StockController',
-'/' => 'Admin\DashboardController',
-
 
 
   ]);
 
-  Route::get('/home', 'HomeController@index')->name('home');
-  Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-  Route::get('users/{users}/edit', 'UsersController@edit')->name('users.edit');
-  Route::put('users/{users}', 'UsersController@update')->name('users.update');
+  
+  Route::get('users/{users}/edit', 'Admin\UserController@edit')->name('users.edit');
+  Route::put('users/{users}', 'Admin\UserController@update')->name('users.update');
 Route::POST('addAfiliado','AfiliadoController@addAfiliado');
 Route::POST('editAfiliado','AfiliadoController@editAfiliado');
 Route::POST('deleteAfiliado','AfiliadoController@deleteAfiliado');
@@ -82,8 +77,6 @@ Route::POST('addStock','StockController@addStock');
 Route::POST('editStock','StockController@editStock');
 Route::POST('deleteStock','StockController@deleteStock');
 
-Route::get('dashboard/log-chart', 'Admin\DashboardController@getLogChartData')->name('dashboard.log.chart');
-    Route::get('dashboard/registration-chart', 'Admin\DashboardController@getRegistrationChartData')->name('dashboard.registration.chart');
 
 Route::POST('addPermissions','Admin\PermissionsController@addPermissions');
 Route::POST('ediPermissions','Admin\PermissionsController@ediPermissions');
@@ -130,4 +123,5 @@ Route::POST('addUbicacion','UbicacionController@addUbicacion');
 Route::POST('editUbicacion','UbicacionController@editUbicacion');
 Route::POST('deleteUbicacion','UbicacionController@deleteUbicacion');
 
- 
+$this->get('/verify-user/{code}', 'Auth\RegisterController@activateUser')->name('activate.user');
+

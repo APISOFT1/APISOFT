@@ -1,15 +1,14 @@
 <?php
 
-use Database\traits\TruncateTable;
-use Database\traits\DisableForeignKeys;
 
+use Illuminate\Support\Str;
 use Carbon\Carbon as Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 class UsersSeeder extends Seeder
 {
-    use DisableForeignKeys, TruncateTable;
+   
 
     /**
      * Run the database seed.
@@ -18,34 +17,34 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        $this->disableForeignKeys();
-        $this->truncate('users');
+        
 
-        $users = [
-            [
-                'name' => 'Admin',
-                'email' => 'admin.laravel@gmail.com',
+        DB::table('users')->insert([ 
+            
+                'name' => 'Juana',
+                'email' => 'Juana.hotmail@gmail.com',
                 'password' => bcrypt('admin'),
                 'active' => true,
                 'confirmation_code' => \Ramsey\Uuid\Uuid::uuid4(),
                 'confirmed' => true,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ],
-            [
-                'name' => 'Juan',
-                'email' => 'Juan@gmail.com',
-                'password' => bcrypt('demo'),
-                'active' => true,
-                'confirmation_code' => \Ramsey\Uuid\Uuid::uuid4(),
-                'confirmed' => true,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ]
-        ];
+            
+        ]);
 
-        DB::table('users')->insert($users);
+        DB::table('users')->insert([ 
+            
+            'name' => 'Jose',
+            'email' => 'Jose.hotmail@gmail.com',
+            'password' => bcrypt('admin'),
+            'active' => true,
+            'confirmation_code' => \Ramsey\Uuid\Uuid::uuid4(),
+            'confirmed' => true,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        
+    ]);
 
-        $this->enableForeignKeys();
+       
     }
 }
