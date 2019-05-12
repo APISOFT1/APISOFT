@@ -201,12 +201,11 @@
  
         } else {
           $('.error').remove();
-          $('#table').append("<tr class='cera" + data.id + "'>"+
+          $('#table').append("<tr class='recepcionEst" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.Recepcion_id + "</td>"+
           "<td>" + data.Estanon_id + "</td>"+
           "<td>" + data.Fecha + "</td>"+
-  
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
           data.id +  "' data-Recepcion_id='" 
           + data.Recepcion_id +  " 'data-Estanon_id='" 

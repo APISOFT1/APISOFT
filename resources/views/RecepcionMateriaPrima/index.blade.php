@@ -26,6 +26,8 @@
   ROL CREADO CORRECTAMENTE
 </div>
 @endif
+
+
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
@@ -285,8 +287,8 @@
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
               <select  class="form-control" name="Estanon_id" class="form-control" id="busqueda_parroquia1">
          <option value="">-- Seleccione Estañon --</option>
-         @foreach ($recepcion as $value)
-          <option class="recepcion{{$value->id}}">{{ $value->id }}--{{ $value->fecha }}--{{ $value->afiliado_id }}</option>
+         @foreach ($estanon as $value)
+          <option class="estanon{{$value->id}}">{{ $value->id }}</option>
          @endforeach         
                 </select>
               <p class="No ingreso el tipo de Entrega"></p>
@@ -306,10 +308,10 @@
               </div>
           
             <div class="modal-footer">
-          <button class="btn btn-warning" class="text-center" type="submit" id="add">
+          <button class="btn btn-warning" class="text-center" type="submit" id="addd">
               <span class="fa fa-save"></span> Guardar 
             </button>
-           
+
             </div>
                            
                         </div>
@@ -450,7 +452,28 @@
 	<!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
 	<script src="assets2/js/jquery.validate.min.js"></script>
 
-
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+    @if(Session::has('message'))
+        var type = "{{ Session::get('alert-type', 'info') }}";
+        switch(type){
+            case 'info':
+                toastr.info("{{ Session::get('message') }}");
+                break;
+            
+            case 'warning':
+                toastr.warning("{{ Session::get('message') }}");
+                break;
+            case 'success':
+                toastr.success("{{ Session::get('message') }}");
+                break;
+            case 'error':
+                toastr.error("{{ Session::get('message') }}");
+                break;
+        }
+    @endif
+    </script>
 
    
 

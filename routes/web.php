@@ -16,10 +16,11 @@ Route::get('/', function () {
   
 });
 Auth::routes();
-Auth::routes(['verify' => true]);
+//Auth::routes(['verify' => true]);
 
 
-Route::group(['middleware' =>['auth' ,'verified']], function () {
+
+Route::group(['middleware' =>['auth' ]], function () {
 // Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
   Route::get('/home', 'HomeController@index')->name('home');
   Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
@@ -66,6 +67,8 @@ Route::group(['middleware' =>['auth' ,'verified']], function () {
 Route::POST('addAfiliado','AfiliadoController@addAfiliado');
 Route::POST('editAfiliado','AfiliadoController@editAfiliado');
 Route::POST('deleteAfiliado','AfiliadoController@deleteAfiliado');
+
+Route::get('notify/index', 'NotificationController@index');
 
 
 Route::get('dashboard/log-chart', 'Admin\DashboardController@getLogChartData')->name('dashboard.log.chart');

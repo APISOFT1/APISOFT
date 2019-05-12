@@ -14,6 +14,7 @@ use App\Afiliado;
 use App\User;
 use App\TipoEntrega;
 use App\Estanon;
+use App\RecepcionEstanon;
 
 
 
@@ -64,7 +65,35 @@ public function addRecepcionMateriaPrima(Request $request){
         $recepcion->observacion = $request->observacion;
     $recepcion->save();
     return response()->json($recepcion);
+   
   }
+}
+
+public function addRecepcion(Request $request){
+  $rules = array(
+   
+    'Recepcion_id' => 'required',
+    'Estanon_id' => 'required',
+    'Fecha' => 'required',
+    
+  );
+$validator = Validator::make ( Input::all(), $rules);
+if ($validator->fails())
+return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
+else {
+  
+ 
+  $recepcionEst = new RecepcionEstanon;
+  $recepcionEst->Recepcion_id = $request->Recepcion_id;
+  $recepcionEst->Estanon_id = $request->Estanon_id;
+  $recepcionEst->Fecha = $request->Fecha;
+
+  $recepcionEst->save();
+  return back()->with('flash','Recepcion Guardada');
+  return response()->json($recepcionEst);
+
+
+}
 }
 
 public function editRol(request $request){
