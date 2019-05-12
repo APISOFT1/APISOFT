@@ -67,13 +67,6 @@
                             
                         </a>
                     </li>
-
-                    <li>
-                        <a href="{{ url('/register/') }}">Registrar
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                            
-                        </a>
-                    </li>
                     @else
                     <li><a><i class="fa fa-home"></i> Planta <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
