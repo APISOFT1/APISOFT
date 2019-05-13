@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use App\User;
+use Alert;
 class LoginController extends Controller
 {
     /*
@@ -25,64 +28,76 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    protected function credentials(Request $request)
     {
-        $this->middleware('guest')->except('logout');
-    }
-        public function messages()
-{
-    return [
-        'email.required'  => 'Correo electrónico es obligatorio',
-         'password.required' => 'Contraseña es obligatoria',
-    ];
-}
-protected function sendFailedLoginResponse(Request $request)
-    {
-        $errors = [$this->username() => __('auth.failed')];
+        $field = $this->field($request);
 
-        if ($request->expectsJson()) {
-            return response()->json($errors, 422);
-        }
+        return [
+            $field => $request->get($this->username()),
+            'password' => $request->get('password'),
+            'status' => User::STATUS,
+        ];
 
-        return redirect()->back()
-            ->withInput($request->only($this->username(), 'remember'))
-            ->withErrors($errors);
+       
     }
 
     /**
-     * The user has been authenticated.
+     * Determine if the request field is email or username.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  mixed $user
-     * @return mixed
+     * @param  \Illuminate\Http\Request  $request
+     * @return string
      */
-    protected function authenticated(Request $request, $user)
+    public function field(Request $request)
     {
-        $errors = [];
+        $email = $this->username();
+        
+      
 
-        if (config('auth.users.confirm_email') && !$user->confirmed) {
-            $errors = [$this->username() => __('auth.notconfirmed', ['url' => route('confirm.send', [$user->email])])];
-        }
-
-        if (!$user->active) {
-            $errors = [$this->username() => __('auth.active')];
-        }
-
-        if ($errors) {
-            auth()->logout();  //logout
-
-            return redirect()->back()
-                ->withInput($request->only($this->username(), 'remember'))
-                ->withErrors($errors);
-        }
-
-        return redirect()->intended($this->redirectPath());
+        return filter_var($request->get($email), FILTER_VALIDATE_EMAIL) ? $email : 'username';
     }
+
+    /**
+     * Validate the user login request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     */
+    protected function validateLogin(Request $request)
+    {
+        $field = $this->field($request);
+
+        $messages = ["{$this->username()}.exists" => 'La cuenta que está intentado ingresar no ha sido activado.'];
+
+        $this->validate($request, [
+            $this->username() => "required|exists:users,{$field},status," . User::STATUS,
+            'password' => 'required',
+        ], $messages);
+
+
 }
+protected function sendFailedLoginResponse(Request $request)
+   {
+        $request->session()->put('login_error', trans('auth.failed'));
+       throw ValidationException::withMessages(
+           [
+                'error' => [trans('auth.failed')],
+          ]
+        );
+    }
+
+   // public function logOut()
+   // {
+     //   Auth::logout();
+      //  alert()->success('You have been logged out.', 'Good bye!');
+       // return Redirect::to('login');
+  //  }
+}
+

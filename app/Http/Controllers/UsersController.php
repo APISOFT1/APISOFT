@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Genero;
-use App\Rol;
-use App\Estado;
-
-
+use App\Role;
 
 
 use Illuminate\Http\Request;
@@ -27,8 +24,7 @@ class UsersController extends Controller
        
        if($request){
         $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-        $users= User::with('Genero') 
-            ->where('name','LIKE','%'.$query.'%')
+        $users= User::where('name','LIKE','%'.$query.'%')
             ->orderby('id','desc')
             ->paginate(7);
 

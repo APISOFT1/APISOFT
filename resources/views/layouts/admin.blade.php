@@ -25,6 +25,7 @@
                         </div>
                     @endif
                 </div>
+                
                 @yield('content')
             </div>
 

@@ -31,7 +31,7 @@
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
-<h1 >LISTADO DE  ROL<a href="RecepcionMateriaPrima/create"> <button class="btn btn-primary" >  Nuevo <span class="glyphicon glyphicon-user"></button></a></h1>
+<h1 >LISTADO DE  Recepción Miel</h1>
 <!-- Saltos de linea-->
 <br>
 <br>
@@ -68,9 +68,9 @@
           <td>{{ $value->pesoBruto }}</td>
           <td>{{ $value->pesoNeto }}</td>
           <td>{{ $value->numero_muestras }}</td>
-          <td>{{ $value->afiliado_id }}</td>
-          <td>{{ $value->user_id }}</td>
-          <td>{{ $value->tipoEntrega_id }}</td>
+          <td>{{ $value->afiliado_id }}- {{ $value->afiliado->Nombre }} {{ $value->afiliado->apellido1 }} {{ $value->afiliado->apellido2 }}</td>
+          <td>{{ $value->user_id }} - {{ $value->user->name }}</td>
+          <td>{{ $value->tipoEntrega_id }}- {{ $value->tipoEntrega->Descripcion }}</td>
           <td>{{ $value->observacion }}</td>
           <td>
             <a href="#" class="show-modal btn btn-info btn-sm" data-id="{{$value->id}}" 
@@ -288,7 +288,11 @@
               <select  class="form-control" name="Estanon_id" class="form-control" id="busqueda_parroquia1">
          <option value="">-- Seleccione Estañon --</option>
          @foreach ($estanon as $value)
+<<<<<<< HEAD
           <option class="estanon{{$value->id}}">{{ $value->id }}</option>
+=======
+          <option value="{{ $value->id }}">{{$value->id}}-{{$value->Descripcion}}</option>
+>>>>>>> Caro
          @endforeach         
                 </select>
               <p class="No ingreso el tipo de Entrega"></p>

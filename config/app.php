@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -161,6 +161,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Yoeunes\Toastr\ToastrServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
+        Styde\Html\HtmlServiceProvider::class,
+        UxWeb\SweetAlert\SweetAlertServiceProvider::class,
 
         /*
          * Package Service Providers...

@@ -1,38 +1,23 @@
 <?php
 namespace App;
+
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Database\Eloquent\Model;
-class User extends Authenticatable implements MustVerifyEmail
+
+class User extends Authenticatable
 {
     use Notifiable;
-    use HasRoles;
+
+    const STATUS = 1;
+    const INACTIVE = 0;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $table= 'users';
-    protected $primaryKey="id";
-    
-    public $timestamps=true;
     protected $fillable = [
-        'id',
-        'name', 
-        'email',
-      'email_verified_at',
-         'password',
-        'Apellido1',
-        'Apellido2',
-        'Telefono',
-        'Direccion',
-        'Fecha_Ingreso',
-        'Genero_Id',
-        'Rol_Id',
-        'estado_id'
-        
+        'name', 'email', 'username', 'password' , 'status', 'activation_code',
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -42,20 +27,60 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password', 'remember_token',
     ];
-    protected $casts = [
-        'Fecha_Ingreso' => 'Y-m-d H:i:s'
-    ];
-    public function setPasswordAttribute($password)
+    
+    public function roles()
     {
-        $this->attributes['password'] = \Hash::make($password);
+        return $this->belongsToMany(Role::class, 'users_roles', 'user_id', 'role_id');
     }
-    public function Genero() 
+
+    public function assignRole(Role $role)
+{
+    return $this->roles()->save($role);
+}
+
+//para las rutas
+public function isAdmin()
+{
+    foreach ($this->roles()->get() as $role)
     {
-        return $this->belongsTo(Genero::class ,'Genero_Id');
+        if ($role->name == 'administrador')
+        {
+            return true;
+        }
     }
-    public function role()
-    {
-        return $this->belongsToMany(Role::class, 'role');
-    }
+
    
+}
+
+public function isPlanta()
+{
+    foreach ($this->roles()->get() as $role)
+    {
+        if ($role->name == 'Planta')
+        {
+            return true;
+        }
+    }
+}
+
+public function isAutenticado()
+{
+    foreach ($this->roles()->get() as $role)
+    {
+        if ($role->name == 'authenticated')
+        {
+            return true;
+        }
+    }
+}
+public function hasRole(string $roleSlug)
+{
+
+
+     $roles = $roleSlug;
+     $rolesArray = explode(';',$roles);  
+     $roles = $this->roles()->whereIn('name', $rolesArray)->count() > 0;
+     return $roles;
+
+}
 }

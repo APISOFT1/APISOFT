@@ -43,7 +43,7 @@
         <div class="col-md-3 left_col menu_fixed">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="{{ url('/admin') }}" class="site_title">
+              <a href="{{ url('/Afiliado') }}" class="site_title">
                 <i class="glyphicon glyphicon-home"></i> <span>AAPIS Chorotega</span>
               </a>
             </div>
@@ -65,13 +65,15 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
+                @if(Auth::check())
+                    @if (Auth::user()->isAdmin())
+                  <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                     <li><a href="{{ url('/roles/') }}">Gestionar Rol</a></li>
-                     <li><a href="{{ url('/permissions/') }}">Gestionar Permisos</a></li>
-                     <li><a href="{{ url('/users/') }}">Gestionar Users</a></li>
+                      
+                     <li><a href="{{ url('users/') }}">Gestionar users</a></li>
                     </ul>
                   </li>
+                 
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
@@ -81,6 +83,8 @@
                     
                     </ul>
                   </li>
+                  @endif
+                  @endif
                   <li><a><i class="glyphicon glyphicon-list-alt"></i> Recepción<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/RecepcionMateriaPrima') }}">Gestionar Recepción</a></li>
@@ -91,16 +95,16 @@
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
                       <li><a href="{{ url('/RecepEstanon/') }}">Gestionar Recepción-Estañón</a></li>
-                      <li><a href="{{ url('/Homogeneizacion/') }}">Gestionar Homogeneización</a></li>
+                     
                     
                     </ul>
                   </li>
 
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Producto Terminado <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
-                      <li><a href="{{ url('/AfiliadoEstanon/') }}">Gestionar Afiliado-Estañon</a></li>
-                      <li><a href="{{ url('/Homogeneizacion/') }}">Gestionar Homogeneización</a></li>
+                      <li><a href="{{ url('/Producto/') }}">Gestionar Productos</a></li>
+                      <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    
                     
                     </ul>
                   </li>
@@ -158,7 +162,10 @@
         <!-- /footer content -->
       </div>
     </div>
-  
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+  <script src="{{asset('js2/bootstrap-select.min.js')}}"></script>
   
     <!-- jQuery -->
 
@@ -193,10 +200,13 @@
 
 <!-- MODAL AFILIADO -->
   
+<<<<<<< HEAD
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+=======
+>>>>>>> Caro
 <script type="text/javascript">
 {{-- ajax Form Add Post--}}
   $(document).on('click','.create-modal', function() {
@@ -210,7 +220,10 @@
       type: 'POST',
       url: 'addAfiliado',
       data: {
+<<<<<<< HEAD
        
+=======
+>>>>>>> Caro
         'id': $('input[name=id]').val(),
         'Nombre': $('input[name=Nombre]').val(),
         'apellido1': $('input[name=apellido1]').val(),
@@ -239,11 +252,10 @@
           $('.error').text(data.errors.genero_id);
           $('.error').text(data.errors.estado_civil_id);
           $('.error').text(data.errors.estado_id);
-
  
         } else {
           $('.error').remove();
-          $('#table').append("<tr class='item" + data.id + "'>"+
+          $('#table').append("<tr class='afi" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.Nombre + "</td>"+
           "<td>" + data.apellido1 + "</td>"+
@@ -300,7 +312,7 @@
         }
       },
     });
-    $('#idd').val('');
+    $('#id').val('');
     $('#Nombre').val('');
     $('#apellido1').val('');
     $('#apellido2').val('');
@@ -313,8 +325,6 @@
     $('#estado_civil_id').val('');
     $('#estado_id').val('');
   });
-
-
 $(document).on('click', '.edit-modal', function() {
 $('#footer_action_button').text(" Editar ");
 $('#footer_action_button').addClass('fa fa-pencil');
@@ -339,7 +349,6 @@ $('#e').val($(this).data('estado_civil_id'));
 $('#es').val($(this).data('estado_id'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
@@ -358,7 +367,6 @@ $('.modal-footer').on('click', '.edit', function() {
 'genero_id':$('#g').val(),
 'estado_civil_id':$('#e').val(),
 'estado_id':$('#es').val(),
-
     },
 success: function(data) {
       $('.afi' + data.id).replaceWith(" "+
@@ -418,9 +426,7 @@ success: function(data) {
     }
   });
 });
-
 /*
-
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Delete");
@@ -431,88 +437,60 @@ $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
 $('.modal-title').text('Delete Post');
 $('.id').text($(this).data('id'));
-$('.Nombre').text($(this).data('Nombre'));
+$('.nombre').text($(this).data('Nombre'));
 $('.apellido1').text($(this).data('apellido1'));
 $('.apellido2').text($(this).data('apellido2'));
-$('.Telefono').text($(this).data('Telefono'));
+$('.telefono').text($(this).data('Telefono'));
 $('.email').text($(this).data('email'));
-$('.Direccion').text($(this).data('Direccion'));
-$('.Fecha_Ingreso').text($(this).data('Fecha_Ingreso'));
-$('.Num_Cuenta').text($(this).data('Num_Cuenta'));
+$('.direccion').text($(this).data('Direccion'));
+$('.fecha_ingreso').text($(this).data('Fecha_Ingreso'));
+$('.num_cuenta').text($(this).data('Num_Cuenta'));
 $('.genero_id').text($(this).data('genero_id'));
 $('.estado_civil_id').text($(this).data('estado_civil_id'));
 $('.estado_id').text($(this).data('estado_id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
-$('.id').html($(this).data('id'));
-$('.Nombre').html($(this).data('Nombre'));
-$('.apellido1').html($(this).data('apellido1'));
-$('.apellido2').html($(this).data('apellido2'));
-$('.Telefono').html($(this).data('Telefono'));
-$('.email').html($(this).data('email'));
-$('.Direccion').html($(this).data('Direccion'));
-$('.Fecha_Ingreso').html($(this).data('Fecha_Ingreso'));
-$('.Num_Cuenta').html($(this).data('Num_Cuenta'));
-$('.genero_id').html($(this).data('genero_id'));
-$('.estado_civil_id').html($(this).data('estado_civil_id'));
-$('.estado_id').html($(this).data('estado_id'));
+$('.title').html($(this).data('descripcion'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
     url: 'deleteAfiliado',
     data: {
-      'id': $('.id').text(),
-      'Nombre': $('.Nombre').text(),
-      'apellido1': $('.apellido1').text(),
-      'apellido2': $('.apellido2').text(),
-      'Telefono': $('.Telefono').text(),
-      'email': $('.email').text(),
-      'Direccion': $('.Direccion').text(),
-      'Fecha_Ingreso': $('.Fecha_Ingreso').text(),
-      'Num_Cuenta': $('.Num_Cuenta').text(),
-      'genero_id': $('.genero_id').text(),
-      'estado_civil_id': $('.estado_civil_id').text(),
-      'estado_id': $('.estado_id').text()
+  
       
     },
     success: function(data){
-       $('.afi' + $('.id').text()+ $('.Nombre').text()+
-       $('.apellido1').text()+ $('.apellido2').text()+ $('.Telefono').text()+ $('.email').text()+ $('.Direccion').text()+
-       $('.Fecha_Ingreso').text()+ $('.Num_Cuenta').text()+ $('.genero_id').text()+ $('.estado_civil_id').text()+ $('.genero_id').text()).remove();
+       $('.afiliado' + $('.id').text()+ $('.nombre').text()+
+       $('.apellido1').text()+ $('.apellido2').text()+ $('.telefono').text()+ $('.email').text()+ $('.direccion').text()+
+       $('.fecha_ingreso').text() $('.num_cuenta').text()+ $('.genero_id').text()+ $('.estado_civil_id').text()+ $('.genero_id').text()).remove();
     }
   });
 });
 */
-
-
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
   
-
 $('#iaa').val($(this).data('id'));
 $('#jaja').val($(this).data('nombre'));
 ;
   $('.modal-show').text('Datos');
   });
-
+ 
+</script>
 
 <script type="text/javascript">
 $(document).ready(function () {
     var navListItems = $('div.setup-panel div a'), // tab nav items
             allWells = $('.setup-content'), // content div
             allNextBtn = $('.nextBtn'); // next button
-
     allWells.hide(); // hide all contents by defauld
-
     navListItems.click(function (e) {
         e.preventDefault();
         var $target = $($(this).attr('href')),
                 $item = $(this);
-
         if (!$item.hasClass('disabled')) {
             navListItems.removeClass('btn-primary').addClass('btn-default');
             $item.addClass('btn-primary');
@@ -540,17 +518,12 @@ $(document).ready(function () {
         if (isValid)
             nextStepWizard.removeAttr('disabled').trigger('click');
     });
-
-
  
     $('div.setup-panel div a.btn-primary').trigger('click');
 });
-
-
 </script>
 
 
-  </script>
   </body>
 </html>
   <style type="text/css">
@@ -560,23 +533,18 @@ $(document).ready(function () {
 .stepwizard-step p {
     margin-top: 10px;
 }
-
 .stepwizard-row {
     display: table-row;
 }
-
 .stepwizard {
     display: table;
     width: 100%;
     position: relative;
 }
-
 .stepwizard-step button[disabled] {
     opacity: 1 !important;
     filter: alpha(opacity=100) !important;
 }
-
-
  
 .stepwizard-row:before {
     top: 14px;
@@ -587,15 +555,12 @@ $(document).ready(function () {
     height: 1px;
     background-color: #ccc;
     z-order: 0;
-
 }
-
 .stepwizard-step {
     display: table-cell;
     text-align: center;
     position: relative;
 }
-
 .btn-circle {
   width: 30px;
   height: 30px;

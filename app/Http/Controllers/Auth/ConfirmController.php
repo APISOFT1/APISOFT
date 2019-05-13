@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Auth\User\User;
+use App\User;
 use App\Notifications\Auth\ConfirmEmail;
 use App\Http\Controllers\Controller;
 use Ramsey\Uuid\Uuid;
@@ -43,6 +43,6 @@ class ConfirmController extends Controller
         //send email
         $user->notify(new ConfirmEmail());
 
-        return back()->with('status', __('auth.confirm'));
+        return back()->with('status', __('home'));
     }
 }

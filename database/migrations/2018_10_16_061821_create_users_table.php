@@ -17,7 +17,9 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('username')->unique();
             $table->string('password');
+<<<<<<< HEAD
 <<<<<<< HEAD
             $table->string('Apellido1',30);
             $table->string('Apellido2',30);
@@ -43,12 +45,15 @@ class CreateUsersTable extends Migration
             $table->uuid('confirmation_code')->nullable();
             $table->boolean('confirmed')->default(config('access.users.confirm_email') ? false : true);
 >>>>>>> Caro
+=======
+            $table->string('activation_code')->nullable();
+            $table->boolean('status')->default(0);
+>>>>>>> Caro
             $table->rememberToken();
             $table->timestamps();
-            $table->softDeletes();
+        
         });
     }
-
     /**
      * Reverse the migrations.
      *

@@ -19,8 +19,8 @@ class Role extends Model
 
     ];
 
-    public function permissions(){
-        return $this->belongsToMany(config('permission.models.permission'), config('permission.table_names.role_has_permissions')
-        );
+    public function usuarios()
+    {
+        return $this->belongsToMany(User::class,'users_roles', 'user_id', 'role_id');
     }
 }
