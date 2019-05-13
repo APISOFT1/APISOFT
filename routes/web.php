@@ -35,14 +35,14 @@ Route::group(['middleware' =>['auth']], function () {
   
 
   
- Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard')->middleware('role:planta;administrador');
+ Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
  Route::get('chartRecepcion', 'Admin\DashboardController@indexRecepcion')->name('chartRecepcion')->middleware('role:planta;administrador');
  Route::get('chartIngreso', 'Admin\DashboardController@indexIngreso')->name('chartIngreso')->middleware('role:administrador');
  
       
- Route::resource('users', 'Admin\UserController')->middleware('role:administrador');
+ Route::resource('users', 'Admin\UserController')->middleware('role:administrador');;
  //Route::get('users', 'Admin\UserController@index')
- Route::get('Afiliado', 'AfiliadoController@index')->middleware('role:administrador');
+ Route::resource('Afiliado', 'AfiliadoController')->middleware('role:administrador');
 
 
 

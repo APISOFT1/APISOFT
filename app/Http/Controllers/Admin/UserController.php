@@ -17,16 +17,19 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        if($request){
-            $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-            $users= User::with('roles')->where('name','LIKE','%'.$query.'%')
+       
+       if($request){
+        $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
+        $users= User::with('roles')->where('name','LIKE','%'.$query.'%')
             ->orderby('id','desc')
-            ->paginate(10);
-
+            ->paginate(4);
+          
+      
             $roles = Role::all();
         return view('users.index', compact('users', 'roles'), ['users'=>$users,"searchText"=>$query]);
     }
     }
+   
 
     /**
      * Show the form for creating a new resource.
@@ -57,7 +60,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('admin.users.show', ['user' => $user]);
+        return view('users.show', ['user' => $user]);
     }
 
     /**
@@ -103,7 +106,8 @@ class UserController extends Controller
             }
         }
       
-        return redirect()->intended(route('users.index'));
+        return redirect()->intended(route('users.index'))->with('success', 'Profile updated!');;
+        
     }
 
     /**
@@ -112,8 +116,14 @@ class UserController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
+   /*DELETEEEEEE*/
+public function destroy($id)
+{
+    $users=User::findOrFail($id);
+    $users->delete();
+    return redirect('users');
+ 
+}
+ 
+ 
 }

@@ -24,10 +24,9 @@
 
 <!--Esta clase nos permite posicionar el buscador  -->
 
-<div class="absolute3">
-		@include('Afiliado.search') 
 
-</div>
+@include('Afiliado.search') 
+
 <div class="row">
   <div class="table table-responsive">
     <table class="table table-bordered table-dark" id="table">
@@ -43,7 +42,7 @@
   		<th>Estado Civil</th>
      
 			<th>Estado</th>
-      <th>Accion</th>
+     
       @if(Auth::check())
       @if (Auth::user()->isAdmin())
         <th class="text-center" width="150px">
