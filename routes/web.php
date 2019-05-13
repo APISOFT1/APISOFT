@@ -18,69 +18,54 @@ Route::get('/', function () {
 Auth::routes();
 
 
-  if (config('auth.registration')) {
-    Route::get('register', 'RegisterController@showRegistrationForm')->name('register');
-    Route::post('register', 'RegisterController@register');
-}
+
+  
+  Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout'); 
+  
+  $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+  $this->post('register', 'Auth\RegisterController@register');
 
   Route::get('activate/{token}', 'Auth\RegisterController@activate')
       ->name('activate');
       
+     
   Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
   
   
 
-
-      Route::get('chart', 'ChartController@index'); 
-
-     Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
-     Route::get('chartRecepcion', 'Admin\DashboardController@indexRecepcion')->name('chartRecepcion');
-     Route::get('chartIngreso', 'Admin\DashboardController@indexIngreso')->name('chartIngreso');
-
-
-   
-
-  Route::resources([
-'Estanon'=>'EstanonController',
-'Genero'=>'GeneroController',
-'EstadoCivil'=>'EstadoCivilController',
-'Ubicacion'=>'UbicacionController',
-'Afiliado' => 'AfiliadoController',
-'AfiliadoApiario'=>'AfiliadoApiarioController',
-'Apiario' => 'ApiarioController',
-'Usuario'=>'UserController',
-'Rol'=>'RolController',
-'Estado'=>'EstadoController',
-'RecepcionMateriaPrima'=> 'RecepcionMateriaPrimaController',
-'Ingreso' => 'IngresoController',
-'IngresoCera' => 'IngresoCeraController',
-'IngresoInventario' => 'IngresoInventarioController',
-'admin/permissions' => 'Admin\PermissionsController',
-'admin/roles'=> 'Admin\RolesController',
-'users'=> 'Admin\UserController',
-'Cera'=>'CeraController',
-'Producto' => 'ProductController',
-'RecepEstanon' => 'RecepcionEstanonController',
-'Stock' => 'StockController',
+  
+ Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
+ Route::get('chartRecepcion', 'Admin\DashboardController@indexRecepcion')->name('chartRecepcion')->middleware('role:planta;administrador');
+ Route::get('chartIngreso', 'Admin\DashboardController@indexIngreso')->name('chartIngreso')->middleware('role:administrador');
+ 
+      
+ Route::resource('users', 'Admin\UserController')->middleware('role:administrador');;
+ //Route::get('users', 'Admin\UserController@index')
+ Route::resource('Afiliado', 'AfiliadoController')->middleware('role:administrador');
 
 
-  ]);
+
+  //route grupo 
+    Route::get('Estanon' , 'EstanonController@index')->middleware('role:planta;administrador');
+    Route::get('EstadoCivil', 'EstadoCivilController@index')->middleware('role:planta;administrador');
+    Route::get('Ubicacion','UbicacionController@index')->middleware('role:planta;administrador');
+    Route::get('AfiliadoApiario','AfiliadoApiarioController@index')->middleware('role:planta;administrador');
+    Route::get('Apiario' , 'ApiarioController@index')->middleware('role:planta;administrador');
+    Route::get('RecepcionMateriaPrima','RecepcionMateriaPrimaController@index')->middleware('role:planta;administrador');
+    Route::get('Ingreso' , 'IngresoController@index')->middleware('role:planta;administrador');
+    Route::get('IngresoCera' , 'IngresoCeraController@index')->middleware('role:planta;administrador');
+    Route::get('IngresoInventario' , 'IngresoInventarioController@index')->middleware('role:planta;administrador');
+    Route::get('Cera','CeraController@index')->middleware('role:planta;administrador');
+    Route::get('Producto' , 'ProductController@index')->middleware('role:planta;administrador');
+    Route::get('RecepEstanon' , 'RecepcionEstanonController@index')->middleware('role:planta;administrador');
+
+
+
 
   
-  Route::get('users/{users}/edit', 'Admin\UserController@edit')->name('users.edit');
-  Route::put('users/{users}', 'Admin\UserController@update')->name('users.update');
 Route::POST('addAfiliado','AfiliadoController@addAfiliado');
 Route::POST('editAfiliado','AfiliadoController@editAfiliado');
 Route::POST('deleteAfiliado','AfiliadoController@deleteAfiliado');
-
-Route::POST('addStock','StockController@addStock');
-Route::POST('editStock','StockController@editStock');
-Route::POST('deleteStock','StockController@deleteStock');
-
-
-Route::POST('addPermissions','Admin\PermissionsController@addPermissions');
-Route::POST('ediPermissions','Admin\PermissionsController@ediPermissions');
-Route::POST('deletePermissions','Admin\PermissionsController@deletePermissions');
 
 Route::POST('addRole','Admin\RolesController@addRole');
 Route::POST('editRol','Admin\RolesController@editRole');
@@ -108,12 +93,11 @@ Route::POST('addRecepcion','RecepcionEstanonController@addRecepcion');
 Route::POST('editRecepcion','RecepcionEstanonController@editRecepcion');
 Route::POST('deleRecepcion','RecepcionEstanonController@deleteRecepcion');
 
-Route::POST('editUser','Admin\UsersController@editUser');
-Route::POST('deleteUser','Admin\UsersController@deleteUser');
+
 
 Route::POST('addUser','Auth\RegisterController@addUser');
-Route::POST('editUser','Admin\UsersController@editUser');
-Route::POST('deleteUser','Admin\UsersController@deleteUser');
+Route::POST('editUser','Admin\UserController@editUser');
+Route::POST('deleteUser','Admin\UserController@deleteUser');
 
 Route::POST('addProduct','ProductController@addProduct');
 Route::POST('editProduct','ProductController@editProduct');
@@ -125,3 +109,7 @@ Route::POST('deleteUbicacion','UbicacionController@deleteUbicacion');
 
 $this->get('/verify-user/{code}', 'Auth\RegisterController@activateUser')->name('activate.user');
 
+  
+Route::get('test', ['as' => 'test', 'uses' => 'AlertController@index']);
+ $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+  $this->post('register', 'Auth\RegisterController@register');

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Genero;
 use App\Role;
-use App\Estado;
+
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UsuarioFormRequest;

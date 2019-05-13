@@ -83,6 +83,10 @@
 							<a class="text" href="{{ route('password.request') }}">
                   {{ __('¿Olvidó su contraseña?') }}
               </a>
+
+							<a class="text"   href="{{ route('register') }}">
+                         {{ __('¿Estás registrado?') }}
+              </a>
 						</p>    
 					</div> 
 
@@ -94,7 +98,10 @@
 	
 
 	<div id="dropDownSelect1"></div>
-	
+	<script src="js/sweetalert.min.js"></script>
+
+<!-- Include this after the sweet alert js file -->
+@include('sweet::alert')
 <!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->

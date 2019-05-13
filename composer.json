@@ -17,8 +17,14 @@
         "laravelcollective/html": "^5.5",
         "laraveldaily/laravel-charts": "^0.1.4",
         "spatie/laravel-permission": "^2.36",
+        "styde/html": "~1.0",
         "techlab/smartwizard": "^4.3",
+<<<<<<< HEAD
         "yoeunes/toastr": "^1.2"
+=======
+        "uxweb/sweet-alert": "^2.0",
+        "yoeunes/toastr": "^1.1"
+>>>>>>> 130ab668603650505a12a454ff603cbf6d962c3c
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

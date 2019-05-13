@@ -37,4 +37,72 @@ class User extends Authenticatable
 {
     return $this->roles()->save($role);
 }
+
+//para las rutas
+public function isAdmin()
+{
+    foreach ($this->roles()->get() as $role)
+    {
+        if ($role->name == 'administrador')
+        {
+            return true;
+        }
+    }
+
+   
+}
+
+public function isPlanta()
+{
+    foreach ($this->roles()->get() as $role)
+    {
+        if ($role->name == 'Planta')
+        {
+            return true;
+        }
+    }
+}
+
+public function isAutenticado()
+{
+    foreach ($this->roles()->get() as $role)
+    {
+        if ($role->name == 'authenticated')
+        {
+            return true;
+        }
+    }
+}
+public function hasRole(string $roleSlug)
+{
+
+
+     $roles = $roleSlug;
+     $rolesArray = explode(';',$roles);  
+     $roles = $this->roles()->whereIn('name', $rolesArray)->count() > 0;
+     return $roles;
+
+}
+
+//PARA EL FILTRO DE LAS TABLAS
+    //Query Scope
+    public function scopeName($query, $name)
+    {
+        if($name)
+            return $query->where('name', 'LIKE', "%$name%");
+    }
+    public function scopeEmail($query, $email)
+    {
+        if($email)
+            return $query->where('email', 'LIKE', "%$email%");
+    }
+
+    public function scopeBuscar($query,$name)
+		{
+		  if (trim($name) !="")
+		  {
+		    $query->where(\DB::raw("CONCAT(name,' ',email)"),"LIKE","%$name%");
+		  }
+
+		}
 }

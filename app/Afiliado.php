@@ -39,4 +39,13 @@ class Afiliado extends Model
     {
         return $this->belongsTo(Estado_Civil::class, 'estado_civil_id');
     }   
+
+    public function scopeBuscar($query,$Nombre)
+		{
+		  if (trim($Nombre) !="")
+		  {
+		    $query->where(\DB::raw("CONCAT(Nombre,' ',apellido1)"),"LIKE","%$Nombre%");
+		  }
+
+		}
 }

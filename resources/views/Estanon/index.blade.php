@@ -1,4 +1,4 @@
-@extends ('layouts.principalUbicacion') 
+@extends ('layouts.pricipalEstanon')
 
 <!-- mensaje de exito -->
 <?php $message=Session::get('message') ?>
@@ -79,82 +79,23 @@ EATAÑON CREADO CORRECTAMENTE
               <input type="text" class="form-control has-feedback-left" id="Descripcion" name="Descripcion"
               placeholder="Ubicación" required>
 
-                 <div class="form-group row add">
-        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-              <input type="text" class="form-control has-feedback-left" id="Peso" name="Peso"
-              placeholder="Peso" required>
-              
-              <p class="error text-center alert alert-danger hidden"></p>
-              <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
-            </div>
-          </div>
-        </form>
-      </div>
-          <div class="modal-footer">
-            <button class="btn btn-success" type="submit" id="add">
-              <span class="fa fa-save"></span>Guardar
-            </button>
-            <button class="btn btn-warning" type="button" data-dismiss="modal">
-              <span class="fa fa-times"></span>Cerrar
-            </button>
-          </div>
-    </div>
-  </div>
-</div></div>
-{{-- Modal Form Show POST --}}
-<div id="show" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header ">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title text-center"></h4>
-                  </div>
-                    <div class="modal-body">
-                    <div class="form-group">
-                      <label for="">Código :</label>
-                      <b id="i3"/>
-                    </div>
-                    <div class="form-group">
-                      <label for="">Descripción:</label>
-                      <b id="d3"/>
-                    </div>
-                      <div class="form-group">
-                      <label for="">Peso:</label>
-                      <b id="pe2"/>
-                    </div>
-                    </div>
-                    </div>
-                  </div>
-</div>
-{{-- Modal Form Edit and Delete Post --}}
-<div id="myModal"class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header" style="background-color:	#fff">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h1 class="modal-descripcion text-center" ></h1>
-      </div>
-      <div class="modal-body">
-        <form class="form-horizontal" role="modal">
+<div class="table-responsive">
+			<table class="table table-striped table-bordered table-condensed table-hover">
+				<thead>
+					<th>Identificación</th>
+					<th>Peso</th>
+					<th>Creación</th>
+					<th> <a href="Estanon/create"
+					class="create-modal btn btn-success btn-sm">
+            <i class="glyphicon glyphicon-plus"></i>
+			</th>
 
-          <div class="form-group">
-          <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-              <input type="text" class="form-control has-feedback-left" id="ids" disabled>
-              <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
-            </div>
-          </div>
-          <div class="form-group">
-          <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-            <input type="name" class="form-control  has-feedback-left" id="des">
-            <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
-            </div>
-          </div>
-           <div class="form-group">
-          <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-            <input type="name" class="form-control  has-feedback-left" id="pes">
-            <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
-            </div>
-          </div>
+				</thead>
+               @foreach ($estanon as $est)
+				<tr>
+					<td>{{ $est->id}}</td>
+					<td>{{ $est->Peso}}</td>
+					<td>{{ $est->created_at}}</td>
 
         </form>
                 {{-- Form Delete Post --}}

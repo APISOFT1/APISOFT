@@ -77,7 +77,10 @@
             </div>
           </div>
                   
-               
+          <script src="js/sweetalert.min.js"></script>
+
+<!-- Include this after the sweet alert js file -->
+
                 </div>
             </div>
         </div>

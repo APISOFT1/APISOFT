@@ -287,6 +287,8 @@
       </div>
     </section>     
     </div>  
+
+    @include('sweet::alert')
     
 		<script src="welcome/js/jquery-2.1.4.min.js"></script>
     <script src="welcome/js/bootstrap.min.js"></script>

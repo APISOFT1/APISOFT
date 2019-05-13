@@ -3,38 +3,42 @@
 <!-- mensaje de exito -->
 <?php $message=Session::get('message') ?>
 
-@if($message == 'addUser')
+@if($message == 'store')
 <div class="alert alert-success alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  ROL CREADO CORRECTAMENTE
+  USUARIO ELIMINADO CREADO CORRECTAMENTE
 </div>
 @endif
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
-<h1 class="text-center">LISTADO DE  USER</h1>
-
+<h1 class="text-center">LISTADO DE USUARIOS</h1>
+  	
 <!-- Saltos de linea-->
 <br>
 <br>
 <!-- Fin de salto de linea. No necesita una etiqueta de cierre-->
 
 <!--Esta clase nos permite posicionar el buscador  -->
-<div class="absolute3">
-@include('users.search') 
-</div>
 
-<div class="table-responsive">
-			<table class="table table-striped table-bordered table-condensed table-hover">
-            <table class="table table-bordered" id="table">
-      <tr>
+
+@include('users.search') 
+
+
+
+
+
+<div class="row">
+    <div class="table table-responsive">
+    <table class="table  table-bordered table-dark" id="table">
+    <tr>
 			<th width="150px" >Cédula</th>
   		<th> <div class="size2">Usuario</th>
   		<th>Correo</th>
       <th>Roles</th>
       <th>Estado</th>
       <th>Acciones</th>
-         <tr>
+      </tr>
        
           {{ csrf_field() }}
                 @foreach ($users as $value)
@@ -75,7 +79,7 @@
    ><i class="glyphicon glyphicon-pencil"></i> </a>
 
    {{--@if(!$value->hasRole('administrator'))--}}
-            <a href="#" class="delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" data-title="{{$value->name}}">
+            <a href="" data-target="#modal-delete-{{$value->id}}" data-toggle="modal">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
             </a>
@@ -84,6 +88,7 @@
         </tr>
       @endforeach
     </table>
+    
   </div>
   {{$users->links()}}
 </div>
@@ -121,7 +126,32 @@
                   </div>
 </div>
 
-{{-- Modal Form Edit and Delete Post --}}
+<div class="modal fade modal-slide-in-right" aria-hidden="true"
+role="dialog" tabindex="-1" id="modal-delete-{{$value->id}}">
+	
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" 
+				aria-label="Close">
+                     <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Eliminar Usuario</h4>
+			</div>
+			<div class="modal-body">
+				<p>Confirme si desea Eliminar el Usuario</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				<button type="submit" class="btn btn-primary">Confirmar</button>
+			</div>
+		</div>
+	</div>
+	{{Form::Close()}}
+
+</div>
+
+<!--{{-- Modal Form Edit and Delete Post --}}
 <div id="myModal"class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -191,7 +221,7 @@
     </div>
   </div>
 </div>
-
+-->
 @endsection
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>

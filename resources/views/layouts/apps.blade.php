@@ -37,6 +37,7 @@
         {{--Common Scripts--}}
         {{ Html::script('js/custom.min.js') }}
         {{ Html::script('js/app.js') }}
+        {{ Html::script('sweetAlert/sweetalert.min.js') }}
       <!-- NProgress -->
       {!!Html::script('/js2/nprogress.js')!!}
     <!-- jQuery custom content scroller -->
@@ -53,5 +54,8 @@
 
         {{--Scripts--}}
         @yield('scripts')
+
+    
+@include('sweet::alert')
     </body>
 </html>
