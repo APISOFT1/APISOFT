@@ -1,85 +1,87 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Stock;
+use Validator;
+use Response;
+use App\RecepcionEstanon;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Input;  //MUYR IMPORTANTE , SIN ESTO NO GUARDA.
+use App\Http\Requests\StockFormRequest;
 class StockController extends Controller
-{
-    /**
+{/**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-       if($request)
-        {
-            $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-            $stock = Stock::paginate(10);
-                return view('Stock.index',compact('Stock'), ['stock'=>$stock,"searchText"=>$query]);        
-        }
+      if($request){
+        $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
+        $sto= Stock::with('recepcionEstanon') 
+            ->where('id','LIKE','%'.$query.'%')
+            ->orderby('id','desc')
+            ->paginate(7);
+            $recepcionEstanon = RecepcionEstanon::all();
+        return view('Stock.index', compact('sto','recepcionEstanon'), ['sto'=>$sto,"searchText"=>$query]);
     }
-
-
-    public function addStock(Request $request){
-    $rules = array(
-      'producto_id' => 'required',
-      'estanon_recepcions_id' => 'required',
-      'precioTotal' => 'required',
-      'cantidadDisponible' => 'required',
-
-
-    );
-  $validator = Validator::make ( Input::all(), $rules);
-  if ($validator->fails())
-  return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
-
-  else {
-    $stock = new Stock;
-    $stock->producto_id = $request->producto_id;
-    $stock->estanon_recepcions_id = $request->estanon_recepcions_id;
-    $stock->precioTotal = $request->precioTotal;
-    $stock->cantidadDisponible = $request->cantidadDisponible;
-    $stock->save();
-    return response()->json($stock)->with('message');
-  }
-}
-
-public function editStock(request $request){
-  $rules = array(
-     'producto_id' => 'required',
-      'estanon_recepcions_id' => 'required',
-      'precioTotal' => 'required',
-      'cantidadDisponible' => 'required',
-  );
-$validator = Validator::make ( Input::all(), $rules);
-if ($validator->fails())
-return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
-
-else {
-$stock = Stock::find ($request->id);
-    $stock->producto_id = $request->producto_id;
-    $stock->estanon_recepcions_id = $request->estanon_recepcions_id;
-    $stock->precioTotal = $request->precioTotal;
-    $stock->cantidadDisponible = $request->cantidadDisponible;
-    $stock->save();
-return response()->json($stock);
-}
-}
-
-public function deleteStock(request $request){
-  
-  $stock = Stock::find ($request->id);
-  $stock->delete();
-  return response()->json();
-}
-
    
-     public function getProductAll()
-     {
-        $all = \App\Stock::where('cantidadDisponible','!=',0)->with(['producto','estanon_recepcion'])->get();
-        return $allt;
+    
+  
+      return view('Stock.index',compact('sto','recepcionEstanon'));   
+         }
+   
+    public function addStock(Request $request){
+        $rules = array(
+    
+         
+          'nombre' => 'required',
+          'cantidadDisponible' => 'required',
+          'precioUnitario' => 'required',
+          'estanon_recepcions_id' => 'required'
+        );
+      $validator = Validator::make ( Input::all(), $rules);
+      if ($validator->fails())
+      return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
+    
+      else {   
+        $sto = new Stock;
+        $sto->id= $request->id;
+        $sto->nombre = $request->nombre;
+        $sto->cantidadDisponible = $request->cantidadDisponible;
+        $sto->precioUnitario = $request->precioUnitario;
+        $sto->estanon_recepcions_id = $request->estanon_recepcions_id;
+        $sto->save();
+        return response()->json($sto);
+      }
     }
+    public function editStock(request $request){
+        $rules = array(
+        );
+      $validator = Validator::make ( Input::all(), $rules);
+      if ($validator->fails())
+      return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
+      
+      else {
+      $sto = Stock::find ($request->id);
+      
+        $sto->nombre = $request->nombre;
+        $sto->cantidadDisponible = $request->cantidadDisponible;
+        $sto->precioUnitario = $request->precioUnitario;
+        $sto->estanon_recepcions_id = $request->estanon_recepcions_id;
+   
+      $sto->save();
+      return response()->json($sto);
+      }
+      }
+    public function deleteStock(request $request){
+  
+      $sto = Stock::find ($request->id);
+       $sto->nombre = $request->nombre;
+        $sto->cantidadDisponible = $request->cantidadDisponible;
+        $sto->precioUnitario = $request->precioUnitario;
+        $sto->estanon_recepcions_id = $request->estanon_recepcions_id;
+   
+        $sto->delete();
+        return response()->json();
+      }
 }

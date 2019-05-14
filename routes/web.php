@@ -59,7 +59,7 @@ Route::group(['middleware' =>['auth']], function () {
     Route::get('Cera','CeraController@index')->middleware('role:planta;administrador');
     Route::get('Producto' , 'ProductController@index')->middleware('role:planta;administrador');
     Route::get('RecepEstanon' , 'RecepcionEstanonController@index')->middleware('role:planta;administrador');
-
+    Route::get('Stock' , 'StockController@index')->middleware('role:planta;administrador');
 
 
 
@@ -107,6 +107,11 @@ Route::POST('deleteProduct','ProductController@deleteProduct');
 Route::POST('addUbicacion','UbicacionController@addUbicacion');
 Route::POST('editUbicacion','UbicacionController@editUbicacion');
 Route::POST('deleteUbicacion','UbicacionController@deleteUbicacion');
+
+Route::POST('addStock','StockController@addStock');
+Route::POST('editStock','StockController@editStock');
+Route::POST('deleteStock','StockController@deleteStock');
+
 });
  
 $this->get('/verify-user/{code}', 'Auth\RegisterController@activateUser')->name('activate.user');
