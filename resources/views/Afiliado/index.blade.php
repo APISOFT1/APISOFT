@@ -121,11 +121,6 @@
             @endif
             @endif
           </td>
-          <td>
-          <button type="button" href="{{ route('users.show', [$value->id]) }}" class="btn btn-primary" data-toggle="modal" data-target="exampleModalCentered-{{$value->id}}">
-  Launch centered demo modal
-</button>
-</td>
         </tr>
       @endforeach
     </table>
