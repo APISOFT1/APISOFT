@@ -121,6 +121,11 @@
             @endif
             @endif
           </td>
+          <td>
+          <button type="button" href="{{ route('users.show', [$value->id]) }}" class="btn btn-primary" data-toggle="modal" data-target="exampleModalCentered-{{$value->id}}">
+  Launch centered demo modal
+</button>
+</td>
         </tr>
       @endforeach
     </table>
@@ -304,6 +309,83 @@
   </div>
 </div></div>
 
+{{-- Modal Form Show POST --}}
+<div id="show" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"></h4>
+                  </div>
+                    <div class="modal-body">
+                    <div class="form-group">
+                      <label for="">ID :</label>
+                      <b id="iaa"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="">Nombre :</label>
+                      
+                      <b id="jaja"/>
+                    </div>
+										<div class="form-group">
+                      <label for="">Primer Apellido:</label>
+                      <b id="ape1"/>
+                    </div>
+										<div class="form-group">
+                   
+                      <label for="">Segundo Apellido :</label>
+                      <b id="ape2"/>
+                    </div>
+                    <div class="form-group">
+                   
+                   <label for="">Telefono :</label>
+                   <b id="tel"/>
+                 </div>
+                 <div class="form-group">
+                   
+                   <label for="">Correo :</label>
+                   <b id="eml"/>
+                 </div>
+                 <div class="form-group">
+                   
+                   <label for="">Direccion :</label>
+                   <b id="dirn"/>
+                 </div>
+                 <div class="form-group">
+                   
+                   <label for="">Direccion :</label>
+                   <b id="dirn"/>
+                 </div>
+                 <div class="form-group">
+                   
+                   <label for="">Fecha Ingreso :</label>
+                   <b id="fecso"/>
+                 </div>
+                 <div class="form-group">
+                   
+                   <label for="">Numero de cuenta :</label>
+                   <b id="nunta"/>
+                 </div>
+                 <div class="form-group">
+                   
+                   <label for="">Genero :</label>
+                   <b id="ged"/>
+                 </div>
+                 <div class="form-group">
+                   
+                   <label for="">Estado Civil :</label>
+                   <b id="estid"/>
+                 </div>
+                 <div class="form-group">
+                   
+                   <label for="">Estado :</label>
+                   <b id="esid"/>
+                 </div>
+                    </div>
+                    </div>
+                  </div>
+</div>
+
 
 {{-- Modal Form Edit and Delete Post --}}
 <div id="myModal"class="modal fade" role="dialog">
@@ -435,6 +517,7 @@
     </div>
   </div>
 </div>
+
 
 @endsection
 

@@ -464,6 +464,16 @@ $('.modal-footer').on('click', '.delete', function(){
   
 $('#iaa').val($(this).data('id'));
 $('#jaja').val($(this).data('nombre'));
+$('#ape1').($(this).data('apellido1'));
+$('#ape2').($(this).data('apellido2'));
+$('#tel').($(this).data('Telefono'));
+$('#eml').($(this).data('email'));
+$('#dirn').($(this).data('Direccion'));
+$('#fecso').($(this).data('Fecha_Ingreso'));
+$('#nunta').($(this).data('Num_Cuenta'));
+$('#ged').($(this).data('genero_id'));
+$('#estid').($(this).data('estado_civil_id'));
+$('#esid').($(this).data('estado_id'));
 ;
   $('.modal-show').text('Datos');
   });
