@@ -1,4 +1,12 @@
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+@extends ('layouts.principal')
+@section ('contenido')
+
+=======
+>>>>>>> raychel
+<<<<<<< HEAD
 <div class="modal fade modal-slide-in-right" id="editarUsuario">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -7,6 +15,10 @@
 @section ('contenido')
 
 >>>>>>> develop
+<<<<<<< HEAD
+=======
+>>>>>>> 241b96a66e7c2609e56d42119f95f8d3ae4b79f3
+>>>>>>> raychel
 
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">

@@ -26,7 +26,10 @@
 
 </div>
 
+<<<<<<< HEAD
 <<<<<<< HEAD:resources/views/Rol/index.blade.php
+=======
+>>>>>>> raychel
 <div id="trabajador" style="display: none;">
     <h2>Si eres estudiante...</h2>
     <form action="index.php" method="post">
@@ -57,7 +60,10 @@
         <th>Create At</th>
         <th class="text-center" width="150px">
           <a href="#" class="create-modalRol btn btn-success btn-sm">
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> raychel
 <div class="table-responsive">
 			<table class="table table-striped table-bordered table-condensed table-hover">
 				<thead>
@@ -65,7 +71,10 @@
                     <th>Código </th>
                     <th> Permiso</th>
 					<th><a href="#" class="create-modal btn btn-success btn-sm">
+<<<<<<< HEAD
 >>>>>>> Caro:resources/views/permissions/index.blade.php
+=======
+>>>>>>> raychel
             <i class="glyphicon glyphicon-plus"></i>
           </a>
         </th>

@@ -202,7 +202,7 @@
 {!!Html::script('/js/jquery-1.11.1.min.js')!!}
 
 
-<!-- MODAL AFILIADO -->
+<!-- MODAL INVENTARIO -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -213,12 +213,12 @@
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
-    $('.modal-descripcion').text('Crear Apiario');
+    $('.modal-descripcion').text('NUEVO LOTE');
   });
   $("#add").click(function() {
     $.ajax({
       type: 'POST',
-      url: 'addApiario',
+      url: 'addStock',
       
       data: {
         '_token': $('input[name=_token]').val(),
@@ -318,37 +318,7 @@ success: function(data) {
   });
 });
 
-/*
-// form Delete function
-$(document).on('click', '.delete-modal', function() {
-$('#footer_action_button').text(" Delete");
-$('#footer_action_button').removeClass('glyphicon-check');
-$('#footer_action_button').addClass('glyphicon-trash');
-$('.actionBtn').removeClass('btn-success');
-$('.actionBtn').addClass('btn-danger');
-$('.actionBtn').addClass('delete');
-$('.modal-title').text('Delete Post');
-$('.id').text($(this).data('id'));
-$('.deleteContent').show();
-$('.form-horizontal').hide();
-$('.title').html($(this).data('Descripcion'));
-$('#myModal').modal('show');
-});
 
-$('.modal-footer').on('click', '.delete', function(){
-  $.ajax({
-    type: 'POST',
-    url: 'deleteApiario',
-    data: {
-      '_token': $('input[name=_token]').val(),
-      'id': $('.id').text()
-    },
-    success: function(data){
-       $('.apiario' + $('.id').text()).remove();
-    }
-  });
-});
-*/
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
@@ -378,6 +348,7 @@ myApp = myApp || (function () {
 })();
 </script>
   
+<<<<<<< HEAD
   <!--  <style>
    
 
@@ -399,6 +370,10 @@ border-bottom:2px dashed #1ABB9C;
 }
     </style> -->
     @include('sweet::alert')
+=======
+  
+
+>>>>>>> raychel
     </body>
     </html>
     

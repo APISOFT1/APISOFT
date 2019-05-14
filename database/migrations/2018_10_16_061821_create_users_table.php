@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             $table->string('Apellido1',30);
             $table->string('Apellido2',30);
             $table->string('Telefono',15);
@@ -49,6 +50,10 @@ class CreateUsersTable extends Migration
             $table->string('activation_code')->nullable();
             $table->boolean('status')->default(0);
 >>>>>>> Caro
+=======
+            $table->string('activation_code')->nullable();
+            $table->boolean('status')->default(0);
+>>>>>>> raychel
             $table->rememberToken();
             $table->timestamps();
         

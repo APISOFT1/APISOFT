@@ -19,10 +19,14 @@ Auth::routes();
 //Auth::routes(['verify' => true]);
 
 
+  if (config('auth.registration')) {
+    Route::get('register', 'RegisterController@showRegistrationForm')->name('register');
+    Route::post('register', 'RegisterController@register');
+}
 
-Route::group(['middleware' =>['auth' ]], function () {
-// Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
-  Route::get('/home', 'HomeController@index')->name('home');
+  Route::get('activate/{token}', 'Auth\RegisterController@activate')
+      ->name('activate');
+      
   Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
      if ($options['register'] ?? true) {
          $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
@@ -57,8 +61,7 @@ Route::group(['middleware' =>['auth' ]], function () {
 'Cera'=>'CeraController',
 'Producto' => 'ProductController',
 'RecepEstanon' => 'RecepcionEstanonController',
-'/' => 'Admin\DashboardController',
-
+'Stock' => 'StockController',
 
 
   ]);
@@ -68,7 +71,9 @@ Route::POST('addAfiliado','AfiliadoController@addAfiliado');
 Route::POST('editAfiliado','AfiliadoController@editAfiliado');
 Route::POST('deleteAfiliado','AfiliadoController@deleteAfiliado');
 
-Route::get('notify/index', 'NotificationController@index');
+Route::POST('addStock','StockController@addStock');
+Route::POST('editStock','StockController@editStock');
+Route::POST('deleteStock','StockController@deleteStock');
 
 
 
@@ -133,11 +138,6 @@ Route::POST('deleteProduct','ProductController@deleteProduct');
 Route::POST('addUbicacion','UbicacionController@addUbicacion');
 Route::POST('editUbicacion','UbicacionController@editUbicacion');
 Route::POST('deleteUbicacion','UbicacionController@deleteUbicacion');
-});
- 
+
 $this->get('/verify-user/{code}', 'Auth\RegisterController@activateUser')->name('activate.user');
 
-  
-Route::get('test', ['as' => 'test', 'uses' => 'AlertController@index']);
- $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-  $this->post('register', 'Auth\RegisterController@register');

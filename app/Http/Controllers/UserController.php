@@ -14,12 +14,8 @@ use App\Http\Requests\UsuarioFormRequest;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
+<<<<<<< HEAD
   
     public function index(Request $request)
     {
@@ -157,5 +153,7 @@ class UserController extends Controller
         $usuario->delete();
         return redirect('Usuario');
     }
+=======
+>>>>>>> raychel
 }
 

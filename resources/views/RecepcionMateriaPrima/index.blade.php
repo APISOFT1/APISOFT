@@ -288,11 +288,9 @@
               <select  class="form-control" name="Estanon_id" class="form-control" id="busqueda_parroquia1">
          <option value="">-- Seleccione Estañon --</option>
          @foreach ($estanon as $value)
-<<<<<<< HEAD
-          <option class="estanon{{$value->id}}">{{ $value->id }}</option>
-=======
           <option value="{{ $value->id }}">{{$value->id}}-{{$value->Descripcion}}</option>
->>>>>>> Caro
+         @foreach ($recepcion as $value)
+          <option class="recepcion{{$value->id}}">{{ $value->id }}--{{ $value->fecha }}--{{ $value->afiliado_id }}</option>
          @endforeach         
                 </select>
               <p class="No ingreso el tipo de Entrega"></p>
