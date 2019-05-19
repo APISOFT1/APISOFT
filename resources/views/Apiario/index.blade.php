@@ -92,6 +92,7 @@
 @endif
       </div>
       <div class="modal-body">
+      <span id="form_result"></span>
         <form class="form-horizontal" role="form">
 
         <div class="form-group row add">
@@ -144,7 +145,7 @@
           <i class="glyphicon glyphicon-info-sign"></i></h4>
                   </div>
                     <div class="modal-body">
-                  
+                    <span id="form_result"></span>
                     <div class="form-group">
                       <label for="">Código :</label>
                       <b id="i2"/>
