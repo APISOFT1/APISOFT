@@ -59,39 +59,115 @@
                 </ul>
                 @if(Auth::check())
                     @if (Auth::user()->isAdmin())
-                    <li><a><i class="fa fa-user"></i> Usuarios <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-briefcase"></i> Usuarios <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li>
-                        <a href="{{ url('/users/') }}">Usuarios
+                        <a href="{{ url('/users/') }}">Gestionar Usuarios
                             <i class="fa fa-home" aria-hidden="true"></i>
                             
                         </a>
                     </li>
-
-                    <li>
-                        <a href="{{ url('/register/') }}">Registrar
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                            
-                        </a>
-                    </li>
                     @else
+
+                   
+
                     <li><a><i class="fa fa-home"></i> Planta <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li>
-                        <a href="{{ url('/RecepcionMateriaPrima/') }}"> Gestionar Recepción
-                            <i class="fa fa-file-text" aria-hidden="true"></i>
+                        <a href="{{ url('Estanon') }}">Gestionar Estañones
                             
                         </a>
                     </li>
-
+                    <li>
+                        <a href="{{ url('/RecepEstanon/') }}">Gestionar Recepción-Estañón
+                            
+                        </a>
+                    </li>
+                  
+            
                    
                     @endif
                     @endif
                     
                 </ul>
-           
-           
-            
+                @if(Auth::check())
+                    @if (Auth::user()->isAdmin())
+                <li><a><i class="fa fa-users"></i> Afiliado <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                    <li>
+                        <a href="{{ url('Afiliado') }}">Gestionar Afiliado
+                            
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/Ubicacion/') }}">Gestionar Ubicación
+                            
+                        </a>
+                    </li>
+                  
+                    <li>
+                        <a href="{{ url('/Apiario/') }}">Gestionar Apiario
+                            
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario
+                            
+                        </a>
+                    </li>
+                   
+               
+                @else
+                <li><a><i class="fa fa-list-alt"></i> Recepción <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                    <li>
+                        <a href="{{ url('RecepcionMateriaPrima') }}">Gestionar Recepción
+                            
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/Cera/') }}">Gestionar Extracción Cera
+                            
+                        </a>
+                    </li>
+                    @endif
+@endif
+                </ul>
+               
+                @if(Auth::check())
+                    @if (Auth::user()->isAdmin())
+                <li><a><i class="fa fa-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                    <li>
+                        <a href="{{ url('Stok') }}">Gestionar Stock
+                            
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/IngresoCera/') }}">Gestionar Servio Cera
+                            
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/IngresoInventario/') }}">Gestionar Servio Inventario
+                            
+                        </a>
+                    </li>
+                    
+                    @else
+                    <li><a><i class="fa fa-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                    <li>
+                        <a href="{{ url('Stok') }}">Gestionar Stock
+                            
+                        </a>
+                    </li>
+                
+                        </a>
+                    </li>
+                    @endif
+@endif
+                </ul>
         </div>
         <!-- /sidebar menu -->
     </div>

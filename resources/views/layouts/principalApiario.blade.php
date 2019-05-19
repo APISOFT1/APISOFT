@@ -229,12 +229,14 @@
       },
       success: function(data){
         if ((data.errors)) {
+          html = '<div class="alert alert-danger">';
           $('.error').removeClass('hidden');
           $('.error').text(data.errors.Descripcion);
           $('.error').text(data.errors.cantidad);
           $('.error').text(data.errors.ubicacion_id);
  
         } else {
+          html = '<div class="alert alert-success">' + data.success + '</div>';
           $('.error').remove();
           $('#table').append("<tr class='api" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
@@ -255,6 +257,7 @@
           + data.ubicacion_id + "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         }
+        $('#form_result').html(html);
       },
     });
     $('#Descripcion').val('');
@@ -282,6 +285,7 @@ $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.edit', function() {
+  $('#form_result').html('');
   $.ajax({
     type: 'POST',
     url: 'editApiario',
@@ -294,6 +298,7 @@ $('.modal-footer').on('click', '.edit', function() {
 
     },
 success: function(data) {
+  
       $('.api' + data.id).replaceWith(" "+
       "<tr class='api" + data.id + "'>"+
       "<td>" + data.id + "</td>"+

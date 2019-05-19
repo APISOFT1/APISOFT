@@ -1,4 +1,4 @@
-@extends ('layouts.principal1')
+@extends ('layouts.principal')
 
 
 <!-- mensaje de exito -->
@@ -68,16 +68,8 @@
 	</div>
 </div>
 
-<script src="js/push.min.js"></script>
-<script>
-push.create("Hola"),{
-    body:"Tutoriales en menos de 15min",
-    icon:"https://pbs.twing.com/profile_images/1550374393/coc_thumb.jpg",
-    timeout:4000
-});
 
-}
 
-</script>
+
 
 @endsection

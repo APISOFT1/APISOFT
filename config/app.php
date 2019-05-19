@@ -179,7 +179,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        NotificationChannels\WebPush\WebPushServiceProvider::class
+        //NotificationChannels\WebPush\WebPushServiceProvider::class
 
     ],
 

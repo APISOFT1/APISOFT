@@ -313,3 +313,5 @@ $('.modal-footer').on('click', '.delete', function(){
   $('.modal-title').text('Detalle');
   });
 </script>
+ </body>
+    </html>

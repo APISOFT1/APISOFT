@@ -48,7 +48,7 @@ class IngresoInventarioController extends Controller
         $usuarios=DB::table('users')
         ->get();
         $stocks = DB::table('stocks as art')
-          ->select(DB::raw('CONCAT(art.id," - ", art.producto_id) AS stocks'),'art.id','art.cantidadDisponible')
+          ->select(DB::raw('CONCAT(art.id," - ", art.nombre) AS stocks'),'art.id','art.cantidadDisponible')
           ->groupBy('stocks','art.id','art.cantidadDisponible')
           ->get();
         return view ("IngresoInventario.create",["personas"=>$personas,"usuarios"=>$usuarios,"stocks"=>$stocks]);

@@ -4,7 +4,6 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-
 class User extends Authenticatable
 {
     use Notifiable;
@@ -85,4 +84,26 @@ public function hasRole(string $roleSlug)
      return $roles;
 
 }
+
+//PARA EL FILTRO DE LAS TABLAS
+    //Query Scope
+    public function scopeName($query, $name)
+    {
+        if($name)
+            return $query->where('name', 'LIKE', "%$name%");
+    }
+    public function scopeEmail($query, $email)
+    {
+        if($email)
+            return $query->where('email', 'LIKE', "%$email%");
+    }
+
+    public function scopeBuscar($query,$name)
+		{
+		  if (trim($name) !="")
+		  {
+		    $query->where(\DB::raw("CONCAT(name,' ',email)"),"LIKE","%$name%");
+		  }
+
+		}
 }

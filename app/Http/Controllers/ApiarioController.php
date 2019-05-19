@@ -33,14 +33,16 @@ class ApiarioController extends Controller
     }
     ////////////////////////////////////////////////////////NUEVO
 public function addApiario(Request $request){
-    $rules = array(
+   
+  $validator = Validator::make($request->all(), [
+      
       'Descripcion' => 'required',
       'cantidad' => 'required',
       'ubicacion_id' => 'required'
-    );
-  $validator = Validator::make ( Input::all(), $rules);
+      ]); 
+      
   if ($validator->fails())
-  return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
+  return Response::json(['errors' => $error->errors()->all()]);
   else {
     
     $ubicacion_id = input::get('ubicacion_id');
@@ -52,7 +54,8 @@ public function addApiario(Request $request){
     $api->save();
     
    
-    return response()->json($api);
+    return response()->json(['success' => 'Se ha creado correctamente']);
+ 
    
   
   
@@ -94,6 +97,9 @@ public function deleteApiario(request $request){
   
   $api = Apiario::find ($request->id);
   $api->delete();
-  return response()->json();
+ 
+
+   return response()->json(['success' => 'Se ha editado correctamente']);
+
 }
 }

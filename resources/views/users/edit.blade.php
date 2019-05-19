@@ -12,9 +12,10 @@
 				</ul>
 			</div>
 			@endif
-
-			{!!Form::model($user,['method'=>'PATCH','route'=>['users.update',$user->id]])!!}
+      {!!Form::model($user,['method'=>'PATCH','route'=>['users.update',$user->id]])!!}
             {{Form::token()}}
+	
+          
          
 
             <div class="form-grup">

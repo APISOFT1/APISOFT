@@ -122,6 +122,7 @@
 
 </body>
 </html>
+<<<<<<< HEAD
 
 @extends('layouts.app')
 
@@ -201,3 +202,5 @@
 </div>
 @endsection
 
+=======
+>>>>>>> Caro

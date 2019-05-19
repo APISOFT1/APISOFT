@@ -132,45 +132,7 @@
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
               
-              <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-9" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Demo App</a>
-        </div>
-
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="dropdown dropdown-notifications">
-              <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
-                <i data-count="0" class="glyphicon glyphicon-bell notification-icon"></i>
-              </a>
-
-              <div class="dropdown-container">
-                <div class="dropdown-toolbar">
-                  <div class="dropdown-toolbar-actions">
-                    <a href="#">Mark all as read</a>
-                  </div>
-                  <h3 class="dropdown-toolbar-title">Notifications (<span class="notif-count">0</span>)</h3>
-                </div>
-                <ul class="dropdown-menu">
-                </ul>
-                <div class="dropdown-footer text-center">
-                  <a href="#">View All</a>
-                </div>
-              </div>
-            </li>
-            <li><a href="#">Timeline</a></li>
-            <li><a href="#">Friends</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+            
         
               <ul class="nav navbar-nav navbar-right">     
                <li class="">
@@ -196,13 +158,11 @@
 
    <ul class="nav nav-tabs " id="myTab" role="tablist" >
   <li class="nav-item">
-    <a class="nav-link active" role="tab"  href="{{ url('/IngresoCera/') }}">Boletas de la Cera procesada</a>
+    <a class="nav-link active" role="tab"  href="{{ url('/IngresoCera/') }}">Servicios de la Cera procesada</a>
   </li>
+ 
   <li class="nav-item">
-    <a class="nav-link active" role="tab"  href="{{ url('/IngresoInventario/') }}">Boletas de Inventario</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active" role="tab"  href="{{ url('/Ingreso/') }}">Boletas de la miel</a>
+    <a class="nav-link active" role="tab"  href="{{ url('/Ingreso/') }}">Servicios de la miel procesada</a>
   </li>
 
 </ul>
@@ -547,6 +507,7 @@ $('#jaja').val($(this).data('nombre'));
   $('.modal-show').text('Datos');
   });
 
+<<<<<<< HEAD
 
  
 </script>
@@ -601,6 +562,8 @@ $(document).ready(function () {
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="//js.pusher.com/3.1/pusher.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+=======
+>>>>>>> Caro
 
 
 <script type="text/javascript">

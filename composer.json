@@ -9,7 +9,6 @@
         "arcanedev/log-viewer": "4.6",
         "barryvdh/laravel-dompdf": "^0.8.3",
         "consoletvs/charts": "5.*",
-        "davejamesmiller/laravel-breadcrumbs": "5.x",
         "fideloper/proxy": "^4.0",
         "khill/lavacharts": "3.0.*",
         "laravel/framework": "5.7.*",

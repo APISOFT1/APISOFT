@@ -83,6 +83,10 @@
 							<a class="text" href="{{ route('password.request') }}">
                   {{ __('¿Olvidó su contraseña?') }}
               </a>
+
+							<a class="text"   href="{{ route('register') }}">
+                         {{ __('¿Estás registrado?') }}
+              </a>
 						</p>    
 					</div> 
 
