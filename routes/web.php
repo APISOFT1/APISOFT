@@ -110,3 +110,12 @@ $this->get('/verify-user/{code}', 'Auth\RegisterController@activateUser')->name(
 
   
 Route::get('test', ['as' => 'test', 'uses' => 'AlertController@index']);
+	
+Route::get('notify/index', 'NotificationController@index');
+
+Route::get('test', function () {
+  event(new App\Events\StatusLiked('Someone'));
+  return "Event has been sent!";
+});
+
+

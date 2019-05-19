@@ -3,21 +3,12 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-<<<<<<< HEAD
-use App\Role;
-use Illuminate\Database\Eloquent\Model;
 
-
-//class User extends Authenticatable implements MustVerifyEmail
-
-class User extends Authenticatable 
-
-=======
 
 class User extends Authenticatable
->>>>>>> Caro
 {
     use Notifiable;
+
 
     const STATUS = 1;
     const INACTIVE = 0;

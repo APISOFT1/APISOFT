@@ -163,6 +163,7 @@ return [
         ConsoleTVs\Charts\ChartsServiceProvider::class,
         Styde\Html\HtmlServiceProvider::class,
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+     
 
         /*
          * Package Service Providers...
@@ -174,9 +175,11 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        NotificationChannels\WebPush\WebPushServiceProvider::class
 
     ],
 

@@ -3,26 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-use DB;
 
 use Illuminate\Support\Facades\Auth;
 
 use Spatie\Permission\Models\Role;
 
-use Spatie\Permission\Models\Permission;class HomeController extends Controller
-=======
-class HomeController extends Controller
->>>>>>> origin
-=======
-=======
+use Spatie\Permission\Models\Permission;
 use Alert;
->>>>>>> Caro
+
 class HomeController extends Controller
->>>>>>> Caro
+
+
+
 {
     /**
      * Create a new controller instance.
@@ -45,20 +37,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         //$afiliados = DB::select("SELECT count('id_Afiliado') as total, genero_id as Genero
        // FROM afiliados INNER JOIN generos 
        // ON afiliados.genero_id=generos.id GROUP BY genero_id");
-=======
->>>>>>> origin
+
         return view('home');
-=======
+
         return view('dashboard');
->>>>>>> Caro
-=======
+
         return redirect('dashboard')->with('success', 'Profile updated!');
->>>>>>> Caro
+
     }
 }

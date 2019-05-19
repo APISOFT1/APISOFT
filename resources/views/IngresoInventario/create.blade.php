@@ -209,13 +209,12 @@
              <button class="btn btn-danger" type="reset">Cancelar</button>
    </div>
   </div>
+
  </div>
 {!!Form::close()!!} 
 
 @push ('scripts')
 <script>
-
-
 $(document).ready(function(){
     $('#bt_add').click(function(){
     agregar();
