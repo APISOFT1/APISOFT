@@ -36,8 +36,7 @@ class IngresoInventarioFormRequest extends Request
             
             'stock_id'=>'required',
             'Precio'=>'required',
-            'cantidad'=>'required',
-            'descuento'=>'required'
+            'cantidad'=>'required'
             
         ];
     }

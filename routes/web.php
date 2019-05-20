@@ -16,7 +16,11 @@ Route::get('/', function () {
 });
 Auth::routes();
 
-
+Route::resources([
+    'Ingreso' => 'IngresoController',
+ 'IngresoCera' => 'IngresoCeraController',
+ 'IngresoInventario' => 'IngresoInventarioController'
+      ]);
 
 Route::group(['middleware' =>['auth']], function () {
   
@@ -37,7 +41,7 @@ Route::group(['middleware' =>['auth']], function () {
  Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
  Route::get('chartRecepcion', 'Admin\DashboardController@indexRecepcion')->name('chartRecepcion')->middleware('role:planta;administrador');
  Route::get('chartIngreso', 'Admin\DashboardController@indexIngreso')->name('chartIngreso')->middleware('role:administrador');
-// Route::get('IngresoInventario' , 'IngresoInventarioController@index')->name('IngresoInventario');
+
       
  Route::resource('users', 'Admin\UserController')->middleware('role:administrador');;
  //Route::get('users', 'Admin\UserController@index')
@@ -52,9 +56,9 @@ Route::group(['middleware' =>['auth']], function () {
     Route::get('AfiliadoApiario','AfiliadoApiarioController@index')->middleware('role:planta;administrador');
     Route::get('Apiario' , 'ApiarioController@index')->middleware('role:planta;administrador');
     Route::get('RecepcionMateriaPrima','RecepcionMateriaPrimaController@index')->middleware('role:planta;administrador');
-    Route::get('Ingreso' , 'IngresoController@index')->middleware('role:planta;administrador');
-   Route::get('IngresoCera' , 'IngresoCeraController@index')->middleware('role:planta;administrador');
-    Route::get('IngresoInventario' , 'IngresoInventarioController@index')->middleware('role:planta;administrador');
+   // Route::get('Ingreso' , 'IngresoController@index')->middleware('role:planta;administrador');
+   //Route::get('IngresoCera' , 'IngresoCeraController@index')->middleware('role:planta;administrador');
+   // Route::get('IngresoInventario' , 'IngresoInventarioController@index')->middleware('role:planta;administrador');
     Route::get('Cera','CeraController@index')->middleware('role:planta;administrador');
     Route::get('Producto' , 'ProductController@index')->middleware('role:planta;administrador');
     Route::get('RecepEstanon' , 'RecepcionEstanonController@index')->middleware('role:planta;administrador');

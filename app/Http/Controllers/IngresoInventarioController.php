@@ -73,7 +73,7 @@ class IngresoInventarioController extends Controller
             $stock_id = $request->get('stock_id');
             $Precio= $request->get('Precio');
             $cantidad=$request->get('cantidad');
-            $descuento=$request->get('descuento');
+         
         
 
             $cont= 0;
@@ -83,7 +83,7 @@ class IngresoInventarioController extends Controller
                 $detalle->stock_id=$stock_id[$cont];
                 $detalle->Precio=$Precio[$cont];
                 $detalle->cantidad=$cantidad[$cont];
-                $detalle->descuento=$cantidad[$cont];
+           
                 $detalle->save();
                 $cont=$cont+1;
                 
@@ -108,7 +108,7 @@ class IngresoInventarioController extends Controller
 
         $detalles=DB::table('detalle_ingreso_inventario as d')
             ->join ('stocks as a','d.stock_id','=','a.id')
-            ->select('a.producto_id as stocks','d.Precio','d.cantidad','d.descuento','a.cantidadDisponible')
+            ->select('a.producto_id as stocks','d.Precio','d.cantidad','a.cantidadDisponible')
             ->where('d.idingreso_inventario','=',$id)
             ->get(); 
         return view("IngresoInventario.show",["ingresos"=>$ingresos,"detalles"=>$detalles]);
@@ -127,7 +127,7 @@ class IngresoInventarioController extends Controller
 
     $detalles=DB::table('detalle_ingreso_inventario as d')
         ->join ('stocks as a','d.stock_id','=','a.id')
-        ->select('a.producto_id as stocks','d.Precio','d.cantidad','d.descuento','a.cantidadDisponible')
+        ->select('a.producto_id as stocks','d.Precio','d.cantidad','a.cantidadDisponible')
         ->where('d.idingreso_inventario','=',$id)
         ->get(); 
     

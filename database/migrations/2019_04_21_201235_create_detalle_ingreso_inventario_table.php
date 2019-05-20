@@ -22,7 +22,6 @@ class CreateDetalleIngresoInvetarioTable extends Migration
         $table->foreign('stock_id')->references('id')->on('stocks');
         $table->double('Precio');
         $table->integer('cantidad');
-        $table->double('descuento');
         $table->timestamps();
         });
     }
