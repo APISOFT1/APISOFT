@@ -179,7 +179,7 @@
     Precio=$("#pPrecio").val();
    
 
-    if (cera_id!="" && PesoNeto!="" && PesoNeto>0 && Precio!="")
+    if (cera_id!="" && PesoNeto>0 && Precio!="")
     {
        subtotal[cont]=(PesoNeto*Precio);
        total=total+subtotal[cont];
@@ -200,7 +200,6 @@
   }
 
  function limpiar(){
-    $("#pPesoNeto").val("");
     $("#pPrecio").val("");
 
   }
