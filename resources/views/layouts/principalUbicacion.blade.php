@@ -235,6 +235,7 @@
       },
       success: function(data){
         if ((data.errors)) {
+          html = '<div class="alert alert-danger">';
           $('.error').removeClass('hidden');
           $('.error').text(data.errors.Descripcion);
           if(data.errors.Descripcion){
@@ -242,6 +243,7 @@
                     }
  
         } else {
+          html = '<div class="alert alert-success alert-dismissible">'  + data.success + '</div>';
           $('.error').remove();
           $('#table').append("<tr class='ubicacion" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
@@ -251,6 +253,7 @@
           data.id + "'data-Descripcion='" + data.Descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-Descripcion='" + data.Descripcion + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.Descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         }
+        $('#form_result').html(html);
       },
     });
     $('#Descripcion').val('');
@@ -274,6 +277,7 @@ $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.edit', function() {
+  $('#form_result').html('');
   $.ajax({
     type: 'POST',
     url: 'editUbicacion',
@@ -294,20 +298,19 @@ success: function(data) {
   });
 });
 
-/*
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
-$('#footer_action_button').text(" Delete");
+$('#footer_action_button').text(" Eliminar");
 $('#footer_action_button').removeClass('glyphicon-check');
 $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Delete Post');
+$('.modal-title').text('Eliminar Ubicación');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
-$('.Descripcion').html($(this).data('Descripcion'));
+$('.descripcion').html($(this).data('descripcion'));
 $('#myModal').modal('show');
 });
 
@@ -320,11 +323,11 @@ $('.modal-footer').on('click', '.delete', function(){
       'id': $('.id').text()
     },
     success: function(data){
-       $('.ubicacion' + $('.id').text()).remove();
+      $('.ubicacion' + $('.id').text()).remove();
     }
   });
 });
-*/
+
 
   // Show function
   $(document).on('click', '.show-modal', function() {

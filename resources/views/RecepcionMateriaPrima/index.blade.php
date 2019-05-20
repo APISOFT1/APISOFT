@@ -29,7 +29,7 @@
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
-<h1 >LISTADO DE  Recepción Miel</h1>
+<h1 >LISTADO DE  RECEPCIÓN MIEL</h1>
 <!-- Saltos de linea-->
 <br>
 <br>
@@ -76,9 +76,9 @@
             data-pesoBruto="{{$value->pesoBruto}}" 
             data-pesoNeto="{{$value->pesoNeto}}" 
             data-numero_muestras="{{$value->numero_muestras}}"
-            data-afiliado_id="{{$value->afiliado_id}}"
-            data-user_id="{{$value->user_id}}"
-            data-tipoEntrega_id="{{$value->tipoEntrega_id}}"
+            data-afiliado_id="{{$value->afiliado_id}} - {{ $value->afiliado->Nombre }} {{ $value->afiliado->apellido1 }} {{ $value->afiliado->apellido2 }}"
+            data-user_id="{{$value->user_id}} - {{ $value->user->name }}"
+            data-tipoEntrega_id="{{$value->tipoEntrega_id}} - {{ $value->tipoEntrega->Descripcion }}"
             data-observacion="{{$value->observacion}}">
               <i class="fa fa-eye"></i>
             </a>
@@ -87,20 +87,13 @@
             data-pesoBruto="{{$value->pesoBruto}}" 
             data-pesoNeto="{{$value->pesoNeto}}" 
             data-numero_muestras="{{$value->numero_muestras}}"
-            data-afiliado_id="{{$value->afiliado_id}}"
-            data-user_id="{{$value->user_id}}"
-            data-tipoEntrega_id="{{$value->tipoEntrega_id}}"
+            data-afiliado_id="{{$value->afiliado_id}} "
+            data-user_id="{{$value->user_id}} "
+            data-tipoEntrega_id="{{$value->tipoEntrega_id}} "
             data-observacion="{{$value->observacion}}">
               <i class="glyphicon glyphicon-pencil"></i>
             </a>
             <a href="#" class="delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" 
-            data-fecha="{{$value->fecha}}"
-            data-pesoBruto="{{$value->pesoBruto}}" 
-            data-pesoNeto="{{$value->pesoNeto}}" 
-            data-numero_muestras="{{$value->numero_muestras}}"
-            data-afiliado_id="{{$value->afiliado_id}}"
-            data-user_id="{{$value->user_id}}"
-            data-tipoEntrega_id="{{$value->tipoEntrega_id}}"
             data-observacion="{{$value->observacion}}">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
@@ -122,6 +115,7 @@
         <h4 class="modal-crear"></h4>
       </div>
       <div class="modal-body">
+      <span id="form_result"></span>
         <form class="form-horizontal" role="form">
        
         <div class="stepwizard">
@@ -323,8 +317,8 @@
 </div></div>
 
 
- <!-- Modal Escenario-->
- <div class="modal fade" id="popupBusquedaParroquia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <!-- Modal Escenario-->
+  <div class="modal fade" id="popupBusquedaParroquia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -387,8 +381,36 @@
                       <b id="ii"/>
                     </div>
                     <div class="form-group">
-                      <label for="id">Descripcion :</label>
+                      <label for="id">Fecha :</label>
+                      <b id="ech"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="id">Peso Bruto :</label>
                       <b id="di"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="id">Peso Neto :</label>
+                      <b id="psn"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="id">Número de muestra :</label>
+                      <b id="num"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="id">Afiliado :</label>
+                      <b id="afi"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="id">Usuario :</label>
+                      <b id="use"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="id">Tipo Entrega :</label>
+                      <b id="tip"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="id">Observación :</label>
+                      <b id="obs"/>
                     </div>
                     </div>
                     </div>
@@ -412,16 +434,58 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="control-label col-sm-2"for="descripcion">Descripcion</label>
+            <label class="control-label col-sm-2"for="descripcion">Fecha</label>
             <div class="col-sm-10">
             <input type="name" class="form-control" id="ti">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2"for="descripcion">Peso Bruto</label>
+            <div class="col-sm-10">
+            <input type="name" class="form-control" id="psb">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2"for="descripcion">Peso Neto</label>
+            <div class="col-sm-10">
+            <input type="name" class="form-control" id="snt">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2"for="descripcion">Número muestras</label>
+            <div class="col-sm-10">
+            <input type="name" class="form-control" id="mue">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2"for="descripcion">Afiliado</label>
+            <div class="col-sm-10">
+            <input type="name" class="form-control" id="ali">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2"for="descripcion">Usuario</label>
+            <div class="col-sm-10">
+            <input type="name" class="form-control" id="ser">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2"for="descripcion">Tipo Entrega</label>
+            <div class="col-sm-10">
+            <input type="name" class="form-control" id="ent">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2"for="descripcion">Observación</label>
+            <div class="col-sm-10">
+            <input type="name" class="form-control" id="cio">
             </div>
           </div>
 
         </form>
                 {{-- Form Delete Post --}}
         <div class="deleteContent">
-          Are You sure want to delete <span class="descripcion"></span>?
+          ¿Está seguro que desea eliminar esta Recepción de Materia Prima <span class="descripcion"></span>?
           <span class="hidden id"></span>
         </div>
       </div>
@@ -436,6 +500,8 @@
     </div>
   </div>
 </div>
+
+
 
 
  <!--   Core JS Files   -->

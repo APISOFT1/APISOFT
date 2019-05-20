@@ -61,7 +61,7 @@ public function addCera(Request $request){
     $cera->Fecha = $request->Fecha;
   
     $cera->save();
-    return response()->json($cera);
+    return response()->json(['success' => 'Se ha creado una Recepción de Cera correctamente']);
    
   
   
@@ -92,10 +92,10 @@ $cera->save();
 return response()->json($cera);
 }
 }
-public function deleteApiario(request $request){
+public function deleteCera(request $request){
   
   $cera = Cera::find ($request->id);
   $cera->delete();
-  return response()->json($cera);
+
 }
 }

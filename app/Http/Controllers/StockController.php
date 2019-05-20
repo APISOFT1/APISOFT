@@ -51,7 +51,7 @@ class StockController extends Controller
         $sto->precioUnitario = $request->precioUnitario;
         $sto->estanon_recepcions_id = $request->estanon_recepcions_id;
         $sto->save();
-        return response()->json($sto);
+        return response()->json(['success' => 'Se ha creado un Stock correctamente']);
       }
     }
     public function editStock(request $request){

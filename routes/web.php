@@ -82,17 +82,21 @@ Route::POST('editApiario','ApiarioController@editApiario');
 Route::POST('deleteApiario','ApiarioController@deleteApiario');
 
 Route::POST('addAfiliadoApiario','AfiliadoApiarioController@addAfiliadoApiario');
-Route::POST('editApiario','ApiarioController@editApiario');
-Route::POST('deleteApiario','ApiarioController@deleteApiario');
+Route::POST('editAfiliadoApiario','AfiliadoApiarioController@editAfiliadoApiario');
+Route::POST('deleteAfiliadoApiario','AfiliadoApiarioController@deleteAfiliadoApiario');
 
 Route::POST('addCera','CeraController@addCera');
 Route::POST('editCera','CeraController@editCera');
 Route::POST('deleteCera','CeraController@deleteCera');
 Route::POST('agregar','CeraController@agregar');
 
+Route::POST('addEstanon','EstanonController@addEstanon');
+Route::POST('editEstanon','EstanonController@editEstanon');
+Route::POST('deleteEstanon','EstanonController@deleteEstanon');
+
 Route::POST('addRecepcion','RecepcionEstanonController@addRecepcion');
 Route::POST('editRecepcion','RecepcionEstanonController@editRecepcion');
-Route::POST('deleRecepcion','RecepcionEstanonController@deleteRecepcion');
+Route::POST('deleteRecepcion','RecepcionEstanonController@deleteRecepcion');
 
 
 

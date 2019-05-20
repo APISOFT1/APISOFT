@@ -66,9 +66,7 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                     <li><a href="{{ url('/roles/') }}">Gestionar Rol</a></li>
-                     <li><a href="{{ url('/permissions/') }}">Gestionar Permisos</a></li>
-                     <li><a href="{{ url('/users/') }}">Gestionar Users</a></li>
+                     <li><a href="{{ url('/users/') }}">Gestionar Usuarios</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
@@ -90,7 +88,7 @@
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
                       <li><a href="{{ url('/RecepEstanon/') }}">Gestionar Recepción-Estañón</a></li>
-                      <li><a href="{{ url('/Homogeneizacion/') }}">Gestionar Homogeneización</a></li>
+                     
                     
                     </ul>
                   </li>
@@ -219,6 +217,7 @@
       },
       success: function(data){
         if ((data.errors)) {
+          html = '<div class="alert alert-danger">';
           $('.error').removeClass('hidden');
           $('.error').text(data.errors.nombre);
           $('.error').text(data.errors.cantidadDisponible);
@@ -226,6 +225,7 @@
           $('.error').text(data.errors.estanon_recepcions_id);
  
         } else {
+          html = '<div class="alert alert-success alert-dismissible">'  + data.success + '</div>';
           $('.error').remove();
           $('#table').append("<tr class='sto" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
@@ -266,6 +266,7 @@
           + data.estanon_recepcions_id +  "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         }
+        $('#form_result').html(html);
       },
     });
     $('#nombre').val('');

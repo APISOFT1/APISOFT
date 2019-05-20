@@ -23,55 +23,10 @@ table {
 	padding: 60px 0px;
 }
 
-/**media Queries**/
-.navbar-default {
-    background-color: transparent;
-}
 
 .bg-color
 {
 	background-color: RGBA(0, 0, 0, 0.41);
-}
-
-.nav > li > a {
-    padding: 0px;
-}
-.navbar-brand
-{
-	padding: 0px;
-	height: inherit;
-	font-family: 'Lato', sans-serif;
-}
-.navbar-default .navbar-brand {
-    color: #fff;
-	font-size: 34px;
-	text-transform: uppercase;
-	font-weight: 700;
-	letter-spacing: 2px;
-}
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
-    color: #FFD34E;
-    background-color: transparent;
-    text-transform: uppercase;
-}
-.navbar-default .navbar-nav > li > a {
-    color: #fff;
-    padding: 0px 20px;
-    text-transform: uppercase;
-}
-.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus
-{
-	color: #FFD34E;
-}
-
-.navbar-fixed-top {
-    padding: 40px 0;
-    transition: all 0.5s;
-}
-
-.top-nav-collapse {
-    background: rgba(0,0,0,0.8);
-    padding: 25px 0;
 }
 
 
@@ -207,27 +162,14 @@ p
     margin-left: 73px;
     padding:0px 25px 25px 0px;
 }
-h3.txt-tl {
-    font-size: 24px;
-    line-height: 1.35;
-}
+
 /****/
 .parallax {
     background-attachment: fixed;
     background-repeat: repeat-y;
     background-position: center center;
 }
-.bg-image-2 {
-    background: url('../img/cta-banner.jpg') no-repeat center fixed;
-    -webkit-background-size: 100% auto;
-    -moz-background-size: 100% auto;
-    -o-background-size: 100% auto;
-    background-size: 100% auto;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
+
 .section {
     position: relative;
     padding: 88px 0 67px 0;
@@ -341,24 +283,8 @@ a, a:hover
     transform: rotate(20deg);
 }
 /****/
-#footer
-{
-	background-color: #191919;
-	padding: 20px 0px;
-}
-.footer-copyright {
-    color: #fff;
-    line-height: 32px;
-    text-align: left;
-}
-.footer-social
-{
-	float: right;
-}
-.footer-social a {
-    font-size: 18px;
-    color: #666;
-}
+
+
 .link-dec, .link-dec:hover{
     color: #000;
 }
@@ -368,19 +294,7 @@ a, a:hover
         margin-bottom: 15px;
     }
 }
-@media (min-width: 20px) and (max-width: 450px){
-    .navbar-toggle:hover, .navbar-toggle{
-        background-color: #fff;
-        color: #000;
-    }
-    .navbar-toggle{
-        margin-top: 0px;
-    }
-    .navbar-default .navbar-nav > li > a{
-        text-align: center;
-        background-color: rgba(255, 255, 255, 0.32);
-        color: #000;
-    }
+
     .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
         background-color: rgba(255, 255, 255, 0.32);
         color: #FFD34E;
@@ -406,12 +320,7 @@ a, a:hover
     .cta-txt h3{
         font-size: 28px;
     }
-    body{
-        font-size: 14px;
-    }
-    h3.txt-tl{
-        font-size: 20px;
-    }
+    
 
     /*menu y submenu*/
       .menu {
@@ -429,55 +338,6 @@ a, a:hover
     text-align:center;
     }
      
-    .nav {
-        position: relative;
-        z-index: 999;
-    }
-     
-    .nav > li {
-    width:240px;
-    float:left;
-    }
-     
-    .nav li a {
-    background:#20a64f;
-    color:#FFF;
-    display:block;
-    border:1px solid;
-    padding:10px 12px;
-    }
-     
-    .nav li .flecha{
-    font-size: 9px;
-    padding-left: 6px;
-    display: none;
-    }
-     
-    .nav li a:not(:last-child) .flecha {
-    display: inline;
-    }
-     
-    .nav li a:hover {
-    background:#e61229;
-    }
-     
-    .nav li {
-    position:relative;
-    }
-     
-    .nav li ul {
-    display:none;
-    position:absolute;
-    min-width:240px;
-    }
-     
-    .nav li:hover > ul {
-    display:block;
-    }
-     
-    .nav li ul li ul {
-    right:-140px;
-    top:0;
-    }
+    
 }
 /****/

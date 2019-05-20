@@ -228,6 +228,7 @@
       },
       success: function(data){
         if ((data.errors)) {
+          html = '<div class="alert alert-danger">';
           $('.error').removeClass('hidden');
           $('.error').text(data.errors.id);
           $('.error').text(data.errors.Nombre);
@@ -243,6 +244,7 @@
           $('.error').text(data.errors.estado_id);
  
         } else {
+          html = '<div class="alert alert-success alert-dismissible">'  + data.success + '</div>';
           $('.error').remove();
           $('#table').append("<tr class='afi" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
@@ -299,6 +301,7 @@
           "</tr>");
          
         }
+        $('#form_result').html(html);
       },
     });
     $('#id').val('');
@@ -415,49 +418,36 @@ success: function(data) {
     }
   });
 });
-/*
+
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
-$('#footer_action_button').text(" Delete");
+$('#footer_action_button').text(" Eliminar");
 $('#footer_action_button').removeClass('glyphicon-check');
 $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Delete Post');
+$('.modal-title').text('Eliminar Afiliado');
 $('.id').text($(this).data('id'));
-$('.nombre').text($(this).data('Nombre'));
-$('.apellido1').text($(this).data('apellido1'));
-$('.apellido2').text($(this).data('apellido2'));
-$('.telefono').text($(this).data('Telefono'));
-$('.email').text($(this).data('email'));
-$('.direccion').text($(this).data('Direccion'));
-$('.fecha_ingreso').text($(this).data('Fecha_Ingreso'));
-$('.num_cuenta').text($(this).data('Num_Cuenta'));
-$('.genero_id').text($(this).data('genero_id'));
-$('.estado_civil_id').text($(this).data('estado_civil_id'));
-$('.estado_id').text($(this).data('estado_id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
-$('.title').html($(this).data('descripcion'));
+$('.nombre').html($(this).data('nombre'));
 $('#myModal').modal('show');
 });
+
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
     url: 'deleteAfiliado',
     data: {
-  
-      
+      '_token': $('input[name=_token]').val(),
+      'id': $('.id').text()
     },
     success: function(data){
-       $('.afiliado' + $('.id').text()+ $('.nombre').text()+
-       $('.apellido1').text()+ $('.apellido2').text()+ $('.telefono').text()+ $('.email').text()+ $('.direccion').text()+
-       $('.fecha_ingreso').text() $('.num_cuenta').text()+ $('.genero_id').text()+ $('.estado_civil_id').text()+ $('.genero_id').text()).remove();
+      $('.afi' + $('.id').text()).remove();
     }
   });
 });
-*/
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');

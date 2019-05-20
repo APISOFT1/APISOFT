@@ -212,35 +212,25 @@
 </div>
 </div>
         </form>
-                {{-- Form Delete Post --}}
+        {{-- Form Delete Post --}}
         <div class="deleteContent">
-          Are You sure want to delete <span class="descripcion"></span>?
+        ¿Está seguro que desea eliminar este Apiario<span class="descripcion"></span>?
           <span class="hidden id"></span>
         </div>
       </div>
       <div class="modal-footer">
-      <button class="btn btn-warning" type="submit" id="add">
-              <span class="fa fa-pencil"></span> Editar 
-            </button>
-            <button class="btn btn-warning" type="button" data-dismiss="modal">
-              <span class="fa fa-times"></span> Cerrar
-            </button>
-            myApp.showPleaseWait();
+        <button type="button" class="btn actionBtn" data-dismiss="modal">
+          <span id="footer_action_button" class="glyphicon"></span>
+        </button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">
+          <span class="fa fa-times"></span>Cerrar
+        </button>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal hide" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false">
-        <div class="modal-header">
-            <h1>Processing...</h1>
-        </div>
-        <div class="modal-body">
-            <div class="progress progress-striped active">
-                <div class="bar" style="width: 100%;"></div>
-            </div>
-        </div>
-    </div>
+
 @endsection
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>

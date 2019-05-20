@@ -203,6 +203,7 @@
       },
       success: function(data){
         if ((data.errors)) {
+          html = '<div class="alert alert-danger">';
           $('.error').removeClass('hidden');
           $('.error').text(data.errors.Descripcion);
           $('.error').text(data.errors.Recepcion_id);
@@ -211,6 +212,7 @@
           $('.error').text(data.errors.Fecha);
  
         } else {
+          html = '<div class="alert alert-success alert-dismissible">'  + data.success + '</div>';
           $('.error').remove();
           $('#table').append("<tr class='cera" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
@@ -239,6 +241,7 @@
           + data.Fecha + "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         }
+        $('#form_result').html(html);
       },
     });
     $('#Descripcion').val('');
@@ -251,98 +254,109 @@
  
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
-$('#footer_action_button').text(" Editar Apiario");
+$('#footer_action_button').text(" Editar Cera");
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-$('.modal-descripcion').text('Editar Apiario');
+$('.modal-descripcion').text('Editar Cera');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
 $('#ids').val($(this).data('id'));
-$('#cri').val($(this).data('Descripcion'));
-$('#can').val($(this).data('cantidad'));
-$('#ub').val($(this).data('ubicacion_id'));
+$('#cri').val($(this).data('descripcion'));
+$('#can').val($(this).data('recepcion_id'));
+$('#ub').val($(this).data('pesobruto'));
+$('#ps').val($(this).data('pesoneto'));
+$('#fec').val($(this).data('fecha'));
 $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
-    url: 'editApiario',
+    url: 'editCera',
     data: {
 '_token': $('input[name=_token]').val(),
 'id': $("#ids").val(),
 'Descripcion': $('#cri').val(),
-'cantidad': $('#can').val(),
-'ubicacion_id': $('#ub').val(),
+'Recepcion_id': $('#can').val(),
+'PesoBruto': $('#ub').val(),
+'PesoNeto': $('#ps').val(),
+'Fecha': $('#fec').val(),
 
     },
 success: function(data) {
       $('.api' + data.id).replaceWith(" "+
       "<tr class='api" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
-      "<td>" + data.Descripcion + "</td>"+
-      "<td>" + data.cantidad + "</td>"+
-      "<td>" + data.ubicacion_id + "</td>"+
-      
- "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + "' data-Descripcion='" 
- + data.Descripcion + "' data-cantidad='" 
-          + data.cantidad +  " 'data-ubicacion_id='" 
-          + data.ubicacion_id + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
-          + data.id + "' data-Descripcion='" + data.Descripcion + 
-          "' data-cantidad='" 
-          + data.cantidad +  " 'data-ubicacion_id='" 
-          + data.ubicacion_id + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
-          + data.id + "' data-Descripcion='" + data.Descripcion + 
-          "' data-cantidad='" 
-          + data.cantidad +  " 'data-ubicacion_id='" 
-          + data.ubicacion_id + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
-      "</tr>");
+          "<td>" + data.Descripcion + "</td>"+
+          "<td>" + data.Recepcion_id + "</td>"+
+          "<td>" + data.PesoBruto + "</td>"+
+          "<td>" + data.PesoNeto + "</td>"+
+          "<td>" + data.Fecha + "</td>"+
+  
+          "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
+          data.id + "' data-Descripcion='"
+          + data.Descripcion +  "' data-Recepcion_id='" 
+          + data.Recepcion_id +  " 'data-PesoBruto='" 
+          + data.PesoBruto + " 'data-PesoNeto='" 
+          + data.PesoNeto +   " 'data-Fecha='"
+          + data.Fecha + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='"
+           + data.id + "' data-Descripcion='" 
+           + data.Descripcion + "' data-Recepcion_id='" + data.Recepcion_id + "' data-PesoBruto='" 
+           + data.PesoBruto + " 'data-PesoNeto='" 
+          + data.PesoNeto +   " 'data-Fecha='"
+          + data.Fecha + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
+           + data.id + "' data-Descripcion='" + data.Descripcion +  "' data-Recepcion_id='" 
+          + data.Recepcion_id +  " 'data-PesoBruto='" 
+          + data.PesoBruto + " 'data-PesoNeto='" 
+          + data.PesoNeto +   " 'data-Fecha='"
+          + data.Fecha + "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
+          "</tr>");
     }
   });
 });
 
-/*
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
-$('#footer_action_button').text(" Delete");
+$('#footer_action_button').text(" Eliminar");
 $('#footer_action_button').removeClass('glyphicon-check');
 $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Delete Post');
+$('.modal-title').text('Eliminar Ubicación');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
-$('.title').html($(this).data('Descripcion'));
+$('.descripcion').html($(this).data('descripcion'));
 $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
-    url: 'deleteApiario',
+    url: 'deleteCera',
     data: {
       '_token': $('input[name=_token]').val(),
       'id': $('.id').text()
     },
     success: function(data){
-       $('.apiario' + $('.id').text()).remove();
+      $('.api' + $('.id').text()).remove();
     }
   });
 });
-*/
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
   $('#i2').text($(this).data('id'));
   $('#d2').text($(this).data('descripcion'));
-  $('#ca2').text($(this).data('cantidad'));
-  $('#ub2').text($(this).data('ubicacion_id'));
-  $('.modal-title').text('Show Post');
+  $('#ca2').text($(this).data('recepcion_id'));
+  $('#ub2').text($(this).data('pesobruto'));
+  $('#pen').text($(this).data('pesoneto'));
+  $('#ech').text($(this).data('fecha'));
+  $('.modal-title').text('Detalle Cera');
   });
 
   

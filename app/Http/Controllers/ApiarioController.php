@@ -54,7 +54,7 @@ public function addApiario(Request $request){
     $api->save();
     
    
-    return response()->json(['success' => 'Se ha creado correctamente']);
+    return response()->json(['success' => 'Se ha creado un Apiario correctamente']);
  
    
   
@@ -90,7 +90,7 @@ $api->Descripcion = $request->Descripcion;
 $api->cantidad = $request->cantidad;
 $api->ubicacion_id = $request->ubicacion_id;
 $api->save();
-return response()->json($api , $ubicaciones);
+return response()->json($api);
 }
 }
 public function deleteApiario(request $request){
@@ -99,7 +99,7 @@ public function deleteApiario(request $request){
   $api->delete();
  
 
-   return response()->json(['success' => 'Se ha editado correctamente']);
+  
 
 }
 }

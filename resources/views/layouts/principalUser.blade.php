@@ -357,20 +357,19 @@ success: function(data) {
   });
 });
 
-/*
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
-$('#footer_action_button').text(" Delete");
+$('#footer_action_button').text(" Eliminar");
 $('#footer_action_button').removeClass('glyphicon-check');
 $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Delete Post');
+$('.modal-title').text('Eliminar Ubicación');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
-$('.title').html($(this).data('Descripcion'));
+$('.name').html($(this).data('name'));
 $('#myModal').modal('show');
 });
 
@@ -383,11 +382,10 @@ $('.modal-footer').on('click', '.delete', function(){
       'id': $('.id').text()
     },
     success: function(data){
-       $('.apiario' + $('.id').text()).remove();
+      $('.users' + $('.id').text()).remove();
     }
   });
 });
-*/
 
   // Show function
   $(document).on('click', '.show-modal', function() {
