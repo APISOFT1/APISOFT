@@ -101,7 +101,8 @@ $afi = Afiliado::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))
         
 
        
-        Alert::message('Welcome back!');
+        Alert::success('Bienvenido!')->persistent("Close");
+
         return view('dashboard', ['counts' => $counts] , compact('chart', 'chart2', 'chart3', 'chart4'));
        
         

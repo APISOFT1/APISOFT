@@ -33,12 +33,14 @@ class ApiarioController extends Controller
     }
     ////////////////////////////////////////////////////////NUEVO
 public function addApiario(Request $request){
-    $rules = array(
+   
+  $validator = Validator::make($request->all(), [
+      
       'Descripcion' => 'required',
       'cantidad' => 'required',
       'ubicacion_id' => 'required'
-    );
-  $validator = Validator::make ( Input::all(), $rules);
+      ]); 
+      
   if ($validator->fails())
   return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
   else {

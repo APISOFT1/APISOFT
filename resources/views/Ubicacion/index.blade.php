@@ -20,14 +20,14 @@ UBICACION CREADO CORRECTAMENTE
 <br>
 <br>
 <!-- Fin de salto de linea. No necesita una etiqueta de cierre-->
-<div class="absolute3">
+
 @include('Ubicacion.search') 
 		
-</div>	
+
 
 <div class="row">
   <div class="table table-responsive">
-  @include('Ubicacion.search')
+  
     <table class="table table-bordered" id="table">
       <tr>
         <th width="150px">No</th>

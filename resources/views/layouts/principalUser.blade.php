@@ -213,6 +213,10 @@
 
 {!!Html::script('/js/jquery-1.11.1.min.js')!!}
 
+<script src="js/sweetalert.min.js"></script>
+
+<!-- Include this after the sweet alert js file -->
+@include('sweet::alert')
 
 
 
@@ -392,7 +396,7 @@ $('.modal-footer').on('click', '.delete', function(){
   $('#n2').text($(this).data('name'));
   $('#em').text($(this).data('email'));
   $('#pw').text($(this).data('password'));
-  $('.modal-title').text('Show Post');
+  $('.modal-title').text('Detalle Usuario');
   });
 </script>
 @include('partials.javascripts')

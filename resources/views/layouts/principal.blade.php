@@ -477,6 +477,7 @@ $('.modal-footer').on('click', '.delete', function(){
   
 $('#iaa').val($(this).data('id'));
 $('#jaja').val($(this).data('nombre'));
+
 ;
   $('.modal-show').text('Datos');
   });

@@ -71,9 +71,21 @@ Route::POST('addAfiliado','AfiliadoController@addAfiliado');
 Route::POST('editAfiliado','AfiliadoController@editAfiliado');
 Route::POST('deleteAfiliado','AfiliadoController@deleteAfiliado');
 
+<<<<<<< HEAD
 Route::POST('addStock','StockController@addStock');
 Route::POST('editStock','StockController@editStock');
 Route::POST('deleteStock','StockController@deleteStock');
+=======
+  
+ Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
+ Route::get('chartRecepcion', 'Admin\DashboardController@indexRecepcion')->name('chartRecepcion')->middleware('role:planta;administrador');
+ Route::get('chartIngreso', 'Admin\DashboardController@indexIngreso')->name('chartIngreso')->middleware('role:administrador');
+ 
+      
+ Route::resource('users', 'Admin\UserController')->middleware('role:administrador');;
+ //Route::get('users', 'Admin\UserController@index')
+ Route::resource('Afiliado', 'AfiliadoController')->middleware('role:administrador');
+>>>>>>> Caro
 
 
 
@@ -90,7 +102,7 @@ Route::POST('deleteStock','StockController@deleteStock');
     Route::get('Cera','CeraController@index')->middleware('role:planta;administrador');
     Route::get('Producto' , 'ProductController@index')->middleware('role:planta;administrador');
     Route::get('RecepEstanon' , 'RecepcionEstanonController@index')->middleware('role:planta;administrador');
-
+    Route::get('Stock' , 'StockController@index')->middleware('role:planta;administrador');
 
 
 
@@ -139,5 +151,20 @@ Route::POST('addUbicacion','UbicacionController@addUbicacion');
 Route::POST('editUbicacion','UbicacionController@editUbicacion');
 Route::POST('deleteUbicacion','UbicacionController@deleteUbicacion');
 
+<<<<<<< HEAD
 $this->get('/verify-user/{code}', 'Auth\RegisterController@activateUser')->name('activate.user');
 
+=======
+Route::POST('addStock','StockController@addStock');
+Route::POST('editStock','StockController@editStock');
+Route::POST('deleteStock','StockController@deleteStock');
+
+});
+ 
+$this->get('/verify-user/{code}', 'Auth\RegisterController@activateUser')->name('activate.user');
+
+  
+Route::get('test', ['as' => 'test', 'uses' => 'AlertController@index']);
+ $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+  $this->post('register', 'Auth\RegisterController@register');
+>>>>>>> Caro

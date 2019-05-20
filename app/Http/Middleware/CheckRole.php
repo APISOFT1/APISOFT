@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
-
+use Alert;
 use Closure;
 
 class CheckRole
@@ -13,6 +13,7 @@ class CheckRole
             return $next($request);
         }
 
+       
        return redirect('/');
     }
 }
