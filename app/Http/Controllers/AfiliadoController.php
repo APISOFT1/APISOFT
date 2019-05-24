@@ -80,7 +80,7 @@ class AfiliadoController extends Controller
         $afi->estado_civil_id = $request->estado_civil_id;
         $afi->estado_id = $request->estado_id;
         $afi->save();
-        return response()->json($afi);
+        return response()->json(['success' => 'Se ha creado un Afiliado correctamente']);
       }
     }
 
@@ -150,6 +150,7 @@ class AfiliadoController extends Controller
     public function deleteAfiliado(request $request){
   
         $afi = Afiliado::find ($request->id);
+<<<<<<< HEAD
         $afi->Nombre = $request->Nombre;
         $afi->apellido1 = $request->apellido1;
         $afi->apellido2 = $request->apellido2;
@@ -164,6 +165,10 @@ class AfiliadoController extends Controller
         $afi->delete();
         return response()->json();
  
+=======
+        $afi->delete();
+       
+>>>>>>> Caro
       }
       }   //
     

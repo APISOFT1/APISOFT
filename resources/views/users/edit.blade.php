@@ -38,11 +38,15 @@
             
                 <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-           <input type="text" class="form-control has-feedback-left" id="status" name="status"  value="{{ $user->status }}" placeholder="Estado" required>
-           <p class="error text-center alert alert-danger hidden"></p>
-              <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                </div>
-                </div>
+        <div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="status" id="status" value="{{ $user->status }}">
+  <label class="form-check-label" for="inlineRadio1">Activo</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="status" id="status" value="{{ $user->status }}">
+  <label class="form-check-label" for="inlineRadio2">Inactivo</label>
+</div>
+           
                
                 <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">

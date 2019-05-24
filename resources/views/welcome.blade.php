@@ -19,10 +19,13 @@
     <link href="welcome/css/material.min.css" rel="stylesheet">
     <link href="welcome/css/ripples.min.css" rel="stylesheet">
     <link href="welcome/css/main.css" rel="stylesheet">
+    <link href="welcome/css/style.css" rel="stylesheet">
+    <link href="welcome/css/animate.css" rel="stylesheet">
     <link href="welcome/css/responsive.css" rel="stylesheet">
     <link href="welcome/css/animate.min.css" rel="stylesheet">
     <link href="css5/normalize.css" rel="stylesheet">
     <link href="css/cardio.css" rel="stylesheet">
+
 
   </head>
 
@@ -40,10 +43,10 @@
         <ul class="nav navbar-nav main-navigation">
           <li class="active"><a href="#home">Inicio</a></li>
           <li><a href="#features">Historia</a></li>
-          <li><a href="#why">Mision</a></li>
-          <li><a href="#screenshot">Vision</a></li>
+          <li><a href="#why">Misión</a></li>
+          <li><a href="#screenshot">Visión</a></li>
           <li><a href="#testimonial">Acerca de Nosotros</a></li>
-          <li><a href="#contact">Ubicacion</a></li>
+          <li><a href="#contact">Ubicación</a></li>
         </ul>
         <button class="close-button" id="close-button">Cerrar</button>
     </div>
@@ -66,14 +69,20 @@
                 </div>
               </div>
             </div>
-        </div>        
+        </div>  
+              
         <div class="contents text-right">
           <h1 class="wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="300ms">APISOFT - Asociación de Apicultores Región Chorotega</h1>
           <p class="wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="400ms">La mejor miel del país producida en Nicoya</p>
   
         <a href="{{ url('/login/') }}" class="btn btn-lg btn-border wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">Iniciar Sesion</a>
+
+        
         </div>   
     </header>
+ 
+    
+  
 
     <section id="features" class="section">
 			<div class="container">
@@ -123,6 +132,7 @@
     <section id="screenshot" class="section">
       <div class="container">
         <div class="section-header">
+      
           <h1 class="section-title wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="300ms">Visión</h1>
 		</div>
 		<h1 class="section-subtitle wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="400ms">
@@ -135,8 +145,8 @@
       </div>
 	</div>
     </section>
-
-
+   
+   
     <section id="testimonial" class="section">
       <div class="container">
         <div class="section-header text-center wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="400ms">
@@ -178,7 +188,7 @@
 
 
    
-
+    
 
    
     <section id="contact">
@@ -226,10 +236,13 @@
                   <p>Apicultores Nicoya</p>
                 </div>
               </div>
+            
             </div>
           </div>
         </div>
+      
       </div>
+     
     </section>    
 
     <div class="map-area">      
@@ -243,21 +256,21 @@
         <div class="container">
           <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
-               <h3>   APPIS Chorotega</h3>
+            <h3>Asociación de Apicultores Región Chorotega</h3>
+  
               <ul>
-               <!-- <img src="/welcome/img/APPIS.jpeg"> -->
+               <img src="/welcome/img/APPIS.jpeg">
               </ul>
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="col-md-3  col-xs-12">
+          
             </div>
-            </div>
-           
+         
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <h3>Asociacion de Apicultores Región Chorotega</h3>
-                Todos los derechos reservados<br>
+            <h3>Colaboradores</h3>
+                <br>
               <ul>
-              
+              <img src="/welcome/img/una.png">
               </ul>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12">

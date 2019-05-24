@@ -192,11 +192,13 @@
       },
       success: function(data){
         if ((data.errors)) {
+          html = '<div class="alert alert-danger">';
           $('.error').removeClass('hidden');
           $('.error').text(data.errors.afiliado_id);
           $('.error').text(data.errors.apiario_id);
  
         } else {
+          html = '<div class="alert alert-success alert-dismissible">'  + data.success + '</div>';
           $('.error').remove();
           $('#table').append("<tr class='afiliadoapiario" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
@@ -215,6 +217,7 @@
            + data.apiario_id + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         }
+        $('#form_result').html(html);
       },
     });
     $('#afiliado_id').val('');
@@ -236,6 +239,7 @@ $('.form-horizontal').show();
 $('#idAA').val($(this).data('id'));
 $('#afi').val($(this).data('afiliado_id'));
 $('#api').val($(this).data('apiario_id'));
+
 $('#myModal').modal('show');
 });
 
@@ -247,25 +251,10 @@ $('.modal-footer').on('click', '.edit', function() {
 '_token': $('input[name=_token]').val(),
 'id': $("#idAA").val(),
 'afiliado_id': $('#afi').val(),
-'apiario_id': $('#api').val()
+'apiario_id': $('#api').val(),
     },
 success: function(data) {
-      $('.afiliadoapiario' + data.id).replaceWith(" "+
-      "<tr class='afiliadoapiario" + data.id + "'>"+
-      "<td>" + data.id + "</td>"+
-      "<td>" + data.afiliado_id + "</td>"+
-      "<td>" + data.apiario_id + "</td>"+
-      "<td>" + data.created_at + "</td>"+
- "<td><button class='show-modal btn btn-info btn-sm' data-id='"+
- data.id+"' data-afiliado_id='"
- +data.afiliado_id+"'data-apiario_id='"
- +data.apiario_id+"'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='"+
- data.id+"'data-afiliado_id='"
- +data.afiliado_id+ "' data-apiario_id='"
- +data.apiario_id+"'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='"+
- data.id+"' data-afiliado_id='"+
- data.afiliado_id+"'data-apiario_id='"+
- data.apiario_id+"'><span class='glyphicon glyphicon-trash'></span></button></td>"+"</tr>");
+      $('.table' + $('.id').text()).remove();
     }
   });
 });

@@ -49,7 +49,7 @@ class AfiliadoApiarioController extends Controller
         $afiliadoapiario->afiliado_id = $request->afiliado_id;
         $afiliadoapiario->apiario_id = $request->apiario_id;
         $afiliadoapiario->save();
-        return response()->json($afiliadoapiario);
+        return response()->json(['success' => 'Se ha creado un Afiliado con su Apiario correctamente']);
       }
     }
     

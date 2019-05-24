@@ -198,12 +198,14 @@
       },
       success: function(data){
         if ((data.errors)) {
+          html = '<div class="alert alert-danger">';
           $('.error').removeClass('hidden');
           $('.error').text(data.errors.Recepcion_id);
           $('.error').text(data.errors.Estanon_id);
           $('.error').text(data.errors.Fecha);
  
         } else {
+          html = '<div class="alert alert-success alert-dismissible">'  + data.success + '</div>';
           $('.error').remove();
           $('#table').append("<tr class='recepcionEst" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
@@ -224,6 +226,7 @@
           + data.Fecha + "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         }
+        $('#form_result').html(html);
       },
     });
     $('#Recepcion_id').val('');
@@ -290,42 +293,43 @@ success: function(data) {
 /*
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
-$('#footer_action_button').text(" Delete");
+$('#footer_action_button').text(" Eliminar");
 $('#footer_action_button').removeClass('glyphicon-check');
 $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Delete Post');
+$('.modal-title').text('Eliminar Ubicación');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
-$('.title').html($(this).data('Descripcion'));
+$('.recepcion_id').html($(this).data('recepcion_id'));
 $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
-    url: 'deleteApiario',
+    url: 'deleteRecepcion',
     data: {
       '_token': $('input[name=_token]').val(),
       'id': $('.id').text()
     },
     success: function(data){
-       $('.apiario' + $('.id').text()).remove();
+      $('.ubicacion' + $('.id').text()).remove();
     }
   });
 });
+
 */
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
   $('#i2').text($(this).data('id'));
-  $('#d2').text($(this).data('descripcion'));
-  $('#ca2').text($(this).data('cantidad'));
-  $('#ub2').text($(this).data('ubicacion_id'));
-  $('.modal-title').text('Show Post');
+  $('#d2').text($(this).data('recepcion_id'));
+  $('#ca2').text($(this).data('estanon_id'));
+  $('#ub2').text($(this).data('fecha'));
+  $('.modal-title').text('Detalle Recepción Estañón');
   });
 </script>
     

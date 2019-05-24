@@ -42,7 +42,7 @@ public function addApiario(Request $request){
       ]); 
       
   if ($validator->fails())
-  return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
+  return Response::json(['errors' => $error->errors()->all()]);
   else {
     
     $ubicacion_id = input::get('ubicacion_id');
@@ -54,7 +54,8 @@ public function addApiario(Request $request){
     $api->save();
     
    
-    return response()->json($api);
+    return response()->json(['success' => 'Se ha creado un Apiario correctamente']);
+ 
    
   
   
@@ -89,13 +90,16 @@ $api->Descripcion = $request->Descripcion;
 $api->cantidad = $request->cantidad;
 $api->ubicacion_id = $request->ubicacion_id;
 $api->save();
-return response()->json($api , $ubicaciones);
+return response()->json($api);
 }
 }
 public function deleteApiario(request $request){
   
   $api = Apiario::find ($request->id);
   $api->delete();
-  return response()->json();
+ 
+
+  
+
 }
 }

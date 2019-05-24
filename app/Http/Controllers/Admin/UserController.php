@@ -117,13 +117,12 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
    /*DELETEEEEEE*/
-public function destroy($id)
-{
-    $users=User::findOrFail($id);
-    $users->delete();
-    return redirect('users');
- 
-}
- 
+
+public function deleteUser(request $request){
+  
+    $afi = User::find($request->id);
+    $afi->delete();
+   
+  }
  
 }

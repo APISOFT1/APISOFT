@@ -232,14 +232,13 @@ var div_respuesta="#respuesta";
           "<td><button class='show-modalRol btn btn-info btn-sm' data-id='" + 
           data.id + "' data-descripcion='" + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modalRol btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalRol btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
-          
-
-
+        
           $('#busqueda_parroquia').append("<tr class='recepcion" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.fecha + "</td>"+
           "<td>" + data.afiliado_id + "</td>");
         }
+        $('#form_result').html(html);
       },
     });
       
@@ -317,21 +316,28 @@ $("#addd").click(function() {
 
 
 // function Edit POST
-$(document).on('click', '.edit-modalRol', function() {
-$('#footer_action_button').text(" Editar Rol");
+$(document).on('click', '.edit-modal', function() {
+$('#footer_action_button').text(" Editar");
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-$('.modal-descripcion').text('Editar Rol');
+$('.modal-descripcion').text('Editar Recepción');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
 $('#fid').val($(this).data('id'));
-$('#ti').val($(this).data('descripcion'));
+$('#ti').val($(this).data('fecha'));
+$('#psb').val($(this).data('pesobruto'));
+$('#snt').val($(this).data('pesoneto'));
+$('#mue').val($(this).data('numero_muestras'));
+$('#ali').val($(this).data('afiliado_id'));
+$('#ser').val($(this).data('user_id'));
+$('#ent').val($(this).data('tipoentrega_id'));
+$('#cio').val($(this).data('observacion'));
+
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
@@ -340,7 +346,6 @@ $('.modal-footer').on('click', '.edit', function() {
 '_token': $('input[name=_token]').val(),
 'id': $("#fid").val(),
 'descripcion': $('#ti').val(),
-
     },
 success: function(data) {
       $('.rol' + data.id).replaceWith(" "+
@@ -353,43 +358,49 @@ success: function(data) {
     }
   });
 });
-
 // form Delete function
-$(document).on('click', '.delete-modalRol', function() {
-$('#footer_action_button').text(" Delete");
+$(document).on('click', '.delete-modal', function() {
+$('#footer_action_button').text(" Eliminar");
 $('#footer_action_button').removeClass('glyphicon-check');
 $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Delete Post');
+$('.modal-title').text('Eliminar Ubicación');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
-$('.title').html($(this).data('descripcion'));
+$('.observacion').html($(this).data('observacion'));
 $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
-    url: 'deleteRol',
+    url: 'deleteRecepcionMateriaPrima',
     data: {
       '_token': $('input[name=_token]').val(),
       'id': $('.id').text()
     },
     success: function(data){
-       $('.rol' + $('.id').text()).remove();
+      $('.ubicacion' + $('.id').text()).remove();
     }
   });
 });
 
   // Show function
-  $(document).on('click', '.show-modalRol', function() {
+  $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
   $('#ii').text($(this).data('id'));
-  $('#di').text($(this).data('descripcion'));
-  $('.modal-title').text('Show Post');
+  $('#ech').text($(this).data('fecha'));
+  $('#di').text($(this).data('pesobruto'));
+  $('#psn').text($(this).data('pesoneto'));
+  $('#num').text($(this).data('numero_muestras'));
+  $('#afi').text($(this).data('afiliado_id'));
+  $('#use').text($(this).data('user_id'));
+  $('#tip').text($(this).data('tipoentrega_id'));
+  $('#obs').text($(this).data('observacion'));
+  $('.modal-title').text('Detalle Recepción');
   });
 </script>
 

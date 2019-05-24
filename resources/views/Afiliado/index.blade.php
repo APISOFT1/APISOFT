@@ -105,17 +105,7 @@
             </a>
             <a href="#" class="delete-modal btn btn-danger btn-sm"
             data-id="{{$value->id}}"
-            data-Nombre="{{$value->Nombre}}"
-            data-apellido1="{{$value->apellido1}}"
-            data-apellido2="{{$value->apellido2}}"
-            data-Telefono="{{$value->Telefono}}"
-            data-email="{{$value->email}}"
-            data-Direccion="{{$value->Direccion}}"
-            data-Fecha_Ingreso="{{$value->Fecha_Ingreso}}"
-            data-Num_Cuenta="{{$value->Num_Cuenta}}"
-            data-genero_id="{{$value->genero_id}}"
-            data-estado_civil_id="{{$value->estado_civil_id}}"
-            data-estado_id="{{$value->estado_id}}">
+            data-Nombre="{{$value->Nombre}}">
               <i class="fa fa-trash"></i>
             </a>
             @endif
@@ -137,6 +127,7 @@
         <h4 class="modal-crear"></h4>
       </div>
       <div class="modal-body">
+      <span id="form_result"></span>
         <form class="form-horizontal" role="form">
        
         <div class="stepwizard">
@@ -498,7 +489,7 @@
         </form>
                 {{-- Form Delete Post --}}
         <div class="deleteContent">
-          Desea Eliminar Este Afiliado <span class="descripcion"></span>?
+          ¿Está seguro que desea eliminar este afiliado <span class="descripcion"></span>?
           <span class="hidden id"></span>
         </div>
       </div>
@@ -507,7 +498,7 @@
           <span id="footer_action_button" class="glyphicon"></span>
         </button>
         <button type="button" class="btn btn-warning" data-dismiss="modal">
-          <span class="fa fa-close"></span>close
+          <span class="fa fa-close"></span>Cerrar
         </button>
       </div>
     </div>

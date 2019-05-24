@@ -180,9 +180,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+<<<<<<< HEAD
 
 {{-- ajax Form Add Post--}}
 
+=======
+{{-- ajax Form Add Post--}}
+>>>>>>> Caro
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
@@ -196,16 +200,27 @@
       data: {
         '_token': $('input[name=_token]').val(),
         'Descripcion': $('input[name=Descripcion]').val(),
+<<<<<<< HEAD
         'peso': $('input[name=peso]').val(),
+=======
+        'Peso': $('input[name=Peso]').val(),
+>>>>>>> Caro
         
       },
       success: function(data){
         if ((data.errors)) {
           $('.error').removeClass('hidden');
           $('.error').text(data.errors.Descripcion);
+<<<<<<< HEAD
           $('.error').text(data.errors.peso);
  
         } else {
+=======
+          $('.error').text(data.errors.Peso);
+ 
+        } else {
+          html = '<div class="alert alert-success alert-dismissible">'  + data.success + '</div>';
+>>>>>>> Caro
           $('.error').remove();
           $('#table').append("<tr class='api" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
@@ -220,6 +235,7 @@
            + data.id +
             "' data-Descripcion='" 
            + data.Descripcion +
+<<<<<<< HEAD
             "' data-peso='" + data.peso +
             
             "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
@@ -232,16 +248,35 @@
     $('#Descripcion').val('');
     $('#peso').val('');
 
+=======
+            "' data-Peso='" + data.Peso +
+            
+            "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
+           + data.id + "' data-Descripcion='" + data.Descripcion +  "' data-Peso='" 
+          + data.Peso + "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
+          "</tr>");
+        }
+        $('#form_result').html(html);
+      },
+    });
+    $('#Descripcion').val('');
+    $('#Peso').val('');
+>>>>>>> Caro
   });
  
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
+<<<<<<< HEAD
 $('#footer_action_button').text(" Editar Apiario");
+=======
+$('#footer_action_button').text(" Editar");
+>>>>>>> Caro
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
+<<<<<<< HEAD
 $('.modal-descripcion').text('Editar Estañon');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
@@ -251,6 +286,16 @@ $('#pes').val($(this).data('peso'));
 $('#myModal').modal('show');
 });
 
+=======
+$('.modal-descripcion').text('Editar Estañón');
+$('.deleteContent').hide();
+$('.form-horizontal').show();
+$('#ids').val($(this).data('id'));
+$('#des').val($(this).data('descripcion'));
+$('#pes').val($(this).data('peso'));
+$('#myModal').modal('show');
+});
+>>>>>>> Caro
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
@@ -259,14 +304,19 @@ $('.modal-footer').on('click', '.edit', function() {
 '_token': $('input[name=_token]').val(),
 'id': $("#ids").val(),
 'Descripcion': $('#des').val(),
+<<<<<<< HEAD
 'peso': $('#pes').val(),
 
+=======
+'Peso': $('#pes').val(),
+>>>>>>> Caro
     },
 success: function(data) {
       $('.api' + data.id).replaceWith(" "+
       "<tr class='api" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
       "<td>" + data.Descripcion + "</td>"+
+<<<<<<< HEAD
       "<td>" + data.peso + "</td>"+
       
  "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + "' data-Descripcion='" 
@@ -279,10 +329,52 @@ success: function(data) {
           "' data-peso='" 
           + data.peso + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
       "</tr>");
+=======
+      "<td>" + data.Peso + "</td>"+
+      
+ "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + "' data-Descripcion='" 
+ + data.Descripcion + "' data-Peso='" 
+          + data.peso + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
+          + data.id + "' data-Descripcion='" + data.Descripcion + 
+          "' data-Peso='" 
+          + data.Peso + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
+          + data.id + "' data-Descripcion='" + data.Descripcion + 
+          "' data-Peso='" 
+          + data.Peso + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+      "</tr>");
     }
   });
 });
+// form Delete function
+$(document).on('click', '.delete-modal', function() {
+$('#footer_action_button').text(" Eliminar");
+$('#footer_action_button').removeClass('glyphicon-check');
+$('#footer_action_button').addClass('glyphicon-trash');
+$('.actionBtn').removeClass('btn-success');
+$('.actionBtn').addClass('btn-danger');
+$('.actionBtn').addClass('delete');
+$('.modal-title').text('Eliminar Ubicación');
+$('.id').text($(this).data('id'));
+$('.deleteContent').show();
+$('.form-horizontal').hide();
+$('.descripcion').html($(this).data('descripcion'));
+$('#myModal').modal('show');
+});
 
+$('.modal-footer').on('click', '.delete', function(){
+  $.ajax({
+    type: 'POST',
+    url: 'deleteEstanon',
+    data: {
+      '_token': $('input[name=_token]').val(),
+      'id': $('.id').text()
+    },
+    success: function(data){
+      $('.ubicacion' + $('.id').text()).remove();
+>>>>>>> Caro
+    }
+  });
+});
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');

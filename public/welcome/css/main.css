@@ -536,7 +536,7 @@ a:focus {
 }
 #footer {
   position: relative;
-  background: #333;
+  background:url(../img/testimonial-bg.jpg);
 }
 #footer h3 {
   color: #fff;
