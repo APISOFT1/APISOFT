@@ -116,6 +116,12 @@ div.absolute7 {
   
 }
 
+div.absolute1 {
+	position: absolute;
+  top: 8px;
+  right:18px;
+  font-size: 15px;
+}
  
 
 /* buscador */

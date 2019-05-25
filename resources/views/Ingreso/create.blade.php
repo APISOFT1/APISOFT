@@ -98,7 +98,6 @@
        <th>Recepcion</th>
        <th>Peso Bruto Miel</th>
        <th>Precio</th>
-       <th></th>
        <th>Subtotal</th>
 
       </thead>
@@ -125,6 +124,11 @@
     <button  :disabled="loading"  @click="sendNotification" class="btn btn-primary" type="submit">Guardar</button>
              <button class="btn btn-danger" type="reset">Cancelar</button>
    </div>
+  </div>
+  <div class="absolute1">
+     <div class="form-group">
+      <a href="{{ URL::previous() }}">Regresar <i class="glyphicon glyphicon-arrow-left"></i></a>
+     </div>
   </div>
  </div>
 {!!Form::close()!!} 

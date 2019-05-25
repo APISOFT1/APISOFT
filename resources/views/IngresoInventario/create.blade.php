@@ -3,11 +3,6 @@
  <div class="row">
   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
    <h3>Nuevo Boleta de Inventario</h3>
-   <div class="col-lg-60 col-sm-60 col-md-60 col-xs-12">
-   <div class="form-group">
-   <a href="{{ URL::previous() }}">Regresar <i class="glyphicon glyphicon-arrow-left"></i></a>
-   </div>
-  </div>
    @if (count($errors)>0)
    <div class="alert alert-danger">
 
@@ -152,7 +147,11 @@
              <button class="btn btn-danger" type="reset">Cancelar</button>
    </div>
   </div>
-
+  <div class="absolute1">
+     <div class="form-group">
+      <a href="{{ URL::previous() }}">Regresar <i class="glyphicon glyphicon-arrow-left"></i></a>
+     </div>
+  </div>
  </div>
 {!!Form::close()!!} 
 
