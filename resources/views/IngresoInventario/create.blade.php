@@ -78,61 +78,8 @@
   <div class="panel panel-primary">
   <div class="table-responsive">
    <div class="panel-body">
-    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
      <div class="form-group">
-
-                   <!--  <div class="col-xs-2 col-sm-2 col-md-12">
-                        <div class="form-group">
-                            <label for="stocks">Agregar recepcion:</label>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="glyphicon glyphicon-plus"></i></button>
-                        </div> 
-                    </div> 
-                    Modal 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Componentes</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <table class="table" width="250" border="2">
-                                        <thead> 
-                                            <tr>
-                                                <td><h4>PrecioTotal</h4></td>
-                                                <td><h4>Producto</h4></td>
-                                               
-                                                <td></td>
-                                            </tr>
-                                        <thead>   
-                                        <tbody>
-                                        @foreach($stocks as $stock)
-                                        <option value="{{$stock->id}}_{{$stock->cantidadDisponible}}">{{$stock->stocks}}
-                                        </option>
-    
-                                         <td>   <input type="checkbox" aria-label="Checkbox for following text input" href="" />Agregar </td>
-                                            </tr>
-                                            @endforeach
-                                    </table>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">Guardar</button>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-      
-</div> 
-</div>
-</footer>
-</body>
-</html> -->
-
   <label>Producto</label>
      <select name="pstock_id" class="form-control selectpicker" id="pstock_id" data-live-search="true">
        @foreach($stocks as $stock)
@@ -155,18 +102,12 @@
       <input type="number" name="pPrecio" id="pPrecio" class="form-control" placeholder="Precio">
      </div>
     </div>
-    <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
      <div class="form-group">
-      <label for="cantidad">Cantidad a utilizar</label>
-      <input type="number" name="pcantidad" id="pcantidad" class="form-control" placeholder="cantidad de laminas">
+      <label for="cantidad">Cantidad a utilizar en laminas</label>
+      <input type="number" name="pcantidad" id="pcantidad" class="form-control" placeholder="cantidad a utilizar en laminas">
      </div>
     </div>
- 
-   <!-- <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
-     <div class="form-group">
-      <label for="descuento">Descuento</label>
-      <input type="number"  name="pdescuento" id="pdescuento" class="form-control" placeholder="Descuento">
-     </div>-->
      
     </div>
     <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
@@ -181,9 +122,9 @@
       <thead style="background-color:	#9ddcf2">
        <th>Opciones</th>
        <th>Producto</th>
+       <th>cantidad disponible</th>
        <th>Precio</th>
-       <th>cantidad a utilizar</th>
-       <th>Descuento</th>
+       <th>cantidad a utilizar en laminas</th>
        <th>Subtotal</th>
       </thead>
       <tfoot>
@@ -246,7 +187,7 @@ $(document).ready(function(){
     cantidadDisponible=$("#pcantidadDisponible").val();
     Precio=$("#pPrecio").val();
     cantidad=$("#pcantidad").val();
-    descuento=$("#pdescuento").val();
+   
 
     if (stock_id!="" && cantidadDisponible>0 && Precio!="" && Precio>0 && cantidad!="")
     {

@@ -24,7 +24,7 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <!--[endif]-->
-    <!--[if lt IE 9]>
+    <!--[if lt IE 9]-->
 
 
 
@@ -38,7 +38,7 @@
 
     {!!Html::style ('/css2/bootstrap-select.min.css')!!}  
     
-    <!-- Font Awesome -->
+  <!--   Font Awesome -->
     {!!Html::style ('/css2/font-awesome.min.css')!!}
     <!-- NProgress -->
     {!!Html::style ('/css2/nprogress.css')!!}
@@ -167,10 +167,6 @@
 
 </ul>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="//js.pusher.com/3.1/pusher.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="js/push.min.js"></script>
 
 
 
@@ -507,115 +503,7 @@ $('#jaja').val($(this).data('nombre'));
   $('.modal-show').text('Datos');
   });
 
-<<<<<<< HEAD
 
- 
-</script>
-
-
-<script type="text/javascript">
-$(document).ready(function () {
-    var navListItems = $('div.setup-panel div a'), // tab nav items
-            allWells = $('.setup-content'), // content div
-            allNextBtn = $('.nextBtn'); // next button
-
-    allWells.hide(); // hide all contents by defauld
-
-    navListItems.click(function (e) {
-        e.preventDefault();
-        var $target = $($(this).attr('href')),
-                $item = $(this);
-
-        if (!$item.hasClass('disabled')) {
-            navListItems.removeClass('btn-primary').addClass('btn-default');
-            $item.addClass('btn-primary');
-            allWells.hide();
-            $target.show();
-            $target.find('input:eq(0)').focus();
-        }
-    });
-    // next button
-    allNextBtn.click(function(){
-        var curStep = $(this).closest(".setup-content"),
-            curStepBtn = curStep.attr("id"),
-            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-            curInputs = curStep.find("input[type='text'],input[type='email'],input[type='password'],input[type='url']"),
-            isValid = true;
-           // Validation
-        $(".form-group").removeClass("has-error");
-        for(var i=0; i<curInputs.length; i++){
-            if (!curInputs[i].validity.valid){
-                isValid = false;
-                $(curInputs[i]).closest(".form-group").addClass("has-error");
-            }
-        }
-        // move to next step if valid
-        if (isValid)
-            nextStepWizard.removeAttr('disabled').trigger('click');
-    });
-
-
- 
-    $('div.setup-panel div a.btn-primary').trigger('click');
-});
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="//js.pusher.com/3.1/pusher.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-=======
->>>>>>> Caro
-
-
-<script type="text/javascript">
-      var notificationsWrapper   = $('.dropdown-notifications');
-      var notificationsToggle    = notificationsWrapper.find('a[data-toggle]');
-      var notificationsCountElem = notificationsToggle.find('i[data-count]');
-      var notificationsCount     = parseInt(notificationsCountElem.data('count'));
-      var notifications          = notificationsWrapper.find('ul.dropdown-menu');
-
-      if (notificationsCount <= 0) {
-        notificationsWrapper.hide();
-      }
-
-      // Enable pusher logging - don't include this in production
-      // Pusher.logToConsole = true;
-
-      var pusher = new Pusher('API_KEY_HERE', {
-        encrypted: true
-      });
-
-      // Subscribe to the channel we specified in our Laravel Event
-      var channel = pusher.subscribe('status-liked');
-
-      // Bind a function to a Event (the full Laravel class)
-      channel.bind('App\\Events\\StatusLiked', function(data) {
-        var existingNotifications = notifications.html();
-        var avatar = Math.floor(Math.random() * (71 - 20 + 1)) + 20;
-        var newNotificationHtml = `
-          <li class="notification active">
-              <div class="media">
-                <div class="media-left">
-                  <div class="media-object">
-                    <img src="https://api.adorable.io/avatars/71/`+avatar+`.png" class="img-circle" alt="50x50" style="width: 50px; height: 50px;">
-                  </div>
-                </div>
-                <div class="media-body">
-                  <strong class="notification-title">`+data.message+`</strong>
-                  <!--p class="notification-desc">Extra description can go here</p-->
-                  <div class="notification-meta">
-                    <small class="timestamp">about a minute ago</small>
-                  </div>
-                </div>
-              </div>
-          </li>
-        `;
-        notifications.html(newNotificationHtml + existingNotifications);
-
-        notificationsCount += 1;
-        notificationsCountElem.attr('data-count', notificationsCount);
-        notificationsWrapper.find('.notif-count').text(notificationsCount);
-        notificationsWrapper.show();
-      });
 
       // Enable pusher logging - don't include this in production
 // Pusher.logToConsole = true;

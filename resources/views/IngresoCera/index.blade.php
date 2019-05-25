@@ -4,9 +4,6 @@
 <!-- mensaje de exito -->
 <?php $message=Session::get('message') ?>
 
-
-
-
 @if($message == 'store')
 <div class="alert alert-success alert-dismissible" role="alert">
 
