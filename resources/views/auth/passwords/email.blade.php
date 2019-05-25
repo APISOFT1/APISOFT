@@ -57,9 +57,9 @@
 							
 					</div>
 					<div class="container-login100-form-btn m-t-32">
-						<button type="submit" class="btn btn-primary" {{ __('Send Password Reset Link') }}>{{ __('views.auth.passwords.email.action') }} Enviar correo</button>	
+						<button type="submit" class="btn btn-primary" {{ __('Send Password Reset Link') }}> Enviar correo</button>	
 						<a class="reset_pass" href="{{ route('login') }}">
-                                {{ __('views.auth.passwords.email.message') }}
+                              
                     	</a>		
                 	</div>
 					
