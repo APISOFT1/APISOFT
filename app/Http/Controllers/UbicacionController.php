@@ -46,7 +46,8 @@ public function addUbicacion(Request $request){
     $ubicacion = new Ubicacion;
     $ubicacion->Descripcion = $request->Descripcion;
     $ubicacion->save();
-    return response()->json(['success' => 'Se ha creado una ubicación correctamente']);
+    
+    return response()->json($ubicacion,['success' => 'Se ha creado una ubicación correctamente']);
   }
 }
  public function editUbicacion(request $request){

@@ -299,9 +299,10 @@
               </div>
           
             <div class="modal-footer">
-          <button class="btn btn-warning" class="text-center" type="submit" id="add">
+          <button class="btn btn-warning" class="text-center" type="submit" id="addd">
               <span class="fa fa-save"></span> Guardar 
             </button>
+            
            
             </div>
                            

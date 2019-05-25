@@ -78,10 +78,63 @@
   <div class="panel panel-primary">
   <div class="table-responsive">
    <div class="panel-body">
-    <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
      <div class="form-group">
-      <label>Producto</label>
-      <select name="pstock_id" class="form-control selectpicker" id="pstock_id" data-live-search="true">
+
+                   <!--  <div class="col-xs-2 col-sm-2 col-md-12">
+                        <div class="form-group">
+                            <label for="stocks">Agregar recepcion:</label>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="glyphicon glyphicon-plus"></i></button>
+                        </div> 
+                    </div> 
+                    Modal 
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Componentes</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table" width="250" border="2">
+                                        <thead> 
+                                            <tr>
+                                                <td><h4>PrecioTotal</h4></td>
+                                                <td><h4>Producto</h4></td>
+                                               
+                                                <td></td>
+                                            </tr>
+                                        <thead>   
+                                        <tbody>
+                                        @foreach($stocks as $stock)
+                                        <option value="{{$stock->id}}_{{$stock->cantidadDisponible}}">{{$stock->stocks}}
+                                        </option>
+    
+                                         <td>   <input type="checkbox" aria-label="Checkbox for following text input" href="" />Agregar </td>
+                                            </tr>
+                                            @endforeach
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary">Guardar</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+      
+</div> 
+</div>
+</footer>
+</body>
+</html> -->
+
+  <label>Producto</label>
+     <select name="pstock_id" class="form-control selectpicker" id="pstock_id" data-live-search="true">
        @foreach($stocks as $stock)
         <option value="{{$stock->id}}_{{$stock->cantidadDisponible}}">{{$stock->stocks}}</option>
        @endforeach
@@ -102,21 +155,23 @@
       <input type="number" name="pPrecio" id="pPrecio" class="form-control" placeholder="Precio">
      </div>
     </div>
-    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+    <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
      <div class="form-group">
       <label for="cantidad">Cantidad a utilizar</label>
       <input type="number" name="pcantidad" id="pcantidad" class="form-control" placeholder="cantidad de laminas">
      </div>
     </div>
-    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+ 
+   <!-- <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
      <div class="form-group">
       <label for="descuento">Descuento</label>
       <input type="number"  name="pdescuento" id="pdescuento" class="form-control" placeholder="Descuento">
-     </div>
+     </div>-->
+     
     </div>
     <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
      <div class="form-group">
-      <label>-------------</label>
+      <label></label>
       <button type="button" id="bt_add" class="btn btn-primary">Agregar</button>
      </div>
     </div>
@@ -156,72 +211,58 @@
              <button class="btn btn-danger" type="reset">Cancelar</button>
    </div>
   </div>
+
  </div>
 {!!Form::close()!!} 
 
 @push ('scripts')
 <script>
-
-
 $(document).ready(function(){
     $('#bt_add').click(function(){
     agregar();
     });
   });
-
  var cont=0;
  total=0;
  subtotal=[];
  $("#guardar").hide();
  $("#pstock_id").change(mostrarValores);
-
  function mostrarValores()
  {
    datosProducto= document.getElementById('pstock_id').value.split('_');
    $("#pcantidadDisponible").val(datosProducto[1]);
  }
-
-
  function agregar(){
-
     datosProducto= document.getElementById('pstock_id').value.split('_');
     
     stock_id=datosProducto[0];
     stocks=$("#pstock_id option:selected").text();
-
     cantidadDisponible=$("#pcantidadDisponible").val();
     Precio=$("#pPrecio").val();
     cantidad=$("#pcantidad").val();
     descuento=$("#pdescuento").val();
-
-    if (stock_id!="" && cantidadDisponible>0 && Precio!="" && Precio>0 && cantidad!="" && descuento!="")
+    if (stock_id!="" && cantidadDisponible>0 && Precio!="" && Precio>0 && cantidad!="")
     {
     
-       subtotal[cont]=(Precio*cantidad)-((Precio*cantidad)-descuento);
+       subtotal[cont]=(Precio*cantidad);
        total=total+subtotal[cont];
-
-       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="stock_id[]" value="'+stock_id+'">'+stocks+'</td><td><input type="number" name="cantidadDisponible[]" value="'+cantidadDisponible+'"></td><td><input type="number" name="Precio[]" value="'+Precio+'"></td><td><input type="number" name="cantidad[]" value="'+cantidad+'"></td><td><input type="number" name="descuento[]" value="'+descuento+'"></td><td>'+subtotal[cont]+'</td></tr>';
+       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="stock_id[]" value="'+stock_id+'">'+stocks+'</td><td><input type="number" name="cantidadDisponible[]" value="'+cantidadDisponible+'"></td><td><input type="number" name="Precio[]" value="'+Precio+'"></td><td><input type="number" name="cantidad[]" value="'+cantidad+'"></td><td>'+subtotal[cont]+'</td></tr>';
        cont++;
        limpiar();
        $('#total').html("$/ " + total);
        $('#total_venta').val(total);
        evaluar();
        $('#detalles').append(fila);
-
     }
     else
     {
       alert("Error al ingresar el detalle del ingreso, revise los datos del articulo")
     }
-
   }
-
  function limpiar(){
     $("#pPrecio").val("");
     $("#pcantidad").val("");
-    $("#pdescuento").val("");
   }
-
   function evaluar()
   {
     if (total>0)
@@ -233,7 +274,6 @@ $(document).ready(function(){
       $("#guardar").hide(); 
     }
    }
-
  function eliminar(index){
   total=total-subtotal[index]; 
     $("#total").html("$/. " + total); 
@@ -241,7 +281,6 @@ $(document).ready(function(){
     $("#fila" + index).remove();
     evaluar();
  }
-
 </script>
 @endpush
 @endsection

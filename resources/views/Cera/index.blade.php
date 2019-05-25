@@ -32,11 +32,11 @@
 			<table class="table table-striped table-bordered table-condensed table-hover">
 				<thead>
 					<th>Código</th>
-					<th>Descripción</th>
 					<th>Recepción</th>
 					<th>Peso Bruto</th>
                     <th>Peso Neto</th>
                     <th>Fecha</th>
+                    <th>Observación</th>
 					<th><a href="#"
 					class="create-modal btn btn-success btn-sm">
             <i class="glyphicon glyphicon-plus"></i></th>
@@ -46,11 +46,11 @@
                @foreach ($cera as $value)
 					<tr class="api{$value->id}}">
           <td>{{ $no++ }}</td>
-					<td>{{ $value->Descripcion}}</td>
 					<td>{{ $value->RecepcionMateriaPrima->id}} - {{ $value->RecepcionMateriaPrima->afiliado->Nombre}} {{ $value->RecepcionMateriaPrima->afiliado->apellido1}} {{ $value->RecepcionMateriaPrima->afiliado->apellido2}}</td>
             <td>{{ $value->PesoBruto}}</td>
             <td>{{ $value->PesoNeto}}</td>
             <td>{{ $value->Fecha}}</td>
+            <td>{{ $value->Descripcion}}</td>
 					<td>
 					<a href="#" class="show-modal btn btn-info btn-sm"
 					 data-id="{{$value->id}}" 

@@ -95,7 +95,7 @@
      </div>
     </div>
 
-    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+    <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
      <div class="form-group">
       <label for="Precio">Precio</label>
       <input type="number"  name="pPrecio" id="pPrecio" class="form-control" placeholder="Precio">
@@ -149,41 +149,33 @@
 
 @push ('scripts')
 <script>
-
  $(document).ready(function(){
     $('#bt_add').click(function(){
     agregar();
     });
   });
-
  var cont=0;
  total=0;
  subtotal=[];
  $("#guardar").hide();
  $("#pcera_id").change(mostrarValores);
-
  function mostrarValores()
  {
    datosProducto= document.getElementById('pcera_id').value.split('_');
    $("#pPesoNeto").val(datosProducto[1]);
  }
-
  function agregar(){
-
     datosProducto= document.getElementById('pcera_id').value.split('_');
-
     cera_id=datosProducto[0];
     ceras=$("#pcera_id option:selected").text();
     
     PesoNeto=$("#pPesoNeto").val();
     Precio=$("#pPrecio").val();
    
-
-    if (cera_id!="" && PesoNeto!="" && PesoNeto>0 && Precio!="")
+    if (cera_id!="" && PesoNeto>0 && Precio!="")
     {
        subtotal[cont]=(PesoNeto*Precio);
        total=total+subtotal[cont];
-
        var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="cera_id[]" value="'+cera_id+'">'+ceras+'</td><td><input type="number" name="PesoNeto[]" value="'+PesoNeto+'"></td><td><input type="number" name="Precio[]" value="'+Precio+'"></td><td><td>'+subtotal[cont]+'</td></tr>';
        cont++;
        limpiar();
@@ -191,20 +183,15 @@
        $('#total_venta').val(total);
        evaluar();
        $('#detalles').append(fila);
-
     }
     else
     {
       alert("Error al ingresar el detalle del ingreso, revise los datos del producto")
     }
   }
-
  function limpiar(){
-    $("#pPesoNeto").val("");
     $("#pPrecio").val("");
-
   }
-
   function evaluar()
   {
     if (total>0)
@@ -216,7 +203,6 @@
       $("#guardar").hide(); 
     }
    }
-
  function eliminar(index){
   total=total-subtotal[index]; 
     $("#total").html("$/. " + total);   
@@ -224,7 +210,6 @@
     $("#fila" + index).remove();
     evaluar();
  }
-
 </script>
 @endpush
 @endsection

@@ -235,6 +235,8 @@
     $('#Fecha').val('');
 
   });
+
+  
  
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {

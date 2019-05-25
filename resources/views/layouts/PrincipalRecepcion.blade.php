@@ -252,6 +252,40 @@ var div_respuesta="#respuesta";
 
 
   });
+  {{-- ajax Form Add Post--}}
+$(document).on('click','.create-modal', function() {
+  $('#create').modal('show');
+  $('.form-horizontal').show();
+  $('.modal-descripcion').text('Crear Recepción Estañón');
+});
+$("#addd").click(function() {
+  $.ajax({
+    type: 'POST',
+    url: 'addRecepcion',
+    
+    data: {
+      '_token': $('input[name=_token]').val(),
+      'Recepcion_id': $('select[name=Recepcion_id]').val(),
+      'Estanon_id': $('select[name=Estanon_id]').val(),
+      'Fecha': $('input[name=Fecha]').val()
+      
+    },
+    success: function(data){
+      if ((data.errors)) {
+        $('.error').removeClass('hidden');
+        $('.error').text(data.errors.Recepcion_id);
+        $('.error').text(data.errors.Estanon_id);
+        $('.error').text(data.errors.Fecha);
+      } else {
+        $('.error').remove();
+    
+      }
+    },
+  });
+  $('#Recepcion_id').val('');
+  $('#Estanon_id').val('');
+  $('#Fecha').val('');
+});
 
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {

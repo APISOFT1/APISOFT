@@ -53,9 +53,9 @@ Route::group(['middleware' =>['auth']], function () {
     Route::get('AfiliadoApiario','AfiliadoApiarioController@index')->middleware('role:planta;administrador');
     Route::get('Apiario' , 'ApiarioController@index')->middleware('role:planta;administrador');
     Route::get('RecepcionMateriaPrima','RecepcionMateriaPrimaController@index')->middleware('role:planta;administrador');
-    Route::get('Ingreso' , 'IngresoController@index')->middleware('role:planta;administrador');
-    Route::get('IngresoCera' , 'IngresoCeraController@index')->middleware('role:planta;administrador');
-    Route::get('IngresoInventario' , 'IngresoInventarioController@index')->middleware('role:planta;administrador');
+    Route::resource('Ingreso' , 'IngresoController')->middleware('role:planta;administrador');
+    Route::resource('IngresoCera' , 'IngresoCeraController')->middleware('role:planta;administrador');
+    Route::resource('IngresoInventario' , 'IngresoInventarioController')->middleware('role:planta;administrador');
     Route::get('Cera','CeraController@index')->middleware('role:planta;administrador');
     Route::get('Producto' , 'ProductController@index')->middleware('role:planta;administrador');
     Route::get('RecepEstanon' , 'RecepcionEstanonController@index')->middleware('role:planta;administrador');

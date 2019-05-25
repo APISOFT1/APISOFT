@@ -1,4 +1,4 @@
-@extends ('layouts.principal')
+@extends ('layouts.principal1')
 @section ('contenido')
  <div class="row">
   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -122,7 +122,7 @@
   <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12" id="guardar">
    <div class="form-group">
     <input name="_token" value="{{ csrf_token() }}" type="hidden"></input>
-    <button class="btn btn-primary" type="submit">Guardar</button>
+    <button  :disabled="loading"  @click="sendNotification" class="btn btn-primary" type="submit">Guardar</button>
              <button class="btn btn-danger" type="reset">Cancelar</button>
    </div>
   </div>
@@ -131,40 +131,32 @@
 
 @push ('scripts')
 <script>
-
  $(document).ready(function(){
     $('#bt_add').click(function(){
     agregar();
     });
   });
-
  var cont=0;
  total=0;
  subtotal=[];
  $("#guardar").hide();
  $("#precepcion_id").change(mostrarValores);
-
  function mostrarValores()
  {
    datosProducto= document.getElementById('precepcion_id').value.split('_');
    $("#pPesoBruto").val(datosProducto[1]);
  }
-
  function agregar(){
-
     datosProducto= document.getElementById('precepcion_id').value.split('_');
-
     recepcion_id=datosProducto[0];
     producto=$("#precepcion_id option:selected").text();
     PesoBruto=$("#pPesoBruto").val();
     Precio=$("#pPrecio").val();
     
-
     if (recepcion_id!="" && PesoBruto!=""  && Precio!="" )
     {
        subtotal[cont]=(Precio);
        total=total+subtotal[cont];
-
        var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="recepcion_id[]" value="'+recepcion_id+'">'+producto+'</td><td><input type="number" name="PesoBruto[]" value="'+PesoBruto+'"></td><td><input type="number" name="Precio[]" value="'+Precio+'"></td><td>'+subtotal[cont]+'</td></tr>';
        cont++;
        limpiar();
@@ -172,20 +164,17 @@
        $('#total_venta').val(total);
        evaluar();
        $('#detalles').append(fila);
-
     }
     else
     {
       alert("Error al ingresar el detalle del ingreso, revise los datos del producto")
     }
   }
-
  function limpiar(){
  
     $("#pPrecio").val("");
   
   }
-
   function evaluar()
   {
     if (total>0)
@@ -197,7 +186,6 @@
       $("#guardar").hide(); 
     }
    }
-
  function eliminar(index){
   total=total-subtotal[index]; 
     $("#total").html("$/. " + total);   
@@ -205,7 +193,6 @@
     $("#fila" + index).remove();
     evaluar();
  }
-
 </script>
 @endpush
 @endsection
