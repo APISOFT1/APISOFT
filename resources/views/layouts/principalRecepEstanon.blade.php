@@ -65,7 +65,7 @@
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       
-                     <li><a href="{{ url('users/') }}">Gestionar users</a></li>
+                     <li><a href="{{ url('users/') }}">Gestionar usuarios</a></li>
                     </ul>
                   </li>
                  
@@ -94,10 +94,11 @@
                     
                     </ul>
                   </li>
-                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Producto Terminado <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Producto/') }}">Gestionar Productos</a></li>
-                      <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
+                    <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
                     
                     
                     </ul>

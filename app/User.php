@@ -9,6 +9,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+
     const STATUS = 1;
     const INACTIVE = 0;
 

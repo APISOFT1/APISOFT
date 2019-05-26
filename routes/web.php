@@ -13,11 +13,14 @@ jjajaajaj
 */
 Route::get('/', function () {
     return view('welcome');
-  
 });
 Auth::routes();
 
-
+Route::resources([
+    'Ingreso' => 'IngresoController',
+ 'IngresoCera' => 'IngresoCeraController',
+ 'IngresoInventario' => 'IngresoInventarioController'
+      ]);
 
 Route::group(['middleware' =>['auth']], function () {
   
@@ -38,7 +41,7 @@ Route::group(['middleware' =>['auth']], function () {
  Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
  Route::get('chartRecepcion', 'Admin\DashboardController@indexRecepcion')->name('chartRecepcion')->middleware('role:planta;administrador');
  Route::get('chartIngreso', 'Admin\DashboardController@indexIngreso')->name('chartIngreso')->middleware('role:administrador');
- 
+
       
  Route::resource('users', 'Admin\UserController')->middleware('role:administrador');;
  //Route::get('users', 'Admin\UserController@index')
@@ -120,7 +123,7 @@ Route::POST('deleteStock','StockController@deleteStock');
  
 $this->get('/verify-user/{code}', 'Auth\RegisterController@activateUser')->name('activate.user');
 
-  
+//Route::get('IngresoCera' , 'IngresoCeraController@index');
 Route::get('test', ['as' => 'test', 'uses' => 'AlertController@index']);
  $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
   $this->post('register', 'Auth\RegisterController@register');
