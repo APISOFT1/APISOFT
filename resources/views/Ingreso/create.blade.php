@@ -108,7 +108,7 @@
        <th></th>
     
      
-       <th><h4 id="total">$/ . 0.00</h4> <input type="hidden" name="total_venta" 
+       <th><h4 id="total">₡/ . 0.00</h4> <input type="hidden" name="total_venta" 
        id="total_venta"></th>
       </tfoot>
       <tbody>
@@ -167,12 +167,12 @@
     if (recepcion_id!="" && PesoBruto!=""  && Precio!="" )
     {
        subtotal[cont]=(Precio);
-       total=total+subtotal[cont];
+       total=subtotal[cont];
 
        var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="recepcion_id[]" value="'+recepcion_id+'">'+producto+'</td><td><input type="number" name="PesoBruto[]" value="'+PesoBruto+'"></td><td><input type="number" name="Precio[]" value="'+Precio+'"></td><td>'+subtotal[cont]+'</td></tr>';
        cont++;
        limpiar();
-       $('#total').html("$/ " + total);
+       $('#total').html("₡/ " + total);
        $('#total_venta').val(total);
        evaluar();
        $('#detalles').append(fila);
@@ -204,7 +204,7 @@
 
  function eliminar(index){
   total=total-subtotal[index]; 
-    $("#total").html("$/. " + total);   
+    $("#total").html("₡/. " + total);   
     $("#total_venta").val(total);
     $("#fila" + index).remove();
     evaluar();

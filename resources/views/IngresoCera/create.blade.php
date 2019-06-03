@@ -53,12 +53,16 @@
     </select>
    </div>
   </div>
-  <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+
+
+  
+  <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12 add">
    <div class="form-group">
     <label for="serie_comprobante">Serie Comprobante</label>
     <input type="text" name="serie_comprobante" value="{{old('serie_comprobante')}}" class="form-control" placeholder="Serie Comprobante">
    </div>
   </div>
+  
   <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
    <div class="form-group">
     <label>Tipo de pago</label>
@@ -75,15 +79,22 @@
    <div class="panel-body">
     <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
      <div class="form-group">
-      <label>Cera</label>
+      <label>Id cera</label>
       <select name="pcera_id" class="form-control selectpicker" id="pcera_id" data-live-search="true">
        @foreach($ceras as $cera)
-        <option value="{{$cera->id}}_{{$cera->PesoNeto}}">{{$cera->ceras}}</option>
+        <option value="{{$cera->id}}_{{$cera->Recepcion_id}}_{{$cera->PesoNeto}}">{{$cera->ceras}}</option>
        @endforeach
       </select>
      </div>
     </div>
-     
+
+    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+     <div class="form-group">
+      <label for="Recepcion_id">Id de recepción</label>
+      <input type="number" disabled name="pRecepcion_id" id="pRecepcion_id" class="form-control" placeholder="Id de recepción">
+     </div>
+    </div>
+
     <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
      <div class="form-group">
       <label for="PesoNeto">Peso Neto en Kg</label>
@@ -91,7 +102,7 @@
      </div>
     </div>
 
-    <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
      <div class="form-group">
       <label for="Precio">Precio</label>
       <input type="number"  name="pPrecio" id="pPrecio" class="form-control" placeholder="Precio">
@@ -110,10 +121,11 @@
      <table id="detalles" class="table table-responsive table-striped table-bordered table-condensed table-hover">
       <thead style="background-color:	#9ddcf2">
        <th>Opciones</th>
-       <th>Cera</th>
+       <th>Id cera</th>
+       <th>Id de recepcion</th>
        <th>Peso Neto en Kg</th>
        <th>Precio</th>
-       <th></th>
+     
        <th>Subtotal</th>
       </thead>
       <tfoot>
@@ -121,6 +133,7 @@
        <th></th>
        <th></th>
        <th></th>
+
        <th></th>
        <th><h4 id="total">₡/ . 0.00</h4> <input type="hidden" name="total_venta" 
        id="total_venta"></th>
@@ -166,7 +179,8 @@
  function mostrarValores()
  {
    datosProducto= document.getElementById('pcera_id').value.split('_');
-   $("#pPesoNeto").val(datosProducto[1]);
+   $("#pPesoNeto").val(datosProducto[2]);
+   $("#pRecepcion_id").val(datosProducto[1]);
  }
 
  function agregar(){
@@ -175,17 +189,17 @@
 
     cera_id=datosProducto[0];
     ceras=$("#pcera_id option:selected").text();
-    
+    Recepcion_id=$("#pRecepcion_id").val();
     PesoNeto=$("#pPesoNeto").val();
     Precio=$("#pPrecio").val();
    
 
-    if (cera_id!="" && PesoNeto>0 && Precio!="")
+    if (cera_id!="" && PesoNeto>0  && Precio!="")
     {
        subtotal[cont]=(PesoNeto*Precio);
        total=total+subtotal[cont];
 
-       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="cera_id[]" value="'+cera_id+'">'+ceras+'</td><td><input type="number" name="PesoNeto[]" value="'+PesoNeto+'"></td><td><input type="number" name="Precio[]" value="'+Precio+'"></td><td><td>'+subtotal[cont]+'</td></tr>';
+       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="cera_id[]" value="'+cera_id+'">'+ceras+'</td><td><input type="number" name="Recepcion_id[]" value="'+Recepcion_id+'"></td><td><input type="number" name="PesoNeto[]" value="'+PesoNeto+'"></td><td><input type="number" name="Precio[]" value="'+Precio+'"></td><td><td>'+subtotal[cont]+'</td></tr>';
        cont++;
        limpiar();
        $('#total').html("$/ " + total);
@@ -225,6 +239,10 @@
     evaluar();
  }
 
+
+
 </script>
+
+
 @endpush
 @endsection

@@ -577,3 +577,4 @@ channel.bind('App\\Events\\StatusLiked', function(data) {
   border-radius: 15px;
 }
 </style>
+

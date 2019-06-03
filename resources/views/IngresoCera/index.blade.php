@@ -54,7 +54,7 @@
 					<td>
 						<a href="{{URL::action('IngresoCeraController@show',$ing->idingreso_cera)}}"><button class=" btn btn-info btn-sm"><i class="fa fa-eye"></i></button></a>
 						 <a href="{{URL::action('IngresoCeraController@edit',$ing->idingreso_cera)}}"><button class="btn btn-warning btn-sm"><i class="glyphicon glyphicon-print"></i></button></a>
-						 <a href="" data-target="#modal-delete-{{$ing->idingreso_cera}}" data-toggle="modal"><button class="btn btn-danger"> <i class="glyphicon glyphicon-trash"></i></button></a>
+						<a href="" data-target="#modal-delete-{{$ing->idingreso_cera}}" data-toggle="modal"><button class="btn btn-danger"> <i class="glyphicon glyphicon-trash"></i></button></a>
 					</td>
 				</tr>
 				@include('IngresoCera.modal')

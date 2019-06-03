@@ -66,7 +66,7 @@
        <td>{{$det->producto}} </td>
        <td>{{$det->PesoBruto}} </td>
        <td>{{$det->Precio}} </td>
-       <td> </td> 
+       <td></td>
        <td>{{$det->Precio}} </td> 
      </td>
       @endforeach
@@ -75,5 +75,11 @@
     </div>
    </div>
   </div>
+  <div class="absolute1">
+     <div class="form-group">
+      <a href="{{ URL::previous() }}">Regresar <i class="glyphicon glyphicon-arrow-left"></i></a>
+     </div>
+  </div>
+ </div>
  </div> 
  @endsection

@@ -48,8 +48,8 @@ class IngresoCeraController extends Controller
         $usuarios=DB::table('users')
         ->get();
         $ceras = DB::table('ceras as art')
-          ->select(DB::raw('CONCAT(art.id ," - ",art.Recepcion_id ) AS ceras'),'art.id','art.PesoNeto')
-          ->groupBy('ceras','art.id','art.PesoNeto')
+          ->select(DB::raw('CONCAT(art.id) AS ceras'),'art.id','art.PesoNeto','art.Recepcion_id')
+          ->groupBy('ceras','art.id','art.PesoNeto', 'art.Recepcion_id')
           ->where('art.PesoNeto','>','0')
           ->get();
         return view ("IngresoCera.create",["personas"=>$personas,"usuarios"=>$usuarios,"ceras"=>$ceras]);
@@ -105,7 +105,7 @@ class IngresoCeraController extends Controller
 
         $detalles=DB::table('detalle_ingreso_cera as d')
             ->join ('ceras as a','d.cera_id','=','a.id')
-            ->select('a.Descripcion as ceras','d.Precio','a.PesoNeto')
+            ->select('a.Descripcion as ceras','d.Precio','a.PesoNeto','a.Recepcion_id')
             ->where('d.idingreso_cera','=',$id)
             ->get(); 
         return view("IngresoCera.show",["ingresos"=>$ingresos,"detalles"=>$detalles]);
@@ -124,7 +124,7 @@ class IngresoCeraController extends Controller
 
     $detalles=DB::table('detalle_ingreso_cera as d')
         ->join ('ceras as a','d.cera_id','=','a.id')
-        ->select('a.Descripcion as ceras','d.Precio','a.PesoNeto')
+        ->select('a.Descripcion as ceras','d.Precio','a.PesoNeto','a.Recepcion_id')
         ->where('d.idingreso_cera','=',$id)
         ->get(); 
     

@@ -140,13 +140,6 @@
             <div class="row x_panel">
 
 
-
-
-
-
-
-
-
               @yield('contenido')
             </div>
           </div>
