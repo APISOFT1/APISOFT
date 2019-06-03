@@ -27,7 +27,7 @@ class AfiliadoController extends Controller
         $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
         $afi= Afiliado::with('Genero', 'Estado_Civil') 
             ->where('Nombre','LIKE','%'.$query.'%')
-            ->orderby('id','desc')
+            ->orderby('id','ASC')
             ->paginate(7);
             $genero = Genero::all();
             $estadoC = Estado_Civil::all();
@@ -83,7 +83,7 @@ class AfiliadoController extends Controller
         $afi->estado_civil_id = $request->estado_civil_id;
         $afi->estado_id = $request->estado_id;
         $afi->save();
-        return response()->json(['success' => 'Se ha creado un Afiliado correctamente']);
+        return response()->json($afi);
       }
     }
 
