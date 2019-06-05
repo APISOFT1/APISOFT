@@ -226,6 +226,13 @@
 
 {{-- ajax Form Add Post--}}
 
+<!-- Delay table load until everything else is loaded -->
+ 
+        $(window).load(function(){
+            $('#postTable').removeAttr('style');
+        })
+ 
+
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
@@ -334,7 +341,30 @@ $('.modal-footer').on('click', '.edit', function() {
 
     },
 success: function(data) {
-  
+  $('.errorDescripcion').addClass('hidden');
+         $('.errorCantidad').addClass('hidden');
+         $('.errorUbicacion').addClass('hidden');
+                    
+
+                    if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#myModal').modal('show');
+                            toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.Descripcion) {
+                            $('.errorDescripcion').removeClass('hidden');
+                            $('.errorDescripcion').text(data.errors.Descripcion);
+                        }
+                        if (data.errors.cantidad) {
+                            $('.errorCantidad').removeClass('hidden');
+                            $('.errorCantidad').text(data.errors.cantidad);
+                        }
+                        if (data.errors.ubicacion_id) {
+                            $('.errorUbicacion').removeClass('hidden');
+                            $('.errorUbicacion').text(data.errors.ubicacion_id);
+                        }
+                    } else {
+  toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
       $('.api' + data.id).replaceWith(" "+
       "<tr class='api" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
@@ -355,7 +385,9 @@ success: function(data) {
           + data.cantidad +  " 'data-ubicacion_id='" 
           + data.ubicacion_id + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
       "</tr>");
+
     }
+},
   });
 });
 
@@ -368,7 +400,7 @@ $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Eliminar Ubicación');
+$('.modal-descripcion').text('Eliminar Apiario');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
@@ -385,7 +417,8 @@ $('.modal-footer').on('click', '.delete', function(){
       'id': $('.id').text()
     },
     success: function(data){
-      $('.ubicacion' + $('.id').text()).remove();
+      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
+      $('.api' + $('.id').text()).remove();
     }
   });
 });
