@@ -10,6 +10,7 @@
 </div>
 @endif
 <!-- fin de mensaje de exito -->
+@if(session('message')) {{session('message')}} @endif 
 
 @section ('contenido')
 <h1 class="text-center">LISTADO DE  APIARIOS</h1>
@@ -19,38 +20,39 @@
 <br>
 <!-- Fin de salto de linea. No necesita una etiqueta de cierre-->
 
-@can('Crear Afiliado')
+
 
 <!--Esta clase nos permite posicionar el buscador  -->
-<div class="absolute3">
+
 		@include('Apiario.search') 
-</div>
+
 
 <div class="table-responsive">
 			<table class="table table-striped table-bordered table-condensed table-hover">
 				<thead>
-					<th>Codigo</th>
-					<th>Descripcion</th>
+					<th>Código</th>
+					<th>Descripción</th>
 					<th>Cantidad</th>
-					<th>Ubicacion</th>
+					<th>Ubicación</th>
 					<th><a href="#"
 					class="create-modal btn btn-success btn-sm">
             <i class="glyphicon glyphicon-plus"></i></th>
 				</thead>
         {{ csrf_field() }}
-           <?php  $no=1; ?>
+          
                @foreach ($api as $value)
-					<tr class="api{$value->id}}">
-          <td>{{ $no++ }}</td>
+					
+          <td>{{ $value->id }}</td>
 					<td>{{ $value->Descripcion}}</td>
 					<td>{{ $value->cantidad}}</td>
-            <td>{{ $value->ubicacion->Descripcion}}</td>
+            <td><span class="label label-success">{{ $value->ubicacion->Descripcion}}</span></td>
+           
 					<td>
 					<a href="#" class="show-modal btn btn-info btn-sm"
 					 data-id="{{$value->id}}" 
 					 data-Descripcion="{{$value->Descripcion}}"
 					 data-cantidad="{{$value->cantidad}}"
-					 data-ubicacion_id="{{$value->ubicacion_id}}">
+					 data-ubicacion_id="{{$value->ubicacion_id}} - {{$value->ubicacion->Descripcion}}">
               <i class="fa fa-eye"></i>
             </a>
             <a href="#" class="edit-modal btn btn-warning btn-sm" 
@@ -65,6 +67,7 @@
 						  data-title="{{$value->Descripcion}}">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
+            
           </td>
         </tr>
       @endforeach
@@ -78,43 +81,56 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-descripcion"></h4>
+        <h4 class="modal-descripcion text-center"></h4>
+        @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
       </div>
       <div class="modal-body">
+    
         <form class="form-horizontal" role="form">
 
-          <div class="form-group row add">
-            <label class="control-label col-sm-2" for="Descripcion">Descripcion :</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="Descripcion" name="Descripcion"
-              placeholder="Your Title Here" required>
-              <p class="error text-center alert alert-danger hidden"></p>
-            </div>
-          </div>
+        <div class="form-group row add">
+        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+           <input type="text" class="form-control has-feedback-left" id="Descripcion" name="Descripcion" placeholder="Descripción" required>
+           <p class="error text-center alert alert-danger hidden"></p>
+              <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                </div>
+                </div>
 
-					<div class="form-group row add">
-            <label class="control-label col-sm-2" for="cantidad">Cantidad:</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="cantidad" name="cantidad"
-              placeholder="Ingrese cantidad" required>
-              <p class="error text-center alert alert-danger hidden"></p>
-            </div>
-          </div>
-          <label for="roll">ubicacion <span class="required">*</span></label>
-        <select name="city" class="form-control" id="city">
-         <option value="">-- Select ubicacion --</option>
-         @foreach ($ubicaciones as $state)
-          <option value="{{ $state->id }}">{{ ucfirst($state->Descripcion) }}</option>
+                <div class="form-group row add">
+                <div class="col-md-9" >
+           <input type="text" class="form-control has-feedback-left" id="cantidad" name="cantidad" placeholder="cantidad" required>
+           <p class="error text-center alert alert-danger hidden"></p>
+              <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                </div>
+               </div>
+
+                <div class="form-group row add">
+                <div class="col-md-9  form-group has-feedback">
+        <select name="ubicacion_id" class="form-control has-feedback-left" id="ubicacion_id">
+         <option value="">-- Seleccione ubicación --</option>
+         @foreach ($ubicaciones as $ubicacion)
+          <option value="{{ $ubicacion->id }}">{{$ubicacion->Descripcion}}</option>
          @endforeach
         </select>
+        <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+        </div>
+        </div>
         </form>
       </div>
           <div class="modal-footer">
-            <button class="btn btn-warning" type="submit" id="add">
-              <span class="glyphicon glyphicon-plus"></span>Guardar Apiario
+            <button class="btn btn-warning"   onclick="ConfirmDemo()" type="submit" id="add">
+              <span class="fa fa-save"></span> Guardar 
             </button>
             <button class="btn btn-warning" type="button" data-dismiss="modal">
-              <span class="glyphicon glyphicon-remobe"></span>Cerrar
+              <span class="fa fa-times"></span> Cerrar
             </button>
           </div>
     </div>
@@ -126,15 +142,18 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title"></h4>
+          <h4 class="modal-title text-center">
+          <i class="glyphicon glyphicon-info-sign"></i></h4>
                   </div>
                     <div class="modal-body">
+                    <span id="form_result"></span>
                     <div class="form-group">
-                      <label for="">ID :</label>
+                      <label for="">Código :</label>
                       <b id="i2"/>
                     </div>
                     <div class="form-group">
-                      <label for="">Descripcion :</label>
+                      <label for="">Descripción :</label>
+                      
                       <b id="d2"/>
                     </div>
 										<div class="form-group">
@@ -142,8 +161,9 @@
                       <b id="ca2"/>
                     </div>
 										<div class="form-group">
-                      <label for="">Ubicacion :</label>
-                      <b id="ub2"/>
+                   
+                      <label for="">Ubicación :</label>
+                      <span class="label label-success"><b id="ub2"/>
                     </div>
                     </div>
                     </div>
@@ -155,42 +175,47 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-descripcion"></h4>
+        <h4 class="modal-descripcion text-center"></h4>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" role="modal">
 
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="id">ID</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="ids" disabled>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="Descripcion">Descripcion</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="cri">
-            </div>
-          </div>
+        <div class="form-group row add">
+        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+           <input type="text" class="form-control has-feedback-left" id="ids" disabled>
+              <span class="fa fa-key form-control-feedback left" aria-hidden="true"></span>
+                </div>
+                </div>
+          
+                <div class="form-group row add">
+        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+           <input type="text" class="form-control has-feedback-left" id="cri" >
+              <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
+                </div>
+                </div>
+          
+                <div class="form-group row add">
+        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+           <input type="text" class="form-control has-feedback-left" id="can" >
+              <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
+                </div>
+                </div>
 
-					<div class="form-group">
-            <label class="control-label col-sm-2"for="cantidad">Cantidad</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="can">
-            </div>
-          </div>
-
-					<div class="form-group">
-            <label class="control-label col-sm-2"for="ubicacion_id">Ubicacion</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="ub">
-            </div>
-          </div>
-
+                <div class="form-group row add">
+        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+        <select name="name" class="form-control has-feedback-left" id="ub">
+         <option value="">-- Select ubicacion --</option>
+         @foreach ($ubicaciones as $ubicacion)
+          <option value="{{ $ubicacion->id }}">{{$ubicacion->Descripcion}}</option>
+         @endforeach
+        </select>
+					  <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+</div>
+</div>
         </form>
-                {{-- Form Delete Post --}}
+        {{-- Form Delete Post --}}
         <div class="deleteContent">
-          Are You sure want to delete <span class="descripcion"></span>?
+        ¿Está seguro que desea eliminar este Apiario<span class="descripcion"></span>?
           <span class="hidden id"></span>
         </div>
       </div>
@@ -199,30 +224,20 @@
           <span id="footer_action_button" class="glyphicon"></span>
         </button>
         <button type="button" class="btn btn-warning" data-dismiss="modal">
-          <span class="glyphicon glyphicon"></span>close
+          <span class="fa fa-times"></span>Cerrar
         </button>
       </div>
     </div>
   </div>
 </div>
 
-<script type="text/javascript">
-  $('#city').change(function(){
-      var id_country = $(this).val();
-      var token = $("input[name='_token']").val();
-      $.ajax({
-          url:'addApiario',
-          method: 'POST',
-          data: {id_country:id_country, _token:token},
-          success: function(data) {
-            $("select[name='ubicacion_id'").html('');
-            $("select[name='ubicacion_id'").html(data.options);
-          }
-      });
-  });
-</script>
 
-@else
-                            Usted no tiene los permisos suficientes 
-                        @endcan
 @endsection
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <script type="text/javascript">
+function ConfirmDemo() {
+ Alert::success('Se ha creado con exito ')->persistent("Close");
+}
+</script>

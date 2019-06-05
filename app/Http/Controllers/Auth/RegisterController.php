@@ -1,72 +1,107 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth ;
 
+use App\Notifications\UserActivate;
 use App\User;
+use App\Role;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use Alert;
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
     use RegistersUsers;
-
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
-
+    protected $redirectTo = '/dashboard';
     /**
      * Create a new controller instance.
      *
-     * @return void
      */
     public function __construct()
     {
         $this->middleware('guest');
     }
-
     /**
-     * Get a validator for an incoming registration request.
+     * Register new account.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @param Request $request
+     * @return User
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
-    }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        /** @var  $user User */
+        $user = User::create([
+            
         ]);
+
+        if (config('auth.users.default_role')) {
+            $user->roles()->attach(Role::firstOrCreate(['name' => config('auth.users.default_role')]));
+        }
+
+        return $user;
+    }
+
+    protected function register(Request $request)
+    {
+        
+        /** @var User $user */
+        $validatedData = $request->validate([
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+        try {
+            $validatedData['password']        = bcrypt(array_get($validatedData, 'password'));
+            $validatedData['activation_code'] = str_random(30).time();
+            $user  
+                                       = app(User::class)->create($validatedData);
+
+            
+              
+
+        } catch (\Exception $exception) {          
+            dd($exception);
+            logger()->error($exception);
+            return redirect()->back()->with('message', 'imposible crear una cuenta.');
+        }
+
+        if (config('auth.users.default_role')) {
+            $user->roles()->attach(Role::firstOrCreate(['name' => config('auth.users.default_role')]));
+             }
+        $user->notify(new UserActivate($user));
+        
+       
+        return redirect()->back()->with('message', 'Se ha creado exitosamente una nueva cuenta. Por favor revise su correo para activar su cuenta.');
+        
+    }
+    /**
+     * Activate the user with given activation code.
+     * @param string $activationCode
+     * @return string
+     */
+    public function activateUser(string $activationCode)
+    {
+        try {
+            $user = app(User::class)->where('activation_code', $activationCode)->first();
+            if (!$user) {
+                return "El código no existe en nuestro sistema.";
+            }
+            $user->status          = 1;
+            $user->activation_code = null;
+            $user->save();
+            auth()->login($user);
+        } catch (\Exception $exception) {
+            logger()->error($exception);
+            return "Whoops! sucedió un error.";
+        }
+        
+        return redirect()->to('/dashboard')->with('success', 'Profile updated!');;
     }
 }

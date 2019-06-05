@@ -1,4 +1,5 @@
-@extends ('layouts.principal')
+@extends ('layouts.principal1')
+
 <!-- mensaje de exito -->
 <?php $message=Session::get('message') ?>
 
@@ -11,7 +12,8 @@
 <!-- fin de mensaje de exito -->
 @section ('contenido')
 
-<h1 >LISTADO DE  AFILIADOS <a href="Ingreso/create"> <button class="btn btn-primary" > Nuevo </button></a></h1>
+<h3>Listado de boletas servicios de miel procesada<a href="Ingreso/create"><button class="btn btn-success btn-sm"> <i class="glyphicon glyphicon-plus"></i></h3>
+
 
 
 <!-- Saltos de linea-->
@@ -43,16 +45,15 @@
 					<td>{{ $ing->idingreso}}</td>
 					<td>{{ $ing->fecha_hora}}</td>
 					<td>{{ $ing->Nombre.' '. $ing->apellido1.' '.$ing->apellido2}}</td>
-					<td>{{ $ing->name.' '. $ing->Apellido1.' '.$ing->Apellido2}}</td>
+					<td>{{ $ing->name}}</td>
 					<td>{{ $ing->tipo_comprobante.':'.$ing->serie_comprobante.'-'.$ing->idingreso}}</td>
-                    <td>{{ $ing->total_venta}}</td>
-                    <td>{{ $ing->estado}}</td>
+          <td>{{ $ing->total_venta}}</td>
+          <td>{{ $ing->estado}}</td>
 
 					<td>
-						<a href="{{URL::action('IngresoController@show',$ing->idingreso)}}"><button class="btn btn-primary">Detalles</button></a>
-                         <a href="" data-target="#modal-delete-{{$ing->idingreso}}" data-toggle="modal"><button class="btn btn-danger">Anular</button></a>
-						 <a href="{{URL::action('IngresoController@edit',$ing->idingreso)}}"><button class="btn btn-warning">Descargar</button></a>
-					</td>
+					<a href="{{URL::action('IngresoController@show',$ing->idingreso)}}"><button class=" btn btn-info btn-sm"><i class="fa fa-eye"></i></button></a>
+						 <a href="{{URL::action('IngresoController@edit',$ing->idingreso)}}"><button class="btn btn-warning btn-sm"><i class="glyphicon glyphicon-print"></i></button></a>
+						 <a href="" data-target="#modal-delete-{{$ing->idingreso}}" data-toggle="modal"><button class="btn btn-danger"> <i class="glyphicon glyphicon-trash"></i></button></a>
 				</tr>
 				@include('Ingreso.modal')
 				@endforeach

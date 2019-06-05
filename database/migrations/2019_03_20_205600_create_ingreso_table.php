@@ -17,7 +17,7 @@ class CreateIngresoTable extends Migration
             $table->increments('idingreso');
             $table->string('idproveedor',12);
             $table->foreign('idproveedor')->references('id')->on('afiliados');
-            $table->string('idusuario',12);
+            $table->integer('idusuario')->unsigned();
             $table->foreign('idusuario')->references('id')->on('users');
             $table->string('tipo_comprobante');
             $table->string('serie_comprobante');

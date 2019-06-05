@@ -14,14 +14,23 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="{{asset('css2/bootstrap-select.min.css')}}">
-
-
-
+ 
   
+      <!-- Include Twitter Bootstrap and jQuery: -->
+<!--<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>->
+
+ 
+<!-- Include the plugin's CSS and JS: -->
+
     {!!Html::style ('/css2/bootstrap.min.css')!!} 
 
-    {!!Html::style ('/css2/bootstrap-select.min.css')!!}  
+    {!!Html::style ('/css2/bootstrap-select.min.css')!!}   
     
+    {!!Html::style ('/css2/select2.min.css')!!}
+
+    {!!Html::style ('/css2/select2.css')!!}
+
+    {!!Html::style ('/css/dashboard.css')!!}
     
     <!-- Font Awesome -->
     {!!Html::style ('/css2/font-awesome.min.css')!!}
@@ -31,6 +40,8 @@
     {!!Html::style ('/css2/jquery.mCustomScrollbar.min.css')!!}
     <!-- Custom Theme Style -->
     {!!Html::style ('/css2/custom.min.css')!!}
+
+ 
   </head>
   <body class="nav-md">
     <div class="container body">
@@ -50,7 +61,7 @@
               </div>
               <div class="profile_info">
                 <span>Bienvenido</span>
-                <h2>{{ Auth::user()->name }}</h2>
+            
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -60,42 +71,58 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-home"></i> Home<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Usuario/') }}">Gestionar Usuario</a></li> 
-                     <li><a href="{{ url('/admin/roles/') }}">Gestionar Rol</a></li>
-                     <li><a href="{{ url('/admin/permissions/') }}">Gestionar Permisos</a></li>
-                     <li><a href="{{ url('/admin/users/') }}">Gestionar Users</a></li>
+                     <li><a href="{{ url('/dashboard/') }}">Dashboard</a></li>
+                     
                     </ul>
                   </li>
+                  @if(Auth::check())
+                    @if (Auth::user()->isAdmin())
+                  <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      
+                     <li><a href="{{ url('users/') }}">Gestionar Usuario</a></li>
+                    </ul>
+                  </li>
+                  
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
+                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicación</a></li>
                       <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
-                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiaro</a></li>
+                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiario</a></li>
                     
                     </ul>
                   </li>
+                  @endif
+                  @endif
                   <li><a><i class="glyphicon glyphicon-list-alt"></i> Recepción<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/RecepcionMateriaPrima') }}">Gestionar Recepción</a></li>
-                      <li><a href="{{ url('/SalidaMaterial/') }}">Gestionar Salida Material</a></li>
+                      <li><a href="{{ url('/Cera/') }}">Gestionar Extracción de cera</a></li>
                     </ul>
                   </li>
                   <li><a><i class="glyphicon glyphicon-oil"></i> Planta <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
-                      <li><a href="{{ url('/AfiliadoEstanon/') }}">Gestionar Afiliado-Estañon</a></li>
-                      <li><a href="{{ url('/Homogeneizacion/') }}">Gestionar Homogeneización</a></li>
+                      <li><a href="{{ url('/RecepEstanon/') }}">Gestionar Recepción-Estañón</a></li>
+                     
                     
                     </ul>
                   </li>
 
-                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Producto Terminado <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
-                      <li><a href="{{ url('/AfiliadoEstanon/') }}">Gestionar Afiliado-Estañon</a></li>
-                      <li><a href="{{ url('/Homogeneizacion/') }}">Gestionar Homogeneización</a></li>
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-cart-plus"></i> Servicios <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                    <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
+                    <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
+                    
                     
                     </ul>
                   </li>
@@ -145,35 +172,27 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
   crossorigin="anonymous"></script>
-  <script src="{{asset('js2/bootstrap-select.min.js')}}"></script>
+  <!--<script src="{{asset('js2/bootstrap-select.min.js')}}"></script>-->
   
     <!-- jQuery -->
+     
 
     {!!Html::script('/js2/jquery.min.js')!!}  
+
     @stack('scripts')
     <!-- Bootstrap -->
     {!!Html::script('/js2/bootstrap.min.js')!!}
 
-    
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
-<script src="//cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
-<script src="//cdn.datatables.net/buttons/1.2.4/js/buttons.flash.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.print.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.colVis.min.js"></script>
-<script src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
-<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
-<script src="{{ url('adminlte/js') }}/bootstrap.min.js"></script>
-<script src="{{ url('adminlte/js') }}/select2.full.min.js"></script>
-<script src="{{ url('adminlte/js') }}/main.js"></script>
+   <!-- SELECT2 -->
+   {!!Html::script('/js2/bootstrap-select.min.js')!!} 
 
-<script src="{{ url('adminlte/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
-<script src="{{ url('adminlte/plugins/fastclick/fastclick.js') }}"></script>
-<script src="{{ url('adminlte/js/app.min.js') }}"></script>
+    {!!Html::script('/js2/select2.full.js')!!}
+
+    {!!Html::script('/js2/select2.js')!!}
+    
+    {!!Html::script('/js2/select2.min.js')!!}
+
+    {!!Html::script('/js2/select2.full.min.js')!!}
     <!-- FastClick -->
     {!!Html::script('/js2/fastclick.js')!!}
     <!-- NProgress -->
@@ -182,13 +201,32 @@
     {!!Html::script('/js2/jquery.mCustomScrollbar.concat.min.js')!!}
     <!-- Custom Theme Scripts -->
     {!!Html::script('/js2/custom.min.js')!!}
+
      {!!Html::script('/js2/dropdown.js')!!}
 
+     {!!Html::script('/js/dashboard.js')!!}
+
+     {!!Html::script('/js/Chart.min.js')!!}
+
+
+     {!!Html::script('/js/app.js')!!}
+     
+
+
+ 
+<!-- Include the plugin's CSS and JS: -->
+{!!Html::script('/js/bootstrap-select.min.js')!!}
+
+{!!Html::script('/js/jquery-1.11.1.min.js')!!}
+
+<script src="js/sweetalert.min.js"></script>
+
+<!-- Include this after the sweet alert js file -->
+@include('sweet::alert')
 
 
 
-
-<!-- MODAL AFILIADO -->
+<!-- MODAL USER -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
@@ -197,39 +235,28 @@
     $('#create').modal('show');
     $('.form-horizontal').show();
     $('.modal-crear').text('Crear User');
+    
   });
+
   $("#add").click(function() {
     $.ajax({
       type: 'POST',
       url: 'addUser',
       data: {
        
-        'id': $('input[name=id').val(),
+        '_token': $('input[name=_token]').val(),
         'name': $('input[name=name]').val(),
         'email': $('input[name=email]').val(),
-        'password': $('input[name=password]').val(),
-        'Apellido1': $('input[name=Apellido1]').val(),
-        'Apellido2': $('input[name=Apellido2]').val(),
-        'Telefono': $('input[name=Telefono]').val(),
-        'Direccion': $('input[name=Direccion]').val(),
-        'Fecha_Ingreso': $('input[name=Fecha_Ingreso]').val(),
-        'genero_Id': $('input[name=genero_Id]').val(),
-        'estado_id': $('input[name=estado_id]').val()
+        'password': $('input[name=password]').val()
+      
       },
       success: function(data){
         if ((data.errors)) {
           $('.error').removeClass('hidden');
-          $('.error').text(data.errors.id);
           $('.error').text(data.errors.name);
           $('.error').text(data.errors.email);
           $('.error').text(data.errors.password);
-          $('.error').text(data.errors.Apellido1);
-          $('.error').text(data.errors.Apellido2);
-          $('.error').text(data.errors.Telefono);
-          $('.error').text(data.errors.Direccion);
-          $('.error').text(data.errors.Fecha_Ingreso);
-          $('.error').text(data.errors.genero_Id);
-          $('.error').text(data.errors.estado_id);
+         
 
  
         } else {
@@ -238,214 +265,151 @@
           "<td>" + data.id + "</td>"+
           "<td>" + data.name + "</td>"+
           "<td>" + data.email + "</td>"+
-          "<td>" + data.password + "</td>"+
-          "<td>" + data.Apellido1 + "</td>"+
-          "<td>" + data.Apellido2 + "</td>"+
-          "<td>" + data.Telefono + "</td>"+
-          "<td>" + data.Direccion+ "</td>"+
-          "<td>" + data.Fecha_Ingreso+ "</td>"+
-          "<td>" + data.genero_Id + "</td>"+
-          "<td>" + data.estado_id + "</td>"+
+          
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + 
           "' data-name='" + data.name + 
           "' data-email='" + data.email +
           "' data-password='" + data.password +
-          "'data-Apellido1='" + data.Apellido1 + 
-          "'data-Apellido2='" + data.Apellido2+
-           "'data-Telefono='" + data.Telefono +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-              "'data-genero_Id='" + data.genero_Id + 
-               "'data-estado_id='" + data.estado_id +
+          
  "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
  + data.id + 
            "' data-name='" + data.name + 
           "' data-email='" + data.email +
           "' data-password='" + data.password +
-          "'data-Apellido1='" + data.Apellido1 + 
-          "'data-Apellido2='" + data.Apellido2+
-           "'data-Telefono='" + data.Telefono +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-              "'data-genero_Id='" + data.genero_Id + 
-               "'data-estado_id='" + data.estado_id +
+          
  "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
  + data.id + 
               "' data-name='" + data.name + 
           "' data-email='" + data.email +
           "' data-password='" + data.password +
-          "'data-Apellido1='" + data.Apellido1 + 
-          "'data-Apellido2='" + data.Apellido2+
-           "'data-Telefono='" + data.Telefono +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-              "'data-genero_Id='" + data.genero_Id + 
-               "'data-estado_id='" + data.estado_id +
+      
 "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
          
         }
       },
     });
-    $('#id').val('');
     $('#name').val('');
     $('#email').val('');
     $('#password').val('');
-    $('#Apellido1').val('');
-    $('#Apellido2').val('');
-    $('#Telefono').val('');
-    $('#Direccion').val('');
-    $('#Fecha_Ingreso').val('');
-    $('#genero_Id').val('');
-    $('#estado_id').val('');
+  
   });
 
-/*
+// function Edit POST
 $(document).on('click', '.edit-modal', function() {
-$('#footer_action_button').text(" Editar Afiliado");
+$('#footer_action_button').text(" Editar");
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-$('.modal-descripcion').text('Editar Afiliado');
+$('.modal-descripcion').text('Editar Usuario');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
-$('#i').val($(this).data('id'));
-$('#n').val($(this).data('nombre'));
-$('#a1').val($(this).data('apellido1'));
-$('#a2').val($(this).data('apellido2'));
-$('#t').val($(this).data('telefono'));
-$('#em').val($(this).data('email'));
-$('#d').val($(this).data('direccion'));
-$('#f').val($(this).data('fecha_ingreso'));
-$('#nu').val($(this).data('num_cuenta'));
-$('#g').val($(this).data('genero_id'));
-$('#e').val($(this).data('estado_civil_id'));
-$('#es').val($(this).data('estado_id'));
+$('#iii').val($(this).data('id'));
+$('#nnn').val($(this).data('name'));
+$('#emm').val($(this).data('email'));
+$('#passs').val($(this).data('password'));
+$('#rlss').val($(this).data('roles'));
+
+
 $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
-    url: 'editAfiliado',
+    url: 'editUser',
     data: {
+'_token': $('input[name=_token]').val(),
+'id': $("#iii").val(),
+'name': $('#nnn').val(),
+'email': $('#emm').val(),
+'password': $('#passs').val(),
+'roles': $('#rlss').val(),
 
-'id':$("#i").val(),
-'Nombre':$('#n').val(),
-'apellido1':$('#a1').val(),
-'apellido2':$('#a2').val(),
-'Telefono':$('#t').val(),
-'email':$('#em').val(),
-'Direccion':$('#d').val(),
-'Fecha_Ingreso':$('#f').val(),
-'Num_Cuenta':$('#nu').val(),
-'genero_id':$('#g').val(),
-'estado_civil_id':$('#e').val(),
-'estado_id':$('#es').val(),
+      
 
     },
 success: function(data) {
-      $('.afi' + data.id).replaceWith("<tr class='afi" + data.id + "'>"+
+      $('.users' + data.id).replaceWith(" "+
+      "<tr class='users" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
-          "<td>" + data.Nombre + "</td>"+
-          "<td>" + data.apellido1 + "</td>"+
-          "<td>" + data.apellido2 + "</td>"+
-          "<td>" + data.Telefono + "</td>"+
+          "<td>" + data.name + "</td>"+
           "<td>" + data.email + "</td>"+
-          "<td>" + data.Direccion + "</td>"+
-          "<td>" + data.Fecha_Ingreso + "</td>"+
-          "<td>" + data.Num_Cuenta + "</td>"+
-          "<td>" + data.genero_id + "</td>"+
-          "<td>" + data.estado_civil_id + "</td>"+
-          "<td>" + data.estado_id + "</td>"+
-          "<td><button class='show-modal btn btn-info btn-sm' data-id='" 
-          + data.id + 
-          "' data-Nombre='" + data.Nombre + 
-          "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2 +
-           "'data-Telefono='" + data.Telefono +
-            "' data-email='" + data.email +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-             "'  data-Num_Cuenta='" + data.Num_Cuenta +
-              "'data-genero_id='" + data.genero_id + 
-              "'data-estado_civil_id='" + data.estado_civil_id +
-               "'data-estado_id='" + data.estado_id +
+          
+         
+          "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + 
+          "' data-name='" + data.name + 
+          "' data-email='" + data.email +
+          "' data-password='" + data.password +
+          
  "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
  + data.id + 
-          "' data-Nombre='" + data.Nombre + 
-          "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2+
-           "'data-Telefono='" + data.Telefono +
-            "' data-email='" + data.email +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-             "'  data-Num_Cuenta='" + data.Num_Cuenta +
-              "'data-genero_id='" + data.genero_id + 
-              "'data-estado_civil_id='" + data.estado_civil_id +
-               "'data-estado_id='" + data.estado_id +
+           "' data-name='" + data.name + 
+          "' data-email='" + data.email +
+          "' data-password='" + data.password +
+          
  "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
  + data.id + 
-          "' data-Nombre='" + data.Nombre + 
-          "'data-apellido1='" + data.apellido1 + 
-          "'data-apellido2='" + data.apellido2 +
-           "'data-Telefono='" + data.Telefono +
-            "' data-email='" + data.email +
-             "'data-Direccion='" + data.Direccion + 
-             "'data-Fecha_Ingreso='" + data.Fecha_Ingreso + 
-             "'  data-Num_Cuenta='" + data.Num_Cuenta +
-              "'data-genero_id='" + data.genero_id + 
-              "'data-estado_civil_id='" + data.estado_civil_id +
-               "'data-estado_id='" + data.estado_id +
+              "' data-name='" + data.name + 
+          "' data-email='" + data.email +
+          "' data-password='" + data.password +
+      
 "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
+         
     }
   });
 });
 
-
+// form Delete function
 $(document).on('click', '.delete-modal', function() {
-$('#footer_action_button').text(" Delete");
+$('#footer_action_button').text(" Eliminar");
 $('#footer_action_button').removeClass('glyphicon-check');
 $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Delete Post');
+$('.modal-title').text('Eliminar Ubicación');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
-$('.title').html($(this).data('descripcion'));
+$('.name').html($(this).data('name'));
 $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
-    url: 'deleteAfiliado',
+    url: 'deleteUser',
     data: {
       '_token': $('input[name=_token]').val(),
       'id': $('.id').text()
     },
     success: function(data){
-       $('.afiliado' + $('.id').text()).remove();
+      $('.users' + $('.id').text()).remove();
     }
   });
 });
-*/
+
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
-  
-  $('#iaa').val($(this).data('iii'));
-$('#jaja').val($(this).data('nom'));
-;
-  $('.modal-show').text('Datos');
+  $('#i2').text($(this).data('id'));
+  $('#n2').text($(this).data('name'));
+  $('#em').text($(this).data('email'));
+  $('#pw').text($(this).data('password'));
+  $('.modal-title').text('Detalle Usuario');
   });
 </script>
-
+@include('partials.javascripts')
   </body>
 </html>
-  
+@section('styles')
+    {{ Html::style('css/admin.css') }}
+@endsection
+
+@section('scripts')
+    {{ Html::script('js/admin.js') }}
+@endsection

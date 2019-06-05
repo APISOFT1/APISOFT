@@ -9,19 +9,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>APISOFT</title>
+    @toastr_css
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="{{asset('css2/bootstrap-select.min.css')}}">
-
-
-
+ 
   
+      <!-- Include Twitter Bootstrap and jQuery: -->
+<!--<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>->
+
+ 
+<!-- Include the plugin's CSS and JS: -->
+
     {!!Html::style ('/css2/bootstrap.min.css')!!} 
 
-    {!!Html::style ('/css2/bootstrap-select.min.css')!!}  
+    {!!Html::style ('/css2/bootstrap-select.min.css')!!}   
     
+    {!!Html::style ('/css2/select2.min.css')!!}
+
+    {!!Html::style ('/css2/select2.css')!!}
+
+    {!!Html::style ('/css/dashboard.css')!!}
     
     <!-- Font Awesome -->
     {!!Html::style ('/css2/font-awesome.min.css')!!}
@@ -50,7 +60,7 @@
               </div>
               <div class="profile_info">
                 <span>Bienvenido</span>
-                <h2>{{ Auth::user()->name }}</h2>
+            
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -60,42 +70,58 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-home"></i> Home<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Usuario/') }}">Gestionar Usuario</a></li>
-                      <li><a href="{{ url('/admin/roles/') }}">Gestionar Rol</a></li>
-                     <li><a href="{{ url('/admin/permissions/') }}">Gestionar Permisos</a></li>
-                     <li><a href="{{ url('/admin/users/') }}">Gestionar users</a></li>
+                     <li><a href="{{ url('/dashboard/') }}">Dashboard</a></li>
+                     
                     </ul>
                   </li>
+                @if(Auth::check())
+                    @if (Auth::user()->isAdmin())
+                  <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      
+                     <li><a href="{{ url('users/') }}">Gestionar usuarios</a></li>
+                    </ul>
+                  </li>
+                 
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
+                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicación</a></li>
                       <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
-                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiaro</a></li>
+                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiario</a></li>
                     
                     </ul>
                   </li>
+                  @endif
+                  @endif
                   <li><a><i class="glyphicon glyphicon-list-alt"></i> Recepción<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/RecepcionMateriaPrima') }}">Gestionar Recepción</a></li>
-                      <li><a href="{{ url('/SalidaMaterial/') }}">Gestionar Salida Material</a></li>
+                      <li><a href="{{ url('/Cera/') }}">Gestionar Extracción de cera</a></li>
                     </ul>
                   </li>
                   <li><a><i class="glyphicon glyphicon-oil"></i> Planta <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
-                      <li><a href="{{ url('/AfiliadoEstanon/') }}">Gestionar Afiliado-Estañon</a></li>
-                      <li><a href="{{ url('/Homogeneizacion/') }}">Gestionar Homogeneización</a></li>
+                      <li><a href="{{ url('/RecepEstanon/') }}">Gestionar Recepción-Estañón</a></li>
+                    
                     
                     </ul>
                   </li>
 
-                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Producto Terminado <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
-                      <li><a href="{{ url('/AfiliadoEstanon/') }}">Gestionar Afiliado-Estañon</a></li>
-                      <li><a href="{{ url('/Homogeneizacion/') }}">Gestionar Homogeneización</a></li>
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    
+                    </ul>
+                  </li>
+                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Servicios <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                    <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
+                    <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
+                    
                     
                     </ul>
                   </li>
@@ -145,16 +171,27 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
   crossorigin="anonymous"></script>
-  <script src="{{asset('js2/bootstrap-select.min.js')}}"></script>
+  <!--<script src="{{asset('js2/bootstrap-select.min.js')}}"></script>-->
   
     <!-- jQuery -->
+     
 
     {!!Html::script('/js2/jquery.min.js')!!}  
+
     @stack('scripts')
     <!-- Bootstrap -->
     {!!Html::script('/js2/bootstrap.min.js')!!}
 
+   <!-- SELECT2 -->
+   {!!Html::script('/js2/bootstrap-select.min.js')!!} 
+
+    {!!Html::script('/js2/select2.full.js')!!}
+
+    {!!Html::script('/js2/select2.js')!!}
     
+    {!!Html::script('/js2/select2.min.js')!!}
+
+    {!!Html::script('/js2/select2.full.min.js')!!}
     <!-- FastClick -->
     {!!Html::script('/js2/fastclick.js')!!}
     <!-- NProgress -->
@@ -163,13 +200,26 @@
     {!!Html::script('/js2/jquery.mCustomScrollbar.concat.min.js')!!}
     <!-- Custom Theme Scripts -->
     {!!Html::script('/js2/custom.min.js')!!}
+
      {!!Html::script('/js2/dropdown.js')!!}
 
+     {!!Html::script('/js/dashboard.js')!!}
 
+     {!!Html::script('/js/Chart.min.js')!!}
+     {{ Html::script('sweetAlert/sweetalert.min.js') }}
 
+ 
+<!-- Include the plugin's CSS and JS: -->
+{!!Html::script('/js/bootstrap-select.min.js')!!}
 
+{!!Html::script('/js/jquery-1.11.1.min.js')!!}
+
+    @jquery
+    @toastr_js
+    @toastr_render
 
 <!-- MODAL AFILIADO -->
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
@@ -190,19 +240,35 @@
         '_token': $('input[name=_token]').val(),
         'Descripcion': $('input[name=Descripcion]').val(),
         'cantidad': $('input[name=cantidad]').val(),
-        'ubicacion_id': $('input[name=ubicacion_id]').val()
+        'ubicacion_id': $('select[name=ubicacion_id]').val()
         
       },
-      success: function(data){
-        if ((data.errors)) {
-          $('.error').removeClass('hidden');
-          $('.error').text(data.errors.Descripcion);
-          $('.error').text(data.errors.cantidad);
-          $('.error').text(data.errors.ubicacion_id);
- 
-        } else {
-          $('.error').remove();
-          $('#table').append("<tr class='api" + data.id + "'>"+
+      success: function(data) {
+        $('.errorDescripcion').addClass('hidden');
+         $('.errorCantidad').addClass('hidden');
+         $('.errorUbicacion').addClass('hidden');
+                    
+
+                    if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#create').modal('show');
+                            toastr.error('ERRO DE VALIDACIÓN!', 'Error Alert', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.Descripcion) {
+                            $('.errorDescripcion').removeClass('hidden');
+                            $('.errorDescripcion').text(data.errors.Descripcion);
+                        }
+                        if (data.errors.cantidad) {
+                            $('.errorCantidad').removeClass('hidden');
+                            $('.errorCantidad').text(data.errors.cantidad);
+                        }
+                        if (data.errors.ubicacion_id) {
+                            $('.errorUbicacion').removeClass('hidden');
+                            $('.errorUbicacion').text(data.errors.ubicacion_id);
+                        }
+                    } else {
+                        toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
+                        $('#table').append("<tr class='api" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.Descripcion + "</td>"+
           "<td>" + data.cantidad + "</td>"+
@@ -220,14 +286,21 @@
           + data.cantidad +  " 'data-ubicacion_id='" 
           + data.ubicacion_id + "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
-        }
-      },
-    });
+                       
+                    }
+                },
+            });
+
     $('#Descripcion').val('');
     $('#cantidad').val('');
     $('#ubicacion_id').val('');
+        });
 
-  });
+
+      
+   
+
+
  
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
@@ -248,6 +321,7 @@ $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.edit', function() {
+  $('#form_result').html('');
   $.ajax({
     type: 'POST',
     url: 'editApiario',
@@ -260,6 +334,7 @@ $('.modal-footer').on('click', '.edit', function() {
 
     },
 success: function(data) {
+  
       $('.api' + data.id).replaceWith(" "+
       "<tr class='api" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
@@ -270,7 +345,7 @@ success: function(data) {
  "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + "' data-Descripcion='" 
  + data.Descripcion + "' data-cantidad='" 
           + data.cantidad +  " 'data-ubicacion_id='" 
-          + data.ubicacion_id + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
+          + data.ubicacion_id +  "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
           + data.id + "' data-Descripcion='" + data.Descripcion + 
           "' data-cantidad='" 
           + data.cantidad +  " 'data-ubicacion_id='" 
@@ -284,19 +359,20 @@ success: function(data) {
   });
 });
 
+
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
-$('#footer_action_button').text(" Delete");
+$('#footer_action_button').text(" Eliminar");
 $('#footer_action_button').removeClass('glyphicon-check');
 $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Delete Post');
+$('.modal-title').text('Eliminar Ubicación');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
-$('.title').html($(this).data('Descripcion'));
+$('.descripcion').html($(this).data('descripcion'));
 $('#myModal').modal('show');
 });
 
@@ -309,11 +385,10 @@ $('.modal-footer').on('click', '.delete', function(){
       'id': $('.id').text()
     },
     success: function(data){
-       $('.apiario' + $('.id').text()).remove();
+      $('.ubicacion' + $('.id').text()).remove();
     }
   });
 });
-
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
@@ -321,10 +396,49 @@ $('.modal-footer').on('click', '.delete', function(){
   $('#d2').text($(this).data('descripcion'));
   $('#ca2').text($(this).data('cantidad'));
   $('#ub2').text($(this).data('ubicacion_id'));
-  $('.modal-title').text('Show Post');
+  $('#crt').text($(this).data('created_at'));
+  $('#upd').text($(this).data('updated_at'));
+  $('.modal-title').text('Detalle');
   });
-</script>
-    
 
+  /* processing bar 
+  */
+  var myApp;
+myApp = myApp || (function () {
+    var pleaseWaitDiv = $('<div class="modal hide" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false"><div class="modal-header"><h1>Processing...</h1></div><div class="modal-body"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div></div>');
+    return {
+        showPleaseWait: function() {
+            pleaseWaitDiv.modal();
+        },
+        hidePleaseWait: function () {
+            pleaseWaitDiv.modal('hide');
+        },
+
+    };
+})();
+</script>
+  
+  <!--  <style>
+   
+
+.modal-header {
+
+background-color: #1ABB9C;
+
+padding:16px 16px;
+
+color:#FFF;
+
+border-bottom:2px dashed #1ABB9C;
+
+}
+
+.btn-success {
+    background: #26B99A;
+    border: 1px solid #169F85;
+}
+    </style> -->
+    @include('sweet::alert')
     </body>
     </html>
+    

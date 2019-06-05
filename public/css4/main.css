@@ -358,7 +358,7 @@ iframe {
   display: -ms-flexbox;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: left;
   padding: 0 20px;
   min-width: 160px;
   height: 42px;

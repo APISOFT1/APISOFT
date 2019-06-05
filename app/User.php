@@ -1,47 +1,26 @@
 <?php
-
 namespace App;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable implements MustVerifyEmail
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\MailResetPasswordToken;
+
+class User extends Authenticatable
 {
     use Notifiable;
-    use HasRoles;
+
+
+    const STATUS = 1;
+    const INACTIVE = 0;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-
-    protected $table= 'users';
-    protected $primaryKey="id";
-    
-    public $timestamps=true;
     protected $fillable = [
-        'id',
-        'name', 
-        'email',
-      'email_verified_at',
-         'password',
-        'Apellido1',
-        'Apellido2',
-        'Telefono',
-        'Direccion',
-        'Fecha_Ingreso',
-        'Genero_Id',
-        'Rol_Id',
-        'estado_id'
-        
-
+        'name', 'email', 'username', 'password' , 'status', 'activation_code',
     ];
-
-
-
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -50,21 +29,87 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password', 'remember_token',
     ];
-    protected $casts = [
-        'Fecha_Ingreso' => 'Y-m-d H:i:s'
-    ];
-    public function setPasswordAttribute($password)
+    
+    public function roles()
     {
-        $this->attributes['password'] = \Hash::make($password);
-    }
-    public function Genero() 
-    {
-        return $this->belongsTo(Genero::class ,'Genero_Id');
+        return $this->belongsToMany(Role::class, 'users_roles', 'user_id', 'role_id');
     }
 
-    public function Rol() 
+    public function assignRole(Role $role)
+{
+    return $this->roles()->save($role);
+}
+
+//para las rutas
+public function isAdmin()
+{
+    foreach ($this->roles()->get() as $role)
     {
-        return $this->BelongsTo(Rol::class,'Rol_Id');
+        if ($role->name == 'administrador')
+        {
+            return true;
+        }
     }
+
    
+}
+
+public function isPlanta()
+{
+    foreach ($this->roles()->get() as $role)
+    {
+        if ($role->name == 'Planta')
+        {
+            return true;
+        }
+    }
+}
+
+public function isAutenticado()
+{
+    foreach ($this->roles()->get() as $role)
+    {
+        if ($role->name == 'authenticated')
+        {
+            return true;
+        }
+    }
+}
+public function hasRole(string $roleSlug)
+{
+
+
+     $roles = $roleSlug;
+     $rolesArray = explode(';',$roles);  
+     $roles = $this->roles()->whereIn('name', $rolesArray)->count() > 0;
+     return $roles;
+
+}
+
+//PARA EL FILTRO DE LAS TABLAS
+    //Query Scope
+    public function scopeName($query, $name)
+    {
+        if($name)
+            return $query->where('name', 'LIKE', "%$name%");
+    }
+    public function scopeEmail($query, $email)
+    {
+        if($email)
+            return $query->where('email', 'LIKE', "%$email%");
+    }
+
+    public function scopeBuscar($query,$name)
+		{
+		  if (trim($name) !="")
+		  {
+		    $query->where(\DB::raw("CONCAT(name,' ',email)"),"LIKE","%$name%");
+		  }
+
+        }
+        
+        public function sendPasswordResetNotification($token)
+{
+    $this->notify(new MailResetPasswordToken($token));
+}
 }
