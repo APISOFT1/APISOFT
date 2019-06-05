@@ -6,7 +6,15 @@
 @if ($level === 'error')
 # @lang('Whoops!')
 @else
+<<<<<<< HEAD
+<<<<<<< HEAD
 # @lang('Hola!')
+=======
+# @lang('Hello!')
+>>>>>>> origin
+=======
+# @lang('Hola!')
+>>>>>>> Caro
 @endif
 @endif
 
@@ -43,7 +51,15 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
+<<<<<<< HEAD
+<<<<<<< HEAD
 @lang('Saludos'),<br>{{ config('app.name') }}
+=======
+@lang('Regards'),<br>{{ config('app.name') }}
+>>>>>>> origin
+=======
+@lang('Saludos'),<br>{{ config('app.name') }}
+>>>>>>> Caro
 @endif
 
 {{-- Subcopy --}}

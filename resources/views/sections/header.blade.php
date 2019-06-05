@@ -5,6 +5,7 @@
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
+              
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="{{ route('logout') }}" class="user-profile">
@@ -17,3 +18,4 @@
         </div>
         <!-- /top navigation -->
         
+       

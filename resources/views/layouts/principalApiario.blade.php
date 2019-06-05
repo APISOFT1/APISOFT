@@ -74,7 +74,7 @@
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       
-                     <li><a href="{{ url('users/') }}">Gestionar users</a></li>
+                     <li><a href="{{ url('users/') }}">Gestionar usuarios</a></li>
                     </ul>
                   </li>
                  
@@ -104,11 +104,11 @@
                     </ul>
                   </li>
 
-                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Producto Terminado <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Producto/') }}">Gestionar Productos</a></li>
-                      <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
-                    
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
+                    <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
                     
                     </ul>
                   </li>
@@ -202,7 +202,7 @@
 {!!Html::script('/js/jquery-1.11.1.min.js')!!}
 
 
-<!-- MODAL INVENTARIO -->
+<!-- MODAL AFILIADO -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -210,15 +210,22 @@
 
 {{-- ajax Form Add Post--}}
 
+<!-- Delay table load until everything else is loaded -->
+ 
+        $(window).load(function(){
+            $('#postTable').removeAttr('style');
+        })
+ 
+
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
-    $('.modal-descripcion').text('NUEVO LOTE');
+    $('.modal-descripcion').text('Crear Apiario');
   });
   $("#add").click(function() {
     $.ajax({
       type: 'POST',
-      url: 'addStock',
+      url: 'addApiario',
       
       data: {
         '_token': $('input[name=_token]').val(),
@@ -298,7 +305,30 @@ $('.modal-footer').on('click', '.edit', function() {
 
     },
 success: function(data) {
-  
+  $('.errorDescripcion').addClass('hidden');
+         $('.errorCantidad').addClass('hidden');
+         $('.errorUbicacion').addClass('hidden');
+                    
+
+                    if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#myModal').modal('show');
+                            toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.Descripcion) {
+                            $('.errorDescripcion').removeClass('hidden');
+                            $('.errorDescripcion').text(data.errors.Descripcion);
+                        }
+                        if (data.errors.cantidad) {
+                            $('.errorCantidad').removeClass('hidden');
+                            $('.errorCantidad').text(data.errors.cantidad);
+                        }
+                        if (data.errors.ubicacion_id) {
+                            $('.errorUbicacion').removeClass('hidden');
+                            $('.errorUbicacion').text(data.errors.ubicacion_id);
+                        }
+                    } else {
+  toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
       $('.api' + data.id).replaceWith(" "+
       "<tr class='api" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
@@ -319,13 +349,12 @@ success: function(data) {
           + data.cantidad +  " 'data-ubicacion_id='" 
           + data.ubicacion_id + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
       "</tr>");
+
     }
+},
   });
 });
 
-<<<<<<< HEAD
-
-=======
 
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
@@ -335,7 +364,7 @@ $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Eliminar Ubicación');
+$('.modal-descripcion').text('Eliminar Apiario');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
@@ -352,11 +381,11 @@ $('.modal-footer').on('click', '.delete', function(){
       'id': $('.id').text()
     },
     success: function(data){
-      $('.ubicacion' + $('.id').text()).remove();
+      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
+      $('.api' + $('.id').text()).remove();
     }
   });
 });
->>>>>>> Caro
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
@@ -386,7 +415,6 @@ myApp = myApp || (function () {
 })();
 </script>
   
-<<<<<<< HEAD
   <!--  <style>
    
 
@@ -408,10 +436,6 @@ border-bottom:2px dashed #1ABB9C;
 }
     </style> -->
     @include('sweet::alert')
-=======
-  
-
->>>>>>> raychel
     </body>
     </html>
     

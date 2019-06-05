@@ -10,11 +10,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>APISOFT</title>
     <!-- Bootstrap -->
-  
+    @toastr_css
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="{{asset('css2/bootstrap-select.min.css')}}">
+
+
+
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap-notifications.min.css">
+
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <!--[endif]-->
+    <!--[if lt IE 9]-->
 
 
 
@@ -28,7 +38,7 @@
 
     {!!Html::style ('/css2/bootstrap-select.min.css')!!}  
     
-    <!-- Font Awesome -->
+  <!--   Font Awesome -->
     {!!Html::style ('/css2/font-awesome.min.css')!!}
     <!-- NProgress -->
     {!!Html::style ('/css2/nprogress.css')!!}
@@ -55,7 +65,7 @@
               </div>
               <div class="profile_info">
                 <span>Bienvenido</span>
-                <h2>{{ Auth::user()->name }}</h2>
+               
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -70,16 +80,16 @@
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       
-                     <li><a href="{{ url('users/') }}">Gestionar users</a></li>
+                     <li><a href="{{ url('users/') }}">Gestionar usuarios</a></li>
                     </ul>
                   </li>
                  
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
-                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicacion</a></li>
+                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicación</a></li>
                       <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
-                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiaro</a></li>
+                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiario</a></li>
                     
                     </ul>
                   </li>
@@ -100,10 +110,11 @@
                     </ul>
                   </li>
 
-                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Producto Terminado <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Producto/') }}">Gestionar Productos</a></li>
-                      <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
+                    <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
                     
                     
                     </ul>
@@ -121,12 +132,16 @@
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
-              <ul class="nav navbar-nav navbar-right">
-                <li class="">
+              
+            
+        
+              <ul class="nav navbar-nav navbar-right">     
+               <li class="">
                   <a href="{{ route('logout') }}" class="user-profile">
                     Salir
                     <span class=" fa fa-sign-out"></span>
-                  </a>                 
+                  </a>   
+                  </li>              
               </ul>
             </nav>
           </div>
@@ -144,18 +159,14 @@
 
    <ul class="nav nav-tabs " id="myTab" role="tablist" >
   <li class="nav-item">
-    <a class="nav-link active" role="tab"  href="{{ url('/IngresoCera/') }}">Boletas de la Cera procesada</a>
+    <a class="nav-link active" role="tab"  href="{{ url('/IngresoCera/') }}">Servicios de la Cera procesada</a>
   </li>
+ 
   <li class="nav-item">
-    <a class="nav-link active" role="tab"  href="{{ url('/IngresoInventario/') }}">Boletas de Inventario</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active" role="tab"  href="{{ url('/Ingreso/') }}">Boletas de la miel</a>
+    <a class="nav-link active" role="tab"  href="{{ url('/Ingreso/') }}">Servicios de la miel procesada</a>
   </li>
 
 </ul>
-
-
 
 
 
@@ -208,7 +219,9 @@
      {!!Html::script('/js/icheck.js')!!}
 
 
-
+     @jquery
+    @toastr_js
+    @toastr_render
 
 
 <!-- MODAL AFILIADO -->
@@ -493,58 +506,24 @@ $('#jaja').val($(this).data('nombre'));
   $('.modal-show').text('Datos');
   });
 
- 
-</script>
-
-<script type="text/javascript">
-$(document).ready(function () {
-    var navListItems = $('div.setup-panel div a'), // tab nav items
-            allWells = $('.setup-content'), // content div
-            allNextBtn = $('.nextBtn'); // next button
-
-    allWells.hide(); // hide all contents by defauld
-
-    navListItems.click(function (e) {
-        e.preventDefault();
-        var $target = $($(this).attr('href')),
-                $item = $(this);
-
-        if (!$item.hasClass('disabled')) {
-            navListItems.removeClass('btn-primary').addClass('btn-default');
-            $item.addClass('btn-primary');
-            allWells.hide();
-            $target.show();
-            $target.find('input:eq(0)').focus();
-        }
-    });
-    // next button
-    allNextBtn.click(function(){
-        var curStep = $(this).closest(".setup-content"),
-            curStepBtn = curStep.attr("id"),
-            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-            curInputs = curStep.find("input[type='text'],input[type='email'],input[type='password'],input[type='url']"),
-            isValid = true;
-           // Validation
-        $(".form-group").removeClass("has-error");
-        for(var i=0; i<curInputs.length; i++){
-            if (!curInputs[i].validity.valid){
-                isValid = false;
-                $(curInputs[i]).closest(".form-group").addClass("has-error");
-            }
-        }
-        // move to next step if valid
-        if (isValid)
-            nextStepWizard.removeAttr('disabled').trigger('click');
-    });
 
 
- 
-    $('div.setup-panel div a.btn-primary').trigger('click');
+      // Enable pusher logging - don't include this in production
+// Pusher.logToConsole = true;
+
+// Initiate the Pusher JS library
+var pusher = new Pusher('API_KEY_HERE', {
+    encrypted: true
 });
 
+// Subscribe to the channel we specified in our Laravel Event
+var channel = pusher.subscribe('status-liked');
 
-</script>
-
+// Bind a function to a Event (the full Laravel class)
+channel.bind('App\\Events\\StatusLiked', function(data) {
+    // this is called when the event notification is received...
+});
+    </script> 
 
   </body>
 </html>

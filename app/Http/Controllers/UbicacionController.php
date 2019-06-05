@@ -21,7 +21,6 @@ public function __construct()
 //INDEEEEEEEEEEEEX/
 public function index(Request $request)
 {
-<<<<<<< HEAD
   if ($request)
   {
       $query=trim($request->get('searchText'));
@@ -34,13 +33,6 @@ public function index(Request $request)
  // $ubicacion = Ubicacion::paginate(10);
  // return view('Ubicacion.index',compact('ubicacion'));        
     
-=======
-  if($request){
-    $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-  $ubicacion = Ubicacion::paginate(10);
-  return view('Ubicacion.index',compact('ubicacion'), ['ubicacion'=>$ubicacion,"searchText"=>$query]);       
-}
->>>>>>> raychel
 }
 ////////////////////////////////////////////////////////NUEVO
 public function addUbicacion(Request $request){
@@ -54,7 +46,8 @@ public function addUbicacion(Request $request){
     $ubicacion = new Ubicacion;
     $ubicacion->Descripcion = $request->Descripcion;
     $ubicacion->save();
-    return response()->json(['success' => 'Se ha creado una ubicación correctamente']);
+    
+    return response()->json($ubicacion,['success' => 'Se ha creado una ubicación correctamente']);
   }
 }
  public function editUbicacion(request $request){

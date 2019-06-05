@@ -27,7 +27,7 @@
 
 
 <div class="table-responsive">
-			<table class="table table-striped table-bordered table-condensed table-hover">
+			<table class="table table-striped table-bordered table-condensed table-hover" id="postTable" >
 				<thead>
 					<th>Código</th>
 					<th>Descripción</th>
@@ -97,7 +97,7 @@
 
         <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-           <input type="text" class="form-control has-feedback-left" id="D" name="Descripcion" placeholder="Descripción" required>
+           <input type="text" class="form-control has-feedback-left" id="Descripcion" name="Descripcion" placeholder="Descripción" required>
            <p class="error text-center alert alert-danger hidden"></p>
               <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                 </div>
@@ -154,15 +154,18 @@
                       <label for="">Descripción :</label>
                       
                       <b id="d2"/>
+                     
                     </div>
 										<div class="form-group">
                       <label for="">Cantidad :</label>
                       <b id="ca2"/>
+                     
                     </div>
 										<div class="form-group">
                    
                       <label for="">Ubicación :</label>
                       <span class="label label-success"><b id="ub2"/>
+                      <p class="errorTitle text-center alert alert-danger hidden"></p>
                     </div>
                     </div>
                     </div>
@@ -183,20 +186,25 @@
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
            <input type="text" class="form-control has-feedback-left" id="ids" disabled>
               <span class="fa fa-key form-control-feedback left" aria-hidden="true"></span>
+              
                 </div>
                 </div>
           
                 <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
            <input type="text" class="form-control has-feedback-left" id="cri" >
+           <p class="errorTitle text-center alert alert-danger hidden"></p>
               <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
+              
                 </div>
                 </div>
           
                 <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
            <input type="text" class="form-control has-feedback-left" id="can" >
+           <p class="errorTitle text-center alert alert-danger hidden"></p>
               <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
+             
                 </div>
                 </div>
 

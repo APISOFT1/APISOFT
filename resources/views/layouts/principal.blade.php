@@ -55,6 +55,7 @@
               </div>
               <div class="profile_info">
                 <span>Bienvenido</span>
+                <h2>{{ Auth::user()->name }}</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -69,16 +70,16 @@
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       
-                     <li><a href="{{ url('users/') }}">Gestionar users</a></li>
+                     <li><a href="{{ url('users/') }}">Gestionar usuarios</a></li>
                     </ul>
                   </li>
                  
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
-                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicacion</a></li>
+                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicación</a></li>
                       <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
-                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiaro</a></li>
+                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiario</a></li>
                     
                     </ul>
                   </li>
@@ -99,10 +100,11 @@
                     </ul>
                   </li>
 
-                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Producto Terminado <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Producto/') }}">Gestionar Productos</a></li>
-                      <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
+                    <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
                     
                     
                     </ul>
@@ -137,13 +139,6 @@
           <div class="container">
           
             <div class="row x_panel">
-
-
-
-
-
-
-
 
 
               @yield('contenido')
@@ -199,16 +194,6 @@
 
 <!-- MODAL AFILIADO -->
   
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-=======
->>>>>>> Caro
-=======
->>>>>>> raychel
 <script type="text/javascript">
 {{-- ajax Form Add Post--}}
   $(document).on('click','.create-modal', function() {
@@ -222,10 +207,6 @@
       type: 'POST',
       url: 'addAfiliado',
       data: {
-<<<<<<< HEAD
-       
-=======
->>>>>>> Caro
         'id': $('input[name=id]').val(),
         'Nombre': $('input[name=Nombre]').val(),
         'apellido1': $('input[name=apellido1]').val(),
@@ -241,24 +222,69 @@
       },
       success: function(data){
         if ((data.errors)) {
-          html = '<div class="alert alert-danger">';
-          $('.error').removeClass('hidden');
-          $('.error').text(data.errors.id);
-          $('.error').text(data.errors.Nombre);
-          $('.error').text(data.errors.apellido1);
-          $('.error').text(data.errors.apellido2);
-          $('.error').text(data.errors.Telefono);
-          $('.error').text(data.errors.email);
-          $('.error').text(data.errors.Direccion);
-          $('.error').text(data.errors.Fecha_Ingreso);
-          $('.error').text(data.errors.Num_Cuenta);
-          $('.error').text(data.errors.genero_id);
-          $('.error').text(data.errors.estado_civil_id);
-          $('.error').text(data.errors.estado_id);
- 
-        } else {
-          html = '<div class="alert alert-success alert-dismissible">'  + data.success + '</div>';
-          $('.error').remove();
+          $('.errorNombre').addClass('hidden');
+         $('.errorApellido1').addClass('hidden');
+         $('.errorApellido2').addClass('hidden');
+         $('.errorTelefono').addClass('hidden');
+         $('.errorEmail').addClass('hidden');
+         $('.errorDireccion').addClass('hidden');
+         $('.errorFechaIngreso').addClass('hidden');
+         $('.errorNumCuenta').addClass('hidden');
+         $('.errorGenero').addClass('hidden');
+         $('.errorEstadoCivil').addClass('hidden');
+         $('.errorEstado').addClass('hidden');
+
+         if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#create').modal('show');
+                            toastr.error('ERRO DE VALIDACIÓN!', 'Error Alert', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.Nombre) {
+                            $('.errorNombre').removeClass('hidden');
+                            $('.errorNombre').text(data.errors.Nombre);
+                        }
+                        if (data.errors.apellido1) {
+                            $('.errorApellido1').removeClass('hidden');
+                            $('.errorApellido1').text(data.errors.apellido1);
+                        }
+                        if (data.errors.apellido2) {
+                            $('.errorApellido2').removeClass('hidden');
+                            $('.errorApellido2').text(data.errors.apellido2);
+                        }
+                        if (data.errors.Telefono) {
+                            $('.errorTelefono').removeClass('hidden');
+                            $('.errorTelefono').text(data.errors.Telefono);
+                        }
+                        if (data.errors.email) {
+                            $('.errorEmail').removeClass('hidden');
+                            $('.errorEmail').text(data.errors.email);
+                        }
+                        if (data.errors.Direccion) {
+                            $('.errorDireccion').removeClass('hidden');
+                            $('.errorDireccion').text(data.errors.Direccion);
+                        }
+                        if (data.errors.Fecha_Ingreso) {
+                            $('.errorFechaIngreso').removeClass('hidden');
+                            $('.errorFechaIngreso').text(data.errors.Fecha_Ingreso);
+                        }
+                        if (data.errors.Num_Cuenta) {
+                            $('.errorNumCuenta').removeClass('hidden');
+                            $('.errorNumCuenta').text(data.errors.Num_Cuenta);
+                        }
+                        if (data.errors.genero_id) {
+                            $('.errorGenero').removeClass('hidden');
+                            $('.errorGenero').text(data.errors.genero_id);
+                        }
+                        if (data.errors.estado_civil_id {
+                            $('.errorEstadoCivil').removeClass('hidden');
+                            $('.errorEstadoCivil').text(data.errors.estado_civil_id);
+                        }
+                        if (data.errors.estado_id) {
+                            $('.errorEstado').removeClass('hidden');
+                            $('.errorEstado').text(data.errors.estado_id);
+                        }
+                    } else {
+                      toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
           $('#table').append("<tr class='afi" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.Nombre + "</td>"+
@@ -314,7 +340,7 @@
           "</tr>");
          
         }
-        $('#form_result').html(html);
+      
       },
     });
     $('#id').val('');
@@ -330,6 +356,7 @@
     $('#estado_civil_id').val('');
     $('#estado_id').val('');
   });
+
 $(document).on('click', '.edit-modal', function() {
 $('#footer_action_button').text(" Editar ");
 $('#footer_action_button').addClass('fa fa-pencil');
@@ -376,7 +403,7 @@ $('.modal-footer').on('click', '.edit', function() {
 success: function(data) {
       $('.afi' + data.id).replaceWith(" "+
       "<tr class='afi'>"+
-          "<td>" + data.id + "</td>"+
+          "<td>" + data.id + "</td>"//
           "<td>" + data.Nombre + "</td>"+
           "<td>" + data.apellido1 + "</td>"+
           "<td>" + data.apellido2 + "</td>"+
@@ -457,6 +484,7 @@ $('.modal-footer').on('click', '.delete', function(){
       'id': $('.id').text()
     },
     success: function(data){
+      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
       $('.afi' + $('.id').text()).remove();
     }
   });
@@ -519,28 +547,6 @@ $(document).ready(function () {
 
   </body>
 </html>
-<<<<<<< HEAD
-=======
-<script>
-
-
-var timeoutId = 0;
-$('#discount').keyup(function(e){
-   clearTimeout(timeoutId);
-   timeoutId = setTimeout(discount,1000);
-});
-
-function discount(){
-  let amount = $('#discount').val();
-  if(!isNaN(amount)){
-    let discount = amount * 0.05;
-    let total =  amount - discount;
-    $("#total").val(total);
-  } 
-}
-
-</script>
->>>>>>> raychel
   <style type="text/css">
 .form-control {
     height: 37px;
@@ -586,7 +592,3 @@ function discount(){
   border-radius: 15px;
 }
 </style>
-<<<<<<< HEAD
-=======
-
->>>>>>> raychel

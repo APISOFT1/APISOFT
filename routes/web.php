@@ -13,67 +13,39 @@ jjajaajaj
 */
 Route::get('/', function () {
     return view('welcome');
-  
 });
 Auth::routes();
-//Auth::routes(['verify' => true]);
 
+Route::resources([
+    'Ingreso' => 'IngresoController',
+ 'IngresoCera' => 'IngresoCeraController',
+ 'IngresoInventario' => 'IngresoInventarioController'
+      ]);
 
-  if (config('auth.registration')) {
-    Route::get('register', 'RegisterController@showRegistrationForm')->name('register');
-    Route::post('register', 'RegisterController@register');
-}
+Route::group(['middleware' =>['auth']], function () {
+  
+  Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout'); 
+  
+  $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+  $this->post('register', 'Auth\RegisterController@register');
 
   Route::get('activate/{token}', 'Auth\RegisterController@activate')
       ->name('activate');
       
+     
   Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-     if ($options['register'] ?? true) {
-         $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-         $this->post('register', 'Auth\RegisterController@register');
-      }
+  
+  
 
-      Route::get('chart', 'ChartController@index'); 
+  
+ Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
+ Route::get('chartRecepcion', 'Admin\DashboardController@indexRecepcion')->name('chartRecepcion')->middleware('role:planta;administrador');
+ Route::get('chartIngreso', 'Admin\DashboardController@indexIngreso')->name('chartIngreso')->middleware('role:administrador');
 
-     Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
-
-       // Dashboard
-  //Route::get('users', ' Admin\DashboardController')->name('dashboard'); 
-
-  Route::resources([
-'Estanon'=>'EstanonController',
-'Genero'=>'GeneroController',
-'EstadoCivil'=>'EstadoCivilController',
-'Ubicacion'=>'UbicacionController',
-'Afiliado' => 'AfiliadoController',
-'AfiliadoApiario'=>'AfiliadoApiarioController',
-'Apiario' => 'ApiarioController',
-'Usuario'=>'UserController',
-'Rol'=>'RolController',
-'Estado'=>'EstadoController',
-'RecepcionMateriaPrima'=> 'RecepcionMateriaPrimaController',
-'Ingreso' => 'IngresoController',
-'IngresoCera' => 'IngresoCeraController',
-'IngresoInventario' => 'IngresoInventarioController',
-'admin/permissions' => 'Admin\PermissionsController',
-'admin/roles'=> 'Admin\RolesController',
-'users'=> 'Admin\UsersController',
-'Cera'=>'CeraController',
-'Producto' => 'ProductController',
-'RecepEstanon' => 'RecepcionEstanonController',
-'Stock' => 'StockController',
-
-
-  ]);
-  Route::get('users/{users}/edit', 'UsersController@edit')->name('users.edit');
-  Route::put('users/{users}', 'UsersController@update')->name('users.update');
-Route::POST('addAfiliado','AfiliadoController@addAfiliado');
-Route::POST('editAfiliado','AfiliadoController@editAfiliado');
-Route::POST('deleteAfiliado','AfiliadoController@deleteAfiliado');
-
-Route::POST('addStock','StockController@addStock');
-Route::POST('editStock','StockController@editStock');
-Route::POST('deleteStock','StockController@deleteStock');
+      
+ Route::resource('users', 'Admin\UserController')->middleware('role:administrador');;
+ //Route::get('users', 'Admin\UserController@index')
+ Route::resource('Afiliado', 'AfiliadoController')->middleware('role:administrador');
 
 
 
@@ -84,9 +56,9 @@ Route::POST('deleteStock','StockController@deleteStock');
     Route::get('AfiliadoApiario','AfiliadoApiarioController@index')->middleware('role:planta;administrador');
     Route::get('Apiario' , 'ApiarioController@index')->middleware('role:planta;administrador');
     Route::get('RecepcionMateriaPrima','RecepcionMateriaPrimaController@index')->middleware('role:planta;administrador');
-    Route::get('Ingreso' , 'IngresoController@index')->middleware('role:planta;administrador');
-    Route::get('IngresoCera' , 'IngresoCeraController@index')->middleware('role:planta;administrador');
-    Route::get('IngresoInventario' , 'IngresoInventarioController@index')->middleware('role:planta;administrador');
+    Route::resource('Ingreso' , 'IngresoController')->middleware('role:planta;administrador');
+    Route::resource('IngresoCera' , 'IngresoCeraController')->middleware('role:planta;administrador');
+    Route::resource('IngresoInventario' , 'IngresoInventarioController')->middleware('role:planta;administrador');
     Route::get('Cera','CeraController@index')->middleware('role:planta;administrador');
     Route::get('Producto' , 'ProductController@index')->middleware('role:planta;administrador');
     Route::get('RecepEstanon' , 'RecepcionEstanonController@index')->middleware('role:planta;administrador');
@@ -143,5 +115,15 @@ Route::POST('addUbicacion','UbicacionController@addUbicacion');
 Route::POST('editUbicacion','UbicacionController@editUbicacion');
 Route::POST('deleteUbicacion','UbicacionController@deleteUbicacion');
 
+Route::POST('addStock','StockController@addStock');
+Route::POST('editStock','StockController@editStock');
+Route::POST('deleteStock','StockController@deleteStock');
+
+});
+ 
 $this->get('/verify-user/{code}', 'Auth\RegisterController@activateUser')->name('activate.user');
 
+//Route::get('IngresoCera' , 'IngresoCeraController@index');
+Route::get('test', ['as' => 'test', 'uses' => 'AlertController@index']);
+ $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+  $this->post('register', 'Auth\RegisterController@register');

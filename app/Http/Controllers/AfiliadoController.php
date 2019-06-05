@@ -33,7 +33,10 @@ class AfiliadoController extends Controller
             $estadoC = Estado_Civil::all();
         return view('Afiliado.index', compact('afi','genero','estadoC'), ['afi'=>$afi,"searchText"=>$query]);
     }
-
+   
+    
+  
+  
     return view('Afiliado.index',compact('afi','genero','estadoC','esta'));   
         
     }
@@ -94,6 +97,7 @@ class AfiliadoController extends Controller
       
       else {
       $afi = Afiliado::find ($request->id);
+      
       $afi->Nombre = $request->Nombre;
       $afi->apellido1 = $request->apellido1;
       $afi->apellido2 = $request->apellido2;
@@ -150,25 +154,8 @@ class AfiliadoController extends Controller
     public function deleteAfiliado(request $request){
   
         $afi = Afiliado::find ($request->id);
-<<<<<<< HEAD
-        $afi->Nombre = $request->Nombre;
-        $afi->apellido1 = $request->apellido1;
-        $afi->apellido2 = $request->apellido2;
-        $afi->Telefono = $request->Telefono;
-        $afi->email = $request->email;
-        $afi->Direccion = $request->Direccion;
-        $afi->Fecha_Ingreso = $request->Fecha_Ingreso;
-        $afi->Num_Cuenta = $request->Num_Cuenta;
-        $afi->genero_id = $request->genero_id;
-        $afi->estado_civil_id = $request->estado_civil_id;
-        $afi->estado_id = $request->estado_id;
-        $afi->delete();
-        return response()->json();
- 
-=======
         $afi->delete();
        
->>>>>>> Caro
       }
       }   //
     

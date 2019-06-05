@@ -144,12 +144,12 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('/IngresoCera/') }}">Gestionar Servio Cera
+                        <a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera
                             
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('/IngresoInventario/') }}">Gestionar Servio Inventario
+                        <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario
                             
                         </a>
                     </li>

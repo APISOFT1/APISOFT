@@ -9,12 +9,7 @@ use App\Ubicacion;
 use Illuminate\Http\Redirect;
 use App\Http\Requests\UbicacionFormRequest;
 use DB;
-<<<<<<< HEAD
-
-
-=======
 use App\Estanon;
->>>>>>> Caro
 class EstanonController extends Controller
 {
    
@@ -44,30 +39,16 @@ public function addEstanon(Request $request){
     $estanon->Descripcion = $request->Descripcion;
     $estanon->Peso = $request->Peso;
     $estanon->save();
-<<<<<<< HEAD
-    return response()->json($estanon);
-=======
     return response()->json(['success' => 'Se ha creado un Estañón correctamente']);
->>>>>>> Caro
   }
 }
  public function editEstanon(request $request){
   $rules = array(
-<<<<<<< HEAD
-    'descripcion' => 'required',
-    'Peso' => 'required'
-
-  );
-$validator = Validator::make ( Input::all(), $rules);
-if ($validator->fails())
-
-=======
     'Descripcion' => 'required',
     'Peso' => 'required'
   );
 $validator = Validator::make ( Input::all(), $rules);
 if ($validator->fails())
->>>>>>> Caro
 return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
 else {
    $estanon = new Estanon;
@@ -81,12 +62,6 @@ public function deleteEstanon(request $request){
   
   $estanon = Estanon::find ($request->id);
   $estanon->delete();
-<<<<<<< HEAD
-  return response()->json();
-}
-}   //
-=======
   
 }
 }  
->>>>>>> Caro

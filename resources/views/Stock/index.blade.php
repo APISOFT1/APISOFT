@@ -53,11 +53,7 @@
 					 data-id="{{$value->id}}" 
 					 data-nombre="{{$value->nombre}}"
            data-cantidadDisponible="{{$value->cantidadDisponible}}"
-<<<<<<< HEAD
-           data-precio="{{$value->precio}}"
-=======
            data-precioUnitario="{{$value->precioUnitario}}"
->>>>>>> Caro
 					 data-estanon_recepcions_id="{{$value->estanon_recepcions_id}} - {{$value->recepcionEstanon->id}}">
               <i class="fa fa-eye"></i>
             </a>
@@ -65,11 +61,7 @@
 						data-id="{{$value->id}}"
 					 data-nombre="{{$value->nombre}}"
            data-cantidadDisponible="{{$value->cantidadDisponible}}"
-<<<<<<< HEAD
-           data-precio="{{$value->precio}}"
-=======
            data-precioUnitario="{{$value->precioUnitario}}"
->>>>>>> Caro
 					 data-estanon_recepcions_id="{{$value->estanon_recepcions_id}}">
               <i class="glyphicon glyphicon-pencil"></i>
             </a>
@@ -163,17 +155,6 @@
                     <div class="form-group">
                       <label for="">Descripción :</label>
                       
-<<<<<<< HEAD
-                      <b id="nom"/>
-                    </div>
-										<div class="form-group">
-                      <label for="">Cantidad :</label>
-                      <b id="can"/>
-                    </div>
-                    	<div class="form-group">
-                      <label for="">Precio :</label>
-                      <b id="pu"/>
-=======
                       <b id="nbre"/>
                     </div>
 										<div class="form-group">
@@ -183,7 +164,6 @@
                     	<div class="form-group">
                       <label for="">Precio :</label>
                       <b id="prun"/>
->>>>>>> Caro
                     </div>
 										<div class="form-group">
                    
@@ -214,33 +194,21 @@
           
                 <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-<<<<<<< HEAD
-           <input type="text" class="form-control has-feedback-left" id="lol2" >
-=======
            <input type="text" class="form-control has-feedback-left" id="cri" >
->>>>>>> Caro
               <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
                 </div>
                 </div>
           
                 <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-<<<<<<< HEAD
-           <input type="text" class="form-control has-feedback-left" id="lol3" >
-=======
            <input type="text" class="form-control has-feedback-left" id="tidad" >
->>>>>>> Caro
               <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
                 </div>
                 </div>
                 
                 <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-<<<<<<< HEAD
-           <input type="text" class="form-control has-feedback-left" id="lol4" >
-=======
            <input type="text" class="form-control has-feedback-left" id="uni" >
->>>>>>> Caro
               <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
                 </div>
                 </div>
@@ -289,7 +257,3 @@
 @endsection
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<<<<<<< HEAD
-
-=======
->>>>>>> Caro

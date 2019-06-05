@@ -14,7 +14,6 @@ use App\Afiliado;
 use App\User;
 use App\TipoEntrega;
 use App\Estanon;
-use App\RecepcionEstanon;
 
 
 
@@ -36,7 +35,11 @@ if($request){
   $recepcion = RecepcionMateriaPrima::paginate(10);
       $afiliado = Afiliado::all();
       $estanon = Estanon::all();
-      $recepciones = RecepcionMateriaPrima::all()->sortBy("fecha");
+      $recepciones = DB::table('recepcion_materia_primas')
+      ->select('id','afiliado_id')
+      ->orderBy('created_at','DESC')
+      ->take(1)
+      ->get();
       $user = User::all();
       $tipoEntrega = TipoEntrega::all();
   return view('RecepcionMateriaPrima.index', compact('afiliado','recepciones','estanon','user','tipoEntrega','recepcion'), ['recepcion'=>$recepcion,"searchText"=>$query]);
@@ -64,7 +67,10 @@ public function addRecepcionMateriaPrima(Request $request){
         $recepcion->tipoEntrega_id = $request->tipoEntrega_id;
         $recepcion->observacion = $request->observacion;
     $recepcion->save();
-<<<<<<< HEAD
+    $ruless = array(
+      ['success' => 'Se ha creado una Recepción de Materia Prima correctamente']
+    );
+   
     return response()->json($recepcion);
    
   }
@@ -88,23 +94,13 @@ else {
   $recepcionEst->Recepcion_id = $request->Recepcion_id;
   $recepcionEst->Estanon_id = $request->Estanon_id;
   $recepcionEst->Fecha = $request->Fecha;
-
   $recepcionEst->save();
   return back()->with('flash','Recepcion Guardada');
   return response()->json($recepcionEst);
-
-
 }
-}
-
-public function editRol(request $request){
-=======
-    return response()->json(['success' => 'Se ha creado una Recepción de Materia Prima correctamente']);
-  }
 }
 
 public function editRecepcion(request $request){
->>>>>>> Caro
   $rules = array(
    
   );

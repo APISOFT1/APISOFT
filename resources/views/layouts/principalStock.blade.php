@@ -93,11 +93,11 @@
                     </ul>
                   </li>
 
-                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Producto Terminado <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
-                      <li><a href="{{ url('/AfiliadoEstanon/') }}">Gestionar Afiliado-Estañon</a></li>
-                      <li><a href="{{ url('/Homogeneizacion/') }}">Gestionar Homogeneización</a></li>
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
+                    <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
                     
                     </ul>
                   </li>
@@ -196,13 +196,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-<<<<<<< HEAD
-
 {{-- ajax Form Add Post--}}
-
-=======
-{{-- ajax Form Add Post--}}
->>>>>>> Caro
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
@@ -225,15 +219,6 @@
         if ((data.errors)) {
           html = '<div class="alert alert-danger">';
           $('.error').removeClass('hidden');
-<<<<<<< HEAD
-          $('.error').text(data.errors.Descripcion);
-          $('.error').text(data.errors.cantidad);
-          $('.error').text(data.errors.ubicacion_id);
- 
-        } else {
-          $('.error').remove();
-          $('#table').append("<tr class='api" + data.id + "'>"+
-=======
           $('.error').text(data.errors.nombre);
           $('.error').text(data.errors.cantidadDisponible);
           $('.error').text(data.errors.precioUnitario);
@@ -243,7 +228,6 @@
           html = '<div class="alert alert-success alert-dismissible">'  + data.success + '</div>';
           $('.error').remove();
           $('#table').append("<tr class='sto" + data.id + "'>"+
->>>>>>> Caro
           "<td>" + data.id + "</td>"+
           "<td>" + data.nombre + "</td>"+
           "<td>" + data.cantidadDisponible + "</td>"+
@@ -289,37 +273,16 @@
     $('#cantidadDisponible').val('');
     $('#precioUnitario').val('');
     $('#estanon_recepcions_id').val('');
-<<<<<<< HEAD
-
-=======
->>>>>>> Caro
   });
  
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
-<<<<<<< HEAD
-$('#footer_action_button').text(" Editar Apiario");
-=======
 $('#footer_action_button').text(" Editar Stock");
->>>>>>> Caro
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-<<<<<<< HEAD
-$('.modal-descripcion').text('Editar Apiario');
-$('.deleteContent').hide();
-$('.form-horizontal').show();
-$('#lol1').val($(this).data('id'));
-$('#lol2').val($(this).data('nombre'));
-$('#lol3').val($(this).data('cantidadDisponible'));
-$('#lol4').val($(this).data('precioUnitario'));
-$('#lol5').val($(this).data('estanon_recepcions_id'));
-$('#myModal').modal('show');
-});
-
-=======
 $('.modal-descripcion').text('Editar Stock');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
@@ -330,7 +293,6 @@ $('#uni').val($(this).data('preciounitario'));
 $('#lol5').val($(this).data('estanon_recepcions_id'));
 $('#myModal').modal('show');
 });
->>>>>>> Caro
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
@@ -338,16 +300,6 @@ $('.modal-footer').on('click', '.edit', function() {
     data: {
 '_token': $('input[name=_token]').val(),
 'id': $("#lol1").val(),
-<<<<<<< HEAD
-'nombre': $('#lol2').val(),
-'cantidadDisponible': $('#lol3').val(),
-'precioUnitario': $('#lol4').val(),
-'estanon_recepcions_id': $('#lol5').val(),
-
-    },
-success: function(data) {
-      $('.api' + data.id).replaceWith(" "+
-=======
 'nombre': $('#cri').val(),
 'cantidadDisponible': $('#tidad').val(),
 'precioUnitario': $('#uni').val(),
@@ -355,7 +307,6 @@ success: function(data) {
     },
 success: function(data) {
       $('.sto' + data.id).replaceWith(" "+
->>>>>>> Caro
       "<tr class='api" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
       "<td>" + data.nombre + "</td>"+
@@ -385,31 +336,16 @@ success: function(data) {
     }
   });
 });
-<<<<<<< HEAD
-
-
-=======
->>>>>>> Caro
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
   $('#i').text($(this).data('id'));
-<<<<<<< HEAD
-  $('#nom').text($(this).data('nombre'));
-  $('#can').text($(this).data('cantidadDisponible'));
-  $('#pu').text($(this).data('precioUnitario'));
-  $('#esre').text($(this).data('estanon_recepcions_id'));
-  $('.modal-title').text('Detalle');
-  });
-
-=======
   $('#nbre').text($(this).data('nombre'));
   $('#cdpn').text($(this).data('cantidaddisponible'));
   $('#prun').text($(this).data('preciounitario'));
   $('#esre').text($(this).data('estanon_recepcions_id'));
   $('.modal-title').text('Detalle');
   });
->>>>>>> Caro
   /* processing bar 
   */
   var myApp;
@@ -422,10 +358,6 @@ myApp = myApp || (function () {
         hidePleaseWait: function () {
             pleaseWaitDiv.modal('hide');
         },
-<<<<<<< HEAD
-
-=======
->>>>>>> Caro
     };
 })();
 </script>

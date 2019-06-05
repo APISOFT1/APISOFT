@@ -39,11 +39,21 @@ public function addApiario(Request $request){
       'Descripcion' => 'required',
       'cantidad' => 'required',
       'ubicacion_id' => 'required'
+<<<<<<< HEAD
       ]); 
       
   if ($validator->fails())
   return Response::json(['errors' => $error->errors()->all()]);
   else {
+=======
+      ); 
+
+      $validator = Validator::make ( Input::all(), $rules);
+      if ($validator->fails())
+      return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
+
+    else {
+>>>>>>> d9c60665fa79baa59c387185978bb682e34ad93b
     
     $ubicacion_id = input::get('ubicacion_id');
     $api = new Apiario;

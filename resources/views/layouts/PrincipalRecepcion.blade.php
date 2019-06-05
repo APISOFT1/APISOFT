@@ -65,7 +65,7 @@
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       
-                     <li><a href="{{ url('users/') }}">Gestionar users</a></li>
+                     <li><a href="{{ url('users/') }}">Gestionar usuarios</a></li>
                     </ul>
                   </li>
                 
@@ -94,10 +94,11 @@
                     </ul>
                   </li>
 
-                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Producto Terminado <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Producto/') }}">Gestionar Productos</a></li>
-                      <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
+                    <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
                     
                     
                     </ul>
@@ -130,10 +131,7 @@
         <div class="right_col" role="main">
           <div class="container">
             <div class="row x_panel">
-           
-           
               @yield('contenido')
-
             </div>
           </div>
         </div>
@@ -233,10 +231,12 @@ var div_respuesta="#respuesta";
           data.id + "' data-descripcion='" + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modalRol btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalRol btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         
-          $('#busqueda_parroquia').append("<tr class='recepcion" + data.id + "'>"+
+          $('#fiii').append("<tr class='recepciones" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
-          "<td>" + data.fecha + "</td>"+
           "<td>" + data.afiliado_id + "</td>");
+
+          $('#Recepcion_id').val($(this).data('id'));
+        
         }
         $('#form_result').html(html);
       },
@@ -255,10 +255,7 @@ var div_respuesta="#respuesta";
 
 
   });
-
-
   {{-- ajax Form Add Post--}}
-
 $(document).on('click','.create-modal', function() {
   $('#create').modal('show');
   $('.form-horizontal').show();
@@ -271,7 +268,7 @@ $("#addd").click(function() {
     
     data: {
       '_token': $('input[name=_token]').val(),
-      'Recepcion_id': $('select[name=Recepcion_id]').val(),
+      'Recepcion_id': $('input[name=Recepcion_id]').val(),
       'Estanon_id': $('select[name=Estanon_id]').val(),
       'Fecha': $('input[name=Fecha]').val()
       
@@ -282,7 +279,6 @@ $("#addd").click(function() {
         $('.error').text(data.errors.Recepcion_id);
         $('.error').text(data.errors.Estanon_id);
         $('.error').text(data.errors.Fecha);
-
       } else {
         $('.error').remove();
     
@@ -292,28 +288,7 @@ $("#addd").click(function() {
   $('#Recepcion_id').val('');
   $('#Estanon_id').val('');
   $('#Fecha').val('');
-
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
@@ -576,60 +551,4 @@ $("#numero_muestras").val(aleatorio);
 });
 </script>
 
-
-
-<script type="text/javascript">
-{{-- ajax Form Add Post--}}
-
-
-
-$(document).ready(function () {
-    var table = $('#busqueda_parroquia').DataTable();
-    var dato = "";
-    //para seleccionar una opcion
-    $('#example tbody').on('click', 'tr', function () {
-        if ($(this).hasClass('selected')) {
-            $(this).removeClass('selected');
-            dato = "";
-            console.log(dato);
-        }
-        else {
-            table.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
-            dato = $(this).find("td:eq(0)").text();
-            console.log(dato);
-        }
-    });
-});
-
-$("#BusquedaParroquia").on('click', 'tr', function (e) {
-    e.preventDefault();
-    var renglon = $(this);
-    var campo1, campo2, campo3;
-    $(this).children("td").each(function (i) {
-        switch (i) {
-            case 0:
-                campo1 = $(this).text();
-                break;
-            case 1:
-                campo2 = $(this).text();
-                break;
-            case 2:
-                campo3 = $(this).text();
-                break;
-        }
-    })
-    $("#txt_codigo").val(campo1);
-    $("#txt_nombre").val(campo2);
-    if (campo3 == "A") {
-        $("#che_estado").prop("checked", "checked");
-    }
-    CierraPopup();
-});
-
-function CierraPopup() {
-    $("#popupBusquedaParroquia").modal('hide');//ocultamos el modal
-    $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
-    $('.modal-backdrop').remove();//eliminamos el backdrop del modal
-}
 

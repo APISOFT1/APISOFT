@@ -117,7 +117,6 @@
   </div>
   {{$afi->links()}}
 </div>
-
 {{-- Modal Form Create Afiliado --}}
 <div id="create" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="myModalLabel">
   <div class="modal-dialog">

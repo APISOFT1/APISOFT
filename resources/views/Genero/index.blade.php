@@ -29,9 +29,6 @@
 						<a href="{{URL::action('GeneroController@edit',$generos->id)}}"><button class="btn btn-info">Editar</button></a>
 					
                          <a href="" data-target="#modal-delete-{{$generos->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
-<<<<<<< HEAD
-						
-=======
 						 <script>
 $(document).ready(function(){
     $(".btn").click(function(){
@@ -40,7 +37,6 @@ $(document).ready(function(){
 });
 </script>
 						 
->>>>>>> Caro
 					</td>
 				</tr>
 				@include('Genero.modal')
