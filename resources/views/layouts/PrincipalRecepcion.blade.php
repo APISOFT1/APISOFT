@@ -231,10 +231,12 @@ var div_respuesta="#respuesta";
           data.id + "' data-descripcion='" + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modalRol btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalRol btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         
-          $('#busqueda_parroquia').append("<tr class='recepcion" + data.id + "'>"+
+          $('#fiii').append("<tr class='recepciones" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
-          "<td>" + data.fecha + "</td>"+
           "<td>" + data.afiliado_id + "</td>");
+
+          $('#Recepcion_id').val($(this).data('id'));
+        
         }
         $('#form_result').html(html);
       },
@@ -266,7 +268,7 @@ $("#addd").click(function() {
     
     data: {
       '_token': $('input[name=_token]').val(),
-      'Recepcion_id': $('select[name=Recepcion_id]').val(),
+      'Recepcion_id': $('input[name=Recepcion_id]').val(),
       'Estanon_id': $('select[name=Estanon_id]').val(),
       'Fecha': $('input[name=Fecha]').val()
       
@@ -549,62 +551,4 @@ $("#numero_muestras").val(aleatorio);
 });
 </script>
 
-<script type="text/javascript">
-{{-- ajax Form Add Post--}}
-
-$(document).ready(iniciar);
-
-function iniciar() {
-    $("#busqueda_parroquia tr td").click(clickTabla);
-}
-
-$(document).ready(function () {
-    var table = $('#busqueda_parroquia').DataTable();
-    var dato = "";
-    //para seleccionar una opcion
-    $('#example tbody').on('click', 'tr', function () {
-        if ($(this).hasClass('selected')) {
-            $(this).removeClass('selected');
-            dato = "";
-            console.log(dato);
-        }
-        else {
-            table.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
-            dato = $(this).find("td:eq(0)").text();
-            console.log(dato);
-        }
-    });
-});
-
-$("#BusquedaParroquia").on('click', 'tr', function (e) {
-    e.preventDefault();
-    var renglon = $(this);
-    var campo1, campo2, campo3;
-    $(this).children("td").each(function (i) {
-        switch (i) {
-            case 0:
-                campo1 = $(this).text();
-                break;
-            case 1:
-                campo2 = $(this).text();
-                break;
-            case 2:
-                campo3 = $(this).text();
-                break;
-        }
-    })
-    $("#txt_codigo").val(campo1);
-    $("#txt_nombre").val(campo2);
-    if (campo3 == "A") {
-        $("#che_estado").prop("checked", "checked");
-    }
-    CierraPopup();
-});
-
-function CierraPopup() {
-    $("#popupBusquedaParroquia").modal('hide');//ocultamos el modal
-    $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
-    $('.modal-backdrop').remove();//eliminamos el backdrop del modal
-}
 
