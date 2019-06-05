@@ -41,6 +41,10 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+$app->register(
+    Yoeunes\Toastr\ToastrServiceProvider::class
+);
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application

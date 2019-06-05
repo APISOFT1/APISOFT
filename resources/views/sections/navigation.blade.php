@@ -67,9 +67,11 @@
                             
                         </a>
                     </li>
-                    @else
+                    
 
-                   
+                    @endif
+                    @endif
+                    </ul>
 
                     <li><a><i class="fa fa-home"></i> Planta <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -86,8 +88,7 @@
                   
             
                    
-                    @endif
-                    @endif
+                    
                     
                 </ul>
                 @if(Auth::check())
@@ -117,7 +118,9 @@
                     </li>
                    
                
-                @else
+                    @endif
+                    @endif
+                    </ul>
                 <li><a><i class="fa fa-list-alt"></i> Recepción <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li>
@@ -130,12 +133,11 @@
                             
                         </a>
                     </li>
-                    @endif
-@endif
+                   
+
                 </ul>
                
-                @if(Auth::check())
-                    @if (Auth::user()->isAdmin())
+                
                 <li><a><i class="fa fa-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li>
@@ -143,8 +145,25 @@
                             
                         </a>
                     </li>
+                    </ul>
+
+                    <li><a><i class="fa fa-cart-plus"></i> Servicios <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
                     <li>
+<<<<<<< .merge_file_a22668
                         <a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera
+=======
+                        <a href="{{ url('Stok') }}">Gestionar Stock
+>>>>>>> .merge_file_a07124
+                            
+                        </a>
+                    </li>
+                    <li>
+<<<<<<< .merge_file_a22668
+                        <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario
+=======
+                        <a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera
+>>>>>>> .merge_file_a07124
                             
                         </a>
                     </li>
@@ -154,19 +173,12 @@
                         </a>
                     </li>
                     
-                    @else
-                    <li><a><i class="fa fa-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                    <li>
-                        <a href="{{ url('Stok') }}">Gestionar Stock
-                            
+                   
+                    
                         </a>
                     </li>
-                
-                        </a>
-                    </li>
-                    @endif
-@endif
+                    
+
                 </ul>
         </div>
         <!-- /sidebar menu -->

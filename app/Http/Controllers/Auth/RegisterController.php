@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Alert;
 class RegisterController extends Controller
 {
     use RegistersUsers;
@@ -100,6 +101,7 @@ class RegisterController extends Controller
             logger()->error($exception);
             return "Whoops! sucedió un error.";
         }
-        return redirect()->to('/dashboard');
+        
+        return redirect()->to('/dashboard')->with('success', 'Profile updated!');;
     }
 }

@@ -22,11 +22,12 @@ class ApiarioController extends Controller
             $query=trim($request->get('searchText'));  //valida si la peticion trae el campo de busqueda 
         $api = Apiario::with('Ubicacion')
             ->where('Descripcion','LIKE','%'.$query.'%')
-            ->orderby('id','desc')
+            ->orderby('id','ASC')
             ->paginate(7);
            $ubicaciones = Ubicacion::all();
 
-           
+          
+
         return view('Apiario.index', compact('api', 'ubicaciones'), ['api'=>$api,"searchText"=>$query]);
         }
         
@@ -34,11 +35,12 @@ class ApiarioController extends Controller
     ////////////////////////////////////////////////////////NUEVO
 public function addApiario(Request $request){
    
-  $validator = Validator::make($request->all(), [
+  $rules = array(
       
       'Descripcion' => 'required',
       'cantidad' => 'required',
       'ubicacion_id' => 'required'
+<<<<<<< .merge_file_a13020
 <<<<<<< HEAD
       ]); 
       
@@ -54,6 +56,17 @@ public function addApiario(Request $request){
 
     else {
 >>>>>>> d9c60665fa79baa59c387185978bb682e34ad93b
+=======
+      ); 
+
+      $error = Validator::make($request->all() , $rules);
+  if ($error->fails())
+  {
+    
+  return response()->json(['errors' => $error->errors()->all()]);
+  }
+    else {
+>>>>>>> .merge_file_a29248
     
     $ubicacion_id = input::get('ubicacion_id');
     $api = new Apiario;
@@ -62,13 +75,11 @@ public function addApiario(Request $request){
     $api->ubicacion_id = $request->ubicacion_id;
   
     $api->save();
-    
    
-    return response()->json(['success' => 'Se ha creado un Apiario correctamente']);
- 
-   
+      
+      return response()->json($api);
   
-  
+
   }
 }
 public function find(Request $request)

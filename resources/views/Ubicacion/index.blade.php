@@ -39,10 +39,10 @@ UBICACION CREADO CORRECTAMENTE
         </th>
       </tr>
       {{ csrf_field() }}
-      <?php  $no=1; ?>
+     
       @foreach ($ubicacion as $value)
-        <tr class="ubicacion{{$value->id}}">
-          <td>{{ $no++ }}</td>
+      
+          <td>{{ $value->id}}</td>
           <td>{{ $value->Descripcion }}</td>
           <td>
             <a href="#" class="show-modal btn btn-info btn-sm" data-id="{{$value->id}}" data-Descripcion="{{$value->Descripcion}}">

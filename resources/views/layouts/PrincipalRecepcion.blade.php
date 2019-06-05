@@ -60,6 +60,12 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
+                <li><a><i class="fa fa-home"></i> Home<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                     <li><a href="{{ url('/dashboard/') }}">Dashboard</a></li>
+                     
+                    </ul>
+                  </li>
                 @if(Auth::check())
                     @if (Auth::user()->isAdmin())
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
@@ -95,8 +101,18 @@
                   </li>
 
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
+<<<<<<< .merge_file_a07396
                     <ul class="nav child_menu">
                     <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+=======
+                    <ul class="nav child_menu">
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-cart-plus"></i>Servicios <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+>>>>>>> .merge_file_a14936
                     <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
                     <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
                     
@@ -268,7 +284,11 @@ $("#addd").click(function() {
     
     data: {
       '_token': $('input[name=_token]').val(),
+<<<<<<< .merge_file_a07396
       'Recepcion_id': $('input[name=Recepcion_id]').val(),
+=======
+      'Recepcion_id': $('select[name=Recepcion_id]').val(),
+>>>>>>> .merge_file_a14936
       'Estanon_id': $('select[name=Estanon_id]').val(),
       'Fecha': $('input[name=Fecha]').val()
       

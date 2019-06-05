@@ -9,9 +9,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>APISOFT</title>
+    @toastr_css
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="{{asset('css2/bootstrap-select.min.css')}}">
  
@@ -69,6 +70,12 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
+                <li><a><i class="fa fa-home"></i> Home<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                     <li><a href="{{ url('/dashboard/') }}">Dashboard</a></li>
+                     
+                    </ul>
+                  </li>
                 @if(Auth::check())
                     @if (Auth::user()->isAdmin())
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
@@ -81,9 +88,9 @@
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
-                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicacion</a></li>
+                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicación</a></li>
                       <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
-                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiaro</a></li>
+                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiario</a></li>
                     
                     </ul>
                   </li>
@@ -92,7 +99,7 @@
                   <li><a><i class="glyphicon glyphicon-list-alt"></i> Recepción<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/RecepcionMateriaPrima') }}">Gestionar Recepción</a></li>
-                      <li><a href="{{ url('/Cera/') }}">Gestionar Extración de cera</a></li>
+                      <li><a href="{{ url('/Cera/') }}">Gestionar Extracción de cera</a></li>
                     </ul>
                   </li>
                   <li><a><i class="glyphicon glyphicon-oil"></i> Planta <span class="fa fa-chevron-down"></span></a>
@@ -107,8 +114,19 @@
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+<<<<<<< .merge_file_a11056
                     <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
                     <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
+=======
+                    
+                    </ul>
+                  </li>
+                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Servicios <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                    <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
+                    <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
+                    
+>>>>>>> .merge_file_a20116
                     
                     </ul>
                   </li>
@@ -201,6 +219,9 @@
 
 {!!Html::script('/js/jquery-1.11.1.min.js')!!}
 
+    @jquery
+    @toastr_js
+    @toastr_render
 
 <!-- MODAL AFILIADO -->
 
@@ -234,18 +255,32 @@
         'ubicacion_id': $('select[name=ubicacion_id]').val()
         
       },
-      success: function(data){
-        if ((data.errors)) {
-          html = '<div class="alert alert-danger">';
-          $('.error').removeClass('hidden');
-          $('.error').text(data.errors.Descripcion);
-          $('.error').text(data.errors.cantidad);
-          $('.error').text(data.errors.ubicacion_id);
- 
-        } else {
-          html = '<div class="alert alert-success">' + data.success + '</div>';
-          $('.error').remove();
-          $('#table').append("<tr class='api" + data.id + "'>"+
+      success: function(data) {
+        $('.errorDescripcion').addClass('hidden');
+         $('.errorCantidad').addClass('hidden');
+         $('.errorUbicacion').addClass('hidden');
+                    
+
+                    if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#create').modal('show');
+                            toastr.error('ERRO DE VALIDACIÓN!', 'Error Alert', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.Descripcion) {
+                            $('.errorDescripcion').removeClass('hidden');
+                            $('.errorDescripcion').text(data.errors.Descripcion);
+                        }
+                        if (data.errors.cantidad) {
+                            $('.errorCantidad').removeClass('hidden');
+                            $('.errorCantidad').text(data.errors.cantidad);
+                        }
+                        if (data.errors.ubicacion_id) {
+                            $('.errorUbicacion').removeClass('hidden');
+                            $('.errorUbicacion').text(data.errors.ubicacion_id);
+                        }
+                    } else {
+                        toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
+                        $('#table').append("<tr class='api" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.Descripcion + "</td>"+
           "<td>" + data.cantidad + "</td>"+
@@ -263,15 +298,21 @@
           + data.cantidad +  " 'data-ubicacion_id='" 
           + data.ubicacion_id + "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
-        }
-        $('#form_result').html(html);
-      },
-    });
+                       
+                    }
+                },
+            });
+
     $('#Descripcion').val('');
     $('#cantidad').val('');
     $('#ubicacion_id').val('');
+        });
 
-  });
+
+      
+   
+
+
  
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {

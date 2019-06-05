@@ -10,6 +10,7 @@
 </div>
 @endif
 <!-- fin de mensaje de exito -->
+@if(session('message')) {{session('message')}} @endif 
 
 @section ('contenido')
 <h1 class="text-center">LISTADO DE  APIARIOS</h1>
@@ -38,10 +39,10 @@
             <i class="glyphicon glyphicon-plus"></i></th>
 				</thead>
         {{ csrf_field() }}
-           <?php  $no=1; ?>
+          
                @foreach ($api as $value)
-					<tr class="api{$value->id}}">
-          <td>{{ $no++ }}</td>
+					
+          <td>{{ $value->id }}</td>
 					<td>{{ $value->Descripcion}}</td>
 					<td>{{ $value->cantidad}}</td>
             <td><span class="label label-success">{{ $value->ubicacion->Descripcion}}</span></td>
@@ -92,7 +93,7 @@
 @endif
       </div>
       <div class="modal-body">
-      <span id="form_result"></span>
+    
         <form class="form-horizontal" role="form">
 
         <div class="form-group row add">

@@ -89,9 +89,9 @@
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
-                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicacion</a></li>
+                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicación</a></li>
                       <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
-                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiaro</a></li>
+                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiario</a></li>
                     
                     </ul>
                   </li>
@@ -100,7 +100,7 @@
                   <li><a><i class="glyphicon glyphicon-list-alt"></i> Recepción<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/RecepcionMateriaPrima') }}">Gestionar Recepción</a></li>
-                      <li><a href="{{ url('/Cera/') }}">Gestionar Extración de cera</a></li>
+                      <li><a href="{{ url('/Cera/') }}">Gestionar Extracción de cera</a></li>
                     </ul>
                   </li>
                   <li><a><i class="glyphicon glyphicon-oil"></i> Planta <span class="fa fa-chevron-down"></span></a>
@@ -114,9 +114,20 @@
 
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
+<<<<<<< .merge_file_a06796
                       <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
                       <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
                       <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
+=======
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-cart-plus"></i> Servicios <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                    <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
+                    <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
+>>>>>>> .merge_file_a07424
                     
                     
                     </ul>
