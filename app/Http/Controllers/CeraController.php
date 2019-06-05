@@ -61,7 +61,7 @@ public function addCera(Request $request){
     $cera->Fecha = $request->Fecha;
   
     $cera->save();
-    return response()->json(['success' => 'Se ha creado una Recepción de Cera correctamente']);
+    return response()->json($cera);
    
   
   

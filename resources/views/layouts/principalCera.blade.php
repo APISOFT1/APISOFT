@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>APISOFT</title>
+    @toastr_css
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -174,6 +175,9 @@
 
      {!!Html::script('/js/daterangepicker.js')!!}
 
+     @jquery
+    @toastr_js
+    @toastr_render
 
 
 <!-- MODAL Cera -->
@@ -186,7 +190,7 @@
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
-    $('.modal-descripcion').text('Crear Extración Cera');
+    $('.modal-descripcion').text('Crear Extracción Cera');
   });
   $("#add").click(function() {
     $.ajax({
@@ -195,7 +199,7 @@
       
       data: {
         '_token': $('input[name=_token]').val(),
-        'Descripcion': $('input[name=Descripcion]').val(),
+        'Descripcion': $('textarea[name=Descripcion]').val(),
         'Recepcion_id': $('select[name=Recepcion_id]').val(),
         'PesoBruto': $('input[name=PesoBruto]').val(),
         'PesoNeto': $('input[name=PesoNeto]').val(),
@@ -203,18 +207,41 @@
         
       },
       success: function(data){
-        if ((data.errors)) {
-          html = '<div class="alert alert-danger">';
-          $('.error').removeClass('hidden');
-          $('.error').text(data.errors.Descripcion);
-          $('.error').text(data.errors.Recepcion_id);
-          $('.error').text(data.errors.PesoBruto);
-          $('.error').text(data.errors.PesoNeto);
-          $('.error').text(data.errors.Fecha);
- 
+       
+          $('.errorDescripcion').addClass('hidden');
+         $('.errorRecepcion').addClass('hidden');
+         $('.errorPesoBruto').addClass('hidden');
+         $('.errorPesoNeto').addClass('hidden');
+         $('.errorFecha').addClass('hidden');
+
+         if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#create').modal('show');
+                            toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.Descripcion) {
+                            $('.errorDescripcion').removeClass('hidden');
+                            $('.errorDescripcion').text(data.errors.Descripcion);
+                        }
+                        if (data.errors.Recepcion_id) {
+                            $('.errorRecepcion').removeClass('hidden');
+                            $('.errorRecepcion').text(data.errors.Recepcion_id);
+                        }
+                        if (data.errors.PesoBruto) {
+                            $('.errorPesoBruto').removeClass('hidden');
+                            $('.errorPesoBruto').text(data.errors.PesoBruto);
+                        }
+                        if (data.errors.PesoNeto) {
+                            $('.errorPesoNeto').removeClass('hidden');
+                            $('.errorPesoNeto').text(data.errors.PesoNeto);
+                        }
+                        if (data.errors.Fecha) {
+                            $('.errorFecha').removeClass('hidden');
+                            $('.errorFecha').text(data.errors.Fecha);
+                        }
+
         } else {
-          html = '<div class="alert alert-success alert-dismissible">'  + data.success + '</div>';
-          $('.error').remove();
+          toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
           $('#table').append("<tr class='cera" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.Descripcion + "</td>"+
@@ -242,7 +269,6 @@
           + data.Fecha + "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         }
-        $('#form_result').html(html);
       },
     });
     $('#Descripcion').val('');
@@ -288,9 +314,44 @@ $('.modal-footer').on('click', '.edit', function() {
 
     },
 success: function(data) {
-      $('.api' + data.id).replaceWith(" "+
-      "<tr class='api" + data.id + "'>"+
-      "<td>" + data.id + "</td>"+
+  
+  $('.errorDescripcion').addClass('hidden');
+         $('.errorRecepcion').addClass('hidden');
+         $('.errorPesoBruto').addClass('hidden');
+         $('.errorPesoNeto').addClass('hidden');
+         $('.errorFecha').addClass('hidden');
+
+         if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#create').modal('show');
+                            toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.Descripcion) {
+                            $('.errorDescripcion').removeClass('hidden');
+                            $('.errorDescripcion').text(data.errors.Descripcion);
+                        }
+                        if (data.errors.Recepcion_id) {
+                            $('.errorRecepcion').removeClass('hidden');
+                            $('.errorRecepcion').text(data.errors.Recepcion_id);
+                        }
+                        if (data.errors.PesoBruto) {
+                            $('.errorPesoBruto').removeClass('hidden');
+                            $('.errorPesoBruto').text(data.errors.PesoBruto);
+                        }
+                        if (data.errors.PesoNeto) {
+                            $('.errorPesoNeto').removeClass('hidden');
+                            $('.errorPesoNeto').text(data.errors.PesoNeto);
+                        }
+                        if (data.errors.Fecha) {
+                            $('.errorFecha').removeClass('hidden');
+                            $('.errorFecha').text(data.errors.Fecha);
+                        }
+
+        } else {
+          toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
+      $('.cera' + data.id).replaceWith(" "+
+      "<tr class='cera'>"+
+          "<td>" + data.id + "</td>"+
           "<td>" + data.Descripcion + "</td>"+
           "<td>" + data.Recepcion_id + "</td>"+
           "<td>" + data.PesoBruto + "</td>"+
@@ -316,6 +377,7 @@ success: function(data) {
           + data.Fecha + "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
     }
+},
   });
 });
 
@@ -327,7 +389,7 @@ $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Eliminar Ubicación');
+$('.modal-descripcion').text('Eliminar Ubicación');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
@@ -344,6 +406,7 @@ $('.modal-footer').on('click', '.delete', function(){
       'id': $('.id').text()
     },
     success: function(data){
+      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
       $('.api' + $('.id').text()).remove();
     }
   });
@@ -370,14 +433,55 @@ $('#discount').keyup(function(e){
 function discount(){
   let amount = $('#discount').val();
   if(!isNaN(amount)){
-    let discount = amount * 0.05;
+    let discount = amount * 0.01;
     let total =  amount - discount;
     $("#PesoNeto").val(total);
   } 
 }
 
+var timeoutId = 0;
+$('#ub').keyup(function(e){
+   clearTimeout(timeoutId);
+   timeoutId = setTimeout(discount,1000);
+});
+
+function discount(){
+  let amount = $('#ub').val();
+  if(!isNaN(amount)){
+    let discount = amount * 0.01;
+    let total =  amount - discount;
+    $("#ps").val(total);
+  } 
+}
 </script>
-    
+    <script>
+$( document ).on('click','.create-modal',function() {
+
+    var now = new Date();
+
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+    h=now.getHours();
+    m=now.getMinutes();
+  s=now.getSeconds();
+    var today = now.getFullYear()+"-"+(month)+"-"+(day)+"-"+(h)+"-"+(m)+"-"+(s) ;
+    $("#fecha,#Fecha").val(today);
+});
+</script>
+
+<script>
+  $("#add").click(function(){
+    var now = new Date();
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+    h=now.getHours();
+    m=now.getMinutes();
+  s=now.getSeconds();
+    var today = now.getFullYear()+"-"+(month)+"-"+(day)+"-"+(h)+"-"+(m)+"-"+(s) ;
+    $("#fecha,#Fecha").val(today);
+});
+</script>
+
 
     </body>
     </html>

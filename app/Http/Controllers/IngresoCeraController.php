@@ -90,6 +90,7 @@ class IngresoCeraController extends Controller
         {
             DB::rollback();
         }
+        toastr()->success('Data has been saved successfully!');
         return Redirect::to('IngresoCera'); 
     }
     public function show ($id)
