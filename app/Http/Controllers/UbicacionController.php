@@ -26,9 +26,8 @@ public function index(Request $request)
       $query=trim($request->get('searchText'));
       $ubicacion=DB::table('ubicacions')->where('id','LIKE','%'.$query.'%')
       ->orwhere('descripcion','LIKE','%'.$query.'%')
-      ->orderby('id','ASC')
+      ->orderby('id','desc')
       ->paginate(10);
-   
       return view('Ubicacion.index',["ubicacion"=>$ubicacion,"searchText"=>$query]);
   }
  // $ubicacion = Ubicacion::paginate(10);
@@ -36,23 +35,19 @@ public function index(Request $request)
     
 }
 ////////////////////////////////////////////////////////NUEVO
-public function addUbicacion(Request $request ){
+public function addUbicacion(Request $request){
     $rules = array(
       'Descripcion' => 'required'
     );
-    $error = Validator::make($request->all() , $rules);
-    if ($error->fails())
-    {
-    return response()->json(['errors' => $error->errors()->all()]);
-    }
+  $validator = Validator::make ( Input::all(), $rules);
+  if ($validator->fails())
+  return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
   else {
     $ubicacion = new Ubicacion;
     $ubicacion->Descripcion = $request->Descripcion;
     $ubicacion->save();
     
-    
-    return response()->json($ubicacion);
-    
+    return response()->json($ubicacion,['success' => 'Se ha creado una ubicación correctamente']);
   }
 }
  public function editUbicacion(request $request){

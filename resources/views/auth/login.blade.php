@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Inicio Sesión</title>
+	<title>Inicio Sesion</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -37,9 +37,9 @@
 				</span>
 				<form class="login100-form validate-form p-b-33 p-t-5"  id="signin"  method="POST"  action="{{ route('login') }}">
  					@csrf
-					 @if(session()->has('messages'))
+					 @if(session()->has('message'))
             <div class="alert alert-success">
-              {{ session()->get('messages') }}
+              {{ session()->get('message') }}
             </div>
           @endif
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">

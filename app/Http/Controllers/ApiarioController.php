@@ -22,12 +22,11 @@ class ApiarioController extends Controller
             $query=trim($request->get('searchText'));  //valida si la peticion trae el campo de busqueda 
         $api = Apiario::with('Ubicacion')
             ->where('Descripcion','LIKE','%'.$query.'%')
-            ->orderby('id','ASC')
+            ->orderby('id','desc')
             ->paginate(7);
            $ubicaciones = Ubicacion::all();
 
-          
-
+           
         return view('Apiario.index', compact('api', 'ubicaciones'), ['api'=>$api,"searchText"=>$query]);
         }
         
@@ -35,20 +34,16 @@ class ApiarioController extends Controller
     ////////////////////////////////////////////////////////NUEVO
 public function addApiario(Request $request){
    
-  $rules = array(
+  $validator = Validator::make($request->all(), [
       
       'Descripcion' => 'required',
       'cantidad' => 'required',
       'ubicacion_id' => 'required'
-      ); 
-
-      $error = Validator::make($request->all() , $rules);
-  if ($error->fails())
-  {
-    
-  return response()->json(['errors' => $error->errors()->all()]);
-  }
-    else {
+      ]); 
+      
+  if ($validator->fails())
+  return Response::json(['errors' => $error->errors()->all()]);
+  else {
     
     $ubicacion_id = input::get('ubicacion_id');
     $api = new Apiario;
@@ -57,11 +52,13 @@ public function addApiario(Request $request){
     $api->ubicacion_id = $request->ubicacion_id;
   
     $api->save();
+    
    
-      
-      return response()->json($api);
+    return response()->json(['success' => 'Se ha creado un Apiario correctamente']);
+ 
+   
   
-
+  
   }
 }
 public function find(Request $request)

@@ -9,7 +9,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>APISOFT</title>
-    @toastr_css
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -70,12 +69,6 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                <li><a><i class="fa fa-home"></i> Home<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                     <li><a href="{{ url('/dashboard/') }}">Dashboard</a></li>
-                     
-                    </ul>
-                  </li>
                 @if(Auth::check())
                     @if (Auth::user()->isAdmin())
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
@@ -88,9 +81,9 @@
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
-                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicación</a></li>
+                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicacion</a></li>
                       <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
-                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiario</a></li>
+                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiaro</a></li>
                     
                     </ul>
                   </li>
@@ -99,7 +92,7 @@
                   <li><a><i class="glyphicon glyphicon-list-alt"></i> Recepción<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/RecepcionMateriaPrima') }}">Gestionar Recepción</a></li>
-                      <li><a href="{{ url('/Cera/') }}">Gestionar Extracción de cera</a></li>
+                      <li><a href="{{ url('/Cera/') }}">Gestionar Extración de cera</a></li>
                     </ul>
                   </li>
                   <li><a><i class="glyphicon glyphicon-oil"></i> Planta <span class="fa fa-chevron-down"></span></a>
@@ -113,11 +106,6 @@
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
-                    
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-cart-plus"></i> Servicios <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
                     <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
                     <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
                     
@@ -225,9 +213,7 @@
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>-->
 
-    @jquery
-    @toastr_js
-    @toastr_render
+
 
 
 
@@ -249,23 +235,17 @@
         'Descripcion': $('input[name=Descripcion]').val()
       },
       success: function(data){
-        $('.errorDescripcion').addClass('hidden');
-         
-                    
-
-                    if ((data.errors)) {
-                        setTimeout(function () {
-                            $('#create').modal('show');
-                            toastr.error('ERRO DE VALIDACIÓN!', 'Error Alert', {timeOut: 5000});
-                        }, 500);
-                        if (data.errors.Descripcion) {
-                            $('.errorDescripcion').removeClass('hidden');
-                            $('.errorDescripcion').text(data.errors.Descripcion);
-                        }
-                       
-                    } else {
-                        toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
-  
+        if ((data.errors)) {
+          html = '<div class="alert alert-danger">';
+          $('.error').removeClass('hidden');
+          $('.error').text(data.errors.Descripcion);
+          if(data.errors.Descripcion){
+                        $( '#Descripcion-error' ).html( data.errors.Descripcion[0] );
+                    }
+ 
+        } else {
+          html = '<div class="alert alert-success alert-dismissible">'  + data.success + '</div>';
+          $('.error').remove();
           $('#table').append("<tr class='ubicacion" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.Descripcion + "</td>"+
@@ -273,7 +253,7 @@
           data.id + "'data-Descripcion='" + data.Descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-Descripcion='" + data.Descripcion + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.Descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         }
-     
+        $('#form_result').html(html);
       },
     });
     $('#Descripcion').val('');

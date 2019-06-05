@@ -45,7 +45,7 @@
 				<form class="login100-form validate-form p-b-33 p-t-5" method="POST" action="{{ route('password.email') }}">
 
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input id="email"  type="text"  class="input100{{ $errors->has('email') ? ' is-invalid' : '' }}" type="email" name="email"  placeholder="Correo de recuperación" required="" value="{{ old('email') }}" required autofocus>
+						<input id="email"  type="text"  class="input100{{ $errors->has('email') ? ' is-invalid' : '' }}" type="email" name="email"  placeholder="{{ __('views.auth.passwords.email.input') }}" required="" value="{{ old('email') }}" required autofocus>
 						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
 						 
 						
@@ -56,12 +56,7 @@
 						@endif
 							
 					</div>
-					
 					<div class="container-login100-form-btn m-t-32">
-					<a href="{{ url()->previous() }}" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
-							<i class="fa fa-long-arrow-left m-l-5"></i>
-								Regresar
-						</a>
 						<button type="submit" class="btn btn-primary" {{ __('Send Password Reset Link') }}> Enviar correo</button>	
 						<a class="reset_pass" href="{{ route('login') }}">
                               

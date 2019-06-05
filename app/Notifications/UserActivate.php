@@ -45,9 +45,9 @@ class UserActivate  extends Notification
            
             ->subject('Se ha creado exitosamente una nueva cuenta')
             ->greeting(sprintf('Hola %s', $user->name))
-            ->line(' Se ha registrado exitosamente a nuestro sistema. Por favor, active su cuenta.')
+            ->line(' Se ha registrado exitosamnete a nuestro sistema. Por favor, active su cuenta.')
             ->action('Presione aquí', route('activate.user', $user->activation_code))
-            ->line('Gracias por usar nuestra aplicación!');
+            ->line('Gracias por usuar nuestra apliación!');
     }
     /**
      * Get the array representation of the notification.
