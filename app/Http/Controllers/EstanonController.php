@@ -19,10 +19,12 @@ public function __construct()
 //INDEEEEEEEEEEEEX/
 public function index(Request $request)
 {
-  if($request){
-    $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-  $estanon = Estanon::paginate(10);
-  return view('Estanon.index',compact('estanon'), ['estanon'=>$estanon,"searchText"=>$query]);       
+ if($request){
+    $search = \Request::get('search');
+    $estanon = Estanon::where('Descripcion','like','%'.$search.'%')
+        ->orderBy('Descripcion')
+        ->paginate(10);
+  return view('Estanon.index',compact('estanon'));   
 }
 }
 ////////////////////////////////////////////////////////NUEVO

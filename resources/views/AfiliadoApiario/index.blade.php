@@ -11,6 +11,8 @@ AFILIADO CON SUS APIARIO CREADO CORRECTAMENTE
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
+@include('Busqueda.search',['url'=>'AfiliadoApiario','link'=>'AfiliadoApiario'])
+
 <h1 >LISTADO DE  AFILIADOS CON SU APIARIO</h1>
 
 <!-- Saltos de linea-->

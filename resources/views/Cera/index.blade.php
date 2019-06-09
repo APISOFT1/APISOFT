@@ -12,6 +12,8 @@
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
+@include('Busqueda.search',['url'=>'Cera','link'=>'Cera'])
+
 <h1 class="text-center">LISTADO DE  CERA</h1>
 
 <!-- Saltos de linea-->
@@ -23,7 +25,6 @@
 
 <!--Esta clase nos permite posicionar el buscador  -->
 
-    @include('Apiario.search') 
   
     
 

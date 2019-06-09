@@ -11,6 +11,7 @@
 @endif
 <!-- fin de mensaje de exito -->
 @section ('contenido')
+@include('Busqueda.search',['url'=>'Producto','link'=>'Producto'])
 
 		<h1 class="text-center">Listado de Productos</h1>
 	
@@ -22,7 +23,6 @@
 
 <!--Esta clase nos permite posicionar el buscador  -->
 <div class="absolute3">
-		@include('Producto.search') 
 </div>
 
 
