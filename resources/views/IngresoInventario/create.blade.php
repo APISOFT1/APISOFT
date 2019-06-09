@@ -3,11 +3,6 @@
  <div class="row">
   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
    <h3>Nuevo Boleta de Inventario</h3>
-   <div class="col-lg-60 col-sm-60 col-md-60 col-xs-12">
-   <div class="form-group">
-   <a href="{{ URL::previous() }}">Regresar <i class="glyphicon glyphicon-arrow-left"></i></a>
-   </div>
-  </div>
    @if (count($errors)>0)
    <div class="alert alert-danger">
 
@@ -78,10 +73,10 @@
   <div class="panel panel-primary">
   <div class="table-responsive">
    <div class="panel-body">
-    <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
      <div class="form-group">
-      <label>Producto</label>
-      <select name="pstock_id" class="form-control selectpicker" id="pstock_id" data-live-search="true">
+  <label>Producto</label>
+     <select name="pstock_id" class="form-control selectpicker" id="pstock_id" data-live-search="true">
        @foreach($stocks as $stock)
         <option value="{{$stock->id}}_{{$stock->cantidadDisponible}}">{{$stock->stocks}}</option>
        @endforeach
@@ -102,21 +97,17 @@
       <input type="number" name="pPrecio" id="pPrecio" class="form-control" placeholder="Precio">
      </div>
     </div>
-    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
      <div class="form-group">
-      <label for="cantidad">Cantidad a utilizar</label>
-      <input type="number" name="pcantidad" id="pcantidad" class="form-control" placeholder="cantidad de laminas">
+      <label for="cantidad">Cantidad a utilizar en laminas</label>
+      <input type="number" name="pcantidad" id="pcantidad" class="form-control" placeholder="cantidad a utilizar en laminas">
      </div>
+    </div>
+     
     </div>
     <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
      <div class="form-group">
-      <label for="descuento">Descuento</label>
-      <input type="number"  name="pdescuento" id="pdescuento" class="form-control" placeholder="Descuento">
-     </div>
-    </div>
-    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
-     <div class="form-group">
-      <label>-------------</label>
+      <label></label>
       <button type="button" id="bt_add" class="btn btn-primary">Agregar</button>
      </div>
     </div>
@@ -126,9 +117,9 @@
       <thead style="background-color:	#9ddcf2">
        <th>Opciones</th>
        <th>Producto</th>
+       <th>cantidad disponible</th>
        <th>Precio</th>
-       <th>cantidad a utilizar</th>
-       <th>Descuento</th>
+       <th>cantidad a utilizar en laminas</th>
        <th>Subtotal</th>
       </thead>
       <tfoot>
@@ -156,72 +147,63 @@
              <button class="btn btn-danger" type="reset">Cancelar</button>
    </div>
   </div>
+  <div class="absolute1">
+     <div class="form-group">
+      <a href="{{ URL::previous() }}">Regresar <i class="glyphicon glyphicon-arrow-left"></i></a>
+     </div>
+  </div>
  </div>
 {!!Form::close()!!} 
 
 @push ('scripts')
 <script>
-
-
 $(document).ready(function(){
     $('#bt_add').click(function(){
     agregar();
     });
   });
-
  var cont=0;
  total=0;
  subtotal=[];
  $("#guardar").hide();
  $("#pstock_id").change(mostrarValores);
-
  function mostrarValores()
  {
    datosProducto= document.getElementById('pstock_id').value.split('_');
    $("#pcantidadDisponible").val(datosProducto[1]);
  }
-
-
  function agregar(){
-
     datosProducto= document.getElementById('pstock_id').value.split('_');
     
     stock_id=datosProducto[0];
     stocks=$("#pstock_id option:selected").text();
-
     cantidadDisponible=$("#pcantidadDisponible").val();
     Precio=$("#pPrecio").val();
     cantidad=$("#pcantidad").val();
-    descuento=$("#pdescuento").val();
+   
 
-    if (stock_id!="" && cantidadDisponible>0 && Precio!="" && Precio>0 && cantidad!="" && descuento!="")
+    if (stock_id!="" && cantidadDisponible>0 && Precio!="" && Precio>0 && cantidad!="")
     {
     
-       subtotal[cont]=(Precio*cantidad)-((Precio*cantidad)-descuento);
+       subtotal[cont]=(Precio*cantidad);
        total=total+subtotal[cont];
-
-       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="stock_id[]" value="'+stock_id+'">'+stocks+'</td><td><input type="number" name="cantidadDisponible[]" value="'+cantidadDisponible+'"></td><td><input type="number" name="Precio[]" value="'+Precio+'"></td><td><input type="number" name="cantidad[]" value="'+cantidad+'"></td><td><input type="number" name="descuento[]" value="'+descuento+'"></td><td>'+subtotal[cont]+'</td></tr>';
+       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="stock_id[]" value="'+stock_id+'">'+stocks+'</td><td><input type="number" name="cantidadDisponible[]" value="'+cantidadDisponible+'"></td><td><input type="number" name="Precio[]" value="'+Precio+'"></td><td><input type="number" name="cantidad[]" value="'+cantidad+'"></td><td>'+subtotal[cont]+'</td></tr>';
        cont++;
        limpiar();
        $('#total').html("$/ " + total);
        $('#total_venta').val(total);
        evaluar();
        $('#detalles').append(fila);
-
     }
     else
     {
       alert("Error al ingresar el detalle del ingreso, revise los datos del articulo")
     }
-
   }
-
  function limpiar(){
     $("#pPrecio").val("");
     $("#pcantidad").val("");
-    $("#pdescuento").val("");
   }
-
   function evaluar()
   {
     if (total>0)
@@ -233,7 +215,6 @@ $(document).ready(function(){
       $("#guardar").hide(); 
     }
    }
-
  function eliminar(index){
   total=total-subtotal[index]; 
     $("#total").html("$/. " + total); 
@@ -241,7 +222,6 @@ $(document).ready(function(){
     $("#fila" + index).remove();
     evaluar();
  }
-
 </script>
 @endpush
 @endsection

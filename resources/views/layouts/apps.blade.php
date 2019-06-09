@@ -8,6 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <title>APISOFT</title>
 
         {{--Common App Styles--}}
@@ -30,13 +31,14 @@
 
     </head>
     <body class="@yield('body_class')">
-
+   
         {{--Page--}}
         @yield('page')
 
         {{--Common Scripts--}}
         {{ Html::script('js/custom.min.js') }}
         {{ Html::script('js/app.js') }}
+        {{ Html::script('sweetAlert/sweetalert.min.js') }}
       <!-- NProgress -->
       {!!Html::script('/js2/nprogress.js')!!}
     <!-- jQuery custom content scroller -->
@@ -53,5 +55,8 @@
 
         {{--Scripts--}}
         @yield('scripts')
+
+    
+@include('sweet::alert')
     </body>
 </html>

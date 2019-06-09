@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -161,6 +161,9 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Yoeunes\Toastr\ToastrServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
+        Styde\Html\HtmlServiceProvider::class,
+        UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+     
 
         /*
          * Package Service Providers...
@@ -172,9 +175,11 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        //NotificationChannels\WebPush\WebPushServiceProvider::class
 
     ],
 
@@ -226,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'PDF'=> Barryvdh\DomPDF\Facade::class,
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
+        'Alert' => UxWeb\SweetAlert\SweetAlert::class,
     ],
 
 ];

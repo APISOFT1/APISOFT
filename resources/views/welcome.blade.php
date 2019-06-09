@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 
@@ -20,10 +21,18 @@
     <link href="welcome/css/main.css" rel="stylesheet">
     <link href="welcome/css/responsive.css" rel="stylesheet">
     <link href="welcome/css/animate.min.css" rel="stylesheet">
+    <link href="css5/normalize.css" rel="stylesheet">
+    <link href="css/cardio.css" rel="stylesheet">
+
   </head>
 
-  <body>
+  
+  <body >
 
+  <div class="preloader">
+		<img src="images/loaderr.gif" alt="Preloader image">
+  </div>
+  
     <div class="navbar navbar-invers menu-wrap">
       <div class="navbar-header text-center">
         <a class="navbar-brand logo-right" href=""><i class="mdi-image-timelapse"></i>APISOFT</a>
@@ -31,10 +40,10 @@
         <ul class="nav navbar-nav main-navigation">
           <li class="active"><a href="#home">Inicio</a></li>
           <li><a href="#features">Historia</a></li>
-          <li><a href="#why">Mision</a></li>
-          <li><a href="#screenshot">Vision</a></li>
+          <li><a href="#why">Misión</a></li>
+          <li><a href="#screenshot">Visión</a></li>
           <li><a href="#testimonial">Acerca de Nosotros</a></li>
-          <li><a href="#contact">Ubicacion</a></li>
+          <li><a href="#contact">Ubicación</a></li>
         </ul>
         <button class="close-button" id="close-button">Cerrar</button>
     </div>
@@ -62,7 +71,7 @@
           <h1 class="wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="300ms">APISOFT - Asociación de Apicultores Región Chorotega</h1>
           <p class="wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="400ms">La mejor miel del país producida en Nicoya</p>
   
-        <a href="{{ url('/login/') }}" class="btn btn-lg btn-border wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">Iniciar Sesion</a>
+        <a href="{{ url('/login/') }}" class="btn btn-lg btn-border wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">Iniciar Sesión</a>
         </div>   
     </header>
 
@@ -279,7 +288,8 @@
     </section>     
     </div>  
 
-
+    @include('sweet::alert')
+    
 		<script src="welcome/js/jquery-2.1.4.min.js"></script>
     <script src="welcome/js/bootstrap.min.js"></script>
     <script src="welcome/js/ripples.min.js"></script>
@@ -293,6 +303,7 @@
     <script src="welcome/js/jquery.nav.js"></script>      
     <script src="welcome/js/smooth-on-scroll.js"></script>
     <script src="welcome/js/smooth-scroll.js"></script>
+    <script src="js/loarder.js"></script>
     
 
     <script>
@@ -303,3 +314,5 @@
     </script>
 
   </body>
+\
+

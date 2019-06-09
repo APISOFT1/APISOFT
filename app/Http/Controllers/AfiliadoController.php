@@ -27,7 +27,7 @@ class AfiliadoController extends Controller
         $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
         $afi= Afiliado::with('Genero', 'Estado_Civil') 
             ->where('Nombre','LIKE','%'.$query.'%')
-            ->orderby('id','desc')
+            ->orderby('id','ASC')
             ->paginate(7);
             $genero = Genero::all();
             $estadoC = Estado_Civil::all();
@@ -154,19 +154,8 @@ class AfiliadoController extends Controller
     public function deleteAfiliado(request $request){
   
         $afi = Afiliado::find ($request->id);
-        $afi->Nombre = $request->Nombre;
-      $afi->apellido1 = $request->apellido1;
-      $afi->apellido2 = $request->apellido2;
-      $afi->Telefono = $request->Telefono;
-      $afi->email = $request->email;
-      $afi->Direccion = $request->Direccion;
-      $afi->Fecha_Ingreso = $request->Fecha_Ingreso;
-      $afi->Num_Cuenta = $request->Num_Cuenta;
-      $afi->genero_id = $request->genero_id;
-      $afi->estado_civil_id = $request->estado_civil_id;
-      $afi->estado_id = $request->estado_id;
         $afi->delete();
-        return response()->json();
+       
       }
       }   //
     

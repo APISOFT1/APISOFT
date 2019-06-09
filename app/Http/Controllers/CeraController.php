@@ -92,10 +92,10 @@ $cera->save();
 return response()->json($cera);
 }
 }
-public function deleteApiario(request $request){
+public function deleteCera(request $request){
   
   $cera = Cera::find ($request->id);
   $cera->delete();
-  return response()->json($cera);
+
 }
 }

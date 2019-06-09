@@ -4,9 +4,6 @@
 <!-- mensaje de exito -->
 <?php $message=Session::get('message') ?>
 
-
-
-
 @if($message == 'store')
 <div class="alert alert-success alert-dismissible" role="alert">
 
@@ -16,7 +13,7 @@
 @endif
 <!-- fin de mensaje de exito -->
 @section ('contenido')
-<h3>Listado Boletas de Cera en efectivo  <a href="IngresoCera/create"><button class="btn btn-success btn-sm"> <i class="glyphicon glyphicon-plus"></i></h3>
+<h3>Listado de boletas servicios de cera procesada <a href="IngresoCera/create"><button class="btn btn-success btn-sm"> <i class="glyphicon glyphicon-plus"></i></h3>
 
 <!-- Saltos de linea-->
 <br>

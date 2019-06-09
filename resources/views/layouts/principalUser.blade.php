@@ -77,41 +77,52 @@
                      
                     </ul>
                   </li>
+                  @if(Auth::check())
+                    @if (Auth::user()->isAdmin())
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                     <li><a href="{{ url('/roles/') }}">Gestionar Rol</a></li>
-                     <li><a href="{{ url('/users/') }}">Gestionar Users</a></li>
+                      
+                     <li><a href="{{ url('users/') }}">Gestionar Usuario</a></li>
                     </ul>
                   </li>
+                  
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
-                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicacion</a></li>
+                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicación</a></li>
                       <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
-                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiaro</a></li>
+                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiario</a></li>
                     
                     </ul>
                   </li>
+                  @endif
+                  @endif
                   <li><a><i class="glyphicon glyphicon-list-alt"></i> Recepción<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/RecepcionMateriaPrima') }}">Gestionar Recepción</a></li>
-                      <li><a href="{{ url('/Cera/') }}">Gestionar Extración de cera</a></li>
+                      <li><a href="{{ url('/Cera/') }}">Gestionar Extracción de cera</a></li>
                     </ul>
                   </li>
                   <li><a><i class="glyphicon glyphicon-oil"></i> Planta <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
                       <li><a href="{{ url('/RecepEstanon/') }}">Gestionar Recepción-Estañón</a></li>
-                      <li><a href="{{ url('/Homogeneizacion/') }}">Gestionar Homogeneización</a></li>
+                     
                     
                     </ul>
                   </li>
 
-                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Producto Terminado <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
-                      <li><a href="{{ url('/AfiliadoEstanon/') }}">Gestionar Afiliado-Estañon</a></li>
-                      <li><a href="{{ url('/Homogeneizacion/') }}">Gestionar Homogeneización</a></li>
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-cart-plus"></i> Servicios <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                    <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
+                    <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
+                    
                     
                     </ul>
                   </li>
@@ -208,6 +219,10 @@
 
 {!!Html::script('/js/jquery-1.11.1.min.js')!!}
 
+<script src="js/sweetalert.min.js"></script>
+
+<!-- Include this after the sweet alert js file -->
+@include('sweet::alert')
 
 
 
@@ -348,20 +363,19 @@ success: function(data) {
   });
 });
 
-/*
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
-$('#footer_action_button').text(" Delete");
+$('#footer_action_button').text(" Eliminar");
 $('#footer_action_button').removeClass('glyphicon-check');
 $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Delete Post');
+$('.modal-title').text('Eliminar Ubicación');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
-$('.title').html($(this).data('Descripcion'));
+$('.name').html($(this).data('name'));
 $('#myModal').modal('show');
 });
 
@@ -374,11 +388,10 @@ $('.modal-footer').on('click', '.delete', function(){
       'id': $('.id').text()
     },
     success: function(data){
-       $('.apiario' + $('.id').text()).remove();
+      $('.users' + $('.id').text()).remove();
     }
   });
 });
-*/
 
   // Show function
   $(document).on('click', '.show-modal', function() {
@@ -387,7 +400,7 @@ $('.modal-footer').on('click', '.delete', function(){
   $('#n2').text($(this).data('name'));
   $('#em').text($(this).data('email'));
   $('#pw').text($(this).data('password'));
-  $('.modal-title').text('Show Post');
+  $('.modal-title').text('Detalle Usuario');
   });
 </script>
 @include('partials.javascripts')

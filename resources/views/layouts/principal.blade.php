@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>APISOFT</title>
+    @toastr_css
     <!-- Bootstrap -->
   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -65,42 +66,58 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-home"></i> Home<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                     <li><a href="{{ url('/roles/') }}">Gestionar Rol</a></li>
-                     <li><a href="{{ url('/permissions/') }}">Gestionar Permisos</a></li>
-                     <li><a href="{{ url('/users/') }}">Gestionar Users</a></li>
+                     <li><a href="{{ url('/dashboard/') }}">Dashboard</a></li>
+                     
                     </ul>
                   </li>
+                @if(Auth::check())
+                    @if (Auth::user()->isAdmin())
+                  <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      
+                     <li><a href="{{ url('users/') }}">Gestionar usuarios</a></li>
+                    </ul>
+                  </li>
+                 
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
-                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicacion</a></li>
+                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicación</a></li>
                       <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
-                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiaro</a></li>
+                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiario</a></li>
                     
                     </ul>
                   </li>
+                  @endif
+                  @endif
                   <li><a><i class="glyphicon glyphicon-list-alt"></i> Recepción<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/RecepcionMateriaPrima') }}">Gestionar Recepción</a></li>
-                      <li><a href="{{ url('/Cera/') }}">Gestionar Extración de cera</a></li>
+                      <li><a href="{{ url('/Cera/') }}">Gestionar Extracción de cera</a></li>
                     </ul>
                   </li>
                   <li><a><i class="glyphicon glyphicon-oil"></i> Planta <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
                       <li><a href="{{ url('/RecepEstanon/') }}">Gestionar Recepción-Estañón</a></li>
-                      <li><a href="{{ url('/Homogeneizacion/') }}">Gestionar Homogeneización</a></li>
+                     
                     
                     </ul>
                   </li>
 
-                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Producto Terminado <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
-                      <li><a href="{{ url('/AfiliadoEstanon/') }}">Gestionar Afiliado-Estañon</a></li>
-                      <li><a href="{{ url('/Homogeneizacion/') }}">Gestionar Homogeneización</a></li>
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-cart-plus"></i>Servicios <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                    <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
+                    <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
+                    
                     
                     </ul>
                   </li>
@@ -134,13 +151,6 @@
           <div class="container">
           
             <div class="row x_panel">
-
-
-
-
-
-
-
 
 
               @yield('contenido')
@@ -191,7 +201,9 @@
      {!!Html::script('/js/icheck.js')!!}
 
 
-
+    @jquery
+    @toastr_js
+    @toastr_render
 
 
 <!-- MODAL AFILIADO -->
@@ -224,22 +236,69 @@
       },
       success: function(data){
         if ((data.errors)) {
-          $('.error').removeClass('hidden');
-          $('.error').text(data.errors.id);
-          $('.error').text(data.errors.Nombre);
-          $('.error').text(data.errors.apellido1);
-          $('.error').text(data.errors.apellido2);
-          $('.error').text(data.errors.Telefono);
-          $('.error').text(data.errors.email);
-          $('.error').text(data.errors.Direccion);
-          $('.error').text(data.errors.Fecha_Ingreso);
-          $('.error').text(data.errors.Num_Cuenta);
-          $('.error').text(data.errors.genero_id);
-          $('.error').text(data.errors.estado_civil_id);
-          $('.error').text(data.errors.estado_id);
- 
-        } else {
-          $('.error').remove();
+          $('.errorNombre').addClass('hidden');
+         $('.errorApellido1').addClass('hidden');
+         $('.errorApellido2').addClass('hidden');
+         $('.errorTelefono').addClass('hidden');
+         $('.errorEmail').addClass('hidden');
+         $('.errorDireccion').addClass('hidden');
+         $('.errorFechaIngreso').addClass('hidden');
+         $('.errorNumCuenta').addClass('hidden');
+         $('.errorGenero').addClass('hidden');
+         $('.errorEstadoCivil').addClass('hidden');
+         $('.errorEstado').addClass('hidden');
+
+         if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#create').modal('show');
+                            toastr.error('ERRO DE VALIDACIÓN!', 'Error Alert', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.Nombre) {
+                            $('.errorNombre').removeClass('hidden');
+                            $('.errorNombre').text(data.errors.Nombre);
+                        }
+                        if (data.errors.apellido1) {
+                            $('.errorApellido1').removeClass('hidden');
+                            $('.errorApellido1').text(data.errors.apellido1);
+                        }
+                        if (data.errors.apellido2) {
+                            $('.errorApellido2').removeClass('hidden');
+                            $('.errorApellido2').text(data.errors.apellido2);
+                        }
+                        if (data.errors.Telefono) {
+                            $('.errorTelefono').removeClass('hidden');
+                            $('.errorTelefono').text(data.errors.Telefono);
+                        }
+                        if (data.errors.email) {
+                            $('.errorEmail').removeClass('hidden');
+                            $('.errorEmail').text(data.errors.email);
+                        }
+                        if (data.errors.Direccion) {
+                            $('.errorDireccion').removeClass('hidden');
+                            $('.errorDireccion').text(data.errors.Direccion);
+                        }
+                        if (data.errors.Fecha_Ingreso) {
+                            $('.errorFechaIngreso').removeClass('hidden');
+                            $('.errorFechaIngreso').text(data.errors.Fecha_Ingreso);
+                        }
+                        if (data.errors.Num_Cuenta) {
+                            $('.errorNumCuenta').removeClass('hidden');
+                            $('.errorNumCuenta').text(data.errors.Num_Cuenta);
+                        }
+                        if (data.errors.genero_id) {
+                            $('.errorGenero').removeClass('hidden');
+                            $('.errorGenero').text(data.errors.genero_id);
+                        }
+                        if (data.errors.estado_civil_id {
+                            $('.errorEstadoCivil').removeClass('hidden');
+                            $('.errorEstadoCivil').text(data.errors.estado_civil_id);
+                        }
+                        if (data.errors.estado_id) {
+                            $('.errorEstado').removeClass('hidden');
+                            $('.errorEstado').text(data.errors.estado_id);
+                        }
+                    } else {
+                      toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
           $('#table').append("<tr class='afi" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.Nombre + "</td>"+
@@ -295,6 +354,7 @@
           "</tr>");
          
         }
+      
       },
     });
     $('#id').val('');
@@ -310,6 +370,7 @@
     $('#estado_civil_id').val('');
     $('#estado_id').val('');
   });
+
 $(document).on('click', '.edit-modal', function() {
 $('#footer_action_button').text(" Editar ");
 $('#footer_action_button').addClass('fa fa-pencil');
@@ -356,7 +417,7 @@ $('.modal-footer').on('click', '.edit', function() {
 success: function(data) {
       $('.afi' + data.id).replaceWith(" "+
       "<tr class='afi'>"+
-          "<td>" + data.id + "</td>"+
+          "<td>" + data.id + "</td>"//
           "<td>" + data.Nombre + "</td>"+
           "<td>" + data.apellido1 + "</td>"+
           "<td>" + data.apellido2 + "</td>"+
@@ -411,55 +472,44 @@ success: function(data) {
     }
   });
 });
-/*
+
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
-$('#footer_action_button').text(" Delete");
+$('#footer_action_button').text(" Eliminar");
 $('#footer_action_button').removeClass('glyphicon-check');
 $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Delete Post');
+$('.modal-title').text('Eliminar Afiliado');
 $('.id').text($(this).data('id'));
-$('.nombre').text($(this).data('Nombre'));
-$('.apellido1').text($(this).data('apellido1'));
-$('.apellido2').text($(this).data('apellido2'));
-$('.telefono').text($(this).data('Telefono'));
-$('.email').text($(this).data('email'));
-$('.direccion').text($(this).data('Direccion'));
-$('.fecha_ingreso').text($(this).data('Fecha_Ingreso'));
-$('.num_cuenta').text($(this).data('Num_Cuenta'));
-$('.genero_id').text($(this).data('genero_id'));
-$('.estado_civil_id').text($(this).data('estado_civil_id'));
-$('.estado_id').text($(this).data('estado_id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
-$('.title').html($(this).data('descripcion'));
+$('.nombre').html($(this).data('nombre'));
 $('#myModal').modal('show');
 });
+
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
     url: 'deleteAfiliado',
     data: {
-  
-      
+      '_token': $('input[name=_token]').val(),
+      'id': $('.id').text()
     },
     success: function(data){
-       $('.afiliado' + $('.id').text()+ $('.nombre').text()+
-       $('.apellido1').text()+ $('.apellido2').text()+ $('.telefono').text()+ $('.email').text()+ $('.direccion').text()+
-       $('.fecha_ingreso').text() $('.num_cuenta').text()+ $('.genero_id').text()+ $('.estado_civil_id').text()+ $('.genero_id').text()).remove();
+      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
+      $('.afi' + $('.id').text()).remove();
     }
   });
 });
-*/
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
   
 $('#iaa').val($(this).data('id'));
 $('#jaja').val($(this).data('nombre'));
+
 ;
   $('.modal-show').text('Datos');
   });

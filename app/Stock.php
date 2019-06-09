@@ -1,26 +1,18 @@
 <?php
-
 namespace App;
-
 use Illuminate\Database\Eloquent\Model;
-
+use App\RecepcionEstanon;
 class Stock extends Model
 {
     protected $table = 'stocks';
     protected $primaryKey = 'id';
-
     protected $fillable = [
-        'precioTotal','producto_id','estanon_recepcions_id','cantidadDisponible'
+       'nombre','cantidadDisponible', 'precioUnitario','estanon_recepcions_id'
     ];
-
-    public function producto()
+   
+    public function recepcionEstanon()
     {
-        return $this->hasMany(EstanonRecepcion::class, 'producto_id');
+         return $this->belongsTo(RecepcionEstanon::class ,'estanon_recepcions_id');
     }
-    public function estanon_recepcion()
-    {
-         return $this->belongsTo(EstanonRecepcion::class ,'estanon_recepcions_id');
-    }
-
     
 }

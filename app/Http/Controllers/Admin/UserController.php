@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Auth\Role\Role;
-use App\Models\Auth\User\User;
+use App\Role;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
-
+use Alert;
 class UserController extends Controller
 {
     /**
@@ -17,8 +17,19 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        return view('admin.users.index', ['users' => User::with('roles')->sortable(['email' => 'asc'])->paginate()]);
+       
+       if($request){
+        $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
+        $users= User::with('roles')->where('name','LIKE','%'.$query.'%')
+            ->orderby('id','desc')
+            ->paginate(4);
+          
+      
+            $roles = Role::all();
+        return view('users.index', compact('users', 'roles'), ['users'=>$users,"searchText"=>$query]);
     }
+    }
+   
 
     /**
      * Show the form for creating a new resource.
@@ -49,7 +60,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('admin.users.show', ['user' => $user]);
+        return view('users.show', ['user' => $user]);
     }
 
     /**
@@ -60,7 +71,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.users.edit', ['user' => $user, 'roles' => Role::get()]);
+        return view('users.edit', ['user' => $user, 'roles' => Role::get()]);
     }
 
     /**
@@ -72,33 +83,18 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255',
-            'active' => 'sometimes|boolean',
-            'confirmed' => 'sometimes|boolean',
-        ]);
-
-        $validator->sometimes('email', 'unique:users', function ($input) use ($user) {
-            return strtolower($input->email) != strtolower($user->email);
-        });
-
-        $validator->sometimes('password', 'min:9|confirmed', function ($input) {
-            return $input->password;
-        });
-
-        if ($validator->fails()) return redirect()->back()->withErrors($validator->errors());
-
+    
+        
         $user->name = $request->get('name');
         $user->email = $request->get('email');
+       
 
         if ($request->has('password')) {
             $user->password = bcrypt($request->get('password'));
         }
 
-        $user->active = $request->get('active', 0);
-        $user->confirmed = $request->get('confirmed', 0);
-
+        $user->status = $request->get('status', 0);
+       
         $user->save();
 
         //roles
@@ -109,8 +105,9 @@ class UserController extends Controller
                 $user->roles()->attach($request->get('roles'));
             }
         }
-
-        return redirect()->intended(route('admin.users'));
+      
+        return redirect()->intended(route('users.index'))->with('success', 'Profile updated!');;
+        
     }
 
     /**
@@ -119,8 +116,13 @@ class UserController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
+   /*DELETEEEEEE*/
+
+public function deleteUser(request $request){
+  
+    $afi = User::find($request->id);
+    $afi->delete();
+   
+  }
+ 
 }

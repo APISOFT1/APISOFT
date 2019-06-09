@@ -3,106 +3,91 @@
 <!-- mensaje de exito -->
 <?php $message=Session::get('message') ?>
 
-@if($message == 'addUser')
+@if($message == 'store')
 <div class="alert alert-success alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  ROL CREADO CORRECTAMENTE
+  USUARIO ELIMINADO CREADO CORRECTAMENTE
 </div>
 @endif
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
-<h1 class="text-center">LISTADO DE  USER</h1>
-
+<h1 class="text-center">LISTADO DE USUARIOS</h1>
+  	
 <!-- Saltos de linea-->
 <br>
 <br>
 <!-- Fin de salto de linea. No necesita una etiqueta de cierre-->
 
 <!--Esta clase nos permite posicionar el buscador  -->
-<div class="absolute3">
-@include('users.search') 
-</div>
 
-<div class="table-responsive">
-			<table class="table table-striped table-bordered table-condensed table-hover">
-            <table class="table table-bordered" id="table">
-      <tr>
+
+@include('users.search') 
+
+
+
+
+
+<div class="row">
+    <div class="table table-responsive">
+    <table class="table  table-bordered table-dark" id="table">
+    <tr>
 			<th width="150px" >Cédula</th>
   		<th> <div class="size2">Usuario</th>
   		<th>Correo</th>
-    	<th>Roles</th>
+      <th>Roles</th>
       <th>Estado</th>
-      <th>Confirmado</th>
       <th>Acciones</th>
-         <tr>
+      </tr>
        
           {{ csrf_field() }}
                 @foreach ($users as $value)
                      <tr data-entry-id="{{ $value->id }}">
                                
                                 <td>{{ $value->id }}</td>
-                                <td>{{ $value->name }} {{ $value->Apellido1 }} {{ $value->Apellido2 }}</td>
+                                <td>{{ $value->name }}</td>
                                 <td>{{ $value->email }}</td>
                                 <td> <span class="label label-info label-many label label-success">
                                 {{$value->roles->pluck('name')->implode(' , ')}}</span>
                                  
                                 </td>
                                 <td>
-                                @if($value->active)
-                            <span class="label label-primary"><?php  if ($value->active=='1') {
+                                @if($value->status)
+                            <span class="label label-primary"><?php  if ($value->status=='1') {
 	                     		# code...
 	                 		print("Activo");
 	                         	} 
 	                     	  ?> </span>
                         @else
-                            <span class="label label-danger"><?php  if ($value->active=='0') {
+                            <span class="label label-danger"><?php  if ($value->status=='0') {
 		                      	# code...
 	                       		print("Inactivo");
 	                         	} 
 	                     	  ?> </span>
                         @endif</td>
 
-                        <td>
-                        @if($value->confirmed)
-                            <span class="label label-success"><?php  if ($value->confirmed=='1') {
-		                      	# code...
-		                      	print("Confirmado");
-	                             	} 
-		                           ?></span>
-                        @else
-                            <span class="label label-warning"><?php  if ($value->confirmed=='0') {
-		                      	# code...
-		                     	print("Sin confirmar");
-	                             	} 
-		                           ?></span>
-                        @endif
-                        </td>
+                       
                                 <td>
             <a href="#" class="show-modal btn btn-info btn-sm" 
             data-id="{{$value->id}}"
             data-name="{{$value->name}}"
-            data-email="{{$value->email}}"
-            data-password="{{$value->password}}">
+            data-email="{{$value->email}}">
               <i class="fa fa-eye"></i>
             </a>
-            <a href="#" class="edit-modal btn btn-warning btn-sm"
-            data-id="{{$value->id}}"
-            data-name="{{$value->name}}"
-            data-email="{{$value->email}}"
-            data-password="{{$value->password}}"
+            <a class= "btn btn-warning btn-sm" href="{{ route('users.edit', [$value->id]) }}" data-toggle="tooltip" data-placement="top" data-title="{{ __('views.users.index.edit') }}"
    ><i class="glyphicon glyphicon-pencil"></i> </a>
 
    {{--@if(!$value->hasRole('administrator'))--}}
-            <a href="#" class="delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" data-title="{{$value->name}}">
+   <a href="#" class=" delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" data-Descripcion="{{$value->name}}">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
-            </a>
+            
             {{--@endif--}}
           </td>
         </tr>
       @endforeach
     </table>
+    
   </div>
   {{$users->links()}}
 </div>
@@ -130,15 +115,13 @@
                       <label for="">Correo :</label>
                       <b id="em"/>
                     </div>
-										<div class="form-group">
-                   
-                      <label for="">Contraseña :</label>
-                      <b id="pw"/>
-                    </div>
+										
+                      
                     </div>
                     </div>
                   </div>
 </div>
+
 
 {{-- Modal Form Edit and Delete Post --}}
 <div id="myModal"class="modal fade" role="dialog">
@@ -195,7 +178,7 @@
         </form>
                 {{-- Form Delete Post --}}
         <div class="deleteContent">
-          Desea Eliminar Este Afiliado <span class="descripcion"></span>?
+          ¿Está seguro de eliminar este usuario <span class="descripcion"></span>?
           <span class="hidden id"></span>
         </div>
       </div>
@@ -210,7 +193,7 @@
     </div>
   </div>
 </div>
-
+-->
 @endsection
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>

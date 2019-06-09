@@ -1,11 +1,15 @@
 <?php
 
 namespace App;
-
+use App\Notifications\NotificacionPago;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
 class Afiliado extends Model
 {
+    use Notifiable; 
+
+
     protected $table= 'afiliados';
     protected $primaryKey="id";
     public $timestamps=false;
@@ -35,4 +39,13 @@ class Afiliado extends Model
     {
         return $this->belongsTo(Estado_Civil::class, 'estado_civil_id');
     }   
+
+    public function scopeBuscar($query,$Nombre)
+		{
+		  if (trim($Nombre) !="")
+		  {
+		    $query->where(\DB::raw("CONCAT(Nombre,' ',apellido1)"),"LIKE","%$Nombre%");
+		  }
+
+		}
 }

@@ -53,7 +53,7 @@ AFILIADO CON SUS APIARIO CREADO CORRECTAMENTE
             <a href="#" class="edit-modal btn btn-warning btn-sm" data-id="{{$value->id}}" data-afiliado_id="{{$value->afiliado_id}}" data-apiario_id="{{$value->apiario_id}}">
               <i class="glyphicon glyphicon-pencil"></i>
             </a>
-            <a href="#" class="delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" data-afiliado_id="{{$value->afiliado_id}}" data-apiario_id="{{$value->apiario_id}}">
+            <a href="#" class="delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" data-afiliado_id="{{$value->afiliado_id}}">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
           </td>
@@ -72,6 +72,7 @@ AFILIADO CON SUS APIARIO CREADO CORRECTAMENTE
         <h4 class="modal-descripcion  text-center"></h4>
       </div>
       <div class="modal-body">
+      <span id="form_result"></span>
         <form class="form-horizontal" role="form">
         <div class="form-group row add">
         
@@ -156,20 +157,9 @@ AFILIADO CON SUS APIARIO CREADO CORRECTAMENTE
   
            <label class="control-label col-sm-2" for="afiliado_id">Afiliado</label>
            <div class="col-sm-10">
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <select name="name" id="afi" class="form-control selectpicker" data-live-search="true">
-                @foreach($afiliados as $persona)
-                 <option value="{{$value->id}}">{{$value->id}} - {{$value->Nombre}} {{$value->apellido1}} {{$value->apellido2}}</option>
-=======
-            <select name="name" id="afi"  class="form-control selectpicker" data-live-search="true">
-            <option  value="afi"></option>
-=======
             <select name="name" class="form-control selectpicker"  id="afi"  data-live-search="true">
->>>>>>> Caro
                 @foreach($afiliados as $persona => $value  )
                  <option  value="{{$value->id}}">{{$value->id}} - {{$value->Nombre}} {{$value->apellido1}} {{$value->apellido2}}</option>
->>>>>>> raychel
                  @endforeach
                 
             </select>
@@ -188,7 +178,7 @@ AFILIADO CON SUS APIARIO CREADO CORRECTAMENTE
         </form>
                 {{-- Form Delete Post --}}
         <div class="deleteContent">
-          Are You sure want to delete <span class="descripcion"></span>?
+        ¿Está seguro que desea eliminar este afiliado con su apiario <span class="descripcion"></span>?
           <span class="hidden id"></span>
         </div>
       </div>
@@ -197,7 +187,7 @@ AFILIADO CON SUS APIARIO CREADO CORRECTAMENTE
           <span id="footer_action_button" class="glyphicon"></span>
         </button>
         <button type="button" class="btn btn-warning" data-dismiss="modal">
-          <span class="fa fa-times"></span>close
+          <span class="fa fa-times"></span>Cerrar
         </button>
       </div>
     </div>

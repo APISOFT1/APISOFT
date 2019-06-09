@@ -15,8 +15,7 @@ class DetalleIngresoInventario extends Model
      'idingreso_inventario',
      'stock_id',
      'Precio',
-     'cantidad',
-     'descuento'
+     'cantidad'
     ];
     protected $guarded =[
     ];

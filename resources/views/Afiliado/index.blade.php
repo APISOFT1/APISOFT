@@ -24,10 +24,9 @@
 
 <!--Esta clase nos permite posicionar el buscador  -->
 
-<div class="absolute3">
-		@include('Afiliado.search') 
 
-</div>
+@include('Afiliado.search') 
+
 <div class="row">
   <div class="table table-responsive">
     <table class="table table-bordered table-dark" id="table">
@@ -41,12 +40,18 @@
   		<th>Numero de Cuenta</th>
     	<th>Género</th>
   		<th>Estado Civil</th>
+     
 			<th>Estado</th>
+     
+      @if(Auth::check())
+      @if (Auth::user()->isAdmin())
         <th class="text-center" width="150px">
           <a href="#" class="create-modal btn btn-success btn-sm">
             <i class="fa fa-plus"></i>
           </a>
         </th>
+        @endif
+        @endif
       </tr>
       @foreach ($afi as $value)
       <tr class="afi{{$value->id}}">
@@ -82,6 +87,8 @@
             data-estado_id="{{$value->estado_id}}"
               ><i class="fa fa-eye"></i>
             </a>
+            @if(Auth::check())
+      @if (Auth::user()->isAdmin())
             <a href="#" class="edit-modal btn btn-warning btn-sm"
             data-id="{{$value->id}}"
             data-Nombre="{{$value->Nombre}}"
@@ -98,19 +105,11 @@
             </a>
             <a href="#" class="delete-modal btn btn-danger btn-sm"
             data-id="{{$value->id}}"
-            data-Nombre="{{$value->Nombre}}"
-            data-apellido1="{{$value->apellido1}}"
-            data-apellido2="{{$value->apellido2}}"
-            data-Telefono="{{$value->Telefono}}"
-            data-email="{{$value->email}}"
-            data-Direccion="{{$value->Direccion}}"
-            data-Fecha_Ingreso="{{$value->Fecha_Ingreso}}"
-            data-Num_Cuenta="{{$value->Num_Cuenta}}"
-            data-genero_id="{{$value->genero_id}}"
-            data-estado_civil_id="{{$value->estado_civil_id}}"
-            data-estado_id="{{$value->estado_id}}">
+            data-Nombre="{{$value->Nombre}}">
               <i class="fa fa-trash"></i>
             </a>
+            @endif
+            @endif
           </td>
         </tr>
       @endforeach
@@ -127,6 +126,7 @@
         <h4 class="modal-crear"></h4>
       </div>
       <div class="modal-body">
+      <span id="form_result"></span>
         <form class="form-horizontal" role="form">
        
         <div class="stepwizard">
@@ -295,6 +295,83 @@
   </div>
 </div></div>
 
+{{-- Modal Form Show POST --}}
+<div id="show" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"></h4>
+                  </div>
+                    <div class="modal-body">
+                    <div class="form-group">
+                      <label for="">ID :</label>
+                      <b id="iaa"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="">Nombre :</label>
+                      
+                      <b id="jaja"/>
+                    </div>
+										<div class="form-group">
+                      <label for="">Primer Apellido:</label>
+                      <b id="ape1"/>
+                    </div>
+										<div class="form-group">
+                   
+                      <label for="">Segundo Apellido :</label>
+                      <b id="ape2"/>
+                    </div>
+                    <div class="form-group">
+                   
+                   <label for="">Telefono :</label>
+                   <b id="tel"/>
+                 </div>
+                 <div class="form-group">
+                   
+                   <label for="">Correo :</label>
+                   <b id="eml"/>
+                 </div>
+                 <div class="form-group">
+                   
+                   <label for="">Direccion :</label>
+                   <b id="dirn"/>
+                 </div>
+                 <div class="form-group">
+                   
+                   <label for="">Direccion :</label>
+                   <b id="dirn"/>
+                 </div>
+                 <div class="form-group">
+                   
+                   <label for="">Fecha Ingreso :</label>
+                   <b id="fecso"/>
+                 </div>
+                 <div class="form-group">
+                   
+                   <label for="">Numero de cuenta :</label>
+                   <b id="nunta"/>
+                 </div>
+                 <div class="form-group">
+                   
+                   <label for="">Genero :</label>
+                   <b id="ged"/>
+                 </div>
+                 <div class="form-group">
+                   
+                   <label for="">Estado Civil :</label>
+                   <b id="estid"/>
+                 </div>
+                 <div class="form-group">
+                   
+                   <label for="">Estado :</label>
+                   <b id="esid"/>
+                 </div>
+                    </div>
+                    </div>
+                  </div>
+</div>
+
 
 {{-- Modal Form Edit and Delete Post --}}
 <div id="myModal"class="modal fade" role="dialog">
@@ -411,7 +488,7 @@
         </form>
                 {{-- Form Delete Post --}}
         <div class="deleteContent">
-          Desea Eliminar Este Afiliado <span class="descripcion"></span>?
+          ¿Está seguro que desea eliminar este afiliado <span class="descripcion"></span>?
           <span class="hidden id"></span>
         </div>
       </div>
@@ -420,12 +497,13 @@
           <span id="footer_action_button" class="glyphicon"></span>
         </button>
         <button type="button" class="btn btn-warning" data-dismiss="modal">
-          <span class="fa fa-close"></span>close
+          <span class="fa fa-close"></span>Cerrar
         </button>
       </div>
     </div>
   </div>
 </div>
+
 
 @endsection
 

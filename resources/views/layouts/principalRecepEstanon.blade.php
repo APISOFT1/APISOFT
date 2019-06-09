@@ -60,41 +60,57 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-home"></i> Home<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                     <li><a href="{{ url('/roles/') }}">Gestionar Rol</a></li>
-                     <li><a href="{{ url('/permissions/') }}">Gestionar Permisos</a></li>
-                     <li><a href="{{ url('/users/') }}">Gestionar Users</a></li>
+                     <li><a href="{{ url('/dashboard/') }}">Dashboard</a></li>
+                     
                     </ul>
                   </li>
+                @if(Auth::check())
+                    @if (Auth::user()->isAdmin())
+                  <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      
+                     <li><a href="{{ url('users/') }}">Gestionar usuarios</a></li>
+                    </ul>
+                  </li>
+                 
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
-                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicacion</a></li>
+                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicación</a></li>
                       <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
-                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiaro</a></li>
+                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiario</a></li>
                     
                     </ul>
                   </li>
+                  @endif
+                  @endif
                   <li><a><i class="glyphicon glyphicon-list-alt"></i> Recepción<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/RecepcionMateriaPrima') }}">Gestionar Recepción</a></li>
-                      <li><a href="{{ url('/Cera/') }}">Gestionar Extración de cera</a></li>
+                      <li><a href="{{ url('/Cera/') }}">Gestionar Extracción de cera</a></li>
                     </ul>
                   </li>
                   <li><a><i class="glyphicon glyphicon-oil"></i> Planta <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
                       <li><a href="{{ url('/RecepEstanon/') }}">Gestionar Recepción-Estañón</a></li>
-                      <li><a href="{{ url('/Homogeneizacion/') }}">Gestionar Homogeneización</a></li>
+                    
                     
                     </ul>
                   </li>
-                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Producto Terminado <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
-                      <li><a href="{{ url('/AfiliadoEstanon/') }}">Gestionar Afiliado-Estañon</a></li>
-                      <li><a href="{{ url('/Homogeneizacion/') }}">Gestionar Homogeneización</a></li>
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-cart-plus"></i>Servicios <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                    <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
+                    <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
+                    
                     
                     </ul>
                   </li>
@@ -194,12 +210,14 @@
       },
       success: function(data){
         if ((data.errors)) {
+          html = '<div class="alert alert-danger">';
           $('.error').removeClass('hidden');
           $('.error').text(data.errors.Recepcion_id);
           $('.error').text(data.errors.Estanon_id);
           $('.error').text(data.errors.Fecha);
  
         } else {
+          html = '<div class="alert alert-success alert-dismissible">'  + data.success + '</div>';
           $('.error').remove();
           $('#table').append("<tr class='cera" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
@@ -221,6 +239,7 @@
           + data.Fecha + "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         }
+        $('#form_result').html(html);
       },
     });
     $('#Recepcion_id').val('');
@@ -228,6 +247,8 @@
     $('#Fecha').val('');
 
   });
+
+  
  
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
@@ -287,42 +308,43 @@ success: function(data) {
 /*
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
-$('#footer_action_button').text(" Delete");
+$('#footer_action_button').text(" Eliminar");
 $('#footer_action_button').removeClass('glyphicon-check');
 $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Delete Post');
+$('.modal-title').text('Eliminar Ubicación');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
-$('.title').html($(this).data('Descripcion'));
+$('.recepcion_id').html($(this).data('recepcion_id'));
 $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
-    url: 'deleteApiario',
+    url: 'deleteRecepcion',
     data: {
       '_token': $('input[name=_token]').val(),
       'id': $('.id').text()
     },
     success: function(data){
-       $('.apiario' + $('.id').text()).remove();
+      $('.ubicacion' + $('.id').text()).remove();
     }
   });
 });
+
 */
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
   $('#i2').text($(this).data('id'));
-  $('#d2').text($(this).data('descripcion'));
-  $('#ca2').text($(this).data('cantidad'));
-  $('#ub2').text($(this).data('ubicacion_id'));
-  $('.modal-title').text('Show Post');
+  $('#d2').text($(this).data('recepcion_id'));
+  $('#ca2').text($(this).data('estanon_id'));
+  $('#ub2').text($(this).data('fecha'));
+  $('.modal-title').text('Detalle Recepción Estañón');
   });
 </script>
     

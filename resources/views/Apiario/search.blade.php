@@ -4,5 +4,6 @@
 		<input type="text" class="form-control" name="searchText" placeholder="Buscar..." value="{{$searchText}}">
 		
 	</div>
+	
 </div>
 {{Form::close()}}
