@@ -39,27 +39,18 @@
 				</span>
 				<form class="login100-form validate-form p-b-33 p-t-5"    method="POST" action="{{ route('register') }}" >
   					@csrf
+                      
 					  @if(session()->has('message'))
             <div class="alert alert-success">
               {{ session()->get('message') }}
             </div>
           @endif
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input id="name"  type="text"  class="input100{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+						<input id="name"  type="text"  class="input100{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" placeholder="Nombre " required autofocus>
 						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
 						@if ($errors->has('name'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('name') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-
-					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input id="username"  type="text"  class="input100{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
-						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
-						@if ($errors->has('name'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('username') }}</strong>
                             </span>
                         @endif
                     </div>
@@ -85,15 +76,26 @@
                     </div>
                     
                     <div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input   id="password-confirm" class="input100"  name="password_confirmation" type="password" required>
+						<input   id="password-confirm" class="input100"  name="password_confirmation" type="password" placeholder="Confirmar Contraseña"  required>
 						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
 					</div>
 
 					
-					<div class="container-login100-form-btn m-t-32">
-						<button  type="submit"  {{ __('Register') }} class="login100-form-btn"> Registrarse </button>			
-					</div>
+                    <div class="container-login100-form-btn m-t-32">
+							<a href="{{ url()->previous() }}" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
+							<i class="fa fa-long-arrow-left m-l-5"></i>
+								Regresar
+						</a>
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button type="submit" value="Register" {{ __('Registraser') }} class="login100-form-btn">
+								Ingresar
+							</button>
+							
+						</div>
+
 					
+					</div>
 				
 				</form>
 			</div>

@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>APISOFT</title>
+    @toastr_css
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -62,12 +63,18 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
+                <li><a><i class="fa fa-home"></i> Home<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                     <li><a href="{{ url('/dashboard/') }}">Dashboard</a></li>
+                     
+                    </ul>
+                  </li>
                 @if(Auth::check())
                     @if (Auth::user()->isAdmin())
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       
-                     <li><a href="{{ url('users/') }}">Gestionar users</a></li>
+                     <li><a href="{{ url('users/') }}">Gestionar usuarios</a></li>
                     </ul>
                   </li>
                   
@@ -97,10 +104,16 @@
                     </ul>
                   </li>
 
-                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Producto Terminado <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Producto/') }}">Gestionar Productos</a></li>
-                      <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-cart-plus"></i>Servicios <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                    <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
+                    <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
                     
                     
                     </ul>
@@ -173,6 +186,9 @@
 
      {!!Html::script('/js/daterangepicker.js')!!}
 
+     @jquery
+    @toastr_js
+    @toastr_render
 
 
 <!-- MODAL Cera -->
@@ -185,7 +201,7 @@
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
-    $('.modal-descripcion').text('Crear Extración Cera');
+    $('.modal-descripcion').text('Crear Extracción Cera');
   });
   $("#add").click(function() {
     $.ajax({
@@ -194,7 +210,7 @@
       
       data: {
         '_token': $('input[name=_token]').val(),
-        'Descripcion': $('input[name=Descripcion]').val(),
+        'Descripcion': $('textarea[name=Descripcion]').val(),
         'Recepcion_id': $('select[name=Recepcion_id]').val(),
         'PesoBruto': $('input[name=PesoBruto]').val(),
         'PesoNeto': $('input[name=PesoNeto]').val(),
@@ -202,16 +218,41 @@
         
       },
       success: function(data){
-        if ((data.errors)) {
-          $('.error').removeClass('hidden');
-          $('.error').text(data.errors.Descripcion);
-          $('.error').text(data.errors.Recepcion_id);
-          $('.error').text(data.errors.PesoBruto);
-          $('.error').text(data.errors.PesoNeto);
-          $('.error').text(data.errors.Fecha);
- 
+       
+          $('.errorDescripcion').addClass('hidden');
+         $('.errorRecepcion').addClass('hidden');
+         $('.errorPesoBruto').addClass('hidden');
+         $('.errorPesoNeto').addClass('hidden');
+         $('.errorFecha').addClass('hidden');
+
+         if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#create').modal('show');
+                            toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.Descripcion) {
+                            $('.errorDescripcion').removeClass('hidden');
+                            $('.errorDescripcion').text(data.errors.Descripcion);
+                        }
+                        if (data.errors.Recepcion_id) {
+                            $('.errorRecepcion').removeClass('hidden');
+                            $('.errorRecepcion').text(data.errors.Recepcion_id);
+                        }
+                        if (data.errors.PesoBruto) {
+                            $('.errorPesoBruto').removeClass('hidden');
+                            $('.errorPesoBruto').text(data.errors.PesoBruto);
+                        }
+                        if (data.errors.PesoNeto) {
+                            $('.errorPesoNeto').removeClass('hidden');
+                            $('.errorPesoNeto').text(data.errors.PesoNeto);
+                        }
+                        if (data.errors.Fecha) {
+                            $('.errorFecha').removeClass('hidden');
+                            $('.errorFecha').text(data.errors.Fecha);
+                        }
+
         } else {
-          $('.error').remove();
+          toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
           $('#table').append("<tr class='cera" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.Descripcion + "</td>"+
@@ -251,98 +292,146 @@
  
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
-$('#footer_action_button').text(" Editar Apiario");
+$('#footer_action_button').text(" Editar Cera");
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-$('.modal-descripcion').text('Editar Apiario');
+$('.modal-descripcion').text('Editar Cera');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
 $('#ids').val($(this).data('id'));
-$('#cri').val($(this).data('Descripcion'));
-$('#can').val($(this).data('cantidad'));
-$('#ub').val($(this).data('ubicacion_id'));
+$('#cri').val($(this).data('descripcion'));
+$('#can').val($(this).data('recepcion_id'));
+$('#ub').val($(this).data('pesobruto'));
+$('#ps').val($(this).data('pesoneto'));
+$('#fec').val($(this).data('fecha'));
 $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
-    url: 'editApiario',
+    url: 'editCera',
     data: {
 '_token': $('input[name=_token]').val(),
 'id': $("#ids").val(),
 'Descripcion': $('#cri').val(),
-'cantidad': $('#can').val(),
-'ubicacion_id': $('#ub').val(),
+'Recepcion_id': $('#can').val(),
+'PesoBruto': $('#ub').val(),
+'PesoNeto': $('#ps').val(),
+'Fecha': $('#fec').val(),
 
     },
 success: function(data) {
-      $('.api' + data.id).replaceWith(" "+
-      "<tr class='api" + data.id + "'>"+
-      "<td>" + data.id + "</td>"+
-      "<td>" + data.Descripcion + "</td>"+
-      "<td>" + data.cantidad + "</td>"+
-      "<td>" + data.ubicacion_id + "</td>"+
-      
- "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + "' data-Descripcion='" 
- + data.Descripcion + "' data-cantidad='" 
-          + data.cantidad +  " 'data-ubicacion_id='" 
-          + data.ubicacion_id + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
-          + data.id + "' data-Descripcion='" + data.Descripcion + 
-          "' data-cantidad='" 
-          + data.cantidad +  " 'data-ubicacion_id='" 
-          + data.ubicacion_id + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
-          + data.id + "' data-Descripcion='" + data.Descripcion + 
-          "' data-cantidad='" 
-          + data.cantidad +  " 'data-ubicacion_id='" 
-          + data.ubicacion_id + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
-      "</tr>");
+  
+  $('.errorDescripcion').addClass('hidden');
+         $('.errorRecepcion').addClass('hidden');
+         $('.errorPesoBruto').addClass('hidden');
+         $('.errorPesoNeto').addClass('hidden');
+         $('.errorFecha').addClass('hidden');
+
+         if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#create').modal('show');
+                            toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.Descripcion) {
+                            $('.errorDescripcion').removeClass('hidden');
+                            $('.errorDescripcion').text(data.errors.Descripcion);
+                        }
+                        if (data.errors.Recepcion_id) {
+                            $('.errorRecepcion').removeClass('hidden');
+                            $('.errorRecepcion').text(data.errors.Recepcion_id);
+                        }
+                        if (data.errors.PesoBruto) {
+                            $('.errorPesoBruto').removeClass('hidden');
+                            $('.errorPesoBruto').text(data.errors.PesoBruto);
+                        }
+                        if (data.errors.PesoNeto) {
+                            $('.errorPesoNeto').removeClass('hidden');
+                            $('.errorPesoNeto').text(data.errors.PesoNeto);
+                        }
+                        if (data.errors.Fecha) {
+                            $('.errorFecha').removeClass('hidden');
+                            $('.errorFecha').text(data.errors.Fecha);
+                        }
+
+        } else {
+          toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
+      $('.cera' + data.id).replaceWith(" "+
+      "<tr class='cera'>"+
+          "<td>" + data.id + "</td>"+
+          "<td>" + data.Descripcion + "</td>"+
+          "<td>" + data.Recepcion_id + "</td>"+
+          "<td>" + data.PesoBruto + "</td>"+
+          "<td>" + data.PesoNeto + "</td>"+
+          "<td>" + data.Fecha + "</td>"+
+  
+          "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
+          data.id + "' data-Descripcion='"
+          + data.Descripcion +  "' data-Recepcion_id='" 
+          + data.Recepcion_id +  " 'data-PesoBruto='" 
+          + data.PesoBruto + " 'data-PesoNeto='" 
+          + data.PesoNeto +   " 'data-Fecha='"
+          + data.Fecha + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='"
+           + data.id + "' data-Descripcion='" 
+           + data.Descripcion + "' data-Recepcion_id='" + data.Recepcion_id + "' data-PesoBruto='" 
+           + data.PesoBruto + " 'data-PesoNeto='" 
+          + data.PesoNeto +   " 'data-Fecha='"
+          + data.Fecha + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
+           + data.id + "' data-Descripcion='" + data.Descripcion +  "' data-Recepcion_id='" 
+          + data.Recepcion_id +  " 'data-PesoBruto='" 
+          + data.PesoBruto + " 'data-PesoNeto='" 
+          + data.PesoNeto +   " 'data-Fecha='"
+          + data.Fecha + "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
+          "</tr>");
     }
+},
   });
 });
 
-/*
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
-$('#footer_action_button').text(" Delete");
+$('#footer_action_button').text(" Eliminar");
 $('#footer_action_button').removeClass('glyphicon-check');
 $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Delete Post');
+$('.modal-descripcion').text('Eliminar Ubicación');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
-$('.title').html($(this).data('Descripcion'));
+$('.descripcion').html($(this).data('descripcion'));
 $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
-    url: 'deleteApiario',
+    url: 'deleteCera',
     data: {
       '_token': $('input[name=_token]').val(),
       'id': $('.id').text()
     },
     success: function(data){
-       $('.apiario' + $('.id').text()).remove();
+      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
+      $('.api' + $('.id').text()).remove();
     }
   });
 });
-*/
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
   $('#i2').text($(this).data('id'));
   $('#d2').text($(this).data('descripcion'));
-  $('#ca2').text($(this).data('cantidad'));
-  $('#ub2').text($(this).data('ubicacion_id'));
-  $('.modal-title').text('Show Post');
+  $('#ca2').text($(this).data('recepcion_id'));
+  $('#ub2').text($(this).data('pesobruto'));
+  $('#pen').text($(this).data('pesoneto'));
+  $('#ech').text($(this).data('fecha'));
+  $('.modal-title').text('Detalle Cera');
   });
 
   
@@ -355,14 +444,55 @@ $('#discount').keyup(function(e){
 function discount(){
   let amount = $('#discount').val();
   if(!isNaN(amount)){
-    let discount = amount * 0.05;
+    let discount = amount * 0.01;
     let total =  amount - discount;
     $("#PesoNeto").val(total);
   } 
 }
 
+var timeoutId = 0;
+$('#ub').keyup(function(e){
+   clearTimeout(timeoutId);
+   timeoutId = setTimeout(discount,1000);
+});
+
+function discount(){
+  let amount = $('#ub').val();
+  if(!isNaN(amount)){
+    let discount = amount * 0.01;
+    let total =  amount - discount;
+    $("#ps").val(total);
+  } 
+}
 </script>
-    
+    <script>
+$( document ).on('click','.create-modal',function() {
+
+    var now = new Date();
+
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+    h=now.getHours();
+    m=now.getMinutes();
+  s=now.getSeconds();
+    var today = now.getFullYear()+"-"+(month)+"-"+(day)+"-"+(h)+"-"+(m)+"-"+(s) ;
+    $("#fecha,#Fecha").val(today);
+});
+</script>
+
+<script>
+  $("#add").click(function(){
+    var now = new Date();
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+    h=now.getHours();
+    m=now.getMinutes();
+  s=now.getSeconds();
+    var today = now.getFullYear()+"-"+(month)+"-"+(day)+"-"+(h)+"-"+(m)+"-"+(s) ;
+    $("#fecha,#Fecha").val(today);
+});
+</script>
+
 
     </body>
     </html>

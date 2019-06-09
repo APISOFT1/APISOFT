@@ -58,7 +58,9 @@
           <div class="tab-content mt-4" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <h5 class="pl-2"></h5>
+            
                 {!! $chart3->html() !!}
+           
             </div>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
               <h5 class="pl-2"></h5>

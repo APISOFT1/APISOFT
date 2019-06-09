@@ -12,6 +12,8 @@
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
+@include('Busqueda.search',['url'=>'Stock','link'=>'Stock'])
+
 <h1 class="text-center">INVENTARIO</h1>
 
 <!-- Saltos de linea-->
@@ -23,7 +25,6 @@
 
 <!--Esta clase nos permite posicionar el buscador  -->
 
-		@include('Stock.search') 
 
 
 <div class="table-responsive">
@@ -45,7 +46,7 @@
           <td>{{ $no++ }}</td>
 					<td>{{ $value->nombre}}</td>
           <td>{{ $value->cantidadDisponible}}</td>
-          <td>{{ $value->precio}}</td>
+          <td>{{ $value->precioUnitario}}</td>
             <td><span class="label label-success">{{ $value->RecepcionEstanon->id}}</span></td>
            
 					<td>
@@ -53,7 +54,7 @@
 					 data-id="{{$value->id}}" 
 					 data-nombre="{{$value->nombre}}"
            data-cantidadDisponible="{{$value->cantidadDisponible}}"
-           data-precio="{{$value->precio}}"
+           data-precioUnitario="{{$value->precioUnitario}}"
 					 data-estanon_recepcions_id="{{$value->estanon_recepcions_id}} - {{$value->recepcionEstanon->id}}">
               <i class="fa fa-eye"></i>
             </a>
@@ -61,7 +62,7 @@
 						data-id="{{$value->id}}"
 					 data-nombre="{{$value->nombre}}"
            data-cantidadDisponible="{{$value->cantidadDisponible}}"
-           data-precio="{{$value->precio}}"
+           data-precioUnitario="{{$value->precioUnitario}}"
 					 data-estanon_recepcions_id="{{$value->estanon_recepcions_id}}">
               <i class="glyphicon glyphicon-pencil"></i>
             </a>
@@ -87,6 +88,7 @@
         <h4 class="modal-descripcion text-center"></h4>
       </div>
       <div class="modal-body">
+      <span id="form_result"></span>
         <form class="form-horizontal" role="form">
 
         <div class="form-group row add">
@@ -154,15 +156,15 @@
                     <div class="form-group">
                       <label for="">Descripción :</label>
                       
-                      <b id="nom"/>
+                      <b id="nbre"/>
                     </div>
 										<div class="form-group">
                       <label for="">Cantidad :</label>
-                      <b id="can"/>
+                      <b id="cdpn"/>
                     </div>
                     	<div class="form-group">
                       <label for="">Precio :</label>
-                      <b id="pu"/>
+                      <b id="prun"/>
                     </div>
 										<div class="form-group">
                    
@@ -193,21 +195,21 @@
           
                 <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-           <input type="text" class="form-control has-feedback-left" id="lol2" >
+           <input type="text" class="form-control has-feedback-left" id="cri" >
               <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
                 </div>
                 </div>
           
                 <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-           <input type="text" class="form-control has-feedback-left" id="lol3" >
+           <input type="text" class="form-control has-feedback-left" id="tidad" >
               <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
                 </div>
                 </div>
                 
                 <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-           <input type="text" class="form-control has-feedback-left" id="lol4" >
+           <input type="text" class="form-control has-feedback-left" id="uni" >
               <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
                 </div>
                 </div>
@@ -256,4 +258,3 @@
 @endsection
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-

@@ -3,10 +3,12 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\MailResetPasswordToken;
 
 class User extends Authenticatable
 {
     use Notifiable;
+
 
     const STATUS = 1;
     const INACTIVE = 0;
@@ -104,5 +106,10 @@ public function hasRole(string $roleSlug)
 		    $query->where(\DB::raw("CONCAT(name,' ',email)"),"LIKE","%$name%");
 		  }
 
-		}
+        }
+        
+        public function sendPasswordResetNotification($token)
+{
+    $this->notify(new MailResetPasswordToken($token));
+}
 }

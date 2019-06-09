@@ -40,10 +40,10 @@
         <ul class="nav navbar-nav main-navigation">
           <li class="active"><a href="#home">Inicio</a></li>
           <li><a href="#features">Historia</a></li>
-          <li><a href="#why">Mision</a></li>
-          <li><a href="#screenshot">Vision</a></li>
+          <li><a href="#why">Misión</a></li>
+          <li><a href="#screenshot">Visión</a></li>
           <li><a href="#testimonial">Acerca de Nosotros</a></li>
-          <li><a href="#contact">Ubicacion</a></li>
+          <li><a href="#contact">Ubicación</a></li>
         </ul>
         <button class="close-button" id="close-button">Cerrar</button>
     </div>
@@ -71,7 +71,7 @@
           <h1 class="wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="300ms">APISOFT - Asociación de Apicultores Región Chorotega</h1>
           <p class="wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="400ms">La mejor miel del país producida en Nicoya</p>
   
-        <a href="{{ url('/login/') }}" class="btn btn-lg btn-border wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">Iniciar Sesion</a>
+        <a href="{{ url('/login/') }}" class="btn btn-lg btn-border wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">Iniciar Sesión</a>
         </div>   
     </header>
 

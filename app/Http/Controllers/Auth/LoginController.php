@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -83,7 +82,7 @@ class LoginController extends Controller
 
 
 }
-protected function sendFailedLoginResponse(Request $request)
+/*protected function sendFailedLoginResponse(Request $request)
    {
         $request->session()->put('login_error', trans('auth.failed'));
        throw ValidationException::withMessages(
@@ -98,6 +97,6 @@ protected function sendFailedLoginResponse(Request $request)
      //   Auth::logout();
       //  alert()->success('You have been logged out.', 'Good bye!');
        // return Redirect::to('login');
-  //  }
+  //  }*/
 }
 

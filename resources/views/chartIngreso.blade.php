@@ -11,23 +11,23 @@
         </div>
         <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
-                  <div class="icon"><i class="fa fa-user"></i></div>
-            <div class="count">{{ $counts['afi'] }}</div>
-            <h3>Total Afiliados</h3>
+                  <div class="icon"><i class="fa fa-money"></i></div>
+            <div class="count">₡{{ $counts['ingreso2'] }}</div>
+            <h3>Total Ingreso por Cera</h3>
         </div>
         </div>
         <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
                   <div class="icon"><i class="fa fa-money"></i></div>
             <div class="count green">₡{{ $counts['ingreso'] }}</div>
-            <h3>Total Ingreso</h3>
+            <h3>Total Ingreso Por Miel</h3>
         </div>
         </div>
         <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
-                  <div class="icon"><i class="fa fa-file-text"></i></div>
-            <div class="count">{{ $counts['recep'] }}</div>
-            <h3>Total Recepción</h3>
+                  <div class="icon"><i class="fa fa-money"></i></div>
+            <div class="count">₡{{ $counts['ingreso3'] }}</div>
+            <h3>Total Ingreso por Inventario</h3>
         </div>
         </div>
        

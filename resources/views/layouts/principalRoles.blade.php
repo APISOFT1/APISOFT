@@ -75,9 +75,7 @@
                 <ul class="nav side-menu">
                 <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                     <li><a href="{{ url('/roles/') }}">Gestionar Rol</a></li>
-                     <li><a href="{{ url('/permissions/') }}">Gestionar Permisos</a></li>
-                     <li><a href="{{ url('/users/') }}">Gestionar Users</a></li>
+                     <li><a href="{{ url('/users/') }}">Gestionar Usuarios</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
@@ -104,11 +102,10 @@
                     </ul>
                   </li>
 
-                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Producto Terminado <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
-                      <li><a href="{{ url('/AfiliadoEstanon/') }}">Gestionar Afiliado-Estañon</a></li>
-                      <li><a href="{{ url('/Homogeneizacion/') }}">Gestionar Homogeneización</a></li>
+                    <li><a href="{{ url('/Producto/') }}">Gestionar Productos</a></li>
+                      <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
                     
                     </ul>
                   </li>

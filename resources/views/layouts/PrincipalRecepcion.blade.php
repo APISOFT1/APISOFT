@@ -60,12 +60,18 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
+                <li><a><i class="fa fa-home"></i> Home<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                     <li><a href="{{ url('/dashboard/') }}">Dashboard</a></li>
+                     
+                    </ul>
+                  </li>
                 @if(Auth::check())
                     @if (Auth::user()->isAdmin())
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       
-                     <li><a href="{{ url('users/') }}">Gestionar users</a></li>
+                     <li><a href="{{ url('users/') }}">Gestionar usuarios</a></li>
                     </ul>
                   </li>
                 
@@ -94,10 +100,16 @@
                     </ul>
                   </li>
 
-                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Producto Terminado <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Producto/') }}">Gestionar Productos</a></li>
-                      <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-cart-plus"></i>Servicios <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                    <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
+                    <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
                     
                     
                     </ul>
@@ -229,14 +241,13 @@ var div_respuesta="#respuesta";
           "<td><button class='show-modalRol btn btn-info btn-sm' data-id='" + 
           data.id + "' data-descripcion='" + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modalRol btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalRol btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
-          
-
-
+        
           $('#busqueda_parroquia').append("<tr class='recepcion" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.fecha + "</td>"+
           "<td>" + data.afiliado_id + "</td>");
         }
+        $('#form_result').html(html);
       },
     });
       
@@ -253,23 +264,64 @@ var div_respuesta="#respuesta";
 
 
   });
+  {{-- ajax Form Add Post--}}
+$(document).on('click','.create-modal', function() {
+  $('#create').modal('show');
+  $('.form-horizontal').show();
+  $('.modal-descripcion').text('Crear Recepción Estañón');
+});
+$("#addd").click(function() {
+  $.ajax({
+    type: 'POST',
+    url: 'addRecepcion',
+    
+    data: {
+      '_token': $('input[name=_token]').val(),
+      'Recepcion_id': $('select[name=Recepcion_id]').val(),
+      'Estanon_id': $('select[name=Estanon_id]').val(),
+      'Fecha': $('input[name=Fecha]').val()
+      
+    },
+    success: function(data){
+      if ((data.errors)) {
+        $('.error').removeClass('hidden');
+        $('.error').text(data.errors.Recepcion_id);
+        $('.error').text(data.errors.Estanon_id);
+        $('.error').text(data.errors.Fecha);
+      } else {
+        $('.error').remove();
+    
+      }
+    },
+  });
+  $('#Recepcion_id').val('');
+  $('#Estanon_id').val('');
+  $('#Fecha').val('');
+});
 
 // function Edit POST
-$(document).on('click', '.edit-modalRol', function() {
-$('#footer_action_button').text(" Editar Rol");
+$(document).on('click', '.edit-modal', function() {
+$('#footer_action_button').text(" Editar");
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-$('.modal-descripcion').text('Editar Rol');
+$('.modal-descripcion').text('Editar Recepción');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
 $('#fid').val($(this).data('id'));
-$('#ti').val($(this).data('descripcion'));
+$('#ti').val($(this).data('fecha'));
+$('#psb').val($(this).data('pesobruto'));
+$('#snt').val($(this).data('pesoneto'));
+$('#mue').val($(this).data('numero_muestras'));
+$('#ali').val($(this).data('afiliado_id'));
+$('#ser').val($(this).data('user_id'));
+$('#ent').val($(this).data('tipoentrega_id'));
+$('#cio').val($(this).data('observacion'));
+
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
@@ -278,7 +330,6 @@ $('.modal-footer').on('click', '.edit', function() {
 '_token': $('input[name=_token]').val(),
 'id': $("#fid").val(),
 'descripcion': $('#ti').val(),
-
     },
 success: function(data) {
       $('.rol' + data.id).replaceWith(" "+
@@ -291,43 +342,49 @@ success: function(data) {
     }
   });
 });
-
 // form Delete function
-$(document).on('click', '.delete-modalRol', function() {
-$('#footer_action_button').text(" Delete");
+$(document).on('click', '.delete-modal', function() {
+$('#footer_action_button').text(" Eliminar");
 $('#footer_action_button').removeClass('glyphicon-check');
 $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Delete Post');
+$('.modal-title').text('Eliminar Ubicación');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
-$('.title').html($(this).data('descripcion'));
+$('.observacion').html($(this).data('observacion'));
 $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
-    url: 'deleteRol',
+    url: 'deleteRecepcionMateriaPrima',
     data: {
       '_token': $('input[name=_token]').val(),
       'id': $('.id').text()
     },
     success: function(data){
-       $('.rol' + $('.id').text()).remove();
+      $('.ubicacion' + $('.id').text()).remove();
     }
   });
 });
 
   // Show function
-  $(document).on('click', '.show-modalRol', function() {
+  $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
   $('#ii').text($(this).data('id'));
-  $('#di').text($(this).data('descripcion'));
-  $('.modal-title').text('Show Post');
+  $('#ech').text($(this).data('fecha'));
+  $('#di').text($(this).data('pesobruto'));
+  $('#psn').text($(this).data('pesoneto'));
+  $('#num').text($(this).data('numero_muestras'));
+  $('#afi').text($(this).data('afiliado_id'));
+  $('#use').text($(this).data('user_id'));
+  $('#tip').text($(this).data('tipoentrega_id'));
+  $('#obs').text($(this).data('observacion'));
+  $('.modal-title').text('Detalle Recepción');
   });
 </script>
 

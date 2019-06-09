@@ -1,4 +1,4 @@
-@extends ('layouts.principal1')
+@extends ('layouts.principal')
 @section ('contenido')
 <div class="row">
   <div class="panel panel-primary">

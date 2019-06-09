@@ -64,42 +64,82 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
+<<<<<<< HEAD
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                      <li><a href="{{ url('/roles/') }}">Gestionar Rol</a></li>
                      <li><a href="{{ url('/permissions/') }}">Gestionar Permisos</a></li>
                      <li><a href="{{ url('/users/') }}">Gestionar Users</a></li>
+=======
+                <li><a><i class="fa fa-home"></i> Home<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                     <li><a href="{{ url('/dashboard/') }}">Dashboard</a></li>
+                     
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                     <li><a href="{{ url('/users/') }}">Gestionar Usuarios</a></li>
+>>>>>>> develop
                     </ul>
                   </li>
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
+<<<<<<< HEAD
                       <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicacion</a></li>
                       <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
                       <li><a href="{{ url('/Apiario/') }}">Gestionar Apiaro</a></li>
+=======
+                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicación</a></li>
+                      <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
+                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiario</a></li>
+>>>>>>> develop
                     
                     </ul>
                   </li>
                   <li><a><i class="glyphicon glyphicon-list-alt"></i> Recepción<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/RecepcionMateriaPrima') }}">Gestionar Recepción</a></li>
+<<<<<<< HEAD
                       <li><a href="{{ url('/Cera/') }}">Gestionar Extración de cera</a></li>
+=======
+                      <li><a href="{{ url('/Cera/') }}">Gestionar Extracción de cera</a></li>
+>>>>>>> develop
                     </ul>
                   </li>
                   <li><a><i class="glyphicon glyphicon-oil"></i> Planta <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
                       <li><a href="{{ url('/RecepEstanon/') }}">Gestionar Recepción-Estañón</a></li>
+<<<<<<< HEAD
                       <li><a href="{{ url('/Homogeneizacion/') }}">Gestionar Homogeneización</a></li>
+=======
+                     
+>>>>>>> develop
                     
                     </ul>
                   </li>
 
+<<<<<<< HEAD
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Producto Terminado <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
                       <li><a href="{{ url('/AfiliadoEstanon/') }}">Gestionar Afiliado-Estañon</a></li>
                       <li><a href="{{ url('/Homogeneizacion/') }}">Gestionar Homogeneización</a></li>
+=======
+                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-cart-plus"></i>Servicios <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                    <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
+                    <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
+                    
+>>>>>>> develop
                     
                     </ul>
                   </li>
@@ -198,9 +238,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+<<<<<<< HEAD
 
 {{-- ajax Form Add Post--}}
 
+=======
+{{-- ajax Form Add Post--}}
+>>>>>>> develop
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
@@ -221,6 +265,7 @@
       },
       success: function(data){
         if ((data.errors)) {
+<<<<<<< HEAD
           $('.error').removeClass('hidden');
           $('.error').text(data.errors.Descripcion);
           $('.error').text(data.errors.cantidad);
@@ -229,6 +274,19 @@
         } else {
           $('.error').remove();
           $('#table').append("<tr class='api" + data.id + "'>"+
+=======
+          html = '<div class="alert alert-danger">';
+          $('.error').removeClass('hidden');
+          $('.error').text(data.errors.nombre);
+          $('.error').text(data.errors.cantidadDisponible);
+          $('.error').text(data.errors.precioUnitario);
+          $('.error').text(data.errors.estanon_recepcions_id);
+ 
+        } else {
+          html = '<div class="alert alert-success alert-dismissible">'  + data.success + '</div>';
+          $('.error').remove();
+          $('#table').append("<tr class='sto" + data.id + "'>"+
+>>>>>>> develop
           "<td>" + data.id + "</td>"+
           "<td>" + data.nombre + "</td>"+
           "<td>" + data.cantidadDisponible + "</td>"+
@@ -267,23 +325,35 @@
           + data.estanon_recepcions_id +  "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         }
+<<<<<<< HEAD
+=======
+        $('#form_result').html(html);
+>>>>>>> develop
       },
     });
     $('#nombre').val('');
     $('#cantidadDisponible').val('');
     $('#precioUnitario').val('');
     $('#estanon_recepcions_id').val('');
+<<<<<<< HEAD
 
+=======
+>>>>>>> develop
   });
  
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
+<<<<<<< HEAD
 $('#footer_action_button').text(" Editar Apiario");
+=======
+$('#footer_action_button').text(" Editar Stock");
+>>>>>>> develop
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
+<<<<<<< HEAD
 $('.modal-descripcion').text('Editar Apiario');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
@@ -295,6 +365,18 @@ $('#lol5').val($(this).data('estanon_recepcions_id'));
 $('#myModal').modal('show');
 });
 
+=======
+$('.modal-descripcion').text('Editar Stock');
+$('.deleteContent').hide();
+$('.form-horizontal').show();
+$('#lol1').val($(this).data('id'));
+$('#cri').val($(this).data('nombre'));
+$('#tidad').val($(this).data('cantidaddisponible'));
+$('#uni').val($(this).data('preciounitario'));
+$('#lol5').val($(this).data('estanon_recepcions_id'));
+$('#myModal').modal('show');
+});
+>>>>>>> develop
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
@@ -302,6 +384,7 @@ $('.modal-footer').on('click', '.edit', function() {
     data: {
 '_token': $('input[name=_token]').val(),
 'id': $("#lol1").val(),
+<<<<<<< HEAD
 'nombre': $('#lol2').val(),
 'cantidadDisponible': $('#lol3').val(),
 'precioUnitario': $('#lol4').val(),
@@ -310,6 +393,15 @@ $('.modal-footer').on('click', '.edit', function() {
     },
 success: function(data) {
       $('.api' + data.id).replaceWith(" "+
+=======
+'nombre': $('#cri').val(),
+'cantidadDisponible': $('#tidad').val(),
+'precioUnitario': $('#uni').val(),
+'estanon_recepcions_id': $('#lol5').val(),
+    },
+success: function(data) {
+      $('.sto' + data.id).replaceWith(" "+
+>>>>>>> develop
       "<tr class='api" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
       "<td>" + data.nombre + "</td>"+
@@ -339,12 +431,16 @@ success: function(data) {
     }
   });
 });
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> develop
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
   $('#i').text($(this).data('id'));
+<<<<<<< HEAD
   $('#nom').text($(this).data('nombre'));
   $('#can').text($(this).data('cantidadDisponible'));
   $('#pu').text($(this).data('precioUnitario'));
@@ -352,6 +448,14 @@ success: function(data) {
   $('.modal-title').text('Detalle');
   });
 
+=======
+  $('#nbre').text($(this).data('nombre'));
+  $('#cdpn').text($(this).data('cantidaddisponible'));
+  $('#prun').text($(this).data('preciounitario'));
+  $('#esre').text($(this).data('estanon_recepcions_id'));
+  $('.modal-title').text('Detalle');
+  });
+>>>>>>> develop
   /* processing bar 
   */
   var myApp;
@@ -364,7 +468,10 @@ myApp = myApp || (function () {
         hidePleaseWait: function () {
             pleaseWaitDiv.modal('hide');
         },
+<<<<<<< HEAD
 
+=======
+>>>>>>> develop
     };
 })();
 </script>

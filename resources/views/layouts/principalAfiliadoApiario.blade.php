@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>APISOFT</title>
+    @toastr_css
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -60,21 +61,27 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
+                <li><a><i class="fa fa-home"></i> Home<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                     <li><a href="{{ url('/dashboard/') }}">Dashboard</a></li>
+                     
+                    </ul>
+                  </li>
                 @if(Auth::check())
                     @if (Auth::user()->isAdmin())
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       
-                     <li><a href="{{ url('users/') }}">Gestionar users</a></li>
+                     <li><a href="{{ url('users/') }}">Gestionar usuarios</a></li>
                     </ul>
                   </li>
                 
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
-                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicacion</a></li>
+                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicación</a></li>
                       <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
-                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiaro</a></li>
+                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiario</a></li>
                     
                     </ul>
                   </li>
@@ -83,7 +90,7 @@
                   <li><a><i class="glyphicon glyphicon-list-alt"></i> Recepción<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/RecepcionMateriaPrima') }}">Gestionar Recepción</a></li>
-                      <li><a href="{{ url('/Cera/') }}">Gestionar Extración de cera</a></li>
+                      <li><a href="{{ url('/Cera/') }}">Gestionar Extracción de cera</a></li>
                     </ul>
                   </li>
                   <li><a><i class="glyphicon glyphicon-oil"></i> Planta <span class="fa fa-chevron-down"></span></a>
@@ -95,10 +102,16 @@
                     </ul>
                   </li>
 
-                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Producto Terminado <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Producto/') }}">Gestionar Productos</a></li>
-                      <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    
+                    </ul>
+                  </li>
+                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Servicios <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                    <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
+                    <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
                     
                     
                     </ul>
@@ -170,6 +183,10 @@
      {!!Html::script('/js2/dropdown.js')!!}
 
 
+     @jquery
+    @toastr_js
+    @toastr_render
+
 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -191,13 +208,28 @@
         'apiario_id': $('select[name=apiario_id]').val()
       },
       success: function(data){
-        if ((data.errors)) {
-          $('.error').removeClass('hidden');
-          $('.error').text(data.errors.afiliado_id);
-          $('.error').text(data.errors.apiario_id);
- 
-        } else {
-          $('.error').remove();
+        $('.errorAfiliado').addClass('hidden');
+        $('.errorApiario').addClass('hidden');
+         
+                    
+
+         if ((data.errors)) {
+             setTimeout(function () {
+                 $('#create').modal('show');
+                 toastr.error('ERRO DE VALIDACIÓN!', 'Error Alert', {timeOut: 5000});
+             }, 500);
+             if (data.errors.Afiliado) {
+                 $('.errorAfiliado').removeClass('hidden');
+                 $('.errorAfiliado').text(data.errors.afiliado_id);
+             }
+             if (data.errors.Apiario) {
+                 $('.errorApiario').removeClass('hidden');
+                 $('.errorApiario').text(data.errors.apiario_id);
+             }
+            
+         } else {
+             toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
+          
           $('#table').append("<tr class='afiliadoapiario" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.afiliado_id + "</td>"+
@@ -215,6 +247,7 @@
            + data.apiario_id + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         }
+        
       },
     });
     $('#afiliado_id').val('');
@@ -236,6 +269,7 @@ $('.form-horizontal').show();
 $('#idAA').val($(this).data('id'));
 $('#afi').val($(this).data('afiliado_id'));
 $('#api').val($(this).data('apiario_id'));
+
 $('#myModal').modal('show');
 });
 
@@ -247,26 +281,33 @@ $('.modal-footer').on('click', '.edit', function() {
 '_token': $('input[name=_token]').val(),
 'id': $("#idAA").val(),
 'afiliado_id': $('#afi').val(),
-'apiario_id': $('#api').val()
+'apiario_id': $('#api').val(),
     },
 success: function(data) {
-      $('.afiliadoapiario' + data.id).replaceWith(" "+
-      "<tr class='afiliadoapiario" + data.id + "'>"+
-      "<td>" + data.id + "</td>"+
-      "<td>" + data.afiliado_id + "</td>"+
-      "<td>" + data.apiario_id + "</td>"+
-      "<td>" + data.created_at + "</td>"+
- "<td><button class='show-modal btn btn-info btn-sm' data-id='"+
- data.id+"' data-afiliado_id='"
- +data.afiliado_id+"'data-apiario_id='"
- +data.apiario_id+"'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='"+
- data.id+"'data-afiliado_id='"
- +data.afiliado_id+ "' data-apiario_id='"
- +data.apiario_id+"'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='"+
- data.id+"' data-afiliado_id='"+
- data.afiliado_id+"'data-apiario_id='"+
- data.apiario_id+"'><span class='glyphicon glyphicon-trash'></span></button></td>"+"</tr>");
+  $('.errorAfiliado').addClass('hidden');
+        $('.errorApiario').addClass('hidden');
+         
+                    
+
+         if ((data.errors)) {
+             setTimeout(function () {
+                 $('#create').modal('show');
+                 toastr.error('ERRO DE VALIDACIÓN!', 'Error Alert', {timeOut: 5000});
+             }, 500);
+             if (data.errors.Afiliado) {
+                 $('.errorAfiliado').removeClass('hidden');
+                 $('.errorAfiliado').text(data.errors.afiliado_id);
+             }
+             if (data.errors.Apiario) {
+                 $('.errorApiario').removeClass('hidden');
+                 $('.errorApiario').text(data.errors.apiario_id);
+             }
+            
+         } else {
+             toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
+      $('.table' + $('.id').text()).remove();
     }
+},
   });
 });
 
@@ -281,7 +322,7 @@ $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Delete Post');
+$('.modal-descripcion').text('Eliminar Afiliado Apiario');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
@@ -299,6 +340,7 @@ $('.modal-footer').on('click', '.delete', function(){
       'id': $('.id').text()
     },
     success: function(data){
+      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
        $('.afiliadoapiario' + $('.id').text()).remove();
     }
   });

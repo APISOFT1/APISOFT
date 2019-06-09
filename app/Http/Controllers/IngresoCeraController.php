@@ -48,7 +48,7 @@ class IngresoCeraController extends Controller
         $usuarios=DB::table('users')
         ->get();
         $ceras = DB::table('ceras as art')
-          ->select(DB::raw('CONCAT(art.id ," - ",art.Descripcion ) AS ceras'),'art.id','art.PesoNeto')
+          ->select(DB::raw('CONCAT(art.id ," - ",art.Recepcion_id ) AS ceras'),'art.id','art.PesoNeto')
           ->groupBy('ceras','art.id','art.PesoNeto')
           ->where('art.PesoNeto','>','0')
           ->get();
@@ -90,6 +90,7 @@ class IngresoCeraController extends Controller
         {
             DB::rollback();
         }
+        toastr()->success('Data has been saved successfully!');
         return Redirect::to('IngresoCera'); 
     }
     public function show ($id)
