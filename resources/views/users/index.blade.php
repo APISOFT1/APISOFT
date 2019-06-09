@@ -12,6 +12,8 @@
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
+@include('Busqueda.search',['url'=>'users','link'=>'users'])
+
 <h1 class="text-center">LISTADO DE USUARIOS</h1>
   	
 <!-- Saltos de linea-->
@@ -22,7 +24,6 @@
 <!--Esta clase nos permite posicionar el buscador  -->
 
 
-@include('users.search') 
 
 
 

@@ -4,19 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class producto extends Model
 {
-     protected $table = 'products';
+    protected $table = 'productos';
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'nombre','precio'
+        'nombre'
     ];
 
      public function stocks() 
     {
         return $this->hasMany('App/Stock');
     }
-
-    
 }
