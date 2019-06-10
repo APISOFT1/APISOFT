@@ -105,10 +105,6 @@
                   </li>
 
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
-<<<<<<< .merge_file_a21248
-                    <ul class="nav child_menu">
-                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
-=======
                     <ul class="nav child_menu">
                     <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
                     
@@ -116,7 +112,6 @@
                   </li>
                   <li><a><i class="fa fa-cart-plus"></i>Servicios <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
->>>>>>> .merge_file_a29348
                     <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
                     <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
                     

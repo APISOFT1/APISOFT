@@ -129,9 +129,6 @@
                         <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
                         <p>Asignar Estañon</p>
                     </div>
-                    
-                    
-                    
                 </div>
             </div>
             <div class="row setup-content" id="step-1">

@@ -101,10 +101,6 @@
                   </li>
 
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
-<<<<<<< .merge_file_a07396
-                    <ul class="nav child_menu">
-                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
-=======
                     <ul class="nav child_menu">
                     <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
                     
@@ -112,7 +108,6 @@
                   </li>
                   <li><a><i class="fa fa-cart-plus"></i>Servicios <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
->>>>>>> .merge_file_a14936
                     <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
                     <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
                     
@@ -284,11 +279,7 @@ $("#addd").click(function() {
     
     data: {
       '_token': $('input[name=_token]').val(),
-<<<<<<< .merge_file_a07396
       'Recepcion_id': $('input[name=Recepcion_id]').val(),
-=======
-      'Recepcion_id': $('select[name=Recepcion_id]').val(),
->>>>>>> .merge_file_a14936
       'Estanon_id': $('select[name=Estanon_id]').val(),
       'Fecha': $('input[name=Fecha]').val()
       
@@ -336,19 +327,34 @@ $('#myModal').modal('show');
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
-    url: 'editRol',
+    url: 'editRecepcionMateriaPrima',
     data: {
 '_token': $('input[name=_token]').val(),
 'id': $("#fid").val(),
-'descripcion': $('#ti').val(),
+'fecha': $('#ti').val(),
+'pesoBruto': $('#psb').val(),
+'discount': $('#snt').val(),
+'numero_muestras': $('#mue').val(),
+'afiliado_id': $('#ali').val(),
+'user_id': $('#ser').val(),
+'tipoEntrega_id': $('#ent').val(),
+ 'observacion': $('#cio').val(),
     },
 success: function(data) {
-      $('.rol' + data.id).replaceWith(" "+
-      "<tr class='rol" + data.id + "'>"+
+      $('.recepcion' + data.id).replaceWith(" "+
+      "<tr class='recepcion" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
-      "<td>" + data.descripcion + "</td>"+
-      "<td>" + data.created_at + "</td>"+
- "<td><button class='show-modalRol btn btn-info btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modalRol btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalRol btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+      "<td>" + data.fecha + "</td>"+
+      "<td>" + data.pesoBruto + "</td>"+
+      "<td>" + data.pesoNeto + "</td>"+
+      "<td>" + data.numero_muestras + "</td>"+
+      "<td>" + data.afiliado_id + "</td>"+
+      "<td>" + data.user_id+ "</td>"+
+      "<td>" + data.tipoEntrega_id + "</td>"+
+      "<td>" + data.observacion + "</td>"+
+ "<td><button class='show-modalRol btn btn-info btn-sm' data-id='"
+  + data.id + "' data-descripcion='"
+   + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modalRol btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalRol btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
       "</tr>");
     }
   });

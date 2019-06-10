@@ -245,7 +245,7 @@
             <div class="col-md-3 col-sm-6 col-xs-12">
                <h3>   APPIS Chorotega</h3>
               <ul>
-               <!-- <img src="/welcome/img/APPIS.jpeg"> -->
+                <img src="/welcome/img/APPIS.jpeg">
               </ul>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12">
@@ -254,8 +254,8 @@
             </div>
            
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <h3>Asociacion de Apicultores Región Chorotega</h3>
-                Todos los derechos reservados<br>
+              <h3>Universidad Nacional de Costa Rica<br>
+              <img src="/welcome/img/una.png">
               <ul>
               
               </ul>

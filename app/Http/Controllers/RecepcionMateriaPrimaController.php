@@ -100,7 +100,7 @@ else {
 }
 }
 
-public function editRecepcion(request $request){
+public function editRecepcionMateriaPrima(request $request){
   $rules = array(
    
   );
