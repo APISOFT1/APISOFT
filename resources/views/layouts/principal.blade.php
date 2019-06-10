@@ -236,7 +236,6 @@
         'estado_id': $('input[name=estado_id]').val()
       },
       success: function(data){
-
         $('.errorId').addClass('hidden');
         $('.errorNombre').addClass('hidden');
          $('.errorApellido1').addClass('hidden');
@@ -249,7 +248,6 @@
          $('.errorGenero').addClass('hidden');
          $('.errorEstadoCivil').addClass('hidden');
          $('.errorEstado').addClass('hidden');
-
          if ((data.errors)) {
                         setTimeout(function () {
                             $('#create').modal('show');
@@ -303,7 +301,6 @@
                             $('.errorEstado').removeClass('hidden');
                             $('.errorEstado').text(data.errors.estado_id);
                         }
-
         } else {
           toastr.success('SE HA CREADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
           $('#table').append("<tr class='afi" + data.id + "'>"+
@@ -376,8 +373,6 @@
     $('#estado_civil_id').val('');
     $('#estado_id').val('');
   });
-
-
 $(document).on('click', '.edit-modal', function() {
 $('#footer_action_button').text(" Editar ");
 $('#footer_action_button').addClass('fa fa-pencil');
@@ -434,7 +429,6 @@ success: function(data) {
          $('.errorGenero').addClass('hidden');
          $('.errorEstadoCivil').addClass('hidden');
          $('.errorEstado').addClass('hidden');
-
          if ((data.errors)) {
                         setTimeout(function () {
                             $('#create').modal('show');
@@ -488,7 +482,6 @@ success: function(data) {
                             $('.errorEstado').removeClass('hidden');
                             $('.errorEstado').text(data.errors.estado_id);
                         }
-
         } else {
           toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
       $('.afi' + data.id).replaceWith(" "+
@@ -578,7 +571,6 @@ $('.modal-footer').on('click', '.delete', function(){
     }
   });
 });
-
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
@@ -693,9 +685,7 @@ $(document).ready(function () {
 
 <script>
 $( document ).on('click','.create-modal',function() {
-
     var now = new Date();
-
     var day = ("0" + now.getDate()).slice(-2);
     var month = ("0" + (now.getMonth() + 1)).slice(-2);
     h=now.getHours();
@@ -718,4 +708,3 @@ $( document ).on('click','.create-modal',function() {
     $("#fecha,#Fecha_Ingreso").val(today);
 });
 </script>
-

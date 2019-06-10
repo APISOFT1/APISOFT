@@ -217,7 +217,6 @@
          $('.errorPeso').addClass('hidden');
         
                     
-
                     if ((data.errors)) {
                         setTimeout(function () {
                             $('#create').modal('show');
@@ -291,7 +290,6 @@ success: function(data) {
          $('.errorPeso').addClass('hidden');
         
                     
-
                     if ((data.errors)) {
                         setTimeout(function () {
                             $('#myModal').modal('show');
@@ -343,7 +341,6 @@ $('.form-horizontal').hide();
 $('.descripcion').html($(this).data('descripcion'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
@@ -371,4 +368,3 @@ $('.modal-footer').on('click', '.delete', function(){
 
     </body>
     </html>}
-   

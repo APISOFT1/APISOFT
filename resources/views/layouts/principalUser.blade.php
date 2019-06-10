@@ -19,7 +19,6 @@
   
       <!-- Include Twitter Bootstrap and jQuery: -->
 <!--<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>->
-
  
 <!-- Include the plugin's CSS and JS: -->
 {!!Html::style ('/vendor/switch/switchery.min.css')!!} 
@@ -250,7 +249,6 @@
     $('.modal-crear').text('Crear User');
     
   });
-
   $("#add").click(function() {
     $.ajax({
       type: 'POST',
@@ -270,7 +268,6 @@
           $('.error').text(data.errors.email);
           $('.error').text(data.errors.password);
          
-
  
         } else {
           $('.error').remove();
@@ -307,7 +304,6 @@
     $('#password').val('');
   
   });
-
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
 $('#footer_action_button').text(" Editar");
@@ -325,11 +321,8 @@ $('#emm').val($(this).data('email'));
 $('#passs').val($(this).data('password'));
 $('#sst').val($(this).data('status'));
 $('#rlss').val($(this).data('roles'));
-
-
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
@@ -342,9 +335,7 @@ $('.modal-footer').on('click', '.edit', function() {
 'password': $('#passs').val(),
 'status': $('#sst').val(),
 'roles': $('#rlss').val(),
-
       
-
     },
 success: function(data) {
   $('.errorName').addClass('hidden');
@@ -357,7 +348,6 @@ success: function(data) {
          
          
                     
-
          if ((data.errors)) {
              setTimeout(function () {
                  $('#create').modal('show');
@@ -375,12 +365,10 @@ success: function(data) {
                  $('.errorPassword').removeClass('hidden');
                  $('.errorPassword').text(data.errors.password);
              }
-
              if (data.errors.Roles) {
                  $('.errorRoles').removeClass('hidden');
                  $('.errorRoles').text(data.errors.roles);
              }
-
          } else {
              toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
       $('.users' + data.id).replaceWith(" "+
@@ -406,7 +394,6 @@ success: function(data) {
           "' data-password='" + data.password +
           "' data-password='" + data.status +
           "' data-roles='" + data.roles +
-
  "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
  + data.id + 
               "' data-name='" + data.name + 
@@ -414,14 +401,12 @@ success: function(data) {
           "' data-password='" + data.password +
           "' data-password='" + data.status +
        "' data-roles='" + data.roles + 
-
 "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
          }
     },
   });
 });
-
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Eliminar");
@@ -437,7 +422,6 @@ $('.form-horizontal').hide();
 $('.name').html($(this).data('name'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
@@ -448,7 +432,6 @@ $('.modal-footer').on('click', '.delete', function(){
     },
     success: function(data){
       $('.errorId').addClass('hidden');
-
       if ((data.errors)) {
              setTimeout(function () {
                  $('#myModal').modal('show');
@@ -464,7 +447,6 @@ $('.modal-footer').on('click', '.delete', function(){
     },
   });
 });
-
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');

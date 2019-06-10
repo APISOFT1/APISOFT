@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use Validator;
 use Response;
@@ -25,9 +24,7 @@ class ApiarioController extends Controller
             ->orderby('id','ASC')
             ->paginate(7);
            $ubicaciones = Ubicacion::all();
-
           
-
         return view('Apiario.index', compact('api', 'ubicaciones'), ['api'=>$api,"searchText"=>$query]);
         }
         
@@ -41,11 +38,9 @@ public function addApiario(Request $request){
       'cantidad' => 'required',
       'ubicacion_id' => 'required'
       ); 
-
       $validator = Validator::make ( Input::all(), $rules);
       if ($validator->fails())
       return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
-
     else {
     
     $ubicacion_id = input::get('ubicacion_id');
@@ -59,7 +54,6 @@ public function addApiario(Request $request){
       
       return response()->json($api);
   
-
   }
 }
 public function find(Request $request)
@@ -99,8 +93,6 @@ public function deleteApiario(request $request){
   $api = Apiario::find ($request->id);
   $api->delete();
  
-
   
-
 }
 }

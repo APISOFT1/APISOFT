@@ -192,9 +192,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-
 {{-- ajax Form Add Post--}}
-
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
@@ -217,7 +215,6 @@
          $('.errorEstanon').addClass('hidden');
          $('.errorFecha').addClass('hidden');
        
-
          if ((data.errors)) {
                         setTimeout(function () {
                             $('#create').modal('show');
@@ -263,9 +260,7 @@
     $('#Recepcion_id').val('');
     $('#Estanon_id').val('');
     $('#Fecha').val('');
-
   });
-
   
  
 // function Edit POST
@@ -285,7 +280,6 @@ $('#can').val($(this).data('cantidad'));
 $('#ub').val($(this).data('ubicacion_id'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
@@ -296,14 +290,12 @@ $('.modal-footer').on('click', '.edit', function() {
 'Descripcion': $('#cri').val(),
 'cantidad': $('#can').val(),
 'ubicacion_id': $('#ub').val(),
-
     },
 success: function(data) {
   $('.errorRecepcion').addClass('hidden');
          $('.errorEstanon').addClass('hidden');
          $('.errorFecha').addClass('hidden');
        
-
          if ((data.errors)) {
                         setTimeout(function () {
                             $('#create').modal('show');
@@ -348,7 +340,6 @@ success: function(data) {
 },
   });
 });
-
 /*
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
@@ -365,7 +356,6 @@ $('.form-horizontal').hide();
 $('.recepcion_id').html($(this).data('recepcion_id'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
@@ -379,7 +369,6 @@ $('.modal-footer').on('click', '.delete', function(){
     }
   });
 });
-
 */
   // Show function
   $(document).on('click', '.show-modal', function() {

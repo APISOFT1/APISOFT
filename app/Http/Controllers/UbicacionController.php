@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use Validator;
 use Response;
@@ -10,8 +9,6 @@ use App\Ubicacion;
 use Illuminate\Http\Redirect;
 use App\Http\Requests\UbicacionFormRequest;
 use DB;
-
-
 class UbicacionController extends Controller
 {
    

@@ -284,10 +284,12 @@ var div_respuesta="#respuesta";
           data.id + "' data-descripcion='" + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modalRol btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalRol btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         
-          $('#busqueda_parroquia').append("<tr class='recepcion" + data.id + "'>"+
+          $('#fiii').append("<tr class='recepciones" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
-          "<td>" + data.fecha + "</td>"+
           "<td>" + data.afiliado_id + "</td>");
+
+          $('#Recepcion_id').val($(this).data('id'));
+        
         }
        
       },
@@ -385,11 +387,18 @@ $('#myModal').modal('show');
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
-    url: 'editRol',
+    url: 'editRecepcionMateriaPrima',
     data: {
 '_token': $('input[name=_token]').val(),
 'id': $("#fid").val(),
-'descripcion': $('#ti').val(),
+'fecha': $('#ti').val(),
+'pesoBruto': $('#psb').val(),
+'discount': $('#snt').val(),
+'numero_muestras': $('#mue').val(),
+'afiliado_id': $('#ali').val(),
+'user_id': $('#ser').val(),
+'tipoEntrega_id': $('#ent').val(),
+ 'observacion': $('#cio').val(),
     },
 success: function(data) {
   $('.errorFecha').addClass('hidden');
@@ -445,9 +454,17 @@ success: function(data) {
       $('.rol' + data.id).replaceWith(" "+
       "<tr class='rol" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
-      "<td>" + data.descripcion + "</td>"+
-      "<td>" + data.created_at + "</td>"+
- "<td><button class='show-modalRol btn btn-info btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modalRol btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalRol btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+      "<td>" + data.fecha + "</td>"+
+      "<td>" + data.pesoBruto + "</td>"+
+      "<td>" + data.pesoNeto + "</td>"+
+      "<td>" + data.numero_muestras + "</td>"+
+      "<td>" + data.afiliado_id + "</td>"+
+      "<td>" + data.user_id+ "</td>"+
+      "<td>" + data.tipoEntrega_id + "</td>"+
+      "<td>" + data.observacion + "</td>"+
+ "<td><button class='show-modalRol btn btn-info btn-sm' data-id='"
+  + data.id + "' data-descripcion='"
+   + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modalRol btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalRol btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
       "</tr>");
     }
 },
@@ -672,62 +689,4 @@ $("#numero_muestras").val(aleatorio);
 });
 </script>
 
-<script type="text/javascript">
-{{-- ajax Form Add Post--}}
-
-$(document).ready(iniciar);
-
-function iniciar() {
-    $("#busqueda_parroquia tr td").click(clickTabla);
-}
-
-$(document).ready(function () {
-    var table = $('#busqueda_parroquia').DataTable();
-    var dato = "";
-    //para seleccionar una opcion
-    $('#example tbody').on('click', 'tr', function () {
-        if ($(this).hasClass('selected')) {
-            $(this).removeClass('selected');
-            dato = "";
-            console.log(dato);
-        }
-        else {
-            table.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
-            dato = $(this).find("td:eq(0)").text();
-            console.log(dato);
-        }
-    });
-});
-
-$("#BusquedaParroquia").on('click', 'tr', function (e) {
-    e.preventDefault();
-    var renglon = $(this);
-    var campo1, campo2, campo3;
-    $(this).children("td").each(function (i) {
-        switch (i) {
-            case 0:
-                campo1 = $(this).text();
-                break;
-            case 1:
-                campo2 = $(this).text();
-                break;
-            case 2:
-                campo3 = $(this).text();
-                break;
-        }
-    })
-    $("#txt_codigo").val(campo1);
-    $("#txt_nombre").val(campo2);
-    if (campo3 == "A") {
-        $("#che_estado").prop("checked", "checked");
-    }
-    CierraPopup();
-});
-
-function CierraPopup() {
-    $("#popupBusquedaParroquia").modal('hide');//ocultamos el modal
-    $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
-    $('.modal-backdrop').remove();//eliminamos el backdrop del modal
-}
 
