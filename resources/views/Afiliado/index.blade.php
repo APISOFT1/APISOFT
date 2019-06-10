@@ -64,13 +64,19 @@
         <td>{{$value->Num_Cuenta}}</td>
 	    	<td>{{$value->Genero->descripcion}}</td>
 	    	<td> {{$value->Estado_Civil->descripcion}}</td>  
-        <td> <span class="label label-success"><?php  if ($value->estado_id=='1') {
-			# code...
-			print("Activo");
-		} else {
-			print("Inactivo");
-		}
-		  ?></span></td>  
+        <td>   @if($value->estado_id)
+                            <span class="label label-primary"><?php  if ($value->estado_id=='1') {
+	                     		# code...
+	                 		print("Activo");
+	                         	} 
+	                     	  ?> </span>
+                        @else
+                            <span class="label label-danger"><?php  if ($value->estado_id=='0') {
+		                      	# code...
+	                       		print("Inactivo");
+	                         	} 
+	                     	  ?> </span>
+                        @endif</td>
           <td>
           <a href="#" class="show-modal btn btn-info btn-sm" 
           data-id="{{$value->id}}"
@@ -208,7 +214,7 @@
 
   
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <input type="date" class="form-control " id="Fecha_Ingreso" name="Fecha_Ingreso" placeholder="YYYY-MM-DD" required>
+                        <input type="datetime" class="form-control " id="fecha" name="Fecha_Ingreso" placeholder="YYYY-MM-DD" disabled  required>
                         <p class="No Ingreso la Fecha"></p>
                         <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
                       </div> 
@@ -306,66 +312,62 @@
                     <div class="modal-body">
                     <div class="form-group">
                       <label for="">ID :</label>
-                      <b id="iaa"/>
+                      <b id="dis"/>
                     </div>
                     <div class="form-group">
                       <label for="">Nombre :</label>
                       
-                      <b id="jaja"/>
+                      <b id="mbr"/>
                     </div>
 										<div class="form-group">
                       <label for="">Primer Apellido:</label>
-                      <b id="ape1"/>
+                      <b id="ell"/>
                     </div>
 										<div class="form-group">
                    
                       <label for="">Segundo Apellido :</label>
-                      <b id="ape2"/>
+                      <b id="ido"/>
                     </div>
                     <div class="form-group">
                    
                    <label for="">Telefono :</label>
-                   <b id="tel"/>
+                   <b id="eno"/>
                  </div>
                  <div class="form-group">
                    
                    <label for="">Correo :</label>
-                   <b id="eml"/>
+                   <b id="ail"/>
                  </div>
                  <div class="form-group">
                    
                    <label for="">Direccion :</label>
-                   <b id="dirn"/>
+                   <b id="rec"/>
                  </div>
-                 <div class="form-group">
-                   
-                   <label for="">Direccion :</label>
-                   <b id="dirn"/>
-                 </div>
+                
                  <div class="form-group">
                    
                    <label for="">Fecha Ingreso :</label>
-                   <b id="fecso"/>
+                   <b id="eso"/>
                  </div>
                  <div class="form-group">
                    
                    <label for="">Numero de cuenta :</label>
-                   <b id="nunta"/>
+                   <b id="um"/>
                  </div>
                  <div class="form-group">
                    
                    <label for="">Genero :</label>
-                   <b id="ged"/>
+                   <b id="ero"/>
                  </div>
                  <div class="form-group">
                    
                    <label for="">Estado Civil :</label>
-                   <b id="estid"/>
+                   <b id="vil"/>
                  </div>
                  <div class="form-group">
                    
                    <label for="">Estado :</label>
-                   <b id="esid"/>
+                   <b id="ado"/>
                  </div>
                     </div>
                     </div>
@@ -434,7 +436,7 @@
 
 
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <input type="date" class="form-control  has-feedback-right" id="f" >
+                        <input type="datetime" class="form-control  has-feedback-right" id="f"  disabled>
                         <p class="No Ingreso la Fecha"></p>
                         <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
                       </div>

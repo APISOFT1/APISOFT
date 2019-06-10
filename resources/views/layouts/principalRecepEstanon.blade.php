@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>APISOFT</title>
+    @toastr_css
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -163,6 +164,9 @@
   <script src="{{asset('js2/bootstrap-select.min.js')}}"></script>
   
     <!-- jQuery -->
+    @jquery
+    @toastr_js
+    @toastr_render
 
     {!!Html::script('/js2/jquery.min.js')!!}  
     @stack('scripts')
@@ -209,16 +213,31 @@
         
       },
       success: function(data){
-        if ((data.errors)) {
-          html = '<div class="alert alert-danger">';
-          $('.error').removeClass('hidden');
-          $('.error').text(data.errors.Recepcion_id);
-          $('.error').text(data.errors.Estanon_id);
-          $('.error').text(data.errors.Fecha);
- 
+        $('.errorRecepcion').addClass('hidden');
+         $('.errorEstanon').addClass('hidden');
+         $('.errorFecha').addClass('hidden');
+       
+
+         if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#create').modal('show');
+                            toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.Recepcion_id) {
+                            $('.errorRecepcion').removeClass('hidden');
+                            $('.errorRecepcion').text(data.errors.Recepcion_id);
+                        }
+                        
+                        if (data.errors.Estanon_id) {
+                            $('.errorEstanon').removeClass('hidden');
+                            $('.errorEstanon').text(data.errors.Estanon_id);
+                        }
+                        if (data.errors.Fecha) {
+                            $('.errorFecha').removeClass('hidden');
+                            $('.errorFecha').text(data.errors.Fecha);
+                        }
         } else {
-          html = '<div class="alert alert-success alert-dismissible">'  + data.success + '</div>';
-          $('.error').remove();
+          toastr.success('SE HA CREADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
           $('#table').append("<tr class='cera" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.Recepcion_id + "</td>"+
@@ -239,7 +258,6 @@
           + data.Fecha + "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         }
-        $('#form_result').html(html);
       },
     });
     $('#Recepcion_id').val('');
@@ -281,6 +299,31 @@ $('.modal-footer').on('click', '.edit', function() {
 
     },
 success: function(data) {
+  $('.errorRecepcion').addClass('hidden');
+         $('.errorEstanon').addClass('hidden');
+         $('.errorFecha').addClass('hidden');
+       
+
+         if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#create').modal('show');
+                            toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.Recepcion_id) {
+                            $('.errorRecepcion').removeClass('hidden');
+                            $('.errorRecepcion').text(data.errors.Recepcion_id);
+                        }
+                        
+                        if (data.errors.Estanon_id) {
+                            $('.errorEstanon').removeClass('hidden');
+                            $('.errorEstanon').text(data.errors.Estanon_id);
+                        }
+                        if (data.errors.Fecha) {
+                            $('.errorFecha').removeClass('hidden');
+                            $('.errorFecha').text(data.errors.Fecha);
+                        }
+        } else {
+          toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
       $('.api' + data.id).replaceWith(" "+
       "<tr class='api" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
@@ -302,6 +345,7 @@ success: function(data) {
           + data.ubicacion_id + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
       "</tr>");
     }
+},
   });
 });
 

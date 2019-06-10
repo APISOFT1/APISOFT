@@ -167,6 +167,9 @@
   <script src="{{asset('js2/bootstrap-select.min.js')}}"></script>
   
     <!-- jQuery -->
+    @jquery
+    @toastr_js
+    @toastr_render
 
     {!!Html::script('/js2/jquery.min.js')!!}  
     @stack('scripts')
@@ -186,9 +189,7 @@
 
      {!!Html::script('/js/daterangepicker.js')!!}
 
-     @jquery
-    @toastr_js
-    @toastr_render
+    
 
 
 <!-- MODAL Cera -->
@@ -453,14 +454,14 @@ function discount(){
 var timeoutId = 0;
 $('#ub').keyup(function(e){
    clearTimeout(timeoutId);
-   timeoutId = setTimeout(discount,1000);
+   timeoutId = setTimeout(ub,1000);
 });
 
-function discount(){
+function ub(){
   let amount = $('#ub').val();
   if(!isNaN(amount)){
-    let discount = amount * 0.01;
-    let total =  amount - discount;
+    let ub = amount * 0.01;
+    let total =  amount - ub;
     $("#ps").val(total);
   } 
 }

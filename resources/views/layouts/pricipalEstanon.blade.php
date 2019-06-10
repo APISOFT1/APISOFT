@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>APISOFT</title>
+    @toastr_css
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -166,6 +167,9 @@
   <script src="{{asset('js2/bootstrap-select.min.js')}}"></script>
   
     <!-- jQuery -->
+    @jquery
+    @toastr_js
+    @toastr_render
 
     {!!Html::script('/js2/jquery.min.js')!!}  
     @stack('scripts')
@@ -209,14 +213,27 @@
         
       },
       success: function(data){
-        if ((data.errors)) {
-          $('.error').removeClass('hidden');
-          $('.error').text(data.errors.Descripcion);
-          $('.error').text(data.errors.Peso);
- 
-        } else {
-          html = '<div class="alert alert-success alert-dismissible">'  + data.success + '</div>';
-          $('.error').remove();
+        $('.errorDescripcion').addClass('hidden');
+         $('.errorPeso').addClass('hidden');
+        
+                    
+
+                    if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#create').modal('show');
+                            toastr.error('ERRO DE VALIDACIÓN!', 'Error Alert', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.Descripcion) {
+                            $('.errorDescripcion').removeClass('hidden');
+                            $('.errorDescripcion').text(data.errors.Descripcion);
+                        }
+                        if (data.errors.Peso) {
+                            $('.errorPeso').removeClass('hidden');
+                            $('.errorPeso').text(data.errors.Peso);
+                        }
+                        
+                    } else {
+                        toastr.success('SE HA CREADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
           $('#table').append("<tr class='api" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.Descripcion + "</td>"+
@@ -237,7 +254,6 @@
           + data.Peso + "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         }
-        $('#form_result').html(html);
       },
     });
     $('#Descripcion').val('');
@@ -271,6 +287,27 @@ $('.modal-footer').on('click', '.edit', function() {
 'Peso': $('#pes').val(),
     },
 success: function(data) {
+  $('.errorDescripcion').addClass('hidden');
+         $('.errorPeso').addClass('hidden');
+        
+                    
+
+                    if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#myModal').modal('show');
+                            toastr.error('ERRO DE VALIDACIÓN!', 'Error Alert', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.Descripcion) {
+                            $('.errorDescripcion').removeClass('hidden');
+                            $('.errorDescripcion').text(data.errors.Descripcion);
+                        }
+                        if (data.errors.Peso) {
+                            $('.errorPeso').removeClass('hidden');
+                            $('.errorPeso').text(data.errors.Peso);
+                        }
+                        
+                    } else {
+                        toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
       $('.api' + data.id).replaceWith(" "+
       "<tr class='api" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
@@ -288,6 +325,7 @@ success: function(data) {
           + data.Peso + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
       "</tr>");
     }
+},
   });
 });
 // form Delete function
@@ -298,7 +336,7 @@ $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Eliminar Ubicación');
+$('.modal-descripcion').text('Eliminar Estañón');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
@@ -315,6 +353,7 @@ $('.modal-footer').on('click', '.delete', function(){
       'id': $('.id').text()
     },
     success: function(data){
+      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
       $('.ubicacion' + $('.id').text()).remove();
     }
   });

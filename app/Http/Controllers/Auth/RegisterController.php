@@ -102,6 +102,6 @@ class RegisterController extends Controller
             return "Whoops! sucedió un error.";
         }
         
-        return redirect()->to('/dashboard')->with('success', 'Profile updated!');;
+        return redirect()->to('/dashboard');
     }
 }
