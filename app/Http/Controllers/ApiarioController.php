@@ -19,17 +19,16 @@ class ApiarioController extends Controller
     public function index(Request $request)
     {
         if($request){
-            $query=trim($request->get('searchText'));  //valida si la peticion trae el campo de busqueda 
-        $api = Apiario::with('Ubicacion')
-            ->where('Descripcion','LIKE','%'.$query.'%')
-            ->orderby('id','ASC')
-            ->paginate(7);
-           $ubicaciones = Ubicacion::all();
-
-          
-
-        return view('Apiario.index', compact('api', 'ubicaciones'), ['api'=>$api,"searchText"=>$query]);
-        }
+             $search = \Request::get('search');
+              $api = Apiario::with('Ubicacion');
+              $api = Apiario::where('Descripcion','like','%'.$search.'%')
+              ->orderby('Descripcion','ASC')
+              ->paginate(7);
+              $ubicaciones = Ubicacion::all();
+        return view('Apiario.index', compact('api', 'ubicaciones'));  
+        
+                  
+}
         
     }
     ////////////////////////////////////////////////////////NUEVO

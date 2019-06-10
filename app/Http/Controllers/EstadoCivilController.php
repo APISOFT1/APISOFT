@@ -20,11 +20,11 @@ class EstadoCivilController extends Controller
     {
         if ($request)
         {
-            $query=trim($request->get('searchText'));
-            $estado_Civil=DB::table('estado_civils')->where('descripcion','LIKE','%'.$query.'%')
-            ->orderby('id','desc')
-            ->paginate(7);
-            return view('EstadoCivil.index',["estado_Civil"=>$estado_Civil,"searchText"=>$query]);
+              $search = \Request::get('search');
+    $estado_Civil = Estado_Civil::where('descripcion','like','%'.$search.'%')
+        ->orderBy('Descripcion')
+        ->paginate(10);
+  return view('EstadoCivil.index',compact('estado_Civil'));   
         }
         //
     }

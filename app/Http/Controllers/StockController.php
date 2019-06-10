@@ -15,20 +15,20 @@ class StockController extends Controller
      */
     public function index(Request $request)
     {
-      if($request){
-        $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-        $sto= Stock::with('recepcionEstanon') 
-            ->where('id','LIKE','%'.$query.'%')
-            ->orderby('id','desc')
-            ->paginate(7);
-            $recepcionEstanon = RecepcionEstanon::all();
-        return view('Stock.index', compact('sto','recepcionEstanon'), ['sto'=>$sto,"searchText"=>$query]);
+       if ($request)
+    {
+        $search = \Request::get('search');
+        $recepcionEst = RecepcionEstanon::with('Producto','Presentacion','RecepcionMateriaPrima', 'Estanon');
+        $recepcionEst = RecepcionEstanon::where('producto_id','like','%'.$search.'%')
+        ->orderby('producto_id','desc')
+        ->paginate(7);
+        $recepciones = RecepcionMateriaPrima::all();
+        $presentacion = Presentacion::all();
+        $producto = Producto::all();
+        return view('Stock.index', compact('sto', 'recepcionEstanon', 'presentacion','producto'));
     }
-   
-    
-  
-      return view('Stock.index',compact('sto','recepcionEstanon'));   
-         }
+
+           }
    
     public function addStock(Request $request){
         $rules = array(

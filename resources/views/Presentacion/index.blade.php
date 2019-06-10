@@ -1,4 +1,4 @@
-@extends ('layouts.principalProducto') 
+@extends ('layouts.principalPresentacion') 
 
 <!-- mensaje de exito -->
 <?php $message=Session::get('message') ?>
@@ -6,15 +6,15 @@
 @if($message == 'store')
 <div class="alert alert-success alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-PRODUCTO CREADO CORRECTAMENTE
+    PRESENTACIÓN CREADO CORRECTAMENTE
 </div>
 @endif
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
-@include('Busqueda.search',['url'=>'Producto','link'=>'Producto'])
+@include('Busqueda.search',['url'=>'Presentacion','link'=>'Presentacion'])
 
-<h1 >LISTADO DE PRODUCTO</h1>
+<h1 >LISTADO DE  PRESENTACIÓN</h1>
 
 <!-- Saltos de linea-->
 <br>
@@ -32,7 +32,7 @@ PRODUCTO CREADO CORRECTAMENTE
     <table class="table table-bordered" id="table">
       <tr>
         <th width="150px">No</th>
-        <th  width="150px">Nombre</th>
+        <th  width="150px">Presentación</th>
         <th width="200px">
           <a href="#" class="create-modal btn btn-success btn-sm">
             <i class="glyphicon glyphicon-plus"></i>
@@ -41,18 +41,18 @@ PRODUCTO CREADO CORRECTAMENTE
       </tr>
       {{ csrf_field() }}
      
-      @foreach ($product as $value)
+      @foreach ($pre as $value)
       
           <td>{{ $value->id}}</td>
-          <td>{{ $value->nombre }}</td>
+          <td>{{ $value->Descripcion }}</td>
           <td>
-            <a href="#" class="show-modal btn btn-info btn-sm" data-id="{{$value->id}}" data-Descripcion="{{$value->nombre}}">
+            <a href="#" class="show-modal btn btn-info btn-sm" data-id="{{$value->id}}" data-Descripcion="{{$value->Descripcion}}">
               <i class="fa fa-eye"></i>
             </a>
-            <a href="#" class="edit-modal btn btn-warning btn-sm" data-id="{{$value->id}}" data-Descripcion="{{$value->nombre}}">
+            <a href="#" class="edit-modal btn btn-warning btn-sm" data-id="{{$value->id}}" data-Descripcion="{{$value->Descripcion}}">
               <i class="glyphicon glyphicon-pencil"></i>
             </a>
-            <a href="#" class=" delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" data-Descripcion="{{$value->nombre}}">
+            <a href="#" class=" delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" data-Descripcion="{{$value->Descripcion}}">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
           </td>
@@ -60,7 +60,7 @@ PRODUCTO CREADO CORRECTAMENTE
       @endforeach
     </table>
   </div>
-  {{$ubicacion->links()}}
+  {{$pre->links()}}
 </div>
 {{-- Modal Form Create Post --}}
 <div id="create" class="modal fade" role="dialog">
@@ -77,8 +77,8 @@ PRODUCTO CREADO CORRECTAMENTE
 
           <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-              <input type="text" class="form-control has-feedback-left" id="nombre" name="nombre"
-              placeholder="Nombre" required>
+              <input type="text" class="form-control has-feedback-left" id="Descripcion" name="Descripcion"
+              placeholder="Descripción" required>
               
               <p class="error text-center alert alert-danger hidden"></p>
               <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
@@ -108,11 +108,11 @@ PRODUCTO CREADO CORRECTAMENTE
                     <div class="modal-body">
                     <div class="form-group">
                       <label for="">Código :</label>
-                      <b id="codPro"/>
+                      <b id="codPre"/>
                     </div>
                     <div class="form-group">
-                      <label for="">Nombre :</label>
-                      <b id="NomPro"/>
+                      <label for="">Presentación :</label>
+                      <b id="PrePre"/>
                     </div>
                     </div>
                     </div>
@@ -146,7 +146,7 @@ PRODUCTO CREADO CORRECTAMENTE
         </form>
         {{-- Form Delete Post --}}
         <div class="deleteContent">
-          ¿Está seguro que desea eliminar este producto? <span class="title"></span>?
+          ¿Está seguro que desea eliminar esta presentación <span class="title"></span>?
           <span class="hidden id"></span>
         </div>
       </div>

@@ -30,16 +30,20 @@ public function __construct()
 
 //INDEEEEEEEEEEEEX/
 public function index(Request $request){
-if($request){
-  $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-  $recepcion = RecepcionMateriaPrima::paginate(10);
-      $afiliado = Afiliado::all();
-      $estanon = Estanon::all();
-      $recepciones = RecepcionMateriaPrima::all()->sortBy("fecha");
-      $user = User::all();
-      $tipoEntrega = TipoEntrega::all();
-  return view('RecepcionMateriaPrima.index', compact('afiliado','recepciones','estanon','user','tipoEntrega','recepcion'), ['recepcion'=>$recepcion,"searchText"=>$query]);
-}}
+   if ($request)
+    {
+        $search = \Request::get('search');
+        $recepcion = RecepcionMateriaPrima::where('Recepcion_id','like','%'.$search.'%')
+        ->orderby('fecha','desc')
+        ->paginate(7);
+        $afiliado = Afiliado::all();
+        $estanon = Estanon::all();
+        $recepciones = RecepcionMateriaPrima::all()->sortBy("fecha");
+        $user = User::all();
+        $tipoEntrega = TipoEntrega::all();
+        return view('RecepcionMateriaPrima.index', compact('afiliado','recepciones','estanon','user','tipoEntrega','recepcion'));
+    }
+}
 
 ////////////////////////////////////////////////////////NUEVO
 

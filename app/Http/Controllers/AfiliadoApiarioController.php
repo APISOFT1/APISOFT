@@ -25,11 +25,16 @@ class AfiliadoApiarioController extends Controller
          */
         public function index(Request $request)
         { 
-         
-          $afiliadoapiario = AfiliadoApiario::paginate(10);
+          $search = \Request::get('search');
+          $afiliadoapiario = AfiliadoApiario::where('afiliadoapiario','like','%'.$search.'%')
+          ->orderBy('afiliadoapiario')
+          ->paginate(10);
           $afiliados=Afiliado::all();
           $apiarios=Apiario::all();
           return view('AfiliadoApiario.index',compact('afiliadoapiario','afiliados','apiarios'));      
+
+          
+         
          
         }
     

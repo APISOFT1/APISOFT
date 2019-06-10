@@ -5,12 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Genero;
 use App\Role;
-<<<<<<< HEAD
-use App\Estado;
-=======
 
 
->>>>>>> Caro
 use Illuminate\Http\Request;
 use App\Http\Requests\UsuarioFormRequest;
 
@@ -27,15 +23,13 @@ class UsersController extends Controller
     {
        
        if($request){
-        $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-        $users= User::where('name','LIKE','%'.$query.'%')
-            ->orderby('id','desc')
-            ->paginate(7);
-
-            $generos = Genero::all();
-          
-            $roles = Role::get()->pluck('name', 'name');
-            return view('users.index', compact('users', 'roles', 'generos'), ['users'=>$users,"searchText"=>$query]);
+            $search = \Request::get('search');
+        $users = User::where('nombre','like','%'.$search.'%')
+        ->orderby('nombre','desc')
+        ->paginate(7);
+          $generos = Genero::all();
+          $roles = Role::get()->pluck('name', 'name');
+            return view('users.index', compact('users', 'roles', 'generos'));
     }
         
         return view('users.index', compact('users', 'roles','generos'));

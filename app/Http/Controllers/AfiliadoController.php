@@ -24,14 +24,15 @@ class AfiliadoController extends Controller
     public function index(Request $request)
     {
       if($request){
-        $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-        $afi= Afiliado::with('Genero', 'Estado_Civil') 
-            ->where('Nombre','LIKE','%'.$query.'%')
-            ->orderby('id','ASC')
-            ->paginate(7);
+        
+          $search = \Request::get('search');
+          $afi= Afiliado::with('Genero', 'Estado_Civil'); 
+          $afiliado = Afiliado::where('nombre','like','%'.$search.'%')
+          ->orderBy('nombre')
+          ->paginate(10);
             $genero = Genero::all();
             $estadoC = Estado_Civil::all();
-        return view('Afiliado.index', compact('afi','genero','estadoC'), ['afi'=>$afi,"searchText"=>$query]);
+        return view('Afiliado.index', compact('afi','genero','estadoC'));
     }
    
     

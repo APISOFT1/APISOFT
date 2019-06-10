@@ -23,16 +23,14 @@ public function index(Request $request)
 {
   if ($request)
   {
-      $query=trim($request->get('searchText'));
-      $ubicacion=DB::table('ubicacions')->where('id','LIKE','%'.$query.'%')
-      ->orwhere('descripcion','LIKE','%'.$query.'%')
-      ->orderby('id','ASC')
-      ->paginate(10);
-   
-      return view('Ubicacion.index',["ubicacion"=>$ubicacion,"searchText"=>$query]);
+        $search = \Request::get('search');
+        $ubicacion = Ubicacion::where('descripcion','like','%'.$search.'%')
+        ->orderby('descripcion','desc')
+        ->paginate(7);
+        return view('Ubicacion.index');
+ 
   }
- // $ubicacion = Ubicacion::paginate(10);
- // return view('Ubicacion.index',compact('ubicacion'));        
+  
     
 }
 ////////////////////////////////////////////////////////NUEVO

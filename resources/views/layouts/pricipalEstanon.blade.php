@@ -195,11 +195,7 @@
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
-<<<<<<< HEAD
-    $('.modal-descripcion').text('Crear Estanon');
-=======
     $('.modal-descripcion').text('Crear Estañón');
->>>>>>> develop
   });
   $("#add").click(function() {
     $.ajax({
@@ -209,22 +205,14 @@
       data: {
         '_token': $('input[name=_token]').val(),
         'Descripcion': $('input[name=Descripcion]').val(),
-<<<<<<< HEAD
-        'peso': $('input[name=peso]').val(),
-=======
         'Peso': $('input[name=Peso]').val(),
->>>>>>> develop
         
       },
       success: function(data){
         if ((data.errors)) {
           $('.error').removeClass('hidden');
           $('.error').text(data.errors.Descripcion);
-<<<<<<< HEAD
-          $('.error').text(data.errors.peso);
-=======
           $('.error').text(data.errors.Peso);
->>>>>>> develop
  
         } else {
           html = '<div class="alert alert-success alert-dismissible">'  + data.success + '</div>';
@@ -242,31 +230,18 @@
            + data.id +
             "' data-Descripcion='" 
            + data.Descripcion +
-<<<<<<< HEAD
-            "' data-peso='" + data.peso +
-            
-            "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
-           + data.id + "' data-Descripcion='" + data.Descripcion +  "' data-peso='" 
-          + data.peso + "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
-=======
             "' data-Peso='" + data.Peso +
             
             "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
            + data.id + "' data-Descripcion='" + data.Descripcion +  "' data-Peso='" 
           + data.Peso + "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
->>>>>>> develop
           "</tr>");
         }
         $('#form_result').html(html);
       },
     });
     $('#Descripcion').val('');
-<<<<<<< HEAD
-    $('#peso').val('');
-
-=======
     $('#Peso').val('');
->>>>>>> develop
   });
  
 // function Edit POST
@@ -277,19 +252,11 @@ $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-<<<<<<< HEAD
-$('.modal-descripcion').text('Editar Estañon');
-$('.deleteContent').hide();
-$('.form-horizontal').show();
-$('#ids').val($(this).data('id'));
-$('#des').val($(this).data('Descripcion'));
-=======
 $('.modal-descripcion').text('Editar Estañón');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
 $('#ids').val($(this).data('id'));
 $('#des').val($(this).data('descripcion'));
->>>>>>> develop
 $('#pes').val($(this).data('peso'));
 $('#myModal').modal('show');
 });
@@ -301,31 +268,13 @@ $('.modal-footer').on('click', '.edit', function() {
 '_token': $('input[name=_token]').val(),
 'id': $("#ids").val(),
 'Descripcion': $('#des').val(),
-<<<<<<< HEAD
-'peso': $('#pes').val(),
-
-=======
 'Peso': $('#pes').val(),
->>>>>>> develop
     },
 success: function(data) {
       $('.api' + data.id).replaceWith(" "+
       "<tr class='api" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
       "<td>" + data.Descripcion + "</td>"+
-<<<<<<< HEAD
-      "<td>" + data.peso + "</td>"+
-      
- "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + "' data-Descripcion='" 
- + data.Descripcion + "' data-peso='" 
-          + data.peso + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
-          + data.id + "' data-Descripcion='" + data.Descripcion + 
-          "' data-peso='" 
-          + data.peso + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
-          + data.id + "' data-Descripcion='" + data.Descripcion + 
-          "' data-peso='" 
-          + data.peso + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
-=======
       "<td>" + data.Peso + "</td>"+
       
  "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + "' data-Descripcion='" 
@@ -337,14 +286,10 @@ success: function(data) {
           + data.id + "' data-Descripcion='" + data.Descripcion + 
           "' data-Peso='" 
           + data.Peso + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
->>>>>>> develop
       "</tr>");
     }
   });
 });
-<<<<<<< HEAD
-
-=======
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Eliminar");
@@ -374,7 +319,6 @@ $('.modal-footer').on('click', '.delete', function(){
     }
   });
 });
->>>>>>> develop
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
