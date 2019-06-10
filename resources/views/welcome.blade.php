@@ -213,8 +213,9 @@
                   <div class="icon">
                     <i class="mdi-action-settings-phone"></i>
                   </div>
-                  <h4>Número Telefónico</h4>
-                  <p>2685-02-02</p>
+                  <h4>Números Telefónico</h4>
+                  <p>+506 6099-3366 Con Marvin Jiménez</p>
+                  <p>+506 8827-4252 Con Jesús Guevara</p>
                 </div>
               </div>
               <div class="col-md-6 col-sm-6">

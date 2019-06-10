@@ -32,6 +32,7 @@
 
 @include('Busqueda.search',['url'=>'RecepcionMateriaPrima','link'=>'RecepcionMateriaPrima'])
 
+
 <h1 >LISTADO DE  RECEPCIÓN MIEL</h1>
 
 <!-- Saltos de linea-->
