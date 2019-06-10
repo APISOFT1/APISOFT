@@ -12,6 +12,9 @@
 <!-- fin de mensaje de exito -->
 @section ('contenido')
 
+@include('Busqueda.search',['url'=>'Estanon','link'=>'Estanon'])
+
+
 		<h1 class="text-center">Listado de Estañones</h1>
 	
 
@@ -21,9 +24,6 @@
 <!-- Fin de salto de linea. No necesita una etiqueta de cierre-->
 
 <!--Esta clase nos permite posicionar el buscador  -->
-
-		@include('Estanon.search') 
-
 
 
 <div class="table-responsive">

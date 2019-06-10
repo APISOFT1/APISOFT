@@ -13,6 +13,8 @@
 @if(session('message')) {{session('message')}} @endif 
 
 @section ('contenido')
+@include('Busqueda.search',['url'=>'Apiario','link'=>'Apiario'])
+
 <h1 class="text-center">LISTADO DE  APIARIOS</h1>
 
 <!-- Saltos de linea-->
@@ -24,7 +26,6 @@
 
 <!--Esta clase nos permite posicionar el buscador  -->
 
-		@include('Apiario.search') 
 
 
 <div class="table-responsive">

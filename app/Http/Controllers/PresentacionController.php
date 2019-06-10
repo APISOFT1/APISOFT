@@ -7,79 +7,54 @@ use Illuminate\Http\Request;
 
 class PresentacionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request)
+        {
+            $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
+            $pre = Presentacion::paginate(10);
+                return view('Presentacion.index',compact('Presentacion'), ['Presentacion'=>$pre,"searchText"=>$query]);        
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+   
+    public function addPresentacion(Request $request){
+    $rules = array(
+      'descripcion' => 'required',
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    );
+  $validator = Validator::make ( Input::all(), $rules);
+  if ($validator->fails())
+  return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Presentacion  $presentacion
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Presentacion $presentacion)
-    {
-        //
-    }
+  else {
+    $pre = new Presentacion;
+    $pre->descripcion = $request->descripcion;
+    $pre->save();
+    return response()->json($pre)->with('message');
+  }
+}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Presentacion  $presentacion
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Presentacion $presentacion)
-    {
-        //
-    }
+public function editPresentacion(request $request){
+  $rules = array(
+    'descripcion' => 'required',
+  );
+$validator = Validator::make ( Input::all(), $rules);
+if ($validator->fails())
+return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Presentacion  $presentacion
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Presentacion $presentacion)
-    {
-        //
-    }
+else {
+$pre = Presentacion::find ($request->id);
+$pre->descripcion = $request->descripcion;
+$pre->save();
+return response()->json($pre);
+}
+}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Presentacion  $presentacion
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Presentacion $presentacion)
-    {
-        //
-    }
+public function deletePresentacion(request $request){
+  
+  $pre = Presentacion::find ($request->id);
+  $pre->delete();
+  return response()->json();
+}
 }

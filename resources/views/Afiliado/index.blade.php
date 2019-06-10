@@ -13,6 +13,8 @@
 
 @section ('contenido')
 
+@include('Busqueda.search',['url'=>'Afiliado','link'=>'Afiliado'])
+
               
 <h1 class="text-center">LISTADO DE  AFILIADOS </h1>
 
@@ -25,7 +27,6 @@
 <!--Esta clase nos permite posicionar el buscador  -->
 
 
-@include('Afiliado.search') 
 
 <div class="row">
   <div class="table table-responsive">
