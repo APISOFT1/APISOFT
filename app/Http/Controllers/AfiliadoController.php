@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use Validator;
 use Response;
@@ -11,9 +10,6 @@ use App\Genero;
 use App\Estado_Civil;
 use App\Http\Requests\AfiliadoFormRequest;
 use DB;
-
-
-
 class AfiliadoController extends Controller
 {
     /**
@@ -40,13 +36,11 @@ class AfiliadoController extends Controller
     return view('Afiliado.index',compact('afi','genero','estadoC','esta'));   
         
     }
-
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-
     public function addAfiliado(Request $request){
         $rules = array(
     
@@ -86,8 +80,6 @@ class AfiliadoController extends Controller
         return response()->json($afi);
       }
     }
-
-
     public function editAfiliado(request $request){
         $rules = array(
         );
@@ -113,8 +105,6 @@ class AfiliadoController extends Controller
       return response()->json($afi);
       }
       }
-
-
     /**
      * Store a newly created resource in storage.
      *
@@ -129,7 +119,6 @@ class AfiliadoController extends Controller
      * @return \Illuminate\Http\Response
      */
   
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -158,6 +147,4 @@ class AfiliadoController extends Controller
        
       }
       }   //
-    
-
     

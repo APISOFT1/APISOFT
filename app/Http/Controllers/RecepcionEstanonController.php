@@ -15,17 +15,17 @@ class RecepcionEstanonController extends Controller
     //
     public function index(Request $request)
     {
-        if($request){
-            $query=trim($request->get('searchText'));  //valida si la peticion trae el campo de busqueda 
-        $recepcionEst = RecepcionEstanon::with('RecepcionMateriaPrima', 'Estanon')
-            ->where('Fecha','LIKE','%'.$query.'%')
-            ->orderby('id','desc')
-            ->paginate(7);
-           $recepciones = RecepcionMateriaPrima::all();
-           $estanon = Estanon::all();
-           
-        return view('RecepEstanon.index', compact('cera', 'recepciones', 'estanon'), ['recepcionEst'=>$recepcionEst,"searchText"=>$query]);
-        }
+        if ($request)
+    {
+        $search = \Request::get('search');
+        $recepcionEst = RecepcionEstanon::with('RecepcionMateriaPrima', 'Estanon');
+        $recepcionEst = RecepcionEstanon::where('Estanon_id','like','%'.$search.'%')
+        ->orderby('fecha','desc')
+        ->paginate(7);
+        $recepciones = RecepcionMateriaPrima::all();
+        return view('RecepEstanon.index', compact('cera', 'recepciones', 'estanon'));
+    }
+        
         
     }
     ////////////////////////////////////////////////////////NUEVO

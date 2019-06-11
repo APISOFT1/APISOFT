@@ -63,7 +63,7 @@ else {
 $ubicacion =Ubicacion::find ($request->id);
 $ubicacion->Descripcion = $request->Descripcion;
 $ubicacion->save();
-return response()->json(['success' => 'Se ha editado correctamente']);
+return response()->json($ubicacion);
 }
 }
 public function deleteUbicacion(request $request){

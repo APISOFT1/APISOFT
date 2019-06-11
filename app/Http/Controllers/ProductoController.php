@@ -9,12 +9,15 @@ class ProductoController extends Controller
 {
     public function index(Request $request)
     {
-        if($request)
-        {
-            $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-            $product = Producto::paginate(10);
-            return view('Producto.index',compact('Producto'), ['producto'=>$product,"searchText"=>$query]);        
-        }
+         if ($request)
+    {
+        $search = \Request::get('search');
+        $product = Producto::where('nombre','like','%'.$search.'%')
+        ->orderby('nombre','desc')
+        ->paginate(7);
+        return view('Producto.index');
+    }
+       
     }
    
     public function addProducto(Request $request){

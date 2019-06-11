@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Afiliado;
 use App\Apiario;
@@ -9,10 +8,8 @@ use App\AfiliadoApiario;
 use Illuminate\Http\Request;
 use App\Http\Requests\AfiliadoApiariosFormRequest;
 use Illuminate\Support\Facades\Input;  //MUYR IMPORTANTE , SIN ESTO NO GUARDA.
-
 class AfiliadoApiarioController extends Controller
 {
-
     public function __construct()
     {
     

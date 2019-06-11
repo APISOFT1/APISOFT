@@ -280,17 +280,14 @@
           "' data-Descripcion='" + data.Descripcion + 
           "' data-cantidad='"   + data.cantidad +  
           " 'data-ubicacion_id='" + data.ubicacion_id + 
-
           "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='" + data.id +
           "' data-Descripcion='" + data.Descripcion + 
           "' data-cantidad='" + data.cantidad + 
           "' data-ubicacion_id='" + data.ubicacion_id + 
-
           "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id +
            "' data-Descripcion='" + data.Descripcion + 
             "' data-cantidad='" + data.cantidad +  
             " 'data-ubicacion_id='" + data.ubicacion_id + 
-
             "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+"</tr>");
                        
                     }
@@ -452,4 +449,3 @@ border-bottom:2px dashed #1ABB9C;
     @include('sweet::alert')
     </body>
     </html>
-    

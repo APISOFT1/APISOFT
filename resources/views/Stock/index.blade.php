@@ -118,7 +118,7 @@
                 <div class="col-md-9  form-group has-feedback">
         <select name="estanon_recepcions_id" class="form-control has-feedback-left" id="estanon_recepcions_id">
          <option value="">-- Seleccione recepción-estañon --</option>
-         @foreach ($recepcionEstanon as $recepcionEstanones)
+         @foreach ($recepciones as $recepcionEstanones)
           <option value="{{ $recepcionEstanones->id }}">{{$recepcionEstanones->id}}</option>
          @endforeach
         </select>
@@ -218,7 +218,7 @@
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
         <select name="name" class="form-control has-feedback-left" id="lol5">
         <option value="">-- Seleccione recepción-estañon --</option>
-         @foreach ($recepcionEstanon as $recepcionEstanones)
+         @foreach ($recepciones as $recepcionEstanones)
           <option value="{{ $recepcionEstanones->id }}">{{$recepcionEstanones->id}}</option>
          @endforeach
         </select>

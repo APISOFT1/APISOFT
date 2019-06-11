@@ -9,12 +9,15 @@ class PresentacionController extends Controller
 {
     public function index(Request $request)
     {
-        if($request)
-        {
-            $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-            $pre = Presentacion::paginate(10);
-                return view('Presentacion.index',compact('Presentacion'), ['Presentacion'=>$pre,"searchText"=>$query]);        
-        }
+        if ($request)
+    {
+        $search = \Request::get('search');
+        $pre = Presentacion::where('descripcion','like','%'.$search.'%')
+        ->orderby('descripcion','desc')
+        ->paginate(7);
+        return view('Presentacion.index');
+    }
+       
     }
 
    

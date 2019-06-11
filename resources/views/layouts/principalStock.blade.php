@@ -400,7 +400,6 @@ success: function(data) {
 },
   });
 });
-
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Eliminar");
 $('#footer_action_button').removeClass('glyphicon-check');
@@ -429,8 +428,6 @@ $('.modal-footer').on('click', '.delete', function(){
     }
   });
 });
-
-
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
