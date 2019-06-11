@@ -298,7 +298,7 @@ success: function(data) {
        
          if ((data.errors)) {
                         setTimeout(function () {
-                            $('#create').modal('show');
+                            $('#myModal').modal('show');
                             toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
                         }, 500);
                         if (data.errors.Recepcion_id) {

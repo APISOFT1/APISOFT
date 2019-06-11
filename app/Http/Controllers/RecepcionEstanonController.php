@@ -23,7 +23,8 @@ class RecepcionEstanonController extends Controller
         ->orderby('fecha','desc')
         ->paginate(7);
         $recepciones = RecepcionMateriaPrima::all();
-        return view('RecepEstanon.index', compact('cera', 'recepciones', 'estanon'));
+        $estanon = Estanon::all();
+        return view('RecepEstanon.index', compact('cera', 'recepciones', 'recepcionEst', 'estanon'));
     }
         
         

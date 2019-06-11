@@ -34,8 +34,8 @@ public function addApiario(Request $request){
    
   $rules = array(
       
-      'Descripcion' => 'required',
-      'cantidad' => 'required',
+      'Descripcion' => 'required|min:3|max:10|regex:/^[a-z ,.\'-]+$/i',
+      'cantidad' => 'required|min:2|max:2|',
       'ubicacion_id' => 'required'
       ); 
       $validator = Validator::make ( Input::all(), $rules);
