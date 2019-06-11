@@ -23,7 +23,7 @@ class PresentacionController extends Controller
    
     public function addPresentacion(Request $request){
     $rules = array(
-      'descripcion' => 'required',
+      'descripcion' => 'required|min:10|max:32|',
 
     );
   $validator = Validator::make ( Input::all(), $rules);
@@ -40,7 +40,7 @@ class PresentacionController extends Controller
 
 public function editPresentacion(request $request){
   $rules = array(
-    'descripcion' => 'required',
+    'descripcion' => 'required|min:10|max:32|',
   );
 $validator = Validator::make ( Input::all(), $rules);
 if ($validator->fails())

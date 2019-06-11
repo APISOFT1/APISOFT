@@ -22,7 +22,7 @@ class ProductoController extends Controller
    
     public function addProducto(Request $request){
     $rules = array(
-      'nombre' => 'required',
+      'nombre' => 'required|min:4|max:10|regex:/^[a-z ,.\'-]+$/i',
 
     );
   $validator = Validator::make ( Input::all(), $rules);
@@ -39,7 +39,7 @@ class ProductoController extends Controller
 
 public function editProducto(request $request){
   $rules = array(
-    'nombre' => 'required',
+    'nombre' => 'required|min:4|max:10|regex:/^[a-z ,.\'-]+$/i',
   );
 $validator = Validator::make ( Input::all(), $rules);
 if ($validator->fails())
