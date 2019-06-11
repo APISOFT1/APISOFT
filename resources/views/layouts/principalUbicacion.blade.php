@@ -19,7 +19,6 @@
   
       <!-- Include Twitter Bootstrap and jQuery: -->
 <!--<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>->
-
  
 <!-- Include the plugin's CSS and JS: -->
 <!--<link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>-->
@@ -111,10 +110,6 @@
                   </li>
 
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
-<<<<<<< .merge_file_a25648
-                    <ul class="nav child_menu">
-                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
-=======
                     <ul class="nav child_menu">
                     <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
                     
@@ -122,7 +117,6 @@
                   </li>
                   <li><a><i class="fa fa-cart-plus"></i> Servicios <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
->>>>>>> .merge_file_a21852
                     <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
                     <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
                     
@@ -211,7 +205,6 @@
      {!!Html::script('/js2/dropdown.js')!!}
 
     <!-- {!!Html::script('/js/jquery.min.js')!!}
-
      {!!Html::script('/js/bootstrap.min.js')!!}-->
 
 
@@ -226,7 +219,6 @@
 <!--{!!Html::script('/js/bootstrap.min.js')!!} -->
 
 <!--<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
-
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>-->
 
@@ -257,7 +249,6 @@
         $('.errorDescripcion').addClass('hidden');
          
                     
-
                     if ((data.errors)) {
                         setTimeout(function () {
                             $('#create').modal('show');
@@ -282,9 +273,7 @@
       },
     });
     $('#Descripcion').val('');
-
   });
-
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
 $('#footer_action_button').text(" Editar ");
@@ -300,7 +289,6 @@ $('#ids').val($(this).data('id'));
 $('#des').val($(this).data('descripcion'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.edit', function() {
   $('#form_result').html('');
   $.ajax({
@@ -315,7 +303,6 @@ success: function(data) {
   $('.errorDescripcion').addClass('hidden');
          
                     
-
          if ((data.errors)) {
              setTimeout(function () {
                  $('#create').modal('show');
@@ -329,16 +316,14 @@ success: function(data) {
          } else {
              toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
       $('.ubicacion' + data.id).replaceWith(" "+
-      "<tr class='ubicacion'>"+
+      "<tr class='ubicacion "+ data.id +"'>"+
       "<td>" + data.id + "</td>"+
       "<td>" + data.Descripcion + "</td>"+
-  
  "<td><button class='show-modal btn btn-info btn-sm' data-id='"+data.id+"' data-Descripcion='"+data.Descripcion+"'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='"+data.id+"'data-Descripcion='"+data.Descripcion+"'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='"+data.id+"' data-Descripcion='"+data.Descripcion+"'><span class='glyphicon glyphicon-trash'></span></button></td>"+"</tr>");
     }
 },
   });
 });
-
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Eliminar");
@@ -354,7 +339,6 @@ $('.form-horizontal').hide();
 $('.descripcion').html($(this).data('descripcion'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
@@ -369,8 +353,6 @@ $('.modal-footer').on('click', '.delete', function(){
     }
   });
 });
-
-
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');

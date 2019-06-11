@@ -6,10 +6,14 @@ use App\User;
 use App\Genero;
 use App\Role;
 <<<<<<< HEAD
+<<<<<<< HEAD
 use App\Estado;
 =======
 
 
+>>>>>>> Caro
+=======
+use App\Estado;
 >>>>>>> Caro
 use Illuminate\Http\Request;
 use App\Http\Requests\UsuarioFormRequest;

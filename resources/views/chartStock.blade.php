@@ -12,22 +12,16 @@
         <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
                   <div class="icon"><i class="fa fa-money"></i></div>
-            <div class="count">₡{{ $counts['ingreso2'] }}</div>
-            <h3>Total Ingreso por Cera</h3>
-        </div>
-        </div>
-        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="tile-stats">
-                  <div class="icon"><i class="fa fa-money"></i></div>
-            <div class="count green">₡{{ $counts['ingreso'] }}</div>
-            <h3>Total Ingreso Por Miel</h3>
-        </div>
-        </div>
-        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="tile-stats">
-                  <div class="icon"><i class="fa fa-money"></i></div>
             <div class="count">₡{{ $counts['ingreso3'] }}</div>
-            <h3>Total Ingreso por Inventario</h3>
+            <h3>Ingreso Inventario</h3>
+        </div>
+        </div>
+       
+        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i class="fa fa-money"></i></div>
+            <div class="count">₡{{ $counts['recep'] }}</div>
+            <h3>Total Recepción</h3>
         </div>
         </div>
        
@@ -52,36 +46,35 @@
         </div>
                
 
-                <div class="panel-body">
+        <div class="panel-body">
                 <div class="tab-content mt-4" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <h5 class="pl-2"></h5>
-                <h3>{{ $chart3->options['chart_title'] }}</h3>
-                   {!! $chart3->renderHtml() !!}
+                {!! $chart2->html() !!}
             </div>
                   
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
               <h5 class="pl-2"></h5>
              
-              <h3>{{ $chart2->options['chart_title'] }}</h3>
-                   {!! $chart2->renderHtml() !!}
+              <h3>{{ $chart->options['chart_title'] }}</h3>
+                   {!! $chart->renderHtml() !!}
             </div>
               
             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
               <h5 class="pl-2"></h5>
-              <h3>{{ $chart4->options['chart_title'] }}</h3>
-                   {!! $chart4->renderHtml() !!}
+              <h3>{{ $chart3->options['chart_title'] }}</h3>
+                   {!! $chart3->renderHtml() !!}
+              
             </div>
           </div>
-            
+                
             </div>
         </div>
     </div>
 </div>
 {!! Charts::scripts() !!}
+{!! $chart->renderJs() !!}
+{!! $chart2->script() !!}
 {!! $chart3->renderJs() !!}
-{!! $chart2->renderJs() !!}
-{!! $chart4->renderJs() !!}
 {{ Html::style('css5/chart.css') }}
-
 @endsection

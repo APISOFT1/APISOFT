@@ -4,11 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
 <<<<<<< .merge_file_a29192
     "content-hash": "0dfaa155a4afddda7362298728ae87c3",
 =======
     "content-hash": "c8ed794507bc45265cce8b67f8f5fd1a",
 >>>>>>> .merge_file_a26032
+=======
+    "content-hash": "c8ed794507bc45265cce8b67f8f5fd1a",
+>>>>>>> Caro
     "packages": [
         {
             "name": "arcanedev/log-viewer",

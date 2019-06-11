@@ -29,7 +29,11 @@
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
+
+@include('Busqueda.search',['url'=>'RecepcionMateriaPrima','link'=>'RecepcionMateriaPrima'])
+
 <h1 >LISTADO DE  RECEPCIÓN MIEL</h1>
+
 <!-- Saltos de linea-->
 <br>
 <br>
@@ -185,15 +189,15 @@
               <div class="form-group row add">
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
               <input type="text" class="form-control"  id="numero_muestras" name="numero_muestras"
-          placeholder="Numero Muestra" disabled required>
+          placeholder="Numero Muestra"disabled required>
               <p class="No ingreso el Codigo"></p>
-              <span class="fa fa-address-card form-control-feedback right" aria-hidden="true"></span>
+              <span class="fa fa-sort-numeric-asc form-control-feedback right" aria-hidden="true"></span>
               </div>
               </div>
             
 
-              <div class="form-group row add">
-              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
+              
+              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
               <select class="form-control" id="tipoEntrega_id" name="tipoEntrega_id">
                 <option value="">Seleccione la Entrega</option>
                   @foreach ($tipoEntrega as $entre)
@@ -203,21 +207,21 @@
               <p class="No ingreso el tipo de Entrega"></p>
               <span class="fa fa-sign-in form-control-feedback right" aria-hidden="true"></span>
               </div>
-              </div>
+            
 
-              <div class="form-group row add">
-              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
+              
+              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
               <input type="text" class="form-control"  value="{{ auth()->user()->id }}" id="user_id" name="user_id"
           placeholder="Encargado" disabled required>
               <p class="No ingreso el usuario"></p>
-              <span class="fa fa-user-circle-o form-control-feedback right" aria-hidden="true"></span>
+              <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
               </div>
-              </div>
+              
 
               <div class="form-group row add">
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
               <textarea class="resizable_textarea form-control"  id="observacion" name="observacion" 
-                      placeholder="Ingrese Observacion"></textarea>
+                      placeholder="Ingrese Observación"></textarea>
               <span class="fa fa-file-text form-control-feedback right" aria-hidden="true"></span>
               </div>
               </div>
@@ -228,18 +232,16 @@
                     <div class="modal-footer">
           
           
-          <button class="btn btn-warning" type="submit" id="add">
-              <span class="fa fa-save"></span> Guardar 
-            </button>
+         
            
             </div>
             </div>
                        
-            <button class="btn btn-warning" type="button" data-dismiss="modal">
-              <span class="fa fa-times"></span> Cerrar
-            </button>
+            
                             <button class="btn btn-success  nextBtn pull-right"  type="button" >Siguiente</button>
-                         
+                            <button class="btn btn-warning nextBtn pull-right" " type="submit" id="add">
+              <span class="fa fa-save"></span> Guardar
+            </button>
                         </div>
                     </div>
                </div>

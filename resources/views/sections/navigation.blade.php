@@ -35,13 +35,19 @@
                     <ul class="nav child_menu">
                     <li>
                         <a href="{{ route('dashboard') }}">Afiliado   
-                            <i class="fa fa-user" aria-hidden="true"></i>
+                           
                             
                         </a>
                     </li>
                     <li>
                         <a href="{{ url('/chartRecepcion/') }}">Recepción
-                            <i class="fa fa-file-text" aria-hidden="true"></i>
+                           
+                            
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/chartStock/') }}">Productos
+                           
                             
                         </a>
                     </li>
@@ -49,8 +55,20 @@
                     @if (Auth::user()->isAdmin())
     
                     <li>
-                        <a href="{{ url('/chartIngreso/') }}">Ingreso
-                            <i class="fa fa-money" aria-hidden="true"></i>
+                        <a href="{{ url('/chartIngreso/') }}">Ingreso Por Miel
+                           
+                            
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/chartIngresoCera/') }}">Ingreso Por Cera
+                           
+                            
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/chartIngresoInventario/') }}">Ingreso Por Inventario
+                            
                             
                         </a>
                     </li>
@@ -150,20 +168,28 @@
                     <li><a><i class="fa fa-cart-plus"></i> Servicios <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li>
+<<<<<<< HEAD
 <<<<<<< .merge_file_a22668
                         <a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera
 =======
                         <a href="{{ url('Stok') }}">Gestionar Stock
 >>>>>>> .merge_file_a07124
+=======
+                        <a href="{{ url('Stok') }}">Gestionar Stock
+>>>>>>> Caro
                             
                         </a>
                     </li>
                     <li>
+<<<<<<< HEAD
 <<<<<<< .merge_file_a22668
                         <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario
 =======
                         <a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera
 >>>>>>> .merge_file_a07124
+=======
+                        <a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera
+>>>>>>> Caro
                             
                         </a>
                     </li>

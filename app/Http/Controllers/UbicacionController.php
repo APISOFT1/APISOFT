@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use Validator;
 use Response;
@@ -10,8 +9,6 @@ use App\Ubicacion;
 use Illuminate\Http\Redirect;
 use App\Http\Requests\UbicacionFormRequest;
 use DB;
-
-
 class UbicacionController extends Controller
 {
    
@@ -50,13 +47,9 @@ public function addUbicacion(Request $request ){
     $ubicacion->Descripcion = $request->Descripcion;
     $ubicacion->save();
     
-<<<<<<< .merge_file_a00560
-    return response()->json($ubicacion,['success' => 'Se ha creado una ubicación correctamente']);
-=======
     
     return response()->json($ubicacion);
     
->>>>>>> .merge_file_a26428
   }
 }
  public function editUbicacion(request $request){
@@ -70,7 +63,7 @@ else {
 $ubicacion =Ubicacion::find ($request->id);
 $ubicacion->Descripcion = $request->Descripcion;
 $ubicacion->save();
-return response()->json(['success' => 'Se ha editado correctamente']);
+return response()->json($ubicacion);
 }
 }
 public function deleteUbicacion(request $request){

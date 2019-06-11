@@ -12,6 +12,8 @@ UBICACION CREADO CORRECTAMENTE
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
+@include('Busqueda.search',['url'=>'Ubicacion','link'=>'Ubicacion'])
+
 <h1 >LISTADO DE  UBICACIÓN</h1>
 
 <!-- Saltos de linea-->
@@ -21,7 +23,6 @@ UBICACION CREADO CORRECTAMENTE
 <br>
 <!-- Fin de salto de linea. No necesita una etiqueta de cierre-->
 
-@include('Ubicacion.search') 
 		
 
 
@@ -41,7 +42,7 @@ UBICACION CREADO CORRECTAMENTE
       {{ csrf_field() }}
      
       @foreach ($ubicacion as $value)
-      
+      <tr class="ubicacion{{$value->id}}">
           <td>{{ $value->id}}</td>
           <td>{{ $value->Descripcion }}</td>
           <td>

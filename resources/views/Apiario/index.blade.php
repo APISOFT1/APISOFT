@@ -13,6 +13,8 @@
 @if(session('message')) {{session('message')}} @endif 
 
 @section ('contenido')
+@include('Busqueda.search',['url'=>'Apiario','link'=>'Apiario'])
+
 <h1 class="text-center">LISTADO DE  APIARIOS</h1>
 
 <!-- Saltos de linea-->
@@ -24,11 +26,10 @@
 
 <!--Esta clase nos permite posicionar el buscador  -->
 
-		@include('Apiario.search') 
 
 
 <div class="table-responsive">
-			<table class="table table-striped table-bordered table-condensed table-hover" id="postTable" >
+			<table class="table table-striped table-bordered table-condensed table-hover" id="table" >
 				<thead>
 					<th>Código</th>
 					<th>Descripción</th>
@@ -41,7 +42,7 @@
         {{ csrf_field() }}
           
                @foreach ($api as $value)
-					
+          <tr class="api{{$value->id}}">
           <td>{{ $value->id }}</td>
 					<td>{{ $value->Descripcion}}</td>
 					<td>{{ $value->cantidad}}</td>

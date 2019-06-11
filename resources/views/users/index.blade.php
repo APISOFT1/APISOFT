@@ -12,6 +12,8 @@
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
+@include('Busqueda.search',['url'=>'users','link'=>'users'])
+
 <h1 class="text-center">LISTADO DE USUARIOS</h1>
   	
 <!-- Saltos de linea-->
@@ -22,7 +24,6 @@
 <!--Esta clase nos permite posicionar el buscador  -->
 
 
-@include('users.search') 
 
 
 
@@ -71,11 +72,20 @@
             <a href="#" class="show-modal btn btn-info btn-sm" 
             data-id="{{$value->id}}"
             data-name="{{$value->name}}"
-            data-email="{{$value->email}}">
+            data-email="{{$value->email}}"
+            data-status="{{$value->status}}">
               <i class="fa fa-eye"></i>
             </a>
-            <a class= "btn btn-warning btn-sm" href="{{ route('users.edit', [$value->id]) }}" data-toggle="tooltip" data-placement="top" data-title="{{ __('views.users.index.edit') }}"
-   ><i class="glyphicon glyphicon-pencil"></i> </a>
+           
+            <a href="#" class="edit-modal btn btn-warning btn-sm" 
+            data-id="{{$value->id}}"
+            data-name="{{$value->name}}"
+            data-email="{{$value->email}}"
+            data-password="{{$value->password}}"
+            data-status="{{$value->status}}"
+            data-roles="{{$value->roles}}">
+            <i class="glyphicon glyphicon-pencil"></i>
+            </a>
 
    {{--@if(!$value->hasRole('administrator'))--}}
    <a href="#" class=" delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" data-Descripcion="{{$value->name}}">
@@ -155,9 +165,16 @@
           </div>
 
           <div class="form-group">
-            <label class="control-label col-sm-2"for="password">Password</label>
+            <label class="control-label col-sm-2"for="password">Contraseña</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="passs" >
+              <input type="password" class="form-control" id="passs" >
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="control-label col-sm-2"for="password">Confirmar Contraseña</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" >
             </div>
           </div>
          

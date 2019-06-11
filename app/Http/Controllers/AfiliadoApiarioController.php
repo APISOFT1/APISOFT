@@ -45,6 +45,7 @@ class AfiliadoApiarioController extends Controller
         return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
     
       else {
+       
         $afiliadoapiario = new AfiliadoApiario;
         $afiliadoapiario->afiliado_id = $request->afiliado_id;
         $afiliadoapiario->apiario_id = $request->apiario_id;
@@ -64,6 +65,7 @@ class AfiliadoApiarioController extends Controller
   return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
   
   else {
+    $afiliadoapiario = AfiliadoApiario::all();
   $afiliadoapiario = AfiliadoApiario::find ($request->id);
   $afiliadoapiario->afiliado_id = $request->afiliado_id;
   $afiliadoapiario->apiario_id = $request->apiario_id;

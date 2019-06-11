@@ -10,6 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>APISOFT</title>
+    @toastr_css
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -163,6 +164,9 @@
   <script src="{{asset('js2/bootstrap-select.min.js')}}"></script>
   
     <!-- jQuery -->
+    @jquery
+    @toastr_js
+    @toastr_render
 
     {!!Html::script('/js2/jquery.min.js')!!}  
     @stack('scripts')
@@ -215,19 +219,57 @@ var div_respuesta="#respuesta";
       },
       
       success: function(data){
-        if ((data.errors)) {
-          $('.error').removeClass('hidden');
-          $('.error').text(data.errors.fecha);
-          $('.error').text(data.errors.pesoBruto);
-          $('.error').text(data.errors.pesoNeto);
-          $('.error').text(data.errors.numero_muestras);
-          $('.error').text(data.errors.afiliado_id);
-          $('.error').text(data.errors.user_id);
-          $('.error').text(data.errors.tipoEntrega_id);
-          $('.error').text(data.errors.observacion);
- 
+       
+        $('.errorFecha').addClass('hidden');
+         $('.errorPesoBruto').addClass('hidden');
+         $('.errorPesoNeto').addClass('hidden');
+         $('.errorNumeroMuestras').addClass('hidden');
+         $('.errorAfiliado').addClass('hidden');
+         $('.errorUser').addClass('hidden');
+         $('.errorEntrega').addClass('hidden');
+         $('.errorObservacion').addClass('hidden');
+
+         if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#create').modal('show');
+                            toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.fecha) {
+                            $('.errorFecha').removeClass('hidden');
+                            $('.errorFecha').text(data.errors.fecha);
+                        }
+                        
+                        if (data.errors.PesoBruto) {
+                            $('.errorPesoBruto').removeClass('hidden');
+                            $('.errorPesoBruto').text(data.errors.PesoBruto);
+                        }
+                        if (data.errors.PesoNeto) {
+                            $('.errorPesoNeto').removeClass('hidden');
+                            $('.errorPesoNeto').text(data.errors.PesoNeto);
+                        }
+                        if (data.errors.numero_muestras) {
+                            $('.errorNumeroMuestras').removeClass('hidden');
+                            $('.errorNumeroMuestras').text(data.errors.numero_muestras);
+                        }
+                        if (data.errors.afiliado_id) {
+                            $('.errorAfiliado').removeClass('hidden');
+                            $('.errorAfiliado').text(data.errors.afiliado_id);
+                        }
+                        if (data.errors.user_id) {
+                            $('.errorUser').removeClass('hidden');
+                            $('.errorUser').text(data.errors.user_id);
+                        }
+                        if (data.errors.tipoEntrega_id) {
+                            $('.errorEntrega').removeClass('hidden');
+                            $('.errorEntrega').text(data.errors.user_id);
+                        }
+                        if (data.errors.observacion) {
+                            $('.errorObservacion').removeClass('hidden');
+                            $('.errorObservacion').text(data.errors.observacion);
+                        }
+
         } else {
-          $('.error').remove();
+          toastr.success('SE HA CREADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
           $('#table').append("<tr class='recepcion" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.fecha + "</td>"+
@@ -238,8 +280,34 @@ var div_respuesta="#respuesta";
           "<td>" + data.user_id + "</td>"+
           "<td>" + data.tipoEntrega_id + "</td>"+
           "<td>" + data.observacion + "</td>"+
-          "<td><button class='show-modalRol btn btn-info btn-sm' data-id='" + 
-          data.id + "' data-descripcion='" + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modalRol btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalRol btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+          "<td><button class='show-modal btn btn-info btn-sm' data-id='" 
+          + data.id +
+         "' data-fecha='" + data.fecha +
+         "'data-pesoBruto='" + data.pesoBruto +
+         "'data-PesoNeto='" + data.pesoNeto + 
+         "'data-numero_muestras='" + data.numero_muestras + 
+         "'data-afiliado_id='" + data.afiliado_id +
+          "'data-user_id='" + data.user_id + 
+          "'data-tipoEntrega_id='" + data.tipoEntrega_id + 
+          "'data-observacion='" + data.observacion + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='" 
+          + data.id +
+         "' data-fecha='" + data.fecha +
+         "'data-pesoBruto='" + data.pesoBruto +
+         "'data-PesoNeto='" + data.pesoNeto + 
+         "'data-numero_muestras='" + data.numero_muestras + 
+         "'data-afiliado_id='" + data.afiliado_id +
+          "'data-user_id='" + data.user_id + 
+          "'data-tipoEntrega_id='" + data.tipoEntrega_id + 
+          "'data-observacion='" + data.observacion + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm'  data-id='" 
+          + data.id +
+         "' data-fecha='" + data.fecha +
+         "'data-pesoBruto='" + data.pesoBruto +
+         "'data-PesoNeto='" + data.pesoNeto + 
+         "'data-numero_muestras='" + data.numero_muestras + 
+         "'data-afiliado_id='" + data.afiliado_id +
+          "'data-user_id='" + data.user_id + 
+          "'data-tipoEntrega_id='" + data.tipoEntrega_id + 
+          "'data-observacion='" + data.observacion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         
           $('#fiii').append("<tr class='recepciones" + data.id + "'>"+
@@ -249,7 +317,7 @@ var div_respuesta="#respuesta";
           $('#Recepcion_id').val($(this).data('id'));
         
         }
-        $('#form_result').html(html);
+       
       },
     });
       
@@ -279,19 +347,37 @@ $("#addd").click(function() {
     
     data: {
       '_token': $('input[name=_token]').val(),
-      'Recepcion_id': $('input[name=Recepcion_id]').val(),
+      'Recepcion_id': $('select[name=Recepcion_id]').val(),
       'Estanon_id': $('select[name=Estanon_id]').val(),
       'Fecha': $('input[name=Fecha]').val()
       
     },
     success: function(data){
-      if ((data.errors)) {
-        $('.error').removeClass('hidden');
-        $('.error').text(data.errors.Recepcion_id);
-        $('.error').text(data.errors.Estanon_id);
-        $('.error').text(data.errors.Fecha);
-      } else {
-        $('.error').remove();
+      $('.errorRecepcion').addClass('hidden');
+         $('.errorEstanon').addClass('hidden');
+         $('.errorFecha').addClass('hidden');
+       
+
+         if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#create').modal('show');
+                            toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.Recepcion_id) {
+                            $('.errorRecepcion').removeClass('hidden');
+                            $('.errorRecepcion').text(data.errors.Recepcion_id);
+                        }
+                        
+                        if (data.errors.Estanon_id) {
+                            $('.errorEstanon').removeClass('hidden');
+                            $('.errorEstanon').text(data.errors.Estanon_id);
+                        }
+                        if (data.errors.Fecha) {
+                            $('.errorFecha').removeClass('hidden');
+                            $('.errorFecha').text(data.errors.Fecha);
+                        }
+        } else {
+          toastr.success('SE HA CREADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
     
       }
     },
@@ -341,6 +427,56 @@ $('.modal-footer').on('click', '.edit', function() {
  'observacion': $('#cio').val(),
     },
 success: function(data) {
+  $('.errorFecha').addClass('hidden');
+         $('.errorPesoBruto').addClass('hidden');
+         $('.errorPesoNeto').addClass('hidden');
+         $('.errorNumeroMuestras').addClass('hidden');
+         $('.errorAfiliado').addClass('hidden');
+         $('.errorUser').addClass('hidden');
+         $('.errorEntrega').addClass('hidden');
+         $('.errorObservacion').addClass('hidden');
+
+         if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#create').modal('show');
+                            toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.fecha) {
+                            $('.errorFecha').removeClass('hidden');
+                            $('.errorFecha').text(data.errors.fecha);
+                        }
+                        
+                        if (data.errors.PesoBruto) {
+                            $('.errorPesoBruto').removeClass('hidden');
+                            $('.errorPesoBruto').text(data.errors.PesoBruto);
+                        }
+                        if (data.errors.PesoNeto) {
+                            $('.errorPesoNeto').removeClass('hidden');
+                            $('.errorPesoNeto').text(data.errors.PesoNeto);
+                        }
+                        if (data.errors.numero_muestras) {
+                            $('.errorNumeroMuestras').removeClass('hidden');
+                            $('.errorNumeroMuestras').text(data.errors.numero_muestras);
+                        }
+                        if (data.errors.afiliado_id) {
+                            $('.errorAfiliado').removeClass('hidden');
+                            $('.errorAfiliado').text(data.errors.afiliado_id);
+                        }
+                        if (data.errors.user_id) {
+                            $('.errorUser').removeClass('hidden');
+                            $('.errorUser').text(data.errors.user_id);
+                        }
+                        if (data.errors.tipoEntrega_id) {
+                            $('.errorEntrega').removeClass('hidden');
+                            $('.errorEntrega').text(data.errors.user_id);
+                        }
+                        if (data.errors.observacion) {
+                            $('.errorObservacion').removeClass('hidden');
+                            $('.errorObservacion').text(data.errors.observacion);
+                        }
+
+        } else {
+          toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
       $('.recepcion' + data.id).replaceWith(" "+
       "<tr class='recepcion" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
@@ -357,6 +493,7 @@ success: function(data) {
    + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modalRol btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalRol btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
       "</tr>");
     }
+},
   });
 });
 // form Delete function
@@ -384,6 +521,7 @@ $('.modal-footer').on('click', '.delete', function(){
       'id': $('.id').text()
     },
     success: function(data){
+      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
       $('.ubicacion' + $('.id').text()).remove();
     }
   });

@@ -12,6 +12,8 @@
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
+@include('Busqueda.search',['url'=>'Cera','link'=>'Cera'])
+
 <h1 class="text-center">LISTADO DE  CERA</h1>
 
 <!-- Saltos de linea-->
@@ -23,13 +25,12 @@
 
 <!--Esta clase nos permite posicionar el buscador  -->
 
-    @include('Apiario.search') 
   
     
 
 
 <div class="table-responsive">
-			<table class="table table-striped table-bordered table-condensed table-hover">
+			<table class="table table-striped table-bordered table-condensed table-hover" id="table">
 				<thead>
 					<th>Código</th>
 					<th>Recepción</th>
@@ -42,10 +43,9 @@
             <i class="glyphicon glyphicon-plus"></i></th>
 				</thead>
         {{ csrf_field() }}
-           <?php  $no=1; ?>
                @foreach ($cera as $value)
-					<tr class="api{$value->id}}">
-          <td>{{ $no++ }}</td>
+					<tr class="cera{$value->id}}">
+          <td>{{ $value->id }}</td>
 					<td>{{ $value->RecepcionMateriaPrima->id}} - {{ $value->RecepcionMateriaPrima->afiliado->Nombre}} {{ $value->RecepcionMateriaPrima->afiliado->apellido1}} {{ $value->RecepcionMateriaPrima->afiliado->apellido2}}</td>
             <td>{{ $value->PesoBruto}}</td>
             <td>{{ $value->PesoNeto}}</td>

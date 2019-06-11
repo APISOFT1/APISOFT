@@ -28,7 +28,7 @@
     {!!Html::style ('/css2/font-awesome.min.css')!!}
     <!-- NProgress -->
     {!!Html::style ('/css2/nprogress.css')!!}
-    <!-- jQuery jjaja custom content scroller -->
+    <!-- jQuery custom content scroller -->
     {!!Html::style ('/css2/jquery.mCustomScrollbar.min.css')!!}
     <!-- Custom Theme Style -->
     {!!Html::style ('/css2/custom.min.css')!!}
@@ -103,11 +103,6 @@
                   </li>
 
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
-<<<<<<< .merge_file_a23320
-                    <ul class="nav child_menu">
-                      
-                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
-=======
                     <ul class="nav child_menu">
                     <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
                     
@@ -115,7 +110,6 @@
                   </li>
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Servicios <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
->>>>>>> .merge_file_a26704
                     <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
                     <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
                     
@@ -218,7 +212,6 @@
         $('.errorApiario').addClass('hidden');
          
                     
-
          if ((data.errors)) {
              setTimeout(function () {
                  $('#create').modal('show');
@@ -240,7 +233,6 @@
           "<td>" + data.id + "</td>"+
           "<td>" + data.afiliado_id + "</td>"+
           "<td>" + data.apiario_id + "</td>"+
-          "<td>" + data.created_at + "</td>"+
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
           data.id + "'data-afiliado_id='" 
           +data.afiliado_id+ "'data-apiario_id='" 
@@ -258,9 +250,7 @@
     });
     $('#afiliado_id').val('');
     $('#apiario_id').val('');
-
   });
-
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
 $('#footer_action_button').text(" Editar ");
@@ -275,10 +265,8 @@ $('.form-horizontal').show();
 $('#idAA').val($(this).data('id'));
 $('#afi').val($(this).data('afiliado_id'));
 $('#api').val($(this).data('apiario_id'));
-
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
@@ -294,7 +282,6 @@ success: function(data) {
         $('.errorApiario').addClass('hidden');
          
                     
-
          if ((data.errors)) {
              setTimeout(function () {
                  $('#create').modal('show');
@@ -310,16 +297,25 @@ success: function(data) {
              }
             
          } else {
-             toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
-      $('.table' + $('.id').text()).remove();
+             toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
+             $('.afiliadoapiario' + data.id).replaceWith(" "+
+          "<tr class='afiliadoapiario"+ data.id +"'>"+
+          "<td>" + data.id + "</td>"+
+          "<td>" + data.afiliado_id + "</td>"+
+          "<td>" + data.apiario_id + "</td>"+ 
+          "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
+          data.id + "' data-afiliado_id='"
+          + data.afiliado_id +  "' data-apiario_id='" 
+          + data.apiario_id + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='"
+           + data.id + "' data-afiliado_id='" 
+           + data.afiliado_id + "' data-apiario_id='" + data.apiario_id + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
+           + data.id + "' data-afiliado_id='" + data.afiliado_id +  "' data-apiario_id='" 
+          + data.apiario_id +  "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
+          "</tr>");
     }
 },
   });
 });
-
-
-
-
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Delete");
@@ -336,7 +332,6 @@ $('.afiliado_id').html($(this).data('afiliado_id'));
 $('.apiario_id').html($(this).data('apiario_id'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
@@ -351,7 +346,6 @@ $('.modal-footer').on('click', '.delete', function(){
     }
   });
 });
-
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');

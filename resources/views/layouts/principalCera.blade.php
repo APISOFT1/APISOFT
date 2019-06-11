@@ -167,6 +167,9 @@
   <script src="{{asset('js2/bootstrap-select.min.js')}}"></script>
   
     <!-- jQuery -->
+    @jquery
+    @toastr_js
+    @toastr_render
 
     {!!Html::script('/js2/jquery.min.js')!!}  
     @stack('scripts')
@@ -186,9 +189,7 @@
 
      {!!Html::script('/js/daterangepicker.js')!!}
 
-     @jquery
-    @toastr_js
-    @toastr_render
+    
 
 
 <!-- MODAL Cera -->
@@ -255,11 +256,11 @@
           toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
           $('#table').append("<tr class='cera" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
-          "<td>" + data.Descripcion + "</td>"+
           "<td>" + data.Recepcion_id + "</td>"+
           "<td>" + data.PesoBruto + "</td>"+
           "<td>" + data.PesoNeto + "</td>"+
           "<td>" + data.Fecha + "</td>"+
+          "<td>" + data.Descripcion + "</td>"+
   
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
           data.id + "' data-Descripcion='"
@@ -361,14 +362,13 @@ success: function(data) {
         } else {
           toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
       $('.cera' + data.id).replaceWith(" "+
-      "<tr class='cera'>"+
+      "<tr class='cera "+ data.id +"'>"+
           "<td>" + data.id + "</td>"+
-          "<td>" + data.Descripcion + "</td>"+
           "<td>" + data.Recepcion_id + "</td>"+
           "<td>" + data.PesoBruto + "</td>"+
           "<td>" + data.PesoNeto + "</td>"+
           "<td>" + data.Fecha + "</td>"+
-  
+          "<td>" + data.Descripcion + "</td>"+
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
           data.id + "' data-Descripcion='"
           + data.Descripcion +  "' data-Recepcion_id='" 
@@ -453,14 +453,14 @@ function discount(){
 var timeoutId = 0;
 $('#ub').keyup(function(e){
    clearTimeout(timeoutId);
-   timeoutId = setTimeout(discount,1000);
+   timeoutId = setTimeout(ub,1000);
 });
 
-function discount(){
+function ub(){
   let amount = $('#ub').val();
   if(!isNaN(amount)){
-    let discount = amount * 0.01;
-    let total =  amount - discount;
+    let ub = amount * 0.01;
+    let total =  amount - ub;
     $("#ps").val(total);
   } 
 }

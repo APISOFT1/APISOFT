@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use Validator;
 use Response;
@@ -25,9 +24,7 @@ class ApiarioController extends Controller
             ->orderby('id','ASC')
             ->paginate(7);
            $ubicaciones = Ubicacion::all();
-
           
-
         return view('Apiario.index', compact('api', 'ubicaciones'), ['api'=>$api,"searchText"=>$query]);
         }
         
@@ -40,33 +37,11 @@ public function addApiario(Request $request){
       'Descripcion' => 'required',
       'cantidad' => 'required',
       'ubicacion_id' => 'required'
-<<<<<<< .merge_file_a13020
-<<<<<<< HEAD
-      ]); 
-      
-  if ($validator->fails())
-  return Response::json(['errors' => $error->errors()->all()]);
-  else {
-=======
       ); 
-
       $validator = Validator::make ( Input::all(), $rules);
       if ($validator->fails())
       return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
-
     else {
->>>>>>> d9c60665fa79baa59c387185978bb682e34ad93b
-=======
-      ); 
-
-      $error = Validator::make($request->all() , $rules);
-  if ($error->fails())
-  {
-    
-  return response()->json(['errors' => $error->errors()->all()]);
-  }
-    else {
->>>>>>> .merge_file_a29248
     
     $ubicacion_id = input::get('ubicacion_id');
     $api = new Apiario;
@@ -79,7 +54,6 @@ public function addApiario(Request $request){
       
       return response()->json($api);
   
-
   }
 }
 public function find(Request $request)
@@ -119,8 +93,6 @@ public function deleteApiario(request $request){
   $api = Apiario::find ($request->id);
   $api->delete();
  
-
   
-
 }
 }

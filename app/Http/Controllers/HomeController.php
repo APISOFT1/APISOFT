@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+<<<<<<< HEAD
 <<<<<<< .merge_file_a22560
 <<<<<<< HEAD
 =======
 >>>>>>> .merge_file_a13400
+=======
+>>>>>>> Caro
 
 use Illuminate\Support\Facades\Auth;
 
@@ -15,12 +18,15 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Alert;
 
+<<<<<<< HEAD
 <<<<<<< .merge_file_a22560
 =======
 use Alert;
 >>>>>>> Caro
 =======
 >>>>>>> .merge_file_a13400
+=======
+>>>>>>> Caro
 class HomeController extends Controller
 
 
@@ -47,10 +53,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
 <<<<<<< .merge_file_a22560
 <<<<<<< HEAD
 =======
 >>>>>>> .merge_file_a13400
+=======
+>>>>>>> Caro
 
         //$afiliados = DB::select("SELECT count('id_Afiliado') as total, genero_id as Genero
        // FROM afiliados INNER JOIN generos 
@@ -62,11 +71,14 @@ class HomeController extends Controller
 
         return redirect('dashboard')->with('success', 'Profile updated!');
 
+<<<<<<< HEAD
 <<<<<<< .merge_file_a22560
 =======
         return redirect('dashboard');
 >>>>>>> Caro
 =======
 >>>>>>> .merge_file_a13400
+=======
+>>>>>>> Caro
     }
 }

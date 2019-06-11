@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>APISOFT</title>
+    @toastr_css
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -18,9 +19,9 @@
   
       <!-- Include Twitter Bootstrap and jQuery: -->
 <!--<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>->
-
  
 <!-- Include the plugin's CSS and JS: -->
+{!!Html::style ('/vendor/switch/switchery.min.css')!!} 
 
     {!!Html::style ('/css2/bootstrap.min.css')!!} 
 
@@ -31,7 +32,8 @@
     {!!Html::style ('/css2/select2.css')!!}
 
     {!!Html::style ('/css/dashboard.css')!!}
-    
+
+    {!!Html::style ('/css/green.css')!!}
     <!-- Font Awesome -->
     {!!Html::style ('/css2/font-awesome.min.css')!!}
     <!-- NProgress -->
@@ -114,11 +116,6 @@
 
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-<<<<<<< .merge_file_a06796
-                      <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
-                      <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
-                      <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
-=======
                     <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
                     
                     </ul>
@@ -127,8 +124,7 @@
                     <ul class="nav child_menu">
                     <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
                     <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
->>>>>>> .merge_file_a07424
-                    
+      
                     
                     </ul>
                   </li>
@@ -214,7 +210,8 @@
 
      {!!Html::script('/js/Chart.min.js')!!}
 
-
+     {!!Html::script('/js/switchery.min.js')!!}
+     
      {!!Html::script('/js/app.js')!!}
      
 
@@ -224,6 +221,15 @@
 {!!Html::script('/js/bootstrap-select.min.js')!!}
 
 {!!Html::script('/js/jquery-1.11.1.min.js')!!}
+
+{!!Html::script('/js/icheck.min.js')!!}
+
+{!!Html::script('/js/icheck.js')!!}
+
+    @jquery
+    @toastr_js
+    @toastr_render
+
 
 <script src="js/sweetalert.min.js"></script>
 
@@ -243,7 +249,6 @@
     $('.modal-crear').text('Crear User');
     
   });
-
   $("#add").click(function() {
     $.ajax({
       type: 'POST',
@@ -263,7 +268,6 @@
           $('.error').text(data.errors.email);
           $('.error').text(data.errors.password);
          
-
  
         } else {
           $('.error').remove();
@@ -300,7 +304,6 @@
     $('#password').val('');
   
   });
-
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
 $('#footer_action_button').text(" Editar");
@@ -316,12 +319,10 @@ $('#iii').val($(this).data('id'));
 $('#nnn').val($(this).data('name'));
 $('#emm').val($(this).data('email'));
 $('#passs').val($(this).data('password'));
+$('#sst').val($(this).data('status'));
 $('#rlss').val($(this).data('roles'));
-
-
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
@@ -332,43 +333,80 @@ $('.modal-footer').on('click', '.edit', function() {
 'name': $('#nnn').val(),
 'email': $('#emm').val(),
 'password': $('#passs').val(),
+'status': $('#sst').val(),
 'roles': $('#rlss').val(),
-
       
-
     },
 success: function(data) {
+  $('.errorName').addClass('hidden');
+  $('.errorEmail').addClass('hidden');
+  $('.errorPassword').addClass('hidden');
+  $('.errorStatus').addClass('hidden');
+  $('.errorRoles').addClass('hidden');
+         
+         
+         
+         
+                    
+         if ((data.errors)) {
+             setTimeout(function () {
+                 $('#create').modal('show');
+                 toastr.error('ERRO DE VALIDACIÓN!', 'Error Alert', {timeOut: 5000});
+             }, 500);
+             if (data.errors.Name) {
+                 $('.errorName').removeClass('hidden');
+                 $('.errorName').text(data.errors.name);
+             }
+             if (data.errors.Email) {
+                 $('.errorEmail').removeClass('hidden');
+                 $('.errorEmail').text(data.errors.email);
+             }
+             if (data.errors.Password) {
+                 $('.errorPassword').removeClass('hidden');
+                 $('.errorPassword').text(data.errors.password);
+             }
+             if (data.errors.Roles) {
+                 $('.errorRoles').removeClass('hidden');
+                 $('.errorRoles').text(data.errors.roles);
+             }
+         } else {
+             toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
       $('.users' + data.id).replaceWith(" "+
       "<tr class='users" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.name + "</td>"+
           "<td>" + data.email + "</td>"+
-          
+          "<td>" + data.password + "</td>"+
+          "<td>" + data.status + "</td>"+
+          "<td>" + data.roles + "</td>"+
          
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + 
           "' data-name='" + data.name + 
           "' data-email='" + data.email +
           "' data-password='" + data.password +
+          "' data-password='" + data.status +
+          "' data-roles='" + data.roles +
           
  "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
  + data.id + 
            "' data-name='" + data.name + 
           "' data-email='" + data.email +
           "' data-password='" + data.password +
-          
+          "' data-password='" + data.status +
+          "' data-roles='" + data.roles +
  "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
  + data.id + 
               "' data-name='" + data.name + 
           "' data-email='" + data.email +
           "' data-password='" + data.password +
-      
+          "' data-password='" + data.status +
+       "' data-roles='" + data.roles + 
 "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
-         
-    }
+         }
+    },
   });
 });
-
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Eliminar");
@@ -377,14 +415,13 @@ $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Eliminar Ubicación');
+$('.modal-descripcion').text('Eliminar Usuario');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
 $('.name').html($(this).data('name'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
@@ -394,11 +431,22 @@ $('.modal-footer').on('click', '.delete', function(){
       'id': $('.id').text()
     },
     success: function(data){
+      $('.errorId').addClass('hidden');
+      if ((data.errors)) {
+             setTimeout(function () {
+                 $('#myModal').modal('show');
+                 toastr.error('ERRO DE VALIDACIÓN!', 'Error Alert', {timeOut: 5000});
+             }, 500); 
+             if (data.errors.Id) {
+                 $('.errorId').removeClass('hidden');
+                 $('.errorId').text(data.errors.id);
+             }
+      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
       $('.users' + $('.id').text()).remove();
-    }
+      }
+    },
   });
 });
-
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
