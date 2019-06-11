@@ -4,6 +4,10 @@ use App\Stock;
 use Validator;
 use Response;
 use App\RecepcionEstanon;
+use App\Presentacion;
+use App\Producto;
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;  //MUYR IMPORTANTE , SIN ESTO NO GUARDA.
 use App\Http\Requests\StockFormRequest;
@@ -18,12 +22,12 @@ class StockController extends Controller
        if ($request)
     {
         $search = \Request::get('search');
-        $recepcionEst = RecepcionEstanon::with('Producto','Presentacion','RecepcionMateriaPrima', 'Estanon');
-        $recepcionEst = RecepcionEstanon::where('producto_id','like','%'.$search.'%')
+        $sto = Stock::with('Producto','Presentacion','RecepcionEstanon');
+        $sto = Stock::where('producto_id','like','%'.$search.'%')
         ->orderby('producto_id','desc')
         ->paginate(7);
-        $recepciones = RecepcionMateriaPrima::all();
-        $presentacion = Presentacion::all();
+        $recepciones = RecepcionEstanon::all();
+        $presentacion =  Presentacion::all();
         $producto = Producto::all();
         return view('Stock.index', compact('sto', 'recepcionEstanon', 'presentacion','producto'));
     }
@@ -34,9 +38,10 @@ class StockController extends Controller
         $rules = array(
     
          
-          'nombre' => 'required',
           'cantidadDisponible' => 'required',
           'precioUnitario' => 'required',
+          'producto_id'=> 'required',
+          'presentacion_id'=> 'required',
           'estanon_recepcions_id' => 'required'
         );
       $validator = Validator::make ( Input::all(), $rules);
@@ -46,9 +51,10 @@ class StockController extends Controller
       else {   
         $sto = new Stock;
         $sto->id= $request->id;
-        $sto->nombre = $request->nombre;
         $sto->cantidadDisponible = $request->cantidadDisponible;
         $sto->precioUnitario = $request->precioUnitario;
+        $sto->producto_id = $request->producto_id;
+        $sto->presentacion_id = $request->presentacion_id;
         $sto->estanon_recepcions_id = $request->estanon_recepcions_id;
         $sto->save();
         return response()->json(['success' => 'Se ha creado un Stock correctamente']);
@@ -64,9 +70,10 @@ class StockController extends Controller
       else {
       $sto = Stock::find ($request->id);
       
-        $sto->nombre = $request->nombre;
         $sto->cantidadDisponible = $request->cantidadDisponible;
         $sto->precioUnitario = $request->precioUnitario;
+        $sto->producto_id = $request->producto_id;
+        $sto->presentacion_id = $request->presentacion_id;
         $sto->estanon_recepcions_id = $request->estanon_recepcions_id;
    
       $sto->save();
@@ -76,9 +83,10 @@ class StockController extends Controller
     public function deleteStock(request $request){
   
       $sto = Stock::find ($request->id);
-       $sto->nombre = $request->nombre;
         $sto->cantidadDisponible = $request->cantidadDisponible;
         $sto->precioUnitario = $request->precioUnitario;
+        $sto->producto_id = $request->producto_id;
+        $sto->presentacion_id = $request->presentacion_id;
         $sto->estanon_recepcions_id = $request->estanon_recepcions_id;
    
         $sto->delete();

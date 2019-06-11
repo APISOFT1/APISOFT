@@ -17,7 +17,12 @@ class CeraController extends Controller
          
             $search = \Request::get('search');
             $cera = Cera::with('RecepcionMateriaPrima');
-            $cera = Cera::where('Descripcion','like','%'.$search.'%')
+            $cera = Cera::where('id','like','%'.$search.'%')
+                  ->orWhere('Descripcion','LIKE','%'.$search.'%')
+                  ->orWhere('Recepcion_id','LIKE','%'.$search.'%')
+                  ->orWhere('PesoBruto','LIKE','%'.$search.'%')
+                  ->orWhere('PesoNeto','LIKE','%'.$search.'%')
+                  ->orWhere('Fecha','LIKE','%'.$search.'%')
             ->orderby('id','desc')
             ->paginate(7);
            $recepciones = RecepcionMateriaPrima::all();
