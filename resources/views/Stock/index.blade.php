@@ -12,6 +12,8 @@
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
+@include('Busqueda.search',['url'=>'Stock','link'=>'Stock'])
+
 <h1 class="text-center">INVENTARIO</h1>
 
 <!-- Saltos de linea-->
@@ -23,7 +25,6 @@
 
 <!--Esta clase nos permite posicionar el buscador  -->
 
-		@include('Stock.search') 
 
 
 <div class="table-responsive">
@@ -45,7 +46,7 @@
           <td>{{ $no++ }}</td>
 					<td>{{ $value->nombre}}</td>
           <td>{{ $value->cantidadDisponible}}</td>
-          <td>{{ $value->precio}}</td>
+          <td>{{ $value->precioUnitario}}</td>
             <td><span class="label label-success">{{ $value->RecepcionEstanon->id}}</span></td>
            
 					<td>
@@ -87,6 +88,7 @@
         <h4 class="modal-descripcion text-center"></h4>
       </div>
       <div class="modal-body">
+      <span id="form_result"></span>
         <form class="form-horizontal" role="form">
 
         <div class="form-group row add">

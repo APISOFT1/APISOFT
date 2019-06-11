@@ -47,10 +47,11 @@
     </select>
    </div>
   </div>
-  <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+   
+  <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12 add">
    <div class="form-group">
-    <label for="serie_comprobante">Serie Comprobante</label>
-    <input type="text" name="serie_comprobante" value="{{old('serie_comprobante')}}" class="form-control" placeholder="Serie Comprobante">
+    <label></label>
+    <input type="text" style="display:none" id="serie_comprobante" name="serie_comprobante"  class="form-control" placeholder="Serie Comprobante">
    </div>
   </div>
   </div>
@@ -63,7 +64,7 @@
       <label>Producto</label>
       <select name="precepcion_id" class="form-control selectpicker" id="precepcion_id" data-live-search="true">
        @foreach($productos as $producto)
-        <option value="{{$producto->id}}_{{$producto->PesoBruto}}">{{$producto->producto}}</option>
+        <option value="{{$producto->id}}_{{$producto->PesoNeto}}">{{$producto->producto}}</option>
        @endforeach
       </select>
      </div>
@@ -71,8 +72,8 @@
      
     <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
      <div class="form-group">
-      <label for="PesoBruto">Peso Bruto Miel</label>
-      <input type="number" disabled name="pPesoBruto" id="pPesoBruto" class="form-control" placeholder="Peso Bruto Miel">
+      <label for="PesoNeto">Peso neto miel</label>
+      <input type="number" disabled name="pPesoNeto" id="pPesoNeto" class="form-control" placeholder="Peso neto miel">
      </div>
     </div>
 
@@ -96,7 +97,7 @@
       <thead style="background-color:	#9ddcf2">
        <th>Opciones</th>
        <th>Recepcion</th>
-       <th>Peso Bruto Miel</th>
+       <th>Peso neto miel</th>
        <th>Precio</th>
        <th>Subtotal</th>
 
@@ -108,7 +109,7 @@
        <th></th>
     
      
-       <th><h4 id="total">₡/ . 0.00</h4> <input type="hidden" name="total_venta" 
+       <th><h4 id="total">₡/. 0.00</h4> <input type="hidden" name="total_venta" 
        id="total_venta"></th>
       </tfoot>
       <tbody>
@@ -127,7 +128,7 @@
   </div>
   <div class="absolute1">
      <div class="form-group">
-      <a href="{{ URL::previous() }}">Regresar <i class="glyphicon glyphicon-arrow-left"></i></a>
+      <a href="{{ URL::previous() }}">Regresar<i class="glyphicon glyphicon-arrow-left"></i></a>
      </div>
   </div>
  </div>
@@ -135,61 +136,50 @@
 
 @push ('scripts')
 <script>
-
  $(document).ready(function(){
     $('#bt_add').click(function(){
     agregar();
     });
   });
-
  var cont=0;
  total=0;
  subtotal=[];
  $("#guardar").hide();
  $("#precepcion_id").change(mostrarValores);
-
  function mostrarValores()
  {
    datosProducto= document.getElementById('precepcion_id').value.split('_');
-   $("#pPesoBruto").val(datosProducto[1]);
+   $("#pPesoNeto").val(datosProducto[1]);
  }
-
  function agregar(){
-
     datosProducto= document.getElementById('precepcion_id').value.split('_');
-
     recepcion_id=datosProducto[0];
     producto=$("#precepcion_id option:selected").text();
-    PesoBruto=$("#pPesoBruto").val();
+    PesoNeto=$("#pPesoNeto").val();
     Precio=$("#pPrecio").val();
     
-
-    if (recepcion_id!="" && PesoBruto!=""  && Precio!="" )
+    if (recepcion_id!="" && PesoNeto!=""  && Precio!="" )
     {
-       subtotal[cont]=(Precio);
-       total=subtotal[cont];
-
-       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="recepcion_id[]" value="'+recepcion_id+'">'+producto+'</td><td><input type="number" name="PesoBruto[]" value="'+PesoBruto+'"></td><td><input type="number" name="Precio[]" value="'+Precio+'"></td><td>'+subtotal[cont]+'</td></tr>';
+      subtotal[cont]=(PesoNeto*Precio);
+       total=total+subtotal[cont];
+       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="recepcion_id[]" value="'+recepcion_id+'">'+producto+'</td><td><input type="number" name="PesoNeto[]" value="'+PesoNeto+'"></td><td><input type="number" name="Precio[]" value="'+Precio+'"></td><td>'+subtotal[cont]+'</td></tr>';
        cont++;
        limpiar();
        $('#total').html("₡/ " + total);
        $('#total_venta').val(total);
        evaluar();
        $('#detalles').append(fila);
-
     }
     else
     {
       alert("Error al ingresar el detalle del ingreso, revise los datos del producto")
     }
   }
-
  function limpiar(){
  
     $("#pPrecio").val("");
   
   }
-
   function evaluar()
   {
     if (total>0)
@@ -201,7 +191,6 @@
       $("#guardar").hide(); 
     }
    }
-
  function eliminar(index){
   total=total-subtotal[index]; 
     $("#total").html("₡/. " + total);   
@@ -209,7 +198,6 @@
     $("#fila" + index).remove();
     evaluar();
  }
-
 </script>
 @endpush
 @endsection

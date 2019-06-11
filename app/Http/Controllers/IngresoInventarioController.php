@@ -47,9 +47,11 @@ class IngresoInventarioController extends Controller
         ->get();
         $usuarios=DB::table('users')
         ->get();
+      
         $stocks = DB::table('stocks as art')
-          ->select(DB::raw('CONCAT(art.id," - ", art.nombre) AS stocks'),'art.id','art.cantidadDisponible')
-          ->groupBy('stocks','art.id','art.cantidadDisponible')
+         ->join('presentacions as p','art.presentacion_id','=','p.id')
+          ->select(DB::raw('CONCAT(art.id," - ", art.presentacion_id) AS stocks'),'art.id','art.cantidadDisponible','art.presentacion_id')
+          ->groupBy('stocks','art.id','art.cantidadDisponible', 'art.presentacion_id')
           ->get();
         return view ("IngresoInventario.create",["personas"=>$personas,"usuarios"=>$usuarios,"stocks"=>$stocks]);
     }
@@ -64,18 +66,15 @@ class IngresoInventarioController extends Controller
             $ingreso->serie_comprobante=$request->get('serie_comprobante');
             $ingreso->tipo_pago=$request->get('tipo_pago');
             $ingreso->total_venta=$request->get('total_venta');
-
             $mtyime= Carbon::now('America/Costa_Rica');
             $ingreso->fecha_hora=$mtyime->toDateTimeString();
             $ingreso->estado='Activo';
             $ingreso->save();
-
             $stock_id = $request->get('stock_id');
             $Precio= $request->get('Precio');
             $cantidad=$request->get('cantidad');
          
         
-
             $cont= 0;
             while ($cont < count($stock_id)){
                 $detalle = new DetalleIngresoInventario(); 
@@ -105,7 +104,6 @@ class IngresoInventarioController extends Controller
         ->where('i.idingreso_inventario','=',$id)
         ->groupBy('i.idingreso_inventario','i.fecha_hora','p.nombre','p.apellido1','p.apellido2','u.name','i.tipo_comprobante', 'i.serie_comprobante','i.tipo_pago','i.total_venta','i.estado')
         ->first();
-
         $detalles=DB::table('detalle_ingreso_inventario as d')
             ->join ('stocks as a','d.stock_id','=','a.id')
             ->select('a.producto_id as stocks','d.Precio','d.cantidad','a.cantidadDisponible')
@@ -113,7 +111,6 @@ class IngresoInventarioController extends Controller
             ->get(); 
         return view("IngresoInventario.show",["ingresos"=>$ingresos,"detalles"=>$detalles]);
     }
-
     public function edit($id)
 {
     $ingresos=DB::table('ingreso_inventario as i')
@@ -124,7 +121,6 @@ class IngresoInventarioController extends Controller
     ->where('i.idingreso_inventario','=',$id)
     ->groupBy('i.idingreso_inventario','i.fecha_hora','p.nombre','p.apellido1','p.apellido2','u.name','i.tipo_comprobante', 'i.serie_comprobante','i.tipo_pago','i.total_venta','i.estado')
     ->first();
-
     $detalles=DB::table('detalle_ingreso_inventario as d')
         ->join ('stocks as a','d.stock_id','=','a.id')
         ->select('a.producto_id as stocks','d.Precio','d.cantidad','a.cantidadDisponible')

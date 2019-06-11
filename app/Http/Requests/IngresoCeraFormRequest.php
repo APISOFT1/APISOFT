@@ -29,7 +29,7 @@ class IngresoCeraFormRequest extends Request
             'idproveedor'=>'required',
             'idusuario'=>'required',
             'tipo_comprobante'=>'required|max:20',
-            'serie_comprobante'=>'required|max:30',
+            'serie_comprobante'=>'required',
             'tipo_pago'=>'required|max:20',
             'total_venta'=>'max:30',
             'estado'=>'max:30',

@@ -53,9 +53,9 @@ class IngresoController extends Controller
         $usuarios=DB::table('users')
         ->get();
         $productos = DB::table('recepcion_materia_primas as art')
-          ->select(DB::raw('CONCAT(art.id) AS producto'),'art.id','art.PesoBruto')
-          ->groupBy('producto','art.id','art.PesoBruto')
-          ->where('art.PesoBruto','>','0')
+          ->select(DB::raw('CONCAT(art.id) AS producto'),'art.id','art.PesoNeto')
+          ->groupBy('producto','art.id','art.PesoNeto')
+          ->where('art.PesoNeto','>','0')
           ->get();
         return view ("Ingreso.create",["personas"=>$personas,"usuarios"=>$usuarios,"productos"=>$productos]);
     }
@@ -106,7 +106,7 @@ class IngresoController extends Controller
         ->first();
         $detalles=DB::table('detalle_ingreso as d')
             ->join ('recepcion_materia_primas as a','d.recepcion_id','=','a.id')
-            ->select('a.id as producto','d.Precio','a.PesoBruto')
+            ->select('a.id as producto','d.Precio','a.PesoNeto')
             ->where('d.idingreso','=',$id)
             ->get(); 
         return view("Ingreso.show",["ingresos"=>$ingresos,"detalles"=>$detalles]);
@@ -123,7 +123,7 @@ class IngresoController extends Controller
     ->first();
     $detalles=DB::table('detalle_ingreso as d')
     ->join ('recepcion_materia_primas as a','d.recepcion_id','=','a.id')
-    ->select('a.id as producto','d.Precio','a.PesoBruto')
+    ->select('a.id as producto','d.Precio','a.PesoNeto')
     ->where('d.idingreso','=',$id)
     ->get(); 
         

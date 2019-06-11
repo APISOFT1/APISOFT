@@ -10,6 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>APISOFT</title>
+    @toastr_css
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -60,12 +61,18 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
+                <li><a><i class="fa fa-home"></i> Home<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                     <li><a href="{{ url('/dashboard/') }}">Dashboard</a></li>
+                     
+                    </ul>
+                  </li>
                 @if(Auth::check())
                     @if (Auth::user()->isAdmin())
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       
-                     <li><a href="{{ url('users/') }}">Gestionar users</a></li>
+                     <li><a href="{{ url('users/') }}">Gestionar usuarios</a></li>
                     </ul>
                   </li>
                 
@@ -94,10 +101,16 @@
                     </ul>
                   </li>
 
-                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Producto Terminado <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Producto/') }}">Gestionar Productos</a></li>
-                      <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-cart-plus"></i>Servicios <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                    <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
+                    <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
                     
                     
                     </ul>
@@ -151,6 +164,9 @@
   <script src="{{asset('js2/bootstrap-select.min.js')}}"></script>
   
     <!-- jQuery -->
+    @jquery
+    @toastr_js
+    @toastr_render
 
     {!!Html::script('/js2/jquery.min.js')!!}  
     @stack('scripts')
@@ -203,19 +219,57 @@ var div_respuesta="#respuesta";
       },
       
       success: function(data){
-        if ((data.errors)) {
-          $('.error').removeClass('hidden');
-          $('.error').text(data.errors.fecha);
-          $('.error').text(data.errors.pesoBruto);
-          $('.error').text(data.errors.pesoNeto);
-          $('.error').text(data.errors.numero_muestras);
-          $('.error').text(data.errors.afiliado_id);
-          $('.error').text(data.errors.user_id);
-          $('.error').text(data.errors.tipoEntrega_id);
-          $('.error').text(data.errors.observacion);
- 
+       
+        $('.errorFecha').addClass('hidden');
+         $('.errorPesoBruto').addClass('hidden');
+         $('.errorPesoNeto').addClass('hidden');
+         $('.errorNumeroMuestras').addClass('hidden');
+         $('.errorAfiliado').addClass('hidden');
+         $('.errorUser').addClass('hidden');
+         $('.errorEntrega').addClass('hidden');
+         $('.errorObservacion').addClass('hidden');
+
+         if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#create').modal('show');
+                            toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.fecha) {
+                            $('.errorFecha').removeClass('hidden');
+                            $('.errorFecha').text(data.errors.fecha);
+                        }
+                        
+                        if (data.errors.PesoBruto) {
+                            $('.errorPesoBruto').removeClass('hidden');
+                            $('.errorPesoBruto').text(data.errors.PesoBruto);
+                        }
+                        if (data.errors.PesoNeto) {
+                            $('.errorPesoNeto').removeClass('hidden');
+                            $('.errorPesoNeto').text(data.errors.PesoNeto);
+                        }
+                        if (data.errors.numero_muestras) {
+                            $('.errorNumeroMuestras').removeClass('hidden');
+                            $('.errorNumeroMuestras').text(data.errors.numero_muestras);
+                        }
+                        if (data.errors.afiliado_id) {
+                            $('.errorAfiliado').removeClass('hidden');
+                            $('.errorAfiliado').text(data.errors.afiliado_id);
+                        }
+                        if (data.errors.user_id) {
+                            $('.errorUser').removeClass('hidden');
+                            $('.errorUser').text(data.errors.user_id);
+                        }
+                        if (data.errors.tipoEntrega_id) {
+                            $('.errorEntrega').removeClass('hidden');
+                            $('.errorEntrega').text(data.errors.user_id);
+                        }
+                        if (data.errors.observacion) {
+                            $('.errorObservacion').removeClass('hidden');
+                            $('.errorObservacion').text(data.errors.observacion);
+                        }
+
         } else {
-          $('.error').remove();
+          toastr.success('SE HA CREADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
           $('#table').append("<tr class='recepcion" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.fecha + "</td>"+
@@ -229,14 +283,15 @@ var div_respuesta="#respuesta";
           "<td><button class='show-modalRol btn btn-info btn-sm' data-id='" + 
           data.id + "' data-descripcion='" + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modalRol btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalRol btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
-          
-
-
-          $('#busqueda_parroquia').append("<tr class='recepcion" + data.id + "'>"+
+        
+          $('#fiii').append("<tr class='recepciones" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
-          "<td>" + data.fecha + "</td>"+
           "<td>" + data.afiliado_id + "</td>");
+
+          $('#Recepcion_id').val($(this).data('id'));
+        
         }
+       
       },
     });
       
@@ -253,81 +308,212 @@ var div_respuesta="#respuesta";
 
 
   });
+  {{-- ajax Form Add Post--}}
+$(document).on('click','.create-modal', function() {
+  $('#create').modal('show');
+  $('.form-horizontal').show();
+  $('.modal-descripcion').text('Crear Recepción Estañón');
+});
+$("#addd").click(function() {
+  $.ajax({
+    type: 'POST',
+    url: 'addRecepcion',
+    
+    data: {
+      '_token': $('input[name=_token]').val(),
+      'Recepcion_id': $('select[name=Recepcion_id]').val(),
+      'Estanon_id': $('select[name=Estanon_id]').val(),
+      'Fecha': $('input[name=Fecha]').val()
+      
+    },
+    success: function(data){
+      $('.errorRecepcion').addClass('hidden');
+         $('.errorEstanon').addClass('hidden');
+         $('.errorFecha').addClass('hidden');
+       
+
+         if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#create').modal('show');
+                            toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.Recepcion_id) {
+                            $('.errorRecepcion').removeClass('hidden');
+                            $('.errorRecepcion').text(data.errors.Recepcion_id);
+                        }
+                        
+                        if (data.errors.Estanon_id) {
+                            $('.errorEstanon').removeClass('hidden');
+                            $('.errorEstanon').text(data.errors.Estanon_id);
+                        }
+                        if (data.errors.Fecha) {
+                            $('.errorFecha').removeClass('hidden');
+                            $('.errorFecha').text(data.errors.Fecha);
+                        }
+        } else {
+          toastr.success('SE HA CREADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
+    
+      }
+    },
+  });
+  $('#Recepcion_id').val('');
+  $('#Estanon_id').val('');
+  $('#Fecha').val('');
+});
 
 // function Edit POST
-$(document).on('click', '.edit-modalRol', function() {
-$('#footer_action_button').text(" Editar Rol");
+$(document).on('click', '.edit-modal', function() {
+$('#footer_action_button').text(" Editar");
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-$('.modal-descripcion').text('Editar Rol');
+$('.modal-descripcion').text('Editar Recepción');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
 $('#fid').val($(this).data('id'));
-$('#ti').val($(this).data('descripcion'));
+$('#ti').val($(this).data('fecha'));
+$('#psb').val($(this).data('pesobruto'));
+$('#snt').val($(this).data('pesoneto'));
+$('#mue').val($(this).data('numero_muestras'));
+$('#ali').val($(this).data('afiliado_id'));
+$('#ser').val($(this).data('user_id'));
+$('#ent').val($(this).data('tipoentrega_id'));
+$('#cio').val($(this).data('observacion'));
+
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
-    url: 'editRol',
+    url: 'editRecepcionMateriaPrima',
     data: {
 '_token': $('input[name=_token]').val(),
 'id': $("#fid").val(),
-'descripcion': $('#ti').val(),
-
+'fecha': $('#ti').val(),
+'pesoBruto': $('#psb').val(),
+'discount': $('#snt').val(),
+'numero_muestras': $('#mue').val(),
+'afiliado_id': $('#ali').val(),
+'user_id': $('#ser').val(),
+'tipoEntrega_id': $('#ent').val(),
+ 'observacion': $('#cio').val(),
     },
 success: function(data) {
+  $('.errorFecha').addClass('hidden');
+         $('.errorPesoBruto').addClass('hidden');
+         $('.errorPesoNeto').addClass('hidden');
+         $('.errorNumeroMuestras').addClass('hidden');
+         $('.errorAfiliado').addClass('hidden');
+         $('.errorUser').addClass('hidden');
+         $('.errorEntrega').addClass('hidden');
+         $('.errorObservacion').addClass('hidden');
+
+         if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#create').modal('show');
+                            toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.fecha) {
+                            $('.errorFecha').removeClass('hidden');
+                            $('.errorFecha').text(data.errors.fecha);
+                        }
+                        
+                        if (data.errors.PesoBruto) {
+                            $('.errorPesoBruto').removeClass('hidden');
+                            $('.errorPesoBruto').text(data.errors.PesoBruto);
+                        }
+                        if (data.errors.PesoNeto) {
+                            $('.errorPesoNeto').removeClass('hidden');
+                            $('.errorPesoNeto').text(data.errors.PesoNeto);
+                        }
+                        if (data.errors.numero_muestras) {
+                            $('.errorNumeroMuestras').removeClass('hidden');
+                            $('.errorNumeroMuestras').text(data.errors.numero_muestras);
+                        }
+                        if (data.errors.afiliado_id) {
+                            $('.errorAfiliado').removeClass('hidden');
+                            $('.errorAfiliado').text(data.errors.afiliado_id);
+                        }
+                        if (data.errors.user_id) {
+                            $('.errorUser').removeClass('hidden');
+                            $('.errorUser').text(data.errors.user_id);
+                        }
+                        if (data.errors.tipoEntrega_id) {
+                            $('.errorEntrega').removeClass('hidden');
+                            $('.errorEntrega').text(data.errors.user_id);
+                        }
+                        if (data.errors.observacion) {
+                            $('.errorObservacion').removeClass('hidden');
+                            $('.errorObservacion').text(data.errors.observacion);
+                        }
+
+        } else {
+          toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
       $('.rol' + data.id).replaceWith(" "+
       "<tr class='rol" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
-      "<td>" + data.descripcion + "</td>"+
-      "<td>" + data.created_at + "</td>"+
- "<td><button class='show-modalRol btn btn-info btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modalRol btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalRol btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+      "<td>" + data.fecha + "</td>"+
+      "<td>" + data.pesoBruto + "</td>"+
+      "<td>" + data.pesoNeto + "</td>"+
+      "<td>" + data.numero_muestras + "</td>"+
+      "<td>" + data.afiliado_id + "</td>"+
+      "<td>" + data.user_id+ "</td>"+
+      "<td>" + data.tipoEntrega_id + "</td>"+
+      "<td>" + data.observacion + "</td>"+
+ "<td><button class='show-modalRol btn btn-info btn-sm' data-id='"
+  + data.id + "' data-descripcion='"
+   + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modalRol btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalRol btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
       "</tr>");
     }
+},
   });
 });
-
 // form Delete function
-$(document).on('click', '.delete-modalRol', function() {
-$('#footer_action_button').text(" Delete");
+$(document).on('click', '.delete-modal', function() {
+$('#footer_action_button').text(" Eliminar");
 $('#footer_action_button').removeClass('glyphicon-check');
 $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Delete Post');
+$('.modal-title').text('Eliminar Ubicación');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
-$('.title').html($(this).data('descripcion'));
+$('.observacion').html($(this).data('observacion'));
 $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
-    url: 'deleteRol',
+    url: 'deleteRecepcionMateriaPrima',
     data: {
       '_token': $('input[name=_token]').val(),
       'id': $('.id').text()
     },
     success: function(data){
-       $('.rol' + $('.id').text()).remove();
+      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
+      $('.ubicacion' + $('.id').text()).remove();
     }
   });
 });
 
   // Show function
-  $(document).on('click', '.show-modalRol', function() {
+  $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
   $('#ii').text($(this).data('id'));
-  $('#di').text($(this).data('descripcion'));
-  $('.modal-title').text('Show Post');
+  $('#ech').text($(this).data('fecha'));
+  $('#di').text($(this).data('pesobruto'));
+  $('#psn').text($(this).data('pesoneto'));
+  $('#num').text($(this).data('numero_muestras'));
+  $('#afi').text($(this).data('afiliado_id'));
+  $('#use').text($(this).data('user_id'));
+  $('#tip').text($(this).data('tipoentrega_id'));
+  $('#obs').text($(this).data('observacion'));
+  $('.modal-title').text('Detalle Recepción');
   });
 </script>
 
@@ -503,62 +689,4 @@ $("#numero_muestras").val(aleatorio);
 });
 </script>
 
-<script type="text/javascript">
-{{-- ajax Form Add Post--}}
-
-$(document).ready(iniciar);
-
-function iniciar() {
-    $("#busqueda_parroquia tr td").click(clickTabla);
-}
-
-$(document).ready(function () {
-    var table = $('#busqueda_parroquia').DataTable();
-    var dato = "";
-    //para seleccionar una opcion
-    $('#example tbody').on('click', 'tr', function () {
-        if ($(this).hasClass('selected')) {
-            $(this).removeClass('selected');
-            dato = "";
-            console.log(dato);
-        }
-        else {
-            table.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
-            dato = $(this).find("td:eq(0)").text();
-            console.log(dato);
-        }
-    });
-});
-
-$("#BusquedaParroquia").on('click', 'tr', function (e) {
-    e.preventDefault();
-    var renglon = $(this);
-    var campo1, campo2, campo3;
-    $(this).children("td").each(function (i) {
-        switch (i) {
-            case 0:
-                campo1 = $(this).text();
-                break;
-            case 1:
-                campo2 = $(this).text();
-                break;
-            case 2:
-                campo3 = $(this).text();
-                break;
-        }
-    })
-    $("#txt_codigo").val(campo1);
-    $("#txt_nombre").val(campo2);
-    if (campo3 == "A") {
-        $("#che_estado").prop("checked", "checked");
-    }
-    CierraPopup();
-});
-
-function CierraPopup() {
-    $("#popupBusquedaParroquia").modal('hide');//ocultamos el modal
-    $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
-    $('.modal-backdrop').remove();//eliminamos el backdrop del modal
-}
 

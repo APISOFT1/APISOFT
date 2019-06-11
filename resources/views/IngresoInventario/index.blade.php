@@ -52,7 +52,7 @@
 					<td>{{ $ing->tipo_comprobante.':'.$ing->serie_comprobante.'-'.$ing->idingreso_inventario}}</td>
 					<td>{{ $ing->tipo_pago}}</td>
                     <td>{{ $ing->total_venta}}</td>
-                    <td>{{ $ing->estado}}</td>
+                    <td><span class="label label-success">{{ $ing->estado}}</td>
 
 					<td>
 						<a href="{{URL::action('IngresoInventarioController@show',$ing->idingreso_inventario)}}"><button class=" btn btn-info btn-sm"><i class="fa fa-eye"></i></button></a>

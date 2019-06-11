@@ -19,13 +19,10 @@
     <link href="welcome/css/material.min.css" rel="stylesheet">
     <link href="welcome/css/ripples.min.css" rel="stylesheet">
     <link href="welcome/css/main.css" rel="stylesheet">
-    <link href="welcome/css/style.css" rel="stylesheet">
-    <link href="welcome/css/animate.css" rel="stylesheet">
     <link href="welcome/css/responsive.css" rel="stylesheet">
     <link href="welcome/css/animate.min.css" rel="stylesheet">
     <link href="css5/normalize.css" rel="stylesheet">
     <link href="css/cardio.css" rel="stylesheet">
-
 
   </head>
 
@@ -69,20 +66,14 @@
                 </div>
               </div>
             </div>
-        </div>  
-              
+        </div>        
         <div class="contents text-right">
           <h1 class="wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="300ms">APISOFT - Asociación de Apicultores Región Chorotega</h1>
           <p class="wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="400ms">La mejor miel del país producida en Nicoya</p>
   
-        <a href="{{ url('/login/') }}" class="btn btn-lg btn-border wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">Iniciar Sesion</a>
-
-        
+        <a href="{{ url('/login/') }}" class="btn btn-lg btn-border wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">Iniciar Sesión</a>
         </div>   
     </header>
- 
-    
-  
 
     <section id="features" class="section">
 			<div class="container">
@@ -132,7 +123,6 @@
     <section id="screenshot" class="section">
       <div class="container">
         <div class="section-header">
-      
           <h1 class="section-title wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="300ms">Visión</h1>
 		</div>
 		<h1 class="section-subtitle wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="400ms">
@@ -145,8 +135,8 @@
       </div>
 	</div>
     </section>
-   
-   
+
+
     <section id="testimonial" class="section">
       <div class="container">
         <div class="section-header text-center wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="400ms">
@@ -188,7 +178,7 @@
 
 
    
-    
+
 
    
     <section id="contact">
@@ -223,8 +213,9 @@
                   <div class="icon">
                     <i class="mdi-action-settings-phone"></i>
                   </div>
-                  <h4>Número Telefónico</h4>
-                  <p>2685-02-02</p>
+                  <h4>Números Telefónico</h4>
+                  <p>+506 6099-3366 Con Marvin Jiménez</p>
+                  <p>+506 8827-4252 Con Jesús Guevara</p>
                 </div>
               </div>
               <div class="col-md-6 col-sm-6">
@@ -236,13 +227,10 @@
                   <p>Apicultores Nicoya</p>
                 </div>
               </div>
-            
             </div>
           </div>
         </div>
-      
       </div>
-     
     </section>    
 
     <div class="map-area">      
@@ -256,24 +244,24 @@
         <div class="container">
           <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
-            <h3>Asociación de Apicultores Región Chorotega</h3>
-  
+               <h3>   APPIS Chorotega</h3>
               <ul>
-               <img src="/welcome/img/APPIS.jpeg">
+                <img src="/welcome/img/APPIS.jpeg">
               </ul>
             </div>
-            <div class="col-md-3  col-xs-12">
-          
-            </div>
-         
             <div class="col-md-3 col-sm-6 col-xs-12">
-            <h3>Colaboradores</h3>
-                <br>
-              <ul>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+            </div>
+            </div>
+           
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <h3>Universidad Nacional de Costa Rica<br>
               <img src="/welcome/img/una.png">
+              <ul>
+              
               </ul>
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="col-xs-6 col-sm-3">
               <a class="social" href="#" target="_blank"><i class="fa fa-facebook"></i></a>
               <a class="social" href="#" target="_blank"><i class="fa fa-twitter"></i></a>
               <a class="social" href="#" target="_blank"><i class="fa fa-google-plus"></i></a>
@@ -328,4 +316,14 @@
 
   </body>
 \
+<style>
+div.Prueba{
+top:8px;
+position:absolute;
+bottom:8px;
+left:16px;
+font-size: 18px;
+}
 
+
+</style>

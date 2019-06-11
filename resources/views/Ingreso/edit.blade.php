@@ -33,6 +33,9 @@
             <small>
                 Emitido el: {{ $ingresos->fecha_hora }}
             </small>
+            <small>
+                Estado: {{ $ingresos->estado }}
+            </small>
         </h1>
     </div>
 
@@ -67,10 +70,10 @@
        @foreach($detalles as $det)
             <tr>
                 <td>{{$det->producto}}</td>
-                <td>{{$det->PesoBruto}}</td>
+                <td>{{$det->PesoNeto}}</td>
                 <td>{{$det->Precio}}</td>
-                 
-                 <td>{{$det->Precio}}</td>
+                <td></td>
+                <td>{{$det->PesoNeto*$det->Precio}}</td>
             </tr>
         @endforeach
         </tbody>

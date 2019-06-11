@@ -13,6 +13,8 @@
 
 @section ('contenido')
 
+@include('Busqueda.search',['url'=>'Afiliado','link'=>'Afiliado'])
+
               
 <h1 class="text-center">LISTADO DE  AFILIADOS </h1>
 
@@ -25,7 +27,6 @@
 <!--Esta clase nos permite posicionar el buscador  -->
 
 
-@include('Afiliado.search') 
 
 <div class="row">
   <div class="table table-responsive">
@@ -64,13 +65,19 @@
         <td>{{$value->Num_Cuenta}}</td>
 	    	<td>{{$value->Genero->descripcion}}</td>
 	    	<td> {{$value->Estado_Civil->descripcion}}</td>  
-        <td> <span class="label label-success"><?php  if ($value->estado_id=='1') {
-			# code...
-			print("Activo");
-		} else {
-			print("Inactivo");
-		}
-		  ?></span></td>  
+        <td>   @if($value->estado_id)
+                            <span class="label label-primary"><?php  if ($value->estado_id=='1') {
+	                     		# code...
+	                 		print("Activo");
+	                         	} 
+	                     	  ?> </span>
+                        @else
+                            <span class="label label-danger"><?php  if ($value->estado_id=='0') {
+		                      	# code...
+	                       		print("Inactivo");
+	                         	} 
+	                     	  ?> </span>
+                        @endif</td>
           <td>
           <a href="#" class="show-modal btn btn-info btn-sm" 
           data-id="{{$value->id}}"
@@ -105,17 +112,7 @@
             </a>
             <a href="#" class="delete-modal btn btn-danger btn-sm"
             data-id="{{$value->id}}"
-            data-Nombre="{{$value->Nombre}}"
-            data-apellido1="{{$value->apellido1}}"
-            data-apellido2="{{$value->apellido2}}"
-            data-Telefono="{{$value->Telefono}}"
-            data-email="{{$value->email}}"
-            data-Direccion="{{$value->Direccion}}"
-            data-Fecha_Ingreso="{{$value->Fecha_Ingreso}}"
-            data-Num_Cuenta="{{$value->Num_Cuenta}}"
-            data-genero_id="{{$value->genero_id}}"
-            data-estado_civil_id="{{$value->estado_civil_id}}"
-            data-estado_id="{{$value->estado_id}}">
+            data-Nombre="{{$value->Nombre}}">
               <i class="fa fa-trash"></i>
             </a>
             @endif
@@ -136,6 +133,7 @@
         <h4 class="modal-crear"></h4>
       </div>
       <div class="modal-body">
+      <span id="form_result"></span>
         <form class="form-horizontal" role="form">
        
         <div class="stepwizard">
@@ -217,7 +215,7 @@
 
   
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <input type="date" class="form-control " id="Fecha_Ingreso" name="Fecha_Ingreso" placeholder="YYYY-MM-DD" required>
+                        <input type="datetime" class="form-control " id="fecha" name="Fecha_Ingreso" placeholder="YYYY-MM-DD" disabled  required>
                         <p class="No Ingreso la Fecha"></p>
                         <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
                       </div> 
@@ -315,66 +313,62 @@
                     <div class="modal-body">
                     <div class="form-group">
                       <label for="">ID :</label>
-                      <b id="iaa"/>
+                      <b id="dis"/>
                     </div>
                     <div class="form-group">
                       <label for="">Nombre :</label>
                       
-                      <b id="jaja"/>
+                      <b id="mbr"/>
                     </div>
 										<div class="form-group">
                       <label for="">Primer Apellido:</label>
-                      <b id="ape1"/>
+                      <b id="ell"/>
                     </div>
 										<div class="form-group">
                    
                       <label for="">Segundo Apellido :</label>
-                      <b id="ape2"/>
+                      <b id="ido"/>
                     </div>
                     <div class="form-group">
                    
                    <label for="">Telefono :</label>
-                   <b id="tel"/>
+                   <b id="eno"/>
                  </div>
                  <div class="form-group">
                    
                    <label for="">Correo :</label>
-                   <b id="eml"/>
+                   <b id="ail"/>
                  </div>
                  <div class="form-group">
                    
                    <label for="">Direccion :</label>
-                   <b id="dirn"/>
+                   <b id="rec"/>
                  </div>
-                 <div class="form-group">
-                   
-                   <label for="">Direccion :</label>
-                   <b id="dirn"/>
-                 </div>
+                
                  <div class="form-group">
                    
                    <label for="">Fecha Ingreso :</label>
-                   <b id="fecso"/>
+                   <b id="eso"/>
                  </div>
                  <div class="form-group">
                    
                    <label for="">Numero de cuenta :</label>
-                   <b id="nunta"/>
+                   <b id="um"/>
                  </div>
                  <div class="form-group">
                    
                    <label for="">Genero :</label>
-                   <b id="ged"/>
+                   <b id="ero"/>
                  </div>
                  <div class="form-group">
                    
                    <label for="">Estado Civil :</label>
-                   <b id="estid"/>
+                   <b id="vil"/>
                  </div>
                  <div class="form-group">
                    
                    <label for="">Estado :</label>
-                   <b id="esid"/>
+                   <b id="ado"/>
                  </div>
                     </div>
                     </div>
@@ -443,7 +437,7 @@
 
 
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <input type="date" class="form-control  has-feedback-right" id="f" >
+                        <input type="datetime" class="form-control  has-feedback-right" id="f"  disabled>
                         <p class="No Ingreso la Fecha"></p>
                         <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
                       </div>
@@ -497,7 +491,7 @@
         </form>
                 {{-- Form Delete Post --}}
         <div class="deleteContent">
-          Desea Eliminar Este Afiliado <span class="descripcion"></span>?
+          ¿Está seguro que desea eliminar este afiliado <span class="descripcion"></span>?
           <span class="hidden id"></span>
         </div>
       </div>
@@ -506,7 +500,7 @@
           <span id="footer_action_button" class="glyphicon"></span>
         </button>
         <button type="button" class="btn btn-warning" data-dismiss="modal">
-          <span class="fa fa-close"></span>close
+          <span class="fa fa-close"></span>Cerrar
         </button>
       </div>
     </div>

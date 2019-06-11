@@ -1,4 +1,3 @@
-
 <body class="nav-md">
 <div class="container body">
     <div class="main_container">
@@ -35,13 +34,19 @@
                     <ul class="nav child_menu">
                     <li>
                         <a href="{{ route('dashboard') }}">Afiliado   
-                            <i class="fa fa-user" aria-hidden="true"></i>
+                           
                             
                         </a>
                     </li>
                     <li>
                         <a href="{{ url('/chartRecepcion/') }}">Recepción
-                            <i class="fa fa-file-text" aria-hidden="true"></i>
+                           
+                            
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/chartStock/') }}">Productos
+                           
                             
                         </a>
                     </li>
@@ -49,8 +54,20 @@
                     @if (Auth::user()->isAdmin())
     
                     <li>
-                        <a href="{{ url('/chartIngreso/') }}">Ingreso
-                            <i class="fa fa-money" aria-hidden="true"></i>
+                        <a href="{{ url('/chartIngreso/') }}">Ingreso Por Miel
+                           
+                            
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/chartIngresoCera/') }}">Ingreso Por Cera
+                           
+                            
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/chartIngresoInventario/') }}">Ingreso Por Inventario
+                            
                             
                         </a>
                     </li>
@@ -67,9 +84,11 @@
                             
                         </a>
                     </li>
-                    @else
+                    
 
-                   
+                    @endif
+                    @endif
+                    </ul>
 
                     <li><a><i class="fa fa-home"></i> Planta <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -86,8 +105,7 @@
                   
             
                    
-                    @endif
-                    @endif
+                    
                     
                 </ul>
                 @if(Auth::check())
@@ -117,7 +135,9 @@
                     </li>
                    
                
-                @else
+                    @endif
+                    @endif
+                    </ul>
                 <li><a><i class="fa fa-list-alt"></i> Recepción <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li>
@@ -130,12 +150,11 @@
                             
                         </a>
                     </li>
-                    @endif
-@endif
+                   
+
                 </ul>
                
-                @if(Auth::check())
-                    @if (Auth::user()->isAdmin())
+                
                 <li><a><i class="fa fa-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li>
@@ -143,30 +162,32 @@
                             
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ url('/IngresoCera/') }}">Gestionar Servio Cera
-                            
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/IngresoInventario/') }}">Gestionar Servio Inventario
-                            
-                        </a>
-                    </li>
-                    
-                    @else
-                    <li><a><i class="fa fa-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
+                    </ul>
+
+                    <li><a><i class="fa fa-cart-plus"></i> Servicios <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li>
                         <a href="{{ url('Stok') }}">Gestionar Stock
                             
                         </a>
                     </li>
-                
+                    <li>
+                        <a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera
+                            
                         </a>
                     </li>
-                    @endif
-@endif
+                    <li>
+                        <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario
+                            
+                        </a>
+                    </li>
+                    
+                   
+                    
+                        </a>
+                    </li>
+                    
+
                 </ul>
         </div>
         <!-- /sidebar menu -->

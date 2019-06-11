@@ -29,7 +29,12 @@
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
-<h1 >LISTADO DE  Recepción Miel</h1>
+
+@include('Busqueda.search',['url'=>'RecepcionMateriaPrima','link'=>'RecepcionMateriaPrima'])
+
+
+<h1 >LISTADO DE  RECEPCIÓN MIEL</h1>
+
 <!-- Saltos de linea-->
 <br>
 <br>
@@ -76,9 +81,9 @@
             data-pesoBruto="{{$value->pesoBruto}}" 
             data-pesoNeto="{{$value->pesoNeto}}" 
             data-numero_muestras="{{$value->numero_muestras}}"
-            data-afiliado_id="{{$value->afiliado_id}}"
-            data-user_id="{{$value->user_id}}"
-            data-tipoEntrega_id="{{$value->tipoEntrega_id}}"
+            data-afiliado_id="{{$value->afiliado_id}} - {{ $value->afiliado->Nombre }} {{ $value->afiliado->apellido1 }} {{ $value->afiliado->apellido2 }}"
+            data-user_id="{{$value->user_id}} - {{ $value->user->name }}"
+            data-tipoEntrega_id="{{$value->tipoEntrega_id}} - {{ $value->tipoEntrega->Descripcion }}"
             data-observacion="{{$value->observacion}}">
               <i class="fa fa-eye"></i>
             </a>
@@ -87,20 +92,13 @@
             data-pesoBruto="{{$value->pesoBruto}}" 
             data-pesoNeto="{{$value->pesoNeto}}" 
             data-numero_muestras="{{$value->numero_muestras}}"
-            data-afiliado_id="{{$value->afiliado_id}}"
-            data-user_id="{{$value->user_id}}"
-            data-tipoEntrega_id="{{$value->tipoEntrega_id}}"
+            data-afiliado_id="{{$value->afiliado_id}} "
+            data-user_id="{{$value->user_id}} "
+            data-tipoEntrega_id="{{$value->tipoEntrega_id}} "
             data-observacion="{{$value->observacion}}">
               <i class="glyphicon glyphicon-pencil"></i>
             </a>
             <a href="#" class="delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" 
-            data-fecha="{{$value->fecha}}"
-            data-pesoBruto="{{$value->pesoBruto}}" 
-            data-pesoNeto="{{$value->pesoNeto}}" 
-            data-numero_muestras="{{$value->numero_muestras}}"
-            data-afiliado_id="{{$value->afiliado_id}}"
-            data-user_id="{{$value->user_id}}"
-            data-tipoEntrega_id="{{$value->tipoEntrega_id}}"
             data-observacion="{{$value->observacion}}">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
@@ -122,6 +120,7 @@
         <h4 class="modal-crear"></h4>
       </div>
       <div class="modal-body">
+      <span id="form_result"></span>
         <form class="form-horizontal" role="form">
        
         <div class="stepwizard">
@@ -135,9 +134,6 @@
                         <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
                         <p>Asignar Estañon</p>
                     </div>
-                    
-                    
-                    
                 </div>
             </div>
             <div class="row setup-content" id="step-1">
@@ -151,9 +147,9 @@
               <div class="form-group">
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
               <input type="datetime" class="form-control" id="fecha" name="fecha" 
-              placeholder="YYYY-MM-DD" required>
+              placeholder="YYYY-MM-DD" disabled required>
               <p class="No ingreso la fecha"></p>
-              <span class="fa fa-clock-o form-control-feedback right" aria-hidden="true"></span>
+              <span class="fa fa-clock-o form-control-feedback right" aria-hidden="true" ></span>
               </div>
               </div>
               
@@ -184,7 +180,7 @@
               <div class="form-group row add">
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
               <input type="text" class="form-control" id="pesoNeto" name="pesoNeto"
-             placeholder="Peso Neto" required>
+             placeholder="Peso Neto" disabled required>
               <p class="No ingreso el Peso Neto"></p>
               <span class="fa fa-minus-circle form-control-feedback right" aria-hidden="true"></span>
               </div>
@@ -194,15 +190,15 @@
               <div class="form-group row add">
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
               <input type="text" class="form-control"  id="numero_muestras" name="numero_muestras"
-          placeholder="Numero Muestra" required>
+          placeholder="Numero Muestra" disabled required>
               <p class="No ingreso el Codigo"></p>
-              <span class="fa fa-address-card form-control-feedback right" aria-hidden="true"></span>
+              <span class="fa fa-sort-numeric-asc form-control-feedback right" aria-hidden="true"></span>
               </div>
               </div>
             
 
-              <div class="form-group row add">
-              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
+              
+              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
               <select class="form-control" id="tipoEntrega_id" name="tipoEntrega_id">
                 <option value="">Seleccione la Entrega</option>
                   @foreach ($tipoEntrega as $entre)
@@ -212,21 +208,21 @@
               <p class="No ingreso el tipo de Entrega"></p>
               <span class="fa fa-sign-in form-control-feedback right" aria-hidden="true"></span>
               </div>
-              </div>
+            
 
-              <div class="form-group row add">
-              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
+              
+              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
               <input type="text" class="form-control"  value="{{ auth()->user()->id }}" id="user_id" name="user_id"
-          placeholder="Encargado" required>
+          placeholder="Encargado" disabled required>
               <p class="No ingreso el usuario"></p>
-              <span class="fa fa-user-circle-o form-control-feedback right" aria-hidden="true"></span>
+              <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
               </div>
-              </div>
+              
 
               <div class="form-group row add">
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
               <textarea class="resizable_textarea form-control"  id="observacion" name="observacion" 
-                      placeholder="Ingrese Observacion"></textarea>
+                      placeholder="Ingrese Observación"></textarea>
               <span class="fa fa-file-text form-control-feedback right" aria-hidden="true"></span>
               </div>
               </div>
@@ -237,18 +233,16 @@
                     <div class="modal-footer">
           
           
-          <button class="btn btn-warning" type="submit" id="add">
-              <span class="fa fa-save"></span> Guardar 
-            </button>
+         
            
             </div>
             </div>
                        
-            <button class="btn btn-warning" type="button" data-dismiss="modal">
-              <span class="fa fa-times"></span> Cerrar
-            </button>
+            
                             <button class="btn btn-success  nextBtn pull-right"  type="button" >Siguiente</button>
-                         
+                            <button class="btn btn-warning nextBtn pull-right" " type="submit" id="add">
+              <span class="fa fa-save"></span> Guardar
+            </button>
                         </div>
                     </div>
                </div>
@@ -258,28 +252,34 @@
                         <div class="col-md-12">
                             
                             <!-- content go here -->
-         <div class="modal-footer">
-           <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#popupBusquedaParroquia">   <i class="fa fa-search"></i>   
-          </div>
-
-
         
+              <table style="width: 100%;"  id="fiii" class="display hover dataTable no-footer" cellspacing="0" width="200">
+                  <thead>
+                    <tr>
+                  <th>Codigo</th>
+                  <th>Cédula Afiliado</th>
+                 </tr>
+              </thead>
+              {{ csrf_field() }}
+              <tbody>
+           @foreach ($recepciones as $value)
+        <tr class="recepciones{{$value->id}}">
+       <td>{{ $value->id }}</td>
+       <td>{{ $value->afiliado_id}}</td>
+          </tr>
+      @endforeach
+        </tbody>
+              </table>
 
+           
               <div class="form-group row add">
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
-              <select  class="form-control" name="Recepcion_id" class="form-control" id="Recepcion_id">
-         <option value="">-- Seleccione Recepción --</option>
-         @foreach ($recepciones as $recep)
-          <option value="{{ $recep->id }}">{{$recep->id}} - {{$recep->afiliado->Nombre}} {{$recep->afiliado->apellido1}} {{$recep->afiliado->apellido2}}</option>
-         @endforeach
-        </select>
-              <p class="No ingreso la fecha"></p>
-              <span class="fa fa-child form-control-feedback right" aria-hidden="true"></span>
+              <input type="text" class="form-control"  id="Recepcion_id" name="Recepcion_id"
+          placeholder="Codigo Recepcion" required>
+              <p class="No ingreso la Recepción"></p>
+              <span class="fa fa-user-circle-o form-control-feedback right" aria-hidden="true"></span>
               </div>
               </div>
-
-
-     
 
             <div class="form-group row add">
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
@@ -298,16 +298,17 @@
             <div class="form-group row add">
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
               <input type="datetime" class="form-control" id="Fecha" name="Fecha" 
-              placeholder="YYYY-MM-DD" required>
+              placeholder="YYYY-MM-DD" disabled required>
               <p class="No ingreso la fecha"></p>
               <span class="fa fa-clock-o form-control-feedback right" aria-hidden="true"></span>
               </div>
               </div>
           
             <div class="modal-footer">
-          <button class="btn btn-warning" class="text-center" type="submit" id="add">
+          <button class="btn btn-warning" class="text-center" type="submit" id="addd">
               <span class="fa fa-save"></span> Guardar 
             </button>
+            
            
             </div>
                            
@@ -323,54 +324,6 @@
 </div></div>
 
 
- <!-- Modal Escenario-->
- <div class="modal fade" id="popupBusquedaParroquia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title" id="myModalLabel">Busqueda de Parroquias</h4>
-            </div>
-            <div id="BusquedaParroquia" class="modal-body">
-                <form role="form">
-                    <div class="form-group">
-                        <label for="stock_bodega">Busqueda por:</label>
-                        <select class="form-control" style="width: 40%" id="stock_bodega">
-                            <option>Nombre</option>
-                        </select>
-                        <label for="texto_buscar">Texto a Buscar:</label>
-                        <input type="text" class="form-control" id="texto_buscar">
-                    </div>
-                    <div style="position: relative; overflow: auto; width: 100%; height: 200px;" class="dataTables_scrollBody">
-                        <table style="width: 100%;" id="busqueda_parroquia" class="display nowrap dataTable no-footer" cellspacing="0" width="100">
-                            <thead>
-                                <tr>
-                                    <th>Codigo</th>
-                                    <th>Fecha</th>
-                                    <th>Afiliado</th>
-                                </tr>
-                            </thead>
-                            {{ csrf_field() }}
-                            <tbody>
-                            @foreach ($recepcion as $value)
-        <tr class="recepcion{{$value->id}}">
-       <td>{{ $value->id }}</td>
-          <td>{{ $value->fecha }}</td>
-          <td>{{ $value->afiliado_id }}</td>
-          </tr>
-      @endforeach
-                             </tbody>
-                        </table>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Seleccionar</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
-    </div>
-</div>  <!-- Modal Escenario-->
 
 
 {{-- Modal Form Show POST --}}
@@ -387,8 +340,36 @@
                       <b id="ii"/>
                     </div>
                     <div class="form-group">
-                      <label for="id">Descripcion :</label>
+                      <label for="id">Fecha :</label>
+                      <b id="ech"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="id">Peso Bruto :</label>
                       <b id="di"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="id">Peso Neto :</label>
+                      <b id="psn"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="id">Número de muestra :</label>
+                      <b id="num"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="id">Afiliado :</label>
+                      <b id="afi"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="id">Usuario :</label>
+                      <b id="use"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="id">Tipo Entrega :</label>
+                      <b id="tip"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="id">Observación :</label>
+                      <b id="obs"/>
                     </div>
                     </div>
                     </div>
@@ -412,16 +393,58 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="control-label col-sm-2"for="descripcion">Descripcion</label>
+            <label class="control-label col-sm-2"for="descripcion">Fecha</label>
             <div class="col-sm-10">
             <input type="name" class="form-control" id="ti">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2"for="descripcion">Peso Bruto</label>
+            <div class="col-sm-10">
+            <input type="name" class="form-control" id="psb">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2"for="descripcion">Peso Neto</label>
+            <div class="col-sm-10">
+            <input type="name" class="form-control" id="snt">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2"for="descripcion">Número muestras</label>
+            <div class="col-sm-10">
+            <input type="name" class="form-control" id="mue">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2"for="descripcion">Afiliado</label>
+            <div class="col-sm-10">
+            <input type="name" class="form-control" id="ali">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2"for="descripcion">Usuario</label>
+            <div class="col-sm-10">
+            <input type="name" class="form-control" id="ser">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2"for="descripcion">Tipo Entrega</label>
+            <div class="col-sm-10">
+            <input type="name" class="form-control" id="ent">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2"for="descripcion">Observación</label>
+            <div class="col-sm-10">
+            <input type="name" class="form-control" id="cio">
             </div>
           </div>
 
         </form>
                 {{-- Form Delete Post --}}
         <div class="deleteContent">
-          Are You sure want to delete <span class="descripcion"></span>?
+          ¿Está seguro que desea eliminar esta Recepción de Materia Prima <span class="descripcion"></span>?
           <span class="hidden id"></span>
         </div>
       </div>
@@ -436,6 +459,8 @@
     </div>
   </div>
 </div>
+
+
 
 
  <!--   Core JS Files   -->

@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
 use Alert;
+use App\RecepcionMateriaPrima;
+use Illuminate\Support\Facades\Input;
 class UserController extends Controller
 {
     /**
@@ -110,6 +112,37 @@ class UserController extends Controller
         
     }
 
+    public function editUser(request $request){
+        $rules = array(
+        );
+      $validator = Validator::make ( Input::all(), $rules);
+      if ($validator->fails())
+      return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
+      
+      else {
+        $users = User::find ($request->id);
+      
+      
+        $users->name = $request->name;
+        $users->email = $request->email;
+        if ($request->has('password')) {
+            $users->password = bcrypt($request->get('password'));
+        }
+
+        $users->status = $request->get('status', 1);
+       
+       
+        if ($request->has('roles')) {
+            $users->roles()->detach();
+
+            if ($request->get('roles')) {
+                $users->roles()->attach($request->get('roles'));
+            }
+        }
+        $users->save();
+      return response()->json($users);
+      }
+      }
     /**
      * Remove the specified resource from storage.
      *
@@ -117,13 +150,18 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
    /*DELETEEEEEE*/
-public function destroy($id)
-{
-    $users=User::findOrFail($id);
-    $users->delete();
-    return redirect('users');
- 
-}
- 
- 
+
+public function deleteUser(request $request){
+  
+    try {
+        User::find($request->id)->delete();
+        Alert::info('Usuario eliminada correctamente');
+        return redirect('/users.index');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Alert::error('No se puede eliminar este usuario, porque está relacionada a un producto', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        } 
+   
+   
+    }
 }

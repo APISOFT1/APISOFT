@@ -12,6 +12,8 @@
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
+@include('Busqueda.search',['url'=>'users','link'=>'users'])
+
 <h1 class="text-center">LISTADO DE USUARIOS</h1>
   	
 <!-- Saltos de linea-->
@@ -20,12 +22,6 @@
 <!-- Fin de salto de linea. No necesita una etiqueta de cierre-->
 
 <!--Esta clase nos permite posicionar el buscador  -->
-
-
-@include('users.search') 
-
-
-
 
 
 <div class="row">
@@ -72,17 +68,25 @@
             data-id="{{$value->id}}"
             data-name="{{$value->name}}"
             data-email="{{$value->email}}"
-            data-password="{{$value->password}}">
+            data-status="{{$value->status}}">
               <i class="fa fa-eye"></i>
             </a>
-            <a class= "btn btn-warning btn-sm" href="{{ route('users.edit', [$value->id]) }}" data-toggle="tooltip" data-placement="top" data-title="{{ __('views.users.index.edit') }}"
-   ><i class="glyphicon glyphicon-pencil"></i> </a>
+           
+            <a href="#" class="edit-modal btn btn-warning btn-sm" 
+            data-id="{{$value->id}}"
+            data-name="{{$value->name}}"
+            data-email="{{$value->email}}"
+            data-password="{{$value->password}}"
+            data-status="{{$value->status}}"
+            data-roles="{{$value->roles}}">
+            <i class="glyphicon glyphicon-pencil"></i>
+            </a>
 
    {{--@if(!$value->hasRole('administrator'))--}}
-            <a href="" data-target="#modal-delete-{{$value->id}}" data-toggle="modal">
+   <a href="#" class=" delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" data-Descripcion="{{$value->name}}">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
-            </a>
+            
             {{--@endif--}}
           </td>
         </tr>
@@ -116,42 +120,15 @@
                       <label for="">Correo :</label>
                       <b id="em"/>
                     </div>
-										<div class="form-group">
-                   
-                      <label for="">Contraseña :</label>
-                      <b id="pw"/>
-                    </div>
+										
+                      
                     </div>
                     </div>
                   </div>
 </div>
 
-<div class="modal fade modal-slide-in-right" aria-hidden="true"
-role="dialog" tabindex="-1" id="modal-delete-{{$value->id}}">
-	
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" 
-				aria-label="Close">
-                     <span aria-hidden="true">×</span>
-                </button>
-                <h4 class="modal-title">Eliminar Usuario</h4>
-			</div>
-			<div class="modal-body">
-				<p>Confirme si desea Eliminar el Usuario</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-				<button type="submit" class="btn btn-primary">Confirmar</button>
-			</div>
-		</div>
-	</div>
-	{{Form::Close()}}
 
-</div>
-
-<!--{{-- Modal Form Edit and Delete Post --}}
+{{-- Modal Form Edit and Delete Post --}}
 <div id="myModal"class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -183,9 +160,16 @@ role="dialog" tabindex="-1" id="modal-delete-{{$value->id}}">
           </div>
 
           <div class="form-group">
-            <label class="control-label col-sm-2"for="password">Password</label>
+            <label class="control-label col-sm-2"for="password">Contraseña</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="passs" >
+              <input type="password" class="form-control" id="passs" >
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="control-label col-sm-2"for="password">Confirmar Contraseña</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" >
             </div>
           </div>
          
@@ -206,7 +190,7 @@ role="dialog" tabindex="-1" id="modal-delete-{{$value->id}}">
         </form>
                 {{-- Form Delete Post --}}
         <div class="deleteContent">
-          Desea Eliminar Este Afiliado <span class="descripcion"></span>?
+          ¿Está seguro de eliminar este usuario <span class="descripcion"></span>?
           <span class="hidden id"></span>
         </div>
       </div>
@@ -221,7 +205,7 @@ role="dialog" tabindex="-1" id="modal-delete-{{$value->id}}">
     </div>
   </div>
 </div>
--->
+
 @endsection
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>

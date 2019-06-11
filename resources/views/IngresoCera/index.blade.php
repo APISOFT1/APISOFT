@@ -12,7 +12,7 @@
 @endif
 <!-- fin de mensaje de exito -->
 @section ('contenido')
-<h3>Listado de boletas servicios de cera procesada <a href="IngresoCera/create"><button class="btn btn-success btn-sm"> <i class="glyphicon glyphicon-plus"></i></h3>
+<h3>Listado de boletas servicios de cera procesada <a href="IngresoCera/create"><button  id="create" class="btn btn-success btn-sm"> <i class="glyphicon glyphicon-plus"></i></h3>
 
 <!-- Saltos de linea-->
 <br>
@@ -48,7 +48,7 @@
 					<td>{{ $ing->tipo_comprobante.':'.$ing->serie_comprobante.'-'.$ing->idingreso_cera}}</td>
 					<td>{{ $ing->tipo_pago}}</td>
           <td>{{ $ing->total_venta}}</td>
-          <td>{{ $ing->estado}}</td>
+          <td><span class="label label-success">{{ $ing->estado}}</td>
 
 					<td>
 						<a href="{{URL::action('IngresoCeraController@show',$ing->idingreso_cera)}}"><button class=" btn btn-info btn-sm"><i class="fa fa-eye"></i></button></a>

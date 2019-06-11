@@ -12,6 +12,7 @@
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
+@include('Busqueda.search',['url'=>'RecepEstanon','link'=>'RecepEstanon'])
 <h1 class="text-center">LISTADO DE RECEPCIÓN CON SU ESTAÑÓN</h1>
 
 <!-- Saltos de linea-->
@@ -23,7 +24,6 @@
 
 <!--Esta clase nos permite posicionar el buscador  -->
 
-		@include('Apiario.search') 
 
 
 <div class="table-responsive">
@@ -48,8 +48,8 @@
 					<td>
 					<a href="#" class="show-modal btn btn-info btn-sm"
 					 data-id="{{$value->id}}" 
-					 data-Recepcion_id="{{$value->Recepcion_id}}"
-					 data-Estanon_id="{{$value->Estanon_id}}"
+					 data-Recepcion_id="{{$value->Recepcion_id}} - {{ $value->RecepcionMateriaPrima->afiliado->Nombre}} {{ $value->RecepcionMateriaPrima->afiliado->apellido1}} {{ $value->RecepcionMateriaPrima->afiliado->apellido2}}"
+					 data-Estanon_id="{{$value->Estanon_id}} - {{ $value->Estanon->Descripcion}}"
                      data-Fecha="{{$value->Fecha}}">
               <i class="fa fa-eye"></i>
             </a>
@@ -82,6 +82,7 @@
         <h4 class="modal-descripcion"></h4>
       </div>
       <div class="modal-body">
+      <span id="form_result"></span>
         <form class="form-horizontal" role="form">
 
         
@@ -143,17 +144,17 @@
                       <b id="i2"/>
                     </div>
                     <div class="form-group">
-                      <label for="">Descripcion :</label>
+                      <label for="">Recepción :</label>
                       
                       <b id="d2"/>
                     </div>
 										<div class="form-group">
-                      <label for="">Cantidad :</label>
+                      <label for="">Estañón :</label>
                       <b id="ca2"/>
                     </div>
 										<div class="form-group">
                    
-                      <label for="">Ubicacion :</label>
+                      <label for="">Fecha :</label>
                       <b id="ub2"/>
                     </div>
                     </div>
@@ -178,21 +179,26 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="control-label col-sm-2"for="Descripcion">Descripcion</label>
+            <label class="control-label col-sm-2"for="Descripcion">Recepción </label>
             <div class="col-sm-10">
             <input type="name" class="form-control" id="cri">
             </div>
           </div>
 
 					<div class="form-group">
-            <label class="control-label col-sm-2"for="cantidad">Cantidad</label>
+            <label class="control-label col-sm-2"for="cantidad">Estañón</label>
             <div class="col-sm-10">
             <input type="name" class="form-control" id="can">
             </div>
           </div>
 
         
-
+          <div class="form-group">
+            <label class="control-label col-sm-2"for="cantidad">Fecha</label>
+            <div class="col-sm-10">
+            <input type="name" class="form-control" id="ub">
+            </div>
+          </div>
         </form>
                 {{-- Form Delete Post --}}
         <div class="deleteContent">

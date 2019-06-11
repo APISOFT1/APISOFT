@@ -12,6 +12,8 @@ UBICACION CREADO CORRECTAMENTE
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
+@include('Busqueda.search',['url'=>'Ubicacion','link'=>'Ubicacion'])
+
 <h1 >LISTADO DE  UBICACIÓN</h1>
 
 <!-- Saltos de linea-->
@@ -21,7 +23,6 @@ UBICACION CREADO CORRECTAMENTE
 <br>
 <!-- Fin de salto de linea. No necesita una etiqueta de cierre-->
 
-@include('Ubicacion.search') 
 		
 
 
@@ -39,10 +40,10 @@ UBICACION CREADO CORRECTAMENTE
         </th>
       </tr>
       {{ csrf_field() }}
-      <?php  $no=1; ?>
+     
       @foreach ($ubicacion as $value)
-        <tr class="ubicacion{{$value->id}}">
-          <td>{{ $no++ }}</td>
+      
+          <td>{{ $value->id}}</td>
           <td>{{ $value->Descripcion }}</td>
           <td>
             <a href="#" class="show-modal btn btn-info btn-sm" data-id="{{$value->id}}" data-Descripcion="{{$value->Descripcion}}">
@@ -51,7 +52,7 @@ UBICACION CREADO CORRECTAMENTE
             <a href="#" class="edit-modal btn btn-warning btn-sm" data-id="{{$value->id}}" data-Descripcion="{{$value->Descripcion}}">
               <i class="glyphicon glyphicon-pencil"></i>
             </a>
-            <a href="#" class="delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" data-Descripcion="{{$value->Descripcion}}">
+            <a href="#" class=" delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" data-Descripcion="{{$value->Descripcion}}">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
           </td>
@@ -70,6 +71,8 @@ UBICACION CREADO CORRECTAMENTE
         <h3 class="modal-descripcion  text-center"></h3>
       </div>
       <div class="modal-body">
+      <span id="form_result"></span>
+
         <form class="form-horizontal" role="form">
 
           <div class="form-group row add">
@@ -124,6 +127,7 @@ UBICACION CREADO CORRECTAMENTE
         <h1 class="modal-descripcion text-center" ></h1>
       </div>
       <div class="modal-body">
+      <span id="form_result"></span>
         <form class="form-horizontal" role="modal">
 
           <div class="form-group">
@@ -140,9 +144,9 @@ UBICACION CREADO CORRECTAMENTE
           </div>
 
         </form>
-                {{-- Form Delete Post --}}
+        {{-- Form Delete Post --}}
         <div class="deleteContent">
-          Are You sure want to delete <span class="descripcion"></span>?
+          ¿Está seguro que desea eliminar esa ubicación <span class="title"></span>?
           <span class="hidden id"></span>
         </div>
       </div>
@@ -151,34 +155,14 @@ UBICACION CREADO CORRECTAMENTE
           <span id="footer_action_button" class="glyphicon"></span>
         </button>
         <button type="button" class="btn btn-warning" data-dismiss="modal">
-          <span class="fa fa-times"></span>close
+          <span class="glyphicon glyphicon"></span>Cerrar
         </button>
       </div>
     </div>
   </div>
 </div>
-
 @endsection
 
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script>
-    @if(Session::has('message'))
-        var type = "{{ Session::get('alert-type', 'info') }}";
-        switch(type){
-            case 'info':
-                toastr.info("{{ Session::get('message') }}");
-                break;
-            
-            case 'warning':
-                toastr.warning("{{ Session::get('message') }}");
-                break;
-            case 'success':
-                toastr.success("{{ Session::get('message') }}");
-                break;
-            case 'error':
-                toastr.error("{{ Session::get('message') }}");
-                break;
-        }
-    @endif
-    </script>
+@section('css')
+   
+@endsection

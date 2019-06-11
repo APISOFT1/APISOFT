@@ -40,9 +40,12 @@ Route::group(['middleware' =>['auth']], function () {
   
  Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
  Route::get('chartRecepcion', 'Admin\DashboardController@indexRecepcion')->name('chartRecepcion')->middleware('role:planta;administrador');
- Route::get('chartIngreso', 'Admin\DashboardController@indexIngreso')->name('chartIngreso')->middleware('role:administrador');
-
+ Route::get('chartStock', 'Admin\DashboardController@indexStock')->name('chartStock')->middleware('role:planta;administrador');
+ Route::get('chartIngreso', 'Admin\DashboardController@indexIngreso')->name('chartIngreso')->middleware('role:planta;administrador');
+ Route::get('chartIngresoCera', 'Admin\DashboardController@indexIngresoCera')->name('chartIngresoCera')->middleware('role:planta;administrador');
+ Route::get('chartIngresoInventario', 'Admin\DashboardController@indexIngresoInventario')->name('chartIngresoInventario')->middleware('role:planta;administrador');
       
+
  Route::resource('users', 'Admin\UserController')->middleware('role:administrador');;
  //Route::get('users', 'Admin\UserController@index')
  Route::resource('Afiliado', 'AfiliadoController')->middleware('role:administrador');
@@ -56,9 +59,9 @@ Route::group(['middleware' =>['auth']], function () {
     Route::get('AfiliadoApiario','AfiliadoApiarioController@index')->middleware('role:planta;administrador');
     Route::get('Apiario' , 'ApiarioController@index')->middleware('role:planta;administrador');
     Route::get('RecepcionMateriaPrima','RecepcionMateriaPrimaController@index')->middleware('role:planta;administrador');
-   // Route::get('Ingreso' , 'IngresoController@index')->middleware('role:planta;administrador');
-   //Route::get('IngresoCera' , 'IngresoCeraController@index')->middleware('role:planta;administrador');
-   // Route::get('IngresoInventario' , 'IngresoInventarioController@index')->middleware('role:planta;administrador');
+    Route::resource('Ingreso' , 'IngresoController')->middleware('role:planta;administrador');
+    Route::resource('IngresoCera' , 'IngresoCeraController')->middleware('role:planta;administrador');
+    Route::resource('IngresoInventario' , 'IngresoInventarioController')->middleware('role:planta;administrador');
     Route::get('Cera','CeraController@index')->middleware('role:planta;administrador');
     Route::get('Producto' , 'ProductController@index')->middleware('role:planta;administrador');
     Route::get('RecepEstanon' , 'RecepcionEstanonController@index')->middleware('role:planta;administrador');
@@ -85,17 +88,21 @@ Route::POST('editApiario','ApiarioController@editApiario');
 Route::POST('deleteApiario','ApiarioController@deleteApiario');
 
 Route::POST('addAfiliadoApiario','AfiliadoApiarioController@addAfiliadoApiario');
-Route::POST('editApiario','ApiarioController@editApiario');
-Route::POST('deleteApiario','ApiarioController@deleteApiario');
+Route::POST('editAfiliadoApiario','AfiliadoApiarioController@editAfiliadoApiario');
+Route::POST('deleteAfiliadoApiario','AfiliadoApiarioController@deleteAfiliadoApiario');
 
 Route::POST('addCera','CeraController@addCera');
 Route::POST('editCera','CeraController@editCera');
 Route::POST('deleteCera','CeraController@deleteCera');
 Route::POST('agregar','CeraController@agregar');
 
+Route::POST('addEstanon','EstanonController@addEstanon');
+Route::POST('editEstanon','EstanonController@editEstanon');
+Route::POST('deleteEstanon','EstanonController@deleteEstanon');
+
 Route::POST('addRecepcion','RecepcionEstanonController@addRecepcion');
 Route::POST('editRecepcion','RecepcionEstanonController@editRecepcion');
-Route::POST('deleRecepcion','RecepcionEstanonController@deleteRecepcion');
+Route::POST('deleteRecepcion','RecepcionEstanonController@deleteRecepcion');
 
 
 

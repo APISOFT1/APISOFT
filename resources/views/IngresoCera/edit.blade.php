@@ -28,10 +28,10 @@
                 Serie Comprobante: {{$ingresos->serie_comprobante}}
             </small>
             <small>
-                Numero Comprobante: {{$ingresos->tipo_pago}}
+            Numero Comprobante:{{$ingresos->idingreso_cera}}
             </small>
             <small>
-                Numero tipo de pago: {{$ingresos->idingreso_cera}}
+            Tipo de pago:{{$ingresos->tipo_pago}}
             </small>
             <small>
                 Emitido el: {{ $ingresos->fecha_hora }}

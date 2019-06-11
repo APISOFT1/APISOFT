@@ -22,6 +22,16 @@
     },
     "dependencies": {
         "push.js": "^1.0.9",
+<<<<<<< HEAD
+        "smartwizard": "^4.3.1",
+        "toastr": "^2.1.4"
+=======
+<<<<<<< .merge_file_a25732
         "smartwizard": "^4.3.1"
+=======
+        "smartwizard": "^4.3.1",
+        "toastr": "^2.1.4"
+>>>>>>> .merge_file_a02744
+>>>>>>> jeremy
     }
 }

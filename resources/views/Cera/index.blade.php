@@ -12,6 +12,8 @@
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
+@include('Busqueda.search',['url'=>'Cera','link'=>'Cera'])
+
 <h1 class="text-center">LISTADO DE  CERA</h1>
 
 <!-- Saltos de linea-->
@@ -23,7 +25,6 @@
 
 <!--Esta clase nos permite posicionar el buscador  -->
 
-    @include('Apiario.search') 
   
     
 
@@ -32,16 +33,13 @@
 			<table class="table table-striped table-bordered table-condensed table-hover">
 				<thead>
 					<th>Código</th>
-					<th>Descripción</th>
 					<th>Recepción</th>
 					<th>Peso Bruto</th>
                     <th>Peso Neto</th>
                     <th>Fecha</th>
+                    <th>Observación</th>
 					<th><a href="#"
 					class="create-modal btn btn-success btn-sm">
-            <i class="glyphicon glyphicon-plus"></i></th>
-            <th><a href="#"
-					class=" btn btn-success btn-sm" data-toggle="modal" data-target="#miModal">
             <i class="glyphicon glyphicon-plus"></i></th>
 				</thead>
         {{ csrf_field() }}
@@ -49,16 +47,16 @@
                @foreach ($cera as $value)
 					<tr class="api{$value->id}}">
           <td>{{ $no++ }}</td>
-					<td>{{ $value->Descripcion}}</td>
 					<td>{{ $value->RecepcionMateriaPrima->id}} - {{ $value->RecepcionMateriaPrima->afiliado->Nombre}} {{ $value->RecepcionMateriaPrima->afiliado->apellido1}} {{ $value->RecepcionMateriaPrima->afiliado->apellido2}}</td>
             <td>{{ $value->PesoBruto}}</td>
             <td>{{ $value->PesoNeto}}</td>
             <td>{{ $value->Fecha}}</td>
+            <td>{{ $value->Descripcion}}</td>
 					<td>
 					<a href="#" class="show-modal btn btn-info btn-sm"
 					 data-id="{{$value->id}}" 
 					 data-Descripcion="{{$value->Descripcion}}"
-					 data-Recepcion_id="{{$value->Recepcion_id}}"
+					 data-Recepcion_id="{{$value->Recepcion_id}}  - {{ $value->RecepcionMateriaPrima->afiliado->Nombre}} {{ $value->RecepcionMateriaPrima->afiliado->apellido1}} {{ $value->RecepcionMateriaPrima->afiliado->apellido2}}"
 					 data-PesoBruto="{{$value->PesoBruto}}"
                      data-PesoNeto="{{$value->PesoNeto}}"
                      data-Fecha="{{$value->Fecha}}">
@@ -95,6 +93,7 @@
         <h4 class="modal-descripcion"></h4>
       </div>
       <div class="modal-body">
+      <span id="form_result"></span>
         <form class="form-horizontal" role="form">
 
        
@@ -112,16 +111,16 @@
               <div class="form-group row add">
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
               <input type="text" class="form-control" id="PesoNeto" name="PesoNeto"
-             placeholder="Peso Neto" required>
+             placeholder="Peso Neto"  disabled required>
               <p class="No ingreso el Peso Neto"></p>
               <span class="fa fa-minus-circle form-control-feedback right" aria-hidden="true"></span>
               </div>
               </div>
 
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-              <input type="date" class="form-control has-feedback-right" id="Fecha" name="Fecha" required>
+                <input type="datetime"  class="form-control has-feedback-right" id="fecha" name="Fecha" disabled required>
               <p class="No Ingreso la Fecha"></p>
-              <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
+              <span class="fa fa-clock-o form-control-feedback right" aria-hidden="true"></span>
             </div>
 
             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -134,10 +133,10 @@
    </div>
  
   
-   <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-           <input type="text" class="form-control has-feedback-left" id="Descripcion" name="Descripcion" placeholder="Obersevación" required>
+   <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
+   <textarea class="resizable_textarea form-control" class="form-control has-feedback-left" id="Descripcion" name="Descripcion" placeholder="Ingrese la Obersevación" required></textarea>
             <p class="No Ingresó la Observación"></p>
-              <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+            <span class="fa fa-file-text form-control-feedback right" aria-hidden="true"></span>
                 </div> 
         </form>
       </div>
@@ -153,70 +152,7 @@
   </div>
 </div></div>
 
-{{-- MODAL RECEPCION --}}
-<div id="miModal" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-    <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <h4 class="modal-title" id="myModalLabel">Buscar Recepción</h4>
-    </div>
-    <div class="modal-body">
-    <form class="form-horizontal">
-    <div class="form-group">                                              
-    <div class="col-sm-6">
-    <input type="text" class="form-control" id="filtrar" placeholder="Buscar productos">
-    </div>
-    <a href="#" id="bus"><i class='glyphicon glyphicon-search'></i> Buscar</a>
-                  </div>
-                </form>                 
-                                  <div class="outer_div">                                          
-                                      
-                                        <div class="table-responsive">
-                                        <table class="table">
 
-                                            <tbody class="buscar">    
-                                        <tr  class="warning">
-                                            <th>Código</th>
-                                            <th>Afiliado</th>
-                                            <th>pesoBruto</th>  
-                                            <th>Fecha</th>
-                                            <th class='text-center' style="width: 36px;">Agregar</th>
-                                        </tr>
-                                       
-
-                                        @foreach ($recepciones as $value)
-                                        <tr>
-                                        
-					                              <td>{{ $value->id}}</td>
-				                             	  <td>{{ $value->afiliado->id}}{{ $value->afiliado->Nombre}}{{ $value->afiliado->apellido1}}{{ $value->afiliado->apellido2}}</td>
-                                        <td>{{ $value->pesoBruto}}</td>
-                                         <td>{{ $value->fecha}}</td>
-                                        
-                                            
-                                            
-                                            <td class='col-xs-2'>
-                                                <div class="pull-right">
-                                                    <input type="text" class="form-control" style="text-align:right" id="precio" value="">
-                                                </div>
-                                            </td>
-                                            <td class='text-center'>
-                                                <a class='btn btn-info'href="#" onclick="agregar(<?php echo $value->id; ?>)"><i class="glyphicon glyphicon-plus"></i></a>
-                                            </td>
-                                  
-                                            @endforeach
-                                        </tr>
-                                            </tbody>
-                                        </table>
-                                        </div>
-                                        </div>
-                                        </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>                  
-              </div>
-            </div>
-          </div>
-        </div>
         
 {{-- Modal Form Show POST --}}
 <div id="show" class="modal fade" role="dialog">
@@ -232,19 +168,29 @@
                       <b id="i2"/>
                     </div>
                     <div class="form-group">
-                      <label for="">Descripcion :</label>
+                      <label for="">Observación :</label>
                       
                       <b id="d2"/>
                     </div>
 										<div class="form-group">
-                      <label for="">Cantidad :</label>
+                      <label for="">Recepción :</label>
                       <b id="ca2"/>
                     </div>
 										<div class="form-group">
                    
-                      <label for="">Ubicacion :</label>
+                      <label for="">Peso Bruto :</label>
                       <b id="ub2"/>
                     </div>
+                    <div class="form-group">
+                   
+                   <label for="">Peso Neto :</label>
+                   <b id="pen"/>
+                 </div>
+                 <div class="form-group">
+                   
+                   <label for="">Fecha :</label>
+                   <b id="ech"/>
+                 </div>
                     </div>
                     </div>
                   </div>
@@ -260,41 +206,63 @@
       <div class="modal-body">
         <form class="form-horizontal" role="modal">
 
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="id">ID</label>
-            <div class="col-sm-10">
+        <div class="form-group row add">
+          <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
+           
               <input type="text" class="form-control" id="ids" disabled>
-            </div>
+              <span class="fa fa-key form-control-feedback right" aria-hidden="true"></span>
+         
           </div>
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="Descripcion">Descripcion</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="cri">
-            </div>
           </div>
+         
 
-					<div class="form-group">
-            <label class="control-label col-sm-2"for="cantidad">Cantidad</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="can">
-            </div>
-          </div>
+				
+          <div class="form-group row add">
+              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
+              <input type="number" class="form-control" id="ub" name="PesoBruto"
+              placeholder="Peso Bruto" required>
+              <p class="No ingreso el Peso Bruto"></p>
+              <span class="fa fa-plus form-control-feedback right" aria-hidden="true"></span>
+              </div>
+              </div>
+             
 
-        
+              <div class="form-group row add">
+              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
+              <input type="text" class="form-control" id="ps" name="PesoNeto"
+             placeholder="Peso Neto"  disabled required>
+              <p class="No ingreso el Peso Neto"></p>
+              <span class="fa fa-minus-circle form-control-feedback right" aria-hidden="true"></span>
+              </div>
+              </div>
+          <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <input type="datetime"  class="form-control has-feedback-right" id="fec" name="Fecha" disabled required>
+              <p class="No Ingreso la Fecha"></p>
+              <span class="fa fa-clock-o form-control-feedback right" aria-hidden="true"></span>
+            </div>
+
+          <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+    <select name="Recepcion_id" id="can" class="form-control  selectpicker " data-live-search="true">
+     @foreach($recepciones as $recep  )
+     <option value="{{$recep->id}}">{{$recep->id}} - {{$recep->afiliado->Nombre}} {{$recep->afiliado->apellido1}} {{$recep->afiliado->apellido2}}</option>
+     @endforeach
+    </select>
+    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+   </div>
+
+          <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
+   <textarea class="resizable_textarea form-control" class="form-control has-feedback-left" id="cri" name="Descripcion" placeholder="Ingrese la Obersevación" required></textarea>
+            <p class="No Ingresó la Observación"></p>
+            <span class="fa fa-file-text form-control-feedback right" aria-hidden="true"></span>
+                </div> 
 
         </form>
 
-         <!-- Modal Busca Producto-->
-   
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>                  
-              </div>
-            </div>
-          </div>
-        </div>
+        
                 {{-- Form Delete Post --}}
+               
         <div class="deleteContent">
-          Are You sure want to delete <span class="descripcion"></span>?
+        ¿Está seguro que desea borrar esta Recepción de Cera <span class="descripcion"></span>?
           <span class="hidden id"></span>
         </div>
       </div>
@@ -303,7 +271,7 @@
           <span id="footer_action_button" class="glyphicon"></span>
         </button>
         <button type="button" class="btn btn-warning" data-dismiss="modal">
-          <span class="glyphicon glyphicon"></span>close
+          <span class="glyphicon glyphicon"></span>Cerrar
         </button>
       </div>
     </div>

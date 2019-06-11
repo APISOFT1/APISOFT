@@ -60,14 +60,13 @@
        <th><h4 id="total">{{$ingresos->total_venta}}</h4></th>
       </tfoot>
       <tbody>
-
        @foreach($detalles as $det)
       <tr>
        <td>{{$det->producto}} </td>
-       <td>{{$det->PesoBruto}} </td>
+       <td>{{$det->PesoNeto}} </td>
        <td>{{$det->Precio}} </td>
        <td></td>
-       <td>{{$det->Precio}} </td> 
+       <td>{{$det->PesoNeto*$det->Precio}} </td> 
      </td>
       @endforeach
       </tbody>

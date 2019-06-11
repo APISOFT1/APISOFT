@@ -9,8 +9,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>APISOFT</title>
+    @toastr_css
     <!-- Bootstrap -->
-  
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -75,21 +76,27 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
+                <li><a><i class="fa fa-home"></i> Home<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                     <li><a href="{{ url('/dashboard/') }}">Dashboard</a></li>
+                     
+                    </ul>
+                  </li>
                 @if(Auth::check())
                     @if (Auth::user()->isAdmin())
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       
-                     <li><a href="{{ url('users/') }}">Gestionar users</a></li>
+                     <li><a href="{{ url('users/') }}">Gestionar usuarios</a></li>
                     </ul>
                   </li>
                  
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
-                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicacion</a></li>
+                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicación</a></li>
                       <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
-                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiaro</a></li>
+                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiario</a></li>
                     
                     </ul>
                   </li>
@@ -98,7 +105,7 @@
                   <li><a><i class="glyphicon glyphicon-list-alt"></i> Recepción<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/RecepcionMateriaPrima') }}">Gestionar Recepción</a></li>
-                      <li><a href="{{ url('/Cera/') }}">Gestionar Extración de cera</a></li>
+                      <li><a href="{{ url('/Cera/') }}">Gestionar Extracción de cera</a></li>
                     </ul>
                   </li>
                   <li><a><i class="glyphicon glyphicon-oil"></i> Planta <span class="fa fa-chevron-down"></span></a>
@@ -110,10 +117,16 @@
                     </ul>
                   </li>
 
-                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Producto Terminado <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/Producto/') }}">Gestionar Productos</a></li>
-                      <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-cart-plus"></i>Servicios <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                    <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
+                    <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
                     
                     
                     </ul>
@@ -191,7 +204,10 @@
   <script src="{{asset('js2/bootstrap-select.min.js')}}"></script>
   
     <!-- jQuery -->
-
+    @jquery
+    @toastr_js
+    @toastr_render
+    
     {!!Html::script('/js2/jquery.min.js')!!}  
     @stack('scripts')
     <!-- Bootstrap -->
@@ -208,6 +224,7 @@
     <!-- jQuery custom content scroller -->
     {!!Html::script('/js2/jquery.mCustomScrollbar.concat.min.js')!!}
     <!-- Custom Theme Scripts -->
+   
     {!!Html::script('/js2/custom.min.js')!!}
      {!!Html::script('/js2/dropdown.js')!!}
 
@@ -218,7 +235,7 @@
      {!!Html::script('/js/icheck.js')!!}
 
 
-
+   
 
 
 <!-- MODAL AFILIADO -->
@@ -264,7 +281,6 @@
           $('.error').text(data.errors.genero_id);
           $('.error').text(data.errors.estado_civil_id);
           $('.error').text(data.errors.estado_id);
-
  
         } else {
           $('.error').remove();
@@ -338,8 +354,6 @@
     $('#estado_civil_id').val('');
     $('#estado_id').val('');
   });
-
-
 $(document).on('click', '.edit-modal', function() {
 $('#footer_action_button').text(" Editar ");
 $('#footer_action_button').addClass('fa fa-pencil');
@@ -355,7 +369,6 @@ $('#n').val($(this).data('nombre'));
 $('#a1').val($(this).data('apellido1'));
 $('#a2').val($(this).data('apellido2'));
 $('#t').val($(this).data('telefono'));
-
 $('#em').val($(this).data('email'));
 $('#d').val($(this).data('direccion'));
 $('#f').val($(this).data('fecha_ingreso'));
@@ -365,7 +378,6 @@ $('#e').val($(this).data('estado_civil_id'));
 $('#es').val($(this).data('estado_id'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
@@ -384,7 +396,6 @@ $('.modal-footer').on('click', '.edit', function() {
 'genero_id':$('#g').val(),
 'estado_civil_id':$('#e').val(),
 'estado_id':$('#es').val(),
-
     },
 success: function(data) {
       $('.afi' + data.id).replaceWith(" "+
@@ -444,9 +455,7 @@ success: function(data) {
     }
   });
 });
-
 /*
-
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Delete");
@@ -461,7 +470,6 @@ $('.nombre').text($(this).data('Nombre'));
 $('.apellido1').text($(this).data('apellido1'));
 $('.apellido2').text($(this).data('apellido2'));
 $('.telefono').text($(this).data('Telefono'));
-
 $('.email').text($(this).data('email'));
 $('.direccion').text($(this).data('Direccion'));
 $('.fecha_ingreso').text($(this).data('Fecha_Ingreso'));
@@ -474,7 +482,6 @@ $('.form-horizontal').hide();
 $('.title').html($(this).data('descripcion'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
@@ -491,31 +498,23 @@ $('.modal-footer').on('click', '.delete', function(){
   });
 });
 */
-
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
   
-
 $('#iaa').val($(this).data('id'));
 $('#jaja').val($(this).data('nombre'));
 ;
   $('.modal-show').text('Datos');
   });
-
-
-
       // Enable pusher logging - don't include this in production
 // Pusher.logToConsole = true;
-
 // Initiate the Pusher JS library
 var pusher = new Pusher('API_KEY_HERE', {
     encrypted: true
 });
-
 // Subscribe to the channel we specified in our Laravel Event
 var channel = pusher.subscribe('status-liked');
-
 // Bind a function to a Event (the full Laravel class)
 channel.bind('App\\Events\\StatusLiked', function(data) {
     // this is called when the event notification is received...
@@ -531,23 +530,18 @@ channel.bind('App\\Events\\StatusLiked', function(data) {
 .stepwizard-step p {
     margin-top: 10px;
 }
-
 .stepwizard-row {
     display: table-row;
 }
-
 .stepwizard {
     display: table;
     width: 100%;
     position: relative;
 }
-
 .stepwizard-step button[disabled] {
     opacity: 1 !important;
     filter: alpha(opacity=100) !important;
 }
-
-
  
 .stepwizard-row:before {
     top: 14px;
@@ -558,15 +552,12 @@ channel.bind('App\\Events\\StatusLiked', function(data) {
     height: 1px;
     background-color: #ccc;
     z-order: 0;
-
 }
-
 .stepwizard-step {
     display: table-cell;
     text-align: center;
     position: relative;
 }
-
 .btn-circle {
   width: 30px;
   height: 30px;
@@ -577,4 +568,18 @@ channel.bind('App\\Events\\StatusLiked', function(data) {
   border-radius: 15px;
 }
 </style>
+
+<script>
+$( document ).on('click','.bt_add',function() {
+  var aleatorio = Math.round(Math.random()*1000000);
+$("#serie_comprobante").val(aleatorio);   
+});
+</script>
+
+<script>
+ $("#bt_add").click(function() {
+  var aleatorio = Math.round(Math.random()*1000000);
+$("#serie_comprobante").val(aleatorio);  
+});
+</script>
 

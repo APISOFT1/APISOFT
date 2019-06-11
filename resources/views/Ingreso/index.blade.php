@@ -47,8 +47,8 @@
 					<td>{{ $ing->Nombre.' '. $ing->apellido1.' '.$ing->apellido2}}</td>
 					<td>{{ $ing->name}}</td>
 					<td>{{ $ing->tipo_comprobante.':'.$ing->serie_comprobante.'-'.$ing->idingreso}}</td>
-          <td>{{ $ing->total_venta}}</td>
-          <td>{{ $ing->estado}}</td>
+                    <td>{{ $ing->total_venta}}</td>
+                    <td><span class="label label-info label-many label label-success">{{ $ing->estado}}</td>
 
 					<td>
 					<a href="{{URL::action('IngresoController@show',$ing->idingreso)}}"><button class=" btn btn-info btn-sm"><i class="fa fa-eye"></i></button></a>
@@ -64,3 +64,17 @@
 </div>
 
 @endsection
+
+<script>
+$( document ).on('click','.bt_add',function() {
+  var aleatorio = Math.round(Math.random()*1000000);
+$("#serie_comprobante").val(aleatorio);   
+});
+</script>
+
+<script>
+ $("#bt_add").click(function() {
+  var aleatorio = Math.round(Math.random()*1000000);
+$("#serie_comprobante").val(aleatorio);  
+});
+</script>

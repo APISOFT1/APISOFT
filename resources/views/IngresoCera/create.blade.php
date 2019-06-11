@@ -54,21 +54,19 @@
    </div>
   </div>
 
-
-  
-  <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12 add">
-   <div class="form-group">
-    <label for="serie_comprobante">Serie Comprobante</label>
-    <input type="text" name="serie_comprobante" value="{{old('serie_comprobante')}}" class="form-control" placeholder="Serie Comprobante">
-   </div>
-  </div>
-  
   <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
    <div class="form-group">
     <label>Tipo de pago</label>
     <select name="tipo_pago" class="form-control">
-     <option value="laminas">En efectivo</option>
+     <option value="En efectivo">En efectivo</option>
     </select>
+   </div>
+  </div>
+    
+  <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12 add">
+   <div class="form-group">
+    <label></label>
+    <input type="text" style="display:none" id="serie_comprobante" name="serie_comprobante"  class="form-control" placeholder="Serie Comprobante">
    </div>
   </div>
   </div>
@@ -163,13 +161,11 @@
 
 @push ('scripts')
 <script>
-
  $(document).ready(function(){
     $('#bt_add').click(function(){
     agregar();
     });
   });
-
  var cont=0;
  total=0;
  subtotal=[];
@@ -179,46 +175,38 @@
  function mostrarValores()
  {
    datosProducto= document.getElementById('pcera_id').value.split('_');
-   $("#pPesoNeto").val(datosProducto[2]);
    $("#pRecepcion_id").val(datosProducto[1]);
+   $("#pPesoNeto").val(datosProducto[2]);
+   
  }
-
  function agregar(){
-
     datosProducto= document.getElementById('pcera_id').value.split('_');
-
     cera_id=datosProducto[0];
     ceras=$("#pcera_id option:selected").text();
     Recepcion_id=$("#pRecepcion_id").val();
     PesoNeto=$("#pPesoNeto").val();
     Precio=$("#pPrecio").val();
    
-
-    if (cera_id!="" && PesoNeto>0  && Precio!="")
+    if (cera_id!="" && PesoNeto>0 && Precio!="")
     {
        subtotal[cont]=(PesoNeto*Precio);
        total=total+subtotal[cont];
-
-       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="cera_id[]" value="'+cera_id+'">'+ceras+'</td><td><input type="number" name="Recepcion_id[]" value="'+Recepcion_id+'"></td><td><input type="number" name="PesoNeto[]" value="'+PesoNeto+'"></td><td><input type="number" name="Precio[]" value="'+Precio+'"></td><td><td>'+subtotal[cont]+'</td></tr>';
+       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="cera_id[]" value="'+cera_id+'">'+ceras+'</td><td><input type="number" name="Recepcion_id[]" value="'+Recepcion_id+'"></td><td><input type="number" name="PesoNeto[]" value="'+PesoNeto+'"></td><td><input type="number" name="Precio[]" value="'+Precio+'"></td><td>'+subtotal[cont]+'</<td></tr>';
        cont++;
        limpiar();
-       $('#total').html("$/ " + total);
+       $('#total').html("₡/ " + total);
        $('#total_venta').val(total);
        evaluar();
        $('#detalles').append(fila);
-
     }
     else
     {
       alert("Error al ingresar el detalle del ingreso, revise los datos del producto")
     }
   }
-
  function limpiar(){
     $("#pPrecio").val("");
-
   }
-
   function evaluar()
   {
     if (total>0)
@@ -230,17 +218,13 @@
       $("#guardar").hide(); 
     }
    }
-
  function eliminar(index){
   total=total-subtotal[index]; 
-    $("#total").html("$/. " + total);   
+    $("#total").html("₡/. " + total);   
     $("#total_venta").val(total);
     $("#fila" + index).remove();
     evaluar();
  }
-
-
-
 </script>
 
 

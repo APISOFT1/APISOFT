@@ -78,7 +78,7 @@
   <label>Producto</label>
      <select name="pstock_id" class="form-control selectpicker" id="pstock_id" data-live-search="true">
        @foreach($stocks as $stock)
-        <option value="{{$stock->id}}_{{$stock->cantidadDisponible}}">{{$stock->stocks}}</option>
+        <option value="{{$stock->id}}_{{$stock->cantidadDisponible}}_{{$stock->presentacion_id}}">{{$stock->stocks}}</option>
        @endforeach
       </select>
      </div>
@@ -88,6 +88,12 @@
      <div class="form-group">
       <label for="cantidadDisponible">cantidad Disponible</label>
       <input type="number"  disabled name="pcantidadDisponible" id="pcantidadDisponible" class="form-control" placeholder="cantidad Disponible">
+     </div>
+    </div>
+    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+     <div class="form-group">
+      <label>id de la presentación</label>
+      <input type="number"  disabled name="ppresentacion_id" id="ppresentacion_id" class="form-control" placeholder="id de la presentación">
      </div>
     </div>
 
@@ -104,7 +110,6 @@
      </div>
     </div>
      
-    </div>
     <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
      <div class="form-group">
       <label></label>
@@ -118,12 +123,13 @@
        <th>Opciones</th>
        <th>Producto</th>
        <th>cantidad disponible</th>
-       <th>Precio</th>
+       <th>Presentacion id</th>
        <th>cantidad a utilizar en laminas</th>
        <th>Subtotal</th>
       </thead>
       <tfoot>
        <th>Total</th>
+       <th></th>
        <th></th>
        <th></th>
        <th></th>
@@ -162,28 +168,25 @@ $(document).ready(function(){
     agregar();
     });
   });
-
  var cont=0;
  total=0;
  subtotal=[];
  $("#guardar").hide();
  $("#pstock_id").change(mostrarValores);
-
  function mostrarValores()
  {
    datosProducto= document.getElementById('pstock_id').value.split('_');
    $("#pcantidadDisponible").val(datosProducto[1]);
+   $("#ppresentacion_id").val(datosProducto[2]);
  }
-
-
  function agregar(){
-
     datosProducto= document.getElementById('pstock_id').value.split('_');
     
     stock_id=datosProducto[0];
     stocks=$("#pstock_id option:selected").text();
-
     cantidadDisponible=$("#pcantidadDisponible").val();
+    
+    presentacion_id=$("#ppresentacion_id").val();
     Precio=$("#pPrecio").val();
     cantidad=$("#pcantidad").val();
    
@@ -193,29 +196,23 @@ $(document).ready(function(){
     
        subtotal[cont]=(Precio*cantidad);
        total=total+subtotal[cont];
-
-       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="stock_id[]" value="'+stock_id+'">'+stocks+'</td><td><input type="number" name="cantidadDisponible[]" value="'+cantidadDisponible+'"></td><td><input type="number" name="Precio[]" value="'+Precio+'"></td><td><input type="number" name="cantidad[]" value="'+cantidad+'"></td><td>'+subtotal[cont]+'</td></tr>';
+       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="stock_id[]" value="'+stock_id+'">'+stocks+'</td><td><input type="number" name="cantidadDisponible[]" value="'+cantidadDisponible+'"></td><td><input type="number" name="presentacion_id[]" value="'+presentacion_id+'"></td><td><input type="number" name="Precio[]" value="'+Precio+'"></td><td><input type="number" name="cantidad[]" value="'+cantidad+'"></td><td>'+subtotal[cont]+'</td></tr>';
        cont++;
        limpiar();
        $('#total').html("$/ " + total);
        $('#total_venta').val(total);
        evaluar();
        $('#detalles').append(fila);
-
     }
     else
     {
       alert("Error al ingresar el detalle del ingreso, revise los datos del articulo")
     }
-
   }
-
  function limpiar(){
     $("#pPrecio").val("");
     $("#pcantidad").val("");
-
   }
-
   function evaluar()
   {
     if (total>0)
@@ -227,7 +224,6 @@ $(document).ready(function(){
       $("#guardar").hide(); 
     }
    }
-
  function eliminar(index){
   total=total-subtotal[index]; 
     $("#total").html("$/. " + total); 
@@ -235,7 +231,6 @@ $(document).ready(function(){
     $("#fila" + index).remove();
     evaluar();
  }
-
 </script>
 @endpush
 @endsection

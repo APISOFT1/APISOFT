@@ -41,9 +41,13 @@ class MailResetPasswordToken extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject("Reestablecer contraseña")
-                    ->line("Hola, ¿Has olvidado tu contraseña? Has click en el boton para reestablecerla.")
-                    ->action('Reestablecer contraseña', url('password/reset', $this->token))
-                    ->line('Este link exipira en 60 minutos');
+        ->subject('Recuperar contraseña')
+        ->greeting('Hola')
+        ->line('Estás recibiendo este correo porque hiciste una solicitud de recuperación de contraseña para tu cuenta.')
+        ->action('Recuperar contraseña', route('password.reset', $this->token))
+        ->line('Si no realizaste esta solicitud, no se requiere realizar ninguna otra acción.')
+        ->salutation('Saludos, '. config('app.name'));
+
+                    
     }
 }
