@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\producto;
 use Illuminate\Http\Request;
-
+use Validator;
+use Illuminate\Support\Facades\Input;
 class ProductoController extends Controller
 {
     public function index(Request $request)
@@ -16,7 +17,7 @@ class ProductoController extends Controller
                               ->orWhere('id','LIKE','%'.$search.'%')
         ->orderby('nombre','desc')
         ->paginate(7);
-        return view('Producto.index');
+        return view('Producto.index',compact('product'));
     }
        
     }
@@ -34,7 +35,7 @@ class ProductoController extends Controller
     $product = new Producto;
     $product->nombre = $request->nombre;
     $product->save();
-    return response()->json($product)->with('message');
+    return response()->json($product);
   }
 }
 
@@ -47,6 +48,7 @@ if ($validator->fails())
 return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
 
 else {
+  $product = Producto::all();
 $product = Producto::find ($request->id);
 $product->nombre = $request->nombre;
 $product->save();

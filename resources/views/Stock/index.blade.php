@@ -1,4 +1,4 @@
-@extends ('layouts.principalRecepcion') 
+@extends ('layouts.principalStock') 
 
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
@@ -20,19 +20,19 @@
 <!-- mensaje de exito -->
 <?php $message=Session::get('message') ?>
 
-@if($message == 'AddRol')
+@if($message == 'AddStock')
 <div class="alert alert-success alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  ROL CREADO CORRECTAMENTE
+  REGISTRO CREADO CORRECTAMENTE
 </div>
 @endif
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
 
-@include('Busqueda.search',['url'=>'RecepcionMateriaPrima','link'=>'RecepcionMateriaPrima'])
+@include('Busqueda.search',['url'=>'Stock','link'=>'Stock'])
 
-<h1 >LISTADO DE  RECEPCIÓN MIEL</h1>
+<h1 >LISTADO DE INVENTARIO</h1>
 
 <!-- Saltos de linea-->
 <br>
@@ -47,14 +47,10 @@
     <table class="table table-bordered" id="table">
       <tr>
         <th width="150px">No</th>
-        <th>Fecha Recepción</th>
-        <th>Peso Bruto</th>
-        <th>Peso Neto</th>
-        <th>Numero de Muestra</th>
-        <th>Afiliado</th>
-        <th>Responsable</th>
-        <th>Tipo Entregra</th>
-        <th>Observacion</th>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Presentaciòn</th>
+        <th>recepción-estañon</th>
         <th class="text-center" width="150px">
           <a href="#" class="create-modal btn btn-success btn-sm">
             <i class="glyphicon glyphicon-plus"></i>
@@ -63,42 +59,33 @@
       </tr>
       {{ csrf_field() }}
      
-      @foreach ($recepcion as $value)
-        <tr class="recepcion{{$value->id}}">
+      @foreach ($sto as $value)
+        <tr class="sto{{$value->id}}">
        <td>{{ $value->id }}</td>
-          <td>{{ $value->fecha }}</td>
-          <td>{{ $value->pesoBruto }}</td>
-          <td>{{ $value->pesoNeto }}</td>
-          <td>{{ $value->numero_muestras }}</td>
-          <td>{{ $value->afiliado_id }}- {{ $value->afiliado->Nombre }} {{ $value->afiliado->apellido1 }} {{ $value->afiliado->apellido2 }}</td>
-          <td>{{ $value->user_id }} - {{ $value->user->name }}</td>
-          <td>{{ $value->tipoEntrega_id }}- {{ $value->tipoEntrega->Descripcion }}</td>
-          <td>{{ $value->observacion }}</td>
+          <td>{{ $value->producto_id }}-{{ $value->producto_id->Nombre}}</td>
+          <td>{{ $value->precioUnitario }}</td>
+          <td>{{ $value->presentacion_id }}-{{ $value->presentacion_id->descripcion}}</td>
+          <td>{{ $value->cantidadDisponible }}</td>
+          <td>{{ $value->estanon_recepcions_id }}</td>
           <td>
             <a href="#" class="show-modal btn btn-info btn-sm" data-id="{{$value->id}}" 
-            data-fecha="{{$value->fecha}}"
-            data-pesoBruto="{{$value->pesoBruto}}" 
-            data-pesoNeto="{{$value->pesoNeto}}" 
-            data-numero_muestras="{{$value->numero_muestras}}"
-            data-afiliado_id="{{$value->afiliado_id}} - {{ $value->afiliado->Nombre }} {{ $value->afiliado->apellido1 }} {{ $value->afiliado->apellido2 }}"
-            data-user_id="{{$value->user_id}} - {{ $value->user->name }}"
-            data-tipoEntrega_id="{{$value->tipoEntrega_id}} - {{ $value->tipoEntrega->Descripcion }}"
-            data-observacion="{{$value->observacion}}">
-              <i class="fa fa-eye"></i>
+            data-producto_id="{{$value->producto_id}}-{{ $value->producto_id->Nombre }}"
+            data-precioUnitario="{{$value->precioUnitario}}" 
+            data-presentacion_id="{{$value->presentacion_id}}-{{ $value->presentacion_id->descripcion}}"
+            data-cantidadDisponible="{{$value->cantidadDisponible}}"
+            data-estanon_recepcions_id="{{$value->estanon_recepcions_id}}"> <i class="fa fa-eye"></i>
             </a>
             <a href="#" class="edit-modal btn btn-warning btn-sm" data-id="{{$value->id}}" 
-            data-fecha="{{$value->fecha}}"
-            data-pesoBruto="{{$value->pesoBruto}}" 
-            data-pesoNeto="{{$value->pesoNeto}}" 
-            data-numero_muestras="{{$value->numero_muestras}}"
-            data-afiliado_id="{{$value->afiliado_id}} "
-            data-user_id="{{$value->user_id}} "
-            data-tipoEntrega_id="{{$value->tipoEntrega_id}} "
-            data-observacion="{{$value->observacion}}">
+             data-producto_id="{{$value->producto_id}}-{{ $value->producto_id->Nombre }}"
+            data-precioUnitario="{{$value->precioUnitario}}" 
+            data-presentacion_id="{{$value->presentacion_id}}-{{ $value->presentacion_id->descripcion}}"
+            data-cantidadDisponible="{{$value->cantidadDisponible}}" 
+            data-estanon_recepcions_id="{{$value->estanon_recepcions_id}}">
+
               <i class="glyphicon glyphicon-pencil"></i>
             </a>
             <a href="#" class="delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" 
-            data-observacion="{{$value->observacion}}">
+            data-observacion="{{$value->producto_id}}-{{ $value->producto_id->Nombre }}">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
           </td>
@@ -106,307 +93,138 @@
       @endforeach
     </table>
   </div>
-  {{$recepcion->links()}}
+  {{$sto->links()}}
 </div>
- 
 
-{{-- Modal Form Create Afiliado --}}
-<div id="create" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="myModalLabel">
+{{-- Modal Form Create Post --}}
+<div id="create" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-crear"></h4>
+        <h4 class="modal-descripcion text-center"></h4>
+        @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
       </div>
       <div class="modal-body">
-      <span id="form_result"></span>
+    
         <form class="form-horizontal" role="form">
-       
-        <div class="stepwizard">
-                <div class="stepwizard-row setup-panel">
-                    <div class="stepwizard-step">
-                        <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
-                        <p>Recepcion Miel</p>
-                    </div>
-                    
-                    <div class="stepwizard-step">
-                        <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
-                        <p>Asignar Estañon</p>
-                    </div>
-                    
-                    
-                    
-                </div>
-            </div>
-            <div class="row setup-content" id="step-1">
-                    <div class="col-xs-12">
-                        <div class="col-md-12">
-                            
-                            <!-- content go here -->
 
+             <div class="form-group row add">
+                <div class="col-md-9  form-group has-feedback">
+        <select name="producto_id" class="form-control has-feedback-left" id="producto_id">
+         <option value="">-- Seleccione producto --</option>
+         @foreach ($producto as $productos)
+          <option value="{{ $productos->id }}">{{$productos->nombre}}</option>
+         @endforeach
+        </select>
+        <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+        </div>
+        </div>
+
+         <div class="form-group row add">
+        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+           <input type="text" class="form-control has-feedback-left" id="precioUnitario" name="precioUnitario" placeholder="Precio" required>
+           <p class="error text-center alert alert-danger hidden"></p>
+              <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                </div>
+                </div>
+
+         <div class="form-group row add">
+                <div class="col-md-9  form-group has-feedback">
+        <select name="presentacion_id" class="form-control has-feedback-left" id="presentacion_id">
+          <option value="">-- Seleccione presentación --</option>
+         @foreach ($presentacion as $pre)
+          <option value="{{ $pre->id }}">{{$pre->Descripcion}}</option>
+         @endforeach
+        </select>
+        <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+        </div>
+        </div>
+                <div class="form-group row add">
+        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+           <input type="text" class="form-control has-feedback-left" id="cantidadDisponible" name="cantidadDisponible" placeholder="Cantidad" required>
+           <p class="error text-center alert alert-danger hidden"></p>
+              <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                </div>
+                </div>
 
                 <div class="form-group row add">
                 <div class="col-md-9  form-group has-feedback">
         <select name="estanon_recepcions_id" class="form-control has-feedback-left" id="estanon_recepcions_id">
-         <option value="">-- Seleccione recepción-estañon --</option>
-         @foreach ($recepciones as $recepcionEstanones)
-          <option value="{{ $recepcionEstanones->id }}">{{$recepcionEstanones->id}}</option>
+         <option value="">-- Seleccione estañon-recepciòn --</option>
+         @foreach ($recepcionEst as $rec)
+          <option value="{{ $rec->id }}">{{$rec->id}}</option>
          @endforeach
         </select>
-              <p class="No ingreso la fecha"></p>
-              <span class="fa fa-child form-control-feedback right" aria-hidden="true"></span>
-              </div>
-              </div>
-
-
-              <div class="form-group row add">
-              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
-              <input type="number" class="form-control" id="discount" name="pesoBruto"
-              placeholder="Peso Bruto" required>
-              <p class="No ingreso el Peso Bruto"></p>
-              <span class="fa fa-plus form-control-feedback right" aria-hidden="true"></span>
-              </div>
-              </div>
-             
-
-              <div class="form-group row add">
-              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
-              <input type="text" class="form-control" id="pesoNeto" name="pesoNeto"
-             placeholder="Peso Neto" required  disabled>
-              <p class="No ingreso el Peso Neto"></p>
-              <span class="fa fa-minus-circle form-control-feedback right" aria-hidden="true"></span>
-              </div>
-              </div>
-
-              
-              <div class="form-group row add">
-              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
-              <input type="text" class="form-control"  id="numero_muestras" name="numero_muestras"
-          placeholder="Numero Muestra" required  disabled>
-              <p class="No ingreso el Codigo"></p>
-              <span class="fa fa-address-card form-control-feedback right" aria-hidden="true"></span>
-              </div>
-              </div>
-            
-
-              <div class="form-group row add">
-              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
-              <select class="form-control" id="tipoEntrega_id" name="tipoEntrega_id">
-                <option value="">Seleccione la Entrega</option>
-                  @foreach ($tipoEntrega as $entre)
-                    <option value="{{$entre->id}}">{{ $entre->Descripcion }}</option>
-                  @endforeach           
-                </select>
-              <p class="No ingreso el tipo de Entrega"></p>
-              <span class="fa fa-sign-in form-control-feedback right" aria-hidden="true"></span>
-              </div>
-              </div>
-
-              <div class="form-group row add">
-              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
-              <input type="text" class="form-control"  value="{{ auth()->user()->id }}" id="user_id" name="user_id"
-          placeholder="Encargado" required  disabled>
-              <p class="No ingreso el usuario"></p>
-              <span class="fa fa-user-circle-o form-control-feedback right" aria-hidden="true"></span>
-              </div>
-              </div>
-
-              <div class="form-group row add">
-              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
-              <textarea class="resizable_textarea form-control"  id="observacion" name="observacion" 
-                      placeholder="Ingrese Observacion"></textarea>
-              <span class="fa fa-file-text form-control-feedback right" aria-hidden="true"></span>
-              </div>
-              </div>
-
-
-                 
-
-                    <div class="modal-footer">
-          
-          
-          <button class="btn btn-warning" type="submit" id="add">
+        <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+        </div>
+        </div>
+        </form>
+      </div>
+          <div class="modal-footer">
+            <button class="btn btn-warning"   onclick="ConfirmDemo()" type="submit" id="add">
               <span class="fa fa-save"></span> Guardar 
             </button>
-           
-            </div>
-            </div>
-                       
             <button class="btn btn-warning" type="button" data-dismiss="modal">
               <span class="fa fa-times"></span> Cerrar
             </button>
-                            <button class="btn btn-success  nextBtn pull-right"  type="button" >Siguiente</button>
-                         
-                        </div>
-                    </div>
-               </div>
-
-               <div class="row setup-content" id="step-2">
-                    <div class="col-xs-12">
-                        <div class="col-md-12">
-                            
-                            <!-- content go here -->
-         <div class="modal-footer">
-           <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#popupBusquedaParroquia">   <i class="fa fa-search"></i>   
           </div>
-
-
-        
-
-              <div class="form-group row add">
-              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
-              <select  class="form-control" name="Recepcion_id" class="form-control" id="Recepcion_id">
-         <option value="">-- Seleccione Recepción --</option>
-         @foreach ($recepciones as $recep)
-          <option value="{{ $recep->id }}">{{$recep->id}} - {{$recep->afiliado->Nombre}} {{$recep->afiliado->apellido1}} {{$recep->afiliado->apellido2}}</option>
-         @endforeach
-        </select>
-              <p class="No ingreso la fecha"></p>
-              <span class="fa fa-child form-control-feedback right" aria-hidden="true"></span>
-              </div>
-              </div>
-
-
-    
-
-            <div class="form-group row add">
-              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
-              <select  class="form-control" name="Estanon_id" class="form-control" id="busqueda_parroquia1">
-         <option value="">-- Seleccione Estañon --</option>
-         @foreach ($recepcion as $value)
-          <option class="recepcion{{$value->id}}">{{ $value->id }}--{{ $value->fecha }}--{{ $value->afiliado_id }}</option>
-         @endforeach         
-                </select>
-              <p class="No ingreso el tipo de Entrega"></p>
-              <span class="fa fa-sign-in form-control-feedback right" aria-hidden="true"></span>
-              </div>
-              </div>
-      
-       
-
-            <div class="form-group row add">
-              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
-              <input type="datetime" class="form-control" id="Fecha" name="Fecha" 
-              placeholder="YYYY-MM-DD" required  disabled>
-              <p class="No ingreso la fecha"></p>
-              <span class="fa fa-clock-o form-control-feedback right" aria-hidden="true"></span>
-              </div>
-              </div>
-          
-            <div class="modal-footer">
-          <button class="btn btn-warning" class="text-center" type="submit" id="addd">
-              <span class="fa fa-save"></span> Guardar 
-            </button>
-            
-           
-            </div>
-                           
-                        </div>
-                    </div>
-               </div>
-               </div> 
-        </form>
-      </div>
-          
     </div>
   </div>
 </div></div>
-
-
-  <!-- Modal Escenario-->
-  <div class="modal fade" id="popupBusquedaParroquia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title" id="myModalLabel">Busqueda de Parroquias</h4>
-            </div>
-            <div id="BusquedaParroquia" class="modal-body">
-                <form role="form">
-                    <div class="form-group">
-                        <label for="stock_bodega">Busqueda por:</label>
-                        <select class="form-control" style="width: 40%" id="stock_bodega">
-                            <option>Nombre</option>
-                        </select>
-                        <label for="texto_buscar">Texto a Buscar:</label>
-                        <input type="text" class="form-control" id="texto_buscar">
-                    </div>
-                    <div style="position: relative; overflow: auto; width: 100%; height: 200px;" class="dataTables_scrollBody">
-                        <table style="width: 100%;" id="busqueda_parroquia" class="display nowrap dataTable no-footer" cellspacing="0" width="100">
-                            <thead>
-                                <tr>
-                                    <th>Codigo</th>
-                                    <th>Fecha</th>
-                                    <th>Afiliado</th>
-                                </tr>
-                            </thead>
-                            {{ csrf_field() }}
-                            <tbody>
-                            @foreach ($recepcion as $value)
-        <tr class="recepcion{{$value->id}}">
-       <td>{{ $value->id }}</td>
-          <td>{{ $value->fecha }}</td>
-          <td>{{ $value->afiliado_id }}</td>
-          </tr>
-      @endforeach
-                             </tbody>
-                        </table>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Seleccionar</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
-    </div>
-</div>  <!-- Modal Escenario-->
-
-
+ 
 {{-- Modal Form Show POST --}}
 <div id="show" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title"></h4>
+          <h4 class="modal-title text-center">
+          <i class="glyphicon glyphicon-info-sign"></i></h4>
                   </div>
                     <div class="modal-body">
+                    <span id="form_result"></span>
                     <div class="form-group">
-                      <label for="descripcion">ID :</label>
-                      <b id="ii"/>
+                      <label for="">Código :</label>
+                      <b id="id3"/>
                     </div>
                     <div class="form-group">
-                      <label for="id">Fecha :</label>
-                      <b id="ech"/>
+                      <label for="">Producto :</label>
+                      
+                      <b id="pro3"/>
+                     
                     </div>
-                    <div class="form-group">
-                      <label for="id">Peso Bruto :</label>
-                      <b id="di"/>
+										<div class="form-group">
+                      <label for="">Precio:</label>
+                      <b id="pre3"/>
+                     
                     </div>
-                    <div class="form-group">
-                      <label for="id">Peso Neto :</label>
-                      <b id="psn"/>
                     </div>
-                    <div class="form-group">
-                      <label for="id">Número de muestra :</label>
-                      <b id="num"/>
+										<div class="form-group">
+                      <label for="">Presentacion:</label>
+                      <b id="pres3"/>
+                     
                     </div>
-                    <div class="form-group">
-                      <label for="id">Afiliado :</label>
-                      <b id="afi"/>
+								 <div class="form-group">
+                      <label for="">Cantidad :</label>
+                      <b id="can3"/>
+
                     </div>
+                  
                     <div class="form-group">
-                      <label for="id">Usuario :</label>
-                      <b id="use"/>
+                      <label for="">estañon-recepciòn :</label>    
+                      <b id="est3"/>
                     </div>
-                    <div class="form-group">
-                      <label for="id">Tipo Entrega :</label>
-                      <b id="tip"/>
-                    </div>
-                    <div class="form-group">
-                      <label for="id">Observación :</label>
-                      <b id="obs"/>
+
+
                     </div>
                     </div>
                     </div>
@@ -418,72 +236,57 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-descripcion"></h4>
+        <h4 class="modal-descripcion text-center"></h4>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" role="modal">
 
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="id">ID</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="fid" disabled>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="descripcion">Fecha</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="ti">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="descripcion">Peso Bruto</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="psb">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="descripcion">Peso Neto</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="snt">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="descripcion">Número muestras</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="mue">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="descripcion">Afiliado</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="ali">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="descripcion">Usuario</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="ser">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="descripcion">Tipo Entrega</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="ent">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="descripcion">Observación</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="cio">
-            </div>
-          </div>
+           <div class="form-group row add">
+        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+        <select name="producto_id" class="form-control has-feedback-left" id="pro2">
+         <option value="">-- Seleccionar producto --</option>
+         @foreach ($producto as $productos)
+          <option value="{{ $productos->id }}">{{$productos->Nombre}}</option>
+         @endforeach
+        </select>
+					  <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+</div>
+</div>
+
+        <div class="form-group row add">
+        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+           <input type="text" class="form-control has-feedback-left" id="pre2" disabled>
+              <span class="fa fa-key form-control-feedback left" aria-hidden="true"></span>
+              
+                </div>
+                </div>
+          
+                  <div class="form-group row add">
+        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+        <select name="presentacion_id" class="form-control has-feedback-left" id="pres2">
+         <option value="">-- Seleccionar presentaciòn --</option>
+         @foreach ($presentacion as $pre)
+          <option value="{{ $pre->id }}">{{$pre->Descripcion}}</option>
+         @endforeach
+        </select>
+					  <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+          
+
+               <div class="form-group row add">
+        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+           <input type="text" class="form-control has-feedback-left" id="can2" disabled>
+              <span class="fa fa-key form-control-feedback left" aria-hidden="true"></span>
+              
+                </div>
+                </div>
+                
 
                 <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-        <select name="name" class="form-control has-feedback-left" id="lol5">
-        <option value="">-- Seleccione recepción-estañon --</option>
-         @foreach ($recepciones as $recepcionEstanones)
-          <option value="{{ $recepcionEstanones->id }}">{{$recepcionEstanones->id}}</option>
+        <select name="estanon_recepcions_id" class="form-control has-feedback-left" id="est2">
+         <option value="">-- Seleccionar estañon-recepciòn --</option>
+         @foreach ($recepcionEst as $rec)
+          <option value="{{ $rec->id }}">{{$rec->id}}</option>
          @endforeach
         </select>
 					  <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
@@ -492,7 +295,7 @@
         </form>
         {{-- Form Delete Post --}}
         <div class="deleteContent">
-          ¿Está seguro que desea eliminar este Producto <span class="descripcion"></span>?
+        ¿Está seguro que desea eliminar este registro?<span class="descripcion"></span>?
           <span class="hidden id"></span>
         </div>
       </div>
@@ -501,10 +304,20 @@
           <span id="footer_action_button" class="glyphicon"></span>
         </button>
         <button type="button" class="btn btn-warning" data-dismiss="modal">
-          <span class="glyphicon glyphicon"></span>close
+          <span class="fa fa-times"></span>Cerrar
         </button>
       </div>
     </div>
   </div>
 </div>
+
+
 @endsection
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <script type="text/javascript">
+function ConfirmDemo() {
+ Alert::success('Se ha creado con exito ')->persistent("Close");
+}
+</script>

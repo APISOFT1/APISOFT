@@ -3,13 +3,13 @@ namespace App\Http\Controllers;
 use App\Stock;
 use Validator;
 use Response;
+use Illuminate\Support\Facades\Input;
 use App\Presentacion;
 use App\Producto;
 use App\RecepcionEstanon;
 
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;  //MUYR IMPORTANTE , SIN ESTO NO GUARDA.
 use App\Http\Requests\StockFormRequest;
 class StockController extends Controller
 {/**
@@ -29,11 +29,11 @@ class StockController extends Controller
 
       ->orderby('producto_id','desc')
       ->paginate(7);
-      $recepciones = RecepcionEstanon::all();
+      $recepcionEst = RecepcionEstanon::all();
       $presentacion = Presentacion::all();
       $producto = Producto::all();
-      return view('Stock.index', compact('sto', 'recepciones', 'presentacion','producto'));
-        return view('Stock.index', compact('sto', 'recepciones', 'presentacion','producto'));
+      return view('Stock.index', compact('sto', 'recepcionEst', 'presentacion','producto'));
+        return view('Stock.index', compact('sto', 'recepcionEst', 'presentacion','producto'));
     }
 
            }

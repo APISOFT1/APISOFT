@@ -27,7 +27,8 @@ class UsersController extends Controller
             $roles = Role::get()->pluck('name', 'name');
             return view('users.index', compact('users', 'roles', 'generos'));
     }
-        
+                    return view('users.index', compact('users', 'roles', 'generos'));
+
     }
     
     public function addUser(Request $request){

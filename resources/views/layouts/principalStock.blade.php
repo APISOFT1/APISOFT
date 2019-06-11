@@ -225,87 +225,57 @@
       
       data: {
         '_token': $('input[name=_token]').val(),
-        'nombre': $('input[name=nombre]').val(),
-        'cantidadDisponible': $('input[name=cantidadDisponible]').val(),
+        'producto_id': $('input[name=producto_id]').val(),
         'precioUnitario': $('input[name=precioUnitario]').val(),
+        'presentacion_id': $('input[name=presentacion_id]').val(),
+        'cantidadDisponible': $('input[name=cantidadDisponible]').val(),
         'estanon_recepcions_id': $('select[name=estanon_recepcions_id]').val()
         
       },
       success: function(data){
        
-        $('.errorNombre').addClass('hidden');
-         $('.errorCantidadDisponible').addClass('hidden');
+        $('.errorProducto_id').addClass('hidden');
          $('.errorPrecioUnitario').addClass('hidden');
-         $('.errorEstanon').addClass('hidden');
+         $('.errorPresentacion_id').addClass('hidden');
+         $('.errorCantidadDisponible').addClass('hidden');
+        $('.errorEstanon_recepcions_id').addClass('hidden');
          if ((data.errors)) {
                         setTimeout(function () {
                             $('#create').modal('show');
                             toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
                         }, 500);
                         if (data.errors.nombre) {
-                            $('.errorNombre').removeClass('hidden');
-                            $('.errorNombre').text(data.errors.nombre);
+                            $('.errorProducto_id').removeClass('hidden');
+                            $('.errorProducto_id').text(data.errors.producto_id);
+                        }
+                         if (data.errors.precioUnitario) {
+                            $('.errorPrecioUnitario').removeClass('hidden');
+                            $('.errorPrecioUnitario').text(data.errors.precioUnitario);
+                        }
+                         if (data.errors.Presentacion_id) {
+                            $('.errorPresentacion_id').removeClass('hidden');
+                            $('.errorPresentacion_id').text(data.errors.presentacion_id);
                         }
                         if (data.errors.cantidadDisponible) {
                             $('.errorCantidadDisponible').removeClass('hidden');
                             $('.errorCantidadDisponible').text(data.errors.cantidadDisponible);
                         }
-                        if (data.errors.precioUnitario) {
-                            $('.errorPrecioUnitario').removeClass('hidden');
-                            $('.errorPrecioUnitario').text(data.errors.precioUnitario);
-                        }
                       
                         if (data.errors.estanon_recepcions_id) {
-                            $('.errorEstanon').removeClass('hidden');
-                            $('.errorEstanon').text(data.errors.estanon_recepcions_id);
+                            $('.errorEstanon_recepcions_id').removeClass('hidden');
+                            $('.errorEstanon_recepcions_id').text(data.errors.estanon_recepcions_id);
                         }
         } else {
           toastr.success('SE HA CREADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
-          $('#table').append("<tr class='sto" + data.id + "'>"+
-          "<td>" + data.id + "</td>"+
-          "<td>" + data.nombre + "</td>"+
-          "<td>" + data.cantidadDisponible + "</td>"+
-          "<td>" + data.precioUnitario + "</td>"+
-          "<td>" + data.estanon_recepcions_id + "</td>"+
-  
-          "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
-          data.id + 
-          "' data-nombre='"
-          + data.nombre +  
-          "' data-cantidadDisponible='" 
-          + data.cantidadDisponible + 
-            "' data-precioUnitario='" 
-          + data.precioUnitario +  
-          " 'data-estanon_recepcions_id='" 
-          + data.estanon_recepcions_id + 
-          "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='"
-           + data.id + 
-            "' data-nombre='"
-          + data.nombre +  
-          "' data-cantidadDisponible='" 
-          + data.cantidadDisponible + 
-            "' data-precioUnitario='" 
-          + data.precioUnitario +  
-          " 'data-estanon_recepcions_id='" 
-          + data.estanon_recepcions_id + 
-           "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
-           + data.id + 
-             "' data-nombre='"
-          + data.nombre +  
-          "' data-cantidadDisponible='" 
-          + data.cantidadDisponible + 
-            "' data-precioUnitario='" 
-          + data.precioUnitario +  
-          " 'data-estanon_recepcions_id='" 
-          + data.estanon_recepcions_id +  "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
-          "</tr>");
-        }
-       
+      
+
+       }
       },
     });
-    $('#nombre').val('');
-    $('#cantidadDisponible').val('');
+    $('#producto_id').val('');
     $('#precioUnitario').val('');
+    $('#presentacion_id').val('');
+    $('#cantidadDisponible').val('');
     $('#estanon_recepcions_id').val('');
   });
  
@@ -320,11 +290,12 @@ $('.actionBtn').addClass('edit');
 $('.modal-descripcion').text('Editar Stock');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
-$('#lol1').val($(this).data('id'));
-$('#cri').val($(this).data('nombre'));
-$('#tidad').val($(this).data('cantidaddisponible'));
-$('#uni').val($(this).data('preciounitario'));
-$('#lol5').val($(this).data('estanon_recepcions_id'));
+$('#id2').val($(this).data('id'));
+$('#pro2').val($(this).data('producto_id'));
+$('#pre2').val($(this).data('precioUnitario'));
+$('#pres2').val($(this).data('presentacion_id'));
+$('#can2').val($(this).data('cantidadDisponible'));
+$('#est2').val($(this).data('estanon_recepcions_id'));
 $('#myModal').modal('show');
 });
 $('.modal-footer').on('click', '.edit', function() {
@@ -333,70 +304,82 @@ $('.modal-footer').on('click', '.edit', function() {
     url: 'editStock',
     data: {
 '_token': $('input[name=_token]').val(),
-'id': $("#lol1").val(),
-'nombre': $('#cri').val(),
-'cantidadDisponible': $('#tidad').val(),
-'precioUnitario': $('#uni').val(),
-'estanon_recepcions_id': $('#lol5').val(),
+'id': $("#id2").val(),
+'producto_id': $('#pro2').val(),
+'precioUnitario': $('#pre2').val(),
+'presentacion_id': $('#pres2').val(),
+'cantidadDisponible': $('#can2').val(),
+'estanon_recepcions_id': $('#est2').val(),
     },
 success: function(data) {
-  
-  $('.errorNombre').addClass('hidden');
-         $('.errorCantidadDisponible').addClass('hidden');
+   $('.errorProducto_id').addClass('hidden');
          $('.errorPrecioUnitario').addClass('hidden');
-         $('.errorEstanon').addClass('hidden');
+         $('.errorPresentacion_id').addClass('hidden');
+         $('.errorCantidadDisponible').addClass('hidden');
+        $('.errorEstanon_recepcions_id').addClass('hidden');
          if ((data.errors)) {
                         setTimeout(function () {
-                            $('#myModal').modal('show');
+                            $('#create').modal('show');
                             toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
                         }, 500);
-                        if (data.errors.nombre) {
-                            $('.errorNombre').removeClass('hidden');
-                            $('.errorNombre').text(data.errors.nombre);
+                        if (data.errors.producto_id) {
+                            $('.errorProducto_id').removeClass('hidden');
+                            $('.errorProducto_id').text(data.errors.producto_id);
+                        }
+                         if (data.errors.precioUnitario) {
+                            $('.errorPrecioUnitario').removeClass('hidden');
+                            $('.errorPrecioUnitario').text(data.errors.precioUnitario);
+                        }
+                         if (data.errors.precioUnitario) {
+                            $('.errorPresentacion_id').removeClass('hidden');
+                            $('.errorPresentacion_id').text(data.errors.presentacion_id);
                         }
                         if (data.errors.cantidadDisponible) {
                             $('.errorCantidadDisponible').removeClass('hidden');
                             $('.errorCantidadDisponible').text(data.errors.cantidadDisponible);
                         }
-                        if (data.errors.precioUnitario) {
-                            $('.errorPrecioUnitario').removeClass('hidden');
-                            $('.errorPrecioUnitario').text(data.errors.precioUnitario);
-                        }
-                        
+                      
                         if (data.errors.estanon_recepcions_id) {
-                            $('.errorEstanon').removeClass('hidden');
-                            $('.errorEstanon').text(data.errors.estanon_recepcions_id);
+                            $('.errorEstanon_recepcions_id').removeClass('hidden');
+                            $('.errorEstanon_recepcions_id').text(data.errors.estanon_recepcions_id);
                         }
         } else {
           toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
-      $('.sto' + data.id).replaceWith(" "+
-      "<tr class='api" + data.id + "'>"+
-      "<td>" + data.id + "</td>"+
-      "<td>" + data.nombre + "</td>"+
-      "<td>" + data.cantidadDisponible + "</td>"+
-      "<td>" + data.precioUnitario + "</td>"+
-      "<td>" + data.estanon_recepcions_id + "</td>"+
-      
- "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + 
-      "<td>" + data.nombre + "</td>"+
-      "<td>" + data.cantidadDisponible + "</td>"+
-      "<td>" + data.precioUnitario + "</td>"+
-      "<td>" + data.estanon_recepcions_id + "</td>"+
-           "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
-          + data.id + 
-      "<td>" + data.nombre + "</td>"+
-      "<td>" + data.cantidadDisponible + "</td>"+
-      "<td>" + data.precioUnitario + "</td>"+
-      "<td>" + data.estanon_recepcions_id + "</td>"+
-           "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
+     $('#table').append("<tr class='sto" + data.id + "'>"+
+          "<td>" + data.id + "</td>"+
+          "<td>" + data.producto_id + "</td>"+
+          "<td>" + data.precioUnitario + "</td>"+
+          "<td>" + data.presentacion_id + "</td>"+
+          "<td>" + data.cantidadDisponible + "</td>"+
+          "<td>" + data.estanon_recepcions_id + "</td>"+
+  
+          "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
+          data.id + 
+          "' data-producto_id='"
+          + data.producto_id + 
+             "' data-precioUnitario='" 
+          + data.precioUnitario + 
+             "' data-presentacion_id='" 
+          + data.presentacion_id+  
+          "' data-cantidadDisponible='" 
+          + data.cantidadDisponible + 
+          " 'data-estanon_recepcions_id='" 
+          + data.estanon_recepcions_id + 
+          "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='"
           + data.id +
-      "<td>" + data.nombre + "</td>"+
-      "<td>" + data.cantidadDisponible + "</td>"+
-      "<td>" + data.precioUnitario + "</td>"+
-      "<td>" + data.estanon_recepcions_id + "</td>"+
-           "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+          "' data-producto_id='"
+          + data.producto_id + 
+             "' data-precioUnitario='" 
+          + data.precioUnitario + 
+             "' data-presentacion_id='" 
+          + data.presentacion_id+  
+          "' data-cantidadDisponible='" 
+          + data.cantidadDisponible + 
+          " 'data-estanon_recepcions_id='" 
+          + data.estanon_recepcions_id +   "'><span class='fa fa-eye'></span></button> <button class='edit-modalRol btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalRol btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
       "</tr>");
-    }
+        }
+      
 },
   });
 });
@@ -407,11 +390,11 @@ $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-descripcion').text('Eliminar Producto');
+$('.modal-descripcion').text('Eliminar Stock');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
-$('.nombre').html($(this).data('nombre'));
+$('.id').html($(this).data('id'));
 $('#myModal').modal('show');
 });
 $('.modal-footer').on('click', '.delete', function(){
@@ -431,11 +414,12 @@ $('.modal-footer').on('click', '.delete', function(){
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
-  $('#i').text($(this).data('id'));
-  $('#nbre').text($(this).data('nombre'));
-  $('#cdpn').text($(this).data('cantidaddisponible'));
-  $('#prun').text($(this).data('preciounitario'));
-  $('#esre').text($(this).data('estanon_recepcions_id'));
+  $('#id3').text($(this).data('id'));
+  $('#pro3').text($(this).data('producto_id'));
+  $('#pre3').text($(this).data('precioUnitario'));
+  $('#pres3').text($(this).data('presentacion_id'));
+  $('#can3').text($(this).data('cantidadDisponible'));
+  $('#est3').text($(this).data('estanon_recepcions_id'));
   $('.modal-title').text('Detalle');
   });
   /* processing bar 

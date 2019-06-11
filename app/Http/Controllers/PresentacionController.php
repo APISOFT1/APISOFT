@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Presentacion;
+use Validator;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 
 class PresentacionController extends Controller
@@ -24,7 +26,7 @@ class PresentacionController extends Controller
    
     public function addPresentacion(Request $request){
     $rules = array(
-      'descripcion' => 'required',
+      'Descripcion' => 'required',
 
     );
   $validator = Validator::make ( Input::all(), $rules);
@@ -33,15 +35,15 @@ class PresentacionController extends Controller
 
   else {
     $pre = new Presentacion;
-    $pre->descripcion = $request->descripcion;
+    $pre->Descripcion = $request->Descripcion;
     $pre->save();
-    return response()->json($pre)->with('message');
+    return response()->json($pre);
   }
 }
 
 public function editPresentacion(request $request){
   $rules = array(
-    'descripcion' => 'required',
+    'Descripcion' => 'required',
   );
 $validator = Validator::make ( Input::all(), $rules);
 if ($validator->fails())
@@ -49,7 +51,7 @@ return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
 
 else {
 $pre = Presentacion::find ($request->id);
-$pre->descripcion = $request->descripcion;
+$pre->Descripcion = $request->Descripcion;
 $pre->save();
 return response()->json($pre);
 }
