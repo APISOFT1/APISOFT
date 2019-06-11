@@ -145,23 +145,13 @@
                             <!-- content go here -->
 
 
-
-              <div class="form-group">
-              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
-              <input type="datetime" class="form-control" id="fecha" name="fecha" 
-              placeholder="YYYY-MM-DD" required  disabled>
-              <p class="No ingreso la fecha"></p>
-              <span class="fa fa-clock-o form-control-feedback right" aria-hidden="true"></span>
-              </div>
-              </div>
-              
-              <div class="form-group row add">
-              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
-              <select class="form-control" id="afiliado_id" name="afiliado_id">
-          <option value="">Seleccione el Afiliado</option>
-          @foreach ($afiliado as $afi)
-            <option value="{{$afi->id}}">{{ $afi->Nombre }}</option>
-          @endforeach           
+                <div class="form-group row add">
+                <div class="col-md-9  form-group has-feedback">
+        <select name="estanon_recepcions_id" class="form-control has-feedback-left" id="estanon_recepcions_id">
+         <option value="">-- Seleccione recepción-estañon --</option>
+         @foreach ($recepciones as $recepcionEstanones)
+          <option value="{{ $recepcionEstanones->id }}">{{$recepcionEstanones->id}}</option>
+         @endforeach
         </select>
               <p class="No ingreso la fecha"></p>
               <span class="fa fa-child form-control-feedback right" aria-hidden="true"></span>
@@ -488,10 +478,21 @@
             </div>
           </div>
 
+                <div class="form-group row add">
+        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+        <select name="name" class="form-control has-feedback-left" id="lol5">
+        <option value="">-- Seleccione recepción-estañon --</option>
+         @foreach ($recepciones as $recepcionEstanones)
+          <option value="{{ $recepcionEstanones->id }}">{{$recepcionEstanones->id}}</option>
+         @endforeach
+        </select>
+					  <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+</div>
+</div>
         </form>
-                {{-- Form Delete Post --}}
+        {{-- Form Delete Post --}}
         <div class="deleteContent">
-          ¿Está seguro que desea eliminar esta Recepción de Materia Prima <span class="descripcion"></span>?
+          ¿Está seguro que desea eliminar este Producto <span class="descripcion"></span>?
           <span class="hidden id"></span>
         </div>
       </div>
@@ -506,24 +507,4 @@
     </div>
   </div>
 </div>
-
-
-
-
- <!--   Core JS Files   -->
- <script src="assets2/js/jquery-2.2.4.min.js" type="text/javascript"></script>
-	<script src="assets2/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="assets2/js/jquery.bootstrap.wizard.js" type="text/javascript"></script>
-
-	<!--  Plugin for the Wizard -->
-	<script src="assets2/js/gsdk-bootstrap-wizard.js"></script>
-
-	<!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
-	<script src="assets2/js/jquery.validate.min.js"></script>
-
-
-
-   
-
-
 @endsection

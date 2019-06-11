@@ -212,7 +212,6 @@
         $('.errorApiario').addClass('hidden');
          
                     
-
          if ((data.errors)) {
              setTimeout(function () {
                  $('#create').modal('show');
@@ -252,9 +251,7 @@
     });
     $('#afiliado_id').val('');
     $('#apiario_id').val('');
-
   });
-
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
 $('#footer_action_button').text(" Editar ");
@@ -269,10 +266,8 @@ $('.form-horizontal').show();
 $('#idAA').val($(this).data('id'));
 $('#afi').val($(this).data('afiliado_id'));
 $('#api').val($(this).data('apiario_id'));
-
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
@@ -288,7 +283,6 @@ success: function(data) {
         $('.errorApiario').addClass('hidden');
          
                     
-
          if ((data.errors)) {
              setTimeout(function () {
                  $('#create').modal('show');
@@ -310,10 +304,6 @@ success: function(data) {
 },
   });
 });
-
-
-
-
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Delete");
@@ -330,7 +320,6 @@ $('.afiliado_id').html($(this).data('afiliado_id'));
 $('.apiario_id').html($(this).data('apiario_id'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
@@ -345,7 +334,6 @@ $('.modal-footer').on('click', '.delete', function(){
     }
   });
 });
-
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');

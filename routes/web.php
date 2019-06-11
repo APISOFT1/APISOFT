@@ -44,9 +44,9 @@ Route::group(['middleware' =>['auth']], function () {
  Route::resource('users', 'Admin\UserController')->middleware('role:administrador');;
  //Route::get('users', 'Admin\UserController@index')
  Route::resource('Afiliado', 'AfiliadoController')->middleware('role:administrador');
+
+
   //route grupo 
-    Route::get('Estanon' , 'EstanonController@index')->middleware('role:planta;administrador');
-    Route::get('EstadoCivil', 'EstadoCivilController@index')->middleware('role:planta;administrador');
     Route::get('Ubicacion','UbicacionController@index')->middleware('role:planta;administrador');
     Route::get('AfiliadoApiario','AfiliadoApiarioController@index')->middleware('role:planta;administrador');
     Route::get('Apiario' , 'ApiarioController@index')->middleware('role:planta;administrador');
@@ -58,6 +58,9 @@ Route::group(['middleware' =>['auth']], function () {
     Route::get('Producto' , 'ProductController@index')->middleware('role:planta;administrador');
     Route::get('RecepEstanon' , 'RecepcionEstanonController@index')->middleware('role:planta;administrador');
     Route::get('Stock' , 'StockController@index')->middleware('role:planta;administrador');
+
+
+
   
 Route::POST('addAfiliado','AfiliadoController@addAfiliado');
 Route::POST('editAfiliado','AfiliadoController@editAfiliado');

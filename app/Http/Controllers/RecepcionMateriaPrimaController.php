@@ -30,20 +30,20 @@ public function __construct()
 
 //INDEEEEEEEEEEEEX/
 public function index(Request $request){
-   if ($request)
-    {
-        $search = \Request::get('search');
-        $recepcion = RecepcionMateriaPrima::where('Recepcion_id','like','%'.$search.'%')
-        ->orderby('fecha','desc')
-        ->paginate(7);
-        $afiliado = Afiliado::all();
-        $estanon = Estanon::all();
-        $recepciones = RecepcionMateriaPrima::all()->sortBy("fecha");
-        $user = User::all();
-        $tipoEntrega = TipoEntrega::all();
-        return view('RecepcionMateriaPrima.index', compact('afiliado','recepciones','estanon','user','tipoEntrega','recepcion'));
-    }
-}
+if($request){
+  $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
+  $recepcion = RecepcionMateriaPrima::paginate(10);
+      $afiliado = Afiliado::all();
+      $estanon = Estanon::all();
+      $recepciones = DB::table('recepcion_materia_primas')
+      ->select('id','afiliado_id')
+      ->orderBy('created_at','DESC')
+      ->take(1)
+      ->get();
+      $user = User::all();
+      $tipoEntrega = TipoEntrega::all();
+  return view('RecepcionMateriaPrima.index', compact('afiliado','recepciones','estanon','user','tipoEntrega','recepcion'), ['recepcion'=>$recepcion,"searchText"=>$query]);
+}}
 
 ////////////////////////////////////////////////////////NUEVO
 
@@ -67,7 +67,12 @@ public function addRecepcionMateriaPrima(Request $request){
         $recepcion->tipoEntrega_id = $request->tipoEntrega_id;
         $recepcion->observacion = $request->observacion;
     $recepcion->save();
-    return response()->json(['success' => 'Se ha creado una Recepción de Materia Prima correctamente']);
+    $ruless = array(
+      ['success' => 'Se ha creado una Recepción de Materia Prima correctamente']
+    );
+   
+    return response()->json($recepcion);
+   
   }
 }
 

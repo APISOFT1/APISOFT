@@ -19,7 +19,6 @@
   
       <!-- Include Twitter Bootstrap and jQuery: -->
 <!--<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>->
-
  
 <!-- Include the plugin's CSS and JS: -->
 
@@ -218,30 +217,27 @@
     @toastr_js
     @toastr_render
 
-<!-- MODAL INVENTARIO -->
+<!-- MODAL AFILIADO -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-
 {{-- ajax Form Add Post--}}
-
 <!-- Delay table load until everything else is loaded -->
  
         $(window).load(function(){
             $('#postTable').removeAttr('style');
         })
  
-
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
-    $('.modal-descripcion').text('NUEVO LOTE');
+    $('.modal-descripcion').text('Crear Apiario');
   });
   $("#add").click(function() {
     $.ajax({
       type: 'POST',
-      url: 'addStock',
+      url: 'addApiario',
       
       data: {
         '_token': $('input[name=_token]').val(),
@@ -255,7 +251,6 @@
          $('.errorCantidad').addClass('hidden');
          $('.errorUbicacion').addClass('hidden');
                     
-
                     if ((data.errors)) {
                         setTimeout(function () {
                             $('#create').modal('show');
@@ -281,33 +276,29 @@
           "<td>" + data.cantidad + "</td>"+
           "<td>" + data.ubicacion_id + "</td>"+
   
-          "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
-          data.id + "' data-Descripcion='"
-          + data.Descripcion +  "' data-cantidad='" 
-          + data.cantidad +  " 'data-ubicacion_id='" 
-          + data.ubicacion_id + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='"
-           + data.id + "' data-Descripcion='" 
-           + data.Descripcion + "' data-cantidad='" + data.cantidad + "' data-ubicacion_id='" 
-           + data.ubicacion_id + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
-           + data.id + "' data-Descripcion='" + data.Descripcion +  "' data-cantidad='" 
-          + data.cantidad +  " 'data-ubicacion_id='" 
-          + data.ubicacion_id + "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
-          "</tr>");
+          "<td><button class='show-modal btn btn-info btn-sm' data-id='" +  data.id + 
+          "' data-Descripcion='" + data.Descripcion + 
+          "' data-cantidad='"   + data.cantidad +  
+          " 'data-ubicacion_id='" + data.ubicacion_id + 
+          "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='" + data.id +
+          "' data-Descripcion='" + data.Descripcion + 
+          "' data-cantidad='" + data.cantidad + 
+          "' data-ubicacion_id='" + data.ubicacion_id + 
+          "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id +
+           "' data-Descripcion='" + data.Descripcion + 
+            "' data-cantidad='" + data.cantidad +  
+            " 'data-ubicacion_id='" + data.ubicacion_id + 
+            "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+"</tr>");
                        
                     }
                 },
             });
-
     $('#Descripcion').val('');
     $('#cantidad').val('');
     $('#ubicacion_id').val('');
         });
-
-
       
    
-
-
  
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
@@ -326,7 +317,6 @@ $('#can').val($(this).data('cantidad'));
 $('#ub').val($(this).data('ubicacion_id'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.edit', function() {
   $('#form_result').html('');
   $.ajax({
@@ -338,14 +328,12 @@ $('.modal-footer').on('click', '.edit', function() {
 'Descripcion': $('#cri').val(),
 'cantidad': $('#can').val(),
 'ubicacion_id': $('#ub').val(),
-
     },
 success: function(data) {
   $('.errorDescripcion').addClass('hidden');
          $('.errorCantidad').addClass('hidden');
          $('.errorUbicacion').addClass('hidden');
                     
-
                     if ((data.errors)) {
                         setTimeout(function () {
                             $('#myModal').modal('show');
@@ -364,9 +352,9 @@ success: function(data) {
                             $('.errorUbicacion').text(data.errors.ubicacion_id);
                         }
                     } else {
-  toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
-      $('.api' + data.id).replaceWith(" "+
-      "<tr class='api" + data.id + "'>"+
+  toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Alerta Éxito', {timeOut: 5000});
+  $('.api' + data.id).replaceWith(" "+
+      "<tr class='api'>"+
       "<td>" + data.id + "</td>"+
       "<td>" + data.Descripcion + "</td>"+
       "<td>" + data.cantidad + "</td>"+
@@ -385,16 +373,10 @@ success: function(data) {
           + data.cantidad +  " 'data-ubicacion_id='" 
           + data.ubicacion_id + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
       "</tr>");
-
     }
 },
   });
 });
-
-<<<<<<< HEAD
-
-=======
-
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Eliminar");
@@ -410,7 +392,6 @@ $('.form-horizontal').hide();
 $('.descripcion').html($(this).data('descripcion'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
@@ -420,12 +401,11 @@ $('.modal-footer').on('click', '.delete', function(){
       'id': $('.id').text()
     },
     success: function(data){
-      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
+      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Alerta Éxito', {timeOut: 5000});
       $('.api' + $('.id').text()).remove();
     }
   });
 });
->>>>>>> develop
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
@@ -437,7 +417,6 @@ $('.modal-footer').on('click', '.delete', function(){
   $('#upd').text($(this).data('updated_at'));
   $('.modal-title').text('Detalle');
   });
-
   /* processing bar 
   */
   var myApp;
@@ -450,26 +429,18 @@ myApp = myApp || (function () {
         hidePleaseWait: function () {
             pleaseWaitDiv.modal('hide');
         },
-
     };
 })();
 </script>
   
   <!--  <style>
    
-
 .modal-header {
-
 background-color: #1ABB9C;
-
 padding:16px 16px;
-
 color:#FFF;
-
 border-bottom:2px dashed #1ABB9C;
-
 }
-
 .btn-success {
     background: #26B99A;
     border: 1px solid #169F85;
@@ -478,4 +449,3 @@ border-bottom:2px dashed #1ABB9C;
     @include('sweet::alert')
     </body>
     </html>
-    

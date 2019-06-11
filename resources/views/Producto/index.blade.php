@@ -23,7 +23,13 @@ PRODUCTO CREADO CORRECTAMENTE
 <br>
 <!-- Fin de salto de linea. No necesita una etiqueta de cierre-->
 
+<<<<<<< HEAD
+<!--Esta clase nos permite posicionar el buscador  -->
+<div class="absolute3">
+</div>
+=======
 		
+>>>>>>> raychel
 
 
 <div class="row">

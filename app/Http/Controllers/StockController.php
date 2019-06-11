@@ -3,9 +3,9 @@ namespace App\Http\Controllers;
 use App\Stock;
 use Validator;
 use Response;
-use App\RecepcionEstanon;
 use App\Presentacion;
 use App\Producto;
+use App\RecepcionEstanon;
 
 
 use Illuminate\Http\Request;
@@ -21,15 +21,16 @@ class StockController extends Controller
     {
        if ($request)
     {
-        $search = \Request::get('search');
-        $sto = Stock::with('Producto','Presentacion','RecepcionEstanon');
-        $sto = Stock::where('producto_id','like','%'.$search.'%')
-        ->orderby('producto_id','desc')
-        ->paginate(7);
-        $recepciones = RecepcionEstanon::all();
-        $presentacion =  Presentacion::all();
-        $producto = Producto::all();
-        return view('Stock.index', compact('sto', 'recepcionEstanon', 'presentacion','producto'));
+      $search = \Request::get('search');
+      $sto = Stock::with('Producto','Presentacion','RecepcionEstanon');
+      $sto = Stock::where('producto_id','like','%'.$search.'%')
+      ->orderby('producto_id','desc')
+      ->paginate(7);
+      $recepciones = RecepcionEstanon::all();
+      $presentacion = Presentacion::all();
+      $producto = Producto::all();
+      return view('Stock.index', compact('sto', 'recepciones', 'presentacion','producto'));
+        return view('Stock.index', compact('sto', 'recepciones', 'presentacion','producto'));
     }
 
            }
@@ -57,7 +58,7 @@ class StockController extends Controller
         $sto->presentacion_id = $request->presentacion_id;
         $sto->estanon_recepcions_id = $request->estanon_recepcions_id;
         $sto->save();
-        return response()->json(['success' => 'Se ha creado un Stock correctamente']);
+        return response()->json($sto);
       }
     }
     public function editStock(request $request){
@@ -83,13 +84,9 @@ class StockController extends Controller
     public function deleteStock(request $request){
   
       $sto = Stock::find ($request->id);
-        $sto->cantidadDisponible = $request->cantidadDisponible;
-        $sto->precioUnitario = $request->precioUnitario;
-        $sto->producto_id = $request->producto_id;
-        $sto->presentacion_id = $request->presentacion_id;
-        $sto->estanon_recepcions_id = $request->estanon_recepcions_id;
-   
-        $sto->delete();
-        return response()->json();
+      $sto->delete();
+       
+     
+     
       }
 }

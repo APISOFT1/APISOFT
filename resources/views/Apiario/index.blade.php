@@ -29,7 +29,7 @@
 
 
 <div class="table-responsive">
-			<table class="table table-striped table-bordered table-condensed table-hover" id="postTable" >
+			<table class="table table-striped table-bordered table-condensed table-hover" id="table" >
 				<thead>
 					<th>Código</th>
 					<th>Descripción</th>
@@ -42,7 +42,7 @@
         {{ csrf_field() }}
           
                @foreach ($api as $value)
-					
+          <tr class="api{{$value->id}}">
           <td>{{ $value->id }}</td>
 					<td>{{ $value->Descripcion}}</td>
 					<td>{{ $value->cantidad}}</td>
@@ -99,7 +99,7 @@
 
         <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-           <input type="text" class="form-control has-feedback-left" id="D" name="Descripcion" placeholder="Descripción" required>
+           <input type="text" class="form-control has-feedback-left" id="Descripcion" name="Descripcion" placeholder="Descripción" required>
            <p class="error text-center alert alert-danger hidden"></p>
               <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                 </div>

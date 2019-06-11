@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Afiliado;
 use App\Apiario;
@@ -9,10 +8,8 @@ use App\AfiliadoApiario;
 use Illuminate\Http\Request;
 use App\Http\Requests\AfiliadoApiariosFormRequest;
 use Illuminate\Support\Facades\Input;  //MUYR IMPORTANTE , SIN ESTO NO GUARDA.
-
 class AfiliadoApiarioController extends Controller
 {
-
     public function __construct()
     {
     
@@ -25,16 +22,11 @@ class AfiliadoApiarioController extends Controller
          */
         public function index(Request $request)
         { 
-          $search = \Request::get('search');
-          $afiliadoapiario = AfiliadoApiario::where('afiliadoapiario','like','%'.$search.'%')
-          ->orderBy('afiliadoapiario')
-          ->paginate(10);
+         
+          $afiliadoapiario = AfiliadoApiario::paginate(10);
           $afiliados=Afiliado::all();
           $apiarios=Apiario::all();
           return view('AfiliadoApiario.index',compact('afiliadoapiario','afiliados','apiarios'));      
-
-          
-         
          
         }
     

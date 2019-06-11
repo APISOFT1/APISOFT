@@ -6,10 +6,11 @@
 @if($message == 'store')
 <div class="alert alert-success alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-EATAÑON CREADO CORRECTAMENTE
+  ESTAÑON CREADO CORRECTAMENTE
 </div>
 @endif
 <!-- fin de mensaje de exito -->
+@section ('contenido')
 
 @include('Busqueda.search',['url'=>'Estanon','link'=>'Estanon'])
 
@@ -20,16 +21,10 @@ EATAÑON CREADO CORRECTAMENTE
 <!-- Saltos de linea-->
 <br>
 <br>
-<br>
-<br>
 <!-- Fin de salto de linea. No necesita una etiqueta de cierre-->
 
 <!--Esta clase nos permite posicionar el buscador  -->
 
-          <div class="form-group row add">
-        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-              <input type="text" class="form-control has-feedback-left" id="Descripcion" name="Descripcion"
-              placeholder="Ubicación" required>
 
 <div class="table-responsive">
 			<table class="table table-striped table-bordered table-condensed table-hover">
@@ -213,26 +208,3 @@ EATAÑON CREADO CORRECTAMENTE
 
 
 @endsection
-
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script>
-    @if(Session::has('message'))
-        var type = "{{ Session::get('alert-type', 'info') }}";
-        switch(type){
-            case 'info':
-                toastr.info("{{ Session::get('message') }}");
-                break;
-            
-            case 'warning':
-                toastr.warning("{{ Session::get('message') }}");
-                break;
-            case 'success':
-                toastr.success("{{ Session::get('message') }}");
-                break;
-            case 'error':
-                toastr.error("{{ Session::get('message') }}");
-                break;
-        }
-    @endif
-    </script>

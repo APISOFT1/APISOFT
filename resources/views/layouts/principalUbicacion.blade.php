@@ -19,7 +19,6 @@
   
       <!-- Include Twitter Bootstrap and jQuery: -->
 <!--<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>->
-
  
 <!-- Include the plugin's CSS and JS: -->
 <!--<link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>-->
@@ -206,7 +205,6 @@
      {!!Html::script('/js2/dropdown.js')!!}
 
     <!-- {!!Html::script('/js/jquery.min.js')!!}
-
      {!!Html::script('/js/bootstrap.min.js')!!}-->
 
 
@@ -221,7 +219,6 @@
 <!--{!!Html::script('/js/bootstrap.min.js')!!} -->
 
 <!--<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
-
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>-->
 
@@ -252,7 +249,6 @@
         $('.errorDescripcion').addClass('hidden');
          
                     
-
                     if ((data.errors)) {
                         setTimeout(function () {
                             $('#create').modal('show');
@@ -277,9 +273,7 @@
       },
     });
     $('#Descripcion').val('');
-
   });
-
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
 $('#footer_action_button').text(" Editar ");
@@ -295,7 +289,6 @@ $('#ids').val($(this).data('id'));
 $('#des').val($(this).data('descripcion'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.edit', function() {
   $('#form_result').html('');
   $.ajax({
@@ -310,7 +303,6 @@ success: function(data) {
   $('.errorDescripcion').addClass('hidden');
          
                     
-
          if ((data.errors)) {
              setTimeout(function () {
                  $('#create').modal('show');
@@ -333,7 +325,6 @@ success: function(data) {
 },
   });
 });
-
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Eliminar");
@@ -349,7 +340,6 @@ $('.form-horizontal').hide();
 $('.descripcion').html($(this).data('descripcion'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
@@ -364,8 +354,6 @@ $('.modal-footer').on('click', '.delete', function(){
     }
   });
 });
-
-
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');

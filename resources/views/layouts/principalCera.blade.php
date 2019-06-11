@@ -167,6 +167,9 @@
   <script src="{{asset('js2/bootstrap-select.min.js')}}"></script>
   
     <!-- jQuery -->
+    @jquery
+    @toastr_js
+    @toastr_render
 
     {!!Html::script('/js2/jquery.min.js')!!}  
     @stack('scripts')
@@ -186,18 +189,14 @@
 
      {!!Html::script('/js/daterangepicker.js')!!}
 
-     @jquery
-    @toastr_js
-    @toastr_render
+    
 
 
 <!-- MODAL Cera -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-
 {{-- ajax Form Add Post--}}
-
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
@@ -224,7 +223,6 @@
          $('.errorPesoBruto').addClass('hidden');
          $('.errorPesoNeto').addClass('hidden');
          $('.errorFecha').addClass('hidden');
-
          if ((data.errors)) {
                         setTimeout(function () {
                             $('#create').modal('show');
@@ -250,7 +248,6 @@
                             $('.errorFecha').removeClass('hidden');
                             $('.errorFecha').text(data.errors.Fecha);
                         }
-
         } else {
           toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
           $('#table').append("<tr class='cera" + data.id + "'>"+
@@ -287,7 +284,6 @@
     $('#PesoBruto').val('');
     $('#PesoNeto').val('');
     $('#Fecha').val('');
-
   });
  
 // function Edit POST
@@ -309,7 +305,6 @@ $('#ps').val($(this).data('pesoneto'));
 $('#fec').val($(this).data('fecha'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
@@ -322,7 +317,6 @@ $('.modal-footer').on('click', '.edit', function() {
 'PesoBruto': $('#ub').val(),
 'PesoNeto': $('#ps').val(),
 'Fecha': $('#fec').val(),
-
     },
 success: function(data) {
   
@@ -331,7 +325,6 @@ success: function(data) {
          $('.errorPesoBruto').addClass('hidden');
          $('.errorPesoNeto').addClass('hidden');
          $('.errorFecha').addClass('hidden');
-
          if ((data.errors)) {
                         setTimeout(function () {
                             $('#create').modal('show');
@@ -357,7 +350,6 @@ success: function(data) {
                             $('.errorFecha').removeClass('hidden');
                             $('.errorFecha').text(data.errors.Fecha);
                         }
-
         } else {
           toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
       $('.cera' + data.id).replaceWith(" "+
@@ -391,7 +383,6 @@ success: function(data) {
 },
   });
 });
-
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Eliminar");
@@ -407,7 +398,6 @@ $('.form-horizontal').hide();
 $('.descripcion').html($(this).data('descripcion'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
@@ -433,14 +423,12 @@ $('.modal-footer').on('click', '.delete', function(){
   $('#ech').text($(this).data('fecha'));
   $('.modal-title').text('Detalle Cera');
   });
-
   
   var timeoutId = 0;
 $('#discount').keyup(function(e){
    clearTimeout(timeoutId);
    timeoutId = setTimeout(discount,1000);
 });
-
 function discount(){
   let amount = $('#discount').val();
   if(!isNaN(amount)){
@@ -449,27 +437,23 @@ function discount(){
     $("#PesoNeto").val(total);
   } 
 }
-
 var timeoutId = 0;
 $('#ub').keyup(function(e){
    clearTimeout(timeoutId);
-   timeoutId = setTimeout(discount,1000);
+   timeoutId = setTimeout(ub,1000);
 });
-
-function discount(){
+function ub(){
   let amount = $('#ub').val();
   if(!isNaN(amount)){
-    let discount = amount * 0.01;
-    let total =  amount - discount;
+    let ub = amount * 0.01;
+    let total =  amount - ub;
     $("#ps").val(total);
   } 
 }
 </script>
     <script>
 $( document ).on('click','.create-modal',function() {
-
     var now = new Date();
-
     var day = ("0" + now.getDate()).slice(-2);
     var month = ("0" + (now.getMonth() + 1)).slice(-2);
     h=now.getHours();

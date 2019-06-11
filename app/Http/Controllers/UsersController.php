@@ -1,16 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\User;
 use App\Genero;
 use App\Role;
-
-
+use App\Estado;
 use Illuminate\Http\Request;
 use App\Http\Requests\UsuarioFormRequest;
-
-
 class UsersController extends Controller
 {
     /**
@@ -18,12 +13,11 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     public function index(Request $request)
     {
        
        if($request){
-            $search = \Request::get('search');
+        $search = \Request::get('search');
             $users = User::where('name','like','%'.$search.'%')
                   ->orWhere('email','LIKE','%'.$search.'%')
                   ->orderby('name','desc')
@@ -35,8 +29,6 @@ class UsersController extends Controller
         
         return view('users.index', compact('users', 'roles','generos'));
     }
-
-
     
     public function addUser(Request $request){
         $rules = array(
@@ -73,8 +65,6 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-
      
     public function editUser(request $request){
         $rules = array(
@@ -99,8 +89,6 @@ class UsersController extends Controller
       return response()->json($users);
       }
       }
-
-
     public function massDestroy(Request $request)
     {
         if (! Gate::allows('users_manage')) {
