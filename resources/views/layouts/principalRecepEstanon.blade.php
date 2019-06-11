@@ -265,31 +265,31 @@
  
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
-$('#footer_action_button').text(" Editar Apiario");
+$('#footer_action_button').text(" Editar Recepción");
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-$('.modal-descripcion').text('Editar Apiario');
+$('.modal-descripcion').text('Editar Recepción');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
 $('#ids').val($(this).data('id'));
-$('#cri').val($(this).data('Descripcion'));
-$('#can').val($(this).data('cantidad'));
-$('#ub').val($(this).data('ubicacion_id'));
+$('#desc').val($(this).data('recepcion_id'));
+$('#dad').val($(this).data('estanon_id'));
+$('#cion').val($(this).data('fecha'));
 $('#myModal').modal('show');
 });
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
-    url: 'editApiario',
+    url: 'editRecepcion',
     data: {
 '_token': $('input[name=_token]').val(),
 'id': $("#ids").val(),
-'Descripcion': $('#cri').val(),
-'cantidad': $('#can').val(),
-'ubicacion_id': $('#ub').val(),
+'Recepcion_id': $('#desc').val(),
+'Estanon_id': $('#dad').val(),
+'Fecha': $('#cion').val(),
     },
 success: function(data) {
   $('.errorRecepcion').addClass('hidden');
@@ -317,30 +317,30 @@ success: function(data) {
         } else {
           toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
       $('.api' + data.id).replaceWith(" "+
-      "<tr class='api" + data.id + "'>"+
+      "<tr class='recepcionEst" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
-      "<td>" + data.Descripcion + "</td>"+
-      "<td>" + data.cantidad + "</td>"+
-      "<td>" + data.ubicacion_id + "</td>"+
-      
- "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + "' data-Descripcion='" 
- + data.Descripcion + "' data-cantidad='" 
-          + data.cantidad +  " 'data-ubicacion_id='" 
-          + data.ubicacion_id + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
-          + data.id + "' data-Descripcion='" + data.Descripcion + 
-          "' data-cantidad='" 
-          + data.cantidad +  " 'data-ubicacion_id='" 
-          + data.ubicacion_id + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
-          + data.id + "' data-Descripcion='" + data.Descripcion + 
-          "' data-cantidad='" 
-          + data.cantidad +  " 'data-ubicacion_id='" 
-          + data.ubicacion_id + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
-      "</tr>");
+          "<td>" + data.Recepcion_id + "</td>"+
+          "<td>" + data.Estanon_id + "</td>"+
+          "<td>" + data.Fecha + "</td>"+
+  
+          "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
+          data.id +  "' data-Recepcion_id='" 
+          + data.Recepcion_id +  " 'data-Estanon_id='" 
+          + data.Estanon_id + " 'data-Fecha='"
+          + data.Fecha + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='"
+           + data.id + "' data-Recepcion_id='" + data.Recepcion_id + " 'data-Estanon_id='"
+           + data.Estanon_id +  " 'data-Fecha='"
+          + data.Fecha + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
+           + data.id +  "' data-Recepcion_id='" 
+          + data.Recepcion_id +  " 'data-Estanon_id='"  
+          + data.Estanon_id +  " 'data-Fecha='"
+          + data.Fecha + "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
+          "</tr>");
     }
 },
   });
 });
-/*
+
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Eliminar");
@@ -349,13 +349,14 @@ $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Eliminar Ubicación');
+$('.modal-descripcion').text('Eliminar Recepción');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
 $('.recepcion_id').html($(this).data('recepcion_id'));
 $('#myModal').modal('show');
 });
+
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
@@ -365,11 +366,11 @@ $('.modal-footer').on('click', '.delete', function(){
       'id': $('.id').text()
     },
     success: function(data){
+      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
       $('.ubicacion' + $('.id').text()).remove();
     }
   });
 });
-*/
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
@@ -379,8 +380,35 @@ $('.modal-footer').on('click', '.delete', function(){
   $('#ub2').text($(this).data('fecha'));
   $('.modal-title').text('Detalle Recepción Estañón');
   });
+
+  
 </script>
-    
+     <script>
+$( document ).on('click','.create-modal',function() {
+    var now = new Date();
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+    h=now.getHours();
+    m=now.getMinutes();
+  s=now.getSeconds();
+    var today = now.getFullYear()+"-"+(month)+"-"+(day)+"-"+(h)+"-"+(m)+"-"+(s) ;
+    $("#fecha,#Fecha").val(today);
+});
+</script>
+
+<script>
+  $("#add").click(function(){
+    var now = new Date();
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+    h=now.getHours();
+    m=now.getMinutes();
+  s=now.getSeconds();
+    var today = now.getFullYear()+"-"+(month)+"-"+(day)+"-"+(h)+"-"+(m)+"-"+(s) ;
+    $("#fecha,#Fecha").val(today);
+});
+</script>
+
 
     </body>
     </html>

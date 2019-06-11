@@ -276,18 +276,22 @@
           "<td>" + data.cantidad + "</td>"+
           "<td>" + data.ubicacion_id + "</td>"+
   
-          "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
-          data.id + "' data-Descripcion='"
-          + data.Descripcion +  "' data-cantidad='" 
-          + data.cantidad +  " 'data-ubicacion_id='" 
-          + data.ubicacion_id + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='"
-           + data.id + "' data-Descripcion='" 
-           + data.Descripcion + "' data-cantidad='" + data.cantidad + "' data-ubicacion_id='" 
-           + data.ubicacion_id + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
-           + data.id + "' data-Descripcion='" + data.Descripcion +  "' data-cantidad='" 
-          + data.cantidad +  " 'data-ubicacion_id='" 
-          + data.ubicacion_id + "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
-          "</tr>");
+          "<td><button class='show-modal btn btn-info btn-sm' data-id='" +  data.id + 
+          "' data-Descripcion='" + data.Descripcion + 
+          "' data-cantidad='"   + data.cantidad +  
+          " 'data-ubicacion_id='" + data.ubicacion_id + 
+
+          "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='" + data.id +
+          "' data-Descripcion='" + data.Descripcion + 
+          "' data-cantidad='" + data.cantidad + 
+          "' data-ubicacion_id='" + data.ubicacion_id + 
+
+          "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id +
+           "' data-Descripcion='" + data.Descripcion + 
+            "' data-cantidad='" + data.cantidad +  
+            " 'data-ubicacion_id='" + data.ubicacion_id + 
+
+            "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+"</tr>");
                        
                     }
                 },
@@ -351,9 +355,9 @@ success: function(data) {
                             $('.errorUbicacion').text(data.errors.ubicacion_id);
                         }
                     } else {
-  toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
-      $('.api' + data.id).replaceWith(" "+
-      "<tr class='api" + data.id + "'>"+
+  toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Alerta Éxito', {timeOut: 5000});
+  $('.api' + data.id).replaceWith(" "+
+      "<tr class='api'>"+
       "<td>" + data.id + "</td>"+
       "<td>" + data.Descripcion + "</td>"+
       "<td>" + data.cantidad + "</td>"+
@@ -400,7 +404,7 @@ $('.modal-footer').on('click', '.delete', function(){
       'id': $('.id').text()
     },
     success: function(data){
-      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
+      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Alerta Éxito', {timeOut: 5000});
       $('.api' + $('.id').text()).remove();
     }
   });

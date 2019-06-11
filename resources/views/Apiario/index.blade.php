@@ -29,7 +29,7 @@
 
 
 <div class="table-responsive">
-			<table class="table table-striped table-bordered table-condensed table-hover" id="postTable" >
+			<table class="table table-striped table-bordered table-condensed table-hover" id="table" >
 				<thead>
 					<th>Código</th>
 					<th>Descripción</th>
@@ -42,7 +42,7 @@
         {{ csrf_field() }}
           
                @foreach ($api as $value)
-					
+          <tr class="api{{$value->id}}">
           <td>{{ $value->id }}</td>
 					<td>{{ $value->Descripcion}}</td>
 					<td>{{ $value->cantidad}}</td>

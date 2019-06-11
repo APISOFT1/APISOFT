@@ -49,10 +49,8 @@ public function addRecepcion(Request $request){
     $recepcionEst->Fecha = $request->Fecha;
   
     $recepcionEst->save();
-    return response()->json(['success' => 'Se ha creado una Recepción de Estañón correctamente']);
+    return response()->json($recepcionEst);
    
-  
-  
   }
 }
 
@@ -71,7 +69,7 @@ else {
 
     $recepcionEst =  RecepcionEstanon::find($request->id);
     $recepcionEst->Recepcion_id = $request->Recepcion_id;
-    $recepcionEst->Estanon = $request->Estanon;
+    $recepcionEst->Estanon_id = $request->Estanon_id;
     $recepcionEst->Fecha = $request->Fecha;
     $recepcionEst->save();
     return response()->json($recepcionEst);

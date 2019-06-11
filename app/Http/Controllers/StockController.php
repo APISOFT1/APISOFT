@@ -76,12 +76,9 @@ class StockController extends Controller
     public function deleteStock(request $request){
   
       $sto = Stock::find ($request->id);
-       $sto->nombre = $request->nombre;
-        $sto->cantidadDisponible = $request->cantidadDisponible;
-        $sto->precioUnitario = $request->precioUnitario;
-        $sto->estanon_recepcions_id = $request->estanon_recepcions_id;
-   
-        $sto->delete();
-        return response()->json();
+      $sto->delete();
+       
+     
+     
       }
 }
