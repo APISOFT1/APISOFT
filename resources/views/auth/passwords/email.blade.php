@@ -59,9 +59,17 @@
 					
 					<div class="container-login100-form-btn m-t-32">
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> jeremy
 <<<<<<< HEAD
 <<<<<<< .merge_file_a17524
+=======
+=======
+>>>>>>> Caro
+<<<<<<< HEAD
+>>>>>>> jeremy
 =======
 =======
 >>>>>>> Caro
@@ -71,9 +79,17 @@
 								Regresar
 						</a>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> jeremy
 <<<<<<< HEAD
 >>>>>>> .merge_file_a29588
+=======
+>>>>>>> Caro
+<<<<<<< HEAD
+>>>>>>> jeremy
+=======
 =======
 >>>>>>> Caro
 >>>>>>> jeremy

@@ -57,7 +57,7 @@ Route::group(['middleware' =>['auth']], function () {
     Route::resource('IngresoCera' , 'IngresoCeraController')->middleware('role:planta;administrador');
     Route::resource('IngresoInventario' , 'IngresoInventarioController')->middleware('role:planta;administrador');
     Route::get('Cera','CeraController@index')->middleware('role:planta;administrador');
-    Route::get('Producto' , 'ProductController@index')->middleware('role:planta;administrador');
+    Route::get('Producto' , 'ProductoController@index')->middleware('role:planta;administrador');
     Route::get('RecepEstanon' , 'RecepcionEstanonController@index')->middleware('role:planta;administrador');
     Route::get('Stock' , 'StockController@index')->middleware('role:planta;administrador');
 

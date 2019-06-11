@@ -107,7 +107,7 @@
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
-                    
+                    <li><a href="{{ url('/Producto/') }}">Gestionar Producto</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-cart-plus"></i>Servicios <span class="fa fa-chevron-down"></span></a>
@@ -453,11 +453,15 @@ function ub(){
     <script>
 $( document ).on('click','.create-modal',function() {
 <<<<<<< HEAD
+<<<<<<< HEAD
     var now = new Date();
 =======
 
     var now = new Date();
 
+>>>>>>> jeremy
+=======
+    var now = new Date();
 >>>>>>> jeremy
     var day = ("0" + now.getDate()).slice(-2);
     var month = ("0" + (now.getMonth() + 1)).slice(-2);

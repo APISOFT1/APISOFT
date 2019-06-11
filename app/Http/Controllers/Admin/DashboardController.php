@@ -22,6 +22,7 @@ use App\DetalleIngresoInventario;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Routing\Route;
+use App\producto;
 use DB;
 use Alert;
 \Carbon\Carbon::setLocale('es'); 
@@ -53,7 +54,7 @@ class DashboardController extends Controller
            'recep' =>\DB::table('recepcion_materia_primas')->count(),
            'api'=>\DB::table('apiarios')->count(),
            'cera'=>\DB::table('ceras')->count(),
-           'product'=>\DB::table('stocks')->count(),
+           'product'=>\DB::table('productos')->count(),
            
         ];
         $api =\DB::select("
@@ -102,9 +103,17 @@ $afi = Afiliado::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))
         }
         
 
-       
+        $chart_options = [
+            'chart_title' => 'Registro de Afiliados por Año',
+            'report_type' => 'group_by_date',
+            'model' => 'App\Afiliado',
+            'group_by_field' => 'created_at',
+            'group_by_period' => 'year',
+            'chart_type' => 'line',
+        ];
+        $chart5 = new LaravelChart($chart_options);
         
-        return view('dashboard', ['counts' => $counts] , compact('chart', 'chart2', 'chart3', 'chart4'));
+        return view('dashboard', ['counts' => $counts] , compact('chart', 'chart2', 'chart3', 'chart4', 'chart5'));
        
         
     }
@@ -119,7 +128,8 @@ $afi = Afiliado::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))
            'recep' =>\DB::table('recepcion_materia_primas')->count(),
            'api'=>\DB::table('apiarios')->count(),
            'cera'=>\DB::table('ceras')->count(),
-           'product'=>\DB::table('stocks')->count(),
+           'stocks'=>\DB::table('stocks')->count(),
+           'product'=>\DB::table('productos')->count(),
            'ingreso3'=>\DB::table('detalle_ingreso_inventario')->sum('precio'),
          
            
@@ -130,14 +140,14 @@ $afi = Afiliado::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))
 $chart_options = [
     'chart_title' => 'Productos por día',
     'report_type' => 'group_by_date',
-    'model' => 'App\Stock',
+    'model' => 'App\producto',
     'group_by_field' => 'created_at',
     'group_by_period' => 'day',
     'chart_type' => 'bar',
 ];
 $chart = new LaravelChart($chart_options);
 
-$stocks = Stock::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))
+$stocks = producto::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))
     				->get();
         $chart2 = Charts::database($stocks, 'line', 'highcharts')
 			      ->title("Registro Mensual de Productos ")
@@ -152,7 +162,7 @@ $stocks = Stock::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))
 $chart_options = [
     'chart_title' => 'Productos por año',
     'report_type' => 'group_by_date',
-    'model' => 'App\Stock',
+    'model' => 'App\producto',
     'group_by_field' => 'created_at',
     'group_by_period' => 'year',
     'chart_type' => 'line',
@@ -169,7 +179,7 @@ $chart3 = new LaravelChart($chart_options);
            'recep' =>\DB::table('recepcion_materia_primas')->count(),
            'api'=>\DB::table('apiarios')->count(),
            'cera'=>\DB::table('ceras')->count(),
-           'product'=>\DB::table('stocks')->count(),
+           'product'=>\DB::table('productos')->count(),
            'ingreso'=>\DB::table('detalle_ingreso')->sum('precio'),
          
            
@@ -221,7 +231,7 @@ $chart3 = new LaravelChart($chart_options);
             
            'afi' => \DB::table('afiliados')->count(),
            'recep' =>\DB::table('recepcion_materia_primas')->count(),
-           'product'=>\DB::table('stocks')->count(),
+           'product'=>\DB::table('productos')->count(),
           'ingreso'=>\DB::table('detalle_ingreso')->sum('precio'),
           'ingreso2'=>\DB::table('detalle_ingreso_cera')->sum('precio'),
           'ingreso3'=>\DB::table('detalle_ingreso_inventario')->sum('precio'),

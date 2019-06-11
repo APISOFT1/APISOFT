@@ -69,13 +69,9 @@
 {!! $chart2->renderHtml() !!}
             </div>
             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-              <h5 class="pl-2">Contact</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              <h5 class="pl-2"></h5>
+              <h1>{{ $chart5->options['chart_title'] }}</h1>
+                  {!! $chart5->renderHtml() !!}
             </div>
           </div>
                   
@@ -91,6 +87,7 @@
 {!! Charts::scripts() !!}
 {!! $chart3->script() !!}
 {!! $chart2->renderJs() !!}
+{!! $chart5->renderJs() !!}
 {{ Html::style('css5/chart.css') }}
 @endsection
 

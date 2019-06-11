@@ -106,6 +106,7 @@
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    <li><a href="{{ url('/Producto/') }}">Gestionar Producto</a></li>
                     
                     </ul>
                   </li>

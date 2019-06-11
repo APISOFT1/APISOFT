@@ -158,7 +158,12 @@
                 <li><a><i class="fa fa-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li>
-                        <a href="{{ url('Stok') }}">Gestionar Stock
+                        <a href="{{ url('Stock') }}">Gestionar Stock
+                            
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('Producto') }}">Gestionar Producto
                             
                         </a>
                     </li>
@@ -166,37 +171,9 @@
 
                     <li><a><i class="fa fa-cart-plus"></i> Servicios <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
+                    
                     <li>
-<<<<<<< HEAD
-                        <a href="{{ url('Stok') }}">Gestionar Stock
-=======
-<<<<<<< HEAD
-<<<<<<< .merge_file_a22668
                         <a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera
-=======
-                        <a href="{{ url('Stok') }}">Gestionar Stock
->>>>>>> .merge_file_a07124
-=======
-                        <a href="{{ url('Stok') }}">Gestionar Stock
->>>>>>> Caro
->>>>>>> jeremy
-                            
-                        </a>
-                    </li>
-                    <li>
-<<<<<<< HEAD
-                        <a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera
-=======
-<<<<<<< HEAD
-<<<<<<< .merge_file_a22668
-                        <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario
-=======
-                        <a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera
->>>>>>> .merge_file_a07124
-=======
-                        <a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera
->>>>>>> Caro
->>>>>>> jeremy
                             
                         </a>
                     </li>

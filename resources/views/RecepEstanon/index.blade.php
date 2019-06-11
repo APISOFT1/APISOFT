@@ -94,6 +94,7 @@
           <option value="{{ $recep->id }}">{{$recep->id}} - {{$recep->afiliado->Nombre}} {{$recep->afiliado->apellido1}} {{$recep->afiliado->apellido2}}</option>
          @endforeach
         </select>
+        <p class="errorRecepcion text-center alert alert-danger hidden"></p>
         <span class="fa fa-file-text form-control-feedback right" aria-hidden="true"></span>
             </div>
 </div>
@@ -105,6 +106,7 @@
           <option value="{{ $est->id }}">{{$est->id}}-{{$est->Descripcion}}</option>
          @endforeach
         </select>
+        <p class="errorEstanon text-center alert alert-danger hidden"></p>
         <span class="fa fa-database form-control-feedback right" aria-hidden="true"></span>
             </div>
             </div>
@@ -187,6 +189,7 @@
           <option value="{{ $recep->id }}">{{$recep->id}} - {{$recep->afiliado->Nombre}} {{$recep->afiliado->apellido1}} {{$recep->afiliado->apellido2}}</option>
          @endforeach
         </select>
+        <p class="errorRecepcion text-center alert alert-danger hidden"></p>
         <span class="fa fa-file-text form-control-feedback right" aria-hidden="true"></span>
             </div>
 </div>
@@ -199,6 +202,7 @@
           <option value="{{ $est->id }}">{{$est->id}}-{{$est->Descripcion}}</option>
          @endforeach
         </select>
+        <p class="errorEstanon text-center alert alert-danger hidden"></p>
         <span class="fa fa-database form-control-feedback right" aria-hidden="true"></span>
             </div>
             </div>

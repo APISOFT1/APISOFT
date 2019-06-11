@@ -15,7 +15,7 @@ class ProductoController extends Controller
         $product = Producto::where('nombre','like','%'.$search.'%')
         ->orderby('nombre','desc')
         ->paginate(7);
-        return view('Producto.index');
+        return view('Producto.index',compact('product'));
     }
        
     }

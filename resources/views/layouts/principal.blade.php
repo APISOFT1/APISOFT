@@ -110,6 +110,7 @@
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    <li><a href="{{ url('/Producto/') }}">Gestionar Producto</a></li>
                     
                     </ul>
                   </li>
@@ -251,11 +252,7 @@
          if ((data.errors)) {
                         setTimeout(function () {
                             $('#create').modal('show');
-<<<<<<< HEAD
                             toastr.error('¡COMPLETE EL CAMPO!', 'Error de Validación', {timeOut: 5000});
-=======
-                            toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
->>>>>>> jeremy
                         }, 500);
                         if (data.errors.id) {
                             $('.errorId').removeClass('hidden');
@@ -711,7 +708,11 @@ $( document ).on('click','.create-modal',function() {
     $("#fecha,#Fecha_Ingreso").val(today);
 });
 <<<<<<< HEAD
+<<<<<<< HEAD
 </script>
+=======
+</script>
+>>>>>>> jeremy
 =======
 </script>
 >>>>>>> jeremy

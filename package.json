@@ -24,10 +24,18 @@
         "push.js": "^1.0.9",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "smartwizard": "^4.3.1",
         "toastr": "^2.1.4"
 =======
 =======
+>>>>>>> jeremy
+=======
+=======
+        "smartwizard": "^4.3.1",
+        "toastr": "^2.1.4"
+=======
+>>>>>>> Caro
 >>>>>>> jeremy
 <<<<<<< .merge_file_a25732
         "smartwizard": "^4.3.1"
@@ -36,11 +44,20 @@
         "toastr": "^2.1.4"
 >>>>>>> .merge_file_a02744
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> jeremy
 =======
 =======
+>>>>>>> jeremy
+=======
         "smartwizard": "^4.3.1",
         "toastr": "^2.1.4"
+>>>>>>> Caro
+<<<<<<< HEAD
+>>>>>>> jeremy
+=======
+=======
+>>>>>>> jeremy
 >>>>>>> Caro
 >>>>>>> jeremy
     }

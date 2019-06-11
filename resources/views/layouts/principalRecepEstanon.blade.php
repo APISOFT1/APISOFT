@@ -104,7 +104,7 @@
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
-                    
+                    <li><a href="{{ url('/Producto/') }}">Gestionar Producto</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-cart-plus"></i>Servicios <span class="fa fa-chevron-down"></span></a>
@@ -275,15 +275,9 @@ $('.modal-descripcion').text('Editar Recepción');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
 $('#ids').val($(this).data('id'));
-<<<<<<< HEAD
 $('#desc').val($(this).data('recepcion_id'));
 $('#dad').val($(this).data('estanon_id'));
 $('#cion').val($(this).data('fecha'));
-=======
-$('#cri').val($(this).data('recepcion_id'));
-$('#can').val($(this).data('estanon_id'));
-$('#ub').val($(this).data('fecha'));
->>>>>>> jeremy
 $('#myModal').modal('show');
 });
 $('.modal-footer').on('click', '.edit', function() {
@@ -293,15 +287,10 @@ $('.modal-footer').on('click', '.edit', function() {
     data: {
 '_token': $('input[name=_token]').val(),
 'id': $("#ids").val(),
-<<<<<<< HEAD
 'Recepcion_id': $('#desc').val(),
 'Estanon_id': $('#dad').val(),
 'Fecha': $('#cion').val(),
-=======
-'Recepcion_id': $('#cri').val(),
-'Estanon_id': $('#can').val(),
-'Fecha': $('#ub').val(),
->>>>>>> jeremy
+
     },
 success: function(data) {
   $('.errorRecepcion').addClass('hidden');
@@ -352,10 +341,7 @@ success: function(data) {
 },
   });
 });
-<<<<<<< HEAD
 
-=======
->>>>>>> jeremy
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Eliminar");
@@ -394,10 +380,7 @@ $('.modal-footer').on('click', '.delete', function(){
   $('#ub2').text($(this).data('fecha'));
   $('.modal-title').text('Detalle Recepción Estañón');
   });
-<<<<<<< HEAD
 
-=======
->>>>>>> jeremy
   
 </script>
      <script>
