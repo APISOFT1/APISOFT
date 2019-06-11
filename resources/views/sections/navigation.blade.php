@@ -1,4 +1,3 @@
-
 <body class="nav-md">
 <div class="container body">
     <div class="main_container">
@@ -169,6 +168,7 @@
                     <ul class="nav child_menu">
                     <li>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< .merge_file_a22668
                         <a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera
 =======
@@ -177,16 +177,23 @@
 =======
                         <a href="{{ url('Stok') }}">Gestionar Stock
 >>>>>>> Caro
+=======
+                        <a href="{{ url('Stok') }}">Gestionar Stock
+>>>>>>> Caro
                             
                         </a>
                     </li>
                     <li>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< .merge_file_a22668
                         <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario
 =======
                         <a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera
 >>>>>>> .merge_file_a07124
+=======
+                        <a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera
+>>>>>>> Caro
 =======
                         <a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera
 >>>>>>> Caro

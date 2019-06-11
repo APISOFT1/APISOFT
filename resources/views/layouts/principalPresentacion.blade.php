@@ -102,7 +102,7 @@
 
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stock</a></li>
                     
                     </ul>
                   </li>
@@ -193,78 +193,78 @@
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
-    $('.modal-descripcion').text('Crear producto');
+    $('.modal-descripcion').text('Crear presentación');
   });
   $("#add").click(function() {
     $.ajax({
       type: 'POST',
-      url: 'addProduct',
+      url: 'addPresentacion',
       
       data: {
         '_token': $('input[name=_token]').val(),
-        'nombre': $('input[name=nombre]').val()
+        'descripcion': $('input[name=descripcion]').val()
       },
       success: function(data){
         if ((data.errors)) {
           $('.error').removeClass('hidden');
-          $('.error').text(data.errors.nombre);
+          $('.error').text(data.errors.descripcion);
 } 
         } else {
           $('.error').remove();
           $('#table').append("<tr class='api" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
-          "<td>" + data.nombre + "</td>"+
+          "<td>" + data.descripción + "</td>"+
   
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + 
           "' data-nombre='"  + data.nombre + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='"
-           + data.id + "' data-nombre='" 
-           + data.nombre +  "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
-           + data.id + "' data-nombre='" + data.nombre +  "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
+           + data.id + "' data-descripcion='" 
+           + data.descripcion +  "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
+           + data.id + "' data-descripcion='" + data.descripcion +  "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         }
       },
     });
-    $('#nombre').val('');
+    $('#descripcion').val('');
 
   });
  
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
-$('#footer_action_button').text(" Editar Producto");
+$('#footer_action_button').text(" Editar Presentación");
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-$('.modal-descripcion').text('Editar Producto');
+$('.modal-descripcion').text('Editar Presentación');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
-$('#idPro').val($(this).data('id'));
-$('#nPro').val($(this).data('nombre'));
+$('#idDes').val($(this).data('id'));
+$('#nDes').val($(this).data('descripcion'));
 $('#myModal').modal('show');
 });
 
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
-    url: 'editProduct',
+    url: 'editPresentacion',
     data: {
 '_token': $('input[name=_token]').val(),
-'id': $("#idPro").val(),
-'nombre': $('#nPro').val(),
+'id': $("#idDes").val(),
+'descripcion': $('#nDes').val(),
 
     },
 success: function(data) {
       $('.api' + data.id).replaceWith(" "+
       "<tr class='api" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
-      "<td>" + data.nombre + "</td>"+
+      "<td>" + data.descripción + "</td>"+
       
- "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + "' data-nombre='" 
- + data.nombre + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
-          + data.id + "' data-nombre='" + data.nombre + 
+ "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + "' data-descripcion='" 
+ + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
+          + data.id + "' data-descripcion='" + data.descripcion + 
         "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
-          + data.id + "' data-nombre='" + data.nombre + 
+          + data.id + "' data-descripcion='" + data.descripcion + 
        "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
       "</tr>");
     }
@@ -275,8 +275,8 @@ success: function(data) {
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
-  $('#codPro').text($(this).data('id'));
-  $('#NomPro').text($(this).data('nombre'));
+  $('#codPre').text($(this).data('id'));
+  $('#PrePre').text($(this).data('presentacion'));
   $('.modal-title').text('Show Post');
   });
 </script>

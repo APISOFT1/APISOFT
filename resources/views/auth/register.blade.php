@@ -30,7 +30,7 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
+@include('flash-message')
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg'); {{ __('Register') }} ">
 			<div class="wrap-login100 p-t-30 p-b-50">
@@ -38,7 +38,7 @@
 					Registro
 				</span>
 				<form class="login100-form validate-form p-b-33 p-t-5"    method="POST" action="{{ route('register') }}" >
-  					@csrf
+  				
                       
 					  @if(session()->has('message'))
             <div class="alert alert-success">
@@ -102,7 +102,7 @@
 		</div>
 	</div>
 	
-
+    @include('flash-message')
 	<div id="dropDownSelect1"></div>
 	
 <!--===============================================================================================-->

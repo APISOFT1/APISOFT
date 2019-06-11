@@ -20,13 +20,14 @@ public function __construct()
 /*INDEEEEEEEEEEEEX*/
 public function index(Request $request)
 {
+ 
         if ($request)
     {
-        $query=trim($request->get('searchText'));
-        $genero=DB::table('generos')->where('descripcion','LIKE','%'.$query.'%')
-        ->orderby('id','desc')
+        $search = \Request::get('search');
+        $genero = Genero::where('descripcion','like','%'.$search.'%')
+        ->orderby('descripcion','desc')
         ->paginate(7);
-        return view('Genero.index',["genero"=>$genero,"searchText"=>$query]);
+        return view('Genero.index');
     }
 }
 

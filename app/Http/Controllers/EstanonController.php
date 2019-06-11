@@ -30,8 +30,8 @@ public function index(Request $request)
 ////////////////////////////////////////////////////////NUEVO
 public function addEstanon(Request $request){
     $rules = array(
-      'Descripcion' => 'required',
-      'Peso' => 'required'
+      'Descripcion' => 'required|min:3|max:32|regex:/^[a-z ,.\'-]+$/i',
+      'Peso' => 'required|numeric|'
     );
   $validator = Validator::make ( Input::all(), $rules);
   if ($validator->fails())
@@ -46,8 +46,8 @@ public function addEstanon(Request $request){
 }
  public function editEstanon(request $request){
   $rules = array(
-    'Descripcion' => 'required',
-    'Peso' => 'required'
+    'Descripcion' => 'required|min:3|max:32|regex:/^[a-z ,.\'-]+$/i',
+    'Peso' => 'required|numeric|'
   );
 $validator = Validator::make ( Input::all(), $rules);
 if ($validator->fails())

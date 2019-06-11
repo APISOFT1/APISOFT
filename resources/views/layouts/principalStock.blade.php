@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>APISOFT</title>
+    @toastr_css
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -163,6 +164,9 @@
   
     <!-- jQuery -->
      
+    @jquery
+    @toastr_js
+    @toastr_render
 
     {!!Html::script('/js2/jquery.min.js')!!}  
 
@@ -228,17 +232,35 @@
         
       },
       success: function(data){
-        if ((data.errors)) {
-          html = '<div class="alert alert-danger">';
-          $('.error').removeClass('hidden');
-          $('.error').text(data.errors.nombre);
-          $('.error').text(data.errors.cantidadDisponible);
-          $('.error').text(data.errors.precioUnitario);
-          $('.error').text(data.errors.estanon_recepcions_id);
- 
+       
+        $('.errorNombre').addClass('hidden');
+         $('.errorCantidadDisponible').addClass('hidden');
+         $('.errorPrecioUnitario').addClass('hidden');
+         $('.errorEstanon').addClass('hidden');
+         if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#create').modal('show');
+                            toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.nombre) {
+                            $('.errorNombre').removeClass('hidden');
+                            $('.errorNombre').text(data.errors.nombre);
+                        }
+                        if (data.errors.cantidadDisponible) {
+                            $('.errorCantidadDisponible').removeClass('hidden');
+                            $('.errorCantidadDisponible').text(data.errors.cantidadDisponible);
+                        }
+                        if (data.errors.precioUnitario) {
+                            $('.errorPrecioUnitario').removeClass('hidden');
+                            $('.errorPrecioUnitario').text(data.errors.precioUnitario);
+                        }
+                      
+                        if (data.errors.estanon_recepcions_id) {
+                            $('.errorEstanon').removeClass('hidden');
+                            $('.errorEstanon').text(data.errors.estanon_recepcions_id);
+                        }
         } else {
-          html = '<div class="alert alert-success alert-dismissible">'  + data.success + '</div>';
-          $('.error').remove();
+          toastr.success('SE HA CREADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
           $('#table').append("<tr class='sto" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.nombre + "</td>"+
@@ -278,7 +300,7 @@
           + data.estanon_recepcions_id +  "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         }
-        $('#form_result').html(html);
+       
       },
     });
     $('#nombre').val('');
@@ -318,6 +340,35 @@ $('.modal-footer').on('click', '.edit', function() {
 'estanon_recepcions_id': $('#lol5').val(),
     },
 success: function(data) {
+  
+  $('.errorNombre').addClass('hidden');
+         $('.errorCantidadDisponible').addClass('hidden');
+         $('.errorPrecioUnitario').addClass('hidden');
+         $('.errorEstanon').addClass('hidden');
+         if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#myModal').modal('show');
+                            toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.nombre) {
+                            $('.errorNombre').removeClass('hidden');
+                            $('.errorNombre').text(data.errors.nombre);
+                        }
+                        if (data.errors.cantidadDisponible) {
+                            $('.errorCantidadDisponible').removeClass('hidden');
+                            $('.errorCantidadDisponible').text(data.errors.cantidadDisponible);
+                        }
+                        if (data.errors.precioUnitario) {
+                            $('.errorPrecioUnitario').removeClass('hidden');
+                            $('.errorPrecioUnitario').text(data.errors.precioUnitario);
+                        }
+                        
+                        if (data.errors.estanon_recepcions_id) {
+                            $('.errorEstanon').removeClass('hidden');
+                            $('.errorEstanon').text(data.errors.estanon_recepcions_id);
+                        }
+        } else {
+          toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
       $('.sto' + data.id).replaceWith(" "+
       "<tr class='api" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
@@ -345,6 +396,35 @@ success: function(data) {
       "<td>" + data.estanon_recepcions_id + "</td>"+
            "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
       "</tr>");
+    }
+},
+  });
+});
+$(document).on('click', '.delete-modal', function() {
+$('#footer_action_button').text(" Eliminar");
+$('#footer_action_button').removeClass('glyphicon-check');
+$('#footer_action_button').addClass('glyphicon-trash');
+$('.actionBtn').removeClass('btn-success');
+$('.actionBtn').addClass('btn-danger');
+$('.actionBtn').addClass('delete');
+$('.modal-descripcion').text('Eliminar Producto');
+$('.id').text($(this).data('id'));
+$('.deleteContent').show();
+$('.form-horizontal').hide();
+$('.nombre').html($(this).data('nombre'));
+$('#myModal').modal('show');
+});
+$('.modal-footer').on('click', '.delete', function(){
+  $.ajax({
+    type: 'POST',
+    url: 'deleteStock',
+    data: {
+      '_token': $('input[name=_token]').val(),
+      'id': $('.id').text()
+    },
+    success: function(data){
+      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Alerta Éxito', {timeOut: 5000});
+      $('.sto' + $('.id').text()).remove();
     }
   });
 });

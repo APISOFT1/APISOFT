@@ -14,14 +14,17 @@ class CeraController extends Controller
     public function index(Request $request)
     {
         if($request){
-            $query=trim($request->get('searchText'));  //valida si la peticion trae el campo de busqueda 
-        $cera = Cera::with('RecepcionMateriaPrima')
-            ->where('Descripcion','LIKE','%'.$query.'%')
+         
+            $search = \Request::get('search');
+            $cera = Cera::with('RecepcionMateriaPrima');
+            $cera = Cera::where('Descripcion','like','%'.$search.'%')
             ->orderby('id','desc')
             ->paginate(7);
            $recepciones = RecepcionMateriaPrima::all();
-           
-        return view('Cera.index', compact('cera', 'recepciones'), ['cera'=>$cera,"searchText"=>$query]);
+        return view('Cera.index', compact('cera', 'recepciones'));
+       
+
+       
         }
         
     }

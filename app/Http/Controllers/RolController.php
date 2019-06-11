@@ -26,11 +26,15 @@ public function __construct()
 //INDEEEEEEEEEEEEX/
 public function index(Request $request)
 {
-    if($request){
-        $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-  $rol = Rol::paginate(10);
-  return view('Rol.index',compact('rol'), ['rol'=>$rol,"searchText"=>$query]);        
-}
+  if ($request)
+    {
+        $search = \Request::get('search');
+        $rol = Rol::where('descripcion','like','%'.$search.'%')
+        ->orderby('descripcion','desc')
+        ->paginate(7);
+        return view('Rol.index',compact('rol'));
+    }
+  
 }
 
 ////////////////////////////////////////////////////////NUEVO
