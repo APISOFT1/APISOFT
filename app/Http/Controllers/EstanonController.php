@@ -22,6 +22,9 @@ public function index(Request $request)
  if($request){
     $search = \Request::get('search');
     $estanon = Estanon::where('Descripcion','like','%'.$search.'%')
+                      ->orWhere('id','LIKE','%'.$search.'%')
+                      ->orWhere('Peso','LIKE','%'.$search.'%')
+
         ->orderBy('Descripcion')
         ->paginate(10);
   return view('Estanon.index',compact('estanon'));   

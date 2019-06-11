@@ -24,6 +24,9 @@ class StockController extends Controller
       $search = \Request::get('search');
       $sto = Stock::with('Producto','Presentacion','RecepcionEstanon');
       $sto = Stock::where('producto_id','like','%'.$search.'%')
+                        ->orWhere('cantidadDisponible','LIKE','%'.$search.'%')
+                  ->orWhere('precioUnitario','LIKE','%'.$search.'%')
+
       ->orderby('producto_id','desc')
       ->paginate(7);
       $recepciones = RecepcionEstanon::all();

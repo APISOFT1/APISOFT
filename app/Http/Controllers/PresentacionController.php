@@ -13,9 +13,10 @@ class PresentacionController extends Controller
     {
         $search = \Request::get('search');
         $pre = Presentacion::where('descripcion','like','%'.$search.'%')
+                              ->orWhere('id','LIKE','%'.$search.'%')
         ->orderby('descripcion','desc')
         ->paginate(7);
-        return view('Presentacion.index');
+        return view('Presentacion.index',compact('pre'));
     }
        
     }

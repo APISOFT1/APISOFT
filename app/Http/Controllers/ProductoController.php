@@ -13,6 +13,7 @@ class ProductoController extends Controller
     {
         $search = \Request::get('search');
         $product = Producto::where('nombre','like','%'.$search.'%')
+                              ->orWhere('id','LIKE','%'.$search.'%')
         ->orderby('nombre','desc')
         ->paginate(7);
         return view('Producto.index');

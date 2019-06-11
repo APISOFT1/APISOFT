@@ -20,7 +20,11 @@ class RecepcionEstanonController extends Controller
         $search = \Request::get('search');
         $recepcionEst = RecepcionEstanon::with('RecepcionMateriaPrima', 'Estanon');
         $recepcionEst = RecepcionEstanon::where('Estanon_id','like','%'.$search.'%')
-        ->orderby('fecha','desc')
+                              ->orWhere('id','LIKE','%'.$search.'%')
+                              ->orWhere('Fecha','LIKE','%'.$search.'%')
+                              ->orWhere('Recepcion_id','LIKE','%'.$search.'%')
+
+        ->orderby('Fecha','desc')
         ->paginate(7);
         $recepciones = RecepcionMateriaPrima::all();
         return view('RecepEstanon.index', compact('cera', 'recepciones', 'estanon'));

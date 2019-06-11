@@ -27,7 +27,7 @@ public function index(Request $request)
         $genero = Genero::where('descripcion','like','%'.$search.'%')
         ->orderby('descripcion','desc')
         ->paginate(7);
-        return view('Genero.index');
+        return view('Genero.index',compact('genero'));
     }
 }
 
