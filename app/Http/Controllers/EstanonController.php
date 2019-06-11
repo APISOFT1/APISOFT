@@ -41,7 +41,7 @@ public function addEstanon(Request $request){
     $estanon->Descripcion = $request->Descripcion;
     $estanon->Peso = $request->Peso;
     $estanon->save();
-    return response()->json(['success' => 'Se ha creado un Estañón correctamente']);
+    return response()->json($estanon);
   }
 }
  public function editEstanon(request $request){
@@ -53,7 +53,8 @@ $validator = Validator::make ( Input::all(), $rules);
 if ($validator->fails())
 return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
 else {
-   $estanon = new Estanon;
+  $estanon = Estanon::all();
+  $estanon = Estanon::find($request->id);
     $estanon->Descripcion = $request->Descripcion;
     $estanon->Peso = $request->Peso;
 $estanon->save();

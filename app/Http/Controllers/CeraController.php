@@ -84,8 +84,8 @@ if ($validator->fails())
 return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
 else {
   
-
-   $cera =  Cera::find($request->id);
+    $cera =  Cera::all();
+    $cera =  Cera::find($request->id);
     $cera->Descripcion = $request->Descripcion;
     $cera->Recepcion_id = $request->Recepcion_id;
     $cera->PesoBruto = $request->PesoBruto;

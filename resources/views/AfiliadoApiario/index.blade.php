@@ -41,10 +41,10 @@ AFILIADO CON SUS APIARIO CREADO CORRECTAMENTE
         </th>
       </tr>
       {{ csrf_field() }}
-      <?php  $no=1; ?>
+     
       @foreach ($afiliadoapiario as $value)
-        <tr class="afiliadoapiario{{$value->id}}">
-          <td>{{ $no++ }}</td>
+      <tr class="afiliadoapiario{$value->id}}">
+          <td>{{ $value->id }}</td>
 		  <td>{{$value-> afiliado->id}} - {{$value-> afiliado-> Nombre}} {{$value->afiliado->apellido1}} {{$value->afiliado->apellido2}}</td>
           <td>{{$value-> apiario->id}} - {{$value-> apiario-> Descripcion }}</td>
           

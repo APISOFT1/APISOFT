@@ -252,11 +252,11 @@
           toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
           $('#table').append("<tr class='cera" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
-          "<td>" + data.Descripcion + "</td>"+
           "<td>" + data.Recepcion_id + "</td>"+
           "<td>" + data.PesoBruto + "</td>"+
           "<td>" + data.PesoNeto + "</td>"+
           "<td>" + data.Fecha + "</td>"+
+          "<td>" + data.Descripcion + "</td>"+
   
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
           data.id + "' data-Descripcion='"
@@ -353,14 +353,13 @@ success: function(data) {
         } else {
           toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
       $('.cera' + data.id).replaceWith(" "+
-      "<tr class='cera'>"+
+      "<tr class='cera "+ data.id +"'>"+
           "<td>" + data.id + "</td>"+
-          "<td>" + data.Descripcion + "</td>"+
           "<td>" + data.Recepcion_id + "</td>"+
           "<td>" + data.PesoBruto + "</td>"+
           "<td>" + data.PesoNeto + "</td>"+
           "<td>" + data.Fecha + "</td>"+
-  
+          "<td>" + data.Descripcion + "</td>"+
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
           data.id + "' data-Descripcion='"
           + data.Descripcion +  "' data-Recepcion_id='" 
@@ -453,7 +452,13 @@ function ub(){
 </script>
     <script>
 $( document ).on('click','.create-modal',function() {
+<<<<<<< HEAD
     var now = new Date();
+=======
+
+    var now = new Date();
+
+>>>>>>> jeremy
     var day = ("0" + now.getDate()).slice(-2);
     var month = ("0" + (now.getMonth() + 1)).slice(-2);
     h=now.getHours();

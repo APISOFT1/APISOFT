@@ -43,7 +43,7 @@
             </div>
           @endif
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input id="email"  type="text"  class="input100{{ $errors->has('email') ? ' is-invalid' : '' }}" type="email" name="email" placeholder="Correo Electrónico" required="" value="{{ old('email') }}" required autofocus>
+						<input id="email"  type="text"  class="input100{{ $errors->has('email') ? ' is-invalid' : '' }}" type="email" name="email" placeholder="Correo Electrónico" required="" value="{{ old('email') }}" required >
 						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
 						  @if ($errors->has('email'))
                 		<span class="invalid-feedback" role="alert">
@@ -62,10 +62,6 @@
 								@endif
 					</div>
 					<div class="container-login100-form-btn m-t-32">
-							<a href="{{ url()->previous() }}" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
-							<i class="fa fa-long-arrow-left m-l-5"></i>
-								Regresar
-						</a>
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
 							<button type="submit" value="Ingresar" {{ __('Ingresar') }} class="login100-form-btn">

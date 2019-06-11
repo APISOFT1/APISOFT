@@ -190,7 +190,11 @@
               <div class="form-group row add">
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
               <input type="text" class="form-control"  id="numero_muestras" name="numero_muestras"
+<<<<<<< HEAD
           placeholder="Numero Muestra" disabled required>
+=======
+          placeholder="Numero Muestra"disabled required>
+>>>>>>> jeremy
               <p class="No ingreso el Codigo"></p>
               <span class="fa fa-sort-numeric-asc form-control-feedback right" aria-hidden="true"></span>
               </div>

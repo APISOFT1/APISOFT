@@ -27,7 +27,7 @@
 
 
 <div class="table-responsive">
-			<table class="table table-striped table-bordered table-condensed table-hover">
+			<table class="table table-striped table-bordered table-condensed table-hover" id="table">
 				<thead>
 					<th>Código</th>
 					<th width="150px" >Recepción</th>
@@ -38,10 +38,10 @@
             <i class="glyphicon glyphicon-plus"></i></th>
 				</thead>
         {{ csrf_field() }}
-           <?php  $no=1; ?>
+      
                @foreach ($recepcionEst as $value)
 					<tr class="recepcionEst{$value->id}}">
-          <td>{{ $no++ }}</td>
+          <td>{{ $value->id }}</td>
 					<td>{{ $value->RecepcionMateriaPrima->id}} - {{ $value->RecepcionMateriaPrima->afiliado->Nombre}} {{ $value->RecepcionMateriaPrima->afiliado->apellido1}} {{ $value->RecepcionMateriaPrima->afiliado->apellido2}}</td>
             <td>{{ $value->Estanon->id}} - {{ $value->Estanon->Descripcion}}</td>
             <td>{{ $value->Fecha}}</td>

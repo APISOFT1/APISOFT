@@ -27,7 +27,7 @@
 
 
 <div class="table-responsive">
-			<table class="table table-striped table-bordered table-condensed table-hover">
+			<table class="table table-striped table-bordered table-condensed table-hover" id="table">
 				<thead>
 					<th>Código</th>
 					<th>Descripción</th>
@@ -35,11 +35,10 @@
 					<th> <a href="#"
 					class="create-modal btn btn-success btn-sm">
             <i class="glyphicon glyphicon-plus"></i>
-			</th>
-
 				</thead>
+        {{ csrf_field() }}
                @foreach ($estanon as $value)
-				<tr>
+        <tr class="estanon{{$value->id}}">
 					<td>{{ $value->id}}</td>
 					<td>{{ $value->Descripcion}}</td>
 					<td>{{ $value->Peso}}</td>
@@ -71,9 +70,8 @@
 				@endforeach
 			</table>
 		</div>
-		{{$estanon->render()}}
+		{{$estanon->links()}}
 	</div>
-</div>
 {{-- Modal Form Create Post --}}
 <div id="create" class="modal fade" role="dialog">
   <div class="modal-dialog">

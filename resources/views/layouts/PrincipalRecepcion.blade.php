@@ -280,8 +280,34 @@ var div_respuesta="#respuesta";
           "<td>" + data.user_id + "</td>"+
           "<td>" + data.tipoEntrega_id + "</td>"+
           "<td>" + data.observacion + "</td>"+
-          "<td><button class='show-modalRol btn btn-info btn-sm' data-id='" + 
-          data.id + "' data-descripcion='" + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modalRol btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalRol btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+          "<td><button class='show-modal btn btn-info btn-sm' data-id='" 
+          + data.id +
+         "' data-fecha='" + data.fecha +
+         "'data-pesoBruto='" + data.pesoBruto +
+         "'data-PesoNeto='" + data.pesoNeto + 
+         "'data-numero_muestras='" + data.numero_muestras + 
+         "'data-afiliado_id='" + data.afiliado_id +
+          "'data-user_id='" + data.user_id + 
+          "'data-tipoEntrega_id='" + data.tipoEntrega_id + 
+          "'data-observacion='" + data.observacion + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='" 
+          + data.id +
+         "' data-fecha='" + data.fecha +
+         "'data-pesoBruto='" + data.pesoBruto +
+         "'data-PesoNeto='" + data.pesoNeto + 
+         "'data-numero_muestras='" + data.numero_muestras + 
+         "'data-afiliado_id='" + data.afiliado_id +
+          "'data-user_id='" + data.user_id + 
+          "'data-tipoEntrega_id='" + data.tipoEntrega_id + 
+          "'data-observacion='" + data.observacion + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm'  data-id='" 
+          + data.id +
+         "' data-fecha='" + data.fecha +
+         "'data-pesoBruto='" + data.pesoBruto +
+         "'data-PesoNeto='" + data.pesoNeto + 
+         "'data-numero_muestras='" + data.numero_muestras + 
+         "'data-afiliado_id='" + data.afiliado_id +
+          "'data-user_id='" + data.user_id + 
+          "'data-tipoEntrega_id='" + data.tipoEntrega_id + 
+          "'data-observacion='" + data.observacion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         
           $('#fiii').append("<tr class='recepciones" + data.id + "'>"+
@@ -451,8 +477,13 @@ success: function(data) {
 
         } else {
           toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
+<<<<<<< HEAD
       $('.rol' + data.id).replaceWith(" "+
       "<tr class='rol" + data.id + "'>"+
+=======
+      $('.recepcion' + data.id).replaceWith(" "+
+      "<tr class='recepcion" + data.id + "'>"+
+>>>>>>> jeremy
       "<td>" + data.id + "</td>"+
       "<td>" + data.fecha + "</td>"+
       "<td>" + data.pesoBruto + "</td>"+

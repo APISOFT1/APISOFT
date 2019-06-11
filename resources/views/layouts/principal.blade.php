@@ -251,7 +251,11 @@
          if ((data.errors)) {
                         setTimeout(function () {
                             $('#create').modal('show');
+<<<<<<< HEAD
                             toastr.error('¡COMPLETE EL CAMPO!', 'Error de Validación', {timeOut: 5000});
+=======
+                            toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
+>>>>>>> jeremy
                         }, 500);
                         if (data.errors.id) {
                             $('.errorId').removeClass('hidden');
@@ -574,20 +578,19 @@ $('.modal-footer').on('click', '.delete', function(){
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
-  
-$('#dis').val($(this).data('id'));
-$('#mbr').val($(this).data('nombre'));
-$('#ell').val($(this).data('apellido1'));
-$('#ido').val($(this).data('apellido2'));
-$('#eno').val($(this).data('telefono'));
-$('#ail').val($(this).data('email'));
-$('#rec').val($(this).data('direccion'));
-$('#eso').val($(this).data('fecha_ingreso'));
-$('#um').val($(this).data('num_cuenta'));
-$('#ero').val($(this).data('genero_id'));
-$('#vil').val($(this).data('estado_civil_id'));
-$('#ado').val($(this).data('estado_id'));
-  $('.modal-show').text('Datos');
+$('#dis').text($(this).data('id'));
+$('#mbr').text($(this).data('nombre'));
+$('#ell').text($(this).data('apellido1'));
+$('#ido').text($(this).data('apellido2'));
+$('#eno').text($(this).data('telefono'));
+$('#ail').text($(this).data('email'));
+$('#rec').text($(this).data('direccion'));
+$('#eso').text($(this).data('fecha_ingreso'));
+$('#um').text($(this).data('num_cuenta'));
+$('#ero').text($(this).data('genero_id'));
+$('#vil').text($(this).data('estado_civil_id'));
+$('#ado').text($(this).data('estado_id'));
+  $('.modal-title').text('Datos');
   });
  
 </script>
@@ -707,4 +710,8 @@ $( document ).on('click','.create-modal',function() {
     var today = now.getFullYear()+"-"+(month)+"-"+(day)+"-"+(h)+"-"+(m)+"-"+(s) ;
     $("#fecha,#Fecha_Ingreso").val(today);
 });
+<<<<<<< HEAD
 </script>
+=======
+</script>
+>>>>>>> jeremy

@@ -46,7 +46,7 @@
             </div>
           @endif
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input id="name"  type="text"  class="input100{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" placeholder="Nombre " required autofocus>
+						<input id="name"  type="text"  class="input100{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" placeholder="Nombre " required>
 						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
 						@if ($errors->has('name'))
                             <span class="invalid-feedback" role="alert">
@@ -56,7 +56,7 @@
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input id="email"  type="text"  class="input100{{ $errors->has('email') ? ' is-invalid' : '' }}" type="email" name="email" placeholder="Correo" required="" value="{{ old('email') }}" required autofocus>
+						<input id="email"  type="text"  class="input100{{ $errors->has('email') ? ' is-invalid' : '' }}" type="email" name="email" placeholder="Correo" required="" value="{{ old('email') }}" required >
 						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
 						  @if ($errors->has('email'))
                 		<span class="invalid-feedback" role="alert">
@@ -124,4 +124,7 @@
 
 </body>
 </html>
+<<<<<<< HEAD
 
+=======
+>>>>>>> jeremy

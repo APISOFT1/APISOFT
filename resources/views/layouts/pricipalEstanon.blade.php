@@ -306,8 +306,8 @@ success: function(data) {
                         
                     } else {
                         toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
-      $('.api' + data.id).replaceWith(" "+
-      "<tr class='api" + data.id + "'>"+
+      $('.estanon' + data.id).replaceWith(" "+
+      "<tr class='estanon" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
       "<td>" + data.Descripcion + "</td>"+
       "<td>" + data.Peso + "</td>"+
