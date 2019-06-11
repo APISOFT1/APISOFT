@@ -196,7 +196,8 @@
                 <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
            <input type="text" class="form-control has-feedback-left" id="cri" >
-           <p class="errorTitle text-center alert alert-danger hidden"></p>
+           
+           <p class="errorDescripcion text-center alert alert-danger hidden"></p>
               <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
               
                 </div>
@@ -205,7 +206,7 @@
                 <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
            <input type="text" class="form-control has-feedback-left" id="can" >
-           <p class="errorTitle text-center alert alert-danger hidden"></p>
+           <p class="errorCantidad text-center alert alert-danger hidden"></p>
               <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
              
                 </div>
@@ -219,6 +220,7 @@
           <option value="{{ $ubicacion->id }}">{{$ubicacion->Descripcion}}</option>
          @endforeach
         </select>
+        <p class="errorUbicacion text-center alert alert-danger hidden"></p>
 					  <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
 </div>
 </div>

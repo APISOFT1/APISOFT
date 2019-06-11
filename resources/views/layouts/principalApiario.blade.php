@@ -254,7 +254,7 @@
                     if ((data.errors)) {
                         setTimeout(function () {
                             $('#create').modal('show');
-                            toastr.error('ERRO DE VALIDACIÓN!', 'Error Alert', {timeOut: 5000});
+                            toastr.error('¡COMPLETE EL CAMPO!', 'Error de Validación', {timeOut: 5000});
                         }, 500);
                         if (data.errors.Descripcion) {
                             $('.errorDescripcion').removeClass('hidden');

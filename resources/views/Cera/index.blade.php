@@ -102,7 +102,7 @@
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
               <input type="number" class="form-control" id="discount" name="PesoBruto"
               placeholder="Peso Bruto" required>
-              <p class="No ingreso el Peso Bruto"></p>
+              <p class="errorPesoBruto text-center alert alert-danger hidden"></p>
               <span class="fa fa-plus form-control-feedback right" aria-hidden="true"></span>
               </div>
               </div>
@@ -129,13 +129,14 @@
      <option value="{{$recep->id}}">{{$recep->id}} - {{$recep->afiliado->Nombre}} {{$recep->afiliado->apellido1}} {{$recep->afiliado->apellido2}}</option>
      @endforeach
     </select>
+    <p class="errorRecepcion text-center alert alert-danger hidden"></p>
     <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
    </div>
  
   
    <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
    <textarea class="resizable_textarea form-control" class="form-control has-feedback-left" id="Descripcion" name="Descripcion" placeholder="Ingrese la Obersevación" required></textarea>
-            <p class="No Ingresó la Observación"></p>
+   <p class="errorDescripcion text-center alert alert-danger hidden"></p>
             <span class="fa fa-file-text form-control-feedback right" aria-hidden="true"></span>
                 </div> 
         </form>
@@ -221,7 +222,7 @@
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
               <input type="number" class="form-control" id="ub" name="PesoBruto"
               placeholder="Peso Bruto" required>
-              <p class="No ingreso el Peso Bruto"></p>
+              <p class="errorPesoBruto text-center alert alert-danger hidden"></p>
               <span class="fa fa-plus form-control-feedback right" aria-hidden="true"></span>
               </div>
               </div>
@@ -247,12 +248,13 @@
      <option value="{{$recep->id}}">{{$recep->id}} - {{$recep->afiliado->Nombre}} {{$recep->afiliado->apellido1}} {{$recep->afiliado->apellido2}}</option>
      @endforeach
     </select>
+    <p class="errorRecepcion text-center alert alert-danger hidden"></p>
     <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
    </div>
 
           <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
    <textarea class="resizable_textarea form-control" class="form-control has-feedback-left" id="cri" name="Descripcion" placeholder="Ingrese la Obersevación" required></textarea>
-            <p class="No Ingresó la Observación"></p>
+   <p class="errorDescripcion text-center alert alert-danger hidden"></p>
             <span class="fa fa-file-text form-control-feedback right" aria-hidden="true"></span>
                 </div> 
 
