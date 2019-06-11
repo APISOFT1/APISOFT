@@ -53,7 +53,7 @@
               <div class="profile_pic">
                 <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/b666f811889067.562541eff3013.png" class="img-circle profile_img">
               </div>
-              <div class="profile_info">
+            <div class="profile_info">
                 <span>Bienvenido</span>
                 <h2>{{ Auth::user()->name }}</h2>
               </div>
@@ -138,8 +138,6 @@
           <div class="container">
           
             <div class="row x_panel">
-
-
               @yield('contenido')
             </div>
           </div>
