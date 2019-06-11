@@ -62,30 +62,30 @@
       @foreach ($sto as $value)
         <tr class="sto{{$value->id}}">
        <td>{{ $value->id }}</td>
-          <td>{{ $value->producto_id }}-{{ $value->producto_id->Nombre}}</td>
+          <td>{{ $value->producto_id }}-{{ $value->producto->nombre}}</td>
           <td>{{ $value->precioUnitario }}</td>
-          <td>{{ $value->presentacion_id }}-{{ $value->presentacion_id->descripcion}}</td>
+          <td>{{ $value->presentacion_id }}-{{ $value->presentacion->Descripcion}}</td>
           <td>{{ $value->cantidadDisponible }}</td>
           <td>{{ $value->estanon_recepcions_id }}</td>
           <td>
             <a href="#" class="show-modal btn btn-info btn-sm" data-id="{{$value->id}}" 
-            data-producto_id="{{$value->producto_id}}-{{ $value->producto_id->Nombre }}"
+            data-producto_id="{{$value->producto_id}}-{{ $value->nombre }}"
             data-precioUnitario="{{$value->precioUnitario}}" 
-            data-presentacion_id="{{$value->presentacion_id}}-{{ $value->presentacion_id->descripcion}}"
+            data-presentacion_id="{{$value->presentacion_id}}-{{ $value->Descripcion}}"
             data-cantidadDisponible="{{$value->cantidadDisponible}}"
             data-estanon_recepcions_id="{{$value->estanon_recepcions_id}}"> <i class="fa fa-eye"></i>
             </a>
             <a href="#" class="edit-modal btn btn-warning btn-sm" data-id="{{$value->id}}" 
-             data-producto_id="{{$value->producto_id}}-{{ $value->producto_id->Nombre }}"
+             data-producto_id="{{$value->producto_id}}-{{ $value->nombre }}"
             data-precioUnitario="{{$value->precioUnitario}}" 
-            data-presentacion_id="{{$value->presentacion_id}}-{{ $value->presentacion_id->descripcion}}"
+            data-presentacion_id="{{$value->presentacion_id}}-{{ $value->Descripcion}}"
             data-cantidadDisponible="{{$value->cantidadDisponible}}" 
             data-estanon_recepcions_id="{{$value->estanon_recepcions_id}}">
 
               <i class="glyphicon glyphicon-pencil"></i>
             </a>
             <a href="#" class="delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" 
-            data-observacion="{{$value->producto_id}}-{{ $value->producto_id->Nombre }}">
+            data-observacion="{{$value->producto_id}}-{{ $value->nombre }}">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
           </td>
@@ -95,7 +95,6 @@
   </div>
   {{$sto->links()}}
 </div>
-
 {{-- Modal Form Create Post --}}
 <div id="create" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -103,74 +102,63 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-descripcion text-center"></h4>
-        @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
       </div>
       <div class="modal-body">
-    
+      <span id="form_result"></span>
         <form class="form-horizontal" role="form">
 
-             <div class="form-group row add">
-                <div class="col-md-9  form-group has-feedback">
-        <select name="producto_id" class="form-control has-feedback-left" id="producto_id">
-         <option value="">-- Seleccione producto --</option>
-         @foreach ($producto as $productos)
-          <option value="{{ $productos->id }}">{{$productos->nombre}}</option>
-         @endforeach
-        </select>
-        <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
-        </div>
-        </div>
+              <div class="form-group row add">
+              <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+              <select name="producto_id" class="form-control has-feedback-left" id="producto_id">
+              <option value="">-- Seleccione producto --</option>
+              @foreach ($producto as $productos)
+                <option value="{{ $productos->id }}">{{$productos->nombre}}</option>
+              @endforeach
+              </select>
+              </div>
+              </div>
 
-         <div class="form-group row add">
-        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-           <input type="text" class="form-control has-feedback-left" id="precioUnitario" name="precioUnitario" placeholder="Precio" required>
-           <p class="error text-center alert alert-danger hidden"></p>
-              <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                </div>
-                </div>
-
-         <div class="form-group row add">
-                <div class="col-md-9  form-group has-feedback">
-        <select name="presentacion_id" class="form-control has-feedback-left" id="presentacion_id">
-          <option value="">-- Seleccione presentación --</option>
-         @foreach ($presentacion as $pre)
-          <option value="{{ $pre->id }}">{{$pre->Descripcion}}</option>
-         @endforeach
-        </select>
-        <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
-        </div>
-        </div>
+      
                 <div class="form-group row add">
-        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-           <input type="text" class="form-control has-feedback-left" id="cantidadDisponible" name="cantidadDisponible" placeholder="Cantidad" required>
-           <p class="error text-center alert alert-danger hidden"></p>
-              <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                </div>
+                <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+                <input type="text" class="form-control has-feedback-left" id="precioUnitario" name="precioUnitario" placeholder="Precio" required>
+                <p class="error text-center alert alert-danger hidden"></p>
+               </div>
                 </div>
 
                 <div class="form-group row add">
                 <div class="col-md-9  form-group has-feedback">
-        <select name="estanon_recepcions_id" class="form-control has-feedback-left" id="estanon_recepcions_id">
-         <option value="">-- Seleccione estañon-recepciòn --</option>
-         @foreach ($recepcionEst as $rec)
-          <option value="{{ $rec->id }}">{{$rec->id}}</option>
-         @endforeach
-        </select>
-        <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
-        </div>
-        </div>
-        </form>
-      </div>
+                <select name="presentacion_id" class="form-control has-feedback-left" id="presentacion_id">
+                <option value="">-- Seleccione presentación --</option>
+                @foreach ($presentacion as $pre)
+                  <option value="{{ $pre->id }}">{{$pre->Descripcion}}</option>
+                @endforeach
+                </select>
+                </div>
+                </div>
+      
+                <div class="form-group row add">
+                <div class="col-md-9" >
+                <input type="text" class="form-control has-feedback-left" id="cantidadDisponible" name="cantidadDisponible" placeholder="Cantidad" required>
+               <p class="error text-center alert alert-danger hidden"></p>
+                </div>
+                </div>
+
+
+                <div class="form-group row add">
+              <div class="col-md-9  form-group has-feedback">
+            <select name="estanon_recepcions_id" class="form-control has-feedback-left" id="estanon_recepcions_id">
+            <option value="">-- Seleccione estañon-recepciòn --</option>
+            @foreach ($recepcionEst as $rec)
+              <option value="{{ $rec->id }}">{{$rec->id}}</option>
+            @endforeach
+            </select>
+            </div>
+            </div>
+            </form>
+          </div>
           <div class="modal-footer">
-            <button class="btn btn-warning"   onclick="ConfirmDemo()" type="submit" id="add">
+            <button class="btn btn-warning" type="submit" id="add">
               <span class="fa fa-save"></span> Guardar 
             </button>
             <button class="btn btn-warning" type="button" data-dismiss="modal">
@@ -180,6 +168,7 @@
     </div>
   </div>
 </div></div>
+
  
 {{-- Modal Form Show POST --}}
 <div id="show" class="modal fade" role="dialog">
@@ -207,7 +196,6 @@
                       <b id="pre3"/>
                      
                     </div>
-                    </div>
 										<div class="form-group">
                       <label for="">Presentacion:</label>
                       <b id="pres3"/>
@@ -231,7 +219,7 @@
                   </div>
 </div>
 {{-- Modal Form Edit and Delete Post --}}
-<div id="myModal"class="modal fade" role="dialog">
+<div id="create" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -239,59 +227,63 @@
         <h4 class="modal-descripcion text-center"></h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" role="modal">
+      <span id="form_result"></span>
+        <form class="form-horizontal" role="form">
 
-           <div class="form-group row add">
-        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-        <select name="producto_id" class="form-control has-feedback-left" id="pro2">
-         <option value="">-- Seleccionar producto --</option>
-         @foreach ($producto as $productos)
-          <option value="{{ $productos->id }}">{{$productos->Nombre}}</option>
-         @endforeach
-        </select>
-					  <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
-</div>
-</div>
+              <div class="form-group row add">
+              <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+              <select name="producto_id" class="form-control has-feedback-left" id="producto_id">
+              <option value="">-- Seleccione producto --</option>
+              @foreach ($producto as $productos)
+                <option value="{{ $productos->id }}">{{$productos->nombre}}</option>
+              @endforeach
+              </select>
+              </div>
+              </div>
 
-        <div class="form-group row add">
-        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-           <input type="text" class="form-control has-feedback-left" id="pre2" disabled>
-              <span class="fa fa-key form-control-feedback left" aria-hidden="true"></span>
-              
+      
+                <div class="form-group row add">
+                <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+                <input type="text" class="form-control has-feedback-left" id="precioUnitario" name="precioUnitario" placeholder="Precio" required>
+                <p class="error text-center alert alert-danger hidden"></p>
+               </div>
                 </div>
-                </div>
-          
-                  <div class="form-group row add">
-        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-        <select name="presentacion_id" class="form-control has-feedback-left" id="pres2">
-         <option value="">-- Seleccionar presentaciòn --</option>
-         @foreach ($presentacion as $pre)
-          <option value="{{ $pre->id }}">{{$pre->Descripcion}}</option>
-         @endforeach
-        </select>
-					  <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
-          
-
-               <div class="form-group row add">
-        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-           <input type="text" class="form-control has-feedback-left" id="can2" disabled>
-              <span class="fa fa-key form-control-feedback left" aria-hidden="true"></span>
-              
-                </div>
-                </div>
-                
 
                 <div class="form-group row add">
-        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-        <select name="estanon_recepcions_id" class="form-control has-feedback-left" id="est2">
-         <option value="">-- Seleccionar estañon-recepciòn --</option>
-         @foreach ($recepcionEst as $rec)
-          <option value="{{ $rec->id }}">{{$rec->id}}</option>
-         @endforeach
-        </select>
-					  <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
-</div>
-</div>
+                <div class="col-md-9  form-group has-feedback">
+                <select name="presentacion_id" class="form-control has-feedback-left" id="presentacion_id">
+                <option value="">-- Seleccione presentación --</option>
+                @foreach ($presentacion as $pre)
+                  <option value="{{ $pre->id }}">{{$pre->Descripcion}}</option>
+                @endforeach
+                </select>
+                </div>
+                </div>
+      
+                <div class="form-group row add">
+                <div class="col-md-9" >
+                <input type="text" class="form-control has-feedback-left" id="cantidadDisponible" name="cantidadDisponible" placeholder="Cantidad" required>
+               <p class="error text-center alert alert-danger hidden"></p>
+                </div>
+                </div>
+
+
+                <div class="form-group row add">
+              <div class="col-md-9  form-group has-feedback">
+            <select name="estanon_recepcions_id" class="form-control has-feedback-left" id="estanon_recepcions_id">
+            <option value="">-- Seleccione estañon-recepciòn --</option>
+            @foreach ($recepcionEst as $rec)
+              <option value="{{ $rec->id }}">{{$rec->id}}</option>
+            @endforeach
+            </select>
+            </div>
+            </div>
+            </form>
+          </div>
+          
+    </div>
+  </div>
+</div></div>
         </form>
         {{-- Form Delete Post --}}
         <div class="deleteContent">

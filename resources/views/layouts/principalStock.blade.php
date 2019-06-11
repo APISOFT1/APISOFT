@@ -225,9 +225,9 @@
       
       data: {
         '_token': $('input[name=_token]').val(),
-        'producto_id': $('input[name=producto_id]').val(),
+        'producto_id': $('select[name=producto_id]').val(),
         'precioUnitario': $('input[name=precioUnitario]').val(),
-        'presentacion_id': $('input[name=presentacion_id]').val(),
+        'presentacion_id': $('select[name=presentacion_id]').val(),
         'cantidadDisponible': $('input[name=cantidadDisponible]').val(),
         'estanon_recepcions_id': $('select[name=estanon_recepcions_id]').val()
         
@@ -244,7 +244,7 @@
                             $('#create').modal('show');
                             toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
                         }, 500);
-                        if (data.errors.nombre) {
+                        if (data.errors.producto_id) {
                             $('.errorProducto_id').removeClass('hidden');
                             $('.errorProducto_id').text(data.errors.producto_id);
                         }
@@ -252,7 +252,7 @@
                             $('.errorPrecioUnitario').removeClass('hidden');
                             $('.errorPrecioUnitario').text(data.errors.precioUnitario);
                         }
-                         if (data.errors.Presentacion_id) {
+                         if (data.errors.presentacion_id) {
                             $('.errorPresentacion_id').removeClass('hidden');
                             $('.errorPresentacion_id').text(data.errors.presentacion_id);
                         }
