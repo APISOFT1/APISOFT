@@ -102,10 +102,6 @@ class RegisterController extends Controller
             return "Whoops! sucedió un error.";
         }
         
-<<<<<<< HEAD
-        return redirect()->to('/dashboard');
-=======
         return redirect()->to('/');
->>>>>>> Caro
     }
 }
