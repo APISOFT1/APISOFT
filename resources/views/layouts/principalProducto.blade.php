@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,18 +9,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>APISOFT</title>
+    @toastr_css
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="{{asset('css2/bootstrap-select.min.css')}}">
-
-
+ 
   
+      <!-- Include Twitter Bootstrap and jQuery: -->
+<!--<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>->
+ 
+<!-- Include the plugin's CSS and JS: -->
+<!--<link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>-->
+
+ <!--   {!!Html::style ('/css/bootstrap-multiselect.css')!!} -->
     {!!Html::style ('/css2/bootstrap.min.css')!!} 
 
-    {!!Html::style ('/css2/bootstrap-select.min.css')!!}  
+    {!!Html::style ('/css2/bootstrap-select.min.css')!!}   
     
+    {!!Html::style ('/css2/select2.min.css')!!}
+
+    {!!Html::style ('/css2/select2.css')!!}
     
     <!-- Font Awesome -->
     {!!Html::style ('/css2/font-awesome.min.css')!!}
@@ -71,15 +80,16 @@
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       
-                     <li><a href="{{ url('users/') }}">Gestionar usuarios</a></li>
+                     <li><a href="{{ url('users/') }}">Gestionar usuario</a></li>
                     </ul>
                   </li>
-                
+                  
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
+                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicación</a></li>
                       <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
-                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiaro</a></li>
+                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiario</a></li>
                     
                     </ul>
                   </li>
@@ -88,14 +98,13 @@
                   <li><a><i class="glyphicon glyphicon-list-alt"></i> Recepción<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/RecepcionMateriaPrima') }}">Gestionar Recepción</a></li>
-                      <li><a href="{{ url('/Cera/') }}">Gestionar Extración de cera</a></li>
+                      <li><a href="{{ url('/Cera/') }}">Gestionar Extracción de cera</a></li>
                     </ul>
                   </li>
                   <li><a><i class="glyphicon glyphicon-oil"></i> Planta <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
-                      <li><a href="{{ url('/AfiliadoEstanon/') }}">Gestionar Afiliado-Estañon</a></li>
-                   
+                      <li><a href="{{ url('/RecepEstanon/') }}">Gestionar Recepción-Estañón</a></li>
                     
                     </ul>
                   </li>
@@ -106,7 +115,7 @@
                     <li><a href="{{ url('/Producto/') }}">Gestionar Producto</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-cart-plus"></i>Servicios <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-cart-plus"></i> Servicios <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
                     <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
@@ -157,19 +166,33 @@
         <!-- /footer content -->
       </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+   
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
   crossorigin="anonymous"></script>
-  <script src="{{asset('js2/bootstrap-select.min.js')}}"></script>
+
+  
+  <!--<script src="{{asset('js2/bootstrap-select.min.js')}}"></script>-->
   
     <!-- jQuery -->
+     
 
     {!!Html::script('/js2/jquery.min.js')!!}  
+
     @stack('scripts')
     <!-- Bootstrap -->
     {!!Html::script('/js2/bootstrap.min.js')!!}
 
+   <!-- SELECT2 -->
+   {!!Html::script('/js2/bootstrap-select.min.js')!!} 
+
+    {!!Html::script('/js2/select2.full.js')!!}
+
+    {!!Html::script('/js2/select2.js')!!}
     
+    {!!Html::script('/js2/select2.min.js')!!}
+
+    {!!Html::script('/js2/select2.full.min.js')!!}
     <!-- FastClick -->
     {!!Html::script('/js2/fastclick.js')!!}
     <!-- NProgress -->
@@ -178,9 +201,26 @@
     {!!Html::script('/js2/jquery.mCustomScrollbar.concat.min.js')!!}
     <!-- Custom Theme Scripts -->
     {!!Html::script('/js2/custom.min.js')!!}
+
      {!!Html::script('/js2/dropdown.js')!!}
 
+    <!-- {!!Html::script('/js/jquery.min.js')!!}
+     {!!Html::script('/js/bootstrap.min.js')!!}-->
 
+
+   <!--  <script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>-->
+ 
+<!-- Include the plugin's CSS and JS: -->
+{!!Html::script('/js/bootstrap-select.min.js')!!}
+
+{!!Html::script('/js/jquery-1.11.1.min.js')!!}
+
+<!--{!!Html::script('/js/bootstrap.min.js')!!} -->
+
+<!--<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>-->
 
 
 <!-- MODAL AFILIADO -->
@@ -198,35 +238,35 @@
   $("#add").click(function() {
     $.ajax({
       type: 'POST',
-      url: 'addProduct',
+      url: 'addProducto',
       
       data: {
         '_token': $('input[name=_token]').val(),
         'nombre': $('input[name=nombre]').val()
       },
       success: function(data){
-        if ((data.errors)) {
-          $('.error').removeClass('hidden');
-          $('.error').text(data.errors.nombre);
-} 
+        $('.errorNombre').addClass('hidden');
+     
+         if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#create').modal('show');
+                            toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.nombre) {
+                            $('.errorNombre').removeClass('hidden');
+                            $('.errorNombre').text(data.errors.nombre);
+                        }
+                        
         } else {
-          $('.error').remove();
-          $('#table').append("<tr class='api" + data.id + "'>"+
-          "<td>" + data.id + "</td>"+
-          "<td>" + data.nombre + "</td>"+
-  
-          "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + 
-          "' data-nombre='"  + data.nombre + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='"
-           + data.id + "' data-nombre='" 
-           + data.nombre +  "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
-           + data.id + "' data-nombre='" + data.nombre +  "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
-          "</tr>");
-        }
+          toastr.success('SE HA CREADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
+      
+
+       }
       },
     });
     $('#nombre').val('');
-
   });
+ 
  
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
@@ -247,7 +287,7 @@ $('#myModal').modal('show');
 $('.modal-footer').on('click', '.edit', function() {
   $.ajax({
     type: 'POST',
-    url: 'editProduct',
+    url: 'editProducto',
     data: {
 '_token': $('input[name=_token]').val(),
 'id': $("#idPro").val(),
@@ -255,18 +295,63 @@ $('.modal-footer').on('click', '.edit', function() {
 
     },
 success: function(data) {
-      $('.api' + data.id).replaceWith(" "+
-      "<tr class='api" + data.id + "'>"+
+       $('.errorNombre').addClass('hidden');
+         if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#create').modal('show');
+                            toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.nombre) {
+                            $('.errorNombre').removeClass('hidden');
+                            $('.errorNombre').text(data.errors.nombre);
+                        }
+                       
+        } else {
+          toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
+           $('.product' + data.id).replaceWith(" "+
+       "<tr class='product" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
-      "<td>" + data.nombre + "</td>"+
-      
- "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + "' data-nombre='" 
- + data.nombre + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
-          + data.id + "' data-nombre='" + data.nombre + 
-        "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
-          + data.id + "' data-nombre='" + data.nombre + 
-       "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+      "<td>" + data.Nombre + "</td>"+
+          "<td><button class='show-modal btn btn-info btn-sm' data-id='" 
+          + data.id + 
+          "' data-nombre='"
+          + data.nombre + 
+          "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='"
+          + data.id +
+          "' data-nombre='"
+          + data.nombre +  
+           "'><span class='fa fa-eye'></span></button> <button class='edit-modalProducto btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalRol btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
       "</tr>");
+        }
+      
+},
+  });
+});
+$(document).on('click', '.delete-modal', function() {
+$('#footer_action_button').text(" Eliminar");
+$('#footer_action_button').removeClass('glyphicon-check');
+$('#footer_action_button').addClass('glyphicon-trash');
+$('.actionBtn').removeClass('btn-success');
+$('.actionBtn').addClass('btn-danger');
+$('.actionBtn').addClass('delete');
+$('.modal-descripcion').text('Eliminar Producto');
+$('.id').text($(this).data('id'));
+$('.deleteContent').show();
+$('.form-horizontal').hide();
+$('.producto_id').html($(this).data('producto_id'));
+$('#myModal').modal('show');
+});
+$('.modal-footer').on('click', '.delete', function(){
+  $.ajax({
+    type: 'POST',
+    url: 'deleteProducto',
+    data: {
+      '_token': $('input[name=_token]').val(),
+      'id': $('.id').text()
+    },
+    success: function(data){
+      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Alerta Éxito', {timeOut: 5000});
+      $('.sto' + $('.id').text()).remove();
     }
   });
 });
@@ -279,6 +364,18 @@ success: function(data) {
   $('#NomPro').text($(this).data('nombre'));
   $('.modal-title').text('Show Post');
   });
+ var myApp;
+myApp = myApp || (function () {
+    var pleaseWaitDiv = $('<div class="modal hide" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false"><div class="modal-header"><h1>Processing...</h1></div><div class="modal-body"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div></div>');
+    return {
+        showPleaseWait: function() {
+            pleaseWaitDiv.modal();
+        },
+        hidePleaseWait: function () {
+            pleaseWaitDiv.modal('hide');
+        },
+    };
+})();
 </script>
     
 

@@ -108,11 +108,11 @@
                     <div class="modal-body">
                     <div class="form-group">
                       <label for="">Código :</label>
-                      <b id="codPre"/>
+                      <b id="id6"/>
                     </div>
                     <div class="form-group">
                       <label for="">Presentación :</label>
-                      <b id="PrePre"/>
+                      <b id="nom6"/>
                     </div>
                     </div>
                     </div>
@@ -132,13 +132,13 @@
 
           <div class="form-group">
           <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-              <input type="text" class="form-control has-feedback-left" id="ids" disabled>
+              <input type="text" class="form-control has-feedback-left" id="id5" disabled>
               <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
             </div>
           </div>
           <div class="form-group">
           <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-            <input type="name" class="form-control  has-feedback-left" id="des">
+            <input type="name" class="form-control  has-feedback-left" id="de">
             <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
             </div>
           </div>

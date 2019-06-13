@@ -110,7 +110,7 @@
               <div class="form-group row add">
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
               <input type="text" class="form-control" id="PesoNeto" name="PesoNeto"
-             placeholder="Peso Neto"  disabled required>
+             placeholder="Peso Neto"   required>
               <p class="No ingreso el Peso Neto"></p>
               <span class="fa fa-minus-circle form-control-feedback right" aria-hidden="true"></span>
               </div>

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,18 +9,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>APISOFT</title>
+    @toastr_css
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="{{asset('css2/bootstrap-select.min.css')}}">
-
-
+ 
   
+      <!-- Include Twitter Bootstrap and jQuery: -->
+<!--<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>->
+ 
+<!-- Include the plugin's CSS and JS: -->
+<!--<link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>-->
+
+ <!--   {!!Html::style ('/css/bootstrap-multiselect.css')!!} -->
     {!!Html::style ('/css2/bootstrap.min.css')!!} 
 
-    {!!Html::style ('/css2/bootstrap-select.min.css')!!}  
+    {!!Html::style ('/css2/bootstrap-select.min.css')!!}   
     
+    {!!Html::style ('/css2/select2.min.css')!!}
+
+    {!!Html::style ('/css2/select2.css')!!}
     
     <!-- Font Awesome -->
     {!!Html::style ('/css2/font-awesome.min.css')!!}
@@ -71,15 +80,16 @@
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       
-                     <li><a href="{{ url('users/') }}">Gestionar usuarios</a></li>
+                     <li><a href="{{ url('users/') }}">Gestionar usuario</a></li>
                     </ul>
                   </li>
-                
+                  
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
+                      <li><a href="{{ url('/Ubicacion/') }}">Gestionar Ubicación</a></li>
                       <li><a href="{{ url('/AfiliadoApiario/') }}">Gestionar Afiliado-Apiario</a></li>
-                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiaro</a></li>
+                      <li><a href="{{ url('/Apiario/') }}">Gestionar Apiario</a></li>
                     
                     </ul>
                   </li>
@@ -88,25 +98,29 @@
                   <li><a><i class="glyphicon glyphicon-list-alt"></i> Recepción<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/RecepcionMateriaPrima') }}">Gestionar Recepción</a></li>
-                      <li><a href="{{ url('/Cera/') }}">Gestionar Extración de cera</a></li>
+                      <li><a href="{{ url('/Cera/') }}">Gestionar Extracción de cera</a></li>
                     </ul>
                   </li>
                   <li><a><i class="glyphicon glyphicon-oil"></i> Planta <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
-                      <li><a href="{{ url('/AfiliadoEstanon/') }}">Gestionar Afiliado-Estañon</a></li>
-                   
+                      <li><a href="{{ url('/RecepEstanon/') }}">Gestionar Recepción-Estañón</a></li>
                     
                     </ul>
                   </li>
 
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
+<<<<<<< HEAD
                     <li><a href="{{ url('/Stock/') }}">Gestionar Stock</a></li>
                     <li><a href="{{ url('/Producto/') }}">Gestionar Producto</a></li>
+=======
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    
+>>>>>>> raychel
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-cart-plus"></i>Servicios <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-cart-plus"></i> Servicios <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
                     <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
@@ -157,19 +171,33 @@
         <!-- /footer content -->
       </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+   
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
   crossorigin="anonymous"></script>
-  <script src="{{asset('js2/bootstrap-select.min.js')}}"></script>
+
+  
+  <!--<script src="{{asset('js2/bootstrap-select.min.js')}}"></script>-->
   
     <!-- jQuery -->
+     
 
     {!!Html::script('/js2/jquery.min.js')!!}  
+
     @stack('scripts')
     <!-- Bootstrap -->
     {!!Html::script('/js2/bootstrap.min.js')!!}
 
+   <!-- SELECT2 -->
+   {!!Html::script('/js2/bootstrap-select.min.js')!!} 
+
+    {!!Html::script('/js2/select2.full.js')!!}
+
+    {!!Html::script('/js2/select2.js')!!}
     
+    {!!Html::script('/js2/select2.min.js')!!}
+
+    {!!Html::script('/js2/select2.full.min.js')!!}
     <!-- FastClick -->
     {!!Html::script('/js2/fastclick.js')!!}
     <!-- NProgress -->
@@ -178,109 +206,166 @@
     {!!Html::script('/js2/jquery.mCustomScrollbar.concat.min.js')!!}
     <!-- Custom Theme Scripts -->
     {!!Html::script('/js2/custom.min.js')!!}
+
      {!!Html::script('/js2/dropdown.js')!!}
 
+    <!-- {!!Html::script('/js/jquery.min.js')!!}
+     {!!Html::script('/js/bootstrap.min.js')!!}-->
+
+
+   <!--  <script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>-->
+ 
+<!-- Include the plugin's CSS and JS: -->
+{!!Html::script('/js/bootstrap-select.min.js')!!}
+
+{!!Html::script('/js/jquery-1.11.1.min.js')!!}
+
+<!--{!!Html::script('/js/bootstrap.min.js')!!} -->
+
+<!--<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>-->
+
+    @jquery
+    @toastr_js
+    @toastr_render
 
 
 
-<!-- MODAL AFILIADO -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-
 {{-- ajax Form Add Post--}}
-
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
-    $('.modal-descripcion').text('Crear presentación');
+    $('.modal-nombre').text('Crear Presentación');
   });
   $("#add").click(function() {
     $.ajax({
       type: 'POST',
       url: 'addPresentacion',
-      
       data: {
         '_token': $('input[name=_token]').val(),
-        'descripcion': $('input[name=descripcion]').val()
+        'Descripcion': $('input[name=Descripcion]').val()
       },
       success: function(data){
-        if ((data.errors)) {
-          $('.error').removeClass('hidden');
-          $('.error').text(data.errors.descripcion);
-} 
-        } else {
-          $('.error').remove();
-          $('#table').append("<tr class='api" + data.id + "'>"+
-          "<td>" + data.id + "</td>"+
-          "<td>" + data.descripción + "</td>"+
+        $('.errorDescripcion').addClass('hidden');
+         
+                    
+                    if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#create').modal('show');
+                            toastr.error('ERRO DE VALIDACIÓN!', 'Error Alert', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.Descripcion) {
+                            $('.errorDescripcion').removeClass('hidden');
+                            $('.errorDescripcion').text(data.errors.Descripcion);
+                        }
+                       
+                    } else {
+                        toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
   
-          "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + 
-          "' data-nombre='"  + data.nombre + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='"
-           + data.id + "' data-descripcion='" 
-           + data.descripcion +  "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
-           + data.id + "' data-descripcion='" + data.descripcion +  "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
+          $('#table').append("<tr class='presentacion" + data.id + "'>"+
+          "<td>" + data.id + "</td>"+
+          "<td>" + data.Descripcion + "</td>"+
+          "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
+          data.id + "'data-nombre='" + data.nombre + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" + data.id + "' data-Descripcion='" + data.Descripcion + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.Descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         }
+     
       },
     });
-    $('#descripcion').val('');
-
+    $('#nombre').val('');
   });
- 
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
-$('#footer_action_button').text(" Editar Presentación");
+$('#footer_action_button').text(" Editar ");
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-$('.modal-descripcion').text('Editar Presentación');
+$('.modal-nombre').text('Editar Presentación');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
-$('#idDes').val($(this).data('id'));
-$('#nDes').val($(this).data('descripcion'));
+$('#id5').val($(this).data('id'));
+$('#de').val($(this).data('descripcion'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.edit', function() {
+  $('#form_result').html('');
   $.ajax({
     type: 'POST',
     url: 'editPresentacion',
     data: {
 '_token': $('input[name=_token]').val(),
-'id': $("#idDes").val(),
-'descripcion': $('#nDes').val(),
-
+'id': $("#id5").val(),
+'Descripcion': $('#de').val(),
     },
 success: function(data) {
-      $('.api' + data.id).replaceWith(" "+
-      "<tr class='api" + data.id + "'>"+
+  $('.errorDescripcion').addClass('hidden');
+         
+                    
+         if ((data.errors)) {
+             setTimeout(function () {
+                 $('#create').modal('show');
+                 toastr.error('ERRO DE VALIDACIÓN!', 'Error Alert', {timeOut: 5000});
+             }, 500);
+             if (data.errors.Descripcion) {
+                 $('.errorDescripcion').removeClass('hidden');
+                 $('.errorDescripcion').text(data.errors.Descripcion);
+             }
+            
+         } else {
+             toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
+      $('.pre' + data.id).replaceWith(" "+
+      "<tr class='pre'>"+
       "<td>" + data.id + "</td>"+
-      "<td>" + data.descripción + "</td>"+
-      
- "<td><button class='show-modal btn btn-info btn-sm' data-id='" + data.id + "' data-descripcion='" 
- + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
-          + data.id + "' data-descripcion='" + data.descripcion + 
-        "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
-          + data.id + "' data-descripcion='" + data.descripcion + 
-       "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
-      "</tr>");
+      "<td>" + data.Descripcion + "</td>"+
+  
+ "<td><button class='show-modal btn btn-info btn-sm' data-id='"+data.id+"' data-nombre='"+data.nombre+"'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='"+data.id+"'data-nombre='"+data.nombre+"'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='"+data.id+"' data-nombre='"+data.nombre+"'><span class='glyphicon glyphicon-trash'></span></button></td>"+"</tr>");
+    }
+},
+  });
+});
+// form Delete function
+$(document).on('click', '.delete-modal', function() {
+$('#footer_action_button').text(" Eliminar");
+$('#footer_action_button').removeClass('glyphicon-check');
+$('#footer_action_button').addClass('glyphicon-trash');
+$('.actionBtn').removeClass('btn-success');
+$('.actionBtn').addClass('btn-danger');
+$('.actionBtn').addClass('delete');
+$('.modal-nombre').text('Eliminar Presentación');
+$('.id').text($(this).data('id'));
+$('.deleteContent').show();
+$('.form-horizontal').hide();
+$('.nombre').html($(this).data('nombre'));
+$('#myModal').modal('show');
+});
+$('.modal-footer').on('click', '.delete', function(){
+  $.ajax({
+    type: 'POST',
+    url: 'deletePresentacion',
+    data: {
+      '_token': $('input[name=_token]').val(),
+      'id': $('.id').text()
+    },
+    success: function(data){
+      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
+      $('.presentacion' + $('.id').text()).remove();
     }
   });
 });
-
-
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
-  $('#codPre').text($(this).data('id'));
-  $('#PrePre').text($(this).data('presentacion'));
-  $('.modal-title').text('Show Post');
+  $('#id6').text($(this).data('id'));
+  $('#nom6').text($(this).data('nombre'));
+  $('.modal-title').text('Detalle');
   });
 </script>
-    
-
-    </body>
-    </html>
+  </body>
+</html>

@@ -30,6 +30,8 @@ public function index(Request $request)
     {
         $search = \Request::get('search');
         $rol = Rol::where('descripcion','like','%'.$search.'%')
+                          ->orWhere('id','LIKE','%'.$search.'%')
+
         ->orderby('descripcion','desc')
         ->paginate(7);
         return view('Rol.index',compact('rol'));

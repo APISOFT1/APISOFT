@@ -22,8 +22,13 @@ class AfiliadoApiarioController extends Controller
          */
         public function index(Request $request)
         { 
-         
-          $afiliadoapiario = AfiliadoApiario::paginate(10);
+            $afiliadoapiario = AfiliadoApiario::with('RecepcionMateriaPrima');
+            $search = \Request::get('search');
+            $afiliadoapiario = AfiliadoApiario::where('id','like','%'.$search.'%')
+                  ->orWhere('afiliado_id','LIKE','%'.$search.'%')
+                  ->orWhere('apiario_id','LIKE','%'.$search.'%')
+                  ->orderby('id','desc')
+                  ->paginate(7);         
           $afiliados=Afiliado::all();
           $apiarios=Apiario::all();
           return view('AfiliadoApiario.index',compact('afiliadoapiario','afiliados','apiarios'));      

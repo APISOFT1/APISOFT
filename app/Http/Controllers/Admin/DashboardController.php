@@ -107,7 +107,7 @@ $afi = Afiliado::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))
             'chart_title' => 'Registro de Afiliados por Año',
             'report_type' => 'group_by_date',
             'model' => 'App\Afiliado',
-            'group_by_field' => 'created_at',
+            'group_by_field' => 'Fecha_Ingreso',
             'group_by_period' => 'year',
             'chart_type' => 'line',
         ];

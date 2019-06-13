@@ -4,28 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-<<<<<<< HEAD
     "content-hash": "c8ed794507bc45265cce8b67f8f5fd1a",
-=======
-=======
->>>>>>> jeremy
-<<<<<<< HEAD
-<<<<<<< .merge_file_a29192
-    "content-hash": "0dfaa155a4afddda7362298728ae87c3",
-=======
-    "content-hash": "c8ed794507bc45265cce8b67f8f5fd1a",
->>>>>>> .merge_file_a26032
-=======
-    "content-hash": "c8ed794507bc45265cce8b67f8f5fd1a",
->>>>>>> Caro
-<<<<<<< HEAD
->>>>>>> jeremy
-=======
-=======
-    "content-hash": "c8ed794507bc45265cce8b67f8f5fd1a",
->>>>>>> Caro
->>>>>>> jeremy
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -1818,16 +1797,16 @@
         },
         {
             "name": "laraveldaily/laravel-charts",
-            "version": "0.1.6",
+            "version": "0.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelDaily/laravel-charts.git",
-                "reference": "1d76ed67675b470e8745fe9743b8cf140c3eaa06"
+                "reference": "a4519da50a3cefdaed46c4c8c4c2b00503839b66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LaravelDaily/laravel-charts/zipball/1d76ed67675b470e8745fe9743b8cf140c3eaa06",
-                "reference": "1d76ed67675b470e8745fe9743b8cf140c3eaa06",
+                "url": "https://api.github.com/repos/LaravelDaily/laravel-charts/zipball/a4519da50a3cefdaed46c4c8c4c2b00503839b66",
+                "reference": "a4519da50a3cefdaed46c4c8c4c2b00503839b66",
                 "shasum": ""
             },
             "type": "library",
@@ -1854,7 +1833,7 @@
                 }
             ],
             "description": "Create charts and reports from Laravel",
-            "time": "2019-06-10T09:36:38+00:00"
+            "time": "2019-06-11T09:23:31+00:00"
         },
         {
             "name": "lcobucci/jwt",

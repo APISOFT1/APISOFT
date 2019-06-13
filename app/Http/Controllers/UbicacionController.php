@@ -15,22 +15,21 @@ class UbicacionController extends Controller
 public function __construct()
 {
 }
+
 //INDEEEEEEEEEEEEX/
 public function index(Request $request)
 {
   if ($request)
   {
-      $query=trim($request->get('searchText'));
-      $ubicacion=DB::table('ubicacions')->where('id','LIKE','%'.$query.'%')
-      ->orwhere('descripcion','LIKE','%'.$query.'%')
+     $search = \Request::get('search');     
+      $ubicacion = Ubicacion::where('id','like','%'.$search.'%')
+      ->orwhere('Descripcion','LIKE','%'.$search.'%')
       ->orderby('id','ASC')
       ->paginate(10);
+     return view('Ubicacion.index',compact('ubicacion'));
    
-      return view('Ubicacion.index',["ubicacion"=>$ubicacion,"searchText"=>$query]);
   }
- // $ubicacion = Ubicacion::paginate(10);
- // return view('Ubicacion.index',compact('ubicacion'));        
-    
+
 }
 ////////////////////////////////////////////////////////NUEVO
 public function addUbicacion(Request $request ){

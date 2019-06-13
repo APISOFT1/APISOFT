@@ -23,50 +23,44 @@ PRODUCTO CREADO CORRECTAMENTE
 <br>
 <!-- Fin de salto de linea. No necesita una etiqueta de cierre-->
 
-<<<<<<< HEAD
-<!--Esta clase nos permite posicionar el buscador  -->
-<div class="absolute3">
-</div>
-=======
-		
->>>>>>> raychel
-
-
-<div class="row">
-  <div class="table table-responsive">
-  
-    <table class="table table-bordered" id="table">
-      <tr>
-        <th width="150px">No</th>
-        <th  width="150px">Nombre</th>
-        <th width="200px">
-          <a href="#" class="create-modal btn btn-success btn-sm">
-            <i class="glyphicon glyphicon-plus"></i>
-          </a>
-        </th>
-      </tr>
-      {{ csrf_field() }}
-     
-      @foreach ($product as $value)
-      
-          <td>{{ $value->id}}</td>
-          <td>{{ $value->nombre }}</td>
-          <td>
-            <a href="#" class="show-modal btn btn-info btn-sm" data-id="{{$value->id}}" data-Descripcion="{{$value->nombre}}">
+<div class="table-responsive">
+			<table class="table table-striped table-bordered table-condensed table-hover" id="table" >
+				<thead>
+					<th>Código</th>
+					<th>Nombre</th>
+					<th><a href="#"
+					class="create-modal btn btn-success btn-sm">
+            <i class="glyphicon glyphicon-plus"></i></th>
+				</thead>
+        {{ csrf_field() }}
+          
+               @foreach ($product as $value)
+          <tr class="product{{$value->id}}">
+          <td>{{ $value->id }}</td>
+					<td>{{ $value->nombre}}</td> 
+					<td>
+					<a href="#" class="show-modal btn btn-info btn-sm"
+					 data-id="{{$value->id}}" 
+					 data-nombre="{{$value->nombre}}">
               <i class="fa fa-eye"></i>
             </a>
-            <a href="#" class="edit-modal btn btn-warning btn-sm" data-id="{{$value->id}}" data-Descripcion="{{$value->nombre}}">
+            <a href="#" class="edit-modal btn btn-warning btn-sm" 
+						data-id="{{$value->id}}"
+					 data-nombre="{{$value->nombre}}">
               <i class="glyphicon glyphicon-pencil"></i>
             </a>
-            <a href="#" class=" delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" data-Descripcion="{{$value->nombre}}">
+            <a href="#" class="delete-modal btn btn-danger btn-sm"
+						 data-id="{{$value->id}}"
+						  data-title="{{$value->nombre}}">
               <i class="glyphicon glyphicon-trash"></i>
             </a>
+            
           </td>
         </tr>
       @endforeach
     </table>
   </div>
-  {{$ubicacion->links()}}
+  {{$product->links()}}
 </div>
 {{-- Modal Form Create Post --}}
 <div id="create" class="modal fade" role="dialog">
@@ -138,13 +132,13 @@ PRODUCTO CREADO CORRECTAMENTE
 
           <div class="form-group">
           <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-              <input type="text" class="form-control has-feedback-left" id="ids" disabled>
+              <input type="text" class="form-control has-feedback-left" id="idPro" disabled>
               <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
             </div>
           </div>
           <div class="form-group">
           <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-            <input type="name" class="form-control  has-feedback-left" id="des">
+            <input type="name" class="form-control  has-feedback-left" id="nPro">
             <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
             </div>
           </div>

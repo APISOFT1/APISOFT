@@ -60,6 +60,7 @@ Route::group(['middleware' =>['auth']], function () {
     Route::get('Producto' , 'ProductoController@index')->middleware('role:planta;administrador');
     Route::get('RecepEstanon' , 'RecepcionEstanonController@index')->middleware('role:planta;administrador');
     Route::get('Stock' , 'StockController@index')->middleware('role:planta;administrador');
+    Route::get('Presentacion' , 'PresentacionController@index')->middleware('role:planta;administrador');
 
 
 
@@ -93,15 +94,18 @@ Route::POST('deleteRecepcion','RecepcionEstanonController@deleteRecepcion');
 Route::POST('addUser','Auth\RegisterController@addUser');
 Route::POST('editUser','Admin\UserController@editUser');
 Route::POST('deleteUser','Admin\UserController@deleteUser');
-Route::POST('addProduct','ProductController@addProduct');
-Route::POST('editProduct','ProductController@editProduct');
-Route::POST('deleteProduct','ProductController@deleteProduct');
+Route::POST('addProducto','ProductoController@addProducto');
+Route::POST('editProducto','ProductoController@editProducto');
+Route::POST('deleteProducto','ProductoController@deleteProducto');
 Route::POST('addUbicacion','UbicacionController@addUbicacion');
 Route::POST('editUbicacion','UbicacionController@editUbicacion');
 Route::POST('deleteUbicacion','UbicacionController@deleteUbicacion');
 Route::POST('addStock','StockController@addStock');
 Route::POST('editStock','StockController@editStock');
 Route::POST('deleteStock','StockController@deleteStock');
+Route::POST('addPresentacion','PresentacionController@addPresentacion');
+Route::POST('editPresentacion','PresentacionController@editPresentacion');
+Route::POST('deletePresentacion','PresentacionController@deletePresentacion');
 });
  
 $this->get('/verify-user/{code}', 'Auth\RegisterController@activateUser')->name('activate.user');

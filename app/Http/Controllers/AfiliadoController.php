@@ -20,14 +20,22 @@ class AfiliadoController extends Controller
     public function index(Request $request)
     {
       if($request){
-        $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-        $afi= Afiliado::with('Genero', 'Estado_Civil') 
-            ->where('Nombre','LIKE','%'.$query.'%')
-            ->orderby('id','ASC')
-            ->paginate(7);
+            $afi = Afiliado::with('RecepcionMateriaPrima');        
+            $search = \Request::get('search');
+            $afi = Afiliado::where('id','like','%'.$search.'%')
+                  ->orWhere('Nombre','LIKE','%'.$search.'%')
+                  ->orWhere('apellido1','LIKE','%'.$search.'%')
+                  ->orWhere('apellido2','LIKE','%'.$search.'%')
+                  ->orWhere('Telefono','LIKE','%'.$search.'%')
+                  ->orWhere('email','LIKE','%'.$search.'%')
+                  ->orWhere('Direccion','LIKE','%'.$search.'%')
+                  ->orWhere('Fecha_Ingreso','LIKE','%'.$search.'%')
+                  ->orWhere('Num_Cuenta','LIKE','%'.$search.'%')
+                  ->orderby('id','desc')
+                  ->paginate(7); 
             $genero = Genero::all();
             $estadoC = Estado_Civil::all();
-        return view('Afiliado.index', compact('afi','genero','estadoC'), ['afi'=>$afi,"searchText"=>$query]);
+        return view('Afiliado.index', compact('afi','genero','estadoC'));
     }
    
     
