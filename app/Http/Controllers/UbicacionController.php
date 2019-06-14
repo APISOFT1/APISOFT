@@ -34,7 +34,7 @@ public function index(Request $request)
 ////////////////////////////////////////////////////////NUEVO
 public function addUbicacion(Request $request ){
     $rules = array(
-      'Descripcion' => 'required'
+      'Descripcion' => 'required|min:6|max:32|regex:/^[a-z ,.\'-]+$/i'
     );
     $error = Validator::make($request->all() , $rules);
     if ($error->fails())
@@ -53,7 +53,7 @@ public function addUbicacion(Request $request ){
 }
  public function editUbicacion(request $request){
   $rules = array(
-    'Descripcion' => 'required'
+    'Descripcion' => 'required|min:6|max:32|regex:/^[a-z ,.\'-]+$/i'
   );
 $validator = Validator::make ( Input::all(), $rules);
 if ($validator->fails())

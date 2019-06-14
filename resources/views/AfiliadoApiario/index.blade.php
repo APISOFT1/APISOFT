@@ -41,10 +41,10 @@ AFILIADO CON SUS APIARIO CREADO CORRECTAMENTE
         </th>
       </tr>
       {{ csrf_field() }}
-      <?php  $no=1; ?>
+     
       @foreach ($afiliadoapiario as $value)
-        <tr class="afiliadoapiario{{$value->id}}">
-          <td>{{ $no++ }}</td>
+      <tr class="afiliadoapiario{$value->id}}">
+          <td>{{ $value->id }}</td>
 		  <td>{{$value-> afiliado->id}} - {{$value-> afiliado-> Nombre}} {{$value->afiliado->apellido1}} {{$value->afiliado->apellido2}}</td>
           <td>{{$value-> apiario->id}} - {{$value-> apiario-> Descripcion }}</td>
           
@@ -85,6 +85,7 @@ AFILIADO CON SUS APIARIO CREADO CORRECTAMENTE
      <option value="{{$persona->id}}">{{$persona->id}} - {{$persona->Nombre}} {{$persona->apellido1}} {{$persona->apellido2}}</option>
      @endforeach
     </select>
+    <p class="errorAfiliado text-center alert alert-danger hidden"></p>
     <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
    </div>
   </div>
@@ -96,6 +97,7 @@ AFILIADO CON SUS APIARIO CREADO CORRECTAMENTE
      <option value="{{$api->id}}">  {{  $api->Descripcion}}</option>
      @endforeach
     </select>
+    <p class="errorApiario text-center alert alert-danger hidden"></p>
     <span class="fa fa-archive form-control-feedback right" aria-hidden="true"></span>
    </div>
  
@@ -165,6 +167,8 @@ AFILIADO CON SUS APIARIO CREADO CORRECTAMENTE
                  @endforeach
                 
             </select>
+            <p class="errorAfiliado text-center alert alert-danger hidden"></p>
+            <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
            </div>
           </div>
 		  <div class="form-group">
@@ -175,6 +179,8 @@ AFILIADO CON SUS APIARIO CREADO CORRECTAMENTE
              <option value="{{$api->id}}">{{$api->Descripcion}}</option>
            @endforeach
             </select>
+            <p class="errorApiario text-center alert alert-danger hidden"></p>
+    <span class="fa fa-archive form-control-feedback right" aria-hidden="true"></span>
             </div>
           </div>
         </form>

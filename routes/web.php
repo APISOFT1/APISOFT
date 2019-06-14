@@ -33,8 +33,9 @@ Route::group(['middleware' =>['auth']], function () {
   Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
   
   
-  
- Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
+  Route::get('home', 'homeController@index')->name('home')->middleware('role:authenticated');;
+
+ Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard')->middleware('role:planta;administrador');
  Route::get('chartRecepcion', 'Admin\DashboardController@indexRecepcion')->name('chartRecepcion')->middleware('role:planta;administrador');
  Route::get('chartStock', 'Admin\DashboardController@indexStock')->name('chartStock')->middleware('role:planta;administrador');
  Route::get('chartIngreso', 'Admin\DashboardController@indexIngreso')->name('chartIngreso')->middleware('role:planta;administrador');
@@ -48,6 +49,7 @@ Route::group(['middleware' =>['auth']], function () {
 
   //route grupo 
     Route::get('Ubicacion','UbicacionController@index')->middleware('role:planta;administrador');
+    Route::get('Estanon','EstanonController@index')->middleware('role:planta;administrador');
     Route::get('AfiliadoApiario','AfiliadoApiarioController@index')->middleware('role:planta;administrador');
     Route::get('Apiario' , 'ApiarioController@index')->middleware('role:planta;administrador');
     Route::get('RecepcionMateriaPrima','RecepcionMateriaPrimaController@index')->middleware('role:planta;administrador');

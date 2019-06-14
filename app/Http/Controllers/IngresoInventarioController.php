@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\IngresoInventario;
 use App\DetalleIngresoInventario;
-
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
@@ -18,7 +15,6 @@ use Carbon\Carbon;
 use Response; 
 use PDF;
 use DB;
-
 class IngresoInventarioController extends Controller
 {
     public function __construct()
@@ -47,9 +43,11 @@ class IngresoInventarioController extends Controller
         ->get();
         $usuarios=DB::table('users')
         ->get();
+      
         $stocks = DB::table('stocks as art')
-          ->select(DB::raw('CONCAT(art.id," - ", art.nombre) AS stocks'),'art.id','art.cantidadDisponible')
-          ->groupBy('stocks','art.id','art.cantidadDisponible')
+         ->join('presentacions as p','art.presentacion_id','=','p.id')
+          ->select(DB::raw('CONCAT(art.id," - ", art.presentacion_id) AS stocks'),'art.id','art.cantidadDisponible','art.presentacion_id')
+          ->groupBy('stocks','art.id','art.cantidadDisponible', 'art.presentacion_id')
           ->get();
         return view ("IngresoInventario.create",["personas"=>$personas,"usuarios"=>$usuarios,"stocks"=>$stocks]);
     }

@@ -104,7 +104,7 @@
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
-                    
+                    <li><a href="{{ url('/Producto/') }}">Gestionar Producto</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-cart-plus"></i>Servicios <span class="fa fa-chevron-down"></span></a>
@@ -290,6 +290,7 @@ $('.modal-footer').on('click', '.edit', function() {
 'Recepcion_id': $('#desc').val(),
 'Estanon_id': $('#dad').val(),
 'Fecha': $('#cion').val(),
+
     },
 success: function(data) {
   $('.errorRecepcion').addClass('hidden');
@@ -298,7 +299,7 @@ success: function(data) {
        
          if ((data.errors)) {
                         setTimeout(function () {
-                            $('#create').modal('show');
+                            $('#myModal').modal('show');
                             toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
                         }, 500);
                         if (data.errors.Recepcion_id) {
@@ -356,7 +357,6 @@ $('.form-horizontal').hide();
 $('.recepcion_id').html($(this).data('recepcion_id'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',

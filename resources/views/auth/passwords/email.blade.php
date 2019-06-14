@@ -58,10 +58,41 @@
 					</div>
 					
 					<div class="container-login100-form-btn m-t-32">
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> jeremy
+<<<<<<< HEAD
+<<<<<<< .merge_file_a17524
+=======
+=======
+>>>>>>> Caro
+<<<<<<< HEAD
+>>>>>>> jeremy
+=======
+=======
+>>>>>>> Caro
+>>>>>>> jeremy
 					<a href="{{ url()->previous() }}" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
 							<i class="fa fa-long-arrow-left m-l-5"></i>
 								Regresar
 						</a>
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> jeremy
+<<<<<<< HEAD
+>>>>>>> .merge_file_a29588
+=======
+>>>>>>> Caro
+<<<<<<< HEAD
+>>>>>>> jeremy
+=======
+=======
+>>>>>>> Caro
+>>>>>>> jeremy
 						<button type="submit" class="btn btn-primary" {{ __('Send Password Reset Link') }}> Enviar correo</button>	
 						<a class="reset_pass" href="{{ route('login') }}">
                               

@@ -158,7 +158,12 @@
                 <li><a><i class="fa fa-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li>
-                        <a href="{{ url('Stok') }}">Gestionar Stock
+                        <a href="{{ url('Stock') }}">Gestionar Stock
+                            
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('Producto') }}">Gestionar Producto
                             
                         </a>
                     </li>
@@ -166,11 +171,7 @@
 
                     <li><a><i class="fa fa-cart-plus"></i> Servicios <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                    <li>
-                        <a href="{{ url('Stok') }}">Gestionar Stock
-                            
-                        </a>
-                    </li>
+                    
                     <li>
                         <a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera
                             

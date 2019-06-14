@@ -42,7 +42,7 @@ UBICACION CREADO CORRECTAMENTE
       {{ csrf_field() }}
      
       @foreach ($ubicacion as $value)
-      
+      <tr class="ubicacion{{$value->id}}">
           <td>{{ $value->id}}</td>
           <td>{{ $value->Descripcion }}</td>
           <td>

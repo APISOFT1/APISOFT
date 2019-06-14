@@ -158,10 +158,10 @@
               <select class="form-control" id="afiliado_id" name="afiliado_id">
           <option value="">Seleccione el Afiliado</option>
           @foreach ($afiliado as $afi)
-            <option value="{{$afi->id}}">{{ $afi->Nombre }}</option>
+            <option value="{{$afi->id}}">{{ $afi->Nombre }} {{ $afi->apellido1 }} {{ $afi->apellido2 }}</option>
           @endforeach           
         </select>
-              <p class="No ingreso la fecha"></p>
+          <p class="errorAfiliado text-center alert alert-danger hidden"></p>
               <span class="fa fa-child form-control-feedback right" aria-hidden="true"></span>
               </div>
               </div>
@@ -171,7 +171,7 @@
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
               <input type="number" class="form-control" id="discount" name="pesoBruto"
               placeholder="Peso Bruto" required>
-              <p class="No ingreso el Peso Bruto"></p>
+              <p class="errorPesoBruto text-center alert alert-danger hidden"></p>
               <span class="fa fa-plus form-control-feedback right" aria-hidden="true"></span>
               </div>
               </div>
@@ -191,7 +191,7 @@
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
               <input type="text" class="form-control"  id="numero_muestras" name="numero_muestras"
           placeholder="Numero Muestra" disabled required>
-              <p class="No ingreso el Codigo"></p>
+        
               <span class="fa fa-sort-numeric-asc form-control-feedback right" aria-hidden="true"></span>
               </div>
               </div>
@@ -205,7 +205,7 @@
                     <option value="{{$entre->id}}">{{ $entre->Descripcion }}</option>
                   @endforeach           
                 </select>
-              <p class="No ingreso el tipo de Entrega"></p>
+                <p class="errorEntrega text-center alert alert-danger hidden"></p>
               <span class="fa fa-sign-in form-control-feedback right" aria-hidden="true"></span>
               </div>
             
@@ -223,6 +223,7 @@
               <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
               <textarea class="resizable_textarea form-control"  id="observacion" name="observacion" 
                       placeholder="Ingrese Observación"></textarea>
+                      <p class="errorObservacion text-center alert alert-danger hidden"></p>
               <span class="fa fa-file-text form-control-feedback right" aria-hidden="true"></span>
               </div>
               </div>
@@ -289,7 +290,7 @@
           <option value="{{ $value->id }}">{{$value->id}}-{{$value->Descripcion}}</option>
          @endforeach         
                 </select>
-              <p class="No ingreso el tipo de Entrega"></p>
+                <p class="errorEstanon text-center alert alert-danger hidden"></p>
               <span class="fa fa-sign-in form-control-feedback right" aria-hidden="true"></span>
               </div>
               </div>
@@ -386,61 +387,104 @@
       <div class="modal-body">
         <form class="form-horizontal" role="modal">
 
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="id">ID</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="fid" disabled>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="descripcion">Fecha</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="ti">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="descripcion">Peso Bruto</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="psb">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="descripcion">Peso Neto</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="snt">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="descripcion">Número muestras</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="mue">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="descripcion">Afiliado</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="ali">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="descripcion">Usuario</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="ser">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="descripcion">Tipo Entrega</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="ent">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="descripcion">Observación</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="cio">
-            </div>
-          </div>
+        <div class="form-group row add">
+          <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
 
+              <input type="text" class="form-control" id="fid" disabled>
+              <span class="fa fa-key form-control-feedback right" aria-hidden="true"></span>
+         
+          </div>
+          </div>
+          <div class="form-group">
+              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
+              <input type="datetime" class="form-control" id="ti" name="fecha" 
+              placeholder="YYYY-MM-DD" disabled required>
+              <p class="No ingreso la fecha"></p>
+              <span class="fa fa-clock-o form-control-feedback right" aria-hidden="true" ></span>
+              </div>
+              </div>
+              
+              
+              <div class="form-group row add">
+              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
+              <select class="form-control" id="ali" name="afiliado_id">
+          <option value="">Seleccione el Afiliado</option>
+          @foreach ($afiliado as $afi)
+            <option value="{{$afi->id}}">{{ $afi->Nombre }} {{ $afi->apellido1 }} {{ $afi->apellido2 }}</option>
+          @endforeach           
+        </select>
+          <p class="errorAfiliado text-center alert alert-danger hidden"></p>
+              <span class="fa fa-child form-control-feedback right" aria-hidden="true"></span>
+              </div>
+              </div>
+              
+
+
+              <div class="form-group row add">
+              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
+              <input type="number" class="form-control" id="psb" name="pesoBruto"
+              placeholder="Peso Bruto" required>
+              <p class="errorPesoBruto text-center alert alert-danger hidden"></p>
+              <span class="fa fa-plus form-control-feedback right" aria-hidden="true"></span>
+              </div>
+              </div>
+             
+
+              <div class="form-group row add">
+              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
+              <input type="text" class="form-control" id="snt" name="pesoNeto"
+             placeholder="Peso Neto" disabled required>
+              <p class="No ingreso el Peso Neto"></p>
+              <span class="fa fa-minus-circle form-control-feedback right" aria-hidden="true"></span>
+              </div>
+              </div>
+
+              
+              <div class="form-group row add">
+              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
+              <input type="text" class="form-control"  id="mue" name="numero_muestras"
+          placeholder="Numero Muestra" disabled required>
+        
+              <span class="fa fa-sort-numeric-asc form-control-feedback right" aria-hidden="true"></span>
+              </div>
+              </div>
+            
+
+              
+              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+              <select class="form-control" id="ent" name="tipoEntrega_id">
+                <option value="">Seleccione la Entrega</option>
+                  @foreach ($tipoEntrega as $entre)
+                    <option value="{{$entre->id}}">{{ $entre->Descripcion }}</option>
+                  @endforeach           
+                </select>
+                <p class="errorEntrega text-center alert alert-danger hidden"></p>
+              <span class="fa fa-sign-in form-control-feedback right" aria-hidden="true"></span>
+              </div>
+            
+
+              
+              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+              <input type="text" class="form-control"  value="{{ auth()->user()->id }}" id="ser" name="user_id"
+          placeholder="Encargado" disabled required>
+              <p class="No ingreso el usuario"></p>
+              <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+              </div>
+              
+
+              <div class="form-group row add">
+              <div class="col-md-12 col-sm-2 col-xs-9 form-group has-feedback">
+              <textarea class="resizable_textarea form-control"  id="cio" name="observacion" 
+                      placeholder="Ingrese Observación"></textarea>
+                      <p class="errorObservacion text-center alert alert-danger hidden"></p>
+              <span class="fa fa-file-text form-control-feedback right" aria-hidden="true"></span>
+              </div>
+              </div>
+
+         
+        
+          
+          
         </form>
                 {{-- Form Delete Post --}}
         <div class="deleteContent">

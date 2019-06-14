@@ -107,7 +107,7 @@
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
-                    
+                    <li><a href="{{ url('/Producto/') }}">Gestionar Producto</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-cart-plus"></i>Servicios <span class="fa fa-chevron-down"></span></a>
@@ -252,11 +252,11 @@
           toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
           $('#table').append("<tr class='cera" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
-          "<td>" + data.Descripcion + "</td>"+
           "<td>" + data.Recepcion_id + "</td>"+
           "<td>" + data.PesoBruto + "</td>"+
           "<td>" + data.PesoNeto + "</td>"+
           "<td>" + data.Fecha + "</td>"+
+          "<td>" + data.Descripcion + "</td>"+
   
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
           data.id + "' data-Descripcion='"
@@ -353,14 +353,13 @@ success: function(data) {
         } else {
           toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
       $('.cera' + data.id).replaceWith(" "+
-      "<tr class='cera'>"+
+      "<tr class='cera "+ data.id +"'>"+
           "<td>" + data.id + "</td>"+
-          "<td>" + data.Descripcion + "</td>"+
           "<td>" + data.Recepcion_id + "</td>"+
           "<td>" + data.PesoBruto + "</td>"+
           "<td>" + data.PesoNeto + "</td>"+
           "<td>" + data.Fecha + "</td>"+
-  
+          "<td>" + data.Descripcion + "</td>"+
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
           data.id + "' data-Descripcion='"
           + data.Descripcion +  "' data-Recepcion_id='" 
@@ -453,7 +452,17 @@ function ub(){
 </script>
     <script>
 $( document ).on('click','.create-modal',function() {
+<<<<<<< HEAD
+<<<<<<< HEAD
     var now = new Date();
+=======
+
+    var now = new Date();
+
+>>>>>>> jeremy
+=======
+    var now = new Date();
+>>>>>>> jeremy
     var day = ("0" + now.getDate()).slice(-2);
     var month = ("0" + (now.getMonth() + 1)).slice(-2);
     h=now.getHours();

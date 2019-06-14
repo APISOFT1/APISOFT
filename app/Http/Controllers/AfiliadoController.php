@@ -53,14 +53,14 @@ class AfiliadoController extends Controller
         $rules = array(
     
           'id' => 'min:6|max:9|required',
-          'Nombre' => 'min:1|max:120|required',
-          'apellido1' => 'required',
-          'apellido2' => 'required',
-          'Telefono' => 'numeric|required',
-          'email' => 'required',
-          'Direccion' => 'required',
+          'Nombre' => 'required|min:3|max:36|regex:/^[a-z ,.\'-]+$/i',
+          'apellido1' => 'required|min:4|max:20|regex:/^[a-z ,.\'-]+$/i',
+          'apellido2' => 'required|min:4|max:20|regex:/^[a-z ,.\'-]+$/i',
+          'Telefono' => 'numeric|required|min:8|max:12|',
+          'email' => 'required|email',
+          'Direccion' => 'required|min:10|max:100',
           'Fecha_Ingreso' => 'required',
-          'Num_Cuenta' => 'numeric|required',
+          'Num_Cuenta' => 'numeric|required|min:15|max:17|',
           'genero_id' => 'required',
           'estado_civil_id' => 'required',
           'estado_id' => 'required'
@@ -90,6 +90,18 @@ class AfiliadoController extends Controller
     }
     public function editAfiliado(request $request){
         $rules = array(
+          'id' => 'min:6|max:9|required',
+          'Nombre' => 'required|min:3|max:36|regex:/^[a-z ,.\'-]+$/i',
+          'apellido1' => 'required|min:4|max:20|regex:/^[a-z ,.\'-]+$/i',
+          'apellido2' => 'required|min:4|max:20|regex:/^[a-z ,.\'-]+$/i',
+          'Telefono' => 'numeric|required|min:8|max:12|',
+          'email' => 'required|email',
+          'Direccion' => 'required|min:10|max:100',
+          'Fecha_Ingreso' => 'required',
+          'Num_Cuenta' => 'numeric|required|min:15|max:17|',
+          'genero_id' => 'required',
+          'estado_civil_id' => 'required',
+          'estado_id' => 'required'
         );
       $validator = Validator::make ( Input::all(), $rules);
       if ($validator->fails())

@@ -33,8 +33,8 @@ public function index(Request $request)
 ////////////////////////////////////////////////////////NUEVO
 public function addEstanon(Request $request){
     $rules = array(
-      'Descripcion' => 'required',
-      'Peso' => 'required'
+      'Descripcion' => 'required|min:3|max:32|regex:/^[a-z ,.\'-]+$/i',
+      'Peso' => 'required|numeric|'
     );
   $validator = Validator::make ( Input::all(), $rules);
   if ($validator->fails())
@@ -44,19 +44,20 @@ public function addEstanon(Request $request){
     $estanon->Descripcion = $request->Descripcion;
     $estanon->Peso = $request->Peso;
     $estanon->save();
-    return response()->json(['success' => 'Se ha creado un Estañón correctamente']);
+    return response()->json($estanon);
   }
 }
  public function editEstanon(request $request){
   $rules = array(
-    'Descripcion' => 'required',
-    'Peso' => 'required'
+    'Descripcion' => 'required|min:3|max:32|regex:/^[a-z ,.\'-]+$/i',
+    'Peso' => 'required|numeric|'
   );
 $validator = Validator::make ( Input::all(), $rules);
 if ($validator->fails())
 return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
 else {
-   $estanon = new Estanon;
+  $estanon = Estanon::all();
+  $estanon = Estanon::find($request->id);
     $estanon->Descripcion = $request->Descripcion;
     $estanon->Peso = $request->Peso;
 $estanon->save();

@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\producto;
 use Illuminate\Http\Request;
 use Validator;
@@ -25,12 +23,10 @@ class ProductoController extends Controller
     public function addProducto(Request $request){
     $rules = array(
       'nombre' => 'required',
-
     );
   $validator = Validator::make ( Input::all(), $rules);
   if ($validator->fails())
   return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
-
   else {
     $product = new Producto;
     $product->nombre = $request->nombre;
@@ -38,7 +34,6 @@ class ProductoController extends Controller
     return response()->json($product);
   }
 }
-
 public function editProducto(request $request){
   $rules = array(
     'nombre' => 'required',
@@ -46,7 +41,6 @@ public function editProducto(request $request){
 $validator = Validator::make ( Input::all(), $rules);
 if ($validator->fails())
 return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
-
 else {
   $product = Producto::all();
 $product = Producto::find ($request->id);
@@ -55,7 +49,6 @@ $product->save();
 return response()->json($product);
 }
 }
-
 public function deleteProducto(request $request){
   
   $product = Producto::find ($request->id);

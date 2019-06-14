@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="{{asset('css2/bootstrap-select.min.css')}}">
 
 
+
   
     {!!Html::style ('/css2/bootstrap.min.css')!!} 
 
@@ -32,6 +33,8 @@
     {!!Html::style ('/css2/jquery.mCustomScrollbar.min.css')!!}
     <!-- Custom Theme Style -->
     {!!Html::style ('/css2/custom.min.css')!!}
+
+    {!!Html::style ('/css/daterangepicker.css')!!}
   </head>
   <body class="nav-md">
     <div class="container body">
@@ -95,7 +98,7 @@
                   <li><a><i class="glyphicon glyphicon-oil"></i> Planta <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
-                      <li><a href="{{ url('/AfiliadoEstanon/') }}">Gestionar Afiliado-Estañon</a></li>
+                      <li><a href="{{ url('/RecepEstanon/') }}">Gestionar Afiliado-Estañon</a></li>
                    
                     
                     </ul>
@@ -104,7 +107,7 @@
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
-                    
+                    <li><a href="{{ url('/Producto/') }}">Gestionar Producto</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-cart-plus"></i>Servicios <span class="fa fa-chevron-down"></span></a>
@@ -184,6 +187,7 @@
     {!!Html::script('/js2/custom.min.js')!!}
      {!!Html::script('/js2/dropdown.js')!!}
 
+     {!!Html::script('/js/daterangepicker.js')!!}
 
 <!-- MODAL ROL -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -280,8 +284,34 @@ var div_respuesta="#respuesta";
           "<td>" + data.user_id + "</td>"+
           "<td>" + data.tipoEntrega_id + "</td>"+
           "<td>" + data.observacion + "</td>"+
-          "<td><button class='show-modalRol btn btn-info btn-sm' data-id='" + 
-          data.id + "' data-descripcion='" + data.descripcion + "'><span class='fa fa-eye'></span></button> <button class='edit-modalRol btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalRol btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+          "<td><button class='show-modal btn btn-info btn-sm' data-id='" 
+          + data.id +
+         "' data-fecha='" + data.fecha +
+         "'data-pesoBruto='" + data.pesoBruto +
+         "'data-PesoNeto='" + data.pesoNeto + 
+         "'data-numero_muestras='" + data.numero_muestras + 
+         "'data-afiliado_id='" + data.afiliado_id +
+          "'data-user_id='" + data.user_id + 
+          "'data-tipoEntrega_id='" + data.tipoEntrega_id + 
+          "'data-observacion='" + data.observacion + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='" 
+          + data.id +
+         "' data-fecha='" + data.fecha +
+         "'data-pesoBruto='" + data.pesoBruto +
+         "'data-PesoNeto='" + data.pesoNeto + 
+         "'data-numero_muestras='" + data.numero_muestras + 
+         "'data-afiliado_id='" + data.afiliado_id +
+          "'data-user_id='" + data.user_id + 
+          "'data-tipoEntrega_id='" + data.tipoEntrega_id + 
+          "'data-observacion='" + data.observacion + "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm'  data-id='" 
+          + data.id +
+         "' data-fecha='" + data.fecha +
+         "'data-pesoBruto='" + data.pesoBruto +
+         "'data-PesoNeto='" + data.pesoNeto + 
+         "'data-numero_muestras='" + data.numero_muestras + 
+         "'data-afiliado_id='" + data.afiliado_id +
+          "'data-user_id='" + data.user_id + 
+          "'data-tipoEntrega_id='" + data.tipoEntrega_id + 
+          "'data-observacion='" + data.observacion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         
           $('#fiii').append("<tr class='recepciones" + data.id + "'>"+
@@ -451,8 +481,8 @@ success: function(data) {
 
         } else {
           toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
-      $('.rol' + data.id).replaceWith(" "+
-      "<tr class='rol" + data.id + "'>"+
+      $('.recepcion' + data.id).replaceWith(" "+
+      "<tr class='recepcion" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
       "<td>" + data.fecha + "</td>"+
       "<td>" + data.pesoBruto + "</td>"+

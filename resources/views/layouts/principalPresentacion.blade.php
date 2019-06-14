@@ -111,8 +111,13 @@
 
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
+<<<<<<< HEAD
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stock</a></li>
+                    <li><a href="{{ url('/Producto/') }}">Gestionar Producto</a></li>
+=======
                     <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
                     
+>>>>>>> raychel
                     </ul>
                   </li>
                   <li><a><i class="fa fa-cart-plus"></i> Servicios <span class="fa fa-chevron-down"></span></a>

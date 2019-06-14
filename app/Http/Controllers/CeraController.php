@@ -49,9 +49,9 @@ class CeraController extends Controller
     }
 public function addCera(Request $request){
     $rules = array(
-      'Descripcion' => 'required',
+      'Descripcion' => ' required|min:3|max:20|regex:/^[a-z ,.\'-]+$/i',
       'Recepcion_id' => 'required',
-      'PesoBruto' => 'required',
+      'PesoBruto' => 'numeric|required',
       'PesoNeto' => 'required',
       'Fecha' => 'required'
     );
@@ -78,19 +78,19 @@ public function addCera(Request $request){
 
 public function editCera(request $request){
   $rules = array(
-    'Descripcion' => 'required',
-      'Recepcion_id' => 'required',
-      'PesoBruto' => 'required',
-      'PesoNeto' => 'required',
-      'Fecha' => 'required'
+    'Descripcion' => ' required|min:3|max:20|regex:/^[a-z ,.\'-]+$/i',
+    'Recepcion_id' => 'required',
+    'PesoBruto' => 'numeric|required',
+    'PesoNeto' => 'required',
+    'Fecha' => 'required'
   );
 $validator = Validator::make ( Input::all(), $rules);
 if ($validator->fails())
 return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
 else {
   
-
-   $cera =  Cera::find($request->id);
+    $cera =  Cera::all();
+    $cera =  Cera::find($request->id);
     $cera->Descripcion = $request->Descripcion;
     $cera->Recepcion_id = $request->Recepcion_id;
     $cera->PesoBruto = $request->PesoBruto;

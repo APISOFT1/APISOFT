@@ -105,7 +105,7 @@
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
-                    
+                    <li><a href="{{ url('/Producto/') }}">Gestionar Producto</a></li>
                     </ul>
                   </li>
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Servicios <span class="fa fa-chevron-down"></span></a>
@@ -233,7 +233,6 @@
           "<td>" + data.id + "</td>"+
           "<td>" + data.afiliado_id + "</td>"+
           "<td>" + data.apiario_id + "</td>"+
-          "<td>" + data.created_at + "</td>"+
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
           data.id + "'data-afiliado_id='" 
           +data.afiliado_id+ "'data-apiario_id='" 
@@ -298,8 +297,21 @@ success: function(data) {
              }
             
          } else {
-             toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
-      $('.table' + $('.id').text()).remove();
+             toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
+             $('.afiliadoapiario' + data.id).replaceWith(" "+
+          "<tr class='afiliadoapiario"+ data.id +"'>"+
+          "<td>" + data.id + "</td>"+
+          "<td>" + data.afiliado_id + "</td>"+
+          "<td>" + data.apiario_id + "</td>"+ 
+          "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
+          data.id + "' data-afiliado_id='"
+          + data.afiliado_id +  "' data-apiario_id='" 
+          + data.apiario_id + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='"
+           + data.id + "' data-afiliado_id='" 
+           + data.afiliado_id + "' data-apiario_id='" + data.apiario_id + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
+           + data.id + "' data-afiliado_id='" + data.afiliado_id +  "' data-apiario_id='" 
+          + data.apiario_id +  "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
+          "</tr>");
     }
 },
   });

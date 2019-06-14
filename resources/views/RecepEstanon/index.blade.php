@@ -27,7 +27,7 @@
 
 
 <div class="table-responsive">
-			<table class="table table-striped table-bordered table-condensed table-hover">
+			<table class="table table-striped table-bordered table-condensed table-hover" id="table">
 				<thead>
 					<th>Código</th>
 					<th width="150px" >Recepción</th>
@@ -38,10 +38,10 @@
             <i class="glyphicon glyphicon-plus"></i></th>
 				</thead>
         {{ csrf_field() }}
-           <?php  $no=1; ?>
+      
                @foreach ($recepcionEst as $value)
 					<tr class="recepcionEst{$value->id}}">
-          <td>{{ $no++ }}</td>
+          <td>{{ $value->id }}</td>
 					<td>{{ $value->RecepcionMateriaPrima->id}} - {{ $value->RecepcionMateriaPrima->afiliado->Nombre}} {{ $value->RecepcionMateriaPrima->afiliado->apellido1}} {{ $value->RecepcionMateriaPrima->afiliado->apellido2}}</td>
             <td>{{ $value->Estanon->id}} - {{ $value->Estanon->Descripcion}}</td>
             <td>{{ $value->Fecha}}</td>
@@ -94,6 +94,7 @@
           <option value="{{ $recep->id }}">{{$recep->id}} - {{$recep->afiliado->Nombre}} {{$recep->afiliado->apellido1}} {{$recep->afiliado->apellido2}}</option>
          @endforeach
         </select>
+        <p class="errorRecepcion text-center alert alert-danger hidden"></p>
         <span class="fa fa-file-text form-control-feedback right" aria-hidden="true"></span>
             </div>
 </div>
@@ -105,6 +106,7 @@
           <option value="{{ $est->id }}">{{$est->id}}-{{$est->Descripcion}}</option>
          @endforeach
         </select>
+        <p class="errorEstanon text-center alert alert-danger hidden"></p>
         <span class="fa fa-database form-control-feedback right" aria-hidden="true"></span>
             </div>
             </div>
@@ -187,6 +189,7 @@
           <option value="{{ $recep->id }}">{{$recep->id}} - {{$recep->afiliado->Nombre}} {{$recep->afiliado->apellido1}} {{$recep->afiliado->apellido2}}</option>
          @endforeach
         </select>
+        <p class="errorRecepcion text-center alert alert-danger hidden"></p>
         <span class="fa fa-file-text form-control-feedback right" aria-hidden="true"></span>
             </div>
 </div>
@@ -199,6 +202,7 @@
           <option value="{{ $est->id }}">{{$est->id}}-{{$est->Descripcion}}</option>
          @endforeach
         </select>
+        <p class="errorEstanon text-center alert alert-danger hidden"></p>
         <span class="fa fa-database form-control-feedback right" aria-hidden="true"></span>
             </div>
             </div>

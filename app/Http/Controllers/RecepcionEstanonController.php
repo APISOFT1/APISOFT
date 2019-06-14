@@ -27,7 +27,8 @@ class RecepcionEstanonController extends Controller
         ->orderby('Fecha','desc')
         ->paginate(7);
         $recepciones = RecepcionMateriaPrima::all();
-        return view('RecepEstanon.index', compact('cera', 'recepciones', 'estanon'));
+        $estanon = Estanon::all();
+        return view('RecepEstanon.index', compact('cera', 'recepciones', 'recepcionEst', 'estanon'));
     }
         
         
@@ -70,7 +71,7 @@ if ($validator->fails())
 return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
 else {
   
-
+  $recepcionEst =  RecepcionEstanon::All();
     $recepcionEst =  RecepcionEstanon::find($request->id);
     $recepcionEst->Recepcion_id = $request->Recepcion_id;
     $recepcionEst->Estanon_id = $request->Estanon_id;

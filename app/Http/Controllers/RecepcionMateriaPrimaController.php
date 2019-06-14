@@ -55,7 +55,14 @@ if($request){
 
 public function addRecepcionMateriaPrima(Request $request){
     $rules = array(
-    
+     
+      'fecha' => 'required',
+      'pesoBruto' => 'numeric|required',
+      'pesoNeto' => 'required',
+      'user_id' => 'required',
+      'afiliado_id' => 'required',
+      'tipoEntrega_id' => 'required',
+      'observacion' => ' required|min:10|max:32regex:/^[a-z ,.\'-]+$/i',
     );
   $validator = Validator::make ( Input::all(), $rules);
   if ($validator->fails())
@@ -73,9 +80,7 @@ public function addRecepcionMateriaPrima(Request $request){
         $recepcion->tipoEntrega_id = $request->tipoEntrega_id;
         $recepcion->observacion = $request->observacion;
     $recepcion->save();
-    $ruless = array(
-      ['success' => 'Se ha creado una Recepción de Materia Prima correctamente']
-    );
+   
    
     return response()->json($recepcion);
    
@@ -101,14 +106,20 @@ else {
   $recepcionEst->Estanon_id = $request->Estanon_id;
   $recepcionEst->Fecha = $request->Fecha;
   $recepcionEst->save();
-  return back()->with('flash','Recepcion Guardada');
+ 
   return response()->json($recepcionEst);
 }
 }
 
 public function editRecepcion(request $request){
   $rules = array(
-   
+    'fecha' => 'required',
+      'pesoBruto' => 'numeric|required',
+      'pesoNeto' => 'required',
+      'user_id' => 'required',
+      'afiliado_id' => 'required',
+      'tipoEntrega_id' => 'required',
+      'observacion' => ' required|min:10|max:32regex:/^[a-z ,.\'-]+$/i',
   );
 $validator = Validator::make ( Input::all(), $rules);
 if ($validator->fails())

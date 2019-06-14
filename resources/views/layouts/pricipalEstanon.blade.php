@@ -106,6 +106,7 @@
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    <li><a href="{{ url('/Producto/') }}">Gestionar Producto</a></li>
                     
                     </ul>
                   </li>
@@ -306,8 +307,8 @@ success: function(data) {
                         
                     } else {
                         toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
-      $('.api' + data.id).replaceWith(" "+
-      "<tr class='api" + data.id + "'>"+
+      $('.estanon' + data.id).replaceWith(" "+
+      "<tr class='estanon" + data.id + "'>"+
       "<td>" + data.id + "</td>"+
       "<td>" + data.Descripcion + "</td>"+
       "<td>" + data.Peso + "</td>"+
