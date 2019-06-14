@@ -68,8 +68,7 @@
                 <th>Producto</th>
                 <th>Precio</th>
                 <th>cantidad utilizada</th>
-                <th>descuento</th>
-               
+                <th></th>
                 <th>Subtotal</th>
             </tr>
         </thead>
@@ -79,9 +78,8 @@
                 <td>{{$det->stocks}}</td>
                 <td>{{$det->Precio}}</td>
                 <td>{{$det->cantidad}}</td>
-                <td>{{$det->descuento}}</td>
-              
-                 <td>{{(($det->cantidad*$det->Precio)-(($det->cantidad*$det->Precio)-$det->descuento))}}</td>
+                <td></td>
+                <td>{{$det->cantidad*$det->Precio}}</td>
             </tr>
         @endforeach
         </tbody>

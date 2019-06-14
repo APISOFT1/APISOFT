@@ -124,6 +124,7 @@
        <th>Producto</th>
        <th>Cantidad disponible</th>
        <th>Presentacion id</th>
+       <th>Precio</th>
        <th>cantidad a utilizar</th>
        
        <th>Subtotal</th>
@@ -133,7 +134,8 @@
        <th></th>
        <th></th>
        <th></th>
-      
+       <th></th>
+       
        <th></th>
 
        <th><h4 id="total">₡/ . 0.00</h4> <input type="hidden" name="total_venta" 

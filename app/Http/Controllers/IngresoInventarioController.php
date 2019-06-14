@@ -109,7 +109,9 @@ class IngresoInventarioController extends Controller
         ->first();
         $detalles=DB::table('detalle_ingreso_inventario as d')
             ->join ('stocks as a','d.stock_id','=','a.id')
-            ->select('a.producto_id as stocks','d.Precio','d.cantidad','a.cantidadDisponible')
+            ->join ('productos as p','a.producto_id','=','p.id')
+            ->join ('presentacions as pre','a.presentacion_id','=','pre.id')
+            ->select(DB::raw('CONCAT(a.id," - ",p.nombre," - ", pre.Descripcion) AS stocks'),'d.Precio','d.cantidad','a.cantidadDisponible')
             ->where('d.idingreso_inventario','=',$id)
             ->get(); 
         return view("IngresoInventario.show",["ingresos"=>$ingresos,"detalles"=>$detalles]);
@@ -125,10 +127,12 @@ class IngresoInventarioController extends Controller
     ->groupBy('i.idingreso_inventario','i.fecha_hora','p.nombre','p.apellido1','p.apellido2','u.name','i.tipo_comprobante', 'i.serie_comprobante','i.tipo_pago','i.total_venta','i.estado')
     ->first();
     $detalles=DB::table('detalle_ingreso_inventario as d')
-        ->join ('stocks as a','d.stock_id','=','a.id')
-        ->select('a.producto_id as stocks','d.Precio','d.cantidad','a.cantidadDisponible')
-        ->where('d.idingreso_inventario','=',$id)
-        ->get(); 
+            ->join ('stocks as a','d.stock_id','=','a.id')
+            ->join ('productos as p','a.producto_id','=','p.id')
+            ->join ('presentacions as pre','a.presentacion_id','=','pre.id')
+            ->select(DB::raw('CONCAT(a.id," - ",p.nombre," - ", pre.Descripcion) AS stocks'),'d.Precio','d.cantidad','a.cantidadDisponible')
+            ->where('d.idingreso_inventario','=',$id)
+            ->get(); 
     
      $ingresos = PDF::loadView("IngresoInventario.edit",["ingresos"=>$ingresos,"detalles"=>$detalles]);
      return $ingresos->download('IngresoInventario.edit');

@@ -54,15 +54,15 @@
        <th>Producto</th>
        <th>Precio</th>
        <th>cantidad utilizada</th>
-       <th>Descuento</th>
        <th>Subtotal</th>
+       
       </thead>
       <tfoot>
 
       <th></th>
        <th></th>
        <th></th>
-       <th></th>
+    
        <th><h4 id="total">{{$ingresos->total_venta}}</h4></th>
       </tfoot>
       <tbody>
@@ -72,8 +72,7 @@
        <td>{{$det->stocks}} </td>
        <td>{{$det->Precio}} </td>
        <td>{{$det->cantidad}} </td>
-       <td>{{$det->descuento}} </td>
-       <td>{{(($det->Precio*$det->cantidad)-$det->descuento)}} </td> 
+       <td>{{$det->Precio*$det->cantidad}} </td> 
      </td>
       @endforeach
       </tbody>
