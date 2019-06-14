@@ -29,27 +29,23 @@ public function __construct()
 
 
 //INDEEEEEEEEEEEEX/
+//INDEEEEEEEEEEEEX/
 public function index(Request $request){
-if($request){
- 
-     $search = \Request::get('search');
-        $recepcion = RecepcionMateriaPrima::where('fecha','like','%'.$search.'%')
-                  ->orWhere('id','LIKE','%'.$search.'%')
-                  ->orWhere('pesoBruto','LIKE','%'.$search.'%')
-                  ->orWhere('pesoNeto','LIKE','%'.$search.'%')
-                  ->orWhere('numero_muestras','LIKE','%'.$search.'%')
-                  ->orWhere('observacion','LIKE','%'.$search.'%')
-
-      ->orderBy('created_at','DESC')
-      ->take(1)
-      ->get();
-       $recepcion = RecepcionMateriaPrima::paginate(10);
-      $afiliado = Afiliado::all();
-      $estanon = Estanon::all();
-      $user = User::all();
-      $tipoEntrega = TipoEntrega::all();
-  return view('RecepcionMateriaPrima.index', compact('afiliado','recepciones','estanon','user','tipoEntrega','recepcion'));
-}}
+  if($request){
+    $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
+    $recepcion = RecepcionMateriaPrima::paginate(10);
+        $afiliado = Afiliado::all();
+        $estanon = Estanon::all();
+        $recepciones = DB::table('recepcion_materia_primas')
+        ->select('id','afiliado_id')
+        ->orderBy('created_at','DESC')
+        ->take(1)
+        ->get();
+        $user = User::all();
+        $tipoEntrega = TipoEntrega::all();
+    return view('RecepcionMateriaPrima.index', compact('afiliado','recepciones','estanon','user','tipoEntrega','recepcion'), ['recepcion'=>$recepcion,"searchText"=>$query]);
+  }}
+  
 
 ////////////////////////////////////////////////////////NUEVO
 

@@ -91,7 +91,7 @@
                   @endif
                   <li><a><i class="glyphicon glyphicon-list-alt"></i> Recepción<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('/RecepcionMateriaPrima') }}">Gestionar Recepción</a></li>
+                      <li><a href="{{ url('/RecepcionMateriaPrima/') }}">Gestionar Recepción</a></li>
                       <li><a href="{{ url('/Cera/') }}">Gestionar ExtracCión de cera</a></li>
                     </ul>
                   </li>
@@ -105,8 +105,9 @@
 
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stock</a></li>
                     <li><a href="{{ url('/Producto/') }}">Gestionar Producto</a></li>
+                    <li><a href="{{ url('/Presentacion/') }}">Gestionar Presentación</a></li>
                     
                     </ul>
                   </li>

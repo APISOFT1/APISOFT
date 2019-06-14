@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -304,13 +305,16 @@ success: function(data) {
           "<td>" + data.afiliado_id + "</td>"+
           "<td>" + data.apiario_id + "</td>"+ 
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
-          data.id + "' data-afiliado_id='"
-          + data.afiliado_id +  "' data-apiario_id='" 
-          + data.apiario_id + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='"
-           + data.id + "' data-afiliado_id='" 
-           + data.afiliado_id + "' data-apiario_id='" + data.apiario_id + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
-           + data.id + "' data-afiliado_id='" + data.afiliado_id +  "' data-apiario_id='" 
-          + data.apiario_id +  "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
+          data.id + 
+          "' data-afiliado_id='" + data.afiliado_id +  
+          "' data-apiario_id='" + data.apiario_id + "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='"
+           + data.id + 
+           "' data-afiliado_id='" + data.afiliado_id + 
+           "' data-apiario_id='" + data.apiario_id + 
+           "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
+           + data.id +
+           "' data-afiliado_id='" + data.afiliado_id + 
+            "' data-apiario_id='" + data.apiario_id +  "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
     }
 },

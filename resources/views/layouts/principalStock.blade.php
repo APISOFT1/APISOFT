@@ -16,8 +16,14 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="{{asset('css2/bootstrap-select.min.css')}}">
  
+  
+      <!-- Include Twitter Bootstrap and jQuery: -->
+<!--<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>->
+ 
+<!-- Include the plugin's CSS and JS: -->
+<!--<link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>-->
 
-
+ <!--   {!!Html::style ('/css/bootstrap-multiselect.css')!!} -->
     {!!Html::style ('/css2/bootstrap.min.css')!!} 
 
     {!!Html::style ('/css2/bootstrap-select.min.css')!!}   
@@ -25,8 +31,6 @@
     {!!Html::style ('/css2/select2.min.css')!!}
 
     {!!Html::style ('/css2/select2.css')!!}
-
-    {!!Html::style ('/css/dashboard.css')!!}
     
     <!-- Font Awesome -->
     {!!Html::style ('/css2/font-awesome.min.css')!!}
@@ -55,7 +59,7 @@
               </div>
               <div class="profile_info">
                 <span>Bienvenido</span>
-            
+                <h2>{{ Auth::user()->name }}</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -71,11 +75,15 @@
                      
                     </ul>
                   </li>
+                @if(Auth::check())
+                    @if (Auth::user()->isAdmin())
                   <li><a><i class="fa fa-briefcase"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                     <li><a href="{{ url('/users/') }}">Gestionar Usuarios</a></li>
+                      
+                     <li><a href="{{ url('users/') }}">Gestionar usuario</a></li>
                     </ul>
                   </li>
+                  
                   <li><a><i class="fa fa-users"></i> Afiliados <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Afiliado/') }}">Gestionar Afiliado</a></li>
@@ -85,6 +93,8 @@
                     
                     </ul>
                   </li>
+                  @endif
+                  @endif
                   <li><a><i class="glyphicon glyphicon-list-alt"></i> Recepción<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/RecepcionMateriaPrima') }}">Gestionar Recepción</a></li>
@@ -95,18 +105,18 @@
                     <ul class="nav child_menu">
                       <li><a href="{{ url('/Estanon/') }}">Gestionar Estañones</a></li>
                       <li><a href="{{ url('/RecepEstanon/') }}">Gestionar Recepción-Estañón</a></li>
-                     
                     
                     </ul>
                   </li>
 
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                    <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    <li><a href="{{ url('/Stock/') }}">Gestionar Stock</a></li>
                     <li><a href="{{ url('/Producto/') }}">Gestionar Producto</a></li>
+                    <li><a href="{{ url('/Presentacion/') }}">Gestionar Presentación</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-cart-plus"></i>Servicios <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-cart-plus"></i> Servicios <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li><a href="{{ url('/IngresoCera/') }}">Gestionar Servicio Cera</a></li>
                     <li> <a href="{{ url('/IngresoInventario/') }}">Gestionar Servicio Inventario</a></li>
@@ -157,16 +167,16 @@
         <!-- /footer content -->
       </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+   
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
   crossorigin="anonymous"></script>
+
+  
   <!--<script src="{{asset('js2/bootstrap-select.min.js')}}"></script>-->
   
     <!-- jQuery -->
      
-    @jquery
-    @toastr_js
-    @toastr_render
 
     {!!Html::script('/js2/jquery.min.js')!!}  
 
@@ -195,34 +205,43 @@
 
      {!!Html::script('/js2/dropdown.js')!!}
 
-     {!!Html::script('/js/dashboard.js')!!}
+    <!-- {!!Html::script('/js/jquery.min.js')!!}
+     {!!Html::script('/js/bootstrap.min.js')!!}-->
 
-     {!!Html::script('/js/Chart.min.js')!!}
 
-
+   <!--  <script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>-->
  
 <!-- Include the plugin's CSS and JS: -->
 {!!Html::script('/js/bootstrap-select.min.js')!!}
 
 {!!Html::script('/js/jquery-1.11.1.min.js')!!}
 
+<!--{!!Html::script('/js/bootstrap.min.js')!!} -->
 
-<!-- MODAL INVENTARIO -->
+<!--<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>-->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    @jquery
+    @toastr_js
+    @toastr_render
+
+
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 {{-- ajax Form Add Post--}}
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
-    $('.modal-descripcion').text('Nuevo lote');
+    $('.modal-descripcion').text('Crear Ubicación');
   });
   $("#add").click(function() {
     $.ajax({
       type: 'POST',
       url: 'addStock',
-      
       data: {
         '_token': $('input[name=_token]').val(),
         'producto_id': $('select[name=producto_id]').val(),
@@ -230,21 +249,21 @@
         'presentacion_id': $('select[name=presentacion_id]').val(),
         'cantidadDisponible': $('input[name=cantidadDisponible]').val(),
         'estanon_recepcions_id': $('select[name=estanon_recepcions_id]').val()
-        
       },
       success: function(data){
-       
         $('.errorProducto_id').addClass('hidden');
          $('.errorPrecioUnitario').addClass('hidden');
          $('.errorPresentacion_id').addClass('hidden');
          $('.errorCantidadDisponible').addClass('hidden');
         $('.errorEstanon_recepcions_id').addClass('hidden');
-         if ((data.errors)) {
+         
+                    
+                    if ((data.errors)) {
                         setTimeout(function () {
                             $('#create').modal('show');
-                            toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
+                            toastr.error('ERRO DE VALIDACIÓN!', 'Error Alert', {timeOut: 5000});
                         }, 500);
-                        if (data.errors.producto_id) {
+                       if (data.errors.producto_id) {
                             $('.errorProducto_id').removeClass('hidden');
                             $('.errorProducto_id').text(data.errors.producto_id);
                         }
@@ -265,40 +284,72 @@
                             $('.errorEstanon_recepcions_id').removeClass('hidden');
                             $('.errorEstanon_recepcions_id').text(data.errors.estanon_recepcions_id);
                         }
-        } else {
-          toastr.success('SE HA CREADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
-      
+                       
+                    } else {
+                        toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
+  
+          $('#table').append("<tr class='sto" + data.id + "'>"+
+          "<td>" + data.id + "</td>"+
+          "<td>" + data.producto_id + "</td>"+
+          "<td>" + data.precioUnitario + "</td>"+
+          "<td>" + data.presentacion_id + "</td>"+
+          "<td>" + data.cantidadDisponible + "</td>"+
+          "<td>" + data.estanon_recepcions_id + "</td>"+
 
-       }
+          "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
+          data.id + "'data-producto_id='" + data.producto_id + 
+          "'data-precioUnitario='" + data.precioUnitario + 
+          "'data-presentacion_id='" + data.presentacion_id + 
+          "'data-cantidadDisponible='" + data.cantidadDisponible + 
+          "'data-estanon_recepcions_id='" + data.estanon_recepcions_id + 
+          "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
+          + data.id +
+         "'data-producto_id='" + data.producto_id + 
+          "'data-precioUnitario='" + data.precioUnitario + 
+          "'data-presentacion_id='" + data.presentacion_id + 
+          "'data-cantidadDisponible='" + data.cantidadDisponible + 
+          "'data-estanon_recepcions_id='" + data.estanon_recepcions_id + 
+
+           "' ><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='"
+            + data.id + 
+              "'data-producto_id='" + data.producto_id + 
+          "'data-precioUnitario='" + data.precioUnitario + 
+          "'data-presentacion_id='" + data.presentacion_id + 
+          "'data-cantidadDisponible='" + data.cantidadDisponible + 
+          "'data-estanon_recepcions_id='" + data.estanon_recepcions_id + 
+            "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
+          "</tr>");
+        }
+     
       },
     });
-    $('#producto_id').val('');
+   $('#producto_id').val('');
     $('#precioUnitario').val('');
     $('#presentacion_id').val('');
     $('#cantidadDisponible').val('');
     $('#estanon_recepcions_id').val('');
   });
- 
 // function Edit POST
 $(document).on('click', '.edit-modal', function() {
-$('#footer_action_button').text(" Editar Stock");
+$('#footer_action_button').text(" Editar ");
 $('#footer_action_button').addClass('glyphicon-check');
 $('#footer_action_button').removeClass('glyphicon-trash');
 $('.actionBtn').addClass('btn-success');
 $('.actionBtn').removeClass('btn-danger');
 $('.actionBtn').addClass('edit');
-$('.modal-descripcion').text('Editar Stock');
+$('.modal-descripcion').text('Editar Registro');
 $('.deleteContent').hide();
 $('.form-horizontal').show();
 $('#id2').val($(this).data('id'));
 $('#pro2').val($(this).data('producto_id'));
-$('#pre2').val($(this).data('precioUnitario'));
+$('#pre2').val($(this).data('preciounitario'));
 $('#pres2').val($(this).data('presentacion_id'));
-$('#can2').val($(this).data('cantidadDisponible'));
+$('#can2').val($(this).data('cantidaddisponible'));
 $('#est2').val($(this).data('estanon_recepcions_id'));
 $('#myModal').modal('show');
 });
 $('.modal-footer').on('click', '.edit', function() {
+  $('#form_result').html('');
   $.ajax({
     type: 'POST',
     url: 'editStock',
@@ -312,17 +363,19 @@ $('.modal-footer').on('click', '.edit', function() {
 'estanon_recepcions_id': $('#est2').val(),
     },
 success: function(data) {
-   $('.errorProducto_id').addClass('hidden');
+ $('.errorProducto_id').addClass('hidden');
          $('.errorPrecioUnitario').addClass('hidden');
          $('.errorPresentacion_id').addClass('hidden');
          $('.errorCantidadDisponible').addClass('hidden');
         $('.errorEstanon_recepcions_id').addClass('hidden');
+         
+                    
          if ((data.errors)) {
-                        setTimeout(function () {
-                            $('#create').modal('show');
-                            toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
-                        }, 500);
-                        if (data.errors.producto_id) {
+             setTimeout(function () {
+                 $('#create').modal('show');
+                 toastr.error('ERRO DE VALIDACIÓN!', 'Error Alert', {timeOut: 5000});
+             }, 500);
+             if (data.errors.producto_id) {
                             $('.errorProducto_id').removeClass('hidden');
                             $('.errorProducto_id').text(data.errors.producto_id);
                         }
@@ -343,16 +396,17 @@ success: function(data) {
                             $('.errorEstanon_recepcions_id').removeClass('hidden');
                             $('.errorEstanon_recepcions_id').text(data.errors.estanon_recepcions_id);
                         }
-        } else {
-          toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
-     $('#table').append("<tr class='sto" + data.id + "'>"+
-          "<td>" + data.id + "</td>"+
+            
+         }else {
+        toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
+             $('.sto' + data.id).replaceWith(" "+
+          "<tr class='sto"+ data.id +"'>"+
+      "<td>" + data.id + "</td>"+
           "<td>" + data.producto_id + "</td>"+
           "<td>" + data.precioUnitario + "</td>"+
           "<td>" + data.presentacion_id + "</td>"+
           "<td>" + data.cantidadDisponible + "</td>"+
           "<td>" + data.estanon_recepcions_id + "</td>"+
-  
           "<td><button class='show-modal btn btn-info btn-sm' data-id='" + 
           data.id + 
           "' data-producto_id='"
@@ -364,10 +418,9 @@ success: function(data) {
           "' data-cantidadDisponible='" 
           + data.cantidadDisponible + 
           " 'data-estanon_recepcions_id='" 
-          + data.estanon_recepcions_id + 
-          "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='"
-          + data.id +
-          "' data-producto_id='"
+          + data.estanon_recepcions_id +  "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm'  data-id='"
+           + data.id + 
+           "' data-producto_id='"
           + data.producto_id + 
              "' data-precioUnitario='" 
           + data.precioUnitario + 
@@ -376,13 +429,26 @@ success: function(data) {
           "' data-cantidadDisponible='" 
           + data.cantidadDisponible + 
           " 'data-estanon_recepcions_id='" 
-          + data.estanon_recepcions_id +   "'><span class='fa fa-eye'></span></button> <button class='edit-modalRol btn btn-warning btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modalRol btn btn-danger btn-sm' data-id='" + data.id + "' data-descripcion='" + data.descripcion + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
-      "</tr>");
+          + data.estanon_recepcions_id + 
+           "'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
+           + data.id +
+           "' data-producto_id='"
+          + data.producto_id + 
+             "' data-precioUnitario='" 
+          + data.precioUnitario + 
+             "' data-presentacion_id='" 
+          + data.presentacion_id+  
+          "' data-cantidadDisponible='" 
+          + data.cantidadDisponible + 
+          " 'data-estanon_recepcions_id='" 
+          + data.estanon_recepcions_id +  "' ><span class='glyphicon glyphicon-trash'></span></button></td>"+
+          "</tr>");
         }
       
 },
   });
 });
+// form Delete function
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Eliminar");
 $('#footer_action_button').removeClass('glyphicon-check');
@@ -390,11 +456,11 @@ $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-descripcion').text('Eliminar Stock');
+$('.modal-descripcion').text('Eliminar Registro');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
-$('.id').html($(this).data('id'));
+$('.producto_id').html($(this).data('producto_id'));
 $('#myModal').modal('show');
 });
 $('.modal-footer').on('click', '.delete', function(){
@@ -406,7 +472,7 @@ $('.modal-footer').on('click', '.delete', function(){
       'id': $('.id').text()
     },
     success: function(data){
-      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Alerta Éxito', {timeOut: 5000});
+      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
       $('.sto' + $('.id').text()).remove();
     }
   });
@@ -414,31 +480,14 @@ $('.modal-footer').on('click', '.delete', function(){
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
-  $('#id3').text($(this).data('id'));
-  $('#pro3').text($(this).data('producto_id'));
-  $('#pre3').text($(this).data('precioUnitario'));
-  $('#pres3').text($(this).data('presentacion_id'));
-  $('#can3').text($(this).data('cantidadDisponible'));
-  $('#est3').text($(this).data('estanon_recepcions_id'));
+  $('#id1').text($(this).data('id'));
+  $('#pro1').text($(this).data('producto_id'));
+  $('#pre1').text($(this).data('precioUnitario'));
+  $('#pres1').text($(this).data('presentacion_id'));
+  $('#can1').text($(this).data('cantidadDisponible'));
+  $('#est1').text($(this).data('estanon_recepcions_id'));
   $('.modal-title').text('Detalle');
   });
-  /* processing bar 
-  */
-  var myApp;
-myApp = myApp || (function () {
-    var pleaseWaitDiv = $('<div class="modal hide" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false"><div class="modal-header"><h1>Processing...</h1></div><div class="modal-body"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div></div>');
-    return {
-        showPleaseWait: function() {
-            pleaseWaitDiv.modal();
-        },
-        hidePleaseWait: function () {
-            pleaseWaitDiv.modal('hide');
-        },
-    };
-})();
 </script>
-  
-
-
-    </body>
-    </html>
+  </body>
+</html>
