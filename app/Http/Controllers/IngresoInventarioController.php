@@ -47,12 +47,15 @@ class IngresoInventarioController extends Controller
         ->get();
         $usuarios=DB::table('users')
         ->get();
-      
-        $stocks = DB::table('stocks as art')
-         ->join('presentacions as p','art.presentacion_id','=','p.id')
-          ->select(DB::raw('CONCAT(art.id," - ", art.presentacion_id) AS stocks'),'art.id','art.cantidadDisponible','art.presentacion_id')
-          ->groupBy('stocks','art.id','art.cantidadDisponible', 'art.presentacion_id')
-          ->get();
+        $presentacion=DB::table('presentacions as p');
+        $productos=DB::table('productos as pro');
+        $stocks = DB::table('stocks as art')     
+        ->join('productos as pro','art.producto_id','=','pro.id') 
+        ->join('presentacions as p','art.presentacion_id','=','p.id') 
+        ->select(DB::raw('CONCAT(art.id," - ",p.Descripcion," - ",pro.nombre) AS stocks'),'art.id','art.cantidadDisponible','art.presentacion_id')
+        ->groupBy('stocks','art.id','art.cantidadDisponible','art.presentacion_id')
+        ->where('art.cantidadDisponible','>','0')
+        ->get();
         return view ("IngresoInventario.create",["personas"=>$personas,"usuarios"=>$usuarios,"stocks"=>$stocks]);
     }
     public function store (IngresoInventarioFormRequest $request)

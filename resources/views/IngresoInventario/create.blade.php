@@ -55,7 +55,7 @@
   <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
    <div class="form-group">
     <label for="serie_comprobante">Serie Comprobante</label>
-    <input type="text" name="serie_comprobante" value="{{old('serie_comprobante')}}" class="form-control" placeholder="Serie Comprobante">
+    <input type="text" name="serie_comprobante" id="serie_comprobante" name="serie_comprobante"  class="form-control" placeholder="Serie Comprobante">
    </div>
   </div>
   <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
@@ -63,7 +63,7 @@
     <label>Tipo de pago</label>
     <select name="tipo_pago" class="form-control">
      <option value="en efectivo">En efectivo</option>
-     <option value="Con tarjeta">Con tarjeta</option>
+    
     </select>
    </div>
   </div>
@@ -73,7 +73,7 @@
   <div class="panel panel-primary">
   <div class="table-responsive">
    <div class="panel-body">
-    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
      <div class="form-group">
   <label>Producto</label>
      <select name="pstock_id" class="form-control selectpicker" id="pstock_id" data-live-search="true">
@@ -92,7 +92,7 @@
     </div>
     <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
      <div class="form-group">
-      <label>id de la presentación</label>
+      <label for="presentacion_id">id de la presentación</label>
       <input type="number"  disabled name="ppresentacion_id" id="ppresentacion_id" class="form-control" placeholder="id de la presentación">
      </div>
     </div>
@@ -103,10 +103,10 @@
       <input type="number" name="pPrecio" id="pPrecio" class="form-control" placeholder="Precio">
      </div>
     </div>
-    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
      <div class="form-group">
-      <label for="cantidad">Cantidad a utilizar en laminas</label>
-      <input type="number" name="pcantidad" id="pcantidad" class="form-control" placeholder="cantidad a utilizar en laminas">
+      <label for="cantidad">Cantidad a utilizar</label>
+      <input type="number" name="pcantidad" id="pcantidad" class="form-control" placeholder="cantidad a utilizar">
      </div>
     </div>
      
@@ -122,9 +122,10 @@
       <thead style="background-color:	#9ddcf2">
        <th>Opciones</th>
        <th>Producto</th>
-       <th>cantidad disponible</th>
+       <th>Cantidad disponible</th>
        <th>Presentacion id</th>
-       <th>cantidad a utilizar en laminas</th>
+       <th>cantidad a utilizar</th>
+       
        <th>Subtotal</th>
       </thead>
       <tfoot>
@@ -132,7 +133,7 @@
        <th></th>
        <th></th>
        <th></th>
-       <th></th>
+      
        <th></th>
 
        <th><h4 id="total">₡/ . 0.00</h4> <input type="hidden" name="total_venta" 
@@ -185,21 +186,21 @@ $(document).ready(function(){
     stock_id=datosProducto[0];
     stocks=$("#pstock_id option:selected").text();
     cantidadDisponible=$("#pcantidadDisponible").val();
-    
     presentacion_id=$("#ppresentacion_id").val();
+
     Precio=$("#pPrecio").val();
     cantidad=$("#pcantidad").val();
    
 
-    if (stock_id!="" && cantidadDisponible>0 && Precio!="" && Precio>0 && cantidad!="")
+    if (stock_id!="" && cantidadDisponible>0 && presentacion_id!="" && Precio!="" && Precio>0 && cantidad!="")
     {
     
        subtotal[cont]=(Precio*cantidad);
        total=total+subtotal[cont];
-       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="stock_id[]" value="'+stock_id+'">'+stocks+'</td><td><input type="number" name="cantidadDisponible[]" value="'+cantidadDisponible+'"></td><td><input type="number" name="presentacion_id[]" value="'+presentacion_id+'"></td><td><input type="number" name="Precio[]" value="'+Precio+'"></td><td><input type="number" name="cantidad[]" value="'+cantidad+'"></td><td>'+subtotal[cont]+'</td></tr>';
+       var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="stock_id[]" value="'+stock_id+'">'+stocks+'</td><td><input type="number" name="cantidadDisponible[]" value="'+cantidadDisponible+'"></td><td><input type="number" name="presentacion_id[]" value="'+presentacion_id+'"></td><td><input type="number" name="Precio[]" value="'+Precio+'"></td><td><input type="number" name="cantidad[]" value="'+cantidad+'"></td><<td>'+subtotal[cont]+'</<td></tr>';
        cont++;
        limpiar();
-       $('#total').html("$/ " + total);
+       $('#total').html("₡/ " + total);
        $('#total_venta').val(total);
        evaluar();
        $('#detalles').append(fila);
@@ -226,7 +227,7 @@ $(document).ready(function(){
    }
  function eliminar(index){
   total=total-subtotal[index]; 
-    $("#total").html("$/. " + total); 
+    $("#total").html("₡/. " + total); 
     $('#total_venta').val(total);  
     $("#fila" + index).remove();
     evaluar();

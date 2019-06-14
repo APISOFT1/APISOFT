@@ -170,7 +170,6 @@
   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
   crossorigin="anonymous"></script>
   <script src="{{asset('js2/bootstrap-select.min.js')}}"></script>
-  
     <!-- jQuery -->
     @jquery
     @toastr_js
@@ -181,17 +180,19 @@
     <!-- Bootstrap -->
     {!!Html::script('/js2/bootstrap.min.js')!!}
 
+  
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     
-    <!-- FastClick -->
+     <!-- FastClick -->
     {!!Html::script('/js2/fastclick.js')!!}
     <!-- NProgress -->
     {!!Html::script('/js2/nprogress.js')!!}
     <!-- jQuery custom content scroller -->
     {!!Html::script('/js2/jquery.mCustomScrollbar.concat.min.js')!!}
     <!-- Custom Theme Scripts -->
+   
     {!!Html::script('/js2/custom.min.js')!!}
      {!!Html::script('/js2/dropdown.js')!!}
 
@@ -707,7 +708,7 @@ $( document ).on('click','.create-modal',function() {
 });
 </script>
  
- <script>
+<script>
 $( document ).on('click','.bt_add',function() {
   var aleatorio = Math.round(Math.random()*1000000);
 $("#serie_comprobante").val(aleatorio);   
