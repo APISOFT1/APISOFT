@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use Validator;
 use Response;
@@ -10,35 +9,32 @@ use App\Ubicacion;
 use Illuminate\Http\Redirect;
 use App\Http\Requests\UbicacionFormRequest;
 use DB;
-
-
 class UbicacionController extends Controller
 {
    
 public function __construct()
 {
 }
+
 //INDEEEEEEEEEEEEX/
 public function index(Request $request)
 {
   if ($request)
   {
-      $query=trim($request->get('searchText'));
-      $ubicacion=DB::table('ubicacions')->where('id','LIKE','%'.$query.'%')
-      ->orwhere('descripcion','LIKE','%'.$query.'%')
+     $search = \Request::get('search');     
+      $ubicacion = Ubicacion::where('id','like','%'.$search.'%')
+      ->orwhere('Descripcion','LIKE','%'.$search.'%')
       ->orderby('id','ASC')
       ->paginate(10);
+     return view('Ubicacion.index',compact('ubicacion'));
    
-      return view('Ubicacion.index',["ubicacion"=>$ubicacion,"searchText"=>$query]);
   }
- // $ubicacion = Ubicacion::paginate(10);
- // return view('Ubicacion.index',compact('ubicacion'));        
-    
+
 }
 ////////////////////////////////////////////////////////NUEVO
 public function addUbicacion(Request $request ){
     $rules = array(
-      'Descripcion' => 'required'
+      'Descripcion' => 'required|min:6|max:32|regex:/^[a-z ,.\'-]+$/i'
     );
     $error = Validator::make($request->all() , $rules);
     if ($error->fails())
@@ -57,7 +53,7 @@ public function addUbicacion(Request $request ){
 }
  public function editUbicacion(request $request){
   $rules = array(
-    'Descripcion' => 'required'
+    'Descripcion' => 'required|min:6|max:32|regex:/^[a-z ,.\'-]+$/i'
   );
 $validator = Validator::make ( Input::all(), $rules);
 if ($validator->fails())
@@ -66,7 +62,7 @@ else {
 $ubicacion =Ubicacion::find ($request->id);
 $ubicacion->Descripcion = $request->Descripcion;
 $ubicacion->save();
-return response()->json(['success' => 'Se ha editado correctamente']);
+return response()->json($ubicacion);
 }
 }
 public function deleteUbicacion(request $request){

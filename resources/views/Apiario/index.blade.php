@@ -29,7 +29,7 @@
 
 
 <div class="table-responsive">
-			<table class="table table-striped table-bordered table-condensed table-hover" id="postTable" >
+			<table class="table table-striped table-bordered table-condensed table-hover" id="table" >
 				<thead>
 					<th>Código</th>
 					<th>Descripción</th>
@@ -42,7 +42,7 @@
         {{ csrf_field() }}
           
                @foreach ($api as $value)
-					
+          <tr class="api{{$value->id}}">
           <td>{{ $value->id }}</td>
 					<td>{{ $value->Descripcion}}</td>
 					<td>{{ $value->cantidad}}</td>
@@ -99,16 +99,16 @@
 
         <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-           <input type="text" class="form-control has-feedback-left" id="Descripcion" name="Descripcion" placeholder="Descripción" required>
-           <p class="error text-center alert alert-danger hidden"></p>
+           <input type="text" class="form-control has-feedback-left"  id="Descripcion" name="Descripcion" placeholder="Descripción" required>
+          <p class="errorDescripcion text-center alert alert-danger hidden"></p>
               <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                 </div>
                 </div>
 
                 <div class="form-group row add">
                 <div class="col-md-9" >
-           <input type="text" class="form-control has-feedback-left" id="cantidad" name="cantidad" placeholder="cantidad" required>
-           <p class="error text-center alert alert-danger hidden"></p>
+           <input type="number" class="form-control has-feedback-left" id="cantidad" name="cantidad" placeholder="cantidad" required>
+           <p class="errorCantidad text-center alert alert-danger hidden"></p>
               <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                 </div>
                </div>
@@ -121,6 +121,7 @@
           <option value="{{ $ubicacion->id }}">{{$ubicacion->Descripcion}}</option>
          @endforeach
         </select>
+        <p class="errorUbicacion text-center alert alert-danger hidden"></p>
         <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
         </div>
         </div>
@@ -195,7 +196,8 @@
                 <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
            <input type="text" class="form-control has-feedback-left" id="cri" >
-           <p class="errorTitle text-center alert alert-danger hidden"></p>
+           
+           <p class="errorDescripcion text-center alert alert-danger hidden"></p>
               <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
               
                 </div>
@@ -204,7 +206,7 @@
                 <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
            <input type="text" class="form-control has-feedback-left" id="can" >
-           <p class="errorTitle text-center alert alert-danger hidden"></p>
+           <p class="errorCantidad text-center alert alert-danger hidden"></p>
               <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
              
                 </div>
@@ -218,6 +220,7 @@
           <option value="{{ $ubicacion->id }}">{{$ubicacion->Descripcion}}</option>
          @endforeach
         </select>
+        <p class="errorUbicacion text-center alert alert-danger hidden"></p>
 					  <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
 </div>
 </div>

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use Validator;
 use Response;
@@ -19,16 +18,16 @@ class ApiarioController extends Controller
     public function index(Request $request)
     {
         if($request){
-            $query=trim($request->get('searchText'));  //valida si la peticion trae el campo de busqueda 
-        $api = Apiario::with('Ubicacion')
-            ->where('Descripcion','LIKE','%'.$query.'%')
+            $api = Apiario::with('Ubicacion');
+            $search = \Request::get('search');
+            $api = Apiario::where('id','like','%'.$search.'%')
+                  ->orWhere('Descripcion','LIKE','%'.$search.'%')
+                  ->orWhere('cantidad','LIKE','%'.$search.'%')
+                  ->orWhere('ubicacion_id','LIKE','%'.$search.'%')
             ->orderby('id','ASC')
             ->paginate(7);
            $ubicaciones = Ubicacion::all();
-
-          
-
-        return view('Apiario.index', compact('api', 'ubicaciones'), ['api'=>$api,"searchText"=>$query]);
+        return view('Apiario.index', compact('api', 'ubicaciones'));
         }
         
     }
@@ -37,15 +36,13 @@ public function addApiario(Request $request){
    
   $rules = array(
       
-      'Descripcion' => 'required',
-      'cantidad' => 'required',
+      'Descripcion' => 'required|min:3|max:32|regex:/^[a-z ,.\'-]+$/i',
+      'cantidad' => 'required|min:2|max:2|',
       'ubicacion_id' => 'required'
       ); 
-
       $validator = Validator::make ( Input::all(), $rules);
       if ($validator->fails())
       return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
-
     else {
     
     $ubicacion_id = input::get('ubicacion_id');
@@ -59,7 +56,6 @@ public function addApiario(Request $request){
       
       return response()->json($api);
   
-
   }
 }
 public function find(Request $request)
@@ -77,9 +73,9 @@ public function find(Request $request)
     }
 public function editApiario(request $request){
   $rules = array(
-    'Descripcion' => 'required',
-    'cantidad' => 'required',
-      'ubicacion_id' => 'required'
+    'Descripcion' => 'required|min:3|max:20|regex:/^[a-z ,.\'-]+$/i',
+    'cantidad' => 'required|min:2|max:2|',
+    'ubicacion_id' => 'required'
   );
 $validator = Validator::make ( Input::all(), $rules);
 if ($validator->fails())
@@ -99,8 +95,6 @@ public function deleteApiario(request $request){
   $api = Apiario::find ($request->id);
   $api->delete();
  
-
   
-
 }
 }

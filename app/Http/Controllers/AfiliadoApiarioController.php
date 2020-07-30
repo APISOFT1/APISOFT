@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Afiliado;
 use App\Apiario;
@@ -9,10 +8,8 @@ use App\AfiliadoApiario;
 use Illuminate\Http\Request;
 use App\Http\Requests\AfiliadoApiariosFormRequest;
 use Illuminate\Support\Facades\Input;  //MUYR IMPORTANTE , SIN ESTO NO GUARDA.
-
 class AfiliadoApiarioController extends Controller
 {
-
     public function __construct()
     {
     
@@ -25,8 +22,13 @@ class AfiliadoApiarioController extends Controller
          */
         public function index(Request $request)
         { 
-         
-          $afiliadoapiario = AfiliadoApiario::paginate(10);
+            $afiliadoapiario = AfiliadoApiario::with('RecepcionMateriaPrima');
+            $search = \Request::get('search');
+            $afiliadoapiario = AfiliadoApiario::where('id','like','%'.$search.'%')
+                  ->orWhere('afiliado_id','LIKE','%'.$search.'%')
+                  ->orWhere('apiario_id','LIKE','%'.$search.'%')
+                  ->orderby('id','desc')
+                  ->paginate(7);         
           $afiliados=Afiliado::all();
           $apiarios=Apiario::all();
           return view('AfiliadoApiario.index',compact('afiliadoapiario','afiliados','apiarios'));      
@@ -45,6 +47,7 @@ class AfiliadoApiarioController extends Controller
         return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
     
       else {
+       
         $afiliadoapiario = new AfiliadoApiario;
         $afiliadoapiario->afiliado_id = $request->afiliado_id;
         $afiliadoapiario->apiario_id = $request->apiario_id;
@@ -64,6 +67,7 @@ class AfiliadoApiarioController extends Controller
   return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
   
   else {
+    $afiliadoapiario = AfiliadoApiario::all();
   $afiliadoapiario = AfiliadoApiario::find ($request->id);
   $afiliadoapiario->afiliado_id = $request->afiliado_id;
   $afiliadoapiario->apiario_id = $request->apiario_id;

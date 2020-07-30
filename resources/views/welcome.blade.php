@@ -213,8 +213,9 @@
                   <div class="icon">
                     <i class="mdi-action-settings-phone"></i>
                   </div>
-                  <h4>Número Telefónico</h4>
-                  <p>2685-02-02</p>
+                  <h4>Números Telefónico</h4>
+                  <p>+506 6099-3366 Con Marvin Jiménez</p>
+                  <p>+506 8827-4252 Con Jesús Guevara</p>
                 </div>
               </div>
               <div class="col-md-6 col-sm-6">
@@ -245,7 +246,7 @@
             <div class="col-md-3 col-sm-6 col-xs-12">
                <h3>   APPIS Chorotega</h3>
               <ul>
-               <!-- <img src="/welcome/img/APPIS.jpeg"> -->
+                <img src="/welcome/img/APPIS.jpeg">
               </ul>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12">
@@ -254,13 +255,13 @@
             </div>
            
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <h3>Asociacion de Apicultores Región Chorotega</h3>
-                Todos los derechos reservados<br>
+              <h3>Universidad Nacional de Costa Rica<br>
+              <img src="/welcome/img/una.png">
               <ul>
               
               </ul>
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="col-xs-6 col-sm-3">
               <a class="social" href="#" target="_blank"><i class="fa fa-facebook"></i></a>
               <a class="social" href="#" target="_blank"><i class="fa fa-twitter"></i></a>
               <a class="social" href="#" target="_blank"><i class="fa fa-google-plus"></i></a>
@@ -315,4 +316,14 @@
 
   </body>
 \
+<style>
+div.Prueba{
+top:8px;
+position:absolute;
+bottom:8px;
+left:16px;
+font-size: 18px;
+}
 
+
+</style>

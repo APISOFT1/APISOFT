@@ -30,7 +30,7 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
+@include('flash-message')
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg'); {{ __('Register') }} ">
 			<div class="wrap-login100 p-t-30 p-b-50">
@@ -38,7 +38,7 @@
 					Registro
 				</span>
 				<form class="login100-form validate-form p-b-33 p-t-5"    method="POST" action="{{ route('register') }}" >
-  					@csrf
+  				
                       
 					  @if(session()->has('message'))
             <div class="alert alert-success">
@@ -46,7 +46,7 @@
             </div>
           @endif
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input id="name"  type="text"  class="input100{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" placeholder="Nombre " required autofocus>
+						<input id="name"  type="text"  class="input100{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" placeholder="Nombre " required>
 						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
 						@if ($errors->has('name'))
                             <span class="invalid-feedback" role="alert">
@@ -56,7 +56,7 @@
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input id="email"  type="text"  class="input100{{ $errors->has('email') ? ' is-invalid' : '' }}" type="email" name="email" placeholder="Correo" required="" value="{{ old('email') }}" required autofocus>
+						<input id="email"  type="text"  class="input100{{ $errors->has('email') ? ' is-invalid' : '' }}" type="email" name="email" placeholder="Correo" required="" value="{{ old('email') }}" required >
 						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
 						  @if ($errors->has('email'))
                 		<span class="invalid-feedback" role="alert">
@@ -102,7 +102,7 @@
 		</div>
 	</div>
 	
-
+    @include('flash-message')
 	<div id="dropDownSelect1"></div>
 	
 <!--===============================================================================================-->
@@ -124,3 +124,13 @@
 
 </body>
 </html>
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
+>>>>>>> jeremy
+=======
+>>>>>>> jeremy
+=======
+>>>>>>> raychel

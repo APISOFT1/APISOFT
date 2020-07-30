@@ -27,7 +27,7 @@
 
 
 <div class="table-responsive">
-			<table class="table table-striped table-bordered table-condensed table-hover">
+			<table class="table table-striped table-bordered table-condensed table-hover" id="table">
 				<thead>
 					<th>Código</th>
 					<th>Descripción</th>
@@ -35,11 +35,10 @@
 					<th> <a href="#"
 					class="create-modal btn btn-success btn-sm">
             <i class="glyphicon glyphicon-plus"></i>
-			</th>
-
 				</thead>
+        {{ csrf_field() }}
                @foreach ($estanon as $value)
-				<tr>
+        <tr class="estanon{{$value->id}}">
 					<td>{{ $value->id}}</td>
 					<td>{{ $value->Descripcion}}</td>
 					<td>{{ $value->Peso}}</td>
@@ -71,9 +70,8 @@
 				@endforeach
 			</table>
 		</div>
-		{{$estanon->render()}}
+		{{$estanon->links()}}
 	</div>
-</div>
 {{-- Modal Form Create Post --}}
 <div id="create" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -98,7 +96,7 @@
         <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
            <input type="text" class="form-control has-feedback-left" id="Descripcion" name="Descripcion" placeholder="Descripción" required>
-           <p class="error text-center alert alert-danger hidden"></p>
+           <p class="errorDescripcion text-center alert alert-danger hidden"></p>
               <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                 </div>
                 </div>
@@ -106,7 +104,7 @@
                 <div class="form-group row add">
                 <div class="col-md-9" >
            <input type="text" class="form-control has-feedback-left" id="Peso" name="Peso" placeholder="Peso" required>
-           <p class="error text-center alert alert-danger hidden"></p>
+           <p class="errorPeso text-center alert alert-danger hidden"></p>
               <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                 </div>
                </div>
@@ -175,6 +173,7 @@
                 <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
            <input type="text" class="form-control has-feedback-left" id="des" >
+           <p class="errorDescripcion text-center alert alert-danger hidden"></p>
               <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
                 </div>
                 </div>
@@ -182,6 +181,7 @@
                 <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
            <input type="text" class="form-control has-feedback-left" id="pes" >
+           <p class="errorPeso text-center alert alert-danger hidden"></p>
               <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
                 </div>
                 </div>

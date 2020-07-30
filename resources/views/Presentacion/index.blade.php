@@ -1,4 +1,4 @@
-@extends ('layouts.principalUbicacion') 
+@extends ('layouts.principalPresentacion') 
 
 <!-- mensaje de exito -->
 <?php $message=Session::get('message') ?>
@@ -6,15 +6,15 @@
 @if($message == 'store')
 <div class="alert alert-success alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-UBICACION CREADO CORRECTAMENTE
+    PRESENTACIÓN CREADO CORRECTAMENTE
 </div>
 @endif
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
-@include('Busqueda.search',['url'=>'Ubicacion','link'=>'Ubicacion'])
+@include('Busqueda.search',['url'=>'Presentacion','link'=>'Presentacion'])
 
-<h1 >LISTADO DE  UBICACIÓN</h1>
+<h1 >LISTADO DE  PRESENTACIÓN</h1>
 
 <!-- Saltos de linea-->
 <br>
@@ -32,7 +32,7 @@ UBICACION CREADO CORRECTAMENTE
     <table class="table table-bordered" id="table">
       <tr>
         <th width="150px">No</th>
-        <th  width="150px">Descripción</th>
+        <th  width="150px">Presentación</th>
         <th width="200px">
           <a href="#" class="create-modal btn btn-success btn-sm">
             <i class="glyphicon glyphicon-plus"></i>
@@ -41,8 +41,8 @@ UBICACION CREADO CORRECTAMENTE
       </tr>
       {{ csrf_field() }}
      
-      @foreach ($ubicacion as $value)
-      <tr class="ubicacion{{$value->id}}">
+      @foreach ($pre as $value)
+      
           <td>{{ $value->id}}</td>
           <td>{{ $value->Descripcion }}</td>
           <td>
@@ -60,7 +60,7 @@ UBICACION CREADO CORRECTAMENTE
       @endforeach
     </table>
   </div>
-  {{$ubicacion->links()}}
+  {{$pre->links()}}
 </div>
 {{-- Modal Form Create Post --}}
 <div id="create" class="modal fade" role="dialog">
@@ -78,7 +78,7 @@ UBICACION CREADO CORRECTAMENTE
           <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
               <input type="text" class="form-control has-feedback-left" id="Descripcion" name="Descripcion"
-              placeholder="Ubicación" required>
+              placeholder="Descripción" required>
               
               <p class="error text-center alert alert-danger hidden"></p>
               <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
@@ -108,11 +108,11 @@ UBICACION CREADO CORRECTAMENTE
                     <div class="modal-body">
                     <div class="form-group">
                       <label for="">Código :</label>
-                      <b id="ii"/>
+                      <b id="id6"/>
                     </div>
                     <div class="form-group">
-                      <label for="">Ubicación :</label>
-                      <b id="dii"/>
+                      <label for="">Presentación :</label>
+                      <b id="nom6"/>
                     </div>
                     </div>
                     </div>
@@ -132,13 +132,13 @@ UBICACION CREADO CORRECTAMENTE
 
           <div class="form-group">
           <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-              <input type="text" class="form-control has-feedback-left" id="ids" disabled>
+              <input type="text" class="form-control has-feedback-left" id="id5" disabled>
               <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
             </div>
           </div>
           <div class="form-group">
           <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
-            <input type="name" class="form-control  has-feedback-left" id="des">
+            <input type="name" class="form-control  has-feedback-left" id="de">
             <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
             </div>
           </div>
@@ -146,7 +146,7 @@ UBICACION CREADO CORRECTAMENTE
         </form>
         {{-- Form Delete Post --}}
         <div class="deleteContent">
-          ¿Está seguro que desea eliminar esa ubicación <span class="title"></span>?
+          ¿Está seguro que desea eliminar esta presentación <span class="title"></span>?
           <span class="hidden id"></span>
         </div>
       </div>

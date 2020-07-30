@@ -15,17 +15,22 @@ class RecepcionEstanonController extends Controller
     //
     public function index(Request $request)
     {
-        if($request){
-            $query=trim($request->get('searchText'));  //valida si la peticion trae el campo de busqueda 
-        $recepcionEst = RecepcionEstanon::with('RecepcionMateriaPrima', 'Estanon')
-            ->where('Fecha','LIKE','%'.$query.'%')
-            ->orderby('id','desc')
-            ->paginate(7);
-           $recepciones = RecepcionMateriaPrima::all();
-           $estanon = Estanon::all();
-           
-        return view('RecepEstanon.index', compact('cera', 'recepciones', 'estanon'), ['recepcionEst'=>$recepcionEst,"searchText"=>$query]);
-        }
+        if ($request)
+    {
+        $search = \Request::get('search');
+        $recepcionEst = RecepcionEstanon::with('RecepcionMateriaPrima', 'Estanon');
+        $recepcionEst = RecepcionEstanon::where('Estanon_id','like','%'.$search.'%')
+                              ->orWhere('id','LIKE','%'.$search.'%')
+                              ->orWhere('Fecha','LIKE','%'.$search.'%')
+                              ->orWhere('Recepcion_id','LIKE','%'.$search.'%')
+
+        ->orderby('Fecha','desc')
+        ->paginate(7);
+        $recepciones = RecepcionMateriaPrima::all();
+        $estanon = Estanon::all();
+        return view('RecepEstanon.index', compact('cera', 'recepciones', 'recepcionEst', 'estanon'));
+    }
+        
         
     }
     ////////////////////////////////////////////////////////NUEVO
@@ -49,10 +54,8 @@ public function addRecepcion(Request $request){
     $recepcionEst->Fecha = $request->Fecha;
   
     $recepcionEst->save();
-    return response()->json(['success' => 'Se ha creado una Recepción de Estañón correctamente']);
+    return response()->json($recepcionEst);
    
-  
-  
   }
 }
 
@@ -68,10 +71,10 @@ if ($validator->fails())
 return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
 else {
   
-
+  $recepcionEst =  RecepcionEstanon::All();
     $recepcionEst =  RecepcionEstanon::find($request->id);
     $recepcionEst->Recepcion_id = $request->Recepcion_id;
-    $recepcionEst->Estanon = $request->Estanon;
+    $recepcionEst->Estanon_id = $request->Estanon_id;
     $recepcionEst->Fecha = $request->Fecha;
     $recepcionEst->save();
     return response()->json($recepcionEst);

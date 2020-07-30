@@ -65,13 +65,19 @@
         <td>{{$value->Num_Cuenta}}</td>
 	    	<td>{{$value->Genero->descripcion}}</td>
 	    	<td> {{$value->Estado_Civil->descripcion}}</td>  
-        <td> <span class="label label-success"><?php  if ($value->estado_id=='1') {
-			# code...
-			print("Activo");
-		} else {
-			print("Inactivo");
-		}
-		  ?></span></td>  
+        <td>   @if($value->estado_id)
+                            <span class="label label-primary"><?php  if ($value->estado_id=='1') {
+	                     		# code...
+	                 		print("Activo");
+	                         	} 
+	                     	  ?> </span>
+                        @else
+                            <span class="label label-danger"><?php  if ($value->estado_id=='0') {
+		                      	# code...
+	                       		print("Inactivo");
+	                         	} 
+	                     	  ?> </span>
+                        @endif</td>
           <td>
           <a href="#" class="show-modal btn btn-info btn-sm" 
           data-id="{{$value->id}}"
@@ -156,25 +162,25 @@
                             <!-- content go here -->
                             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
            <input type="text" class="form-control has-feedback-left" id="id" name="id" placeholder="Cédula" required>
-            <p class="No Ingreso la Cedula"></p>
+           <p class="errorId text-center alert alert-danger hidden"></p>
               <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                 </div>
        
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                         <input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Nombre" required>
-                        <p class="No Ingreso el Nombre"></p>
+                        <p class="errorNombre text-center alert alert-danger hidden"></p>
                         <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                       </div>
 
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
            <input type="text" class="form-control has-feedback-left" id="apellido1" name="apellido1" placeholder="Primer Apellido" required>
-            <p class="No Ingreso el Primer Apellido"></p>
+           <p class="errorApellido1 text-center alert alert-danger hidden"></p>
               <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                 </div>
       
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                         <input type="text" class="form-control" id="apellido2" name="apellido2" placeholder="Segundo Apellido" required>
-                        <p class="No Ingreso el Segundo Apellido"></p>
+                        <p class="errorApellido2 text-center alert alert-danger hidden"></p>
                         <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                       </div>
                             <button class="btn btn-success  nextBtn pull-right" type="button" >Siguiente</button>
@@ -191,26 +197,26 @@
                                      
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                         <input type="text" class="form-control  has-feedback-right" id="Telefono" name="Telefono" placeholder="Teléfono">
-                        <p class="No Ingreso el Telefono"></p>
+                        <p class="errorTelefono text-center alert alert-danger hidden"></p>
                         <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
                       </div>
 
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <input type="text" class="form-control " id="email" name="email" placeholder="Correo">
-                        <p class="No Ingreso el Correo"></p>
+                        <input type="text" class="form-control " id="email" name="email" placeholder="ejemplo@gmail.com">
+                        <p class="errorEmail text-center alert alert-danger hidden"></p>
                         <span class="fa fa-envelope form-control-feedback right" aria-hidden="true"></span>
                       </div> 
 
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                         <input type="text" class="form-control has-feedback-left" id="Direccion" name="Direccion" placeholder="Dirección">
-                        <p class="No Ingreso la Direccion"></p>
+                        <p class="errorDireccion text-center alert alert-danger hidden"></p>
                         <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
                       </div> 
 
   
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <input type="date" class="form-control " id="Fecha_Ingreso" name="Fecha_Ingreso" placeholder="YYYY-MM-DD" required>
-                        <p class="No Ingreso la Fecha"></p>
+                        <input type="datetime" class="form-control " id="fecha" name="Fecha_Ingreso" placeholder="YYYY-MM-DD" disabled  required>
+                        <p class="errorFecha text-center alert alert-danger hidden"></p>
                         <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
                       </div> 
                             <button class="btn btn-success  nextBtn pull-right" type="button" >Suguiente</button>
@@ -228,7 +234,7 @@
                             <!-- content go here -->
                             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                         <input type="text" class="form-control has-feedback-left" id="Num_Cuenta" name="Num_Cuenta" placeholder="Número de Cuenta">
-                        <p class="No Ingreso el Numero de Cuenta"></p>
+                        <p class="errorNumCuenta text-center alert alert-danger hidden"></p>
                         <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span>
                       </div> 
 
@@ -242,6 +248,7 @@
               <option value="{{$gene->id}}">{{ $gene->descripcion }}</option>
             @endforeach           
           </select>
+          <p class="errorGenero text-center alert alert-danger hidden"></p>
           <span class="fa fa-users form-control-feedback right" aria-hidden="true"></span>
             </div>
           
@@ -253,6 +260,7 @@
               <option value="{{$ess->id}}">{{ $ess->descripcion }}</option>
             @endforeach           
           </select>
+          <p class="errorEstadoCivil text-center alert alert-danger hidden"></p>
           <span class="fa fa-users form-control-feedback right" aria-hidden="true"></span>
           </div>
 
@@ -307,66 +315,62 @@
                     <div class="modal-body">
                     <div class="form-group">
                       <label for="">ID :</label>
-                      <b id="iaa"/>
+                      <b id="dis"/>
                     </div>
                     <div class="form-group">
                       <label for="">Nombre :</label>
                       
-                      <b id="jaja"/>
+                      <b id="mbr"/>
                     </div>
 										<div class="form-group">
                       <label for="">Primer Apellido:</label>
-                      <b id="ape1"/>
+                      <b id="ell"/>
                     </div>
 										<div class="form-group">
                    
                       <label for="">Segundo Apellido :</label>
-                      <b id="ape2"/>
+                      <b id="ido"/>
                     </div>
                     <div class="form-group">
                    
                    <label for="">Telefono :</label>
-                   <b id="tel"/>
+                   <b id="eno"/>
                  </div>
                  <div class="form-group">
                    
                    <label for="">Correo :</label>
-                   <b id="eml"/>
+                   <b id="ail"/>
                  </div>
                  <div class="form-group">
                    
                    <label for="">Direccion :</label>
-                   <b id="dirn"/>
+                   <b id="rec"/>
                  </div>
-                 <div class="form-group">
-                   
-                   <label for="">Direccion :</label>
-                   <b id="dirn"/>
-                 </div>
+                
                  <div class="form-group">
                    
                    <label for="">Fecha Ingreso :</label>
-                   <b id="fecso"/>
+                   <b id="eso"/>
                  </div>
                  <div class="form-group">
                    
                    <label for="">Numero de cuenta :</label>
-                   <b id="nunta"/>
+                   <b id="um"/>
                  </div>
                  <div class="form-group">
                    
                    <label for="">Genero :</label>
-                   <b id="ged"/>
+                   <b id="ero"/>
                  </div>
                  <div class="form-group">
                    
                    <label for="">Estado Civil :</label>
-                   <b id="estid"/>
+                   <b id="vil"/>
                  </div>
                  <div class="form-group">
                    
                    <label for="">Estado :</label>
-                   <b id="esid"/>
+                   <b id="ado"/>
                  </div>
                     </div>
                     </div>
@@ -398,13 +402,13 @@
 
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
            <input type="text" class="form-control has-feedback-left" id="a1">
-
+           <p class="errorId text-center alert alert-danger hidden"></p>
               <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                 </div>
       
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                         <input type="text" class="form-control has-feedback-right" id="a2" >
-                      
+                        <p class="errorNombre text-center alert alert-danger hidden"></p>
                         <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                       </div>
                           
@@ -412,31 +416,32 @@
                                      
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                         <input type="text" class="form-control has-feedback-left" id="t" >
-                        <p class="No Ingreso el Telefono"></p>
+                        <p class="errorTelefono text-center alert alert-danger hidden"></p>
                         <span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
                       </div>
 
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                         <input type="text" class="form-control has-feedback-right " id="em" >
-                        
+                        <p class="errorEmail text-center alert alert-danger hidden"></p>
                         <span class="fa fa-envelope form-control-feedback right" aria-hidden="true"></span>
                       </div> 
 
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                         <input type="text" class="form-control has-feedback-right" id="d">
-                       
+                        <p class="errorDireccion text-center alert alert-danger hidden"></p>
                         <span class="fa fa-map-marker form-control-feedback right" aria-hidden="true"></span>
                       </div>
 
                             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                         <input type="text" class="form-control has-feedback-left" id="nu" >
+                        <p class="errorNumCuenta text-center alert alert-danger hidden"></p>
                         <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span>
                       </div> 
 
 
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <input type="date" class="form-control  has-feedback-right" id="f" >
-                        <p class="No Ingreso la Fecha"></p>
+                        <input type="datetime" class="form-control  has-feedback-right" id="f"  disabled>
+                        <p class="errorFechaIngreso text-center alert alert-danger hidden"></p>
                         <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
                       </div>
 
@@ -448,6 +453,7 @@
               <option value="{{$gene->id}}">{{ $gene->descripcion }}</option>
             @endforeach           
           </select>
+          <p class="errorGenero text-center alert alert-danger hidden"></p>
           <span class="fa fa-users form-control-feedback left" aria-hidden="true"></span>
             </div>
           
@@ -459,6 +465,7 @@
               <option value="{{$ess->id}}">{{ $ess->descripcion }}</option>
             @endforeach           
           </select>
+          <p class="errorEstadoCivil text-center alert alert-danger hidden"></p>
           <span class="fa fa-users form-control-feedback right" aria-hidden="true"></span>
           </div>
 
@@ -507,5 +514,3 @@
 
 
 @endsection
-
-   

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use Validator;
 use Response;
@@ -11,9 +10,6 @@ use App\Genero;
 use App\Estado_Civil;
 use App\Http\Requests\AfiliadoFormRequest;
 use DB;
-
-
-
 class AfiliadoController extends Controller
 {
     /**
@@ -24,14 +20,22 @@ class AfiliadoController extends Controller
     public function index(Request $request)
     {
       if($request){
-        $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-        $afi= Afiliado::with('Genero', 'Estado_Civil') 
-            ->where('Nombre','LIKE','%'.$query.'%')
-            ->orderby('id','ASC')
-            ->paginate(7);
+            $afi = Afiliado::with('RecepcionMateriaPrima');        
+            $search = \Request::get('search');
+            $afi = Afiliado::where('id','like','%'.$search.'%')
+                  ->orWhere('Nombre','LIKE','%'.$search.'%')
+                  ->orWhere('apellido1','LIKE','%'.$search.'%')
+                  ->orWhere('apellido2','LIKE','%'.$search.'%')
+                  ->orWhere('Telefono','LIKE','%'.$search.'%')
+                  ->orWhere('email','LIKE','%'.$search.'%')
+                  ->orWhere('Direccion','LIKE','%'.$search.'%')
+                  ->orWhere('Fecha_Ingreso','LIKE','%'.$search.'%')
+                  ->orWhere('Num_Cuenta','LIKE','%'.$search.'%')
+                  ->orderby('id','desc')
+                  ->paginate(7); 
             $genero = Genero::all();
             $estadoC = Estado_Civil::all();
-        return view('Afiliado.index', compact('afi','genero','estadoC'), ['afi'=>$afi,"searchText"=>$query]);
+        return view('Afiliado.index', compact('afi','genero','estadoC'));
     }
    
     
@@ -40,25 +44,23 @@ class AfiliadoController extends Controller
     return view('Afiliado.index',compact('afi','genero','estadoC','esta'));   
         
     }
-
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-
     public function addAfiliado(Request $request){
         $rules = array(
     
           'id' => 'min:6|max:9|required',
-          'Nombre' => 'min:1|max:120|required',
-          'apellido1' => 'required',
-          'apellido2' => 'required',
-          'Telefono' => 'numeric|required',
-          'email' => 'required',
-          'Direccion' => 'required',
+          'Nombre' => 'required|min:3|max:36|regex:/^[a-z ,.\'-]+$/i',
+          'apellido1' => 'required|min:4|max:20|regex:/^[a-z ,.\'-]+$/i',
+          'apellido2' => 'required|min:4|max:20|regex:/^[a-z ,.\'-]+$/i',
+          'Telefono' => 'numeric|required|min:8|max:12|',
+          'email' => 'required|email',
+          'Direccion' => 'required|min:10|max:100',
           'Fecha_Ingreso' => 'required',
-          'Num_Cuenta' => 'numeric|required',
+          'Num_Cuenta' => 'numeric|required|min:15|max:17|',
           'genero_id' => 'required',
           'estado_civil_id' => 'required',
           'estado_id' => 'required'
@@ -86,10 +88,20 @@ class AfiliadoController extends Controller
         return response()->json($afi);
       }
     }
-
-
     public function editAfiliado(request $request){
         $rules = array(
+          'id' => 'min:6|max:9|required',
+          'Nombre' => 'required|min:3|max:36|regex:/^[a-z ,.\'-]+$/i',
+          'apellido1' => 'required|min:4|max:20|regex:/^[a-z ,.\'-]+$/i',
+          'apellido2' => 'required|min:4|max:20|regex:/^[a-z ,.\'-]+$/i',
+          'Telefono' => 'numeric|required|min:8|max:12|',
+          'email' => 'required|email',
+          'Direccion' => 'required|min:10|max:100',
+          'Fecha_Ingreso' => 'required',
+          'Num_Cuenta' => 'numeric|required|min:15|max:17|',
+          'genero_id' => 'required',
+          'estado_civil_id' => 'required',
+          'estado_id' => 'required'
         );
       $validator = Validator::make ( Input::all(), $rules);
       if ($validator->fails())
@@ -113,8 +125,6 @@ class AfiliadoController extends Controller
       return response()->json($afi);
       }
       }
-
-
     /**
      * Store a newly created resource in storage.
      *
@@ -129,7 +139,6 @@ class AfiliadoController extends Controller
      * @return \Illuminate\Http\Response
      */
   
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -158,6 +167,4 @@ class AfiliadoController extends Controller
        
       }
       }   //
-    
-
     

@@ -1,4 +1,4 @@
-@extends ('layouts.principalProducto')
+@extends ('layouts.principalProducto') 
 
 <!-- mensaje de exito -->
 <?php $message=Session::get('message') ?>
@@ -6,60 +6,163 @@
 @if($message == 'store')
 <div class="alert alert-success alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  ¡PRODUCTO GUARDADO CORRECTAMENTE!
+PRODUCTO CREADO CORRECTAMENTE
 </div>
 @endif
 <!-- fin de mensaje de exito -->
+
 @section ('contenido')
 @include('Busqueda.search',['url'=>'Producto','link'=>'Producto'])
 
-		<h1 class="text-center">Listado de Productos</h1>
-	
+<h1 >LISTADO DE PRODUCTO</h1>
 
 <!-- Saltos de linea-->
 <br>
 <br>
+<br>
+<br>
 <!-- Fin de salto de linea. No necesita una etiqueta de cierre-->
 
-<!--Esta clase nos permite posicionar el buscador  -->
-<div class="absolute3">
-</div>
-
-
 <div class="table-responsive">
-			<table class="table table-striped table-bordered table-condensed table-hover">
+			<table class="table table-striped table-bordered table-condensed table-hover" id="table" >
 				<thead>
-					<th>Identificación</th>
+					<th>Código</th>
 					<th>Nombre</th>
-					<th>Precio Unitario</th>
-					<th>Creación</th>
-					<th> <a href="#"
+					<th><a href="#"
 					class="create-modal btn btn-success btn-sm">
-            <i class="glyphicon glyphicon-plus"></i>
-			</th>
-
+            <i class="glyphicon glyphicon-plus"></i></th>
 				</thead>
-               @foreach ($product as $prod)
-				<tr>
-					<td>{{ $prod->id}}</td>
-					<td>{{ $prod->nombre}}</td>
-          <td>{{ $prod->precioUnitario}}</td>
-					<td>{{ $prod->created_at}}</td>
-
+        {{ csrf_field() }}
+          
+               @foreach ($product as $value)
+          <tr class="product{{$value->id}}">
+          <td>{{ $value->id }}</td>
+					<td>{{ $value->nombre}}</td> 
 					<td>
-					<a href=""  > <button class="btn btn-info btn-sm" > <span class="glyphicon glyphicon-eye-open"></button></a>
-						<a href="{{URL::action('ProductController@edit',$prod->id)}}"><Button  class="btn btn-success btn-lg btn-sm">
-      <span class="glyphicon glyphicon-edit "></button></a>
-                         <a href="" data-target="#modal-delete-{{$prod->id}}" data-toggle="modal"><button class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove "></button></a>
-						
-					</td>
-				</tr>
-				@include('Producto.modal')
-				@endforeach
-			</table>
-		</div>
-		{{$product->render()}}
-	</div>
+					<a href="#" class="show-modal btn btn-info btn-sm"
+					 data-id="{{$value->id}}" 
+					 data-nombre="{{$value->nombre}}">
+              <i class="fa fa-eye"></i>
+            </a>
+            <a href="#" class="edit-modal btn btn-warning btn-sm" 
+						data-id="{{$value->id}}"
+					 data-nombre="{{$value->nombre}}">
+              <i class="glyphicon glyphicon-pencil"></i>
+            </a>
+            <a href="#" class="delete-modal btn btn-danger btn-sm"
+						 data-id="{{$value->id}}"
+						  data-title="{{$value->nombre}}">
+              <i class="glyphicon glyphicon-trash"></i>
+            </a>
+            
+          </td>
+        </tr>
+      @endforeach
+    </table>
+  </div>
+  {{$product->links()}}
 </div>
+{{-- Modal Form Create Post --}}
+<div id="create" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h3 class="modal-descripcion  text-center"></h3>
+      </div>
+      <div class="modal-body">
+      <span id="form_result"></span>
 
+        <form class="form-horizontal" role="form">
+
+          <div class="form-group row add">
+        <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+              <input type="text" class="form-control has-feedback-left" id="nombre" name="nombre"
+              placeholder="Nombre" required>
+              
+              <p class="error text-center alert alert-danger hidden"></p>
+              <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+            </div>
+          </div>
+        </form>
+      </div>
+          <div class="modal-footer">
+            <button class="btn btn-success" type="submit" id="add">
+              <span class="fa fa-save"></span>Guardar
+            </button>
+            <button class="btn btn-warning" type="button" data-dismiss="modal">
+              <span class="fa fa-times"></span>Cerrar
+            </button>
+          </div>
+    </div>
+  </div>
+</div></div>
+{{-- Modal Form Show POST --}}
+<div id="show" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header ">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title text-center"></h4>
+                  </div>
+                    <div class="modal-body">
+                    <div class="form-group">
+                      <label for="">Código :</label>
+                      <b id="codPro"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="">Nombre :</label>
+                      <b id="NomPro"/>
+                    </div>
+                    </div>
+                    </div>
+                  </div>
+</div>
+{{-- Modal Form Edit and Delete Post --}}
+<div id="myModal"class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:	#fff">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h1 class="modal-descripcion text-center" ></h1>
+      </div>
+      <div class="modal-body">
+      <span id="form_result"></span>
+        <form class="form-horizontal" role="modal">
+
+          <div class="form-group">
+          <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+              <input type="text" class="form-control has-feedback-left" id="idPro" disabled>
+              <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
+            </div>
+          </div>
+          <div class="form-group">
+          <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
+            <input type="name" class="form-control  has-feedback-left" id="nPro">
+            <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+            </div>
+          </div>
+
+        </form>
+        {{-- Form Delete Post --}}
+        <div class="deleteContent">
+          ¿Está seguro que desea eliminar este producto? <span class="title"></span>?
+          <span class="hidden id"></span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn actionBtn" data-dismiss="modal">
+          <span id="footer_action_button" class="glyphicon"></span>
+        </button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">
+          <span class="glyphicon glyphicon"></span>Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection
+
+@section('css')
+   
 @endsection

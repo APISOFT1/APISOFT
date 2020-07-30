@@ -61,8 +61,8 @@
             </div>
             <!-- /menu profile quick info -->
             <br />
-            <!-- sidebar menu -->
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+           <!-- sidebar menu -->
+           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
@@ -110,6 +110,7 @@
                   <li><a><i class="glyphicon glyphicon-shopping-cart"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li><a href="{{ url('/Stock/') }}">Gestionar Stok</a></li>
+                    <li><a href="{{ url('/Producto/') }}">Gestionar Producto</a></li>
                     
                     </ul>
                   </li>
@@ -174,6 +175,9 @@
   <script src="{{asset('js2/bootstrap-select.min.js')}}"></script>
   
     <!-- jQuery -->
+    @jquery
+    @toastr_js
+    @toastr_render
 
     {!!Html::script('/js2/jquery.min.js')!!}  
     @stack('scripts')
@@ -201,9 +205,7 @@
      {!!Html::script('/js/icheck.js')!!}
 
 
-    @jquery
-    @toastr_js
-    @toastr_render
+     
 
 
 <!-- MODAL AFILIADO -->
@@ -235,8 +237,8 @@
         'estado_id': $('input[name=estado_id]').val()
       },
       success: function(data){
-        if ((data.errors)) {
-          $('.errorNombre').addClass('hidden');
+        $('.errorId').addClass('hidden');
+        $('.errorNombre').addClass('hidden');
          $('.errorApellido1').addClass('hidden');
          $('.errorApellido2').addClass('hidden');
          $('.errorTelefono').addClass('hidden');
@@ -247,12 +249,15 @@
          $('.errorGenero').addClass('hidden');
          $('.errorEstadoCivil').addClass('hidden');
          $('.errorEstado').addClass('hidden');
-
          if ((data.errors)) {
                         setTimeout(function () {
                             $('#create').modal('show');
-                            toastr.error('ERRO DE VALIDACIÓN!', 'Error Alert', {timeOut: 5000});
+                            toastr.error('¡COMPLETE EL CAMPO!', 'Error de Validación', {timeOut: 5000});
                         }, 500);
+                        if (data.errors.id) {
+                            $('.errorId').removeClass('hidden');
+                            $('.errorId').text(data.errors.id);
+                        }
                         if (data.errors.Nombre) {
                             $('.errorNombre').removeClass('hidden');
                             $('.errorNombre').text(data.errors.Nombre);
@@ -289,7 +294,7 @@
                             $('.errorGenero').removeClass('hidden');
                             $('.errorGenero').text(data.errors.genero_id);
                         }
-                        if (data.errors.estado_civil_id {
+                        if (data.errors.estado_civil_id) {
                             $('.errorEstadoCivil').removeClass('hidden');
                             $('.errorEstadoCivil').text(data.errors.estado_civil_id);
                         }
@@ -297,8 +302,8 @@
                             $('.errorEstado').removeClass('hidden');
                             $('.errorEstado').text(data.errors.estado_id);
                         }
-                    } else {
-                      toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
+        } else {
+          toastr.success('SE HA CREADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
           $('#table').append("<tr class='afi" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.Nombre + "</td>"+
@@ -354,7 +359,6 @@
           "</tr>");
          
         }
-      
       },
     });
     $('#id').val('');
@@ -370,7 +374,6 @@
     $('#estado_civil_id').val('');
     $('#estado_id').val('');
   });
-
 $(document).on('click', '.edit-modal', function() {
 $('#footer_action_button').text(" Editar ");
 $('#footer_action_button').addClass('fa fa-pencil');
@@ -415,9 +418,76 @@ $('.modal-footer').on('click', '.edit', function() {
 'estado_id':$('#es').val(),
     },
 success: function(data) {
+  $('.errorId').addClass('hidden');
+        $('.errorNombre').addClass('hidden');
+         $('.errorApellido1').addClass('hidden');
+         $('.errorApellido2').addClass('hidden');
+         $('.errorTelefono').addClass('hidden');
+         $('.errorEmail').addClass('hidden');
+         $('.errorDireccion').addClass('hidden');
+         $('.errorFechaIngreso').addClass('hidden');
+         $('.errorNumCuenta').addClass('hidden');
+         $('.errorGenero').addClass('hidden');
+         $('.errorEstadoCivil').addClass('hidden');
+         $('.errorEstado').addClass('hidden');
+         if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#create').modal('show');
+                            toastr.error('COMPLETE EL CAMPO', '¡Error de Validación!', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.id) {
+                            $('.errorId').removeClass('hidden');
+                            $('.errorId').text(data.errors.id);
+                        }
+                        if (data.errors.Nombre) {
+                            $('.errorNombre').removeClass('hidden');
+                            $('.errorNombre').text(data.errors.Nombre);
+                        }
+                        if (data.errors.apellido1) {
+                            $('.errorApellido1').removeClass('hidden');
+                            $('.errorApellido1').text(data.errors.apellido1);
+                        }
+                        if (data.errors.apellido2) {
+                            $('.errorApellido2').removeClass('hidden');
+                            $('.errorApellido2').text(data.errors.apellido2);
+                        }
+                        if (data.errors.Telefono) {
+                            $('.errorTelefono').removeClass('hidden');
+                            $('.errorTelefono').text(data.errors.Telefono);
+                        }
+                        if (data.errors.email) {
+                            $('.errorEmail').removeClass('hidden');
+                            $('.errorEmail').text(data.errors.email);
+                        }
+                        if (data.errors.Direccion) {
+                            $('.errorDireccion').removeClass('hidden');
+                            $('.errorDireccion').text(data.errors.Direccion);
+                        }
+                        if (data.errors.Fecha_Ingreso) {
+                            $('.errorFechaIngreso').removeClass('hidden');
+                            $('.errorFechaIngreso').text(data.errors.Fecha_Ingreso);
+                        }
+                        if (data.errors.Num_Cuenta) {
+                            $('.errorNumCuenta').removeClass('hidden');
+                            $('.errorNumCuenta').text(data.errors.Num_Cuenta);
+                        }
+                        if (data.errors.genero_id) {
+                            $('.errorGenero').removeClass('hidden');
+                            $('.errorGenero').text(data.errors.genero_id);
+                        }
+                        if (data.errors.estado_civil_id) {
+                            $('.errorEstadoCivil').removeClass('hidden');
+                            $('.errorEstadoCivil').text(data.errors.estado_civil_id);
+                        }
+                        if (data.errors.estado_id) {
+                            $('.errorEstado').removeClass('hidden');
+                            $('.errorEstado').text(data.errors.estado_id);
+                        }
+        } else {
+          toastr.success('SE HA EDITADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
       $('.afi' + data.id).replaceWith(" "+
       "<tr class='afi'>"+
-          "<td>" + data.id + "</td>"//
+          "<td>" + data.id + "</td>"+
           "<td>" + data.Nombre + "</td>"+
           "<td>" + data.apellido1 + "</td>"+
           "<td>" + data.apellido2 + "</td>"+
@@ -440,7 +510,7 @@ success: function(data) {
              "'  data-Num_Cuenta='" + data.Num_Cuenta +
               "'data-genero_id='" + data.genero_id + 
               "'data-estado_civil_id='" + data.estado_civil_id +
-               "'data-Estado_id='" + data.estado_id +
+               "'data-estado_id='" + data.estado_id +
  "'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='" 
  + data.id + 
           "' data-Nombre='" + data.Nombre + 
@@ -453,7 +523,7 @@ success: function(data) {
              "'  data-Num_Cuenta='" + data.Num_Cuenta +
               "'data-genero_id='" + data.genero_id + 
               "'data-estado_civil_id='" + data.estado_civil_id +
-               "'data-Estado_id='" + data.estado_id +
+               "'data-estado_id='" + data.estado_id +
  "' ><span class='fa fa-pencil-esquare-o'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='" 
  + data.id + 
           "' data-Nombre='" + data.Nombre + 
@@ -466,13 +536,13 @@ success: function(data) {
              "'  data-Num_Cuenta='" + data.Num_Cuenta +
               "'data-genero_id='" + data.genero_id + 
               "'data-estado_civil_id='" + data.estado_civil_id +
-               "'data-Estado_id='" + data.estado_id +
+               "'data-estado_id='" + data.estado_id +
 "'><span class='fa fa-trash'></span></button></td>"+
           "</tr>");
     }
+},
   });
 });
-
 // form Delete function
 $(document).on('click', '.delete-modal', function() {
 $('#footer_action_button').text(" Eliminar");
@@ -481,14 +551,13 @@ $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Eliminar Afiliado');
+$('.modal-descripcion').text('Eliminar Afiliado');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
 $('.nombre').html($(this).data('nombre'));
 $('#myModal').modal('show');
 });
-
 $('.modal-footer').on('click', '.delete', function(){
   $.ajax({
     type: 'POST',
@@ -498,7 +567,7 @@ $('.modal-footer').on('click', '.delete', function(){
       'id': $('.id').text()
     },
     success: function(data){
-      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
+      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Alerta de Éxito', {timeOut: 5000});
       $('.afi' + $('.id').text()).remove();
     }
   });
@@ -506,12 +575,19 @@ $('.modal-footer').on('click', '.delete', function(){
   // Show function
   $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
-  
-$('#iaa').val($(this).data('id'));
-$('#jaja').val($(this).data('nombre'));
-
-;
-  $('.modal-show').text('Datos');
+$('#dis').text($(this).data('id'));
+$('#mbr').text($(this).data('nombre'));
+$('#ell').text($(this).data('apellido1'));
+$('#ido').text($(this).data('apellido2'));
+$('#eno').text($(this).data('telefono'));
+$('#ail').text($(this).data('email'));
+$('#rec').text($(this).data('direccion'));
+$('#eso').text($(this).data('fecha_ingreso'));
+$('#um').text($(this).data('num_cuenta'));
+$('#ero').text($(this).data('genero_id'));
+$('#vil').text($(this).data('estado_civil_id'));
+$('#ado').text($(this).data('estado_id'));
+  $('.modal-title').text('Datos');
   });
  
 </script>
@@ -606,3 +682,37 @@ $(document).ready(function () {
   border-radius: 15px;
 }
 </style>
+
+<script>
+$( document ).on('click','.create-modal',function() {
+    var now = new Date();
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+    h=now.getHours();
+    m=now.getMinutes();
+  s=now.getSeconds();
+    var today = now.getFullYear()+"-"+(month)+"-"+(day)+"-"+(h)+"-"+(m)+"-"+(s) ;
+    $("#fecha,#Fecha_Ingreso").val(today);
+});
+</script>
+
+<script>
+  $("#add").click(function(){
+    var now = new Date();
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+    h=now.getHours();
+    m=now.getMinutes();
+  s=now.getSeconds();
+    var today = now.getFullYear()+"-"+(month)+"-"+(day)+"-"+(h)+"-"+(m)+"-"+(s) ;
+    $("#fecha,#Fecha_Ingreso").val(today);
+});
+<<<<<<< HEAD
+<<<<<<< HEAD
+</script>
+=======
+</script>
+>>>>>>> jeremy
+=======
+</script>
+>>>>>>> jeremy

@@ -39,11 +39,11 @@
                 <div class="form-group row add">
         <div class="col-md-9 col-sm-6 col-xs-12 form-group has-feedback">
         <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="status" id="status" value="{{ $user->status }}">
+  <input class="form-check-input" type="radio" name="status" id="status" value="{{ $status=1 }}">
   <label class="form-check-label" for="inlineRadio1">Activo</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="status" id="status" value="{{ $user->status }}">
+  <input class="form-check-input" type="radio" name="status" id="status" value="{{ $status=0 }}">
   <label class="form-check-label" for="inlineRadio2">Inactivo</label>
 </div>
            

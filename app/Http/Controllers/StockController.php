@@ -3,9 +3,13 @@ namespace App\Http\Controllers;
 use App\Stock;
 use Validator;
 use Response;
+use Illuminate\Support\Facades\Input;
+use App\Presentacion;
+use App\Producto;
 use App\RecepcionEstanon;
+
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;  //MUYR IMPORTANTE , SIN ESTO NO GUARDA.
 use App\Http\Requests\StockFormRequest;
 class StockController extends Controller
 {/**
@@ -15,28 +19,33 @@ class StockController extends Controller
      */
     public function index(Request $request)
     {
-      if($request){
-        $query=trim($request->get('searchText')); //valida si la peticion trae el campo de busqueda 
-        $sto= Stock::with('recepcionEstanon') 
-            ->where('id','LIKE','%'.$query.'%')
-            ->orderby('id','desc')
-            ->paginate(7);
-            $recepcionEstanon = RecepcionEstanon::all();
-        return view('Stock.index', compact('sto','recepcionEstanon'), ['sto'=>$sto,"searchText"=>$query]);
+       if ($request)
+    {
+      $search = \Request::get('search');
+      $sto = Stock::with('Producto','Presentacion','RecepcionEstanon');
+      $sto = Stock::where('producto_id','like','%'.$search.'%')
+                        ->orWhere('cantidadDisponible','LIKE','%'.$search.'%')
+                  ->orWhere('precioUnitario','LIKE','%'.$search.'%')
+
+      ->orderby('producto_id','desc')
+      ->paginate(7);
+      $recepcionEst = RecepcionEstanon::all();
+      $presentacion = Presentacion::all();
+      $producto = Producto::all();
+      return view('Stock.index', compact('sto', 'recepcionEst', 'presentacion','producto'));
+        return view('Stock.index', compact('sto', 'recepcionEst', 'presentacion','producto'));
     }
-   
-    
-  
-      return view('Stock.index',compact('sto','recepcionEstanon'));   
-         }
+
+           }
    
     public function addStock(Request $request){
         $rules = array(
     
          
-          'nombre' => 'required',
           'cantidadDisponible' => 'required',
           'precioUnitario' => 'required',
+          'producto_id'=> 'required',
+          'presentacion_id'=> 'required',
           'estanon_recepcions_id' => 'required'
         );
       $validator = Validator::make ( Input::all(), $rules);
@@ -46,12 +55,13 @@ class StockController extends Controller
       else {   
         $sto = new Stock;
         $sto->id= $request->id;
-        $sto->nombre = $request->nombre;
         $sto->cantidadDisponible = $request->cantidadDisponible;
         $sto->precioUnitario = $request->precioUnitario;
+        $sto->producto_id = $request->producto_id;
+        $sto->presentacion_id = $request->presentacion_id;
         $sto->estanon_recepcions_id = $request->estanon_recepcions_id;
         $sto->save();
-        return response()->json(['success' => 'Se ha creado un Stock correctamente']);
+        return response()->json($sto);
       }
     }
     public function editStock(request $request){
@@ -64,9 +74,10 @@ class StockController extends Controller
       else {
       $sto = Stock::find ($request->id);
       
-        $sto->nombre = $request->nombre;
         $sto->cantidadDisponible = $request->cantidadDisponible;
         $sto->precioUnitario = $request->precioUnitario;
+        $sto->producto_id = $request->producto_id;
+        $sto->presentacion_id = $request->presentacion_id;
         $sto->estanon_recepcions_id = $request->estanon_recepcions_id;
    
       $sto->save();
@@ -76,12 +87,9 @@ class StockController extends Controller
     public function deleteStock(request $request){
   
       $sto = Stock::find ($request->id);
-       $sto->nombre = $request->nombre;
-        $sto->cantidadDisponible = $request->cantidadDisponible;
-        $sto->precioUnitario = $request->precioUnitario;
-        $sto->estanon_recepcions_id = $request->estanon_recepcions_id;
-   
-        $sto->delete();
-        return response()->json();
+      $sto->delete();
+       
+     
+     
       }
 }

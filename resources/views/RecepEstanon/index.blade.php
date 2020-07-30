@@ -27,7 +27,7 @@
 
 
 <div class="table-responsive">
-			<table class="table table-striped table-bordered table-condensed table-hover">
+			<table class="table table-striped table-bordered table-condensed table-hover" id="table">
 				<thead>
 					<th>Código</th>
 					<th width="150px" >Recepción</th>
@@ -38,10 +38,10 @@
             <i class="glyphicon glyphicon-plus"></i></th>
 				</thead>
         {{ csrf_field() }}
-           <?php  $no=1; ?>
+      
                @foreach ($recepcionEst as $value)
 					<tr class="recepcionEst{$value->id}}">
-          <td>{{ $no++ }}</td>
+          <td>{{ $value->id }}</td>
 					<td>{{ $value->RecepcionMateriaPrima->id}} - {{ $value->RecepcionMateriaPrima->afiliado->Nombre}} {{ $value->RecepcionMateriaPrima->afiliado->apellido1}} {{ $value->RecepcionMateriaPrima->afiliado->apellido2}}</td>
             <td>{{ $value->Estanon->id}} - {{ $value->Estanon->Descripcion}}</td>
             <td>{{ $value->Fecha}}</td>
@@ -94,6 +94,7 @@
           <option value="{{ $recep->id }}">{{$recep->id}} - {{$recep->afiliado->Nombre}} {{$recep->afiliado->apellido1}} {{$recep->afiliado->apellido2}}</option>
          @endforeach
         </select>
+        <p class="errorRecepcion text-center alert alert-danger hidden"></p>
         <span class="fa fa-file-text form-control-feedback right" aria-hidden="true"></span>
             </div>
 </div>
@@ -105,17 +106,20 @@
           <option value="{{ $est->id }}">{{$est->id}}-{{$est->Descripcion}}</option>
          @endforeach
         </select>
+        <p class="errorEstanon text-center alert alert-danger hidden"></p>
         <span class="fa fa-database form-control-feedback right" aria-hidden="true"></span>
             </div>
             </div>
        
             <div class="form-group row add">
                 <div class="col-md-9" >
-              <input type="date" class="form-control has-feedback-right" id="Fecha" name="Fecha" required>
-              <p class="No Ingreso la Fecha"></p>
-              <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
-            </div>
-            </div>
+              <input type="datetime" class="form-control" id="fecha" name="Fecha" 
+              placeholder="YYYY-MM-DD" disabled required>
+              <p class="No ingreso la fecha"></p>
+              <span class="fa fa-clock-o form-control-feedback right" aria-hidden="true" ></span>
+              </div>
+              </div>
+              
 
         </form>
       </div>
@@ -171,38 +175,51 @@
       </div>
       <div class="modal-body">
         <form class="form-horizontal" role="modal">
-
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="id">ID</label>
-            <div class="col-sm-10">
+        <div class="form-group row add">
+            <div class="col-md-9" >
               <input type="text" class="form-control" id="ids" disabled>
+              <span class="fa fa-key form-control-feedback right" aria-hidden="true"></span>
             </div>
           </div>
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="Descripcion">Recepción </label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="cri">
+          <div class="form-group row add">
+                <div class="col-md-9" >
+        <select name="Recepcion_id" class="form-control" id="desc">
+         <option value="">-- Seleccione Recepción --</option>
+         @foreach ($recepciones as $recep)
+          <option value="{{ $recep->id }}">{{$recep->id}} - {{$recep->afiliado->Nombre}} {{$recep->afiliado->apellido1}} {{$recep->afiliado->apellido2}}</option>
+         @endforeach
+        </select>
+        <p class="errorRecepcion text-center alert alert-danger hidden"></p>
+        <span class="fa fa-file-text form-control-feedback right" aria-hidden="true"></span>
             </div>
-          </div>
+</div>
 
-					<div class="form-group">
-            <label class="control-label col-sm-2"for="cantidad">Estañón</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="can">
+<div class="form-group row add">
+                <div class="col-md-9" >
+        <select name="Estanon_id" class="form-control" id="dad">
+         <option value="">-- Seleccione Estañón --</option>
+         @foreach ($estanon as $est)
+          <option value="{{ $est->id }}">{{$est->id}}-{{$est->Descripcion}}</option>
+         @endforeach
+        </select>
+        <p class="errorEstanon text-center alert alert-danger hidden"></p>
+        <span class="fa fa-database form-control-feedback right" aria-hidden="true"></span>
             </div>
-          </div>
+            </div>
 
         
-          <div class="form-group">
-            <label class="control-label col-sm-2"for="cantidad">Fecha</label>
-            <div class="col-sm-10">
-            <input type="name" class="form-control" id="ub">
-            </div>
-          </div>
+            <div class="form-group row add">
+            <div class="col-md-9" >
+              <input type="datetime" class="form-control" id="cion" name="Fecha" 
+              placeholder="YYYY-MM-DD" disabled required>
+              <p class="No ingreso la fecha"></p>
+              <span class="fa fa-clock-o form-control-feedback right" aria-hidden="true" ></span>
+              </div>
+              </div>
         </form>
                 {{-- Form Delete Post --}}
         <div class="deleteContent">
-          Are You sure want to delete <span class="descripcion"></span>?
+        ¿Está seguro que desea eliminar esta Recepción Estañón <span class="descripcion"></span>?
           <span class="hidden id"></span>
         </div>
       </div>
@@ -211,7 +228,7 @@
           <span id="footer_action_button" class="glyphicon"></span>
         </button>
         <button type="button" class="btn btn-warning" data-dismiss="modal">
-          <span class="glyphicon glyphicon"></span>close
+          <span class="glyphicon glyphicon"></span>Cerrar
         </button>
       </div>
     </div>
