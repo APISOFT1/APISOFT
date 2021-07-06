@@ -35,13 +35,19 @@
                     <ul class="nav child_menu">
                     <li>
                         <a href="{{ route('dashboard') }}">Afiliado   
-                            <i class="fa fa-user" aria-hidden="true"></i>
+                           
                             
                         </a>
                     </li>
                     <li>
                         <a href="{{ url('/chartRecepcion/') }}">Recepción
-                            <i class="fa fa-file-text" aria-hidden="true"></i>
+                           
+                            
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/chartStock/') }}">Productos
+                           
                             
                         </a>
                     </li>
@@ -49,8 +55,20 @@
                     @if (Auth::user()->isAdmin())
     
                     <li>
-                        <a href="{{ url('/chartIngreso/') }}">Ingreso
-                            <i class="fa fa-money" aria-hidden="true"></i>
+                        <a href="{{ url('/chartIngreso/') }}">Ingreso Por Miel
+                           
+                            
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/chartIngresoCera/') }}">Ingreso Por Cera
+                           
+                            
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/chartIngresoInventario/') }}">Ingreso Por Inventario
+                            
                             
                         </a>
                     </li>

@@ -12,6 +12,7 @@
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
+@include('Busqueda.search',['url'=>'RecepEstanon','link'=>'RecepEstanon'])
 <h1 class="text-center">LISTADO DE RECEPCIÓN CON SU ESTAÑÓN</h1>
 
 <!-- Saltos de linea-->
@@ -23,7 +24,6 @@
 
 <!--Esta clase nos permite posicionar el buscador  -->
 
-		@include('Apiario.search') 
 
 
 <div class="table-responsive">

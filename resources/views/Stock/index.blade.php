@@ -12,6 +12,8 @@
 <!-- fin de mensaje de exito -->
 
 @section ('contenido')
+@include('Busqueda.search',['url'=>'Stock','link'=>'Stock'])
+
 <h1 class="text-center">INVENTARIO</h1>
 
 <!-- Saltos de linea-->
@@ -23,7 +25,6 @@
 
 <!--Esta clase nos permite posicionar el buscador  -->
 
-		@include('Stock.search') 
 
 
 <div class="table-responsive">

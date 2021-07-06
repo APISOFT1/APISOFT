@@ -42,12 +42,10 @@ public function addApiario(Request $request){
       'ubicacion_id' => 'required'
       ); 
 
-      $error = Validator::make($request->all() , $rules);
-  if ($error->fails())
-  {
-    
-  return response()->json(['errors' => $error->errors()->all()]);
-  }
+      $validator = Validator::make ( Input::all(), $rules);
+      if ($validator->fails())
+      return Response::json(array('errors'=> $validator->getMessageBag()->toarray()));
+
     else {
     
     $ubicacion_id = input::get('ubicacion_id');

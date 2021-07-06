@@ -195,7 +195,7 @@
   $(document).on('click','.create-modal', function() {
     $('#create').modal('show');
     $('.form-horizontal').show();
-    $('.modal-descripcion').text('Crear Estanon');
+    $('.modal-descripcion').text('Crear Estañón');
   });
   $("#add").click(function() {
     $.ajax({

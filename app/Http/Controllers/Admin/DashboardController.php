@@ -15,8 +15,10 @@ use App\Apiario;
 use App\Cera;
 use App\Estanon;
 use App\Ubicacion;
-use App\Product;
+use App\Stock;
 use App\DetalleIngreso;
+use App\DetalleIngresoCera;
+use App\DetalleIngresoInventario;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Routing\Route;
@@ -51,7 +53,7 @@ class DashboardController extends Controller
            'recep' =>\DB::table('recepcion_materia_primas')->count(),
            'api'=>\DB::table('apiarios')->count(),
            'cera'=>\DB::table('ceras')->count(),
-           'product'=>\DB::table('products')->count(),
+           'product'=>\DB::table('stocks')->count(),
            
         ];
         $api =\DB::select("
@@ -107,6 +109,57 @@ $afi = Afiliado::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))
         
     }
 
+//Chart Stocks
+
+    public function indexStock(){
+
+        $counts = [
+            
+           'afi' => \DB::table('afiliados')->count(),
+           'recep' =>\DB::table('recepcion_materia_primas')->count(),
+           'api'=>\DB::table('apiarios')->count(),
+           'cera'=>\DB::table('ceras')->count(),
+           'product'=>\DB::table('stocks')->count(),
+           'ingreso3'=>\DB::table('detalle_ingreso_inventario')->sum('precio'),
+         
+           
+           
+        ]; 
+
+//Recepcion chart
+$chart_options = [
+    'chart_title' => 'Productos por día',
+    'report_type' => 'group_by_date',
+    'model' => 'App\Stock',
+    'group_by_field' => 'created_at',
+    'group_by_period' => 'day',
+    'chart_type' => 'bar',
+];
+$chart = new LaravelChart($chart_options);
+
+$stocks = Stock::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))
+    				->get();
+        $chart2 = Charts::database($stocks, 'line', 'highcharts')
+			      ->title("Registro Mensual de Productos ")
+			      ->elementLabel("Total Productos")
+			      ->dimensions(1000, 500)
+			      ->responsive(false)
+                  ->groupByMonth(date('Y'), true);
+
+ //RECEPCION ANUAL 
+
+                
+$chart_options = [
+    'chart_title' => 'Productos por año',
+    'report_type' => 'group_by_date',
+    'model' => 'App\Stock',
+    'group_by_field' => 'created_at',
+    'group_by_period' => 'year',
+    'chart_type' => 'line',
+];
+$chart3 = new LaravelChart($chart_options);
+        return view('chartStock' ,['counts' => $counts], compact('chart', 'chart2', 'chart3'));
+    }
 
     public function indexRecepcion(){
 
@@ -116,8 +169,9 @@ $afi = Afiliado::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))
            'recep' =>\DB::table('recepcion_materia_primas')->count(),
            'api'=>\DB::table('apiarios')->count(),
            'cera'=>\DB::table('ceras')->count(),
-           'product'=>\DB::table('products')->count(),
+           'product'=>\DB::table('stocks')->count(),
            'ingreso'=>\DB::table('detalle_ingreso')->sum('precio'),
+         
            
            
         ]; 
@@ -167,9 +221,10 @@ $chart3 = new LaravelChart($chart_options);
             
            'afi' => \DB::table('afiliados')->count(),
            'recep' =>\DB::table('recepcion_materia_primas')->count(),
-           'product'=>\DB::table('products')->count(),
+           'product'=>\DB::table('stocks')->count(),
           'ingreso'=>\DB::table('detalle_ingreso')->sum('precio'),
-           
+          'ingreso2'=>\DB::table('detalle_ingreso_cera')->sum('precio'),
+          'ingreso3'=>\DB::table('detalle_ingreso_inventario')->sum('precio'),
            
            
         ]; 
@@ -218,7 +273,126 @@ $chart4 = new LaravelChart($chart_options);
         return view('chartIngreso' ,['counts' => $counts], compact('chart3', 'chart2', 'chart4'));
     }
 
+//CHART DE INGRESO CERA//
 
+public function indexIngresoCera(){
+
+    $counts = [
+        
+       'afi' => \DB::table('afiliados')->count(),
+       'recep' =>\DB::table('recepcion_materia_primas')->count(),
+       'product'=>\DB::table('stocks')->count(),
+      'ingreso'=>\DB::table('detalle_ingreso')->sum('precio'),
+      'ingreso2'=>\DB::table('detalle_ingreso_cera')->sum('precio'),
+      'ingreso3'=>\DB::table('detalle_ingreso_inventario')->sum('precio'),
+       
+       
+    ]; 
+
+//Ingreso dia chart
+$chart_options = [
+'chart_title' => 'Ingreso Cera por día',
+'report_type' => 'group_by_date',
+'model' => 'App\DetalleIngresoCera',
+'group_by_field' => 'created_at',
+'group_by_period' => 'day',
+'aggregate_function' => 'sum',
+'aggregate_field' => 'Precio',
+'chart_type' => 'line',
+];
+$chart3 = new LaravelChart($chart_options);
+
+//Ingreso por mes
+$chart_options = [
+'chart_title' => 'Ingreso Cera por mes',
+'report_type' => 'group_by_date',
+'model' => 'App\DetalleIngresoCera',
+'group_by_field' => 'created_at',
+'group_by_period' => 'month',
+'aggregate_function' => 'sum',
+'aggregate_field' => 'Precio',
+'chart_type' => 'line',
+'filter_field' => 'created_at',
+'filter_days' => 30, // muestra los ultimos 30 dias 
+];
+$chart2 = new LaravelChart($chart_options);
+
+//Chart ingreso por anual 
+$chart_options = [
+'chart_title' => 'Ingreso Cera por año',
+'report_type' => 'group_by_date',
+'model' => 'App\DetalleIngresoCera',
+'group_by_field' => 'created_at',
+'group_by_period' => 'year',
+'aggregate_function' => 'sum',
+'aggregate_field' => 'Precio',
+'chart_type' => 'line',
+
+];
+$chart4 = new LaravelChart($chart_options);
+    return view('chartIngresoCera' ,['counts' => $counts], compact('chart3', 'chart2', 'chart4'));
+}
+
+
+//CHART DE INGRESO inventario//
+
+public function indexIngresoInventario(){
+
+    $counts = [
+        
+       'afi' => \DB::table('afiliados')->count(),
+       'recep' =>\DB::table('recepcion_materia_primas')->count(),
+       'product'=>\DB::table('stocks')->count(),
+      'ingreso'=>\DB::table('detalle_ingreso')->sum('precio'),
+      'ingreso2'=>\DB::table('detalle_ingreso_cera')->sum('precio'),
+      'ingreso3'=>\DB::table('detalle_ingreso_inventario')->sum('precio'),
+       
+       
+    ]; 
+
+//Ingreso dia chart
+$chart_options = [
+'chart_title' => 'Ingreso Inventario por día',
+'report_type' => 'group_by_date',
+'model' => 'App\DetalleIngresoInventario',
+'group_by_field' => 'created_at',
+'group_by_period' => 'day',
+'aggregate_function' => 'sum',
+'aggregate_field' => 'Precio',
+'chart_type' => 'line',
+];
+$chart3 = new LaravelChart($chart_options);
+
+//Ingreso por mes
+$chart_options = [
+'chart_title' => 'Ingreso Inventario por mes',
+'report_type' => 'group_by_date',
+'model' => 'App\DetalleIngresoCera',
+'group_by_field' => 'created_at',
+'group_by_period' => 'month',
+'aggregate_function' => 'sum',
+'aggregate_field' => 'Precio',
+'chart_type' => 'line',
+'filter_field' => 'created_at',
+'filter_days' => 30, // muestra los ultimos 30 dias 
+];
+$chart2 = new LaravelChart($chart_options);
+
+//Chart ingreso por anual 
+$chart_options = [
+'chart_title' => 'Ingreso Inventario por año',
+'report_type' => 'group_by_date',
+'model' => 'App\DetalleIngresoCera',
+'group_by_field' => 'created_at',
+'group_by_period' => 'year',
+'aggregate_function' => 'sum',
+'aggregate_field' => 'Precio',
+'chart_type' => 'line',
+
+];
+$chart4 = new LaravelChart($chart_options);
+    return view('chartIngresoInventario' ,['counts' => $counts], compact('chart3', 'chart2', 'chart4'));
+}
 
 
     public function getRegistrationChartData()

@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>APISOFT</title>
+    @toastr_css
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -182,6 +183,10 @@
      {!!Html::script('/js2/dropdown.js')!!}
 
 
+     @jquery
+    @toastr_js
+    @toastr_render
+
 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -203,15 +208,28 @@
         'apiario_id': $('select[name=apiario_id]').val()
       },
       success: function(data){
-        if ((data.errors)) {
-          html = '<div class="alert alert-danger">';
-          $('.error').removeClass('hidden');
-          $('.error').text(data.errors.afiliado_id);
-          $('.error').text(data.errors.apiario_id);
- 
-        } else {
-          html = '<div class="alert alert-success alert-dismissible">'  + data.success + '</div>';
-          $('.error').remove();
+        $('.errorAfiliado').addClass('hidden');
+        $('.errorApiario').addClass('hidden');
+         
+                    
+
+         if ((data.errors)) {
+             setTimeout(function () {
+                 $('#create').modal('show');
+                 toastr.error('ERRO DE VALIDACIÓN!', 'Error Alert', {timeOut: 5000});
+             }, 500);
+             if (data.errors.Afiliado) {
+                 $('.errorAfiliado').removeClass('hidden');
+                 $('.errorAfiliado').text(data.errors.afiliado_id);
+             }
+             if (data.errors.Apiario) {
+                 $('.errorApiario').removeClass('hidden');
+                 $('.errorApiario').text(data.errors.apiario_id);
+             }
+            
+         } else {
+             toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
+          
           $('#table').append("<tr class='afiliadoapiario" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.afiliado_id + "</td>"+
@@ -229,7 +247,7 @@
            + data.apiario_id + "'><span class='glyphicon glyphicon-trash'></span></button></td>"+
           "</tr>");
         }
-        $('#form_result').html(html);
+        
       },
     });
     $('#afiliado_id').val('');
@@ -266,8 +284,30 @@ $('.modal-footer').on('click', '.edit', function() {
 'apiario_id': $('#api').val(),
     },
 success: function(data) {
+  $('.errorAfiliado').addClass('hidden');
+        $('.errorApiario').addClass('hidden');
+         
+                    
+
+         if ((data.errors)) {
+             setTimeout(function () {
+                 $('#create').modal('show');
+                 toastr.error('ERRO DE VALIDACIÓN!', 'Error Alert', {timeOut: 5000});
+             }, 500);
+             if (data.errors.Afiliado) {
+                 $('.errorAfiliado').removeClass('hidden');
+                 $('.errorAfiliado').text(data.errors.afiliado_id);
+             }
+             if (data.errors.Apiario) {
+                 $('.errorApiario').removeClass('hidden');
+                 $('.errorApiario').text(data.errors.apiario_id);
+             }
+            
+         } else {
+             toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
       $('.table' + $('.id').text()).remove();
     }
+},
   });
 });
 
@@ -282,7 +322,7 @@ $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Delete Post');
+$('.modal-descripcion').text('Eliminar Afiliado Apiario');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
@@ -300,6 +340,7 @@ $('.modal-footer').on('click', '.delete', function(){
       'id': $('.id').text()
     },
     success: function(data){
+      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
        $('.afiliadoapiario' + $('.id').text()).remove();
     }
   });

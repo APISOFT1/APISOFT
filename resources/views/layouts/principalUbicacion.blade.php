@@ -307,14 +307,30 @@ $('.modal-footer').on('click', '.edit', function() {
 'Descripcion': $('#des').val(),
     },
 success: function(data) {
+  $('.errorDescripcion').addClass('hidden');
+         
+                    
+
+         if ((data.errors)) {
+             setTimeout(function () {
+                 $('#create').modal('show');
+                 toastr.error('ERRO DE VALIDACIÓN!', 'Error Alert', {timeOut: 5000});
+             }, 500);
+             if (data.errors.Descripcion) {
+                 $('.errorDescripcion').removeClass('hidden');
+                 $('.errorDescripcion').text(data.errors.Descripcion);
+             }
+            
+         } else {
+             toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
       $('.ubicacion' + data.id).replaceWith(" "+
-      "<tr class='ubicacion" + data.id + "'>"+
+      "<tr class='ubicacion'>"+
       "<td>" + data.id + "</td>"+
       "<td>" + data.Descripcion + "</td>"+
   
-      "<td>" + data.created_at + "</td>"+
  "<td><button class='show-modal btn btn-info btn-sm' data-id='"+data.id+"' data-Descripcion='"+data.Descripcion+"'><span class='fa fa-eye'></span></button> <button class='edit-modal btn btn-warning btn-sm' data-id='"+data.id+"'data-Descripcion='"+data.Descripcion+"'><span class='glyphicon glyphicon-pencil'></span></button> <button class='delete-modal btn btn-danger btn-sm' data-id='"+data.id+"' data-Descripcion='"+data.Descripcion+"'><span class='glyphicon glyphicon-trash'></span></button></td>"+"</tr>");
     }
+},
   });
 });
 
@@ -326,7 +342,7 @@ $('#footer_action_button').addClass('glyphicon-trash');
 $('.actionBtn').removeClass('btn-success');
 $('.actionBtn').addClass('btn-danger');
 $('.actionBtn').addClass('delete');
-$('.modal-title').text('Eliminar Ubicación');
+$('.modal-descripcion').text('Eliminar Ubicación');
 $('.id').text($(this).data('id'));
 $('.deleteContent').show();
 $('.form-horizontal').hide();
@@ -343,6 +359,7 @@ $('.modal-footer').on('click', '.delete', function(){
       'id': $('.id').text()
     },
     success: function(data){
+      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
       $('.ubicacion' + $('.id').text()).remove();
     }
   });

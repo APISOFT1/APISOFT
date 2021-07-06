@@ -236,24 +236,69 @@
       },
       success: function(data){
         if ((data.errors)) {
-          html = '<div class="alert alert-danger">';
-          $('.error').removeClass('hidden');
-          $('.error').text(data.errors.id);
-          $('.error').text(data.errors.Nombre);
-          $('.error').text(data.errors.apellido1);
-          $('.error').text(data.errors.apellido2);
-          $('.error').text(data.errors.Telefono);
-          $('.error').text(data.errors.email);
-          $('.error').text(data.errors.Direccion);
-          $('.error').text(data.errors.Fecha_Ingreso);
-          $('.error').text(data.errors.Num_Cuenta);
-          $('.error').text(data.errors.genero_id);
-          $('.error').text(data.errors.estado_civil_id);
-          $('.error').text(data.errors.estado_id);
- 
-        } else {
-          html = '<div class="alert alert-success alert-dismissible">'  + data.success + '</div>';
-          $('.error').remove();
+          $('.errorNombre').addClass('hidden');
+         $('.errorApellido1').addClass('hidden');
+         $('.errorApellido2').addClass('hidden');
+         $('.errorTelefono').addClass('hidden');
+         $('.errorEmail').addClass('hidden');
+         $('.errorDireccion').addClass('hidden');
+         $('.errorFechaIngreso').addClass('hidden');
+         $('.errorNumCuenta').addClass('hidden');
+         $('.errorGenero').addClass('hidden');
+         $('.errorEstadoCivil').addClass('hidden');
+         $('.errorEstado').addClass('hidden');
+
+         if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#create').modal('show');
+                            toastr.error('ERRO DE VALIDACIÓN!', 'Error Alert', {timeOut: 5000});
+                        }, 500);
+                        if (data.errors.Nombre) {
+                            $('.errorNombre').removeClass('hidden');
+                            $('.errorNombre').text(data.errors.Nombre);
+                        }
+                        if (data.errors.apellido1) {
+                            $('.errorApellido1').removeClass('hidden');
+                            $('.errorApellido1').text(data.errors.apellido1);
+                        }
+                        if (data.errors.apellido2) {
+                            $('.errorApellido2').removeClass('hidden');
+                            $('.errorApellido2').text(data.errors.apellido2);
+                        }
+                        if (data.errors.Telefono) {
+                            $('.errorTelefono').removeClass('hidden');
+                            $('.errorTelefono').text(data.errors.Telefono);
+                        }
+                        if (data.errors.email) {
+                            $('.errorEmail').removeClass('hidden');
+                            $('.errorEmail').text(data.errors.email);
+                        }
+                        if (data.errors.Direccion) {
+                            $('.errorDireccion').removeClass('hidden');
+                            $('.errorDireccion').text(data.errors.Direccion);
+                        }
+                        if (data.errors.Fecha_Ingreso) {
+                            $('.errorFechaIngreso').removeClass('hidden');
+                            $('.errorFechaIngreso').text(data.errors.Fecha_Ingreso);
+                        }
+                        if (data.errors.Num_Cuenta) {
+                            $('.errorNumCuenta').removeClass('hidden');
+                            $('.errorNumCuenta').text(data.errors.Num_Cuenta);
+                        }
+                        if (data.errors.genero_id) {
+                            $('.errorGenero').removeClass('hidden');
+                            $('.errorGenero').text(data.errors.genero_id);
+                        }
+                        if (data.errors.estado_civil_id {
+                            $('.errorEstadoCivil').removeClass('hidden');
+                            $('.errorEstadoCivil').text(data.errors.estado_civil_id);
+                        }
+                        if (data.errors.estado_id) {
+                            $('.errorEstado').removeClass('hidden');
+                            $('.errorEstado').text(data.errors.estado_id);
+                        }
+                    } else {
+                      toastr.success('SE HA CREADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
           $('#table').append("<tr class='afi" + data.id + "'>"+
           "<td>" + data.id + "</td>"+
           "<td>" + data.Nombre + "</td>"+
@@ -309,7 +354,7 @@
           "</tr>");
          
         }
-        $('#form_result').html(html);
+      
       },
     });
     $('#id').val('');
@@ -325,6 +370,7 @@
     $('#estado_civil_id').val('');
     $('#estado_id').val('');
   });
+
 $(document).on('click', '.edit-modal', function() {
 $('#footer_action_button').text(" Editar ");
 $('#footer_action_button').addClass('fa fa-pencil');
@@ -371,7 +417,7 @@ $('.modal-footer').on('click', '.edit', function() {
 success: function(data) {
       $('.afi' + data.id).replaceWith(" "+
       "<tr class='afi'>"+
-          "<td>" + data.id + "</td>"+
+          "<td>" + data.id + "</td>"//
           "<td>" + data.Nombre + "</td>"+
           "<td>" + data.apellido1 + "</td>"+
           "<td>" + data.apellido2 + "</td>"+
@@ -452,6 +498,7 @@ $('.modal-footer').on('click', '.delete', function(){
       'id': $('.id').text()
     },
     success: function(data){
+      toastr.success('SE HA ELIMINADO CORRECTAMENTE!', 'Success Alert', {timeOut: 5000});
       $('.afi' + $('.id').text()).remove();
     }
   });
